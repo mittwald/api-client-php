@@ -22,7 +22,7 @@ class Mailbox
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'mailsystem' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MailSystemSettings',
@@ -31,6 +31,7 @@ class Mailbox
                 'type' => 'string',
             ],
             'quotaInBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'spamProtection' => [
@@ -91,7 +92,7 @@ class Mailbox
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +106,7 @@ class Mailbox
     public function withQuotaInBytes(int $quotaInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($quotaInBytes, self::$schema['properties']['quotaInBytes']);
+        $validator->validate($quotaInBytes, self::$internalValidationSchema['properties']['quotaInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +191,7 @@ class Mailbox
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

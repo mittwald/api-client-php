@@ -23,7 +23,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'finished' => [
                 'type' => 'boolean',
@@ -62,7 +62,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
-        $validator->validate($finished, self::$schema['properties']['finished']);
+        $validator->validate($finished, self::$internalValidationSchema['properties']['finished']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -76,7 +76,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
     public function withSourceCoabMailboxName(string $sourceCoabMailboxName): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabMailboxName, self::$schema['properties']['sourceCoabMailboxName']);
+        $validator->validate($sourceCoabMailboxName, self::$internalValidationSchema['properties']['sourceCoabMailboxName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,7 +12,7 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accessTokenRetrievalKey' => [
                 'maxLength' => 37,
@@ -54,7 +54,7 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
     {
         $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, self::$schema['properties']['accessTokenRetrievalKey']);
+        $validator->validate($accessTokenRetrievalKey, self::$internalValidationSchema['properties']['accessTokenRetrievalKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -68,7 +68,7 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,7 +128,7 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

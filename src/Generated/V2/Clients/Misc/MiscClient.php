@@ -6,8 +6,12 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\VerificationVerifyCompanyOKResponse;
@@ -28,6 +32,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\Verif
 interface MiscClient
 {
     /**
+     * Get a list of currently active llm models.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/misc-get-llm-models-experimental
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetLlmModelsExperimentalRequest $request An object representing the request for this operation
+     * @return GetLlmModelsExperimentalOKResponse List of currently active llm models.
+     */
+    public function getLlmModelsExperimental(GetLlmModelsExperimentalRequest $request): GetLlmModelsExperimentalOKResponse;
+    /**
      * Obtain a service token.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/servicetoken-authenticate-service
@@ -37,6 +51,18 @@ interface MiscClient
      * @return ServicetokenAuthenticateServiceOKResponse Authentication has been successful.
      */
     public function servicetokenAuthenticateService(ServicetokenAuthenticateServiceRequest $request): ServicetokenAuthenticateServiceOKResponse;
+    /**
+     * Check if an email is from mittwald.
+     *
+     * Parses the eml-file of an email to check if it is a phishing mail or a valid email from mittwald. In some cases we can't confirm the validity of an email.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-detect-phishing-email
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param VerificationDetectPhishingEmailRequest $request An object representing the request for this operation
+     * @return VerificationDetectPhishingEmailOKResponse OK
+     */
+    public function verificationDetectPhishingEmail(VerificationDetectPhishingEmailRequest $request): VerificationDetectPhishingEmailOKResponse;
     /**
      * Check if an address exists.
      *

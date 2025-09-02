@@ -22,7 +22,7 @@ class DataFileOpsItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'filename' => [
                 'example' => 'my_file.php',
@@ -92,7 +92,7 @@ class DataFileOpsItem
     public function withFilename(string $filename): self
     {
         $validator = new Validator();
-        $validator->validate($filename, self::$schema['properties']['filename']);
+        $validator->validate($filename, self::$internalValidationSchema['properties']['filename']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class DataFileOpsItem
     public function withFilepath(string $filepath): self
     {
         $validator = new Validator();
-        $validator->validate($filepath, self::$schema['properties']['filepath']);
+        $validator->validate($filepath, self::$internalValidationSchema['properties']['filepath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class DataFileOpsItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

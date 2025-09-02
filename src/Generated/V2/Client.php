@@ -15,6 +15,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
@@ -56,4 +57,5 @@ interface Client
     public function relocation(): RelocationClient;
     public function marketplace(): MarketplaceClient;
     public function misc(): MiscClient;
+    public function leadFyndr(): LeadFyndrClient;
 }

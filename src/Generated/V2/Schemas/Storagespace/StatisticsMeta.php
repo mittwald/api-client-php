@@ -23,14 +23,33 @@ class StatisticsMeta
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'isExceeding' => [
                 'example' => false,
                 'type' => 'boolean',
             ],
+            'lastExceedanceLimitInBytes' => [
+                'description' => 'The last exceedance limit in bytes during the exceedance time, therefore can differ from the current limit. It is retained as a historical record of the most recent exceedance and does not reset once set.',
+                'example' => 10,
+                'format' => 'int64',
+                'type' => 'integer',
+            ],
+            'lastTotalExceedanceInBytes' => [
+                'description' => 'The last total exceedance in bytes related to the limit during the exceedance time, see lastExceedanceLimitInBytes. It is retained as a historical record of the most recent exceedance and does not reset once set.',
+                'example' => 10,
+                'format' => 'int64',
+                'type' => 'integer',
+            ],
+            'lastTotalExceedanceInBytesSetAt' => [
+                'description' => 'The last total exceedance date. It is retained as a historical record of the most recent exceedance and does not reset once set.',
+                'example' => '2023-12-22T13:46:52.000Z',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'limitInBytes' => [
                 'example' => 100000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'notificationThresholdUsedAsLimit' => [
@@ -39,16 +58,20 @@ class StatisticsMeta
                 'type' => 'boolean',
             ],
             'totalExceedanceInBytes' => [
+                'description' => 'The current total exceedance in bytes.',
                 'example' => 10,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'totalExceedanceInBytesSetAt' => [
+                'description' => 'The current total exceedance date.',
                 'example' => '2023-12-22T13:46:52.000Z',
                 'format' => 'date-time',
                 'type' => 'string',
             ],
             'totalFreeInBytes' => [
                 'example' => 99000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'totalFreeInPercentage' => [
@@ -57,6 +80,7 @@ class StatisticsMeta
             ],
             'totalUsageInBytes' => [
                 'example' => 1000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'totalUsageInPercentage' => [
@@ -72,6 +96,21 @@ class StatisticsMeta
 
     private ?bool $isExceeding = null;
 
+    /**
+     * The last exceedance limit in bytes during the exceedance time, therefore can differ from the current limit. It is retained as a historical record of the most recent exceedance and does not reset once set.
+     */
+    private ?int $lastExceedanceLimitInBytes = null;
+
+    /**
+     * The last total exceedance in bytes related to the limit during the exceedance time, see lastExceedanceLimitInBytes. It is retained as a historical record of the most recent exceedance and does not reset once set.
+     */
+    private ?int $lastTotalExceedanceInBytes = null;
+
+    /**
+     * The last total exceedance date. It is retained as a historical record of the most recent exceedance and does not reset once set.
+     */
+    private ?DateTime $lastTotalExceedanceInBytesSetAt = null;
+
     private ?int $limitInBytes = null;
 
     /**
@@ -79,8 +118,14 @@ class StatisticsMeta
      */
     private ?bool $notificationThresholdUsedAsLimit = null;
 
+    /**
+     * The current total exceedance in bytes.
+     */
     private ?int $totalExceedanceInBytes = null;
 
+    /**
+     * The current total exceedance date.
+     */
     private ?DateTime $totalExceedanceInBytesSetAt = null;
 
     private ?int $totalFreeInBytes = null;
@@ -99,6 +144,21 @@ class StatisticsMeta
     public function getIsExceeding(): ?bool
     {
         return $this->isExceeding ?? null;
+    }
+
+    public function getLastExceedanceLimitInBytes(): ?int
+    {
+        return $this->lastExceedanceLimitInBytes ?? null;
+    }
+
+    public function getLastTotalExceedanceInBytes(): ?int
+    {
+        return $this->lastTotalExceedanceInBytes ?? null;
+    }
+
+    public function getLastTotalExceedanceInBytesSetAt(): ?DateTime
+    {
+        return $this->lastTotalExceedanceInBytesSetAt ?? null;
     }
 
     public function getLimitInBytes(): ?int
@@ -144,7 +204,7 @@ class StatisticsMeta
     public function withIsExceeding(bool $isExceeding): self
     {
         $validator = new Validator();
-        $validator->validate($isExceeding, self::$schema['properties']['isExceeding']);
+        $validator->validate($isExceeding, self::$internalValidationSchema['properties']['isExceeding']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,10 +223,70 @@ class StatisticsMeta
         return $clone;
     }
 
+    public function withLastExceedanceLimitInBytes(int $lastExceedanceLimitInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastExceedanceLimitInBytes, self::$internalValidationSchema['properties']['lastExceedanceLimitInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastExceedanceLimitInBytes = $lastExceedanceLimitInBytes;
+
+        return $clone;
+    }
+
+    public function withoutLastExceedanceLimitInBytes(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastExceedanceLimitInBytes);
+
+        return $clone;
+    }
+
+    public function withLastTotalExceedanceInBytes(int $lastTotalExceedanceInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastTotalExceedanceInBytes, self::$internalValidationSchema['properties']['lastTotalExceedanceInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastTotalExceedanceInBytes = $lastTotalExceedanceInBytes;
+
+        return $clone;
+    }
+
+    public function withoutLastTotalExceedanceInBytes(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastTotalExceedanceInBytes);
+
+        return $clone;
+    }
+
+    public function withLastTotalExceedanceInBytesSetAt(DateTime $lastTotalExceedanceInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->lastTotalExceedanceInBytesSetAt = $lastTotalExceedanceInBytesSetAt;
+
+        return $clone;
+    }
+
+    public function withoutLastTotalExceedanceInBytesSetAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastTotalExceedanceInBytesSetAt);
+
+        return $clone;
+    }
+
     public function withLimitInBytes(int $limitInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($limitInBytes, self::$schema['properties']['limitInBytes']);
+        $validator->validate($limitInBytes, self::$internalValidationSchema['properties']['limitInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -188,7 +308,7 @@ class StatisticsMeta
     public function withNotificationThresholdUsedAsLimit(bool $notificationThresholdUsedAsLimit): self
     {
         $validator = new Validator();
-        $validator->validate($notificationThresholdUsedAsLimit, self::$schema['properties']['notificationThresholdUsedAsLimit']);
+        $validator->validate($notificationThresholdUsedAsLimit, self::$internalValidationSchema['properties']['notificationThresholdUsedAsLimit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -210,7 +330,7 @@ class StatisticsMeta
     public function withTotalExceedanceInBytes(int $totalExceedanceInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalExceedanceInBytes, self::$schema['properties']['totalExceedanceInBytes']);
+        $validator->validate($totalExceedanceInBytes, self::$internalValidationSchema['properties']['totalExceedanceInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -248,7 +368,7 @@ class StatisticsMeta
     public function withTotalFreeInBytes(int $totalFreeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalFreeInBytes, self::$schema['properties']['totalFreeInBytes']);
+        $validator->validate($totalFreeInBytes, self::$internalValidationSchema['properties']['totalFreeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -270,7 +390,7 @@ class StatisticsMeta
     public function withTotalFreeInPercentage(int|float $totalFreeInPercentage): self
     {
         $validator = new Validator();
-        $validator->validate($totalFreeInPercentage, self::$schema['properties']['totalFreeInPercentage']);
+        $validator->validate($totalFreeInPercentage, self::$internalValidationSchema['properties']['totalFreeInPercentage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -292,7 +412,7 @@ class StatisticsMeta
     public function withTotalUsageInBytes(int $totalUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalUsageInBytes, self::$schema['properties']['totalUsageInBytes']);
+        $validator->validate($totalUsageInBytes, self::$internalValidationSchema['properties']['totalUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -306,7 +426,7 @@ class StatisticsMeta
     public function withTotalUsageInPercentage(int|float $totalUsageInPercentage): self
     {
         $validator = new Validator();
-        $validator->validate($totalUsageInPercentage, self::$schema['properties']['totalUsageInPercentage']);
+        $validator->validate($totalUsageInPercentage, self::$internalValidationSchema['properties']['totalUsageInPercentage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -344,6 +464,18 @@ class StatisticsMeta
         if (isset($input->{'isExceeding'})) {
             $isExceeding = (bool)($input->{'isExceeding'});
         }
+        $lastExceedanceLimitInBytes = null;
+        if (isset($input->{'lastExceedanceLimitInBytes'})) {
+            $lastExceedanceLimitInBytes = (int)($input->{'lastExceedanceLimitInBytes'});
+        }
+        $lastTotalExceedanceInBytes = null;
+        if (isset($input->{'lastTotalExceedanceInBytes'})) {
+            $lastTotalExceedanceInBytes = (int)($input->{'lastTotalExceedanceInBytes'});
+        }
+        $lastTotalExceedanceInBytesSetAt = null;
+        if (isset($input->{'lastTotalExceedanceInBytesSetAt'})) {
+            $lastTotalExceedanceInBytesSetAt = new DateTime($input->{'lastTotalExceedanceInBytesSetAt'});
+        }
         $limitInBytes = null;
         if (isset($input->{'limitInBytes'})) {
             $limitInBytes = (int)($input->{'limitInBytes'});
@@ -376,6 +508,9 @@ class StatisticsMeta
 
         $obj = new self($totalUsageInBytes);
         $obj->isExceeding = $isExceeding;
+        $obj->lastExceedanceLimitInBytes = $lastExceedanceLimitInBytes;
+        $obj->lastTotalExceedanceInBytes = $lastTotalExceedanceInBytes;
+        $obj->lastTotalExceedanceInBytesSetAt = $lastTotalExceedanceInBytesSetAt;
         $obj->limitInBytes = $limitInBytes;
         $obj->notificationThresholdUsedAsLimit = $notificationThresholdUsedAsLimit;
         $obj->totalExceedanceInBytes = $totalExceedanceInBytes;
@@ -396,6 +531,15 @@ class StatisticsMeta
         $output = [];
         if (isset($this->isExceeding)) {
             $output['isExceeding'] = $this->isExceeding;
+        }
+        if (isset($this->lastExceedanceLimitInBytes)) {
+            $output['lastExceedanceLimitInBytes'] = $this->lastExceedanceLimitInBytes;
+        }
+        if (isset($this->lastTotalExceedanceInBytes)) {
+            $output['lastTotalExceedanceInBytes'] = $this->lastTotalExceedanceInBytes;
+        }
+        if (isset($this->lastTotalExceedanceInBytesSetAt)) {
+            $output['lastTotalExceedanceInBytesSetAt'] = ($this->lastTotalExceedanceInBytesSetAt)->format(DateTime::ATOM);
         }
         if (isset($this->limitInBytes)) {
             $output['limitInBytes'] = $this->limitInBytes;
@@ -435,7 +579,7 @@ class StatisticsMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -449,6 +593,9 @@ class StatisticsMeta
 
     public function __clone()
     {
+        if (isset($this->lastTotalExceedanceInBytesSetAt)) {
+            $this->lastTotalExceedanceInBytesSetAt = clone $this->lastTotalExceedanceInBytesSetAt;
+        }
         if (isset($this->totalExceedanceInBytesSetAt)) {
             $this->totalExceedanceInBytesSetAt = clone $this->totalExceedanceInBytesSetAt;
         }

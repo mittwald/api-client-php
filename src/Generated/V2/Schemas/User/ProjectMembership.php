@@ -23,7 +23,7 @@ class ProjectMembership
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'expiresAt' => [
                 'format' => 'date-time',
@@ -107,7 +107,7 @@ class ProjectMembership
     public function withInherited(bool $inherited): self
     {
         $validator = new Validator();
-        $validator->validate($inherited, self::$schema['properties']['inherited']);
+        $validator->validate($inherited, self::$internalValidationSchema['properties']['inherited']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -192,7 +192,7 @@ class ProjectMembership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

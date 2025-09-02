@@ -22,7 +22,7 @@ class InvoiceGroupsItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'contractId' => [
                 'format' => 'uuid',
@@ -83,7 +83,7 @@ class InvoiceGroupsItem
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, self::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$internalValidationSchema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class InvoiceGroupsItem
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +197,7 @@ class InvoiceGroupsItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

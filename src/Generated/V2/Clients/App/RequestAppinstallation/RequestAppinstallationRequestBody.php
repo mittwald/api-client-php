@@ -14,7 +14,7 @@ class RequestAppinstallationRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'appVersionId' => [
                 'format' => 'uuid',
@@ -90,7 +90,7 @@ class RequestAppinstallationRequestBody
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();
-        $validator->validate($appVersionId, self::$schema['properties']['appVersionId']);
+        $validator->validate($appVersionId, self::$internalValidationSchema['properties']['appVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class RequestAppinstallationRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -187,7 +187,7 @@ class RequestAppinstallationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

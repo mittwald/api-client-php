@@ -13,6 +13,7 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferen
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative7;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3;
@@ -23,7 +24,7 @@ class CreateConversationRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'categoryId' => [
                 'type' => 'string',
@@ -60,7 +61,7 @@ class CreateConversationRequestBody
      */
     private ?array $notificationRoles = null;
 
-    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null $relatedTo = null;
+    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7|null $relatedTo = null;
 
     private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null $sharedWith = null;
 
@@ -91,7 +92,7 @@ class CreateConversationRequestBody
         return $this->notificationRoles ?? null;
     }
 
-    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
+    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7|null
     {
         return $this->relatedTo;
     }
@@ -109,7 +110,7 @@ class CreateConversationRequestBody
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
-        $validator->validate($categoryId, self::$schema['properties']['categoryId']);
+        $validator->validate($categoryId, self::$internalValidationSchema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +132,7 @@ class CreateConversationRequestBody
     public function withMainUserId(string $mainUserId): self
     {
         $validator = new Validator();
-        $validator->validate($mainUserId, self::$schema['properties']['mainUserId']);
+        $validator->validate($mainUserId, self::$internalValidationSchema['properties']['mainUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +170,7 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
+    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7 $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -204,7 +205,7 @@ class CreateConversationRequestBody
     public function withTitle(string $title): self
     {
         $validator = new Validator();
-        $validator->validate($title, self::$schema['properties']['title']);
+        $validator->validate($title, self::$internalValidationSchema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -260,6 +261,7 @@ class CreateConversationRequestBody
                 RelatedAggregateReferenceAlternative4::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative4::buildFromInput($input->{'relatedTo'}, validate: $validate),
                 RelatedAggregateReferenceAlternative5::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative5::buildFromInput($input->{'relatedTo'}, validate: $validate),
                 RelatedAggregateReferenceAlternative6::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative6::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative7::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative7::buildFromInput($input->{'relatedTo'}, validate: $validate),
             };
         }
         $sharedWith = null;
@@ -307,7 +309,7 @@ class CreateConversationRequestBody
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6 => $this->relatedTo->toJson(),
+                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative7 => $this->relatedTo->toJson(),
             };
         }
         if (isset($this->sharedWith)) {
@@ -335,7 +337,7 @@ class CreateConversationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

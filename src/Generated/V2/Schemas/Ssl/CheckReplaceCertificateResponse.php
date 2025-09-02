@@ -22,7 +22,7 @@ class CheckReplaceCertificateResponse
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'changes' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CheckReplaceChanges',
@@ -113,7 +113,7 @@ class CheckReplaceCertificateResponse
     public function withIsReplaceable(bool $isReplaceable): self
     {
         $validator = new Validator();
-        $validator->validate($isReplaceable, self::$schema['properties']['isReplaceable']);
+        $validator->validate($isReplaceable, self::$internalValidationSchema['properties']['isReplaceable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -186,7 +186,7 @@ class CheckReplaceCertificateResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

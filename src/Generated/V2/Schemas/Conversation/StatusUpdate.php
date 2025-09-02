@@ -22,7 +22,7 @@ class StatusUpdate
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'conversationId' => [
                 'type' => 'string',
@@ -113,7 +113,7 @@ class StatusUpdate
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
-        $validator->validate($conversationId, self::$schema['properties']['conversationId']);
+        $validator->validate($conversationId, self::$internalValidationSchema['properties']['conversationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class StatusUpdate
     public function withCreatedAt(string $createdAt): self
     {
         $validator = new Validator();
-        $validator->validate($createdAt, self::$schema['properties']['createdAt']);
+        $validator->validate($createdAt, self::$internalValidationSchema['properties']['createdAt']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class StatusUpdate
     public function withInternal(bool $internal): self
     {
         $validator = new Validator();
-        $validator->validate($internal, self::$schema['properties']['internal']);
+        $validator->validate($internal, self::$internalValidationSchema['properties']['internal']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class StatusUpdate
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
-        $validator->validate($messageContent, self::$schema['properties']['messageContent']);
+        $validator->validate($messageContent, self::$internalValidationSchema['properties']['messageContent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -266,7 +266,7 @@ class StatusUpdate
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

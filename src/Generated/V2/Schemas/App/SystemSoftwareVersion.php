@@ -26,7 +26,7 @@ class SystemSoftwareVersion
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.',
         'properties' => [
             'expiryDate' => [
@@ -164,7 +164,7 @@ class SystemSoftwareVersion
     public function withExternalVersion(string $externalVersion): self
     {
         $validator = new Validator();
-        $validator->validate($externalVersion, self::$schema['properties']['externalVersion']);
+        $validator->validate($externalVersion, self::$internalValidationSchema['properties']['externalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -194,7 +194,7 @@ class SystemSoftwareVersion
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -208,7 +208,7 @@ class SystemSoftwareVersion
     public function withInternalVersion(string $internalVersion): self
     {
         $validator = new Validator();
-        $validator->validate($internalVersion, self::$schema['properties']['internalVersion']);
+        $validator->validate($internalVersion, self::$internalValidationSchema['properties']['internalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class SystemSoftwareVersion
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
-        $validator->validate($recommended, self::$schema['properties']['recommended']);
+        $validator->validate($recommended, self::$internalValidationSchema['properties']['recommended']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -376,7 +376,7 @@ class SystemSoftwareVersion
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

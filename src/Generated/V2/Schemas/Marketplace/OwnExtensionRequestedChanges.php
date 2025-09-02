@@ -22,7 +22,7 @@ class OwnExtensionRequestedChanges
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'additionalProperties' => false,
         'properties' => [
             'context' => [
@@ -35,7 +35,18 @@ class OwnExtensionRequestedChanges
                 'type' => 'array',
             ],
             'webhookUrls' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                    ],
+                    [
+                        'additionalProperties' => false,
+                        'properties' => [
+
+                        ],
+                        'type' => 'object',
+                    ],
+                ],
             ],
         ],
         'type' => 'object',
@@ -48,7 +59,7 @@ class OwnExtensionRequestedChanges
      */
     private ?array $scopes = null;
 
-    private ?WebhookUrls $webhookUrls = null;
+    private WebhookUrls|OwnExtensionRequestedChangesWebhookUrlsAlternative2|null $webhookUrls = null;
 
     /**
      *
@@ -70,9 +81,9 @@ class OwnExtensionRequestedChanges
         return $this->scopes ?? null;
     }
 
-    public function getWebhookUrls(): ?WebhookUrls
+    public function getWebhookUrls(): OwnExtensionRequestedChangesWebhookUrlsAlternative2|WebhookUrls|null
     {
-        return $this->webhookUrls ?? null;
+        return $this->webhookUrls;
     }
 
     public function withContext(Context $context): self
@@ -97,7 +108,7 @@ class OwnExtensionRequestedChanges
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,7 +127,7 @@ class OwnExtensionRequestedChanges
         return $clone;
     }
 
-    public function withWebhookUrls(WebhookUrls $webhookUrls): self
+    public function withWebhookUrls(OwnExtensionRequestedChangesWebhookUrlsAlternative2|WebhookUrls $webhookUrls): self
     {
         $clone = clone $this;
         $clone->webhookUrls = $webhookUrls;
@@ -157,7 +168,11 @@ class OwnExtensionRequestedChanges
         }
         $webhookUrls = null;
         if (isset($input->{'webhookUrls'})) {
-            $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
+            $webhookUrls = match (true) {
+                WebhookUrls::validateInput($input->{'webhookUrls'}, true) => WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate),
+                OwnExtensionRequestedChangesWebhookUrlsAlternative2::validateInput($input->{'webhookUrls'}, true) => OwnExtensionRequestedChangesWebhookUrlsAlternative2::buildFromInput($input->{'webhookUrls'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'webhookUrls' from JSON"),
+            };
         }
 
         $obj = new self();
@@ -182,7 +197,10 @@ class OwnExtensionRequestedChanges
             $output['scopes'] = $this->scopes;
         }
         if (isset($this->webhookUrls)) {
-            $output['webhookUrls'] = $this->webhookUrls->toJson();
+            $output['webhookUrls'] = match (true) {
+                ($this->webhookUrls) instanceof WebhookUrls => $this->webhookUrls->toJson(),
+                $this->webhookUrls instanceof OwnExtensionRequestedChangesWebhookUrlsAlternative2 => ($this->webhookUrls)->toJson(),
+            };
         }
 
         return $output;
@@ -200,7 +218,7 @@ class OwnExtensionRequestedChanges
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -214,5 +232,11 @@ class OwnExtensionRequestedChanges
 
     public function __clone()
     {
+        if (isset($this->webhookUrls)) {
+            $this->webhookUrls = match (true) {
+                ($this->webhookUrls) instanceof WebhookUrls => $this->webhookUrls,
+                $this->webhookUrls instanceof OwnExtensionRequestedChangesWebhookUrlsAlternative2 => clone $this->webhookUrls,
+            };
+        }
     }
 }

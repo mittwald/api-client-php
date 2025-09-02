@@ -24,9 +24,12 @@ class UserInput
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.',
         'properties' => [
+            'additionalValidationSchema' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.app.AdditionalValidationSchema',
+            ],
             'dataSource' => [
                 'description' => 'Optional field to tell the frontend, which data to put into the select.',
                 'type' => 'string',
@@ -67,6 +70,8 @@ class UserInput
         'type' => 'object',
     ];
 
+    private ?AdditionalValidationSchema $additionalValidationSchema = null;
+
     /**
      * Optional field to tell the frontend, which data to put into the select.
      */
@@ -98,6 +103,11 @@ class UserInput
         $this->name = $name;
         $this->required = $required;
         $this->validationSchema = $validationSchema;
+    }
+
+    public function getAdditionalValidationSchema(): ?AdditionalValidationSchema
+    {
+        return $this->additionalValidationSchema ?? null;
     }
 
     public function getDataSource(): ?string
@@ -145,10 +155,26 @@ class UserInput
         return $this->validationSchema;
     }
 
+    public function withAdditionalValidationSchema(AdditionalValidationSchema $additionalValidationSchema): self
+    {
+        $clone = clone $this;
+        $clone->additionalValidationSchema = $additionalValidationSchema;
+
+        return $clone;
+    }
+
+    public function withoutAdditionalValidationSchema(): self
+    {
+        $clone = clone $this;
+        unset($clone->additionalValidationSchema);
+
+        return $clone;
+    }
+
     public function withDataSource(string $dataSource): self
     {
         $validator = new Validator();
-        $validator->validate($dataSource, self::$schema['properties']['dataSource']);
+        $validator->validate($dataSource, self::$internalValidationSchema['properties']['dataSource']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +204,7 @@ class UserInput
     public function withDefaultValue(string $defaultValue): self
     {
         $validator = new Validator();
-        $validator->validate($defaultValue, self::$schema['properties']['defaultValue']);
+        $validator->validate($defaultValue, self::$internalValidationSchema['properties']['defaultValue']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +250,7 @@ class UserInput
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -254,7 +280,7 @@ class UserInput
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
-        $validator->validate($required, self::$schema['properties']['required']);
+        $validator->validate($required, self::$internalValidationSchema['properties']['required']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,7 +294,7 @@ class UserInput
     public function withValidationSchema(string $validationSchema): self
     {
         $validator = new Validator();
-        $validator->validate($validationSchema, self::$schema['properties']['validationSchema']);
+        $validator->validate($validationSchema, self::$internalValidationSchema['properties']['validationSchema']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -294,6 +320,10 @@ class UserInput
             static::validateInput($input);
         }
 
+        $additionalValidationSchema = null;
+        if (isset($input->{'additionalValidationSchema'})) {
+            $additionalValidationSchema = AdditionalValidationSchema::buildFromInput($input->{'additionalValidationSchema'}, validate: $validate);
+        }
         $dataSource = null;
         if (isset($input->{'dataSource'})) {
             $dataSource = $input->{'dataSource'};
@@ -317,6 +347,7 @@ class UserInput
         $validationSchema = $input->{'validationSchema'};
 
         $obj = new self($dataType, $lifecycleConstraint, $name, $required, $validationSchema);
+        $obj->additionalValidationSchema = $additionalValidationSchema;
         $obj->dataSource = $dataSource;
         $obj->defaultValue = $defaultValue;
         $obj->format = $format;
@@ -332,6 +363,9 @@ class UserInput
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->additionalValidationSchema)) {
+            $output['additionalValidationSchema'] = $this->additionalValidationSchema->toJson();
+        }
         if (isset($this->dataSource)) {
             $output['dataSource'] = $this->dataSource;
         }
@@ -365,7 +399,7 @@ class UserInput
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -14,7 +14,7 @@ class ListInvitesForProjectRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -65,7 +65,7 @@ class ListInvitesForProjectRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +79,7 @@ class ListInvitesForProjectRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -101,7 +101,7 @@ class ListInvitesForProjectRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -182,7 +182,7 @@ class ListInvitesForProjectRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,7 +12,7 @@ class RequestAppinstallationCopyRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'description' => [
                 'type' => 'string',
@@ -50,7 +50,7 @@ class RequestAppinstallationCopyRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -64,7 +64,7 @@ class RequestAppinstallationCopyRequestBody
     public function withTargetProjectId(string $targetProjectId): self
     {
         $validator = new Validator();
-        $validator->validate($targetProjectId, self::$schema['properties']['targetProjectId']);
+        $validator->validate($targetProjectId, self::$internalValidationSchema['properties']['targetProjectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class RequestAppinstallationCopyRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

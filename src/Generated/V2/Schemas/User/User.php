@@ -24,7 +24,7 @@ class User
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'avatarRef' => [
                 'format' => 'uuid',
@@ -218,7 +218,7 @@ class User
     public function withAvatarRef(string $avatarRef): self
     {
         $validator = new Validator();
-        $validator->validate($avatarRef, self::$schema['properties']['avatarRef']);
+        $validator->validate($avatarRef, self::$internalValidationSchema['properties']['avatarRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -243,7 +243,7 @@ class User
     public function withCustomerMemberships(array $customerMemberships): self
     {
         $validator = new Validator();
-        $validator->validate($customerMemberships, self::$schema['properties']['customerMemberships']);
+        $validator->validate($customerMemberships, self::$internalValidationSchema['properties']['customerMemberships']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -265,7 +265,7 @@ class User
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -303,7 +303,7 @@ class User
     public function withIsEmployee(bool $isEmployee): self
     {
         $validator = new Validator();
-        $validator->validate($isEmployee, self::$schema['properties']['isEmployee']);
+        $validator->validate($isEmployee, self::$internalValidationSchema['properties']['isEmployee']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -365,7 +365,7 @@ class User
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();
-        $validator->validate($phoneNumber, self::$schema['properties']['phoneNumber']);
+        $validator->validate($phoneNumber, self::$internalValidationSchema['properties']['phoneNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -390,7 +390,7 @@ class User
     public function withProjectMemberships(array $projectMemberships): self
     {
         $validator = new Validator();
-        $validator->validate($projectMemberships, self::$schema['properties']['projectMemberships']);
+        $validator->validate($projectMemberships, self::$internalValidationSchema['properties']['projectMemberships']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -428,7 +428,7 @@ class User
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -567,7 +567,7 @@ class User
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

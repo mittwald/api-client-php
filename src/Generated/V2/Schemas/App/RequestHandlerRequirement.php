@@ -23,7 +23,7 @@ class RequestHandlerRequirement
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start.',
         'properties' => [
             'exampleValues' => [
@@ -113,7 +113,7 @@ class RequestHandlerRequirement
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class RequestHandlerRequirement
     public function withNamespace(string $namespace): self
     {
         $validator = new Validator();
-        $validator->validate($namespace, self::$schema['properties']['namespace']);
+        $validator->validate($namespace, self::$internalValidationSchema['properties']['namespace']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class RequestHandlerRequirement
     public function withParametersTemplate(string $parametersTemplate): self
     {
         $validator = new Validator();
-        $validator->validate($parametersTemplate, self::$schema['properties']['parametersTemplate']);
+        $validator->validate($parametersTemplate, self::$internalValidationSchema['properties']['parametersTemplate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -210,7 +210,7 @@ class RequestHandlerRequirement
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

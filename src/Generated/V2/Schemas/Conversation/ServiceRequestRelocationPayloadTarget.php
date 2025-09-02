@@ -23,7 +23,7 @@ class ServiceRequestRelocationPayloadTarget
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accountShortId' => [
                 'type' => 'string',
@@ -133,7 +133,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withAccountShortId(string $accountShortId): self
     {
         $validator = new Validator();
-        $validator->validate($accountShortId, self::$schema['properties']['accountShortId']);
+        $validator->validate($accountShortId, self::$internalValidationSchema['properties']['accountShortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +147,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withApplication(string $application): self
     {
         $validator = new Validator();
-        $validator->validate($application, self::$schema['properties']['application']);
+        $validator->validate($application, self::$internalValidationSchema['properties']['application']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +169,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withArticleType(string $articleType): self
     {
         $validator = new Validator();
-        $validator->validate($articleType, self::$schema['properties']['articleType']);
+        $validator->validate($articleType, self::$internalValidationSchema['properties']['articleType']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withOrganisation(string $organisation): self
     {
         $validator = new Validator();
-        $validator->validate($organisation, self::$schema['properties']['organisation']);
+        $validator->validate($organisation, self::$internalValidationSchema['properties']['organisation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -216,7 +216,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withProduct(string $product): self
     {
         $validator = new Validator();
-        $validator->validate($product, self::$schema['properties']['product']);
+        $validator->validate($product, self::$internalValidationSchema['properties']['product']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -230,7 +230,7 @@ class ServiceRequestRelocationPayloadTarget
     public function withWithDataCompare(bool $withDataCompare): self
     {
         $validator = new Validator();
-        $validator->validate($withDataCompare, self::$schema['properties']['withDataCompare']);
+        $validator->validate($withDataCompare, self::$internalValidationSchema['properties']['withDataCompare']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -325,7 +325,7 @@ class ServiceRequestRelocationPayloadTarget
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

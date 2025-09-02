@@ -22,7 +22,7 @@ class CheckReplaceSliceChange
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'addedValues' => [
                 'items' => [
@@ -108,7 +108,7 @@ class CheckReplaceSliceChange
     public function withAddedValues(array $addedValues): self
     {
         $validator = new Validator();
-        $validator->validate($addedValues, self::$schema['properties']['addedValues']);
+        $validator->validate($addedValues, self::$internalValidationSchema['properties']['addedValues']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class CheckReplaceSliceChange
     public function withRemovedValues(array $removedValues): self
     {
         $validator = new Validator();
-        $validator->validate($removedValues, self::$schema['properties']['removedValues']);
+        $validator->validate($removedValues, self::$internalValidationSchema['properties']['removedValues']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -142,7 +142,7 @@ class CheckReplaceSliceChange
     public function withValues(array $values): self
     {
         $validator = new Validator();
-        $validator->validate($values, self::$schema['properties']['values']);
+        $validator->validate($values, self::$internalValidationSchema['properties']['values']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -204,7 +204,7 @@ class CheckReplaceSliceChange
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

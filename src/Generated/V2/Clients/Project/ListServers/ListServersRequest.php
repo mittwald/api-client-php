@@ -14,26 +14,43 @@ class ListServersRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerId' => [
                 'type' => 'string',
             ],
-            'limit' => [
-                'default' => 10000,
-                'minimum' => 0,
-                'type' => 'integer',
+            'searchTerm' => [
+                'type' => 'string',
             ],
-            'page' => [
-                'default' => 1,
-                'minimum' => 0,
+            'limit' => [
                 'type' => 'integer',
+                'default' => 10000,
+                'minimum' => 1,
             ],
             'skip' => [
-                'default' => 0,
-                'minimum' => 0,
                 'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'createdAt',
+                    'description',
+                ],
+                'default' => 'createdAt',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'asc',
             ],
         ],
         'required' => [
@@ -43,11 +60,17 @@ class ListServersRequest
 
     private ?string $customerId = null;
 
+    private ?string $searchTerm = null;
+
     private int $limit = 10000;
 
-    private int $page = 1;
-
     private int $skip = 0;
+
+    private ?int $page = null;
+
+    private ListServersRequestSort $sort = ListServersRequestSort::createdAt;
+
+    private ListServersRequestOrder $order = ListServersRequestOrder::asc;
 
     private array $headers = [
 
@@ -65,14 +88,14 @@ class ListServersRequest
         return $this->customerId ?? null;
     }
 
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
-    }
-
-    public function getPage(): int
-    {
-        return $this->page;
     }
 
     public function getSkip(): int
@@ -80,10 +103,25 @@ class ListServersRequest
         return $this->skip;
     }
 
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
+    public function getSort(): ListServersRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): ListServersRequestOrder
+    {
+        return $this->order;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,10 +140,32 @@ class ListServersRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,10 +176,24 @@ class ListServersRequest
         return $clone;
     }
 
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -130,16 +204,26 @@ class ListServersRequest
         return $clone;
     }
 
-    public function withSkip(int $skip): self
+    public function withoutPage(): self
     {
-        $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->skip = $skip;
+        unset($clone->page);
+
+        return $clone;
+    }
+
+    public function withSort(ListServersRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(ListServersRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -163,24 +247,39 @@ class ListServersRequest
         if (isset($input->{'customerId'})) {
             $customerId = $input->{'customerId'};
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
-        }
-        $page = 1;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
         }
         $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
+        $sort = ListServersRequestSort::createdAt;
+        if (isset($input->{'sort'})) {
+            $sort = ListServersRequestSort::from($input->{'sort'});
+        }
+        $order = ListServersRequestOrder::asc;
+        if (isset($input->{'order'})) {
+            $order = ListServersRequestOrder::from($input->{'order'});
+        }
 
         $obj = new self();
         $obj->customerId = $customerId;
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
-        $obj->page = $page;
         $obj->skip = $skip;
+        $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -195,9 +294,16 @@ class ListServersRequest
         if (isset($this->customerId)) {
             $output['customerId'] = $this->customerId;
         }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         $output['limit'] = $this->limit;
-        $output['page'] = $this->page;
         $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -214,7 +320,7 @@ class ListServersRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -261,14 +367,23 @@ class ListServersRequest
         if (isset($mapped['customerId'])) {
             $query['customerId'] = $mapped['customerId'];
         }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
         }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

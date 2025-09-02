@@ -12,7 +12,7 @@ class ExtensionAuthenticateInstanceRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'extensionInstanceSecret' => [
                 'description' => 'The latest secret an external application received via lifecycle webhooks.
@@ -47,7 +47,7 @@ Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
     public function withExtensionInstanceSecret(string $extensionInstanceSecret): self
     {
         $validator = new Validator();
-        $validator->validate($extensionInstanceSecret, self::$schema['properties']['extensionInstanceSecret']);
+        $validator->validate($extensionInstanceSecret, self::$internalValidationSchema['properties']['extensionInstanceSecret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

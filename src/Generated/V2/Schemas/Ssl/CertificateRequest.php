@@ -23,7 +23,7 @@ class CertificateRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'certificateData' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateData',
@@ -200,7 +200,7 @@ class CertificateRequest
     public function withCommonName(string $commonName): self
     {
         $validator = new Validator();
-        $validator->validate($commonName, self::$schema['properties']['commonName']);
+        $validator->validate($commonName, self::$internalValidationSchema['properties']['commonName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,7 +249,7 @@ class CertificateRequest
     public function withDnsNames(array $dnsNames): self
     {
         $validator = new Validator();
-        $validator->validate($dnsNames, self::$schema['properties']['dnsNames']);
+        $validator->validate($dnsNames, self::$internalValidationSchema['properties']['dnsNames']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -271,7 +271,7 @@ class CertificateRequest
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,7 +285,7 @@ class CertificateRequest
     public function withIsCompleted(bool $isCompleted): self
     {
         $validator = new Validator();
-        $validator->validate($isCompleted, self::$schema['properties']['isCompleted']);
+        $validator->validate($isCompleted, self::$internalValidationSchema['properties']['isCompleted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +299,7 @@ class CertificateRequest
     public function withIssuer(string $issuer): self
     {
         $validator = new Validator();
-        $validator->validate($issuer, self::$schema['properties']['issuer']);
+        $validator->validate($issuer, self::$internalValidationSchema['properties']['issuer']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +321,7 @@ class CertificateRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -468,7 +468,7 @@ class CertificateRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

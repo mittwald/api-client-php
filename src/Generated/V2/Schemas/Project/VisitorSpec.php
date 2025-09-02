@@ -22,13 +22,14 @@ class VisitorSpec
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'storage' => [
                 'type' => 'string',
             ],
             'visitors' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -40,9 +41,9 @@ class VisitorSpec
 
     private string $storage;
 
-    private int|float $visitors;
+    private int $visitors;
 
-    public function __construct(string $storage, int|float $visitors)
+    public function __construct(string $storage, int $visitors)
     {
         $this->storage = $storage;
         $this->visitors = $visitors;
@@ -53,7 +54,7 @@ class VisitorSpec
         return $this->storage;
     }
 
-    public function getVisitors(): int|float
+    public function getVisitors(): int
     {
         return $this->visitors;
     }
@@ -61,7 +62,7 @@ class VisitorSpec
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
-        $validator->validate($storage, self::$schema['properties']['storage']);
+        $validator->validate($storage, self::$internalValidationSchema['properties']['storage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -72,10 +73,10 @@ class VisitorSpec
         return $clone;
     }
 
-    public function withVisitors(int|float $visitors): self
+    public function withVisitors(int $visitors): self
     {
         $validator = new Validator();
-        $validator->validate($visitors, self::$schema['properties']['visitors']);
+        $validator->validate($visitors, self::$internalValidationSchema['properties']['visitors']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +103,7 @@ class VisitorSpec
         }
 
         $storage = $input->{'storage'};
-        $visitors = str_contains((string)($input->{'visitors'}), '.') ? (float)($input->{'visitors'}) : (int)($input->{'visitors'});
+        $visitors = (int)($input->{'visitors'});
 
         $obj = new self($storage, $visitors);
 
@@ -135,7 +136,7 @@ class VisitorSpec
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

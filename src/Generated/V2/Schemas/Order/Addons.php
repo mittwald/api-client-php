@@ -22,7 +22,7 @@ class Addons
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'hidden' => [
                 'type' => 'boolean',
@@ -71,7 +71,7 @@ class Addons
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
-        $validator->validate($hidden, self::$schema['properties']['hidden']);
+        $validator->validate($hidden, self::$internalValidationSchema['properties']['hidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -93,7 +93,7 @@ class Addons
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, self::$schema['properties']['key']);
+        $validator->validate($key, self::$internalValidationSchema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +107,7 @@ class Addons
     public function withValue(string $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, self::$schema['properties']['value']);
+        $validator->validate($value, self::$internalValidationSchema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -174,7 +174,7 @@ class Addons
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

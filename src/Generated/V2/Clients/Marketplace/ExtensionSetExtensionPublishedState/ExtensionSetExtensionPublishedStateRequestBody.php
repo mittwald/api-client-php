@@ -12,7 +12,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'published' => [
                 'default' => true,
@@ -20,7 +20,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
                 'type' => 'boolean',
             ],
             'reason' => [
-                'description' => 'When setting withdrawing an extension a reason is required.',
+                'description' => 'When withdrawing an extension a reason is required.',
                 'type' => 'string',
             ],
         ],
@@ -36,7 +36,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
     private bool $published = true;
 
     /**
-     * When setting withdrawing an extension a reason is required.
+     * When withdrawing an extension a reason is required.
      */
     private ?string $reason = null;
 
@@ -60,7 +60,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
-        $validator->validate($published, self::$schema['properties']['published']);
+        $validator->validate($published, self::$internalValidationSchema['properties']['published']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -74,7 +74,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, self::$schema['properties']['reason']);
+        $validator->validate($reason, self::$internalValidationSchema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class ExtensionSetExtensionPublishedStateRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

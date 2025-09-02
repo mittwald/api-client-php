@@ -14,7 +14,7 @@ class ListSystemsoftwareversionsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'systemSoftwareId' => [
@@ -66,7 +66,7 @@ class ListSystemsoftwareversionsRequest
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareId, self::$schema['properties']['systemSoftwareId']);
+        $validator->validate($systemSoftwareId, self::$internalValidationSchema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -80,7 +80,7 @@ class ListSystemsoftwareversionsRequest
     public function withVersionRange(string $versionRange): self
     {
         $validator = new Validator();
-        $validator->validate($versionRange, self::$schema['properties']['versionRange']);
+        $validator->validate($versionRange, self::$internalValidationSchema['properties']['versionRange']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +102,7 @@ class ListSystemsoftwareversionsRequest
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
-        $validator->validate($recommended, self::$schema['properties']['recommended']);
+        $validator->validate($recommended, self::$internalValidationSchema['properties']['recommended']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ class ListSystemsoftwareversionsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -212,7 +212,7 @@ class ListSystemsoftwareversionsRequest
     {
         $mapped = $this->toJson();
         $systemSoftwareId = urlencode($mapped['systemSoftwareId']);
-        return '/v2/system-software/' . $systemSoftwareId . '/versions';
+        return '/v2/system-softwares/' . $systemSoftwareId . '/versions';
     }
 
     /**

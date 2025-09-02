@@ -9,5 +9,6 @@ enum GetFileUploadTypeRulesRequestFileUploadType: string
     case avatar = 'avatar';
     case extensionAssetImage = 'extensionAssetImage';
     case extensionAssetVideo = 'extensionAssetVideo';
+    case anchorIcon = 'anchorIcon';
     case conversation = 'conversation';
 }

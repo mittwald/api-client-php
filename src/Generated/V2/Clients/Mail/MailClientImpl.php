@@ -127,6 +127,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOK
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesForbiddenResponse;
@@ -154,6 +162,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListPro
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionForbiddenResponse;
@@ -754,6 +767,32 @@ class MailClientImpl implements MailClient
     }
 
     /**
+     * List backups belonging to a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-backups-for-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListBackupsForMailAddressRequest $request An object representing the request for this operation
+     * @return ListBackupsForMailAddressOKResponse OK
+     */
+    public function listBackupsForMailAddress(ListBackupsForMailAddressRequest $request): ListBackupsForMailAddressOKResponse
+    {
+        $httpRequest = new Request(ListBackupsForMailAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListBackupsForMailAddressOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListBackupsForMailAddressBadRequestResponse::fromResponse($httpResponse),
+            403 => ListBackupsForMailAddressForbiddenResponse::fromResponse($httpResponse),
+            404 => ListBackupsForMailAddressNotFoundResponse::fromResponse($httpResponse),
+            429 => ListBackupsForMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListBackupsForMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListBackupsForMailAddressDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List DeliveryBoxes belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
@@ -831,6 +870,30 @@ class MailClientImpl implements MailClient
             500 => ListProjectMailSettingsInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListProjectMailSettingsServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListProjectMailSettingsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Recover emails for a MailAddress from a backup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-recover-mail-address-emails
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RecoverMailAddressEmailsRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function recoverMailAddressEmails(RecoverMailAddressEmailsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(RecoverMailAddressEmailsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RecoverMailAddressEmailsBadRequestResponse::fromResponse($httpResponse),
+            404 => RecoverMailAddressEmailsNotFoundResponse::fromResponse($httpResponse),
+            429 => RecoverMailAddressEmailsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => RecoverMailAddressEmailsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -943,7 +1006,7 @@ class MailClientImpl implements MailClient
     }
 
     /**
-     * Update the catchall of a MailAddress.
+     * Update the catch-all of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catch-all
      * @throws GuzzleException

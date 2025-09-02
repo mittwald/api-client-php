@@ -14,7 +14,7 @@ class NotificationsListNotificationsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'status' => [
@@ -23,6 +23,30 @@ class NotificationsListNotificationsRequest
                     'read',
                 ],
                 'type' => 'string',
+            ],
+            'severity' => [
+                'items' => [
+                    'enum' => [
+                        'success',
+                        'info',
+                        'warning',
+                        'error',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'type' => [
+                'items' => [
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'type-not' => [
+                'items' => [
+                    'type' => 'string',
+                ],
+                'type' => 'array',
             ],
             'limit' => [
                 'type' => 'integer',
@@ -45,6 +69,21 @@ class NotificationsListNotificationsRequest
 
     private ?NotificationsListNotificationsRequestStatus $status = null;
 
+    /**
+     * @var string[]|null
+     */
+    private ?array $severity = null;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $type = null;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $typeNot = null;
+
     private int $limit = 500;
 
     private int $skip = 0;
@@ -65,6 +104,30 @@ class NotificationsListNotificationsRequest
     public function getStatus(): ?NotificationsListNotificationsRequestStatus
     {
         return $this->status ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getSeverity(): ?array
+    {
+        return $this->severity ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getType(): ?array
+    {
+        return $this->type ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getTypeNot(): ?array
+    {
+        return $this->typeNot ?? null;
     }
 
     public function getLimit(): int
@@ -98,10 +161,85 @@ class NotificationsListNotificationsRequest
         return $clone;
     }
 
+    /**
+     * @param string[] $severity
+     */
+    public function withSeverity(array $severity): self
+    {
+        $validator = new Validator();
+        $validator->validate($severity, self::$internalValidationSchema['properties']['severity']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->severity = $severity;
+
+        return $clone;
+    }
+
+    public function withoutSeverity(): self
+    {
+        $clone = clone $this;
+        unset($clone->severity);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $type
+     */
+    public function withType(array $type): self
+    {
+        $validator = new Validator();
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->type = $type;
+
+        return $clone;
+    }
+
+    public function withoutType(): self
+    {
+        $clone = clone $this;
+        unset($clone->type);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $typeNot
+     */
+    public function withTypeNot(array $typeNot): self
+    {
+        $validator = new Validator();
+        $validator->validate($typeNot, self::$internalValidationSchema['properties']['type-not']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->typeNot = $typeNot;
+
+        return $clone;
+    }
+
+    public function withoutTypeNot(): self
+    {
+        $clone = clone $this;
+        unset($clone->typeNot);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +253,7 @@ class NotificationsListNotificationsRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -129,7 +267,7 @@ class NotificationsListNotificationsRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -167,6 +305,18 @@ class NotificationsListNotificationsRequest
         if (isset($input->{'status'})) {
             $status = NotificationsListNotificationsRequestStatus::from($input->{'status'});
         }
+        $severity = null;
+        if (isset($input->{'severity'})) {
+            $severity = $input->{'severity'};
+        }
+        $type = null;
+        if (isset($input->{'type'})) {
+            $type = $input->{'type'};
+        }
+        $typeNot = null;
+        if (isset($input->{'type-not'})) {
+            $typeNot = $input->{'type-not'};
+        }
         $limit = 500;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -182,6 +332,9 @@ class NotificationsListNotificationsRequest
 
         $obj = new self();
         $obj->status = $status;
+        $obj->severity = $severity;
+        $obj->type = $type;
+        $obj->typeNot = $typeNot;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -198,6 +351,15 @@ class NotificationsListNotificationsRequest
         $output = [];
         if (isset($this->status)) {
             $output['status'] = ($this->status)->value;
+        }
+        if (isset($this->severity)) {
+            $output['severity'] = $this->severity;
+        }
+        if (isset($this->type)) {
+            $output['type'] = $this->type;
+        }
+        if (isset($this->typeNot)) {
+            $output['type-not'] = $this->typeNot;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -220,7 +382,7 @@ class NotificationsListNotificationsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -266,6 +428,15 @@ class NotificationsListNotificationsRequest
         $query = [];
         if (isset($mapped['status'])) {
             $query['status'] = $mapped['status'];
+        }
+        if (isset($mapped['severity'])) {
+            $query['severity'] = $mapped['severity'];
+        }
+        if (isset($mapped['type'])) {
+            $query['type'] = $mapped['type'];
+        }
+        if (isset($mapped['type-not'])) {
+            $query['type-not'] = $mapped['type-not'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

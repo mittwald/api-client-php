@@ -12,7 +12,7 @@ class IsCustomerLegallyCompetentOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'isLegallyCompetent' => [
                 'type' => 'boolean',
@@ -38,7 +38,7 @@ class IsCustomerLegallyCompetentOKResponseBody
     public function withIsLegallyCompetent(bool $isLegallyCompetent): self
     {
         $validator = new Validator();
-        $validator->validate($isLegallyCompetent, self::$schema['properties']['isLegallyCompetent']);
+        $validator->validate($isLegallyCompetent, self::$internalValidationSchema['properties']['isLegallyCompetent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class IsCustomerLegallyCompetentOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

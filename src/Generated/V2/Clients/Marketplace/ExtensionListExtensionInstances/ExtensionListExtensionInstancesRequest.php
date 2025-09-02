@@ -15,58 +15,129 @@ class ExtensionListExtensionInstancesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'default' => 1000,
-                'type' => 'integer',
-            ],
-            'skip' => [
-                'default' => 0,
-                'type' => 'integer',
-            ],
-            'page' => [
-                'default' => 1,
-                'type' => 'integer',
-            ],
             'context' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
             ],
             'contextId' => [
+                'type' => 'string',
+            ],
+            'extensionId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'createdAt',
+                        'extensionId',
+                        'extensionName',
+                    ],
+                ],
+                'default' => [
+                    'createdAt',
+                ],
+            ],
+            'order' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'asc',
+                        'desc',
+                    ],
+                ],
+                'default' => [
+                    'asc',
+                ],
+            ],
         ],
         'required' => [
-            'context',
-            'contextId',
+
         ],
     ];
 
-    private int $limit = 1000;
+    private ?Context $context = null;
+
+    private ?string $contextId = null;
+
+    private ?string $extensionId = null;
+
+    private ?string $searchTerm = null;
+
+    private ?int $limit = null;
 
     private int $skip = 0;
 
-    private int $page = 1;
+    private ?int $page = null;
 
-    private Context $context;
+    /**
+     * @var string[]
+     */
+    private array $sort = [
+        'createdAt',
+    ];
 
-    private string $contextId;
+    /**
+     * @var string[]
+     */
+    private array $order = [
+        'asc',
+    ];
 
     private array $headers = [
 
     ];
 
-    public function __construct(Context $context, string $contextId)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->context = $context;
-        $this->contextId = $contextId;
     }
 
-    public function getLimit(): int
+    public function getContext(): ?Context
     {
-        return $this->limit;
+        return $this->context ?? null;
+    }
+
+    public function getContextId(): ?string
+    {
+        return $this->contextId ?? null;
+    }
+
+    public function getExtensionId(): ?string
+    {
+        return $this->extensionId ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->limit ?? null;
     }
 
     public function getSkip(): int
@@ -74,25 +145,113 @@ class ExtensionListExtensionInstancesRequest
         return $this->skip;
     }
 
-    public function getPage(): int
+    public function getPage(): ?int
     {
-        return $this->page;
+        return $this->page ?? null;
     }
 
-    public function getContext(): Context
+    /**
+     * @return string[]
+     */
+    public function getSort(): array
     {
-        return $this->context;
+        return $this->sort;
     }
 
-    public function getContextId(): string
+    /**
+     * @return string[]
+     */
+    public function getOrder(): array
     {
-        return $this->contextId;
+        return $this->order;
+    }
+
+    public function withContext(Context $context): self
+    {
+        $clone = clone $this;
+        $clone->context = $context;
+
+        return $clone;
+    }
+
+    public function withoutContext(): self
+    {
+        $clone = clone $this;
+        unset($clone->context);
+
+        return $clone;
+    }
+
+    public function withContextId(string $contextId): self
+    {
+        $validator = new Validator();
+        $validator->validate($contextId, self::$internalValidationSchema['properties']['contextId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contextId = $contextId;
+
+        return $clone;
+    }
+
+    public function withoutContextId(): self
+    {
+        $clone = clone $this;
+        unset($clone->contextId);
+
+        return $clone;
+    }
+
+    public function withExtensionId(string $extensionId): self
+    {
+        $validator = new Validator();
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->extensionId = $extensionId;
+
+        return $clone;
+    }
+
+    public function withoutExtensionId(): self
+    {
+        $clone = clone $this;
+        unset($clone->extensionId);
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
     }
 
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,10 +262,18 @@ class ExtensionListExtensionInstancesRequest
         return $clone;
     }
 
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
+
+        return $clone;
+    }
+
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -120,7 +287,7 @@ class ExtensionListExtensionInstancesRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,24 +298,44 @@ class ExtensionListExtensionInstancesRequest
         return $clone;
     }
 
-    public function withContext(Context $context): self
+    public function withoutPage(): self
     {
         $clone = clone $this;
-        $clone->context = $context;
+        unset($clone->page);
 
         return $clone;
     }
 
-    public function withContextId(string $contextId): self
+    /**
+     * @param string[] $sort
+     */
+    public function withSort(array $sort): self
     {
         $validator = new Validator();
-        $validator->validate($contextId, self::$schema['properties']['contextId']);
+        $validator->validate($sort, self::$internalValidationSchema['properties']['sort']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->contextId = $contextId;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $order
+     */
+    public function withOrder(array $order): self
+    {
+        $validator = new Validator();
+        $validator->validate($order, self::$internalValidationSchema['properties']['order']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -168,7 +355,23 @@ class ExtensionListExtensionInstancesRequest
             static::validateInput($input);
         }
 
-        $limit = 1000;
+        $context = null;
+        if (isset($input->{'context'})) {
+            $context = Context::from($input->{'context'});
+        }
+        $contextId = null;
+        if (isset($input->{'contextId'})) {
+            $contextId = $input->{'contextId'};
+        }
+        $extensionId = null;
+        if (isset($input->{'extensionId'})) {
+            $extensionId = $input->{'extensionId'};
+        }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -176,17 +379,33 @@ class ExtensionListExtensionInstancesRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
-        $page = 1;
+        $page = null;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
-        $context = Context::from($input->{'context'});
-        $contextId = $input->{'contextId'};
+        $sort = [
+                'createdAt',
+            ];
+        if (isset($input->{'sort'})) {
+            $sort = $input->{'sort'};
+        }
+        $order = [
+                'asc',
+            ];
+        if (isset($input->{'order'})) {
+            $order = $input->{'order'};
+        }
 
-        $obj = new self($context, $contextId);
+        $obj = new self();
+        $obj->context = $context;
+        $obj->contextId = $contextId;
+        $obj->extensionId = $extensionId;
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -198,11 +417,27 @@ class ExtensionListExtensionInstancesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['limit'] = $this->limit;
+        if (isset($this->context)) {
+            $output['context'] = $this->context->value;
+        }
+        if (isset($this->contextId)) {
+            $output['contextId'] = $this->contextId;
+        }
+        if (isset($this->extensionId)) {
+            $output['extensionId'] = $this->extensionId;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
         $output['skip'] = $this->skip;
-        $output['page'] = $this->page;
-        $output['context'] = $this->context->value;
-        $output['contextId'] = $this->contextId;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
+        $output['sort'] = $this->sort;
+        $output['order'] = $this->order;
 
         return $output;
     }
@@ -219,7 +454,7 @@ class ExtensionListExtensionInstancesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -263,6 +498,18 @@ class ExtensionListExtensionInstancesRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['context'])) {
+            $query['context'] = $mapped['context'];
+        }
+        if (isset($mapped['contextId'])) {
+            $query['contextId'] = $mapped['contextId'];
+        }
+        if (isset($mapped['extensionId'])) {
+            $query['extensionId'] = $mapped['extensionId'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -272,11 +519,11 @@ class ExtensionListExtensionInstancesRequest
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
         }
-        if (isset($mapped['context'])) {
-            $query['context'] = $mapped['context'];
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
         }
-        if (isset($mapped['contextId'])) {
-            $query['contextId'] = $mapped['contextId'];
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

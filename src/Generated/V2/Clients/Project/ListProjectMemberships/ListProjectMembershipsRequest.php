@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles;
 
 class ListProjectMembershipsRequest
 {
@@ -14,7 +15,7 @@ class ListProjectMembershipsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'limit' => [
@@ -22,6 +23,15 @@ class ListProjectMembershipsRequest
             ],
             'skip' => [
                 'type' => 'integer',
+            ],
+            'hasExpiry' => [
+                'type' => 'boolean',
+            ],
+            'isInherited' => [
+                'type' => 'boolean',
+            ],
+            'role' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.membership.ProjectRoles',
             ],
         ],
         'required' => [
@@ -32,6 +42,12 @@ class ListProjectMembershipsRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?bool $hasExpiry = null;
+
+    private ?bool $isInherited = null;
+
+    private ?ProjectRoles $role = null;
 
     private array $headers = [
 
@@ -54,10 +70,25 @@ class ListProjectMembershipsRequest
         return $this->skip ?? null;
     }
 
+    public function getHasExpiry(): ?bool
+    {
+        return $this->hasExpiry ?? null;
+    }
+
+    public function getIsInherited(): ?bool
+    {
+        return $this->isInherited ?? null;
+    }
+
+    public function getRole(): ?ProjectRoles
+    {
+        return $this->role ?? null;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +110,7 @@ class ListProjectMembershipsRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,6 +125,66 @@ class ListProjectMembershipsRequest
     {
         $clone = clone $this;
         unset($clone->skip);
+
+        return $clone;
+    }
+
+    public function withHasExpiry(bool $hasExpiry): self
+    {
+        $validator = new Validator();
+        $validator->validate($hasExpiry, self::$internalValidationSchema['properties']['hasExpiry']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hasExpiry = $hasExpiry;
+
+        return $clone;
+    }
+
+    public function withoutHasExpiry(): self
+    {
+        $clone = clone $this;
+        unset($clone->hasExpiry);
+
+        return $clone;
+    }
+
+    public function withIsInherited(bool $isInherited): self
+    {
+        $validator = new Validator();
+        $validator->validate($isInherited, self::$internalValidationSchema['properties']['isInherited']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isInherited = $isInherited;
+
+        return $clone;
+    }
+
+    public function withoutIsInherited(): self
+    {
+        $clone = clone $this;
+        unset($clone->isInherited);
+
+        return $clone;
+    }
+
+    public function withRole(ProjectRoles $role): self
+    {
+        $clone = clone $this;
+        $clone->role = $role;
+
+        return $clone;
+    }
+
+    public function withoutRole(): self
+    {
+        $clone = clone $this;
+        unset($clone->role);
 
         return $clone;
     }
@@ -121,10 +212,25 @@ class ListProjectMembershipsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $hasExpiry = null;
+        if (isset($input->{'hasExpiry'})) {
+            $hasExpiry = (bool)($input->{'hasExpiry'});
+        }
+        $isInherited = null;
+        if (isset($input->{'isInherited'})) {
+            $isInherited = (bool)($input->{'isInherited'});
+        }
+        $role = null;
+        if (isset($input->{'role'})) {
+            $role = ProjectRoles::from($input->{'role'});
+        }
 
         $obj = new self();
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->hasExpiry = $hasExpiry;
+        $obj->isInherited = $isInherited;
+        $obj->role = $role;
         return $obj;
     }
 
@@ -142,6 +248,15 @@ class ListProjectMembershipsRequest
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
         }
+        if (isset($this->hasExpiry)) {
+            $output['hasExpiry'] = $this->hasExpiry;
+        }
+        if (isset($this->isInherited)) {
+            $output['isInherited'] = $this->isInherited;
+        }
+        if (isset($this->role)) {
+            $output['role'] = $this->role->value;
+        }
 
         return $output;
     }
@@ -158,7 +273,7 @@ class ListProjectMembershipsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -207,6 +322,15 @@ class ListProjectMembershipsRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['hasExpiry'])) {
+            $query['hasExpiry'] = $mapped['hasExpiry'];
+        }
+        if (isset($mapped['isInherited'])) {
+            $query['isInherited'] = $mapped['isInherited'];
+        }
+        if (isset($mapped['role'])) {
+            $query['role'] = $mapped['role'];
         }
         return [
             'query' => $query,

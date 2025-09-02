@@ -22,7 +22,7 @@ class UploadedFile
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'id' => [
                 'format' => 'uuid',
@@ -89,7 +89,7 @@ class UploadedFile
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class UploadedFile
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class UploadedFile
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, self::$schema['properties']['type']);
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -189,7 +189,7 @@ class UploadedFile
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

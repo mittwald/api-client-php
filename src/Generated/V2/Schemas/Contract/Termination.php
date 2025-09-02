@@ -23,7 +23,7 @@ class Termination
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'cancellationForbidden' => [
                 'description' => 'Indicates whether the User is allowed to cancel the Termination.',
@@ -99,7 +99,7 @@ class Termination
     public function withCancellationForbidden(bool $cancellationForbidden): self
     {
         $validator = new Validator();
-        $validator->validate($cancellationForbidden, self::$schema['properties']['cancellationForbidden']);
+        $validator->validate($cancellationForbidden, self::$internalValidationSchema['properties']['cancellationForbidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,7 +121,7 @@ class Termination
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, self::$schema['properties']['reason']);
+        $validator->validate($reason, self::$internalValidationSchema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class Termination
     public function withScheduledByUserId(string $scheduledByUserId): self
     {
         $validator = new Validator();
-        $validator->validate($scheduledByUserId, self::$schema['properties']['scheduledByUserId']);
+        $validator->validate($scheduledByUserId, self::$internalValidationSchema['properties']['scheduledByUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -250,7 +250,7 @@ class Termination
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

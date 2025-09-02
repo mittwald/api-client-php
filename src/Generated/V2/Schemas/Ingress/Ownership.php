@@ -22,7 +22,7 @@ class Ownership
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'txtRecord' => [
                 'type' => 'string',
@@ -63,7 +63,7 @@ class Ownership
     public function withTxtRecord(string $txtRecord): self
     {
         $validator = new Validator();
-        $validator->validate($txtRecord, self::$schema['properties']['txtRecord']);
+        $validator->validate($txtRecord, self::$internalValidationSchema['properties']['txtRecord']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -85,7 +85,7 @@ class Ownership
     public function withVerified(bool $verified): self
     {
         $validator = new Validator();
-        $validator->validate($verified, self::$schema['properties']['verified']);
+        $validator->validate($verified, self::$internalValidationSchema['properties']['verified']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class Ownership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

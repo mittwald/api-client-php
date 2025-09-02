@@ -24,7 +24,7 @@ class InstalledSystemSoftware
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.',
         'properties' => [
             'systemSoftwareId' => [
@@ -77,7 +77,7 @@ class InstalledSystemSoftware
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareId, self::$schema['properties']['systemSoftwareId']);
+        $validator->validate($systemSoftwareId, self::$internalValidationSchema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +155,7 @@ class InstalledSystemSoftware
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

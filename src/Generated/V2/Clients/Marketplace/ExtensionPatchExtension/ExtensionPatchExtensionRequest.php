@@ -14,7 +14,7 @@ class ExtensionPatchExtensionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contributorId' => [
@@ -26,6 +26,14 @@ class ExtensionPatchExtensionRequest
             ],
             'body' => [
                 'properties' => [
+                    'assets' => [
+                        'description' => 'Used to patch asset order.',
+                        'items' => [
+                            'format' => 'uuid',
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
                     'deprecation' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation',
                     ],
@@ -33,18 +41,25 @@ class ExtensionPatchExtensionRequest
                         'type' => 'string',
                     ],
                     'detailedDescriptions' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
+                        'allOf' => [
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
+                            ],
+                        ],
+                        'nullable' => true,
                     ],
                     'externalFrontends' => [
                         'items' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                         ],
+                        'nullable' => true,
                         'type' => 'array',
                     ],
                     'frontendFragments' => [
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
                         ],
+                        'nullable' => true,
                         'type' => 'object',
                     ],
                     'name' => [
@@ -69,7 +84,12 @@ class ExtensionPatchExtensionRequest
                         'type' => 'array',
                     ],
                     'webhookUrls' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                        'allOf' => [
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                            ],
+                        ],
+                        'nullable' => true,
                     ],
                 ],
                 'type' => 'object',
@@ -117,7 +137,7 @@ class ExtensionPatchExtensionRequest
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +151,7 @@ class ExtensionPatchExtensionRequest
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -201,7 +221,7 @@ class ExtensionPatchExtensionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

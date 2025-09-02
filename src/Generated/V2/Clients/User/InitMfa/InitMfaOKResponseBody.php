@@ -12,7 +12,7 @@ class InitMfaOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'barcode' => [
                 'description' => 'base64 encoded barcode content to scan from your mfa app. e.g. `iVBORw0KGgoAAAANSUhEUgAAAMgAAADIEAAAAADYoy...`. You
@@ -66,7 +66,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     public function withBarcode(string $barcode): self
     {
         $validator = new Validator();
-        $validator->validate($barcode, self::$schema['properties']['barcode']);
+        $validator->validate($barcode, self::$internalValidationSchema['properties']['barcode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -80,7 +80,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     public function withUrl(string $url): self
     {
         $validator = new Validator();
-        $validator->validate($url, self::$schema['properties']['url']);
+        $validator->validate($url, self::$internalValidationSchema['properties']['url']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

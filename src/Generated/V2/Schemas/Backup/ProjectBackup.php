@@ -23,7 +23,7 @@ class ProjectBackup
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -55,6 +55,10 @@ class ProjectBackup
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'requestedAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'status' => [
                 'example' => 'Completed',
                 'type' => 'string',
@@ -65,6 +69,7 @@ class ProjectBackup
             'projectId',
             'status',
             'deletable',
+            'requestedAt',
         ],
         'type' => 'object',
     ];
@@ -85,13 +90,16 @@ class ProjectBackup
 
     private string $projectId;
 
+    private DateTime $requestedAt;
+
     private string $status;
 
-    public function __construct(bool $deletable, string $id, string $projectId, string $status)
+    public function __construct(bool $deletable, string $id, string $projectId, DateTime $requestedAt, string $status)
     {
         $this->deletable = $deletable;
         $this->id = $id;
         $this->projectId = $projectId;
+        $this->requestedAt = $requestedAt;
         $this->status = $status;
     }
 
@@ -135,6 +143,11 @@ class ProjectBackup
         return $this->projectId;
     }
 
+    public function getRequestedAt(): DateTime
+    {
+        return $this->requestedAt;
+    }
+
     public function getStatus(): string
     {
         return $this->status;
@@ -159,7 +172,7 @@ class ProjectBackup
     public function withDeletable(bool $deletable): self
     {
         $validator = new Validator();
-        $validator->validate($deletable, self::$schema['properties']['deletable']);
+        $validator->validate($deletable, self::$internalValidationSchema['properties']['deletable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +186,7 @@ class ProjectBackup
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -227,7 +240,7 @@ class ProjectBackup
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +254,7 @@ class ProjectBackup
     public function withParentId(string $parentId): self
     {
         $validator = new Validator();
-        $validator->validate($parentId, self::$schema['properties']['parentId']);
+        $validator->validate($parentId, self::$internalValidationSchema['properties']['parentId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -263,7 +276,7 @@ class ProjectBackup
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -274,10 +287,18 @@ class ProjectBackup
         return $clone;
     }
 
+    public function withRequestedAt(DateTime $requestedAt): self
+    {
+        $clone = clone $this;
+        $clone->requestedAt = $requestedAt;
+
+        return $clone;
+    }
+
     public function withStatus(string $status): self
     {
         $validator = new Validator();
-        $validator->validate($status, self::$schema['properties']['status']);
+        $validator->validate($status, self::$internalValidationSchema['properties']['status']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -326,9 +347,10 @@ class ProjectBackup
             $parentId = $input->{'parentId'};
         }
         $projectId = $input->{'projectId'};
+        $requestedAt = new DateTime($input->{'requestedAt'});
         $status = $input->{'status'};
 
-        $obj = new self($deletable, $id, $projectId, $status);
+        $obj = new self($deletable, $id, $projectId, $requestedAt, $status);
         $obj->createdAt = $createdAt;
         $obj->description = $description;
         $obj->expiresAt = $expiresAt;
@@ -363,6 +385,7 @@ class ProjectBackup
             $output['parentId'] = $this->parentId;
         }
         $output['projectId'] = $this->projectId;
+        $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
         $output['status'] = $this->status;
 
         return $output;
@@ -380,7 +403,7 @@ class ProjectBackup
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -400,5 +423,6 @@ class ProjectBackup
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
+        $this->requestedAt = clone $this->requestedAt;
     }
 }

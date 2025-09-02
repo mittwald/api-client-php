@@ -22,7 +22,7 @@ class CreateMySqlUser
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
                 'type' => 'string',
@@ -110,7 +110,7 @@ class CreateMySqlUser
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
-        $validator->validate($accessIpMask, self::$schema['properties']['accessIpMask']);
+        $validator->validate($accessIpMask, self::$internalValidationSchema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class CreateMySqlUser
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, self::$schema['properties']['databaseId']);
+        $validator->validate($databaseId, self::$internalValidationSchema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -154,7 +154,7 @@ class CreateMySqlUser
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -168,7 +168,7 @@ class CreateMySqlUser
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
-        $validator->validate($externalAccess, self::$schema['properties']['externalAccess']);
+        $validator->validate($externalAccess, self::$internalValidationSchema['properties']['externalAccess']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +190,7 @@ class CreateMySqlUser
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, self::$schema['properties']['password']);
+        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -269,7 +269,7 @@ class CreateMySqlUser
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

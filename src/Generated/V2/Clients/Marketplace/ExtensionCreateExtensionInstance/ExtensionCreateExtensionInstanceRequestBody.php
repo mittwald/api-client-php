@@ -13,7 +13,7 @@ class ExtensionCreateExtensionInstanceRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'consentedScopes' => [
                 'items' => [
@@ -93,7 +93,7 @@ class ExtensionCreateExtensionInstanceRequestBody
     public function withConsentedScopes(array $consentedScopes): self
     {
         $validator = new Validator();
-        $validator->validate($consentedScopes, self::$schema['properties']['consentedScopes']);
+        $validator->validate($consentedScopes, self::$internalValidationSchema['properties']['consentedScopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +115,7 @@ class ExtensionCreateExtensionInstanceRequestBody
     public function withContextId(string $contextId): self
     {
         $validator = new Validator();
-        $validator->validate($contextId, self::$schema['properties']['contextId']);
+        $validator->validate($contextId, self::$internalValidationSchema['properties']['contextId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -129,7 +129,7 @@ class ExtensionCreateExtensionInstanceRequestBody
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -193,7 +193,7 @@ class ExtensionCreateExtensionInstanceRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

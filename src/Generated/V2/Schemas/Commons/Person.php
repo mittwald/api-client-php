@@ -22,7 +22,7 @@ class Person
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'description' => 'The users personal information, e.g. first name.',
         'properties' => [
@@ -82,7 +82,7 @@ class Person
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($firstName, self::$schema['properties']['firstName']);
+        $validator->validate($firstName, self::$internalValidationSchema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class Person
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($lastName, self::$schema['properties']['lastName']);
+        $validator->validate($lastName, self::$internalValidationSchema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -179,7 +179,7 @@ class Person
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

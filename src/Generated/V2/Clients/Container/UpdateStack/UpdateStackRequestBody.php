@@ -12,7 +12,7 @@ class UpdateStackRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'services' => [
                 'additionalProperties' => [
@@ -72,7 +72,7 @@ class UpdateStackRequestBody
     public function withServices(array $services): self
     {
         $validator = new Validator();
-        $validator->validate($services, self::$schema['properties']['services']);
+        $validator->validate($services, self::$internalValidationSchema['properties']['services']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class UpdateStackRequestBody
     public function withVolumes(array $volumes): self
     {
         $validator = new Validator();
-        $validator->validate($volumes, self::$schema['properties']['volumes']);
+        $validator->validate($volumes, self::$internalValidationSchema['properties']['volumes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -176,7 +176,7 @@ class UpdateStackRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

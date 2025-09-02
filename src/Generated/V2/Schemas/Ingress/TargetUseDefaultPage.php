@@ -22,7 +22,7 @@ class TargetUseDefaultPage
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'useDefaultPage' => [
                 'type' => 'boolean',
@@ -49,7 +49,7 @@ class TargetUseDefaultPage
     public function withUseDefaultPage(bool $useDefaultPage): self
     {
         $validator = new Validator();
-        $validator->validate($useDefaultPage, self::$schema['properties']['useDefaultPage']);
+        $validator->validate($useDefaultPage, self::$internalValidationSchema['properties']['useDefaultPage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +107,7 @@ class TargetUseDefaultPage
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -23,7 +23,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'addresses' => [
                 'items' => [
@@ -87,7 +87,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     public function withAddresses(array $addresses): self
     {
         $validator = new Validator();
-        $validator->validate($addresses, self::$schema['properties']['addresses']);
+        $validator->validate($addresses, self::$internalValidationSchema['properties']['addresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     public function withMailboxNames(array $mailboxNames): self
     {
         $validator = new Validator();
-        $validator->validate($mailboxNames, self::$schema['properties']['mailboxNames']);
+        $validator->validate($mailboxNames, self::$internalValidationSchema['properties']['mailboxNames']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class AccountMfaDetails
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'The users mfa details.',
         'properties' => [
             'mfaConfirmed' => [
@@ -59,7 +59,7 @@ class AccountMfaDetails
     public function withMfaConfirmed(bool $mfaConfirmed): self
     {
         $validator = new Validator();
-        $validator->validate($mfaConfirmed, self::$schema['properties']['mfaConfirmed']);
+        $validator->validate($mfaConfirmed, self::$internalValidationSchema['properties']['mfaConfirmed']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -81,7 +81,7 @@ class AccountMfaDetails
     public function withMfaInitialized(bool $mfaInitialized): self
     {
         $validator = new Validator();
-        $validator->validate($mfaInitialized, self::$schema['properties']['mfaInitialized']);
+        $validator->validate($mfaInitialized, self::$internalValidationSchema['properties']['mfaInitialized']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -160,7 +160,7 @@ class AccountMfaDetails
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

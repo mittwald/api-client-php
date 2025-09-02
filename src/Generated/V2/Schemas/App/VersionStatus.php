@@ -24,7 +24,7 @@ class VersionStatus
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'VersionStatus describes the current and desired version of something like the AppVersion of an AppInstallation. If diverging, an internal process is going to assert, the current value will be aligned.',
         'properties' => [
             'current' => [
@@ -62,7 +62,7 @@ class VersionStatus
     public function withCurrent(string $current): self
     {
         $validator = new Validator();
-        $validator->validate($current, self::$schema['properties']['current']);
+        $validator->validate($current, self::$internalValidationSchema['properties']['current']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -84,7 +84,7 @@ class VersionStatus
     public function withDesired(string $desired): self
     {
         $validator = new Validator();
-        $validator->validate($desired, self::$schema['properties']['desired']);
+        $validator->validate($desired, self::$internalValidationSchema['properties']['desired']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class VersionStatus
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

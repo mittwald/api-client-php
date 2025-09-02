@@ -22,10 +22,14 @@ class HostingOrderPreviewResponse
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'machineTypePrice' => [
                 'example' => 500,
+                'type' => 'number',
+            ],
+            'possibleFreeTrialDays' => [
+                'example' => 10,
                 'type' => 'number',
             ],
             'storagePrice' => [
@@ -47,6 +51,8 @@ class HostingOrderPreviewResponse
 
     private int|float $machineTypePrice;
 
+    private int|float|null $possibleFreeTrialDays = null;
+
     private int|float $storagePrice;
 
     private int|float $totalPrice;
@@ -63,6 +69,11 @@ class HostingOrderPreviewResponse
         return $this->machineTypePrice;
     }
 
+    public function getPossibleFreeTrialDays(): int|float|null
+    {
+        return $this->possibleFreeTrialDays;
+    }
+
     public function getStoragePrice(): int|float
     {
         return $this->storagePrice;
@@ -76,7 +87,7 @@ class HostingOrderPreviewResponse
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
         $validator = new Validator();
-        $validator->validate($machineTypePrice, self::$schema['properties']['machineTypePrice']);
+        $validator->validate($machineTypePrice, self::$internalValidationSchema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -87,10 +98,32 @@ class HostingOrderPreviewResponse
         return $clone;
     }
 
+    public function withPossibleFreeTrialDays(int|float $possibleFreeTrialDays): self
+    {
+        $validator = new Validator();
+        $validator->validate($possibleFreeTrialDays, self::$internalValidationSchema['properties']['possibleFreeTrialDays']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->possibleFreeTrialDays = $possibleFreeTrialDays;
+
+        return $clone;
+    }
+
+    public function withoutPossibleFreeTrialDays(): self
+    {
+        $clone = clone $this;
+        unset($clone->possibleFreeTrialDays);
+
+        return $clone;
+    }
+
     public function withStoragePrice(int|float $storagePrice): self
     {
         $validator = new Validator();
-        $validator->validate($storagePrice, self::$schema['properties']['storagePrice']);
+        $validator->validate($storagePrice, self::$internalValidationSchema['properties']['storagePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +137,7 @@ class HostingOrderPreviewResponse
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();
-        $validator->validate($totalPrice, self::$schema['properties']['totalPrice']);
+        $validator->validate($totalPrice, self::$internalValidationSchema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,11 +164,15 @@ class HostingOrderPreviewResponse
         }
 
         $machineTypePrice = str_contains((string)($input->{'machineTypePrice'}), '.') ? (float)($input->{'machineTypePrice'}) : (int)($input->{'machineTypePrice'});
+        $possibleFreeTrialDays = null;
+        if (isset($input->{'possibleFreeTrialDays'})) {
+            $possibleFreeTrialDays = str_contains((string)($input->{'possibleFreeTrialDays'}), '.') ? (float)($input->{'possibleFreeTrialDays'}) : (int)($input->{'possibleFreeTrialDays'});
+        }
         $storagePrice = str_contains((string)($input->{'storagePrice'}), '.') ? (float)($input->{'storagePrice'}) : (int)($input->{'storagePrice'});
         $totalPrice = str_contains((string)($input->{'totalPrice'}), '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
         $obj = new self($machineTypePrice, $storagePrice, $totalPrice);
-
+        $obj->possibleFreeTrialDays = $possibleFreeTrialDays;
         return $obj;
     }
 
@@ -148,6 +185,9 @@ class HostingOrderPreviewResponse
     {
         $output = [];
         $output['machineTypePrice'] = $this->machineTypePrice;
+        if (isset($this->possibleFreeTrialDays)) {
+            $output['possibleFreeTrialDays'] = $this->possibleFreeTrialDays;
+        }
         $output['storagePrice'] = $this->storagePrice;
         $output['totalPrice'] = $this->totalPrice;
 
@@ -166,7 +206,7 @@ class HostingOrderPreviewResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

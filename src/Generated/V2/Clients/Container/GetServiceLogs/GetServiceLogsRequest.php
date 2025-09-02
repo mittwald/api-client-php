@@ -14,7 +14,7 @@ class GetServiceLogsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'stackId' => [
@@ -24,6 +24,10 @@ class GetServiceLogsRequest
             'serviceId' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'tail' => [
+                'format' => 'int64',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -35,6 +39,8 @@ class GetServiceLogsRequest
     private string $stackId;
 
     private string $serviceId;
+
+    private ?int $tail = null;
 
     private array $headers = [
 
@@ -56,10 +62,15 @@ class GetServiceLogsRequest
         return $this->serviceId;
     }
 
+    public function getTail(): ?int
+    {
+        return $this->tail ?? null;
+    }
+
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,13 +84,35 @@ class GetServiceLogsRequest
     public function withServiceId(string $serviceId): self
     {
         $validator = new Validator();
-        $validator->validate($serviceId, self::$schema['properties']['serviceId']);
+        $validator->validate($serviceId, self::$internalValidationSchema['properties']['serviceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->serviceId = $serviceId;
+
+        return $clone;
+    }
+
+    public function withTail(int $tail): self
+    {
+        $validator = new Validator();
+        $validator->validate($tail, self::$internalValidationSchema['properties']['tail']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->tail = $tail;
+
+        return $clone;
+    }
+
+    public function withoutTail(): self
+    {
+        $clone = clone $this;
+        unset($clone->tail);
 
         return $clone;
     }
@@ -101,9 +134,13 @@ class GetServiceLogsRequest
 
         $stackId = $input->{'stackId'};
         $serviceId = $input->{'serviceId'};
+        $tail = null;
+        if (isset($input->{'tail'})) {
+            $tail = (int)($input->{'tail'});
+        }
 
         $obj = new self($stackId, $serviceId);
-
+        $obj->tail = $tail;
         return $obj;
     }
 
@@ -117,6 +154,9 @@ class GetServiceLogsRequest
         $output = [];
         $output['stackId'] = $this->stackId;
         $output['serviceId'] = $this->serviceId;
+        if (isset($this->tail)) {
+            $output['tail'] = $this->tail;
+        }
 
         return $output;
     }
@@ -133,7 +173,7 @@ class GetServiceLogsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -179,6 +219,9 @@ class GetServiceLogsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['tail'])) {
+            $query['tail'] = $mapped['tail'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

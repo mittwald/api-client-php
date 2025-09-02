@@ -22,7 +22,7 @@ class MailAddressMailboxStorageInBytes
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'current' => [
                 'properties' => [
@@ -31,7 +31,8 @@ class MailAddressMailboxStorageInBytes
                         'type' => 'string',
                     ],
                     'value' => [
-                        'type' => 'number',
+                        'format' => 'int64',
+                        'type' => 'integer',
                     ],
                 ],
                 'required' => [
@@ -41,7 +42,8 @@ class MailAddressMailboxStorageInBytes
                 'type' => 'object',
             ],
             'limit' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -53,9 +55,9 @@ class MailAddressMailboxStorageInBytes
 
     private MailAddressMailboxStorageInBytesCurrent $current;
 
-    private int|float $limit;
+    private int $limit;
 
-    public function __construct(MailAddressMailboxStorageInBytesCurrent $current, int|float $limit)
+    public function __construct(MailAddressMailboxStorageInBytesCurrent $current, int $limit)
     {
         $this->current = $current;
         $this->limit = $limit;
@@ -66,7 +68,7 @@ class MailAddressMailboxStorageInBytes
         return $this->current;
     }
 
-    public function getLimit(): int|float
+    public function getLimit(): int
     {
         return $this->limit;
     }
@@ -79,10 +81,10 @@ class MailAddressMailboxStorageInBytes
         return $clone;
     }
 
-    public function withLimit(int|float $limit): self
+    public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +111,7 @@ class MailAddressMailboxStorageInBytes
         }
 
         $current = MailAddressMailboxStorageInBytesCurrent::buildFromInput($input->{'current'}, validate: $validate);
-        $limit = str_contains((string)($input->{'limit'}), '.') ? (float)($input->{'limit'}) : (int)($input->{'limit'});
+        $limit = (int)($input->{'limit'});
 
         $obj = new self($current, $limit);
 
@@ -142,7 +144,7 @@ class MailAddressMailboxStorageInBytes
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

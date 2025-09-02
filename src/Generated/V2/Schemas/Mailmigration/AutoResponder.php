@@ -22,7 +22,7 @@ class AutoResponder
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -93,7 +93,7 @@ class AutoResponder
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -110,7 +110,7 @@ class AutoResponder
     public function withExpiresAt($expiresAt): self
     {
         $validator = new Validator();
-        $validator->validate($expiresAt, self::$schema['properties']['expiresAt']);
+        $validator->validate($expiresAt, self::$internalValidationSchema['properties']['expiresAt']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -132,7 +132,7 @@ class AutoResponder
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$schema['properties']['message']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class AutoResponder
     public function withStartsAt($startsAt): self
     {
         $validator = new Validator();
-        $validator->validate($startsAt, self::$schema['properties']['startsAt']);
+        $validator->validate($startsAt, self::$internalValidationSchema['properties']['startsAt']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -232,7 +232,7 @@ class AutoResponder
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -13,7 +13,7 @@ class ExtensionChangeContextOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'cleaningUpInstances' => [
                 'description' => 'If this value is true the context will change asynchronously after removing all extension-instances of this extension.',
@@ -70,7 +70,7 @@ class ExtensionChangeContextOKResponseBody
     public function withCleaningUpInstances(bool $cleaningUpInstances): self
     {
         $validator = new Validator();
-        $validator->validate($cleaningUpInstances, self::$schema['properties']['cleaningUpInstances']);
+        $validator->validate($cleaningUpInstances, self::$internalValidationSchema['properties']['cleaningUpInstances']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class ExtensionChangeContextOKResponseBody
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -154,7 +154,7 @@ class ExtensionChangeContextOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

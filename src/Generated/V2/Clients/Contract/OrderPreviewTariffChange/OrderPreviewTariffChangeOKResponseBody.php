@@ -12,7 +12,7 @@ class OrderPreviewTariffChangeOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'machineTypePrice' => [
                 'example' => 100,
@@ -65,7 +65,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
         $validator = new Validator();
-        $validator->validate($machineTypePrice, self::$schema['properties']['machineTypePrice']);
+        $validator->validate($machineTypePrice, self::$internalValidationSchema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +79,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withStoragePrice(int|float $storagePrice): self
     {
         $validator = new Validator();
-        $validator->validate($storagePrice, self::$schema['properties']['storagePrice']);
+        $validator->validate($storagePrice, self::$internalValidationSchema['properties']['storagePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -93,7 +93,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();
-        $validator->validate($totalPrice, self::$schema['properties']['totalPrice']);
+        $validator->validate($totalPrice, self::$internalValidationSchema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +155,7 @@ class OrderPreviewTariffChangeOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCus
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles;
 
 class ListMembershipsForCustomerRequest
 {
@@ -14,7 +15,7 @@ class ListMembershipsForCustomerRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerId' => [
@@ -25,6 +26,12 @@ class ListMembershipsForCustomerRequest
             ],
             'skip' => [
                 'type' => 'integer',
+            ],
+            'hasExpiry' => [
+                'type' => 'boolean',
+            ],
+            'role' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.membership.CustomerRoles',
             ],
         ],
         'required' => [
@@ -37,6 +44,10 @@ class ListMembershipsForCustomerRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?bool $hasExpiry = null;
+
+    private ?CustomerRoles $role = null;
 
     private array $headers = [
 
@@ -62,10 +73,20 @@ class ListMembershipsForCustomerRequest
         return $this->skip ?? null;
     }
 
+    public function getHasExpiry(): ?bool
+    {
+        return $this->hasExpiry ?? null;
+    }
+
+    public function getRole(): ?CustomerRoles
+    {
+        return $this->role ?? null;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +100,7 @@ class ListMembershipsForCustomerRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -101,7 +122,7 @@ class ListMembershipsForCustomerRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,6 +137,44 @@ class ListMembershipsForCustomerRequest
     {
         $clone = clone $this;
         unset($clone->skip);
+
+        return $clone;
+    }
+
+    public function withHasExpiry(bool $hasExpiry): self
+    {
+        $validator = new Validator();
+        $validator->validate($hasExpiry, self::$internalValidationSchema['properties']['hasExpiry']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hasExpiry = $hasExpiry;
+
+        return $clone;
+    }
+
+    public function withoutHasExpiry(): self
+    {
+        $clone = clone $this;
+        unset($clone->hasExpiry);
+
+        return $clone;
+    }
+
+    public function withRole(CustomerRoles $role): self
+    {
+        $clone = clone $this;
+        $clone->role = $role;
+
+        return $clone;
+    }
+
+    public function withoutRole(): self
+    {
+        $clone = clone $this;
+        unset($clone->role);
 
         return $clone;
     }
@@ -144,10 +203,20 @@ class ListMembershipsForCustomerRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $hasExpiry = null;
+        if (isset($input->{'hasExpiry'})) {
+            $hasExpiry = (bool)($input->{'hasExpiry'});
+        }
+        $role = null;
+        if (isset($input->{'role'})) {
+            $role = CustomerRoles::from($input->{'role'});
+        }
 
         $obj = new self($customerId);
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->hasExpiry = $hasExpiry;
+        $obj->role = $role;
         return $obj;
     }
 
@@ -166,6 +235,12 @@ class ListMembershipsForCustomerRequest
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
         }
+        if (isset($this->hasExpiry)) {
+            $output['hasExpiry'] = $this->hasExpiry;
+        }
+        if (isset($this->role)) {
+            $output['role'] = $this->role->value;
+        }
 
         return $output;
     }
@@ -182,7 +257,7 @@ class ListMembershipsForCustomerRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -232,6 +307,12 @@ class ListMembershipsForCustomerRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['hasExpiry'])) {
+            $query['hasExpiry'] = $mapped['hasExpiry'];
+        }
+        if (isset($mapped['role'])) {
+            $query['role'] = $mapped['role'];
         }
         return [
             'query' => $query,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Marketplace;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -22,7 +23,7 @@ class Extension
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'assets' => [
                 'description' => 'The assets/media (images and videos) of the extension.',
@@ -41,6 +42,10 @@ class Extension
             ],
             'contributorId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'createdAt' => [
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'deprecation' => [
@@ -91,12 +96,15 @@ class Extension
             'pricing' => [
                 'oneOf' => [
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy',
                     ],
                 ],
             ],
             'published' => [
                 'description' => 'Whether the extension has been published by the contributor.',
+                'enum' => [
+                    true,
+                ],
                 'type' => 'boolean',
             ],
             'scopes' => [
@@ -122,7 +130,23 @@ class Extension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
             ],
             'support' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                    ],
+                    [
+                        'properties' => [
+                            'inherited' => [
+                                'description' => 'Whether the support information is inherited from the contributor.',
+                                'type' => 'boolean',
+                            ],
+                        ],
+                        'required' => [
+                            'inherited',
+                        ],
+                        'type' => 'object',
+                    ],
+                ],
             ],
             'tags' => [
                 'items' => [
@@ -135,7 +159,6 @@ class Extension
         'required' => [
             'id',
             'contributorId',
-            'support',
             'state',
             'published',
             'name',
@@ -148,7 +171,9 @@ class Extension
             'blocked',
             'assets',
             'statistics',
+            'support',
             'logoRefId',
+            'createdAt',
         ],
         'type' => 'object',
     ];
@@ -168,6 +193,8 @@ class Extension
     private Context $context;
 
     private string $contributorId;
+
+    private DateTime $createdAt;
 
     private ?ExtensionDeprecation $deprecation = null;
 
@@ -205,7 +232,7 @@ class Extension
 
     private string $name;
 
-    private ?MonthlyPricingStrategy $pricing = null;
+    private ?MonthlyPricePlanStrategyItem $pricing = null;
 
     /**
      * Whether the extension has been published by the contributor.
@@ -228,7 +255,7 @@ class Extension
 
     private SubTitle $subTitle;
 
-    private SupportMeta $support;
+    private ExtensionSupport $support;
 
     /**
      * @var string[]
@@ -240,12 +267,13 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $logoRefId, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
+    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, DateTime $createdAt, string $description, bool $disabled, string $id, string $logoRefId, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, ExtensionSupport $support, array $tags)
     {
         $this->assets = $assets;
         $this->blocked = $blocked;
         $this->context = $context;
         $this->contributorId = $contributorId;
+        $this->createdAt = $createdAt;
         $this->description = $description;
         $this->disabled = $disabled;
         $this->id = $id;
@@ -284,6 +312,11 @@ class Extension
     public function getContributorId(): string
     {
         return $this->contributorId;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
     }
 
     public function getDeprecation(): ?ExtensionDeprecation
@@ -346,7 +379,7 @@ class Extension
         return $this->name;
     }
 
-    public function getPricing(): ?MonthlyPricingStrategy
+    public function getPricing(): ?MonthlyPricePlanStrategyItem
     {
         return $this->pricing ?? null;
     }
@@ -382,7 +415,7 @@ class Extension
         return $this->subTitle;
     }
 
-    public function getSupport(): SupportMeta
+    public function getSupport(): ExtensionSupport
     {
         return $this->support;
     }
@@ -412,7 +445,7 @@ class Extension
     public function withBlocked(bool $blocked): self
     {
         $validator = new Validator();
-        $validator->validate($blocked, self::$schema['properties']['blocked']);
+        $validator->validate($blocked, self::$internalValidationSchema['properties']['blocked']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -434,13 +467,21 @@ class Extension
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withCreatedAt(DateTime $createdAt): self
+    {
+        $clone = clone $this;
+        $clone->createdAt = $createdAt;
 
         return $clone;
     }
@@ -464,7 +505,7 @@ class Extension
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -494,7 +535,7 @@ class Extension
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, self::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$internalValidationSchema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -550,7 +591,7 @@ class Extension
     public function withFrontendFragments(array $frontendFragments): self
     {
         $validator = new Validator();
-        $validator->validate($frontendFragments, self::$schema['properties']['frontendFragments']);
+        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -572,7 +613,7 @@ class Extension
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -586,7 +627,7 @@ class Extension
     public function withLogoRefId(string $logoRefId): self
     {
         $validator = new Validator();
-        $validator->validate($logoRefId, self::$schema['properties']['logoRefId']);
+        $validator->validate($logoRefId, self::$internalValidationSchema['properties']['logoRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -600,7 +641,7 @@ class Extension
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -611,7 +652,7 @@ class Extension
         return $clone;
     }
 
-    public function withPricing(MonthlyPricingStrategy $pricing): self
+    public function withPricing(MonthlyPricePlanStrategyItem $pricing): self
     {
         $clone = clone $this;
         $clone->pricing = $pricing;
@@ -630,7 +671,7 @@ class Extension
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
-        $validator->validate($published, self::$schema['properties']['published']);
+        $validator->validate($published, self::$internalValidationSchema['properties']['published']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -647,7 +688,7 @@ class Extension
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -685,7 +726,7 @@ class Extension
         return $clone;
     }
 
-    public function withSupport(SupportMeta $support): self
+    public function withSupport(ExtensionSupport $support): self
     {
         $clone = clone $this;
         $clone->support = $support;
@@ -699,7 +740,7 @@ class Extension
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, self::$schema['properties']['tags']);
+        $validator->validate($tags, self::$internalValidationSchema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -729,6 +770,7 @@ class Extension
         $blocked = (bool)($input->{'blocked'});
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
+        $createdAt = new DateTime($input->{'createdAt'});
         $deprecation = null;
         if (isset($input->{'deprecation'})) {
             $deprecation = ExtensionDeprecation::buildFromInput($input->{'deprecation'}, validate: $validate);
@@ -757,7 +799,7 @@ class Extension
         $pricing = null;
         if (isset($input->{'pricing'})) {
             $pricing = match (true) {
-                MonthlyPricingStrategy::validateInput($input->{'pricing'}, true) => MonthlyPricingStrategy::buildFromInput($input->{'pricing'}, validate: $validate),
+                MonthlyPricePlanStrategyItem::validateInput($input->{'pricing'}, true) => MonthlyPricePlanStrategyItem::buildFromInput($input->{'pricing'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
@@ -766,10 +808,10 @@ class Extension
         $state = ExtensionState::from($input->{'state'});
         $statistics = ExtensionStatistics::buildFromInput($input->{'statistics'}, validate: $validate);
         $subTitle = SubTitle::buildFromInput($input->{'subTitle'}, validate: $validate);
-        $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
+        $support = ExtensionSupport::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($assets, $blocked, $context, $contributorId, $description, $disabled, $id, $logoRefId, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
+        $obj = new self($assets, $blocked, $context, $contributorId, $createdAt, $description, $disabled, $id, $logoRefId, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->externalFrontends = $externalFrontends;
@@ -791,6 +833,7 @@ class Extension
         $output['blocked'] = $this->blocked;
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->deprecation)) {
             $output['deprecation'] = $this->deprecation->toJson();
         }
@@ -813,7 +856,7 @@ class Extension
         $output['name'] = $this->name;
         if (isset($this->pricing)) {
             $output['pricing'] = match (true) {
-                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing->toJson(),
+                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing->toJson(),
             };
         }
         $output['published'] = $this->published;
@@ -821,7 +864,7 @@ class Extension
         $output['state'] = ($this->state)->value;
         $output['statistics'] = $this->statistics->toJson();
         $output['subTitle'] = $this->subTitle->toJson();
-        $output['support'] = $this->support->toJson();
+        $output['support'] = ($this->support)->toJson();
         $output['tags'] = $this->tags;
 
         return $output;
@@ -839,7 +882,7 @@ class Extension
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -853,10 +896,12 @@ class Extension
 
     public function __clone()
     {
+        $this->createdAt = clone $this->createdAt;
         if (isset($this->pricing)) {
             $this->pricing = match (true) {
-                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing,
+                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing,
             };
         }
+        $this->support = clone $this->support;
     }
 }

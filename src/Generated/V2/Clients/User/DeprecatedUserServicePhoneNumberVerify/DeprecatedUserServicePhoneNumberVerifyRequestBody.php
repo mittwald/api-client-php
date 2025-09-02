@@ -12,7 +12,7 @@ class DeprecatedUserServicePhoneNumberVerifyRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'code' => [
                 'example' => '123456',
@@ -53,7 +53,7 @@ class DeprecatedUserServicePhoneNumberVerifyRequestBody
     public function withCode(string $code): self
     {
         $validator = new Validator();
-        $validator->validate($code, self::$schema['properties']['code']);
+        $validator->validate($code, self::$internalValidationSchema['properties']['code']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -67,7 +67,7 @@ class DeprecatedUserServicePhoneNumberVerifyRequestBody
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();
-        $validator->validate($phoneNumber, self::$schema['properties']['phoneNumber']);
+        $validator->validate($phoneNumber, self::$internalValidationSchema['properties']['phoneNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class DeprecatedUserServicePhoneNumberVerifyRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

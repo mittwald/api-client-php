@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectFeature;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectStatus;
 
 class ListProjectsOKResponseBodyItem
@@ -16,9 +17,10 @@ class ListProjectsOKResponseBodyItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'backupStorageUsageInBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'backupStorageUsageInBytesSetAt' => [
@@ -56,6 +58,14 @@ class ListProjectsOKResponseBodyItem
             'enabled' => [
                 'type' => 'boolean',
             ],
+            'features' => [
+                'deprecated' => true,
+                'description' => 'Deprecated by \'supportedFeatures\'.',
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
+                ],
+                'type' => 'array',
+            ],
             'id' => [
                 'type' => 'string',
             ],
@@ -87,7 +97,14 @@ class ListProjectsOKResponseBodyItem
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'supportedFeatures' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
+                ],
+                'type' => 'array',
+            ],
             'webStorageUsageInBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'webStorageUsageInBytesSetAt' => [
@@ -111,6 +128,7 @@ class ListProjectsOKResponseBodyItem
             'webStorageUsageInBytesSetAt',
             'backupStorageUsageInBytes',
             'backupStorageUsageInBytesSetAt',
+            'supportedFeatures',
         ],
         'type' => 'object',
     ];
@@ -132,6 +150,14 @@ class ListProjectsOKResponseBodyItem
     private ?DateTime $disabledAt = null;
 
     private bool $enabled;
+
+    /**
+     * Deprecated by 'supportedFeatures'.
+     *
+     * @var ProjectFeature[]|null
+     * @deprecated
+     */
+    private ?array $features = null;
 
     private string $id;
 
@@ -156,11 +182,19 @@ class ListProjectsOKResponseBodyItem
 
     private DateTime $statusSetAt;
 
+    /**
+     * @var ProjectFeature[]
+     */
+    private array $supportedFeatures;
+
     private int $webStorageUsageInBytes;
 
     private DateTime $webStorageUsageInBytesSetAt;
 
-    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
+    /**
+     * @param ProjectFeature[] $supportedFeatures
+     */
+    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, array $supportedFeatures, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
     {
         $this->backupStorageUsageInBytes = $backupStorageUsageInBytes;
         $this->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
@@ -175,6 +209,7 @@ class ListProjectsOKResponseBodyItem
         $this->shortId = $shortId;
         $this->status = $status;
         $this->statusSetAt = $statusSetAt;
+        $this->supportedFeatures = $supportedFeatures;
         $this->webStorageUsageInBytes = $webStorageUsageInBytes;
         $this->webStorageUsageInBytesSetAt = $webStorageUsageInBytesSetAt;
     }
@@ -222,6 +257,15 @@ class ListProjectsOKResponseBodyItem
     public function getEnabled(): bool
     {
         return $this->enabled;
+    }
+
+    /**
+     * @return ProjectFeature[]|null
+     * @deprecated
+     */
+    public function getFeatures(): ?array
+    {
+        return $this->features ?? null;
     }
 
     public function getId(): string
@@ -272,6 +316,14 @@ class ListProjectsOKResponseBodyItem
         return $this->statusSetAt;
     }
 
+    /**
+     * @return ProjectFeature[]
+     */
+    public function getSupportedFeatures(): array
+    {
+        return $this->supportedFeatures;
+    }
+
     public function getWebStorageUsageInBytes(): int
     {
         return $this->webStorageUsageInBytes;
@@ -285,7 +337,7 @@ class ListProjectsOKResponseBodyItem
     public function withBackupStorageUsageInBytes(int $backupStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($backupStorageUsageInBytes, self::$schema['properties']['backupStorageUsageInBytes']);
+        $validator->validate($backupStorageUsageInBytes, self::$internalValidationSchema['properties']['backupStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -315,7 +367,7 @@ class ListProjectsOKResponseBodyItem
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -337,7 +389,7 @@ class ListProjectsOKResponseBodyItem
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -383,7 +435,7 @@ class ListProjectsOKResponseBodyItem
     public function withEnabled(bool $enabled): self
     {
         $validator = new Validator();
-        $validator->validate($enabled, self::$schema['properties']['enabled']);
+        $validator->validate($enabled, self::$internalValidationSchema['properties']['enabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -394,10 +446,30 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
+    /**
+     * @param ProjectFeature[] $features
+     * @deprecated
+     */
+    public function withFeatures(array $features): self
+    {
+        $clone = clone $this;
+        $clone->features = $features;
+
+        return $clone;
+    }
+
+    public function withoutFeatures(): self
+    {
+        $clone = clone $this;
+        unset($clone->features);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -411,7 +483,7 @@ class ListProjectsOKResponseBodyItem
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
-        $validator->validate($imageRefId, self::$schema['properties']['imageRefId']);
+        $validator->validate($imageRefId, self::$internalValidationSchema['properties']['imageRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -436,7 +508,7 @@ class ListProjectsOKResponseBodyItem
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
-        $validator->validate($isReady, self::$schema['properties']['isReady']);
+        $validator->validate($isReady, self::$internalValidationSchema['properties']['isReady']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -450,7 +522,7 @@ class ListProjectsOKResponseBodyItem
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
-        $validator->validate($projectHostingId, self::$schema['properties']['projectHostingId']);
+        $validator->validate($projectHostingId, self::$internalValidationSchema['properties']['projectHostingId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -480,7 +552,7 @@ class ListProjectsOKResponseBodyItem
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($serverId, self::$schema['properties']['serverId']);
+        $validator->validate($serverId, self::$internalValidationSchema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -502,7 +574,7 @@ class ListProjectsOKResponseBodyItem
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -529,10 +601,21 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
+    /**
+     * @param ProjectFeature[] $supportedFeatures
+     */
+    public function withSupportedFeatures(array $supportedFeatures): self
+    {
+        $clone = clone $this;
+        $clone->supportedFeatures = $supportedFeatures;
+
+        return $clone;
+    }
+
     public function withWebStorageUsageInBytes(int $webStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($webStorageUsageInBytes, self::$schema['properties']['webStorageUsageInBytes']);
+        $validator->validate($webStorageUsageInBytes, self::$internalValidationSchema['properties']['webStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -581,6 +664,10 @@ class ListProjectsOKResponseBodyItem
             $disabledAt = new DateTime($input->{'disabledAt'});
         }
         $enabled = (bool)($input->{'enabled'});
+        $features = null;
+        if (isset($input->{'features'})) {
+            $features = array_map(fn (string $i): ProjectFeature => ProjectFeature::from($i), $input->{'features'});
+        }
         $id = $input->{'id'};
         $imageRefId = null;
         if (isset($input->{'imageRefId'})) {
@@ -599,12 +686,14 @@ class ListProjectsOKResponseBodyItem
         $shortId = $input->{'shortId'};
         $status = ProjectStatus::from($input->{'status'});
         $statusSetAt = new DateTime($input->{'statusSetAt'});
+        $supportedFeatures = array_map(fn (string $i): ProjectFeature => ProjectFeature::from($i), $input->{'supportedFeatures'});
         $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
         $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 
-        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
+        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $supportedFeatures, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->disableReason = $disableReason;
         $obj->disabledAt = $disabledAt;
+        $obj->features = $features;
         $obj->imageRefId = $imageRefId;
         $obj->projectHostingId = $projectHostingId;
         $obj->serverId = $serverId;
@@ -632,6 +721,9 @@ class ListProjectsOKResponseBodyItem
             $output['disabledAt'] = ($this->disabledAt)->format(DateTime::ATOM);
         }
         $output['enabled'] = $this->enabled;
+        if (isset($this->features)) {
+            $output['features'] = array_map(fn (ProjectFeature $i): string => $i->value, $this->features);
+        }
         $output['id'] = $this->id;
         if (isset($this->imageRefId)) {
             $output['imageRefId'] = $this->imageRefId;
@@ -647,6 +739,7 @@ class ListProjectsOKResponseBodyItem
         $output['shortId'] = $this->shortId;
         $output['status'] = $this->status->value;
         $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
+        $output['supportedFeatures'] = array_map(fn (ProjectFeature $i): string => $i->value, $this->supportedFeatures);
         $output['webStorageUsageInBytes'] = $this->webStorageUsageInBytes;
         $output['webStorageUsageInBytesSetAt'] = ($this->webStorageUsageInBytesSetAt)->format(DateTime::ATOM);
 
@@ -665,7 +758,7 @@ class ListProjectsOKResponseBodyItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

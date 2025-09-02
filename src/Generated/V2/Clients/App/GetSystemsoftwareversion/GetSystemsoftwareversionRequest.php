@@ -14,7 +14,7 @@ class GetSystemsoftwareversionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'systemSoftwareId' => [
@@ -59,7 +59,7 @@ class GetSystemsoftwareversionRequest
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareId, self::$schema['properties']['systemSoftwareId']);
+        $validator->validate($systemSoftwareId, self::$internalValidationSchema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,7 +73,7 @@ class GetSystemsoftwareversionRequest
     public function withSystemSoftwareVersionId(string $systemSoftwareVersionId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareVersionId, self::$schema['properties']['systemSoftwareVersionId']);
+        $validator->validate($systemSoftwareVersionId, self::$internalValidationSchema['properties']['systemSoftwareVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class GetSystemsoftwareversionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -163,7 +163,7 @@ class GetSystemsoftwareversionRequest
         $mapped = $this->toJson();
         $systemSoftwareId = urlencode($mapped['systemSoftwareId']);
         $systemSoftwareVersionId = urlencode($mapped['systemSoftwareVersionId']);
-        return '/v2/system-software/' . $systemSoftwareId . '/versions/' . $systemSoftwareVersionId;
+        return '/v2/system-softwares/' . $systemSoftwareId . '/versions/' . $systemSoftwareVersionId;
     }
 
     /**

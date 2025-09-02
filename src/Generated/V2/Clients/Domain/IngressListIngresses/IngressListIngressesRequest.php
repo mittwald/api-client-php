@@ -14,11 +14,10 @@ class IngressListIngressesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'certificateId' => [
@@ -93,7 +92,7 @@ class IngressListIngressesRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +114,7 @@ class IngressListIngressesRequest
     public function withCertificateId(string $certificateId): self
     {
         $validator = new Validator();
-        $validator->validate($certificateId, self::$schema['properties']['certificateId']);
+        $validator->validate($certificateId, self::$internalValidationSchema['properties']['certificateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +136,7 @@ class IngressListIngressesRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +150,7 @@ class IngressListIngressesRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +164,7 @@ class IngressListIngressesRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -264,7 +263,7 @@ class IngressListIngressesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

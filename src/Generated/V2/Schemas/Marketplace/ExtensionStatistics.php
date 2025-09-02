@@ -22,7 +22,7 @@ class ExtensionStatistics
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'amountOfInstances' => [
                 'description' => 'The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.',
@@ -54,7 +54,7 @@ class ExtensionStatistics
     public function withAmountOfInstances(int $amountOfInstances): self
     {
         $validator = new Validator();
-        $validator->validate($amountOfInstances, self::$schema['properties']['amountOfInstances']);
+        $validator->validate($amountOfInstances, self::$internalValidationSchema['properties']['amountOfInstances']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class ExtensionStatistics
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

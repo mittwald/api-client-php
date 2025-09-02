@@ -12,7 +12,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'blacklist' => [
                 'items' => [
@@ -55,7 +55,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     public function withBlacklist(array $blacklist): self
     {
         $validator = new Validator();
-        $validator->validate($blacklist, self::$schema['properties']['blacklist']);
+        $validator->validate($blacklist, self::$internalValidationSchema['properties']['blacklist']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

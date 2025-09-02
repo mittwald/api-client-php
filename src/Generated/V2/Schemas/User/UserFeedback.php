@@ -22,7 +22,7 @@ class UserFeedback
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'id' => [
                 'format' => 'uuid',
@@ -104,7 +104,7 @@ class UserFeedback
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class UserFeedback
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$schema['properties']['message']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -132,7 +132,7 @@ class UserFeedback
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
-        $validator->validate($origin, self::$schema['properties']['origin']);
+        $validator->validate($origin, self::$internalValidationSchema['properties']['origin']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -146,7 +146,7 @@ class UserFeedback
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
-        $validator->validate($subject, self::$schema['properties']['subject']);
+        $validator->validate($subject, self::$internalValidationSchema['properties']['subject']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -160,7 +160,7 @@ class UserFeedback
     public function withVote(int|float $vote): self
     {
         $validator = new Validator();
-        $validator->validate($vote, self::$schema['properties']['vote']);
+        $validator->validate($vote, self::$internalValidationSchema['properties']['vote']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -226,7 +226,7 @@ class UserFeedback
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

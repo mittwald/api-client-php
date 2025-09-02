@@ -22,7 +22,7 @@ class TopLevel
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'irtp' => [
                 'type' => 'boolean',
@@ -105,7 +105,7 @@ class TopLevel
     public function withIrtp(bool $irtp): self
     {
         $validator = new Validator();
-        $validator->validate($irtp, self::$schema['properties']['irtp']);
+        $validator->validate($irtp, self::$internalValidationSchema['properties']['irtp']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class TopLevel
     public function withRgpDays(int $rgpDays): self
     {
         $validator = new Validator();
-        $validator->validate($rgpDays, self::$schema['properties']['rgpDays']);
+        $validator->validate($rgpDays, self::$internalValidationSchema['properties']['rgpDays']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class TopLevel
     public function withTld(string $tld): self
     {
         $validator = new Validator();
-        $validator->validate($tld, self::$schema['properties']['tld']);
+        $validator->validate($tld, self::$internalValidationSchema['properties']['tld']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class TopLevel
     public function withTransferAuthCodeRequired(bool $transferAuthCodeRequired): self
     {
         $validator = new Validator();
-        $validator->validate($transferAuthCodeRequired, self::$schema['properties']['transferAuthCodeRequired']);
+        $validator->validate($transferAuthCodeRequired, self::$internalValidationSchema['properties']['transferAuthCodeRequired']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class TopLevel
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

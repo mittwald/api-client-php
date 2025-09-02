@@ -12,7 +12,7 @@ class CreateRelocationRequestBodyProvider
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'loginUrl' => [
                 'description' => 'Url to the control panel of the provider',
@@ -119,7 +119,7 @@ class CreateRelocationRequestBodyProvider
     public function withLoginUrl(string $loginUrl): self
     {
         $validator = new Validator();
-        $validator->validate($loginUrl, self::$schema['properties']['loginUrl']);
+        $validator->validate($loginUrl, self::$internalValidationSchema['properties']['loginUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class CreateRelocationRequestBodyProvider
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, self::$schema['properties']['password']);
+        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +155,7 @@ class CreateRelocationRequestBodyProvider
     public function withSourceAccount(string $sourceAccount): self
     {
         $validator = new Validator();
-        $validator->validate($sourceAccount, self::$schema['properties']['sourceAccount']);
+        $validator->validate($sourceAccount, self::$internalValidationSchema['properties']['sourceAccount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +169,7 @@ class CreateRelocationRequestBodyProvider
     public function withUserName(string $userName): self
     {
         $validator = new Validator();
-        $validator->validate($userName, self::$schema['properties']['userName']);
+        $validator->validate($userName, self::$internalValidationSchema['properties']['userName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class CreateRelocationRequestBodyProvider
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

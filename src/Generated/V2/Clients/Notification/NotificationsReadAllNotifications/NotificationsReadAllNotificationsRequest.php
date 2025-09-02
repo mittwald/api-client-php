@@ -14,7 +14,7 @@ class NotificationsReadAllNotificationsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'severities' => [
@@ -104,7 +104,7 @@ class NotificationsReadAllNotificationsRequest
     public function withSeverities(array $severities): self
     {
         $validator = new Validator();
-        $validator->validate($severities, self::$schema['properties']['severities']);
+        $validator->validate($severities, self::$internalValidationSchema['properties']['severities']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class NotificationsReadAllNotificationsRequest
     public function withReferenceId(string $referenceId): self
     {
         $validator = new Validator();
-        $validator->validate($referenceId, self::$schema['properties']['referenceId']);
+        $validator->validate($referenceId, self::$internalValidationSchema['properties']['referenceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -148,7 +148,7 @@ class NotificationsReadAllNotificationsRequest
     public function withReferenceAggregate(string $referenceAggregate): self
     {
         $validator = new Validator();
-        $validator->validate($referenceAggregate, self::$schema['properties']['referenceAggregate']);
+        $validator->validate($referenceAggregate, self::$internalValidationSchema['properties']['referenceAggregate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class NotificationsReadAllNotificationsRequest
     public function withReferenceDomain(string $referenceDomain): self
     {
         $validator = new Validator();
-        $validator->validate($referenceDomain, self::$schema['properties']['referenceDomain']);
+        $validator->validate($referenceDomain, self::$internalValidationSchema['properties']['referenceDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -275,7 +275,7 @@ class NotificationsReadAllNotificationsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

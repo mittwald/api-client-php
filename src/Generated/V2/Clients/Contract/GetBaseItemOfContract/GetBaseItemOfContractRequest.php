@@ -14,7 +14,7 @@ class GetBaseItemOfContractRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contractId' => [
@@ -46,7 +46,7 @@ class GetBaseItemOfContractRequest
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, self::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$internalValidationSchema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class GetBaseItemOfContractRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

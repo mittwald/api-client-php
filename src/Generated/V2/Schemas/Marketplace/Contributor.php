@@ -22,7 +22,7 @@ class Contributor
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'customerId' => [
                 'format' => 'uuid',
@@ -31,13 +31,23 @@ class Contributor
             'description' => [
                 'type' => 'string',
             ],
+            'descriptions' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.LocalizedDescription',
+            ],
             'email' => [
                 'deprecated' => true,
+                'type' => 'string',
+            ],
+            'homepage' => [
+                'format' => 'uri',
                 'type' => 'string',
             ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'imprint' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint',
             ],
             'logoRefId' => [
                 'type' => 'string',
@@ -53,9 +63,26 @@ class Contributor
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ContributorState',
             ],
             'supportInformation' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                    ],
+                    [
+                        'properties' => [
+                            'inherited' => [
+                                'description' => 'Whether the support information is inherited from the customer.',
+                                'type' => 'boolean',
+                            ],
+                        ],
+                        'required' => [
+                            'inherited',
+                        ],
+                        'type' => 'object',
+                    ],
+                ],
             ],
             'url' => [
+                'deprecated' => true,
                 'type' => 'string',
             ],
         ],
@@ -65,6 +92,7 @@ class Contributor
             'state',
             'name',
             'supportInformation',
+            'email',
         ],
         'type' => 'object',
     ];
@@ -73,12 +101,18 @@ class Contributor
 
     private ?string $description = null;
 
+    private ?LocalizedDescription $descriptions = null;
+
     /**
      * @deprecated
      */
-    private ?string $email = null;
+    private string $email;
+
+    private ?string $homepage = null;
 
     private string $id;
+
+    private ContributorImprintAlternative1|ContributorImprintAlternative2|null $imprint = null;
 
     private ?string $logoRefId = null;
 
@@ -91,13 +125,17 @@ class Contributor
 
     private ContributorState $state;
 
-    private SupportMeta $supportInformation;
+    private ContributorSupportInformation $supportInformation;
 
+    /**
+     * @deprecated
+     */
     private ?string $url = null;
 
-    public function __construct(string $customerId, string $id, string $name, ContributorState $state, SupportMeta $supportInformation)
+    public function __construct(string $customerId, string $email, string $id, string $name, ContributorState $state, ContributorSupportInformation $supportInformation)
     {
         $this->customerId = $customerId;
+        $this->email = $email;
         $this->id = $id;
         $this->name = $name;
         $this->state = $state;
@@ -114,17 +152,32 @@ class Contributor
         return $this->description ?? null;
     }
 
+    public function getDescriptions(): ?LocalizedDescription
+    {
+        return $this->descriptions ?? null;
+    }
+
     /**
      * @deprecated
      */
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
-        return $this->email ?? null;
+        return $this->email;
+    }
+
+    public function getHomepage(): ?string
+    {
+        return $this->homepage ?? null;
     }
 
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getImprint(): ContributorImprintAlternative1|ContributorImprintAlternative2|null
+    {
+        return $this->imprint;
     }
 
     public function getLogoRefId(): ?string
@@ -150,11 +203,14 @@ class Contributor
         return $this->state;
     }
 
-    public function getSupportInformation(): SupportMeta
+    public function getSupportInformation(): ContributorSupportInformation
     {
         return $this->supportInformation;
     }
 
+    /**
+     * @deprecated
+     */
     public function getUrl(): ?string
     {
         return $this->url ?? null;
@@ -163,7 +219,7 @@ class Contributor
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -177,7 +233,7 @@ class Contributor
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -196,13 +252,29 @@ class Contributor
         return $clone;
     }
 
+    public function withDescriptions(LocalizedDescription $descriptions): self
+    {
+        $clone = clone $this;
+        $clone->descriptions = $descriptions;
+
+        return $clone;
+    }
+
+    public function withoutDescriptions(): self
+    {
+        $clone = clone $this;
+        unset($clone->descriptions);
+
+        return $clone;
+    }
+
     /**
      * @deprecated
      */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,10 +285,24 @@ class Contributor
         return $clone;
     }
 
-    public function withoutEmail(): self
+    public function withHomepage(string $homepage): self
+    {
+        $validator = new Validator();
+        $validator->validate($homepage, self::$internalValidationSchema['properties']['homepage']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->homepage = $homepage;
+
+        return $clone;
+    }
+
+    public function withoutHomepage(): self
     {
         $clone = clone $this;
-        unset($clone->email);
+        unset($clone->homepage);
 
         return $clone;
     }
@@ -224,7 +310,7 @@ class Contributor
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -235,10 +321,26 @@ class Contributor
         return $clone;
     }
 
+    public function withImprint(ContributorImprintAlternative1|ContributorImprintAlternative2 $imprint): self
+    {
+        $clone = clone $this;
+        $clone->imprint = $imprint;
+
+        return $clone;
+    }
+
+    public function withoutImprint(): self
+    {
+        $clone = clone $this;
+        unset($clone->imprint);
+
+        return $clone;
+    }
+
     public function withLogoRefId(string $logoRefId): self
     {
         $validator = new Validator();
-        $validator->validate($logoRefId, self::$schema['properties']['logoRefId']);
+        $validator->validate($logoRefId, self::$internalValidationSchema['properties']['logoRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -260,7 +362,7 @@ class Contributor
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -277,7 +379,7 @@ class Contributor
     public function withPhone(string $phone): self
     {
         $validator = new Validator();
-        $validator->validate($phone, self::$schema['properties']['phone']);
+        $validator->validate($phone, self::$internalValidationSchema['properties']['phone']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -304,7 +406,7 @@ class Contributor
         return $clone;
     }
 
-    public function withSupportInformation(SupportMeta $supportInformation): self
+    public function withSupportInformation(ContributorSupportInformation $supportInformation): self
     {
         $clone = clone $this;
         $clone->supportInformation = $supportInformation;
@@ -312,10 +414,13 @@ class Contributor
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withUrl(string $url): self
     {
         $validator = new Validator();
-        $validator->validate($url, self::$schema['properties']['url']);
+        $validator->validate($url, self::$internalValidationSchema['properties']['url']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -354,11 +459,24 @@ class Contributor
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
         }
-        $email = null;
-        if (isset($input->{'email'})) {
-            $email = $input->{'email'};
+        $descriptions = null;
+        if (isset($input->{'descriptions'})) {
+            $descriptions = LocalizedDescription::buildFromInput($input->{'descriptions'}, validate: $validate);
+        }
+        $email = $input->{'email'};
+        $homepage = null;
+        if (isset($input->{'homepage'})) {
+            $homepage = $input->{'homepage'};
         }
         $id = $input->{'id'};
+        $imprint = null;
+        if (isset($input->{'imprint'})) {
+            $imprint = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ContributorImprintAlternative1::validateInput($input->{'imprint'}, true) => ContributorImprintAlternative1::buildFromInput($input->{'imprint'}, validate: $validate),
+                ContributorImprintAlternative2::validateInput($input->{'imprint'}, true) => ContributorImprintAlternative2::buildFromInput($input->{'imprint'}, validate: $validate),
+            };
+        }
         $logoRefId = null;
         if (isset($input->{'logoRefId'})) {
             $logoRefId = $input->{'logoRefId'};
@@ -369,15 +487,17 @@ class Contributor
             $phone = $input->{'phone'};
         }
         $state = ContributorState::from($input->{'state'});
-        $supportInformation = SupportMeta::buildFromInput($input->{'supportInformation'}, validate: $validate);
+        $supportInformation = ContributorSupportInformation::buildFromInput($input->{'supportInformation'}, validate: $validate);
         $url = null;
         if (isset($input->{'url'})) {
             $url = $input->{'url'};
         }
 
-        $obj = new self($customerId, $id, $name, $state, $supportInformation);
+        $obj = new self($customerId, $email, $id, $name, $state, $supportInformation);
         $obj->description = $description;
-        $obj->email = $email;
+        $obj->descriptions = $descriptions;
+        $obj->homepage = $homepage;
+        $obj->imprint = $imprint;
         $obj->logoRefId = $logoRefId;
         $obj->phone = $phone;
         $obj->url = $url;
@@ -396,10 +516,20 @@ class Contributor
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
-        if (isset($this->email)) {
-            $output['email'] = $this->email;
+        if (isset($this->descriptions)) {
+            $output['descriptions'] = $this->descriptions->toJson();
+        }
+        $output['email'] = $this->email;
+        if (isset($this->homepage)) {
+            $output['homepage'] = $this->homepage;
         }
         $output['id'] = $this->id;
+        if (isset($this->imprint)) {
+            $output['imprint'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->imprint) instanceof ContributorImprintAlternative1, ($this->imprint) instanceof ContributorImprintAlternative2 => $this->imprint->toJson(),
+            };
+        }
         if (isset($this->logoRefId)) {
             $output['logoRefId'] = $this->logoRefId;
         }
@@ -408,7 +538,7 @@ class Contributor
             $output['phone'] = $this->phone;
         }
         $output['state'] = $this->state->value;
-        $output['supportInformation'] = $this->supportInformation->toJson();
+        $output['supportInformation'] = ($this->supportInformation)->toJson();
         if (isset($this->url)) {
             $output['url'] = $this->url;
         }
@@ -428,7 +558,7 @@ class Contributor
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -442,5 +572,6 @@ class Contributor
 
     public function __clone()
     {
+        $this->supportInformation = clone $this->supportInformation;
     }
 }

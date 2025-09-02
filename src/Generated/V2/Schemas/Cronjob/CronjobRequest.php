@@ -22,7 +22,7 @@ class CronjobRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -56,7 +56,7 @@ class CronjobRequest
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
-                'type' => 'number',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -82,9 +82,9 @@ class CronjobRequest
 
     private string $interval;
 
-    private int|float $timeout;
+    private int $timeout;
 
-    public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval, int|float $timeout)
+    public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval, int $timeout)
     {
         $this->active = $active;
         $this->appId = $appId;
@@ -124,7 +124,7 @@ class CronjobRequest
         return $this->interval;
     }
 
-    public function getTimeout(): int|float
+    public function getTimeout(): int
     {
         return $this->timeout;
     }
@@ -132,7 +132,7 @@ class CronjobRequest
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -146,7 +146,7 @@ class CronjobRequest
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$schema['properties']['appId']);
+        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -160,7 +160,7 @@ class CronjobRequest
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -182,7 +182,7 @@ class CronjobRequest
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -204,7 +204,7 @@ class CronjobRequest
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
-        $validator->validate($interval, self::$schema['properties']['interval']);
+        $validator->validate($interval, self::$internalValidationSchema['properties']['interval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,10 +215,10 @@ class CronjobRequest
         return $clone;
     }
 
-    public function withTimeout(int|float $timeout): self
+    public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
-        $validator->validate($timeout, self::$schema['properties']['timeout']);
+        $validator->validate($timeout, self::$internalValidationSchema['properties']['timeout']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -257,7 +257,7 @@ class CronjobRequest
             $email = $input->{'email'};
         }
         $interval = $input->{'interval'};
-        $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+        $timeout = (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
         $obj->email = $email;
@@ -299,7 +299,7 @@ class CronjobRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

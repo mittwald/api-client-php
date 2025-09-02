@@ -11,5 +11,6 @@ enum Department: string
     case accounting = 'accounting';
     case cloudHosting = 'cloudHosting';
     case customerService = 'customerService';
+    case productManagement = 'productManagement';
     case generic = 'generic';
 }

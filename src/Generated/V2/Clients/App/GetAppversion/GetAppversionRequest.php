@@ -14,7 +14,7 @@ class GetAppversionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'appId' => [
@@ -59,7 +59,7 @@ class GetAppversionRequest
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$schema['properties']['appId']);
+        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,7 +73,7 @@ class GetAppversionRequest
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();
-        $validator->validate($appVersionId, self::$schema['properties']['appVersionId']);
+        $validator->validate($appVersionId, self::$internalValidationSchema['properties']['appVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class GetAppversionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

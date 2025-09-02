@@ -23,7 +23,7 @@ class Cancellation
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'cancellationId' => [
                 'format' => 'uuid',
@@ -101,7 +101,7 @@ class Cancellation
     public function withCancellationId(string $cancellationId): self
     {
         $validator = new Validator();
-        $validator->validate($cancellationId, self::$schema['properties']['cancellationId']);
+        $validator->validate($cancellationId, self::$internalValidationSchema['properties']['cancellationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,7 +123,7 @@ class Cancellation
     public function withCorrectionNumber(string $correctionNumber): self
     {
         $validator = new Validator();
-        $validator->validate($correctionNumber, self::$schema['properties']['correctionNumber']);
+        $validator->validate($correctionNumber, self::$internalValidationSchema['properties']['correctionNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class Cancellation
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
-        $validator->validate($pdfId, self::$schema['properties']['pdfId']);
+        $validator->validate($pdfId, self::$internalValidationSchema['properties']['pdfId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class Cancellation
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, self::$schema['properties']['reason']);
+        $validator->validate($reason, self::$internalValidationSchema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -230,7 +230,7 @@ class Cancellation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

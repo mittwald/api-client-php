@@ -22,7 +22,7 @@ class ConfigFile
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'content' => [
                 'format' => 'bytes',
@@ -60,7 +60,7 @@ class ConfigFile
     public function withContent(string $content): self
     {
         $validator = new Validator();
-        $validator->validate($content, self::$schema['properties']['content']);
+        $validator->validate($content, self::$internalValidationSchema['properties']['content']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class ConfigFile
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

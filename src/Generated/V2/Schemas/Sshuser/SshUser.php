@@ -23,7 +23,7 @@ class SshUser
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A representation of an SSHUser.',
         'properties' => [
             'active' => [
@@ -176,7 +176,7 @@ class SshUser
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -214,7 +214,7 @@ class SshUser
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -244,7 +244,7 @@ class SshUser
     public function withHasPassword(bool $hasPassword): self
     {
         $validator = new Validator();
-        $validator->validate($hasPassword, self::$schema['properties']['hasPassword']);
+        $validator->validate($hasPassword, self::$internalValidationSchema['properties']['hasPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -258,7 +258,7 @@ class SshUser
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -272,7 +272,7 @@ class SshUser
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +321,7 @@ class SshUser
     public function withUserName(string $userName): self
     {
         $validator = new Validator();
-        $validator->validate($userName, self::$schema['properties']['userName']);
+        $validator->validate($userName, self::$internalValidationSchema['properties']['userName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -422,7 +422,7 @@ class SshUser
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class Statistics
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'kernelMs' => [
                 'description' => 'Elapsed kernel space time in milliseconds.',
@@ -105,7 +105,7 @@ class Statistics
     public function withKernelMs(int|float $kernelMs): self
     {
         $validator = new Validator();
-        $validator->validate($kernelMs, self::$schema['properties']['kernelMs']);
+        $validator->validate($kernelMs, self::$internalValidationSchema['properties']['kernelMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class Statistics
     public function withOccurrences(int $occurrences): self
     {
         $validator = new Validator();
-        $validator->validate($occurrences, self::$schema['properties']['occurrences']);
+        $validator->validate($occurrences, self::$internalValidationSchema['properties']['occurrences']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class Statistics
     public function withSyscallCount(int $syscallCount): self
     {
         $validator = new Validator();
-        $validator->validate($syscallCount, self::$schema['properties']['syscallCount']);
+        $validator->validate($syscallCount, self::$internalValidationSchema['properties']['syscallCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +147,7 @@ class Statistics
     public function withUserspaceMs(int|float $userspaceMs): self
     {
         $validator = new Validator();
-        $validator->validate($userspaceMs, self::$schema['properties']['userspaceMs']);
+        $validator->validate($userspaceMs, self::$internalValidationSchema['properties']['userspaceMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -211,7 +211,7 @@ class Statistics
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class SpamProtection
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -101,7 +101,7 @@ class SpamProtection
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +115,7 @@ class SpamProtection
     public function withDeleteSensitivity(int $deleteSensitivity): self
     {
         $validator = new Validator();
-        $validator->validate($deleteSensitivity, self::$schema['properties']['deleteSensitivity']);
+        $validator->validate($deleteSensitivity, self::$internalValidationSchema['properties']['deleteSensitivity']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class SpamProtection
     public function withFolder(int $folder): self
     {
         $validator = new Validator();
-        $validator->validate($folder, self::$schema['properties']['folder']);
+        $validator->validate($folder, self::$internalValidationSchema['properties']['folder']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class SpamProtection
     public function withKeepDays(int $keepDays): self
     {
         $validator = new Validator();
-        $validator->validate($keepDays, self::$schema['properties']['keepDays']);
+        $validator->validate($keepDays, self::$internalValidationSchema['properties']['keepDays']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class SpamProtection
     public function withRelocateSensitivity(int $relocateSensitivity): self
     {
         $validator = new Validator();
-        $validator->validate($relocateSensitivity, self::$schema['properties']['relocateSensitivity']);
+        $validator->validate($relocateSensitivity, self::$internalValidationSchema['properties']['relocateSensitivity']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -254,7 +254,7 @@ class SpamProtection
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

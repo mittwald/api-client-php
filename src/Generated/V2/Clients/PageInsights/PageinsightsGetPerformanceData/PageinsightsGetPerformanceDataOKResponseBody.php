@@ -13,7 +13,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -177,7 +177,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
-        $validator->validate($domain, self::$schema['properties']['domain']);
+        $validator->validate($domain, self::$internalValidationSchema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withMoreDataAvailable(array $moreDataAvailable): self
     {
         $validator = new Validator();
-        $validator->validate($moreDataAvailable, self::$schema['properties']['moreDataAvailable']);
+        $validator->validate($moreDataAvailable, self::$internalValidationSchema['properties']['moreDataAvailable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -235,7 +235,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, self::$schema['properties']['path']);
+        $validator->validate($path, self::$internalValidationSchema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,7 +249,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withPerformanceScore(int|float $performanceScore): self
     {
         $validator = new Validator();
-        $validator->validate($performanceScore, self::$schema['properties']['performanceScore']);
+        $validator->validate($performanceScore, self::$internalValidationSchema['properties']['performanceScore']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -358,7 +358,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class DatabaseReference
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'kind' => [
                 'type' => 'string',
@@ -61,7 +61,7 @@ class DatabaseReference
     public function withKind(string $kind): self
     {
         $validator = new Validator();
-        $validator->validate($kind, self::$schema['properties']['kind']);
+        $validator->validate($kind, self::$internalValidationSchema['properties']['kind']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -75,7 +75,7 @@ class DatabaseReference
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -135,7 +135,7 @@ class DatabaseReference
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

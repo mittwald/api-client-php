@@ -12,7 +12,7 @@ class DeprecatedDomainCheckDomainRegistrabilityOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'available' => [
                 'type' => 'boolean',
@@ -39,7 +39,7 @@ class DeprecatedDomainCheckDomainRegistrabilityOKResponseBody
     public function withAvailable(bool $available): self
     {
         $validator = new Validator();
-        $validator->validate($available, self::$schema['properties']['available']);
+        $validator->validate($available, self::$internalValidationSchema['properties']['available']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class DeprecatedDomainCheckDomainRegistrabilityOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,7 +12,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative2
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'additionalProperties' => false,
         'properties' => [
             'certificateId' => [
@@ -41,7 +41,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative2
     public function withCertificateId(string $certificateId): self
     {
         $validator = new Validator();
-        $validator->validate($certificateId, self::$schema['properties']['certificateId']);
+        $validator->validate($certificateId, self::$internalValidationSchema['properties']['certificateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -99,7 +99,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative2
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

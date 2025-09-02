@@ -23,7 +23,7 @@ class Deliverybox
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'authenticationEnabled' => [
                 'type' => 'boolean',
@@ -137,7 +137,7 @@ class Deliverybox
     public function withAuthenticationEnabled(bool $authenticationEnabled): self
     {
         $validator = new Validator();
-        $validator->validate($authenticationEnabled, self::$schema['properties']['authenticationEnabled']);
+        $validator->validate($authenticationEnabled, self::$internalValidationSchema['properties']['authenticationEnabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class Deliverybox
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class Deliverybox
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -179,7 +179,7 @@ class Deliverybox
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -201,7 +201,7 @@ class Deliverybox
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,7 +215,7 @@ class Deliverybox
     public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new Validator();
-        $validator->validate($sendingEnabled, self::$schema['properties']['sendingEnabled']);
+        $validator->validate($sendingEnabled, self::$internalValidationSchema['properties']['sendingEnabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -295,7 +295,7 @@ class Deliverybox
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

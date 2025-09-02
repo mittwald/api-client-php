@@ -12,7 +12,7 @@ class UpdateMysqlUserRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
                 'type' => 'string',
@@ -74,7 +74,7 @@ class UpdateMysqlUserRequestBody
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
-        $validator->validate($accessIpMask, self::$schema['properties']['accessIpMask']);
+        $validator->validate($accessIpMask, self::$internalValidationSchema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class UpdateMysqlUserRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class UpdateMysqlUserRequestBody
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
-        $validator->validate($externalAccess, self::$schema['properties']['externalAccess']);
+        $validator->validate($externalAccess, self::$internalValidationSchema['properties']['externalAccess']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -201,7 +201,7 @@ class UpdateMysqlUserRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -14,11 +14,10 @@ class ListDomainsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'page' => [
@@ -90,7 +89,7 @@ class ListDomainsRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +111,7 @@ class ListDomainsRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +133,7 @@ class ListDomainsRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -156,7 +155,7 @@ class ListDomainsRequest
     public function withDomainSearchName(string $domainSearchName): self
     {
         $validator = new Validator();
-        $validator->validate($domainSearchName, self::$schema['properties']['domainSearchName']);
+        $validator->validate($domainSearchName, self::$internalValidationSchema['properties']['domainSearchName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +177,7 @@ class ListDomainsRequest
     public function withContactHash(string $contactHash): self
     {
         $validator = new Validator();
-        $validator->validate($contactHash, self::$schema['properties']['contactHash']);
+        $validator->validate($contactHash, self::$internalValidationSchema['properties']['contactHash']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -281,7 +280,7 @@ class ListDomainsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

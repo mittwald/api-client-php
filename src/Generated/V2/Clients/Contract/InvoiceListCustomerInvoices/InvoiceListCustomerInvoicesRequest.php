@@ -14,7 +14,7 @@ class InvoiceListCustomerInvoicesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerId' => [
@@ -32,6 +32,9 @@ class InvoiceListCustomerInvoicesRequest
                 ],
                 'type' => 'array',
             ],
+            'search' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -44,6 +47,31 @@ class InvoiceListCustomerInvoicesRequest
             'page' => [
                 'type' => 'integer',
                 'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'invoiceNumber',
+                    ],
+                ],
+                'default' => [
+                    'invoiceNumber',
+                ],
+            ],
+            'order' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'asc',
+                        'desc',
+                    ],
+                ],
+                'default' => [
+                    'desc',
+                ],
             ],
         ],
         'required' => [
@@ -58,11 +86,27 @@ class InvoiceListCustomerInvoicesRequest
      */
     private ?array $invoiceTypes = null;
 
+    private ?string $search = null;
+
     private int $limit = 1000;
 
     private int $skip = 0;
 
     private ?int $page = null;
+
+    /**
+     * @var string[]
+     */
+    private array $sort = [
+        'invoiceNumber',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private array $order = [
+        'desc',
+    ];
 
     private array $headers = [
 
@@ -86,6 +130,11 @@ class InvoiceListCustomerInvoicesRequest
         return $this->invoiceTypes ?? null;
     }
 
+    public function getSearch(): ?string
+    {
+        return $this->search ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
@@ -101,10 +150,26 @@ class InvoiceListCustomerInvoicesRequest
         return $this->page ?? null;
     }
 
+    /**
+     * @return string[]
+     */
+    public function getSort(): array
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOrder(): array
+    {
+        return $this->order;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,7 +186,7 @@ class InvoiceListCustomerInvoicesRequest
     public function withInvoiceTypes(array $invoiceTypes): self
     {
         $validator = new Validator();
-        $validator->validate($invoiceTypes, self::$schema['properties']['invoiceTypes']);
+        $validator->validate($invoiceTypes, self::$internalValidationSchema['properties']['invoiceTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,10 +205,32 @@ class InvoiceListCustomerInvoicesRequest
         return $clone;
     }
 
+    public function withSearch(string $search): self
+    {
+        $validator = new Validator();
+        $validator->validate($search, self::$internalValidationSchema['properties']['search']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->search = $search;
+
+        return $clone;
+    }
+
+    public function withoutSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->search);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -157,7 +244,7 @@ class InvoiceListCustomerInvoicesRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -171,7 +258,7 @@ class InvoiceListCustomerInvoicesRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -186,6 +273,40 @@ class InvoiceListCustomerInvoicesRequest
     {
         $clone = clone $this;
         unset($clone->page);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $sort
+     */
+    public function withSort(array $sort): self
+    {
+        $validator = new Validator();
+        $validator->validate($sort, self::$internalValidationSchema['properties']['sort']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $order
+     */
+    public function withOrder(array $order): self
+    {
+        $validator = new Validator();
+        $validator->validate($order, self::$internalValidationSchema['properties']['order']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -210,6 +331,10 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($input->{'invoiceTypes'})) {
             $invoiceTypes = $input->{'invoiceTypes'};
         }
+        $search = null;
+        if (isset($input->{'search'})) {
+            $search = $input->{'search'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -222,12 +347,27 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = [
+                'invoiceNumber',
+            ];
+        if (isset($input->{'sort'})) {
+            $sort = $input->{'sort'};
+        }
+        $order = [
+                'desc',
+            ];
+        if (isset($input->{'order'})) {
+            $order = $input->{'order'};
+        }
 
         $obj = new self($customerId);
         $obj->invoiceTypes = $invoiceTypes;
+        $obj->search = $search;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -243,11 +383,16 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($this->invoiceTypes)) {
             $output['invoiceTypes'] = $this->invoiceTypes;
         }
+        if (isset($this->search)) {
+            $output['search'] = $this->search;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = $this->sort;
+        $output['order'] = $this->order;
 
         return $output;
     }
@@ -264,7 +409,7 @@ class InvoiceListCustomerInvoicesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -312,6 +457,9 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($mapped['invoiceTypes'])) {
             $query['invoiceTypes'] = $mapped['invoiceTypes'];
         }
+        if (isset($mapped['search'])) {
+            $query['search'] = $mapped['search'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -320,6 +468,12 @@ class InvoiceListCustomerInvoicesRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

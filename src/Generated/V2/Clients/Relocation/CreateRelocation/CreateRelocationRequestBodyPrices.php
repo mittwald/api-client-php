@@ -12,7 +12,7 @@ class CreateRelocationRequestBodyPrices
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'positions' => [
                 'items' => [
@@ -89,7 +89,7 @@ class CreateRelocationRequestBodyPrices
     public function withTotal(int|float $total): self
     {
         $validator = new Validator();
-        $validator->validate($total, self::$schema['properties']['total']);
+        $validator->validate($total, self::$internalValidationSchema['properties']['total']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class CreateRelocationRequestBodyPrices
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

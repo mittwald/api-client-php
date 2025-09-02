@@ -116,6 +116,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUser
 use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseDefaultResponse;
@@ -665,6 +666,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => UninstallAppinstallationNotFoundResponse::fromResponse($httpResponse),
+            412 => UninstallAppinstallationPreconditionFailedResponse::fromResponse($httpResponse),
             429 => UninstallAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => UninstallAppinstallationDefaultResponse::fromResponse($httpResponse),
         });

@@ -23,7 +23,7 @@ class Notification
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -126,7 +126,7 @@ class Notification
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class Notification
     public function withRead(bool $read): self
     {
         $validator = new Validator();
-        $validator->validate($read, self::$schema['properties']['read']);
+        $validator->validate($read, self::$internalValidationSchema['properties']['read']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class Notification
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, self::$schema['properties']['type']);
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -238,7 +238,7 @@ class Notification
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class ReadableBookableArticleOptionsInfo
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'articleName' => [
                 'example' => 'proSpace lite',
@@ -70,7 +70,7 @@ class ReadableBookableArticleOptionsInfo
     public function withArticleName(string $articleName): self
     {
         $validator = new Validator();
-        $validator->validate($articleName, self::$schema['properties']['articleName']);
+        $validator->validate($articleName, self::$internalValidationSchema['properties']['articleName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class ReadableBookableArticleOptionsInfo
     public function withArticleTemplateName(string $articleTemplateName): self
     {
         $validator = new Validator();
-        $validator->validate($articleTemplateName, self::$schema['properties']['articleTemplateName']);
+        $validator->validate($articleTemplateName, self::$internalValidationSchema['properties']['articleTemplateName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class ReadableBookableArticleOptionsInfo
     public function withFromArticleTemplate(bool $fromArticleTemplate): self
     {
         $validator = new Validator();
-        $validator->validate($fromArticleTemplate, self::$schema['properties']['fromArticleTemplate']);
+        $validator->validate($fromArticleTemplate, self::$internalValidationSchema['properties']['fromArticleTemplate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -201,7 +201,7 @@ class ReadableBookableArticleOptionsInfo
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class Address
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'street' => [
@@ -117,7 +117,7 @@ class Address
     public function withStreet(string $street): self
     {
         $validator = new Validator();
-        $validator->validate($street, self::$schema['properties']['street']);
+        $validator->validate($street, self::$internalValidationSchema['properties']['street']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +131,7 @@ class Address
     public function withHouseNumber(string $houseNumber): self
     {
         $validator = new Validator();
-        $validator->validate($houseNumber, self::$schema['properties']['houseNumber']);
+        $validator->validate($houseNumber, self::$internalValidationSchema['properties']['houseNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class Address
     public function withCity(string $city): self
     {
         $validator = new Validator();
-        $validator->validate($city, self::$schema['properties']['city']);
+        $validator->validate($city, self::$internalValidationSchema['properties']['city']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +159,7 @@ class Address
     public function withZip(string $zip): self
     {
         $validator = new Validator();
-        $validator->validate($zip, self::$schema['properties']['zip']);
+        $validator->validate($zip, self::$internalValidationSchema['properties']['zip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class Address
     public function withCountryCode(string $countryCode): self
     {
         $validator = new Validator();
-        $validator->validate($countryCode, self::$schema['properties']['countryCode']);
+        $validator->validate($countryCode, self::$internalValidationSchema['properties']['countryCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -187,7 +187,7 @@ class Address
     public function withAddressPrefix(string $addressPrefix): self
     {
         $validator = new Validator();
-        $validator->validate($addressPrefix, self::$schema['properties']['addressPrefix']);
+        $validator->validate($addressPrefix, self::$internalValidationSchema['properties']['addressPrefix']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,7 +268,7 @@ class Address
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

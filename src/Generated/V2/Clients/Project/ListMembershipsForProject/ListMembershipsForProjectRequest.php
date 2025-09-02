@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProj
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles;
 
 class ListMembershipsForProjectRequest
 {
@@ -14,7 +15,7 @@ class ListMembershipsForProjectRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -25,6 +26,18 @@ class ListMembershipsForProjectRequest
             ],
             'skip' => [
                 'type' => 'integer',
+            ],
+            'hasExpiry' => [
+                'type' => 'boolean',
+            ],
+            'isInherited' => [
+                'type' => 'boolean',
+            ],
+            'role' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.membership.ProjectRoles',
+            ],
+            'hasMfa' => [
+                'type' => 'boolean',
             ],
         ],
         'required' => [
@@ -37,6 +50,14 @@ class ListMembershipsForProjectRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?bool $hasExpiry = null;
+
+    private ?bool $isInherited = null;
+
+    private ?ProjectRoles $role = null;
+
+    private ?bool $hasMfa = null;
 
     private array $headers = [
 
@@ -62,10 +83,30 @@ class ListMembershipsForProjectRequest
         return $this->skip ?? null;
     }
 
+    public function getHasExpiry(): ?bool
+    {
+        return $this->hasExpiry ?? null;
+    }
+
+    public function getIsInherited(): ?bool
+    {
+        return $this->isInherited ?? null;
+    }
+
+    public function getRole(): ?ProjectRoles
+    {
+        return $this->role ?? null;
+    }
+
+    public function getHasMfa(): ?bool
+    {
+        return $this->hasMfa ?? null;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +120,7 @@ class ListMembershipsForProjectRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -101,7 +142,7 @@ class ListMembershipsForProjectRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,6 +157,88 @@ class ListMembershipsForProjectRequest
     {
         $clone = clone $this;
         unset($clone->skip);
+
+        return $clone;
+    }
+
+    public function withHasExpiry(bool $hasExpiry): self
+    {
+        $validator = new Validator();
+        $validator->validate($hasExpiry, self::$internalValidationSchema['properties']['hasExpiry']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hasExpiry = $hasExpiry;
+
+        return $clone;
+    }
+
+    public function withoutHasExpiry(): self
+    {
+        $clone = clone $this;
+        unset($clone->hasExpiry);
+
+        return $clone;
+    }
+
+    public function withIsInherited(bool $isInherited): self
+    {
+        $validator = new Validator();
+        $validator->validate($isInherited, self::$internalValidationSchema['properties']['isInherited']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isInherited = $isInherited;
+
+        return $clone;
+    }
+
+    public function withoutIsInherited(): self
+    {
+        $clone = clone $this;
+        unset($clone->isInherited);
+
+        return $clone;
+    }
+
+    public function withRole(ProjectRoles $role): self
+    {
+        $clone = clone $this;
+        $clone->role = $role;
+
+        return $clone;
+    }
+
+    public function withoutRole(): self
+    {
+        $clone = clone $this;
+        unset($clone->role);
+
+        return $clone;
+    }
+
+    public function withHasMfa(bool $hasMfa): self
+    {
+        $validator = new Validator();
+        $validator->validate($hasMfa, self::$internalValidationSchema['properties']['hasMfa']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hasMfa = $hasMfa;
+
+        return $clone;
+    }
+
+    public function withoutHasMfa(): self
+    {
+        $clone = clone $this;
+        unset($clone->hasMfa);
 
         return $clone;
     }
@@ -144,10 +267,30 @@ class ListMembershipsForProjectRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $hasExpiry = null;
+        if (isset($input->{'hasExpiry'})) {
+            $hasExpiry = (bool)($input->{'hasExpiry'});
+        }
+        $isInherited = null;
+        if (isset($input->{'isInherited'})) {
+            $isInherited = (bool)($input->{'isInherited'});
+        }
+        $role = null;
+        if (isset($input->{'role'})) {
+            $role = ProjectRoles::from($input->{'role'});
+        }
+        $hasMfa = null;
+        if (isset($input->{'hasMfa'})) {
+            $hasMfa = (bool)($input->{'hasMfa'});
+        }
 
         $obj = new self($projectId);
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->hasExpiry = $hasExpiry;
+        $obj->isInherited = $isInherited;
+        $obj->role = $role;
+        $obj->hasMfa = $hasMfa;
         return $obj;
     }
 
@@ -166,6 +309,18 @@ class ListMembershipsForProjectRequest
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
         }
+        if (isset($this->hasExpiry)) {
+            $output['hasExpiry'] = $this->hasExpiry;
+        }
+        if (isset($this->isInherited)) {
+            $output['isInherited'] = $this->isInherited;
+        }
+        if (isset($this->role)) {
+            $output['role'] = $this->role->value;
+        }
+        if (isset($this->hasMfa)) {
+            $output['hasMfa'] = $this->hasMfa;
+        }
 
         return $output;
     }
@@ -182,7 +337,7 @@ class ListMembershipsForProjectRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -232,6 +387,18 @@ class ListMembershipsForProjectRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['hasExpiry'])) {
+            $query['hasExpiry'] = $mapped['hasExpiry'];
+        }
+        if (isset($mapped['isInherited'])) {
+            $query['isInherited'] = $mapped['isInherited'];
+        }
+        if (isset($mapped['role'])) {
+            $query['role'] = $mapped['role'];
+        }
+        if (isset($mapped['hasMfa'])) {
+            $query['hasMfa'] = $mapped['hasMfa'];
         }
         return [
             'query' => $query,

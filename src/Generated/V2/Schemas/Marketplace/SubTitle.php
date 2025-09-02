@@ -22,7 +22,7 @@ class SubTitle
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A few words to promote your Extension.',
         'properties' => [
             'de' => [
@@ -64,7 +64,7 @@ class SubTitle
     public function withDe(string $de): self
     {
         $validator = new Validator();
-        $validator->validate($de, self::$schema['properties']['de']);
+        $validator->validate($de, self::$internalValidationSchema['properties']['de']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -78,7 +78,7 @@ class SubTitle
     public function withEn(string $en): self
     {
         $validator = new Validator();
-        $validator->validate($en, self::$schema['properties']['en']);
+        $validator->validate($en, self::$internalValidationSchema['properties']['en']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class SubTitle
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

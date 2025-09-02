@@ -14,41 +14,28 @@ class ResendProjectInviteMailRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectInviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
         ],
         'required' => [
             'projectInviteId',
-            'body',
         ],
     ];
 
     private string $projectInviteId;
 
-    /**
-     * @var mixed
-     */
-    private $body;
-
     private array $headers = [
 
     ];
 
-    /**
-     * @param mixed $body
-     */
-    public function __construct(string $projectInviteId, $body)
+    public function __construct(string $projectInviteId)
     {
         $this->projectInviteId = $projectInviteId;
-        $this->body = $body;
     }
 
     public function getProjectInviteId(): string
@@ -56,41 +43,16 @@ class ResendProjectInviteMailRequest
         return $this->projectInviteId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
     public function withProjectInviteId(string $projectInviteId): self
     {
         $validator = new Validator();
-        $validator->validate($projectInviteId, self::$schema['properties']['projectInviteId']);
+        $validator->validate($projectInviteId, self::$internalValidationSchema['properties']['projectInviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->projectInviteId = $projectInviteId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, self::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -111,9 +73,8 @@ class ResendProjectInviteMailRequest
         }
 
         $projectInviteId = $input->{'projectInviteId'};
-        $body = $input->{'body'};
 
-        $obj = new self($projectInviteId, $body);
+        $obj = new self($projectInviteId);
 
         return $obj;
     }
@@ -127,7 +88,6 @@ class ResendProjectInviteMailRequest
     {
         $output = [];
         $output['projectInviteId'] = $this->projectInviteId;
-        $output['body'] = $this->body;
 
         return $output;
     }
@@ -144,7 +104,7 @@ class ResendProjectInviteMailRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -192,7 +152,6 @@ class ResendProjectInviteMailRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -22,7 +22,7 @@ class TargetContainerContainer
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'id' => [
                 'format' => 'uuid',
@@ -67,7 +67,7 @@ class TargetContainerContainer
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -81,7 +81,7 @@ class TargetContainerContainer
     public function withPortProtocol(string $portProtocol): self
     {
         $validator = new Validator();
-        $validator->validate($portProtocol, self::$schema['properties']['portProtocol']);
+        $validator->validate($portProtocol, self::$internalValidationSchema['properties']['portProtocol']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class TargetContainerContainer
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

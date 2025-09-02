@@ -14,7 +14,7 @@ class ExtensionGetOwnExtensionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contributorId' => [
@@ -58,7 +58,7 @@ class ExtensionGetOwnExtensionRequest
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -72,7 +72,7 @@ class ExtensionGetOwnExtensionRequest
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -132,7 +132,7 @@ class ExtensionGetOwnExtensionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

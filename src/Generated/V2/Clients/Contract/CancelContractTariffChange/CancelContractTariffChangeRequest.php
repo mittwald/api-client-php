@@ -14,7 +14,7 @@ class CancelContractTariffChangeRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contractId' => [
@@ -59,7 +59,7 @@ class CancelContractTariffChangeRequest
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, self::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$internalValidationSchema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,7 +73,7 @@ class CancelContractTariffChangeRequest
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
-        $validator->validate($contractItemId, self::$schema['properties']['contractItemId']);
+        $validator->validate($contractItemId, self::$internalValidationSchema['properties']['contractItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class CancelContractTariffChangeRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

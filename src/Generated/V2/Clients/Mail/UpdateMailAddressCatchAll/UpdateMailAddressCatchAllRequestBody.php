@@ -12,7 +12,7 @@ class UpdateMailAddressCatchAllRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -38,7 +38,7 @@ class UpdateMailAddressCatchAllRequestBody
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class UpdateMailAddressCatchAllRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

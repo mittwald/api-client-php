@@ -14,79 +14,45 @@ class GetLatestScreenshotRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'domainId' => [
-                'format' => 'uuid',
+            'domainName' => [
+                'example' => 'example.com',
                 'type' => 'string',
-            ],
-            'body' => [
-                'properties' => [
-                    'domainName' => [
-                        'example' => 'example.com',
-                        'type' => 'string',
-                    ],
-                    'path' => [
-                        'example' => '/var/www',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'domainName',
-                    'path',
-                ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'domainId',
-            'body',
+            'domainName',
         ],
     ];
 
-    private string $domainId;
-
-    private GetLatestScreenshotRequestBody $body;
+    private string $domainName;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $domainId, GetLatestScreenshotRequestBody $body)
+    public function __construct(string $domainName)
     {
-        $this->domainId = $domainId;
-        $this->body = $body;
+        $this->domainName = $domainName;
     }
 
-    public function getDomainId(): string
+    public function getDomainName(): string
     {
-        return $this->domainId;
+        return $this->domainName;
     }
 
-    public function getBody(): GetLatestScreenshotRequestBody
-    {
-        return $this->body;
-    }
-
-    public function withDomainId(string $domainId): self
+    public function withDomainName(string $domainName): self
     {
         $validator = new Validator();
-        $validator->validate($domainId, self::$schema['properties']['domainId']);
+        $validator->validate($domainName, self::$internalValidationSchema['properties']['domainName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainId = $domainId;
-
-        return $clone;
-    }
-
-    public function withBody(GetLatestScreenshotRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->domainName = $domainName;
 
         return $clone;
     }
@@ -106,10 +72,9 @@ class GetLatestScreenshotRequest
             static::validateInput($input);
         }
 
-        $domainId = $input->{'domainId'};
-        $body = GetLatestScreenshotRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $domainName = $input->{'domainName'};
 
-        $obj = new self($domainId, $body);
+        $obj = new self($domainName);
 
         return $obj;
     }
@@ -122,8 +87,7 @@ class GetLatestScreenshotRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainId'] = $this->domainId;
-        $output['body'] = ($this->body)->toJson();
+        $output['domainName'] = $this->domainName;
 
         return $output;
     }
@@ -140,7 +104,7 @@ class GetLatestScreenshotRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -154,7 +118,6 @@ class GetLatestScreenshotRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -169,8 +132,7 @@ class GetLatestScreenshotRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        return '/v2/domains/' . $domainId . '/latest-screenshot';
+        return '/v2/domains/latest-screenshot';
     }
 
     /**
@@ -186,10 +148,12 @@ class GetLatestScreenshotRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['domainName'])) {
+            $query['domainName'] = $mapped['domainName'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

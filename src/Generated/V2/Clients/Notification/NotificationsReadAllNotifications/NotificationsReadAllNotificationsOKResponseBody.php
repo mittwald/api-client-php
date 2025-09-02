@@ -13,7 +13,7 @@ class NotificationsReadAllNotificationsOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'status' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
@@ -65,7 +65,7 @@ class NotificationsReadAllNotificationsOKResponseBody
     public function withUpdatedCount(int $updatedCount): self
     {
         $validator = new Validator();
-        $validator->validate($updatedCount, self::$schema['properties']['updatedCount']);
+        $validator->validate($updatedCount, self::$internalValidationSchema['properties']['updatedCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class NotificationsReadAllNotificationsOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

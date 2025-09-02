@@ -23,7 +23,7 @@ class CronjobExecution
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'abortedBy' => [
                 'properties' => [
@@ -225,7 +225,7 @@ class CronjobExecution
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$schema['properties']['cronjobId']);
+        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -239,7 +239,7 @@ class CronjobExecution
     public function withDurationInMilliseconds(int $durationInMilliseconds): self
     {
         $validator = new Validator();
-        $validator->validate($durationInMilliseconds, self::$schema['properties']['durationInMilliseconds']);
+        $validator->validate($durationInMilliseconds, self::$internalValidationSchema['properties']['durationInMilliseconds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -315,7 +315,7 @@ class CronjobExecution
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -329,7 +329,7 @@ class CronjobExecution
     public function withLogPath(string $logPath): self
     {
         $validator = new Validator();
-        $validator->validate($logPath, self::$schema['properties']['logPath']);
+        $validator->validate($logPath, self::$internalValidationSchema['properties']['logPath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -375,7 +375,7 @@ class CronjobExecution
     public function withSuccessful(bool $successful): self
     {
         $validator = new Validator();
-        $validator->validate($successful, self::$schema['properties']['successful']);
+        $validator->validate($successful, self::$internalValidationSchema['properties']['successful']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -518,7 +518,7 @@ class CronjobExecution
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

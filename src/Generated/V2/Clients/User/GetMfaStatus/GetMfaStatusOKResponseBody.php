@@ -12,7 +12,7 @@ class GetMfaStatusOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'confirmed' => [
                 'type' => 'boolean',
@@ -51,7 +51,7 @@ class GetMfaStatusOKResponseBody
     public function withConfirmed(bool $confirmed): self
     {
         $validator = new Validator();
-        $validator->validate($confirmed, self::$schema['properties']['confirmed']);
+        $validator->validate($confirmed, self::$internalValidationSchema['properties']['confirmed']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -65,7 +65,7 @@ class GetMfaStatusOKResponseBody
     public function withInitialized(bool $initialized): self
     {
         $validator = new Validator();
-        $validator->validate($initialized, self::$schema['properties']['initialized']);
+        $validator->validate($initialized, self::$internalValidationSchema['properties']['initialized']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class GetMfaStatusOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

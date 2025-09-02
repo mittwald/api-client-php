@@ -22,7 +22,7 @@ class ProjectHostingOrderPreview
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'customerId' => [
                 'type' => 'string',
@@ -34,6 +34,10 @@ class ProjectHostingOrderPreview
             'diskspaceInGiB' => [
                 'example' => 20,
                 'type' => 'number',
+            ],
+            'promotionCode' => [
+                'example' => '123456',
+                'type' => 'string',
             ],
             'spec' => [
                 'oneOf' => [
@@ -59,6 +63,8 @@ class ProjectHostingOrderPreview
 
     private int|float $diskspaceInGiB;
 
+    private ?string $promotionCode = null;
+
     private MachineTypeSpec|HardwareSpec $spec;
 
     public function __construct(int|float $diskspaceInGiB, HardwareSpec|MachineTypeSpec $spec)
@@ -82,6 +88,11 @@ class ProjectHostingOrderPreview
         return $this->diskspaceInGiB;
     }
 
+    public function getPromotionCode(): ?string
+    {
+        return $this->promotionCode ?? null;
+    }
+
     public function getSpec(): HardwareSpec|MachineTypeSpec
     {
         return $this->spec;
@@ -90,7 +101,7 @@ class ProjectHostingOrderPreview
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +123,7 @@ class ProjectHostingOrderPreview
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,13 +145,35 @@ class ProjectHostingOrderPreview
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
-        $validator->validate($diskspaceInGiB, self::$schema['properties']['diskspaceInGiB']);
+        $validator->validate($diskspaceInGiB, self::$internalValidationSchema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->diskspaceInGiB = $diskspaceInGiB;
+
+        return $clone;
+    }
+
+    public function withPromotionCode(string $promotionCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($promotionCode, self::$internalValidationSchema['properties']['promotionCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->promotionCode = $promotionCode;
+
+        return $clone;
+    }
+
+    public function withoutPromotionCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->promotionCode);
 
         return $clone;
     }
@@ -177,6 +210,10 @@ class ProjectHostingOrderPreview
             $description = $input->{'description'};
         }
         $diskspaceInGiB = str_contains((string)($input->{'diskspaceInGiB'}), '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
+        $promotionCode = null;
+        if (isset($input->{'promotionCode'})) {
+            $promotionCode = $input->{'promotionCode'};
+        }
         $spec = match (true) {
             MachineTypeSpec::validateInput($input->{'spec'}, true) => MachineTypeSpec::buildFromInput($input->{'spec'}, validate: $validate),
             HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
@@ -186,6 +223,7 @@ class ProjectHostingOrderPreview
         $obj = new self($diskspaceInGiB, $spec);
         $obj->customerId = $customerId;
         $obj->description = $description;
+        $obj->promotionCode = $promotionCode;
         return $obj;
     }
 
@@ -204,6 +242,9 @@ class ProjectHostingOrderPreview
             $output['description'] = $this->description;
         }
         $output['diskspaceInGiB'] = $this->diskspaceInGiB;
+        if (isset($this->promotionCode)) {
+            $output['promotionCode'] = $this->promotionCode;
+        }
         $output['spec'] = match (true) {
             ($this->spec) instanceof MachineTypeSpec, ($this->spec) instanceof HardwareSpec => $this->spec->toJson(),
         };
@@ -223,7 +264,7 @@ class ProjectHostingOrderPreview
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

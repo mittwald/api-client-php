@@ -14,12 +14,15 @@ class UpdateStackRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'stackId' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'recreate' => [
+                'type' => 'boolean',
             ],
             'body' => [
                 'properties' => [
@@ -48,6 +51,8 @@ class UpdateStackRequest
 
     private string $stackId;
 
+    private ?bool $recreate = null;
+
     private UpdateStackRequestBody $body;
 
     private array $headers = [
@@ -65,6 +70,11 @@ class UpdateStackRequest
         return $this->stackId;
     }
 
+    public function getRecreate(): ?bool
+    {
+        return $this->recreate ?? null;
+    }
+
     public function getBody(): UpdateStackRequestBody
     {
         return $this->body;
@@ -73,13 +83,35 @@ class UpdateStackRequest
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->stackId = $stackId;
+
+        return $clone;
+    }
+
+    public function withRecreate(bool $recreate): self
+    {
+        $validator = new Validator();
+        $validator->validate($recreate, self::$internalValidationSchema['properties']['recreate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recreate = $recreate;
+
+        return $clone;
+    }
+
+    public function withoutRecreate(): self
+    {
+        $clone = clone $this;
+        unset($clone->recreate);
 
         return $clone;
     }
@@ -108,10 +140,14 @@ class UpdateStackRequest
         }
 
         $stackId = $input->{'stackId'};
+        $recreate = null;
+        if (isset($input->{'recreate'})) {
+            $recreate = (bool)($input->{'recreate'});
+        }
         $body = UpdateStackRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($stackId, $body);
-
+        $obj->recreate = $recreate;
         return $obj;
     }
 
@@ -124,6 +160,9 @@ class UpdateStackRequest
     {
         $output = [];
         $output['stackId'] = $this->stackId;
+        if (isset($this->recreate)) {
+            $output['recreate'] = $this->recreate;
+        }
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -141,7 +180,7 @@ class UpdateStackRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -187,6 +226,9 @@ class UpdateStackRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['recreate'])) {
+            $query['recreate'] = $mapped['recreate'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

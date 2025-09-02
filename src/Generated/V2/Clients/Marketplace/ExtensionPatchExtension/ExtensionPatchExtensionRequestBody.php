@@ -6,20 +6,26 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExte
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\DetailedDescriptions;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExtensionDeprecation;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExternalComponent;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\SubTitle;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\SupportMeta;
-use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\WebhookUrls;
 
 class ExtensionPatchExtensionRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
+            'assets' => [
+                'description' => 'Used to patch asset order.',
+                'items' => [
+                    'format' => 'uuid',
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'deprecation' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation',
             ],
@@ -27,18 +33,25 @@ class ExtensionPatchExtensionRequestBody
                 'type' => 'string',
             ],
             'detailedDescriptions' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
+                    ],
+                ],
+                'nullable' => true,
             ],
             'externalFrontends' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                 ],
+                'nullable' => true,
                 'type' => 'array',
             ],
             'frontendFragments' => [
                 'additionalProperties' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
                 ],
+                'nullable' => true,
                 'type' => 'object',
             ],
             'name' => [
@@ -63,17 +76,29 @@ class ExtensionPatchExtensionRequestBody
                 'type' => 'array',
             ],
             'webhookUrls' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                    ],
+                ],
+                'nullable' => true,
             ],
         ],
         'type' => 'object',
     ];
 
+    /**
+     * Used to patch asset order.
+     *
+     * @var string[]|null
+     */
+    private ?array $assets = null;
+
     private ?ExtensionDeprecation $deprecation = null;
 
     private ?string $description = null;
 
-    private ?DetailedDescriptions $detailedDescriptions = null;
+    private ?ExtensionPatchExtensionRequestBodyDetailedDescriptions $detailedDescriptions = null;
 
     /**
      * @var ExternalComponent[]|null
@@ -101,13 +126,21 @@ class ExtensionPatchExtensionRequestBody
      */
     private ?array $tags = null;
 
-    private ?WebhookUrls $webhookUrls = null;
+    private ?ExtensionPatchExtensionRequestBodyWebhookUrls $webhookUrls = null;
 
     /**
      *
      */
     public function __construct()
     {
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAssets(): ?array
+    {
+        return $this->assets ?? null;
     }
 
     public function getDeprecation(): ?ExtensionDeprecation
@@ -120,7 +153,7 @@ class ExtensionPatchExtensionRequestBody
         return $this->description ?? null;
     }
 
-    public function getDetailedDescriptions(): ?DetailedDescriptions
+    public function getDetailedDescriptions(): ?ExtensionPatchExtensionRequestBodyDetailedDescriptions
     {
         return $this->detailedDescriptions ?? null;
     }
@@ -172,9 +205,34 @@ class ExtensionPatchExtensionRequestBody
         return $this->tags ?? null;
     }
 
-    public function getWebhookUrls(): ?WebhookUrls
+    public function getWebhookUrls(): ?ExtensionPatchExtensionRequestBodyWebhookUrls
     {
         return $this->webhookUrls ?? null;
+    }
+
+    /**
+     * @param string[] $assets
+     */
+    public function withAssets(array $assets): self
+    {
+        $validator = new Validator();
+        $validator->validate($assets, self::$internalValidationSchema['properties']['assets']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->assets = $assets;
+
+        return $clone;
+    }
+
+    public function withoutAssets(): self
+    {
+        $clone = clone $this;
+        unset($clone->assets);
+
+        return $clone;
     }
 
     public function withDeprecation(ExtensionDeprecation $deprecation): self
@@ -196,7 +254,7 @@ class ExtensionPatchExtensionRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,7 +273,7 @@ class ExtensionPatchExtensionRequestBody
         return $clone;
     }
 
-    public function withDetailedDescriptions(DetailedDescriptions $detailedDescriptions): self
+    public function withDetailedDescriptions(ExtensionPatchExtensionRequestBodyDetailedDescriptions $detailedDescriptions): self
     {
         $clone = clone $this;
         $clone->detailedDescriptions = $detailedDescriptions;
@@ -256,7 +314,7 @@ class ExtensionPatchExtensionRequestBody
     public function withFrontendFragments(array $frontendFragments): self
     {
         $validator = new Validator();
-        $validator->validate($frontendFragments, self::$schema['properties']['frontendFragments']);
+        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -278,7 +336,7 @@ class ExtensionPatchExtensionRequestBody
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -303,7 +361,7 @@ class ExtensionPatchExtensionRequestBody
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -360,7 +418,7 @@ class ExtensionPatchExtensionRequestBody
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, self::$schema['properties']['tags']);
+        $validator->validate($tags, self::$internalValidationSchema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -379,7 +437,7 @@ class ExtensionPatchExtensionRequestBody
         return $clone;
     }
 
-    public function withWebhookUrls(WebhookUrls $webhookUrls): self
+    public function withWebhookUrls(ExtensionPatchExtensionRequestBodyWebhookUrls $webhookUrls): self
     {
         $clone = clone $this;
         $clone->webhookUrls = $webhookUrls;
@@ -410,6 +468,10 @@ class ExtensionPatchExtensionRequestBody
             static::validateInput($input);
         }
 
+        $assets = null;
+        if (isset($input->{'assets'})) {
+            $assets = $input->{'assets'};
+        }
         $deprecation = null;
         if (isset($input->{'deprecation'})) {
             $deprecation = ExtensionDeprecation::buildFromInput($input->{'deprecation'}, validate: $validate);
@@ -420,7 +482,7 @@ class ExtensionPatchExtensionRequestBody
         }
         $detailedDescriptions = null;
         if (isset($input->{'detailedDescriptions'})) {
-            $detailedDescriptions = DetailedDescriptions::buildFromInput($input->{'detailedDescriptions'}, validate: $validate);
+            $detailedDescriptions = ExtensionPatchExtensionRequestBodyDetailedDescriptions::buildFromInput($input->{'detailedDescriptions'}, validate: $validate);
         }
         $externalFrontends = null;
         if (isset($input->{'externalFrontends'})) {
@@ -452,10 +514,11 @@ class ExtensionPatchExtensionRequestBody
         }
         $webhookUrls = null;
         if (isset($input->{'webhookUrls'})) {
-            $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
+            $webhookUrls = ExtensionPatchExtensionRequestBodyWebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
         }
 
         $obj = new self();
+        $obj->assets = $assets;
         $obj->deprecation = $deprecation;
         $obj->description = $description;
         $obj->detailedDescriptions = $detailedDescriptions;
@@ -478,6 +541,9 @@ class ExtensionPatchExtensionRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->assets)) {
+            $output['assets'] = $this->assets;
+        }
         if (isset($this->deprecation)) {
             $output['deprecation'] = $this->deprecation->toJson();
         }
@@ -485,7 +551,7 @@ class ExtensionPatchExtensionRequestBody
             $output['description'] = $this->description;
         }
         if (isset($this->detailedDescriptions)) {
-            $output['detailedDescriptions'] = $this->detailedDescriptions->toJson();
+            $output['detailedDescriptions'] = ($this->detailedDescriptions)->toJson();
         }
         if (isset($this->externalFrontends)) {
             $output['externalFrontends'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontends);
@@ -509,7 +575,7 @@ class ExtensionPatchExtensionRequestBody
             $output['tags'] = $this->tags;
         }
         if (isset($this->webhookUrls)) {
-            $output['webhookUrls'] = $this->webhookUrls->toJson();
+            $output['webhookUrls'] = ($this->webhookUrls)->toJson();
         }
 
         return $output;
@@ -527,7 +593,7 @@ class ExtensionPatchExtensionRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -541,5 +607,11 @@ class ExtensionPatchExtensionRequestBody
 
     public function __clone()
     {
+        if (isset($this->detailedDescriptions)) {
+            $this->detailedDescriptions = clone $this->detailedDescriptions;
+        }
+        if (isset($this->webhookUrls)) {
+            $this->webhookUrls = clone $this->webhookUrls;
+        }
     }
 }

@@ -22,33 +22,35 @@ class SupportMeta
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'email' => [
                 'example' => 'a.lovelace@example.com',
+                'format' => 'email',
                 'type' => 'string',
             ],
             'phone' => [
                 'type' => 'string',
             ],
         ],
+        'required' => [
+            'email',
+        ],
         'type' => 'object',
     ];
 
-    private ?string $email = null;
+    private string $email;
 
     private ?string $phone = null;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $email)
     {
+        $this->email = $email;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
-        return $this->email ?? null;
+        return $this->email;
     }
 
     public function getPhone(): ?string
@@ -59,7 +61,7 @@ class SupportMeta
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -70,18 +72,10 @@ class SupportMeta
         return $clone;
     }
 
-    public function withoutEmail(): self
-    {
-        $clone = clone $this;
-        unset($clone->email);
-
-        return $clone;
-    }
-
     public function withPhone(string $phone): self
     {
         $validator = new Validator();
-        $validator->validate($phone, self::$schema['properties']['phone']);
+        $validator->validate($phone, self::$internalValidationSchema['properties']['phone']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,17 +109,13 @@ class SupportMeta
             static::validateInput($input);
         }
 
-        $email = null;
-        if (isset($input->{'email'})) {
-            $email = $input->{'email'};
-        }
+        $email = $input->{'email'};
         $phone = null;
         if (isset($input->{'phone'})) {
             $phone = $input->{'phone'};
         }
 
-        $obj = new self();
-        $obj->email = $email;
+        $obj = new self($email);
         $obj->phone = $phone;
         return $obj;
     }
@@ -138,9 +128,7 @@ class SupportMeta
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->email)) {
-            $output['email'] = $this->email;
-        }
+        $output['email'] = $this->email;
         if (isset($this->phone)) {
             $output['phone'] = $this->phone;
         }
@@ -160,7 +148,7 @@ class SupportMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

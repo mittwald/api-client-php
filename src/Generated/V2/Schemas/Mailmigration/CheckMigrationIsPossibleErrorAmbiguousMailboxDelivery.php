@@ -23,7 +23,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'address' => [
                 'type' => 'string',
@@ -74,7 +74,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery
     public function withAddress(string $address): self
     {
         $validator = new Validator();
-        $validator->validate($address, self::$schema['properties']['address']);
+        $validator->validate($address, self::$internalValidationSchema['properties']['address']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -91,7 +91,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery
     public function withMailboxes(array $mailboxes): self
     {
         $validator = new Validator();
-        $validator->validate($mailboxes, self::$schema['properties']['mailboxes']);
+        $validator->validate($mailboxes, self::$internalValidationSchema['properties']['mailboxes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

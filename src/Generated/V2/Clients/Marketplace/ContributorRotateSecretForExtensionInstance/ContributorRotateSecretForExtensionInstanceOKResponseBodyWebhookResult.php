@@ -12,7 +12,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'failure' => [
                 'type' => 'boolean',
@@ -53,7 +53,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     public function withFailure(bool $failure): self
     {
         $validator = new Validator();
-        $validator->validate($failure, self::$schema['properties']['failure']);
+        $validator->validate($failure, self::$internalValidationSchema['properties']['failure']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -67,7 +67,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     public function withStatusCode(string $statusCode): self
     {
         $validator = new Validator();
-        $validator->validate($statusCode, self::$schema['properties']['statusCode']);
+        $validator->validate($statusCode, self::$internalValidationSchema['properties']['statusCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

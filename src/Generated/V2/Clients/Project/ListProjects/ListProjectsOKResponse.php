@@ -14,7 +14,7 @@ class ListProjectsOKResponse implements ResponseContainer
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'required' => [
             'body',
@@ -24,6 +24,7 @@ class ListProjectsOKResponse implements ResponseContainer
                 'items' => [
                     'properties' => [
                         'backupStorageUsageInBytes' => [
+                            'format' => 'int64',
                             'type' => 'integer',
                         ],
                         'backupStorageUsageInBytesSetAt' => [
@@ -61,6 +62,14 @@ class ListProjectsOKResponse implements ResponseContainer
                         'enabled' => [
                             'type' => 'boolean',
                         ],
+                        'features' => [
+                            'deprecated' => true,
+                            'description' => 'Deprecated by \'supportedFeatures\'.',
+                            'items' => [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
+                            ],
+                            'type' => 'array',
+                        ],
                         'id' => [
                             'type' => 'string',
                         ],
@@ -92,7 +101,14 @@ class ListProjectsOKResponse implements ResponseContainer
                             'format' => 'date-time',
                             'type' => 'string',
                         ],
+                        'supportedFeatures' => [
+                            'items' => [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
+                            ],
+                            'type' => 'array',
+                        ],
                         'webStorageUsageInBytes' => [
+                            'format' => 'int64',
                             'type' => 'integer',
                         ],
                         'webStorageUsageInBytesSetAt' => [
@@ -116,6 +132,7 @@ class ListProjectsOKResponse implements ResponseContainer
                         'webStorageUsageInBytesSetAt',
                         'backupStorageUsageInBytes',
                         'backupStorageUsageInBytesSetAt',
+                        'supportedFeatures',
                     ],
                     'type' => 'object',
                 ],
@@ -205,7 +222,7 @@ class ListProjectsOKResponse implements ResponseContainer
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

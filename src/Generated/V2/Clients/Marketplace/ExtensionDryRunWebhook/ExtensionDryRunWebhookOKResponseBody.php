@@ -12,7 +12,7 @@ class ExtensionDryRunWebhookOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'errorMessage' => [
                 'description' => 'The error message of an internal error.',
@@ -107,7 +107,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withErrorMessage(string $errorMessage): self
     {
         $validator = new Validator();
-        $validator->validate($errorMessage, self::$schema['properties']['errorMessage']);
+        $validator->validate($errorMessage, self::$internalValidationSchema['properties']['errorMessage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -129,7 +129,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withResponseBody(string $responseBody): self
     {
         $validator = new Validator();
-        $validator->validate($responseBody, self::$schema['properties']['responseBody']);
+        $validator->validate($responseBody, self::$internalValidationSchema['properties']['responseBody']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withResponseCode(int|float $responseCode): self
     {
         $validator = new Validator();
-        $validator->validate($responseCode, self::$schema['properties']['responseCode']);
+        $validator->validate($responseCode, self::$internalValidationSchema['properties']['responseCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withResponseHeaders(string $responseHeaders): self
     {
         $validator = new Validator();
-        $validator->validate($responseHeaders, self::$schema['properties']['responseHeaders']);
+        $validator->validate($responseHeaders, self::$internalValidationSchema['properties']['responseHeaders']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -195,7 +195,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withRouteCalled(string $routeCalled): self
     {
         $validator = new Validator();
-        $validator->validate($routeCalled, self::$schema['properties']['routeCalled']);
+        $validator->validate($routeCalled, self::$internalValidationSchema['properties']['routeCalled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -209,7 +209,7 @@ class ExtensionDryRunWebhookOKResponseBody
     public function withSuccessful(bool $successful): self
     {
         $validator = new Validator();
-        $validator->validate($successful, self::$schema['properties']['successful']);
+        $validator->validate($successful, self::$internalValidationSchema['properties']['successful']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -300,7 +300,7 @@ class ExtensionDryRunWebhookOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

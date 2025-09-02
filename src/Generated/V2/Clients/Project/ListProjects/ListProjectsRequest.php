@@ -14,7 +14,7 @@ class ListProjectsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerId' => [
@@ -23,6 +23,9 @@ class ListProjectsRequest
             ],
             'serverId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'searchTerm' => [
                 'type' => 'string',
             ],
             'limit' => [
@@ -38,6 +41,22 @@ class ListProjectsRequest
                 'type' => 'integer',
                 'minimum' => 1,
             ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'createdAt',
+                    'description',
+                ],
+                'default' => 'createdAt',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'asc',
+            ],
         ],
         'required' => [
 
@@ -48,11 +67,17 @@ class ListProjectsRequest
 
     private ?string $serverId = null;
 
+    private ?string $searchTerm = null;
+
     private int $limit = 10000;
 
     private int $skip = 0;
 
     private ?int $page = null;
+
+    private ListProjectsRequestSort $sort = ListProjectsRequestSort::createdAt;
+
+    private ListProjectsRequestOrder $order = ListProjectsRequestOrder::asc;
 
     private array $headers = [
 
@@ -75,6 +100,11 @@ class ListProjectsRequest
         return $this->serverId ?? null;
     }
 
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
@@ -90,10 +120,20 @@ class ListProjectsRequest
         return $this->page ?? null;
     }
 
+    public function getSort(): ListProjectsRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): ListProjectsRequestOrder
+    {
+        return $this->order;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +155,7 @@ class ListProjectsRequest
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($serverId, self::$schema['properties']['serverId']);
+        $validator->validate($serverId, self::$internalValidationSchema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,10 +174,32 @@ class ListProjectsRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +213,7 @@ class ListProjectsRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +227,7 @@ class ListProjectsRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -180,6 +242,22 @@ class ListProjectsRequest
     {
         $clone = clone $this;
         unset($clone->page);
+
+        return $clone;
+    }
+
+    public function withSort(ListProjectsRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(ListProjectsRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -207,6 +285,10 @@ class ListProjectsRequest
         if (isset($input->{'serverId'})) {
             $serverId = $input->{'serverId'};
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -219,13 +301,24 @@ class ListProjectsRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = ListProjectsRequestSort::createdAt;
+        if (isset($input->{'sort'})) {
+            $sort = ListProjectsRequestSort::from($input->{'sort'});
+        }
+        $order = ListProjectsRequestOrder::asc;
+        if (isset($input->{'order'})) {
+            $order = ListProjectsRequestOrder::from($input->{'order'});
+        }
 
         $obj = new self();
         $obj->customerId = $customerId;
         $obj->serverId = $serverId;
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -243,11 +336,16 @@ class ListProjectsRequest
         if (isset($this->serverId)) {
             $output['serverId'] = $this->serverId;
         }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -264,7 +362,7 @@ class ListProjectsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -314,6 +412,9 @@ class ListProjectsRequest
         if (isset($mapped['serverId'])) {
             $query['serverId'] = $mapped['serverId'];
         }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -322,6 +423,12 @@ class ListProjectsRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

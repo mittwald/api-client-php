@@ -12,7 +12,7 @@ class ExtensionRequestAssetUploadOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'assetRefId' => [
                 'description' => 'Use the ID as upload token at `/v2/files/{assetRefId}`. This ID will also be the ID of your asset in extension.',
@@ -144,7 +144,7 @@ class ExtensionRequestAssetUploadOKResponseBody
     public function withAssetRefId(string $assetRefId): self
     {
         $validator = new Validator();
-        $validator->validate($assetRefId, self::$schema['properties']['assetRefId']);
+        $validator->validate($assetRefId, self::$internalValidationSchema['properties']['assetRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -212,7 +212,7 @@ class ExtensionRequestAssetUploadOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

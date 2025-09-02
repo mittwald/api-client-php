@@ -22,7 +22,7 @@ class ScreenshotSettings
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'dataType' => [
                 'enum' => [
@@ -33,16 +33,19 @@ class ScreenshotSettings
                 'type' => 'string',
             ],
             'delay' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
             'height' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
             'quality' => [
-                'type' => 'number',
+                'type' => 'integer',
             ],
             'width' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -57,15 +60,15 @@ class ScreenshotSettings
 
     private ScreenshotSettingsDataType $dataType;
 
-    private int|float $delay;
+    private int $delay;
 
-    private int|float $height;
+    private int $height;
 
-    private int|float $quality;
+    private int $quality;
 
-    private int|float $width;
+    private int $width;
 
-    public function __construct(ScreenshotSettingsDataType $dataType, int|float $delay, int|float $height, int|float $quality, int|float $width)
+    public function __construct(ScreenshotSettingsDataType $dataType, int $delay, int $height, int $quality, int $width)
     {
         $this->dataType = $dataType;
         $this->delay = $delay;
@@ -79,22 +82,22 @@ class ScreenshotSettings
         return $this->dataType;
     }
 
-    public function getDelay(): int|float
+    public function getDelay(): int
     {
         return $this->delay;
     }
 
-    public function getHeight(): int|float
+    public function getHeight(): int
     {
         return $this->height;
     }
 
-    public function getQuality(): int|float
+    public function getQuality(): int
     {
         return $this->quality;
     }
 
-    public function getWidth(): int|float
+    public function getWidth(): int
     {
         return $this->width;
     }
@@ -107,10 +110,10 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withDelay(int|float $delay): self
+    public function withDelay(int $delay): self
     {
         $validator = new Validator();
-        $validator->validate($delay, self::$schema['properties']['delay']);
+        $validator->validate($delay, self::$internalValidationSchema['properties']['delay']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,10 +124,10 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withHeight(int|float $height): self
+    public function withHeight(int $height): self
     {
         $validator = new Validator();
-        $validator->validate($height, self::$schema['properties']['height']);
+        $validator->validate($height, self::$internalValidationSchema['properties']['height']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -135,10 +138,10 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withQuality(int|float $quality): self
+    public function withQuality(int $quality): self
     {
         $validator = new Validator();
-        $validator->validate($quality, self::$schema['properties']['quality']);
+        $validator->validate($quality, self::$internalValidationSchema['properties']['quality']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,10 +152,10 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withWidth(int|float $width): self
+    public function withWidth(int $width): self
     {
         $validator = new Validator();
-        $validator->validate($width, self::$schema['properties']['width']);
+        $validator->validate($width, self::$internalValidationSchema['properties']['width']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -179,10 +182,10 @@ class ScreenshotSettings
         }
 
         $dataType = ScreenshotSettingsDataType::from($input->{'dataType'});
-        $delay = str_contains((string)($input->{'delay'}), '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
-        $height = str_contains((string)($input->{'height'}), '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
-        $quality = str_contains((string)($input->{'quality'}), '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
-        $width = str_contains((string)($input->{'width'}), '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
+        $delay = (int)($input->{'delay'});
+        $height = (int)($input->{'height'});
+        $quality = (int)($input->{'quality'});
+        $width = (int)($input->{'width'});
 
         $obj = new self($dataType, $delay, $height, $quality, $width);
 
@@ -218,7 +221,7 @@ class ScreenshotSettings
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

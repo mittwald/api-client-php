@@ -24,7 +24,7 @@ class ServiceRequestRelocationPayload
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'contact' => [
                 'properties' => [
@@ -257,7 +257,7 @@ class ServiceRequestRelocationPayload
     public function withNotes(string $notes): self
     {
         $validator = new Validator();
-        $validator->validate($notes, self::$schema['properties']['notes']);
+        $validator->validate($notes, self::$internalValidationSchema['properties']['notes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -295,7 +295,7 @@ class ServiceRequestRelocationPayload
     public function withRedirectusKey(int|float $redirectusKey): self
     {
         $validator = new Validator();
-        $validator->validate($redirectusKey, self::$schema['properties']['redirectusKey']);
+        $validator->validate($redirectusKey, self::$internalValidationSchema['properties']['redirectusKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -325,7 +325,7 @@ class ServiceRequestRelocationPayload
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -414,7 +414,7 @@ class ServiceRequestRelocationPayload
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

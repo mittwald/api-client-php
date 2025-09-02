@@ -24,7 +24,7 @@ class Recipient
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'address' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.commons.Address',
@@ -156,7 +156,7 @@ class Recipient
     public function withCompany(string $company): self
     {
         $validator = new Validator();
-        $validator->validate($company, self::$schema['properties']['company']);
+        $validator->validate($company, self::$internalValidationSchema['properties']['company']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class Recipient
     public function withEmailAddress(string $emailAddress): self
     {
         $validator = new Validator();
-        $validator->validate($emailAddress, self::$schema['properties']['emailAddress']);
+        $validator->validate($emailAddress, self::$internalValidationSchema['properties']['emailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -200,7 +200,7 @@ class Recipient
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($firstName, self::$schema['properties']['firstName']);
+        $validator->validate($firstName, self::$internalValidationSchema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class Recipient
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($lastName, self::$schema['properties']['lastName']);
+        $validator->validate($lastName, self::$internalValidationSchema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -247,7 +247,7 @@ class Recipient
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $validator = new Validator();
-        $validator->validate($phoneNumbers, self::$schema['properties']['phoneNumbers']);
+        $validator->validate($phoneNumbers, self::$internalValidationSchema['properties']['phoneNumbers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -277,7 +277,7 @@ class Recipient
     public function withTitle(string $title): self
     {
         $validator = new Validator();
-        $validator->validate($title, self::$schema['properties']['title']);
+        $validator->validate($title, self::$internalValidationSchema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +299,7 @@ class Recipient
     public function withUseFormalTerm(bool $useFormalTerm): self
     {
         $validator = new Validator();
-        $validator->validate($useFormalTerm, self::$schema['properties']['useFormalTerm']);
+        $validator->validate($useFormalTerm, self::$internalValidationSchema['properties']['useFormalTerm']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -422,7 +422,7 @@ class Recipient
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

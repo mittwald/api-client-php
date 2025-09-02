@@ -12,7 +12,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'error' => [
                 'minimum' => 0,
@@ -92,7 +92,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     public function withError(int $error): self
     {
         $validator = new Validator();
-        $validator->validate($error, self::$schema['properties']['error']);
+        $validator->validate($error, self::$internalValidationSchema['properties']['error']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -106,7 +106,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     public function withInfo(int $info): self
     {
         $validator = new Validator();
-        $validator->validate($info, self::$schema['properties']['info']);
+        $validator->validate($info, self::$internalValidationSchema['properties']['info']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -120,7 +120,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     public function withSuccess(int $success): self
     {
         $validator = new Validator();
-        $validator->validate($success, self::$schema['properties']['success']);
+        $validator->validate($success, self::$internalValidationSchema['properties']['success']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +134,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     public function withTotal(int $total): self
     {
         $validator = new Validator();
-        $validator->validate($total, self::$schema['properties']['total']);
+        $validator->validate($total, self::$internalValidationSchema['properties']['total']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -148,7 +148,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     public function withWarning(int $warning): self
     {
         $validator = new Validator();
-        $validator->validate($warning, self::$schema['properties']['warning']);
+        $validator->validate($warning, self::$internalValidationSchema['properties']['warning']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -214,7 +214,7 @@ class NotificationsCountUnreadNotificationsOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

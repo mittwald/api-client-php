@@ -23,7 +23,7 @@ class App
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'An App is to be understood as a manifest for AppInstallations. E.g. \'WordPress\' only exists inside our ecosystem, because there is an  App -Manifest for it.',
         'properties' => [
             'actionCapabilities' => [
@@ -122,7 +122,7 @@ class App
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class App
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -153,7 +153,7 @@ class App
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, self::$schema['properties']['tags']);
+        $validator->validate($tags, self::$internalValidationSchema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class App
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

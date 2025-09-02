@@ -22,7 +22,7 @@ class ContainerImageConfig
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'command' => [
                 'description' => 'Command of the container image.',
@@ -258,7 +258,7 @@ class ContainerImageConfig
     public function withCommand(array $command): self
     {
         $validator = new Validator();
-        $validator->validate($command, self::$schema['properties']['command']);
+        $validator->validate($command, self::$internalValidationSchema['properties']['command']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -283,7 +283,7 @@ class ContainerImageConfig
     public function withEntrypoint(array $entrypoint): self
     {
         $validator = new Validator();
-        $validator->validate($entrypoint, self::$schema['properties']['entrypoint']);
+        $validator->validate($entrypoint, self::$internalValidationSchema['properties']['entrypoint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -343,7 +343,7 @@ class ContainerImageConfig
     public function withHasAiGeneratedData(bool $hasAiGeneratedData): self
     {
         $validator = new Validator();
-        $validator->validate($hasAiGeneratedData, self::$schema['properties']['hasAiGeneratedData']);
+        $validator->validate($hasAiGeneratedData, self::$internalValidationSchema['properties']['hasAiGeneratedData']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -357,7 +357,7 @@ class ContainerImageConfig
     public function withIsAiAvailable(bool $isAiAvailable): self
     {
         $validator = new Validator();
-        $validator->validate($isAiAvailable, self::$schema['properties']['isAiAvailable']);
+        $validator->validate($isAiAvailable, self::$internalValidationSchema['properties']['isAiAvailable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -371,7 +371,7 @@ class ContainerImageConfig
     public function withIsUserRoot(bool $isUserRoot): self
     {
         $validator = new Validator();
-        $validator->validate($isUserRoot, self::$schema['properties']['isUserRoot']);
+        $validator->validate($isUserRoot, self::$internalValidationSchema['properties']['isUserRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -388,7 +388,7 @@ class ContainerImageConfig
     public function withOverwritingUser(int $overwritingUser): self
     {
         $validator = new Validator();
-        $validator->validate($overwritingUser, self::$schema['properties']['overwritingUser']);
+        $validator->validate($overwritingUser, self::$internalValidationSchema['properties']['overwritingUser']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -410,7 +410,7 @@ class ContainerImageConfig
     public function withUser(string $user): self
     {
         $validator = new Validator();
-        $validator->validate($user, self::$schema['properties']['user']);
+        $validator->validate($user, self::$internalValidationSchema['properties']['user']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -424,7 +424,7 @@ class ContainerImageConfig
     public function withUserId(int $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -556,7 +556,7 @@ class ContainerImageConfig
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

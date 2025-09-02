@@ -14,7 +14,7 @@ class ExtensionRegisterExtensionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contributorId' => [
@@ -72,6 +72,17 @@ class ExtensionRegisterExtensionRequest
                         'type' => 'array',
                     ],
                     'webhookURLs' => [
+                        'allOf' => [
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                            ],
+                            [
+                                'deprecated' => true,
+                                'type' => 'object',
+                            ],
+                        ],
+                    ],
+                    'webhookUrls' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
                     ],
                 ],
@@ -114,7 +125,7 @@ class ExtensionRegisterExtensionRequest
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -182,7 +193,7 @@ class ExtensionRegisterExtensionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

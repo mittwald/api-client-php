@@ -23,7 +23,7 @@ class Conversation
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'category' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Category',
@@ -132,7 +132,7 @@ class Conversation
      */
     private ?array $notificationRoles = null;
 
-    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null $relatedTo = null;
+    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7|null $relatedTo = null;
 
     /**
      * @var AggregateReference[]|null
@@ -208,7 +208,7 @@ class Conversation
         return $this->notificationRoles ?? null;
     }
 
-    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
+    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7|null
     {
         return $this->relatedTo;
     }
@@ -265,7 +265,7 @@ class Conversation
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
-        $validator->validate($conversationId, self::$schema['properties']['conversationId']);
+        $validator->validate($conversationId, self::$internalValidationSchema['properties']['conversationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -375,7 +375,7 @@ class Conversation
         return $clone;
     }
 
-    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
+    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|RelatedAggregateReferenceAlternative7 $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -429,7 +429,7 @@ class Conversation
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -451,7 +451,7 @@ class Conversation
     public function withTitle(string $title): self
     {
         $validator = new Validator();
-        $validator->validate($title, self::$schema['properties']['title']);
+        $validator->validate($title, self::$internalValidationSchema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -522,6 +522,7 @@ class Conversation
                 RelatedAggregateReferenceAlternative4::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative4::buildFromInput($input->{'relatedTo'}, validate: $validate),
                 RelatedAggregateReferenceAlternative5::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative5::buildFromInput($input->{'relatedTo'}, validate: $validate),
                 RelatedAggregateReferenceAlternative6::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative6::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative7::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative7::buildFromInput($input->{'relatedTo'}, validate: $validate),
             };
         }
         $relations = null;
@@ -588,7 +589,7 @@ class Conversation
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6 => $this->relatedTo->toJson(),
+                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative7 => $this->relatedTo->toJson(),
             };
         }
         if (isset($this->relations)) {
@@ -620,7 +621,7 @@ class Conversation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,13 +12,14 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'quotaInBytes' => [
                 'description' => '2 GB',
                 'example' => 2147483648,
+                'format' => 'int64',
                 'minimum' => -1,
-                'type' => 'number',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -29,22 +30,22 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
     /**
      * 2 GB
      */
-    private int|float $quotaInBytes;
+    private int $quotaInBytes;
 
-    public function __construct(int|float $quotaInBytes)
+    public function __construct(int $quotaInBytes)
     {
         $this->quotaInBytes = $quotaInBytes;
     }
 
-    public function getQuotaInBytes(): int|float
+    public function getQuotaInBytes(): int
     {
         return $this->quotaInBytes;
     }
 
-    public function withQuotaInBytes(int|float $quotaInBytes): self
+    public function withQuotaInBytes(int $quotaInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($quotaInBytes, self::$schema['properties']['quotaInBytes']);
+        $validator->validate($quotaInBytes, self::$internalValidationSchema['properties']['quotaInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -70,7 +71,7 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
             static::validateInput($input);
         }
 
-        $quotaInBytes = str_contains((string)($input->{'quotaInBytes'}), '.') ? (float)($input->{'quotaInBytes'}) : (int)($input->{'quotaInBytes'});
+        $quotaInBytes = (int)($input->{'quotaInBytes'});
 
         $obj = new self($quotaInBytes);
 
@@ -102,7 +103,7 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

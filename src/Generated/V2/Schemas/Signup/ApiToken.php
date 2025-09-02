@@ -23,7 +23,7 @@ class ApiToken
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'apiTokenId' => [
                 'format' => 'uuid',
@@ -116,7 +116,7 @@ class ApiToken
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();
-        $validator->validate($apiTokenId, self::$schema['properties']['apiTokenId']);
+        $validator->validate($apiTokenId, self::$internalValidationSchema['properties']['apiTokenId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class ApiToken
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -171,7 +171,7 @@ class ApiToken
     public function withRoles(array $roles): self
     {
         $validator = new Validator();
-        $validator->validate($roles, self::$schema['properties']['roles']);
+        $validator->validate($roles, self::$internalValidationSchema['properties']['roles']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class ApiToken
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

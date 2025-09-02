@@ -23,7 +23,7 @@ class BreakingNote
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A BreakingNote is a hint that something serious has changed in the AppVersion containing it, so an automatic update is not possible.',
         'properties' => [
             'faqLink' => [
@@ -52,7 +52,7 @@ class BreakingNote
     public function withFaqLink(string $faqLink): self
     {
         $validator = new Validator();
-        $validator->validate($faqLink, self::$schema['properties']['faqLink']);
+        $validator->validate($faqLink, self::$internalValidationSchema['properties']['faqLink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -110,7 +110,7 @@ class BreakingNote
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

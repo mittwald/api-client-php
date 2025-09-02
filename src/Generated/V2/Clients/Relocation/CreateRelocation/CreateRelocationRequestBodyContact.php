@@ -12,7 +12,7 @@ class CreateRelocationRequestBodyContact
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'email' => [
                 'format' => 'email',
@@ -78,7 +78,7 @@ class CreateRelocationRequestBodyContact
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class CreateRelocationRequestBodyContact
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($firstName, self::$schema['properties']['firstName']);
+        $validator->validate($firstName, self::$internalValidationSchema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -106,7 +106,7 @@ class CreateRelocationRequestBodyContact
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($lastName, self::$schema['properties']['lastName']);
+        $validator->validate($lastName, self::$internalValidationSchema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -120,7 +120,7 @@ class CreateRelocationRequestBodyContact
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();
-        $validator->validate($phoneNumber, self::$schema['properties']['phoneNumber']);
+        $validator->validate($phoneNumber, self::$internalValidationSchema['properties']['phoneNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +197,7 @@ class CreateRelocationRequestBodyContact
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

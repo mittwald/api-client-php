@@ -22,15 +22,17 @@ class FilesystemUsagesDisk
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'path' => [
                 'type' => 'string',
             ],
             'totalBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'usedBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
         ],
@@ -68,7 +70,7 @@ class FilesystemUsagesDisk
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, self::$schema['properties']['path']);
+        $validator->validate($path, self::$internalValidationSchema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +92,7 @@ class FilesystemUsagesDisk
     public function withTotalBytes(int $totalBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalBytes, self::$schema['properties']['totalBytes']);
+        $validator->validate($totalBytes, self::$internalValidationSchema['properties']['totalBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +114,7 @@ class FilesystemUsagesDisk
     public function withUsedBytes(int $usedBytes): self
     {
         $validator = new Validator();
-        $validator->validate($usedBytes, self::$schema['properties']['usedBytes']);
+        $validator->validate($usedBytes, self::$internalValidationSchema['properties']['usedBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -199,7 +201,7 @@ class FilesystemUsagesDisk
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

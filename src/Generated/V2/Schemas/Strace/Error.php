@@ -22,7 +22,7 @@ class Error
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'errorMessage' => [
                 'example' => 'wrong PHP version',
@@ -50,7 +50,7 @@ class Error
     public function withErrorMessage(string $errorMessage): self
     {
         $validator = new Validator();
-        $validator->validate($errorMessage, self::$schema['properties']['errorMessage']);
+        $validator->validate($errorMessage, self::$internalValidationSchema['properties']['errorMessage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class Error
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

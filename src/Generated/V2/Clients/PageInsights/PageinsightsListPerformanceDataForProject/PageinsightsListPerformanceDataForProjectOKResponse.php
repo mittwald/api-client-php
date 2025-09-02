@@ -14,7 +14,7 @@ class PageinsightsListPerformanceDataForProjectOKResponse implements ResponseCon
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'required' => [
             'body',
@@ -145,7 +145,7 @@ class PageinsightsListPerformanceDataForProjectOKResponse implements ResponseCon
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -13,6 +13,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractOKResponse;
@@ -23,14 +25,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertif
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsOKResponse;
@@ -147,6 +151,26 @@ interface ContractClient
      */
     public function getDetailOfContractByDomain(GetDetailOfContractByDomainRequest $request): GetDetailOfContractByDomainOKResponse;
     /**
+     * Return the Contract for the given LeadFyndrProfile.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-lead-fyndr
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByLeadFyndrRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByLeadFyndrOKResponse Returns an active Contract for the given LeadFyndrProfile.
+     */
+    public function getDetailOfContractByLeadFyndr(GetDetailOfContractByLeadFyndrRequest $request): GetDetailOfContractByLeadFyndrOKResponse;
+    /**
+     * Return the Contract for the given Mail Address.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByMailAddressRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByMailAddressOKResponse Returns an active Contract for the given Mail Address.
+     */
+    public function getDetailOfContractByMailAddress(GetDetailOfContractByMailAddressRequest $request): GetDetailOfContractByMailAddressOKResponse;
+    /**
      * Return the Contract for the given Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-project
@@ -175,16 +199,6 @@ interface ContractClient
      * @param GetDetailOfContractItemRequest $request An object representing the request for this operation
      */
     public function getDetailOfContractItem(GetDetailOfContractItemRequest $request): GetDetailOfContractItemOKResponse;
-    /**
-     * Return the next TerminationDate for the ContractItem with the given ID.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-next-termination-date-for-item
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetNextTerminationDateForItemRequest $request An object representing the request for this operation
-     * @return GetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
-     */
-    public function getNextTerminationDateForItem(GetNextTerminationDateForItemRequest $request): GetNextTerminationDateForItemOKResponse;
     /**
      * Return a list of Contracts for the given Customer.
      *
@@ -215,6 +229,19 @@ interface ContractClient
      * @return TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
      */
     public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse;
+    /**
+     * Return the next TerminationDate for the ContractItem with the given ID.
+     *
+     * This route is deprecated. Use GET /v2/contracts/{contractId}/items/{contractItemId} instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-contract-get-next-termination-date-for-item
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContractGetNextTerminationDateForItemRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContractGetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
+     */
+    public function deprecatedContractGetNextTerminationDateForItem(DeprecatedContractGetNextTerminationDateForItemRequest $request): DeprecatedContractGetNextTerminationDateForItemOKResponse;
     /**
      * Get details of an Invoice.
      *

@@ -22,7 +22,7 @@ class InvoiceSettingsStatus
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'message' => [
                 'example' => 'Unfortunately, we were unable to debit your account. Please update your account details.',
@@ -86,7 +86,7 @@ class InvoiceSettingsStatus
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$schema['properties']['message']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class InvoiceSettingsStatus
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

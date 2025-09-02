@@ -12,7 +12,7 @@ class GetLatestScreenshotOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'reference' => [
                 'type' => 'string',
@@ -38,7 +38,7 @@ class GetLatestScreenshotOKResponseBody
     public function withReference(string $reference): self
     {
         $validator = new Validator();
-        $validator->validate($reference, self::$schema['properties']['reference']);
+        $validator->validate($reference, self::$internalValidationSchema['properties']['reference']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class GetLatestScreenshotOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

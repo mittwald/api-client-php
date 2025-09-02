@@ -23,7 +23,7 @@ class ServiceRequestRelocationPayloadSource
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'providerName' => [
                 'type' => 'string',
@@ -98,7 +98,7 @@ class ServiceRequestRelocationPayloadSource
     public function withProviderName(string $providerName): self
     {
         $validator = new Validator();
-        $validator->validate($providerName, self::$schema['properties']['providerName']);
+        $validator->validate($providerName, self::$internalValidationSchema['properties']['providerName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class ServiceRequestRelocationPayloadSource
     public function withProviderPassword(string $providerPassword): self
     {
         $validator = new Validator();
-        $validator->validate($providerPassword, self::$schema['properties']['providerPassword']);
+        $validator->validate($providerPassword, self::$internalValidationSchema['properties']['providerPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class ServiceRequestRelocationPayloadSource
     public function withProviderUrl(string $providerUrl): self
     {
         $validator = new Validator();
-        $validator->validate($providerUrl, self::$schema['properties']['providerUrl']);
+        $validator->validate($providerUrl, self::$internalValidationSchema['properties']['providerUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class ServiceRequestRelocationPayloadSource
     public function withProviderUsername(string $providerUsername): self
     {
         $validator = new Validator();
-        $validator->validate($providerUsername, self::$schema['properties']['providerUsername']);
+        $validator->validate($providerUsername, self::$internalValidationSchema['properties']['providerUsername']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -154,7 +154,7 @@ class ServiceRequestRelocationPayloadSource
     public function withSourceAccount(string $sourceAccount): self
     {
         $validator = new Validator();
-        $validator->validate($sourceAccount, self::$schema['properties']['sourceAccount']);
+        $validator->validate($sourceAccount, self::$internalValidationSchema['properties']['sourceAccount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -220,7 +220,7 @@ class ServiceRequestRelocationPayloadSource
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

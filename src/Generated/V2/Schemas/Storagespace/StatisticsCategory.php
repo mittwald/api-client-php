@@ -22,7 +22,7 @@ class StatisticsCategory
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'kind' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.storagespace.StatisticsCategoryKind',
@@ -36,6 +36,7 @@ class StatisticsCategory
             ],
             'totalUsageInBytes' => [
                 'example' => 1000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
         ],
@@ -109,7 +110,7 @@ class StatisticsCategory
     public function withTotalUsageInBytes(int $totalUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalUsageInBytes, self::$schema['properties']['totalUsageInBytes']);
+        $validator->validate($totalUsageInBytes, self::$internalValidationSchema['properties']['totalUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -176,7 +177,7 @@ class StatisticsCategory
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

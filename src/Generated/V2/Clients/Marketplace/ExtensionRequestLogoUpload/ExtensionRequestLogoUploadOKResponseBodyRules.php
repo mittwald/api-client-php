@@ -12,7 +12,7 @@ class ExtensionRequestLogoUploadOKResponseBodyRules
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'Constraints for the logo image upload.',
         'properties' => [
             'extensions' => [
@@ -173,7 +173,7 @@ class ExtensionRequestLogoUploadOKResponseBodyRules
     public function withExtensions(array $extensions): self
     {
         $validator = new Validator();
-        $validator->validate($extensions, self::$schema['properties']['extensions']);
+        $validator->validate($extensions, self::$internalValidationSchema['properties']['extensions']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -198,7 +198,7 @@ class ExtensionRequestLogoUploadOKResponseBodyRules
     public function withMaxSizeInBytes(int $maxSizeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($maxSizeInBytes, self::$schema['properties']['maxSizeInBytes']);
+        $validator->validate($maxSizeInBytes, self::$internalValidationSchema['properties']['maxSizeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,7 +215,7 @@ class ExtensionRequestLogoUploadOKResponseBodyRules
     public function withMimeTypes(array $mimeTypes): self
     {
         $validator = new Validator();
-        $validator->validate($mimeTypes, self::$schema['properties']['mimeTypes']);
+        $validator->validate($mimeTypes, self::$internalValidationSchema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -302,7 +302,7 @@ class ExtensionRequestLogoUploadOKResponseBodyRules
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
