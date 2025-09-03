@@ -27,6 +27,11 @@ class ExtensionUpdateExtensionPricingRequest
             ],
             'body' => [
                 'properties' => [
+                    'dryRun' => [
+                        'default' => false,
+                        'description' => 'If set to true, the request will be validated but not executed.',
+                        'type' => 'boolean',
+                    ],
                     'priceInCents' => [
                         'description' => 'Price in cents.',
                         'type' => 'number',

@@ -14,6 +14,11 @@ class ExtensionUpdateExtensionPricingRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'dryRun' => [
+                'default' => false,
+                'description' => 'If set to true, the request will be validated but not executed.',
+                'type' => 'boolean',
+            ],
             'priceInCents' => [
                 'description' => 'Price in cents.',
                 'type' => 'number',
@@ -21,6 +26,11 @@ class ExtensionUpdateExtensionPricingRequestBody
         ],
         'type' => 'object',
     ];
+
+    /**
+     * If set to true, the request will be validated but not executed.
+     */
+    private bool $dryRun = false;
 
     /**
      * Price in cents.
@@ -34,9 +44,28 @@ class ExtensionUpdateExtensionPricingRequestBody
     {
     }
 
+    public function getDryRun(): bool
+    {
+        return $this->dryRun;
+    }
+
     public function getPriceInCents(): int|float|null
     {
         return $this->priceInCents;
+    }
+
+    public function withDryRun(bool $dryRun): self
+    {
+        $validator = new Validator();
+        $validator->validate($dryRun, self::$internalValidationSchema['properties']['dryRun']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->dryRun = $dryRun;
+
+        return $clone;
     }
 
     public function withPriceInCents(int|float $priceInCents): self
@@ -76,12 +105,17 @@ class ExtensionUpdateExtensionPricingRequestBody
             static::validateInput($input);
         }
 
+        $dryRun = false;
+        if (isset($input->{'dryRun'})) {
+            $dryRun = (bool)($input->{'dryRun'});
+        }
         $priceInCents = null;
         if (isset($input->{'priceInCents'})) {
             $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
         }
 
         $obj = new self();
+        $obj->dryRun = $dryRun;
         $obj->priceInCents = $priceInCents;
         return $obj;
     }
@@ -94,6 +128,7 @@ class ExtensionUpdateExtensionPricingRequestBody
     public function toJson(): array
     {
         $output = [];
+        $output['dryRun'] = $this->dryRun;
         if (isset($this->priceInCents)) {
             $output['priceInCents'] = $this->priceInCents;
         }

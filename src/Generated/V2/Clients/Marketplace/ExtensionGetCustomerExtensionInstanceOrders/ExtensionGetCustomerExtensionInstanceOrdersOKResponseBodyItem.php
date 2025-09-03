@@ -14,14 +14,28 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItem
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'context' => [
+                'enum' => [
+                    'project',
+                    'customer',
+                ],
+                'type' => 'string',
+            ],
             'extensionId' => [
+                'type' => 'string',
+            ],
+            'referencedId' => [
                 'type' => 'string',
             ],
         ],
         'type' => 'object',
     ];
 
+    private ?ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItemContext $context = null;
+
     private ?string $extensionId = null;
+
+    private ?string $referencedId = null;
 
     /**
      *
@@ -30,9 +44,35 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItem
     {
     }
 
+    public function getContext(): ?ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItemContext
+    {
+        return $this->context ?? null;
+    }
+
     public function getExtensionId(): ?string
     {
         return $this->extensionId ?? null;
+    }
+
+    public function getReferencedId(): ?string
+    {
+        return $this->referencedId ?? null;
+    }
+
+    public function withContext(ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItemContext $context): self
+    {
+        $clone = clone $this;
+        $clone->context = $context;
+
+        return $clone;
+    }
+
+    public function withoutContext(): self
+    {
+        $clone = clone $this;
+        unset($clone->context);
+
+        return $clone;
     }
 
     public function withExtensionId(string $extensionId): self
@@ -57,6 +97,28 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItem
         return $clone;
     }
 
+    public function withReferencedId(string $referencedId): self
+    {
+        $validator = new Validator();
+        $validator->validate($referencedId, self::$internalValidationSchema['properties']['referencedId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referencedId = $referencedId;
+
+        return $clone;
+    }
+
+    public function withoutReferencedId(): self
+    {
+        $clone = clone $this;
+        unset($clone->referencedId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -72,13 +134,23 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItem
             static::validateInput($input);
         }
 
+        $context = null;
+        if (isset($input->{'context'})) {
+            $context = ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItemContext::from($input->{'context'});
+        }
         $extensionId = null;
         if (isset($input->{'extensionId'})) {
             $extensionId = $input->{'extensionId'};
         }
+        $referencedId = null;
+        if (isset($input->{'referencedId'})) {
+            $referencedId = $input->{'referencedId'};
+        }
 
         $obj = new self();
+        $obj->context = $context;
         $obj->extensionId = $extensionId;
+        $obj->referencedId = $referencedId;
         return $obj;
     }
 
@@ -90,8 +162,14 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponseBodyItem
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->context)) {
+            $output['context'] = ($this->context)->value;
+        }
         if (isset($this->extensionId)) {
             $output['extensionId'] = $this->extensionId;
+        }
+        if (isset($this->referencedId)) {
+            $output['referencedId'] = $this->referencedId;
         }
 
         return $output;

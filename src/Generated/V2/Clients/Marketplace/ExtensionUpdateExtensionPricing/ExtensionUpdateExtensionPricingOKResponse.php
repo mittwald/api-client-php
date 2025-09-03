@@ -26,6 +26,57 @@ class ExtensionUpdateExtensionPricingOKResponse implements ResponseContainer
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'priceChangeConsequence' => [
+                        'properties' => [
+                            'contributorConsequence' => [
+                                'description' => 'Description of the consequence for the Extension from the perspective of the contributor. Values: * "NONE": No consequence. * "EDIT_BLOCK": The Extension will be blocked for editing by the contributor for 30 days.
+',
+                                'enum' => [
+                                    'NONE',
+                                    'EDIT_BLOCK',
+                                ],
+                                'type' => 'string',
+                            ],
+                            'globalCustomerConsequence' => [
+                                'description' => 'Description of the consequence for all Customers of the Extension. Values: * "NONE": No consequence. * "INFO": Customers will be informed about the upcoming changes to their contracts. * "CONFIRM_REQUIRED": Customers will have to confirm or select the accepted changes to their contracts within 30 days or their contracts will be automatically cancelled.
+',
+                                'enum' => [
+                                    'NONE',
+                                    'INFO',
+                                    'CONFIRM_REQUIRED',
+                                ],
+                                'type' => 'string',
+                            ],
+                            'variantConsequences' => [
+                                'items' => [
+                                    'properties' => [
+                                        'consequence' => [
+                                            'description' => 'The individual consequence for customers of a specific variant of the Extension. Values: * "NONE": No consequence. * "INFO": Customers will be informed about the upcoming changes to their contracts. * "CONFIRM_REQUIRED": Customers will have to confirm or select the accepted changes to their contracts within 30 days or their contracts will be automatically cancelled.
+',
+                                            'enum' => [
+                                                'NONE',
+                                                'INFO',
+                                                'CONFIRM_REQUIRED',
+                                            ],
+                                            'type' => 'string',
+                                        ],
+                                        'variantKey' => [
+                                            'description' => 'The key of the variant of the Extension.',
+                                            'type' => 'string',
+                                        ],
+                                    ],
+                                    'type' => 'object',
+                                ],
+                                'type' => 'array',
+                            ],
+                        ],
+                        'required' => [
+                            'contributorConsequence',
+                            'globalCustomerConsequence',
+                            'variantConsequences',
+                        ],
+                        'type' => 'object',
+                    ],
                 ],
                 'type' => 'object',
             ],
