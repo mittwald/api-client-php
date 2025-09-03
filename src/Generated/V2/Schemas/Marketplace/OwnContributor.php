@@ -58,6 +58,9 @@ class OwnContributor
             'imprint' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint',
             ],
+            'logoInherited' => [
+                'type' => 'boolean',
+            ],
             'logoRefId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -136,6 +139,8 @@ class OwnContributor
     private string $id;
 
     private ContributorImprintAlternative1|ContributorImprintAlternative2|null $imprint = null;
+
+    private ?bool $logoInherited = null;
 
     private ?string $logoRefId = null;
 
@@ -222,6 +227,11 @@ class OwnContributor
     public function getImprint(): ContributorImprintAlternative1|ContributorImprintAlternative2|null
     {
         return $this->imprint;
+    }
+
+    public function getLogoInherited(): ?bool
+    {
+        return $this->logoInherited ?? null;
     }
 
     public function getLogoRefId(): ?string
@@ -422,6 +432,28 @@ class OwnContributor
         return $clone;
     }
 
+    public function withLogoInherited(bool $logoInherited): self
+    {
+        $validator = new Validator();
+        $validator->validate($logoInherited, self::$internalValidationSchema['properties']['logoInherited']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->logoInherited = $logoInherited;
+
+        return $clone;
+    }
+
+    public function withoutLogoInherited(): self
+    {
+        $clone = clone $this;
+        unset($clone->logoInherited);
+
+        return $clone;
+    }
+
     public function withLogoRefId(string $logoRefId): self
     {
         $validator = new Validator();
@@ -579,6 +611,10 @@ class OwnContributor
                 ContributorImprintAlternative2::validateInput($input->{'imprint'}, true) => ContributorImprintAlternative2::buildFromInput($input->{'imprint'}, validate: $validate),
             };
         }
+        $logoInherited = null;
+        if (isset($input->{'logoInherited'})) {
+            $logoInherited = (bool)($input->{'logoInherited'});
+        }
         $logoRefId = null;
         if (isset($input->{'logoRefId'})) {
             $logoRefId = $input->{'logoRefId'};
@@ -601,6 +637,7 @@ class OwnContributor
         $obj->descriptions = $descriptions;
         $obj->homepage = $homepage;
         $obj->imprint = $imprint;
+        $obj->logoInherited = $logoInherited;
         $obj->logoRefId = $logoRefId;
         $obj->phone = $phone;
         $obj->url = $url;
@@ -635,6 +672,9 @@ class OwnContributor
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 ($this->imprint) instanceof ContributorImprintAlternative1, ($this->imprint) instanceof ContributorImprintAlternative2 => $this->imprint->toJson(),
             };
+        }
+        if (isset($this->logoInherited)) {
+            $output['logoInherited'] = $this->logoInherited;
         }
         if (isset($this->logoRefId)) {
             $output['logoRefId'] = $this->logoRefId;

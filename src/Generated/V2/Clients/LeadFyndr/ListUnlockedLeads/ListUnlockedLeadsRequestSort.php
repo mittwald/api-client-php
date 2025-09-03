@@ -8,4 +8,5 @@ enum ListUnlockedLeadsRequestSort: string
 {
     case potential = 'potential';
     case relevance = 'relevance';
+    case company = 'company';
 }

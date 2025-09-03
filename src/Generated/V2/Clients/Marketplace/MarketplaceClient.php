@@ -27,6 +27,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContribu
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationOKResponse;
@@ -233,6 +236,26 @@ interface MarketplaceClient
      * @return ContributorReceiptGetFileAccessTokenOKResponse The File Access Token required to access the Incoming Invoice file.
      */
     public function contributorReceiptGetFileAccessToken(ContributorReceiptGetFileAccessTokenRequest $request): ContributorReceiptGetFileAccessTokenOKResponse;
+    /**
+     * Add a deviating avatar to a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-request-deviating-contributor-avatar-upload
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorRequestDeviatingContributorAvatarUploadRequest $request An object representing the request for this operation
+     * @return ContributorRequestDeviatingContributorAvatarUploadOKResponse The Upload of an avatar for the contributor has been requested.
+     */
+    public function contributorRequestDeviatingContributorAvatarUpload(ContributorRequestDeviatingContributorAvatarUploadRequest $request): ContributorRequestDeviatingContributorAvatarUploadOKResponse;
+    /**
+     * Delete deviating contributor avatar und return to the inherited customer avatar.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-reset-contributor-avatar
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorResetContributorAvatarRequest $request An object representing the request for this operation
+     * @return EmptyResponse Returned to the inherited customer avatar.
+     */
+    public function contributorResetContributorAvatar(ContributorResetContributorAvatarRequest $request): EmptyResponse;
     /**
      * Rotate the secret for an extension instance.
      *
