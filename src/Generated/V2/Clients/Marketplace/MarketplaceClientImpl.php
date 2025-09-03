@@ -10,6 +10,10 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeDefaultResponse;
@@ -61,6 +65,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFil
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceNotFoundResponse;
@@ -333,6 +346,30 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Delete a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-delete-contributor
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorDeleteContributorRequest $request An object representing the request for this operation
+     * @return EmptyResponse The Contributor has been deleted.
+     */
+    public function contributorDeleteContributor(ContributorDeleteContributorRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ContributorDeleteContributorRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ContributorDeleteContributorNotFoundResponse::fromResponse($httpResponse),
+            412 => new EmptyResponse($httpResponse),
+            429 => ContributorDeleteContributorTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorDeleteContributorDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Express interest to be a contributor.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-express-interest-to-contribute
@@ -548,6 +585,52 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ContributorReceiptGetFileAccessTokenNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorReceiptGetFileAccessTokenTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorReceiptGetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Add a deviating avatar to a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-request-deviating-contributor-avatar-upload
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorRequestDeviatingContributorAvatarUploadRequest $request An object representing the request for this operation
+     * @return ContributorRequestDeviatingContributorAvatarUploadOKResponse The Upload of an avatar for the contributor has been requested.
+     */
+    public function contributorRequestDeviatingContributorAvatarUpload(ContributorRequestDeviatingContributorAvatarUploadRequest $request): ContributorRequestDeviatingContributorAvatarUploadOKResponse
+    {
+        $httpRequest = new Request(ContributorRequestDeviatingContributorAvatarUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorRequestDeviatingContributorAvatarUploadOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ContributorRequestDeviatingContributorAvatarUploadNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorRequestDeviatingContributorAvatarUploadTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorRequestDeviatingContributorAvatarUploadDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Delete deviating contributor avatar und return to the inherited customer avatar.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-reset-contributor-avatar
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorResetContributorAvatarRequest $request An object representing the request for this operation
+     * @return EmptyResponse Returned to the inherited customer avatar.
+     */
+    public function contributorResetContributorAvatar(ContributorResetContributorAvatarRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ContributorResetContributorAvatarRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ContributorResetContributorAvatarNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorResetContributorAvatarTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorResetContributorAvatarDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -50,6 +50,7 @@ class Contributor
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint',
             ],
             'logoRefId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'name' => [

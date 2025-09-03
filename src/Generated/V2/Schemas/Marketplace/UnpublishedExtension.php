@@ -820,7 +820,7 @@ class UnpublishedExtension
         $pricing = null;
         if (isset($input->{'pricing'})) {
             $pricing = match (true) {
-                array_reduce(array_map(fn ($item): bool => MonthlyPricePlanStrategyItem::validateInput($item, true), $input->{'pricing'}), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn (array $item): MonthlyPricePlanStrategyItem => MonthlyPricePlanStrategyItem::buildFromInput($item, validate: $validate), $input->{'pricing'}),
+                array_reduce(array_map(fn ($item): bool => MonthlyPricePlanStrategyItem::validateInput($item, true), $input->{'pricing'}), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn (array|object $item): MonthlyPricePlanStrategyItem => MonthlyPricePlanStrategyItem::buildFromInput($item, validate: $validate), $input->{'pricing'}),
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }

@@ -122,6 +122,7 @@ class ListUnlockedLeadsRequest
                 'enum' => [
                     'potential',
                     'relevance',
+                    'company',
                 ],
                 'default' => 'relevance',
             ],

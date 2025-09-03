@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ConversationMembersItem;
 use Psr\Http\Message\ResponseInterface;
 
-class GetConversationMembersOKResponse implements ResponseContainer
+class ContributorResetContributorAvatarTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,38 +21,36 @@ class GetConversationMembersOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ConversationMembers',
+                'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    /**
-     * @var ConversationMembersItem[]
-     */
-    private array $body;
+    private ContributorResetContributorAvatarTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ConversationMembersItem[] $body
-     */
-    public function __construct(array $body)
+    public function __construct(ContributorResetContributorAvatarTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ConversationMembersItem[]
-     */
-    public function getBody(): array
+    public function getBody(): ContributorResetContributorAvatarTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ConversationMembersItem[] $body
-     */
-    public function withBody(array $body): self
+    public function withBody(ContributorResetContributorAvatarTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -66,17 +63,17 @@ class GetConversationMembersOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetConversationMembersOKResponse Created instance
+     * @return ContributorResetContributorAvatarTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetConversationMembersOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorResetContributorAvatarTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $item): ConversationMembersItem => ConversationMembersItem::buildFromInput($item, validate: $validate), $input->{'body'});
+        $body = ContributorResetContributorAvatarTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -91,7 +88,7 @@ class GetConversationMembersOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn ($item): array => $item->toJson(), $this->body);
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -122,6 +119,7 @@ class GetConversationMembersOKResponse implements ResponseContainer
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
