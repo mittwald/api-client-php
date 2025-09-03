@@ -232,7 +232,10 @@ class Extension
 
     private string $name;
 
-    private ?MonthlyPricePlanStrategyItem $pricing = null;
+    /**
+     * @var MonthlyPricePlanStrategyItem[]|null
+     */
+    private ?array $pricing = null;
 
     /**
      * Whether the extension has been published by the contributor.
@@ -379,7 +382,10 @@ class Extension
         return $this->name;
     }
 
-    public function getPricing(): ?MonthlyPricePlanStrategyItem
+    /**
+     * @return MonthlyPricePlanStrategyItem[]|null
+     */
+    public function getPricing(): ?array
     {
         return $this->pricing ?? null;
     }
@@ -652,7 +658,10 @@ class Extension
         return $clone;
     }
 
-    public function withPricing(MonthlyPricePlanStrategyItem $pricing): self
+    /**
+     * @param MonthlyPricePlanStrategyItem[] $pricing
+     */
+    public function withPricing(array $pricing): self
     {
         $clone = clone $this;
         $clone->pricing = $pricing;
@@ -799,7 +808,7 @@ class Extension
         $pricing = null;
         if (isset($input->{'pricing'})) {
             $pricing = match (true) {
-                MonthlyPricePlanStrategyItem::validateInput($input->{'pricing'}, true) => MonthlyPricePlanStrategyItem::buildFromInput($input->{'pricing'}, validate: $validate),
+                array_reduce(array_map(fn ($item): bool => MonthlyPricePlanStrategyItem::validateInput($item, true), $input->{'pricing'}), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn (array|object $item): MonthlyPricePlanStrategyItem => MonthlyPricePlanStrategyItem::buildFromInput($item, validate: $validate), $input->{'pricing'}),
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
@@ -856,7 +865,7 @@ class Extension
         $output['name'] = $this->name;
         if (isset($this->pricing)) {
             $output['pricing'] = match (true) {
-                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing->toJson(),
+                array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn ($item): array => $item->toJson(), $this->pricing),
             };
         }
         $output['published'] = $this->published;
@@ -899,7 +908,7 @@ class Extension
         $this->createdAt = clone $this->createdAt;
         if (isset($this->pricing)) {
             $this->pricing = match (true) {
-                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing,
+                array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => $this->pricing,
             };
         }
         $this->support = clone $this->support;

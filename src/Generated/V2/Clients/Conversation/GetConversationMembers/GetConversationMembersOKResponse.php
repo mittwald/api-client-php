@@ -27,21 +27,33 @@ class GetConversationMembersOKResponse implements ResponseContainer
         ],
     ];
 
-    private ConversationMembersItem $body;
+    /**
+     * @var ConversationMembersItem[]
+     */
+    private array $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ConversationMembersItem $body)
+    /**
+     * @param ConversationMembersItem[] $body
+     */
+    public function __construct(array $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ConversationMembersItem
+    /**
+     * @return ConversationMembersItem[]
+     */
+    public function getBody(): array
     {
         return $this->body;
     }
 
-    public function withBody(ConversationMembersItem $body): self
+    /**
+     * @param ConversationMembersItem[] $body
+     */
+    public function withBody(array $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,7 +76,7 @@ class GetConversationMembersOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = ConversationMembersItem::buildFromInput($input->{'body'}, validate: $validate);
+        $body = array_map(fn (array|object $item): ConversationMembersItem => ConversationMembersItem::buildFromInput($item, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -79,7 +91,7 @@ class GetConversationMembersOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = array_map(fn ($item): array => $item->toJson(), $this->body);
 
         return $output;
     }
