@@ -6,3 +6,7 @@ parameters:
   # Ignore until this can be fixed in client generation
   - identifier: match.unhandled
     path: src/Generated/V2/Clients/*/*ClientImpl.php
+  - identifier: match.unhandled
+    path: src/Generated/V2/Schemas/Marketplace/*.php
+  - identifier: instanceof.alwaysTrue
+    path: src/Generated
