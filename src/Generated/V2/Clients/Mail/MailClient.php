@@ -25,7 +25,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddress
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressQuota\DeprecatedMailUpdateMailAddressQuotaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressSpamProtection\DeprecatedMailUpdateMailAddressSpamProtectionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOKResponse;
@@ -267,16 +266,6 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse;
-    /**
-     * Disable a MailAddress Archive.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-disable-mail-archive
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DisableMailArchiveRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
-     */
-    public function disableMailArchive(DisableMailArchiveRequest $request): EmptyResponse;
     /**
      * Get a DeliveryBox.
      *

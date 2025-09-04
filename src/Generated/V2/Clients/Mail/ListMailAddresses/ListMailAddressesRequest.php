@@ -32,9 +32,6 @@ class ListMailAddressesRequest
             'autoResponder' => [
                 'type' => 'boolean',
             ],
-            'mailArchive' => [
-                'type' => 'boolean',
-            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
@@ -98,8 +95,6 @@ class ListMailAddressesRequest
 
     private ?bool $autoResponder = null;
 
-    private ?bool $mailArchive = null;
-
     private int $limit = 10000;
 
     private int $skip = 0;
@@ -154,11 +149,6 @@ class ListMailAddressesRequest
     public function getAutoResponder(): ?bool
     {
         return $this->autoResponder ?? null;
-    }
-
-    public function getMailArchive(): ?bool
-    {
-        return $this->mailArchive ?? null;
     }
 
     public function getLimit(): int
@@ -294,28 +284,6 @@ class ListMailAddressesRequest
         return $clone;
     }
 
-    public function withMailArchive(bool $mailArchive): self
-    {
-        $validator = new Validator();
-        $validator->validate($mailArchive, self::$internalValidationSchema['properties']['mailArchive']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->mailArchive = $mailArchive;
-
-        return $clone;
-    }
-
-    public function withoutMailArchive(): self
-    {
-        $clone = clone $this;
-        unset($clone->mailArchive);
-
-        return $clone;
-    }
-
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -432,10 +400,6 @@ class ListMailAddressesRequest
         if (isset($input->{'autoResponder'})) {
             $autoResponder = (bool)($input->{'autoResponder'});
         }
-        $mailArchive = null;
-        if (isset($input->{'mailArchive'})) {
-            $mailArchive = (bool)($input->{'mailArchive'});
-        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -468,7 +432,6 @@ class ListMailAddressesRequest
         $obj->forwardAddress = $forwardAddress;
         $obj->catchAll = $catchAll;
         $obj->autoResponder = $autoResponder;
-        $obj->mailArchive = $mailArchive;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -497,9 +460,6 @@ class ListMailAddressesRequest
         }
         if (isset($this->autoResponder)) {
             $output['autoResponder'] = $this->autoResponder;
-        }
-        if (isset($this->mailArchive)) {
-            $output['mailArchive'] = $this->mailArchive;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -580,9 +540,6 @@ class ListMailAddressesRequest
         }
         if (isset($mapped['autoResponder'])) {
             $query['autoResponder'] = $mapped['autoResponder'];
-        }
-        if (isset($mapped['mailArchive'])) {
-            $query['mailArchive'] = $mapped['mailArchive'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
