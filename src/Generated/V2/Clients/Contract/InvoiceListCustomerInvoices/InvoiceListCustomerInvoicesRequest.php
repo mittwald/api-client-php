@@ -32,6 +32,18 @@ class InvoiceListCustomerInvoicesRequest
                 ],
                 'type' => 'array',
             ],
+            'status' => [
+                'items' => [
+                    'enum' => [
+                        'CONFIRMED',
+                        'PAID',
+                        'PARTIALLY_PAID',
+                        'OVERPAID',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'search' => [
                 'type' => 'string',
             ],
@@ -86,6 +98,11 @@ class InvoiceListCustomerInvoicesRequest
      */
     private ?array $invoiceTypes = null;
 
+    /**
+     * @var string[]|null
+     */
+    private ?array $status = null;
+
     private ?string $search = null;
 
     private int $limit = 1000;
@@ -128,6 +145,14 @@ class InvoiceListCustomerInvoicesRequest
     public function getInvoiceTypes(): ?array
     {
         return $this->invoiceTypes ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getStatus(): ?array
+    {
+        return $this->status ?? null;
     }
 
     public function getSearch(): ?string
@@ -201,6 +226,31 @@ class InvoiceListCustomerInvoicesRequest
     {
         $clone = clone $this;
         unset($clone->invoiceTypes);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $status
+     */
+    public function withStatus(array $status): self
+    {
+        $validator = new Validator();
+        $validator->validate($status, self::$internalValidationSchema['properties']['status']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withoutStatus(): self
+    {
+        $clone = clone $this;
+        unset($clone->status);
 
         return $clone;
     }
@@ -331,6 +381,10 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($input->{'invoiceTypes'})) {
             $invoiceTypes = $input->{'invoiceTypes'};
         }
+        $status = null;
+        if (isset($input->{'status'})) {
+            $status = $input->{'status'};
+        }
         $search = null;
         if (isset($input->{'search'})) {
             $search = $input->{'search'};
@@ -362,6 +416,7 @@ class InvoiceListCustomerInvoicesRequest
 
         $obj = new self($customerId);
         $obj->invoiceTypes = $invoiceTypes;
+        $obj->status = $status;
         $obj->search = $search;
         $obj->limit = $limit;
         $obj->skip = $skip;
@@ -382,6 +437,9 @@ class InvoiceListCustomerInvoicesRequest
         $output['customerId'] = $this->customerId;
         if (isset($this->invoiceTypes)) {
             $output['invoiceTypes'] = $this->invoiceTypes;
+        }
+        if (isset($this->status)) {
+            $output['status'] = $this->status;
         }
         if (isset($this->search)) {
             $output['search'] = $this->search;
@@ -456,6 +514,9 @@ class InvoiceListCustomerInvoicesRequest
         $query = [];
         if (isset($mapped['invoiceTypes'])) {
             $query['invoiceTypes'] = $mapped['invoiceTypes'];
+        }
+        if (isset($mapped['status'])) {
+            $query['status'] = $mapped['status'];
         }
         if (isset($mapped['search'])) {
             $query['search'] = $mapped['search'];
