@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Directus\Domain;
+use Mittwald\ApiClient\Generated\V2\Schemas\Directus\EmailInbox;
 
 class CreateRelocationRequestBody
 {
@@ -79,6 +80,13 @@ class CreateRelocationRequestBody
                 'description' => 'List of domains which should be transferred (when allDomains is not checked).',
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.directus.Domain',
+                ],
+                'type' => 'array',
+            ],
+            'emailInboxes' => [
+                'description' => 'List of email inboxes which should be transferred.',
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.directus.EmailInbox',
                 ],
                 'type' => 'array',
             ],
@@ -268,6 +276,13 @@ class CreateRelocationRequestBody
     private ?array $domains = null;
 
     /**
+     * List of email inboxes which should be transferred.
+     *
+     * @var EmailInbox[]|null
+     */
+    private ?array $emailInboxes = null;
+
+    /**
      * Anything our customer service needs to know for the relocation process.
      */
     private ?string $notes = null;
@@ -322,6 +337,14 @@ class CreateRelocationRequestBody
     public function getDomains(): ?array
     {
         return $this->domains ?? null;
+    }
+
+    /**
+     * @return EmailInbox[]|null
+     */
+    public function getEmailInboxes(): ?array
+    {
+        return $this->emailInboxes ?? null;
     }
 
     public function getNotes(): ?string
@@ -428,6 +451,25 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
+    /**
+     * @param EmailInbox[] $emailInboxes
+     */
+    public function withEmailInboxes(array $emailInboxes): self
+    {
+        $clone = clone $this;
+        $clone->emailInboxes = $emailInboxes;
+
+        return $clone;
+    }
+
+    public function withoutEmailInboxes(): self
+    {
+        $clone = clone $this;
+        unset($clone->emailInboxes);
+
+        return $clone;
+    }
+
     public function withNotes(string $notes): self
     {
         $validator = new Validator();
@@ -517,6 +559,10 @@ class CreateRelocationRequestBody
         if (isset($input->{'domains'})) {
             $domains = array_map(fn (array|object $i): Domain => Domain::buildFromInput($i, validate: $validate), $input->{'domains'});
         }
+        $emailInboxes = null;
+        if (isset($input->{'emailInboxes'})) {
+            $emailInboxes = array_map(fn (array|object $i): EmailInbox => EmailInbox::buildFromInput($i, validate: $validate), $input->{'emailInboxes'});
+        }
         $notes = null;
         if (isset($input->{'notes'})) {
             $notes = $input->{'notes'};
@@ -535,6 +581,7 @@ class CreateRelocationRequestBody
         $obj = new self($additionalServices, $allowPasswordChange, $articleType, $contact, $prices, $provider, $target);
         $obj->allDomains = $allDomains;
         $obj->domains = $domains;
+        $obj->emailInboxes = $emailInboxes;
         $obj->notes = $notes;
         $obj->userId = $userId;
         return $obj;
@@ -557,6 +604,9 @@ class CreateRelocationRequestBody
         $output['contact'] = ($this->contact)->toJson();
         if (isset($this->domains)) {
             $output['domains'] = array_map(fn (Domain $i): array => $i->toJson(), $this->domains);
+        }
+        if (isset($this->emailInboxes)) {
+            $output['emailInboxes'] = array_map(fn (EmailInbox $i): array => $i->toJson(), $this->emailInboxes);
         }
         if (isset($this->notes)) {
             $output['notes'] = $this->notes;

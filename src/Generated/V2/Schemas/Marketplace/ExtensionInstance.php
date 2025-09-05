@@ -78,6 +78,12 @@ class ExtensionInstance
             'extensionSubTitle' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
             ],
+            'frontendFragments' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
+                ],
+                'type' => 'object',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -128,6 +134,11 @@ class ExtensionInstance
     private string $extensionName;
 
     private ?SubTitle $extensionSubTitle = null;
+
+    /**
+     * @var mixed[]|null
+     */
+    private ?array $frontendFragments = null;
 
     private string $id;
 
@@ -200,6 +211,14 @@ class ExtensionInstance
     public function getExtensionSubTitle(): ?SubTitle
     {
         return $this->extensionSubTitle ?? null;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public function getFrontendFragments(): ?array
+    {
+        return $this->frontendFragments ?? null;
     }
 
     public function getId(): string
@@ -360,6 +379,31 @@ class ExtensionInstance
         return $clone;
     }
 
+    /**
+     * @param mixed[] $frontendFragments
+     */
+    public function withFrontendFragments(array $frontendFragments): self
+    {
+        $validator = new Validator();
+        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->frontendFragments = $frontendFragments;
+
+        return $clone;
+    }
+
+    public function withoutFrontendFragments(): self
+    {
+        $clone = clone $this;
+        unset($clone->frontendFragments);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -439,6 +483,10 @@ class ExtensionInstance
         if (isset($input->{'extensionSubTitle'})) {
             $extensionSubTitle = SubTitle::buildFromInput($input->{'extensionSubTitle'}, validate: $validate);
         }
+        $frontendFragments = null;
+        if (isset($input->{'frontendFragments'})) {
+            $frontendFragments = (array)$input->{'frontendFragments'};
+        }
         $id = $input->{'id'};
         $pendingInstallation = false;
         if (isset($input->{'pendingInstallation'})) {
@@ -454,6 +502,7 @@ class ExtensionInstance
         $obj->createdAt = $createdAt;
         $obj->disabled = $disabled;
         $obj->extensionSubTitle = $extensionSubTitle;
+        $obj->frontendFragments = $frontendFragments;
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
         return $obj;
@@ -482,6 +531,9 @@ class ExtensionInstance
         $output['extensionName'] = $this->extensionName;
         if (isset($this->extensionSubTitle)) {
             $output['extensionSubTitle'] = $this->extensionSubTitle->toJson();
+        }
+        if (isset($this->frontendFragments)) {
+            $output['frontendFragments'] = $this->frontendFragments;
         }
         $output['id'] = $this->id;
         $output['pendingInstallation'] = $this->pendingInstallation;

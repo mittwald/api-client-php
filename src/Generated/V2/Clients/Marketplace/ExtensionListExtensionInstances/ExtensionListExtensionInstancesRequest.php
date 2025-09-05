@@ -31,6 +31,9 @@ class ExtensionListExtensionInstancesRequest
             'searchTerm' => [
                 'type' => 'string',
             ],
+            'anchor' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -84,6 +87,8 @@ class ExtensionListExtensionInstancesRequest
 
     private ?string $searchTerm = null;
 
+    private ?string $anchor = null;
+
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -133,6 +138,11 @@ class ExtensionListExtensionInstancesRequest
     public function getSearchTerm(): ?string
     {
         return $this->searchTerm ?? null;
+    }
+
+    public function getAnchor(): ?string
+    {
+        return $this->anchor ?? null;
     }
 
     public function getLimit(): ?int
@@ -244,6 +254,28 @@ class ExtensionListExtensionInstancesRequest
     {
         $clone = clone $this;
         unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withAnchor(string $anchor): self
+    {
+        $validator = new Validator();
+        $validator->validate($anchor, self::$internalValidationSchema['properties']['anchor']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->anchor = $anchor;
+
+        return $clone;
+    }
+
+    public function withoutAnchor(): self
+    {
+        $clone = clone $this;
+        unset($clone->anchor);
 
         return $clone;
     }
@@ -371,6 +403,10 @@ class ExtensionListExtensionInstancesRequest
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
+        $anchor = null;
+        if (isset($input->{'anchor'})) {
+            $anchor = $input->{'anchor'};
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -401,6 +437,7 @@ class ExtensionListExtensionInstancesRequest
         $obj->contextId = $contextId;
         $obj->extensionId = $extensionId;
         $obj->searchTerm = $searchTerm;
+        $obj->anchor = $anchor;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -428,6 +465,9 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->anchor)) {
+            $output['anchor'] = $this->anchor;
         }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
@@ -509,6 +549,9 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($mapped['searchTerm'])) {
             $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['anchor'])) {
+            $query['anchor'] = $mapped['anchor'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
