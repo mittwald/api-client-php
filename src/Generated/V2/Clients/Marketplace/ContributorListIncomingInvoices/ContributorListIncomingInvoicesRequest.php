@@ -20,6 +20,9 @@ class ContributorListIncomingInvoicesRequest
             'contributorId' => [
                 'type' => 'string',
             ],
+            'search' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -65,6 +68,8 @@ class ContributorListIncomingInvoicesRequest
 
     private string $contributorId;
 
+    private ?string $search = null;
+
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -97,6 +102,11 @@ class ContributorListIncomingInvoicesRequest
     public function getContributorId(): string
     {
         return $this->contributorId;
+    }
+
+    public function getSearch(): ?string
+    {
+        return $this->search ?? null;
     }
 
     public function getLimit(): ?int
@@ -140,6 +150,28 @@ class ContributorListIncomingInvoicesRequest
 
         $clone = clone $this;
         $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withSearch(string $search): self
+    {
+        $validator = new Validator();
+        $validator->validate($search, self::$internalValidationSchema['properties']['search']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->search = $search;
+
+        return $clone;
+    }
+
+    public function withoutSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->search);
 
         return $clone;
     }
@@ -252,6 +284,10 @@ class ContributorListIncomingInvoicesRequest
         }
 
         $contributorId = $input->{'contributorId'};
+        $search = null;
+        if (isset($input->{'search'})) {
+            $search = $input->{'search'};
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -278,6 +314,7 @@ class ContributorListIncomingInvoicesRequest
         }
 
         $obj = new self($contributorId);
+        $obj->search = $search;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -295,6 +332,9 @@ class ContributorListIncomingInvoicesRequest
     {
         $output = [];
         $output['contributorId'] = $this->contributorId;
+        if (isset($this->search)) {
+            $output['search'] = $this->search;
+        }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
@@ -365,6 +405,9 @@ class ContributorListIncomingInvoicesRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['search'])) {
+            $query['search'] = $mapped['search'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
