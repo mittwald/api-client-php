@@ -86,6 +86,13 @@ class CreateRelocationRequest
                         ],
                         'type' => 'array',
                     ],
+                    'emailInboxes' => [
+                        'description' => 'List of email inboxes which should be transferred.',
+                        'items' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.directus.EmailInbox',
+                        ],
+                        'type' => 'array',
+                    ],
                     'notes' => [
                         'description' => 'Anything our customer service needs to know for the relocation process.',
                         'type' => 'string',
