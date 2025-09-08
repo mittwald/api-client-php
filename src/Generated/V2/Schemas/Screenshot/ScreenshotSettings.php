@@ -33,19 +33,16 @@ class ScreenshotSettings
                 'type' => 'string',
             ],
             'delay' => [
-                'format' => 'int64',
-                'type' => 'integer',
+                'type' => 'number',
             ],
             'height' => [
-                'format' => 'int64',
-                'type' => 'integer',
+                'type' => 'number',
             ],
             'quality' => [
-                'type' => 'integer',
+                'type' => 'number',
             ],
             'width' => [
-                'format' => 'int64',
-                'type' => 'integer',
+                'type' => 'number',
             ],
         ],
         'required' => [
@@ -60,15 +57,15 @@ class ScreenshotSettings
 
     private ScreenshotSettingsDataType $dataType;
 
-    private int $delay;
+    private int|float $delay;
 
-    private int $height;
+    private int|float $height;
 
-    private int $quality;
+    private int|float $quality;
 
-    private int $width;
+    private int|float $width;
 
-    public function __construct(ScreenshotSettingsDataType $dataType, int $delay, int $height, int $quality, int $width)
+    public function __construct(ScreenshotSettingsDataType $dataType, int|float $delay, int|float $height, int|float $quality, int|float $width)
     {
         $this->dataType = $dataType;
         $this->delay = $delay;
@@ -82,22 +79,22 @@ class ScreenshotSettings
         return $this->dataType;
     }
 
-    public function getDelay(): int
+    public function getDelay(): int|float
     {
         return $this->delay;
     }
 
-    public function getHeight(): int
+    public function getHeight(): int|float
     {
         return $this->height;
     }
 
-    public function getQuality(): int
+    public function getQuality(): int|float
     {
         return $this->quality;
     }
 
-    public function getWidth(): int
+    public function getWidth(): int|float
     {
         return $this->width;
     }
@@ -110,7 +107,7 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withDelay(int $delay): self
+    public function withDelay(int|float $delay): self
     {
         $validator = new Validator();
         $validator->validate($delay, self::$internalValidationSchema['properties']['delay']);
@@ -124,7 +121,7 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withHeight(int $height): self
+    public function withHeight(int|float $height): self
     {
         $validator = new Validator();
         $validator->validate($height, self::$internalValidationSchema['properties']['height']);
@@ -138,7 +135,7 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withQuality(int $quality): self
+    public function withQuality(int|float $quality): self
     {
         $validator = new Validator();
         $validator->validate($quality, self::$internalValidationSchema['properties']['quality']);
@@ -152,7 +149,7 @@ class ScreenshotSettings
         return $clone;
     }
 
-    public function withWidth(int $width): self
+    public function withWidth(int|float $width): self
     {
         $validator = new Validator();
         $validator->validate($width, self::$internalValidationSchema['properties']['width']);
@@ -182,10 +179,10 @@ class ScreenshotSettings
         }
 
         $dataType = ScreenshotSettingsDataType::from($input->{'dataType'});
-        $delay = (int)($input->{'delay'});
-        $height = (int)($input->{'height'});
-        $quality = (int)($input->{'quality'});
-        $width = (int)($input->{'width'});
+        $delay = str_contains((string)($input->{'delay'}), '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
+        $height = str_contains((string)($input->{'height'}), '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
+        $quality = str_contains((string)($input->{'quality'}), '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
+        $width = str_contains((string)($input->{'width'}), '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
 
         $obj = new self($dataType, $delay, $height, $quality, $width);
 

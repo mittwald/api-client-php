@@ -109,6 +109,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMail
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxForbiddenResponse;
@@ -729,6 +735,31 @@ class MailClientImpl implements MailClient
             500 => DeleteMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteMailAddressDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Disable a MailAddress Archive.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-disable-mail-archive
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DisableMailArchiveRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function disableMailArchive(DisableMailArchiveRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DisableMailArchiveRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DisableMailArchiveForbiddenResponse::fromResponse($httpResponse),
+            429 => DisableMailArchiveTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DisableMailArchiveInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => DisableMailArchiveServiceUnavailableResponse::fromResponse($httpResponse),
+            default => DisableMailArchiveDefaultResponse::fromResponse($httpResponse),
         });
     }
 

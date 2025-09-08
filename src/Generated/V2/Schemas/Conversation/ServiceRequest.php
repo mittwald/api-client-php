@@ -74,7 +74,6 @@ class ServiceRequest
             'messageContent',
             'createdAt',
             'type',
-            'internal',
             'meta',
         ],
         'type' => 'object',
@@ -89,7 +88,7 @@ class ServiceRequest
      */
     private ?array $files = null;
 
-    private bool $internal;
+    private ?bool $internal = null;
 
     private ServiceRequestMessageContent $messageContent;
 
@@ -99,11 +98,10 @@ class ServiceRequest
 
     private ServiceRequestType $type;
 
-    public function __construct(string $conversationId, DateTime $createdAt, bool $internal, ServiceRequestMessageContent $messageContent, string $messageId, ServiceRequestRelocationPayload $meta, ServiceRequestType $type)
+    public function __construct(string $conversationId, DateTime $createdAt, ServiceRequestMessageContent $messageContent, string $messageId, ServiceRequestRelocationPayload $meta, ServiceRequestType $type)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
-        $this->internal = $internal;
         $this->messageContent = $messageContent;
         $this->messageId = $messageId;
         $this->meta = $meta;
@@ -128,9 +126,9 @@ class ServiceRequest
         return $this->files ?? null;
     }
 
-    public function getInternal(): bool
+    public function getInternal(): ?bool
     {
-        return $this->internal;
+        return $this->internal ?? null;
     }
 
     public function getMessageContent(): ServiceRequestMessageContent
@@ -208,6 +206,14 @@ class ServiceRequest
         return $clone;
     }
 
+    public function withoutInternal(): self
+    {
+        $clone = clone $this;
+        unset($clone->internal);
+
+        return $clone;
+    }
+
     public function withMessageContent(ServiceRequestMessageContent $messageContent): self
     {
         $clone = clone $this;
@@ -272,7 +278,10 @@ class ServiceRequest
                 DeletedFile::validateInput($i, true) => DeletedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $internal = (bool)($input->{'internal'});
+        $internal = null;
+        if (isset($input->{'internal'})) {
+            $internal = (bool)($input->{'internal'});
+        }
         $messageContent = ServiceRequestMessageContent::from($input->{'messageContent'});
         $messageId = $input->{'messageId'};
         $meta = match (true) {
@@ -281,8 +290,9 @@ class ServiceRequest
         };
         $type = ServiceRequestType::from($input->{'type'});
 
-        $obj = new self($conversationId, $createdAt, $internal, $messageContent, $messageId, $meta, $type);
+        $obj = new self($conversationId, $createdAt, $messageContent, $messageId, $meta, $type);
         $obj->files = $files;
+        $obj->internal = $internal;
         return $obj;
     }
 
@@ -302,7 +312,9 @@ class ServiceRequest
                 ($i) instanceof RequestedFile, ($i) instanceof UploadedFile, ($i) instanceof DeletedFile => $i->toJson(),
             }, $this->files);
         }
-        $output['internal'] = $this->internal;
+        if (isset($this->internal)) {
+            $output['internal'] = $this->internal;
+        }
         $output['messageContent'] = ($this->messageContent)->value;
         $output['messageId'] = $this->messageId;
         $output['meta'] = match (true) {
