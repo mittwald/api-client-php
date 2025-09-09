@@ -30,6 +30,7 @@ class DetailCompany
             'websiteType',
             'companyType',
             'city',
+            'phoneNumbers',
         ],
         'properties' => [
             'county' => [
@@ -63,6 +64,15 @@ class DetailCompany
             ],
             'name' => [
                 'type' => 'string',
+            ],
+            'phoneNumbers' => [
+                'default' => [
+
+                ],
+                'items' => [
+                    'type' => 'string',
+                ],
+                'type' => 'array',
             ],
             'targetGroup' => [
                 'items' => [
@@ -100,6 +110,13 @@ class DetailCompany
     private array $coreProduct;
 
     private ?string $name = null;
+
+    /**
+     * @var string[]
+     */
+    private array $phoneNumbers = [
+
+    ];
 
     /**
      * @var string[]
@@ -171,6 +188,14 @@ class DetailCompany
     public function getName(): ?string
     {
         return $this->name ?? null;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPhoneNumbers(): array
+    {
+        return $this->phoneNumbers;
     }
 
     /**
@@ -340,6 +365,23 @@ class DetailCompany
     }
 
     /**
+     * @param string[] $phoneNumbers
+     */
+    public function withPhoneNumbers(array $phoneNumbers): self
+    {
+        $validator = new Validator();
+        $validator->validate($phoneNumbers, self::$internalValidationSchema['properties']['phoneNumbers']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->phoneNumbers = $phoneNumbers;
+
+        return $clone;
+    }
+
+    /**
      * @param string[] $targetGroup
      */
     public function withTargetGroup(array $targetGroup): self
@@ -408,6 +450,12 @@ class DetailCompany
         if (isset($input->{'name'})) {
             $name = $input->{'name'};
         }
+        $phoneNumbers = [
+
+            ];
+        if (isset($input->{'phoneNumbers'})) {
+            $phoneNumbers = $input->{'phoneNumbers'};
+        }
         $targetGroup = $input->{'targetGroup'};
         $websiteType = $input->{'websiteType'};
 
@@ -416,6 +464,7 @@ class DetailCompany
         $obj->foundingYear = $foundingYear;
         $obj->salesVolume = $salesVolume;
         $obj->name = $name;
+        $obj->phoneNumbers = $phoneNumbers;
         return $obj;
     }
 
@@ -443,6 +492,7 @@ class DetailCompany
         if (isset($this->name)) {
             $output['name'] = $this->name;
         }
+        $output['phoneNumbers'] = $this->phoneNumbers;
         $output['targetGroup'] = $this->targetGroup;
         $output['websiteType'] = $this->websiteType;
 
