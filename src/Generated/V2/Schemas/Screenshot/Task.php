@@ -38,7 +38,7 @@ class Task
                 'type' => 'string',
             ],
             'priority' => [
-                'type' => 'number',
+                'type' => 'integer',
             ],
             'settings' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.screenshot.ScreenshotSettings',
@@ -72,7 +72,7 @@ class Task
 
     private string $id;
 
-    private int|float $priority;
+    private int $priority;
 
     private ScreenshotSettings $settings;
 
@@ -80,7 +80,7 @@ class Task
 
     private string|Error|null $taskState = null;
 
-    public function __construct(string $id, int|float $priority, ScreenshotSettings $settings, Target $target)
+    public function __construct(string $id, int $priority, ScreenshotSettings $settings, Target $target)
     {
         $this->id = $id;
         $this->priority = $priority;
@@ -103,7 +103,7 @@ class Task
         return $this->id;
     }
 
-    public function getPriority(): int|float
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -175,7 +175,7 @@ class Task
         return $clone;
     }
 
-    public function withPriority(int|float $priority): self
+    public function withPriority(int $priority): self
     {
         $validator = new Validator();
         $validator->validate($priority, self::$internalValidationSchema['properties']['priority']);
@@ -245,7 +245,7 @@ class Task
             $fileReference = $input->{'fileReference'};
         }
         $id = $input->{'id'};
-        $priority = str_contains((string)($input->{'priority'}), '.') ? (float)($input->{'priority'}) : (int)($input->{'priority'});
+        $priority = (int)($input->{'priority'});
         $settings = ScreenshotSettings::buildFromInput($input->{'settings'}, validate: $validate);
         $target = Target::buildFromInput($input->{'target'}, validate: $validate);
         $taskState = null;
