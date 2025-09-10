@@ -36,6 +36,11 @@ class ExtensionOrderExtensionRequest
                                 'format' => 'uuid',
                                 'type' => 'string',
                             ],
+                            'variantKey' => [
+                                'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
+                                'example' => 'default',
+                                'type' => 'string',
+                            ],
                         ],
                         'required' => [
                             'consentedScopes',
@@ -54,6 +59,11 @@ class ExtensionOrderExtensionRequest
                             'projectId' => [
                                 'description' => 'The project the extension should be installed in. Either customerId or projectId is required.',
                                 'format' => 'uuid',
+                                'type' => 'string',
+                            ],
+                            'variantKey' => [
+                                'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
+                                'example' => 'default',
                                 'type' => 'string',
                             ],
                         ],

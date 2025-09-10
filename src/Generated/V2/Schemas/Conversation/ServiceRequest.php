@@ -40,9 +40,6 @@ class ServiceRequest
                 'maxItems' => 0,
                 'type' => 'array',
             ],
-            'internal' => [
-                'type' => 'boolean',
-            ],
             'messageContent' => [
                 'enum' => [
                     'relocation',
@@ -88,8 +85,6 @@ class ServiceRequest
      */
     private ?array $files = null;
 
-    private ?bool $internal = null;
-
     private ServiceRequestMessageContent $messageContent;
 
     private string $messageId;
@@ -124,11 +119,6 @@ class ServiceRequest
     public function getFiles(): ?array
     {
         return $this->files ?? null;
-    }
-
-    public function getInternal(): ?bool
-    {
-        return $this->internal ?? null;
     }
 
     public function getMessageContent(): ServiceRequestMessageContent
@@ -188,28 +178,6 @@ class ServiceRequest
     {
         $clone = clone $this;
         unset($clone->files);
-
-        return $clone;
-    }
-
-    public function withInternal(bool $internal): self
-    {
-        $validator = new Validator();
-        $validator->validate($internal, self::$internalValidationSchema['properties']['internal']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->internal = $internal;
-
-        return $clone;
-    }
-
-    public function withoutInternal(): self
-    {
-        $clone = clone $this;
-        unset($clone->internal);
 
         return $clone;
     }
@@ -278,10 +246,6 @@ class ServiceRequest
                 DeletedFile::validateInput($i, true) => DeletedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $internal = null;
-        if (isset($input->{'internal'})) {
-            $internal = (bool)($input->{'internal'});
-        }
         $messageContent = ServiceRequestMessageContent::from($input->{'messageContent'});
         $messageId = $input->{'messageId'};
         $meta = match (true) {
@@ -292,7 +256,6 @@ class ServiceRequest
 
         $obj = new self($conversationId, $createdAt, $messageContent, $messageId, $meta, $type);
         $obj->files = $files;
-        $obj->internal = $internal;
         return $obj;
     }
 
@@ -311,9 +274,6 @@ class ServiceRequest
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 ($i) instanceof RequestedFile, ($i) instanceof UploadedFile, ($i) instanceof DeletedFile => $i->toJson(),
             }, $this->files);
-        }
-        if (isset($this->internal)) {
-            $output['internal'] = $this->internal;
         }
         $output['messageContent'] = ($this->messageContent)->value;
         $output['messageId'] = $this->messageId;

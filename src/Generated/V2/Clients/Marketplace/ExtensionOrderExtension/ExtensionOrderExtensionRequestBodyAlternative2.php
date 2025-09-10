@@ -25,6 +25,11 @@ class ExtensionOrderExtensionRequestBodyAlternative2
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'variantKey' => [
+                'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
+                'example' => 'default',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'consentedScopes',
@@ -42,6 +47,11 @@ class ExtensionOrderExtensionRequestBodyAlternative2
      * The project the extension should be installed in. Either customerId or projectId is required.
      */
     private string $projectId;
+
+    /**
+     * The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.
+     */
+    private ?string $variantKey = null;
 
     /**
      * @param string[] $consentedScopes
@@ -63,6 +73,11 @@ class ExtensionOrderExtensionRequestBodyAlternative2
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getVariantKey(): ?string
+    {
+        return $this->variantKey ?? null;
     }
 
     /**
@@ -96,6 +111,28 @@ class ExtensionOrderExtensionRequestBodyAlternative2
         return $clone;
     }
 
+    public function withVariantKey(string $variantKey): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantKey = $variantKey;
+
+        return $clone;
+    }
+
+    public function withoutVariantKey(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantKey);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -113,9 +150,13 @@ class ExtensionOrderExtensionRequestBodyAlternative2
 
         $consentedScopes = $input->{'consentedScopes'};
         $projectId = $input->{'projectId'};
+        $variantKey = null;
+        if (isset($input->{'variantKey'})) {
+            $variantKey = $input->{'variantKey'};
+        }
 
         $obj = new self($consentedScopes, $projectId);
-
+        $obj->variantKey = $variantKey;
         return $obj;
     }
 
@@ -129,6 +170,9 @@ class ExtensionOrderExtensionRequestBodyAlternative2
         $output = [];
         $output['consentedScopes'] = $this->consentedScopes;
         $output['projectId'] = $this->projectId;
+        if (isset($this->variantKey)) {
+            $output['variantKey'] = $this->variantKey;
+        }
 
         return $output;
     }
