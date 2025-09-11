@@ -32,6 +32,11 @@ class ContainerImageConfig
                 ],
                 'type' => 'array',
             ],
+            'digest' => [
+                'description' => 'The image digest.',
+                'example' => 'sha256:216aab5860821ba2eecad636722a6891e40a81791fbb61e2bd49bfc5aeeacdca',
+                'type' => 'string',
+            ],
             'entrypoint' => [
                 'description' => 'Entrypoint of the container image.',
                 'items' => [
@@ -99,6 +104,7 @@ class ContainerImageConfig
             'isUserRoot',
             'hasAiGeneratedData',
             'isAiAvailable',
+            'digest',
         ],
         'type' => 'object',
     ];
@@ -109,6 +115,11 @@ class ContainerImageConfig
      * @var string[]|null
      */
     private ?array $command = null;
+
+    /**
+     * The image digest.
+     */
+    private string $digest;
 
     /**
      * Entrypoint of the container image.
@@ -170,8 +181,9 @@ class ContainerImageConfig
      */
     private ?array $volumes = null;
 
-    public function __construct(bool $hasAiGeneratedData, bool $isAiAvailable, bool $isUserRoot, string $user, int $userId)
+    public function __construct(string $digest, bool $hasAiGeneratedData, bool $isAiAvailable, bool $isUserRoot, string $user, int $userId)
     {
+        $this->digest = $digest;
         $this->hasAiGeneratedData = $hasAiGeneratedData;
         $this->isAiAvailable = $isAiAvailable;
         $this->isUserRoot = $isUserRoot;
@@ -185,6 +197,11 @@ class ContainerImageConfig
     public function getCommand(): ?array
     {
         return $this->command ?? null;
+    }
+
+    public function getDigest(): string
+    {
+        return $this->digest;
     }
 
     /**
@@ -273,6 +290,20 @@ class ContainerImageConfig
     {
         $clone = clone $this;
         unset($clone->command);
+
+        return $clone;
+    }
+
+    public function withDigest(string $digest): self
+    {
+        $validator = new Validator();
+        $validator->validate($digest, self::$internalValidationSchema['properties']['digest']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->digest = $digest;
 
         return $clone;
     }
@@ -473,6 +504,7 @@ class ContainerImageConfig
         if (isset($input->{'command'})) {
             $command = $input->{'command'};
         }
+        $digest = $input->{'digest'};
         $entrypoint = null;
         if (isset($input->{'entrypoint'})) {
             $entrypoint = $input->{'entrypoint'};
@@ -499,7 +531,7 @@ class ContainerImageConfig
             $volumes = array_map(fn (array|object $i): ContainerImageConfigVolume => ContainerImageConfigVolume::buildFromInput($i, validate: $validate), $input->{'volumes'});
         }
 
-        $obj = new self($hasAiGeneratedData, $isAiAvailable, $isUserRoot, $user, $userId);
+        $obj = new self($digest, $hasAiGeneratedData, $isAiAvailable, $isUserRoot, $user, $userId);
         $obj->command = $command;
         $obj->entrypoint = $entrypoint;
         $obj->env = $env;
@@ -520,6 +552,7 @@ class ContainerImageConfig
         if (isset($this->command)) {
             $output['command'] = $this->command;
         }
+        $output['digest'] = $this->digest;
         if (isset($this->entrypoint)) {
             $output['entrypoint'] = $this->entrypoint;
         }

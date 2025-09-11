@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\Licence;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
+class DisableMailArchiveTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +21,36 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.Licence',
+                'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private Licence $body;
+    private DisableMailArchiveTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Licence $body)
+    public function __construct(DisableMailArchiveTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Licence
+    public function getBody(): DisableMailArchiveTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(Licence $body): self
+    public function withBody(DisableMailArchiveTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +63,17 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateLlmLicenceExperimentalOKResponse Created instance
+     * @return DisableMailArchiveTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateLlmLicenceExperimentalOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DisableMailArchiveTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Licence::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DisableMailArchiveTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +88,7 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +119,7 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

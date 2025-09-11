@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimen
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Llmlocksmith\Licence;
+use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\Licence;
 use Psr\Http\Message\ResponseInterface;
 
 class GetLlmLicenceExperimentalOKResponse implements ResponseContainer
@@ -22,7 +22,7 @@ class GetLlmLicenceExperimentalOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.llmlocksmith.Licence',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.Licence',
             ],
         ],
     ];

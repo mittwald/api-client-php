@@ -18,7 +18,6 @@ class ContributorGetCustomerBillingPortalLinkRequest
         'type' => 'object',
         'properties' => [
             'customerId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

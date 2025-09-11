@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ContributorGetBillingInformationRequest
+class DisableMailArchiveRequest
 {
-    public const method = 'get';
+    public const method = 'delete';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,41 +17,42 @@ class ContributorGetBillingInformationRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'contributorId' => [
+            'mailAddressId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'contributorId',
+            'mailAddressId',
         ],
     ];
 
-    private string $contributorId;
+    private string $mailAddressId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $contributorId)
+    public function __construct(string $mailAddressId)
     {
-        $this->contributorId = $contributorId;
+        $this->mailAddressId = $mailAddressId;
     }
 
-    public function getContributorId(): string
+    public function getMailAddressId(): string
     {
-        return $this->contributorId;
+        return $this->mailAddressId;
     }
 
-    public function withContributorId(string $contributorId): self
+    public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
+        $validator->validate($mailAddressId, self::$internalValidationSchema['properties']['mailAddressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->contributorId = $contributorId;
+        $clone->mailAddressId = $mailAddressId;
 
         return $clone;
     }
@@ -61,19 +62,19 @@ class ContributorGetBillingInformationRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ContributorGetBillingInformationRequest Created instance
+     * @return DisableMailArchiveRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ContributorGetBillingInformationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DisableMailArchiveRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $contributorId = $input->{'contributorId'};
+        $mailAddressId = $input->{'mailAddressId'};
 
-        $obj = new self($contributorId);
+        $obj = new self($mailAddressId);
 
         return $obj;
     }
@@ -86,7 +87,7 @@ class ContributorGetBillingInformationRequest
     public function toJson(): array
     {
         $output = [];
-        $output['contributorId'] = $this->contributorId;
+        $output['mailAddressId'] = $this->mailAddressId;
 
         return $output;
     }
@@ -131,8 +132,8 @@ class ContributorGetBillingInformationRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $contributorId = urlencode($mapped['contributorId']);
-        return '/v2/contributors/' . $contributorId . '/billing-information';
+        $mailAddressId = urlencode($mapped['mailAddressId']);
+        return '/v2/mail-addresses/' . $mailAddressId . '/mail-archive';
     }
 
     /**

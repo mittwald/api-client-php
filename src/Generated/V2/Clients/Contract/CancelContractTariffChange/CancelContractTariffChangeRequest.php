@@ -18,7 +18,6 @@ class CancelContractTariffChangeRequest
         'type' => 'object',
         'properties' => [
             'contractId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'contractItemId' => [

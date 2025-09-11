@@ -18,7 +18,6 @@ class CustomerUpdatePaymentMethodRequest
         'type' => 'object',
         'properties' => [
             'customerId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
