@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\Licence;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
+class DisableMailArchiveBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.Licence',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
-    private Licence $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Licence $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Licence
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
-    public function withBody(Licence $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class UpdateLlmLicenceExperimentalOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateLlmLicenceExperimentalOKResponse Created instance
+     * @return DisableMailArchiveBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateLlmLicenceExperimentalOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DisableMailArchiveBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Licence::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

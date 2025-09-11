@@ -18,7 +18,6 @@ class GetDetailOfContractByDomainRequest
         'type' => 'object',
         'properties' => [
             'domainId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

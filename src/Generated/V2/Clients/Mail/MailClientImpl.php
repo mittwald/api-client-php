@@ -109,9 +109,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMail
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveTooManyRequestsResponse;
@@ -739,13 +741,13 @@ class MailClientImpl implements MailClient
     }
 
     /**
-     * Disable a MailAddress Archive.
+     * Disable the mail-archive of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-disable-mail-archive
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DisableMailArchiveRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function disableMailArchive(DisableMailArchiveRequest $request): EmptyResponse
     {
@@ -755,7 +757,9 @@ class MailClientImpl implements MailClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DisableMailArchiveBadRequestResponse::fromResponse($httpResponse),
             403 => DisableMailArchiveForbiddenResponse::fromResponse($httpResponse),
+            404 => DisableMailArchiveNotFoundResponse::fromResponse($httpResponse),
             429 => DisableMailArchiveTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DisableMailArchiveInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DisableMailArchiveServiceUnavailableResponse::fromResponse($httpResponse),

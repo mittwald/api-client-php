@@ -17,42 +17,42 @@ class DisableMailArchiveRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'mailArchiveId' => [
+            'mailAddressId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'mailArchiveId',
+            'mailAddressId',
         ],
     ];
 
-    private string $mailArchiveId;
+    private string $mailAddressId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mailArchiveId)
+    public function __construct(string $mailAddressId)
     {
-        $this->mailArchiveId = $mailArchiveId;
+        $this->mailAddressId = $mailAddressId;
     }
 
-    public function getMailArchiveId(): string
+    public function getMailAddressId(): string
     {
-        return $this->mailArchiveId;
+        return $this->mailAddressId;
     }
 
-    public function withMailArchiveId(string $mailArchiveId): self
+    public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
-        $validator->validate($mailArchiveId, self::$internalValidationSchema['properties']['mailArchiveId']);
+        $validator->validate($mailAddressId, self::$internalValidationSchema['properties']['mailAddressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->mailArchiveId = $mailArchiveId;
+        $clone->mailAddressId = $mailAddressId;
 
         return $clone;
     }
@@ -72,9 +72,9 @@ class DisableMailArchiveRequest
             static::validateInput($input);
         }
 
-        $mailArchiveId = $input->{'mailArchiveId'};
+        $mailAddressId = $input->{'mailAddressId'};
 
-        $obj = new self($mailArchiveId);
+        $obj = new self($mailAddressId);
 
         return $obj;
     }
@@ -87,7 +87,7 @@ class DisableMailArchiveRequest
     public function toJson(): array
     {
         $output = [];
-        $output['mailArchiveId'] = $this->mailArchiveId;
+        $output['mailAddressId'] = $this->mailAddressId;
 
         return $output;
     }
@@ -132,8 +132,8 @@ class DisableMailArchiveRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $mailArchiveId = urlencode($mapped['mailArchiveId']);
-        return '/v2/mail-archive/' . $mailArchiveId;
+        $mailAddressId = urlencode($mapped['mailAddressId']);
+        return '/v2/mail-addresses/' . $mailAddressId . '/mail-archive';
     }
 
     /**

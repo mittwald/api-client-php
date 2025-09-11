@@ -18,7 +18,6 @@ class ListContractsRequest
         'type' => 'object',
         'properties' => [
             'customerId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'limit' => [

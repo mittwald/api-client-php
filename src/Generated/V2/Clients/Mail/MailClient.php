@@ -268,13 +268,13 @@ interface MailClient
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse;
     /**
-     * Disable a MailAddress Archive.
+     * Disable the mail-archive of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-disable-mail-archive
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DisableMailArchiveRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function disableMailArchive(DisableMailArchiveRequest $request): EmptyResponse;
     /**

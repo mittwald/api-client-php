@@ -11,4 +11,5 @@ enum Phase: string
     case upgrading = 'upgrading';
     case ready = 'ready';
     case disabled = 'disabled';
+    case reconfiguring = 'reconfiguring';
 }

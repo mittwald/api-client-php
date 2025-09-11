@@ -32,13 +32,16 @@ class MailAddress
             'archive' => [
                 'properties' => [
                     'active' => [
+                        'description' => 'shows if the mail-archive is enabled',
                         'type' => 'boolean',
                     ],
                     'quota' => [
+                        'description' => 'maximum available mail-archive storage in bytes',
                         'format' => 'int64',
                         'type' => 'integer',
                     ],
                     'usedBytes' => [
+                        'description' => 'current mail-archive usage in bytes',
                         'format' => 'int64',
                         'type' => 'integer',
                     ],
