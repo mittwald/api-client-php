@@ -32,6 +32,9 @@ class ExtensionCreateExtensionInstanceRequestBody
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'variantKey' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'extensionId',
@@ -52,6 +55,8 @@ class ExtensionCreateExtensionInstanceRequestBody
     private string $contextId;
 
     private string $extensionId;
+
+    private ?string $variantKey = null;
 
     /**
      * @param string[] $consentedScopes
@@ -85,6 +90,11 @@ class ExtensionCreateExtensionInstanceRequestBody
     public function getExtensionId(): string
     {
         return $this->extensionId;
+    }
+
+    public function getVariantKey(): ?string
+    {
+        return $this->variantKey ?? null;
     }
 
     /**
@@ -140,6 +150,28 @@ class ExtensionCreateExtensionInstanceRequestBody
         return $clone;
     }
 
+    public function withVariantKey(string $variantKey): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantKey = $variantKey;
+
+        return $clone;
+    }
+
+    public function withoutVariantKey(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantKey);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -159,9 +191,13 @@ class ExtensionCreateExtensionInstanceRequestBody
         $context = Context::from($input->{'context'});
         $contextId = $input->{'contextId'};
         $extensionId = $input->{'extensionId'};
+        $variantKey = null;
+        if (isset($input->{'variantKey'})) {
+            $variantKey = $input->{'variantKey'};
+        }
 
         $obj = new self($consentedScopes, $context, $contextId, $extensionId);
-
+        $obj->variantKey = $variantKey;
         return $obj;
     }
 
@@ -177,6 +213,9 @@ class ExtensionCreateExtensionInstanceRequestBody
         $output['context'] = $this->context->value;
         $output['contextId'] = $this->contextId;
         $output['extensionId'] = $this->extensionId;
+        if (isset($this->variantKey)) {
+            $output['variantKey'] = $this->variantKey;
+        }
 
         return $output;
     }

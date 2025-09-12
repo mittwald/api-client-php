@@ -18,7 +18,6 @@ class OrderGetOrderRequest
         'type' => 'object',
         'properties' => [
             'orderId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

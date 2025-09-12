@@ -18,7 +18,6 @@ class ContributorUpdateBillingInformationRequest
         'type' => 'object',
         'properties' => [
             'contributorId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

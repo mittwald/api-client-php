@@ -22,7 +22,6 @@ class ExtensionUpdateExtensionPricingRequest
                 'type' => 'string',
             ],
             'contributorId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

@@ -18,7 +18,6 @@ class ContributorGetLoginLinkRequest
         'type' => 'object',
         'properties' => [
             'contributorId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

@@ -18,6 +18,7 @@ class GetDetailOfContractByProjectRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

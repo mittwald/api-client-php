@@ -18,7 +18,6 @@ class ContributorListOnbehalfInvoicesRequest
         'type' => 'object',
         'properties' => [
             'contributorId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

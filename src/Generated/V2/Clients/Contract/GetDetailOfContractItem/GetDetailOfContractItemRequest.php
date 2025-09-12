@@ -18,6 +18,7 @@ class GetDetailOfContractItemRequest
         'type' => 'object',
         'properties' => [
             'contractId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'contractItemId' => [
