@@ -28,7 +28,7 @@ class MailArchiveOrderPreview
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'useCurrentData' => [
+            'syncExistingMails' => [
                 'type' => 'boolean',
             ],
         ],
@@ -40,7 +40,7 @@ class MailArchiveOrderPreview
 
     private string $mailAddressId;
 
-    private ?bool $useCurrentData = null;
+    private ?bool $syncExistingMails = null;
 
     public function __construct(string $mailAddressId)
     {
@@ -52,9 +52,9 @@ class MailArchiveOrderPreview
         return $this->mailAddressId;
     }
 
-    public function getUseCurrentData(): ?bool
+    public function getSyncExistingMails(): ?bool
     {
-        return $this->useCurrentData ?? null;
+        return $this->syncExistingMails ?? null;
     }
 
     public function withMailAddressId(string $mailAddressId): self
@@ -71,24 +71,24 @@ class MailArchiveOrderPreview
         return $clone;
     }
 
-    public function withUseCurrentData(bool $useCurrentData): self
+    public function withSyncExistingMails(bool $syncExistingMails): self
     {
         $validator = new Validator();
-        $validator->validate($useCurrentData, self::$internalValidationSchema['properties']['useCurrentData']);
+        $validator->validate($syncExistingMails, self::$internalValidationSchema['properties']['syncExistingMails']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->useCurrentData = $useCurrentData;
+        $clone->syncExistingMails = $syncExistingMails;
 
         return $clone;
     }
 
-    public function withoutUseCurrentData(): self
+    public function withoutSyncExistingMails(): self
     {
         $clone = clone $this;
-        unset($clone->useCurrentData);
+        unset($clone->syncExistingMails);
 
         return $clone;
     }
@@ -109,13 +109,13 @@ class MailArchiveOrderPreview
         }
 
         $mailAddressId = $input->{'mailAddressId'};
-        $useCurrentData = null;
-        if (isset($input->{'useCurrentData'})) {
-            $useCurrentData = (bool)($input->{'useCurrentData'});
+        $syncExistingMails = null;
+        if (isset($input->{'syncExistingMails'})) {
+            $syncExistingMails = (bool)($input->{'syncExistingMails'});
         }
 
         $obj = new self($mailAddressId);
-        $obj->useCurrentData = $useCurrentData;
+        $obj->syncExistingMails = $syncExistingMails;
         return $obj;
     }
 
@@ -128,8 +128,8 @@ class MailArchiveOrderPreview
     {
         $output = [];
         $output['mailAddressId'] = $this->mailAddressId;
-        if (isset($this->useCurrentData)) {
-            $output['useCurrentData'] = $this->useCurrentData;
+        if (isset($this->syncExistingMails)) {
+            $output['syncExistingMails'] = $this->syncExistingMails;
         }
 
         return $output;

@@ -18,7 +18,6 @@ class InvoiceDetailRequest
         'type' => 'object',
         'properties' => [
             'invoiceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

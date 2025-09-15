@@ -135,6 +135,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreat
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeDefaultResponse;
@@ -746,6 +747,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateOrderBadRequestResponse::fromResponse($httpResponse),
+            422 => OrderCreateOrderUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => OrderCreateOrderTooManyRequestsResponse::fromResponse($httpResponse),
             default => OrderCreateOrderDefaultResponse::fromResponse($httpResponse),
         });
