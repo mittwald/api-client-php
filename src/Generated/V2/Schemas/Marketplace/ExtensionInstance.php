@@ -96,6 +96,10 @@ class ExtensionInstance
                 'default' => false,
                 'type' => 'boolean',
             ],
+            'variantKey' => [
+                'example' => 'default',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -145,6 +149,8 @@ class ExtensionInstance
     private bool $pendingInstallation = false;
 
     private bool $pendingRemoval = false;
+
+    private ?string $variantKey = null;
 
     /**
      * @param string[] $consentedScopes
@@ -234,6 +240,11 @@ class ExtensionInstance
     public function getPendingRemoval(): bool
     {
         return $this->pendingRemoval;
+    }
+
+    public function getVariantKey(): ?string
+    {
+        return $this->variantKey ?? null;
     }
 
     public function withAggregateReference(ExtensionInstanceAggregateReference $aggregateReference): self
@@ -446,6 +457,28 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withVariantKey(string $variantKey): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantKey = $variantKey;
+
+        return $clone;
+    }
+
+    public function withoutVariantKey(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantKey);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -496,6 +529,10 @@ class ExtensionInstance
         if (isset($input->{'pendingRemoval'})) {
             $pendingRemoval = (bool)($input->{'pendingRemoval'});
         }
+        $variantKey = null;
+        if (isset($input->{'variantKey'})) {
+            $variantKey = $input->{'variantKey'};
+        }
 
         $obj = new self($aggregateReference, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
         $obj->chargeability = $chargeability;
@@ -505,6 +542,7 @@ class ExtensionInstance
         $obj->frontendFragments = $frontendFragments;
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
+        $obj->variantKey = $variantKey;
         return $obj;
     }
 
@@ -538,6 +576,9 @@ class ExtensionInstance
         $output['id'] = $this->id;
         $output['pendingInstallation'] = $this->pendingInstallation;
         $output['pendingRemoval'] = $this->pendingRemoval;
+        if (isset($this->variantKey)) {
+            $output['variantKey'] = $this->variantKey;
+        }
 
         return $output;
     }

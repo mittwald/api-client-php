@@ -19,7 +19,6 @@ class OrderListProjectOrdersRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'limit' => [

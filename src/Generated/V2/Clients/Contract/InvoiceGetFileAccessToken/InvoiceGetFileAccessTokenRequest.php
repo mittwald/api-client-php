@@ -21,7 +21,6 @@ class InvoiceGetFileAccessTokenRequest
                 'type' => 'string',
             ],
             'invoiceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

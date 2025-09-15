@@ -36,6 +36,9 @@ class ExtensionCreateExtensionInstanceRequest
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'variantKey' => [
+                        'type' => 'string',
+                    ],
                 ],
                 'required' => [
                     'extensionId',

@@ -11,4 +11,5 @@ enum OrderCreateOrderRequestBodyOrderType: string
     case server = 'server';
     case externalCertificate = 'externalCertificate';
     case leadFyndr = 'leadFyndr';
+    case mailArchive = 'mailArchive';
 }

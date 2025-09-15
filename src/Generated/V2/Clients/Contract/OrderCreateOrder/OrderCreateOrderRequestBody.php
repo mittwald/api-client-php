@@ -9,6 +9,7 @@ use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\LeadFyndrOrder;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\MailArchiveOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder;
 
@@ -36,6 +37,9 @@ class OrderCreateOrderRequestBody
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrder',
+                    ],
                 ],
             ],
             'orderType' => [
@@ -45,6 +49,7 @@ class OrderCreateOrderRequestBody
                     'server',
                     'externalCertificate',
                     'leadFyndr',
+                    'mailArchive',
                 ],
                 'example' => 'projectHosting',
                 'type' => 'string',
@@ -53,7 +58,7 @@ class OrderCreateOrderRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingOrder|ServerOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|null $orderData = null;
+    private ProjectHostingOrder|ServerOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|null $orderData = null;
 
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
 
@@ -64,7 +69,7 @@ class OrderCreateOrderRequestBody
     {
     }
 
-    public function getOrderData(): DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|ProjectHostingOrder|ServerOrder|null
+    public function getOrderData(): DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null
     {
         return $this->orderData;
     }
@@ -74,7 +79,7 @@ class OrderCreateOrderRequestBody
         return $this->orderType ?? null;
     }
 
-    public function withOrderData(DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|ProjectHostingOrder|ServerOrder $orderData): self
+    public function withOrderData(DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -129,6 +134,7 @@ class OrderCreateOrderRequestBody
                 DomainOrder::validateInput($input->{'orderData'}, true) => DomainOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 ExternalCertificateOrder::validateInput($input->{'orderData'}, true) => ExternalCertificateOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 LeadFyndrOrder::validateInput($input->{'orderData'}, true) => LeadFyndrOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                MailArchiveOrder::validateInput($input->{'orderData'}, true) => MailArchiveOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'orderData' from JSON"),
             };
         }
@@ -153,7 +159,7 @@ class OrderCreateOrderRequestBody
         $output = [];
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder => $this->orderData->toJson(),
+                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder, ($this->orderData) instanceof MailArchiveOrder => $this->orderData->toJson(),
             };
         }
         if (isset($this->orderType)) {
@@ -191,7 +197,7 @@ class OrderCreateOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder, ($this->orderData) instanceof MailArchiveOrder => $this->orderData,
             };
         }
     }
