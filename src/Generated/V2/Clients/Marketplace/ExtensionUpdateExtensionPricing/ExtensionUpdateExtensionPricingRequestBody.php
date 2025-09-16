@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExt
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionUpdateExtensionPricingRequestBodyAlternative1
+class ExtensionUpdateExtensionPricingRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -24,9 +24,6 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
                 'type' => 'number',
             ],
         ],
-        'required' => [
-            'priceInCents',
-        ],
         'type' => 'object',
     ];
 
@@ -38,11 +35,13 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
     /**
      * Price in cents.
      */
-    private int|float $priceInCents;
+    private int|float|null $priceInCents = null;
 
-    public function __construct(int|float $priceInCents)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->priceInCents = $priceInCents;
     }
 
     public function getDryRun(): bool
@@ -50,7 +49,7 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
         return $this->dryRun;
     }
 
-    public function getPriceInCents(): int|float
+    public function getPriceInCents(): int|float|null
     {
         return $this->priceInCents;
     }
@@ -83,15 +82,23 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
         return $clone;
     }
 
+    public function withoutPriceInCents(): self
+    {
+        $clone = clone $this;
+        unset($clone->priceInCents);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionPricingRequestBodyAlternative1 Created instance
+     * @return ExtensionUpdateExtensionPricingRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBodyAlternative1
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -102,10 +109,14 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
         if (isset($input->{'dryRun'})) {
             $dryRun = (bool)($input->{'dryRun'});
         }
-        $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
+        $priceInCents = null;
+        if (isset($input->{'priceInCents'})) {
+            $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
+        }
 
-        $obj = new self($priceInCents);
+        $obj = new self();
         $obj->dryRun = $dryRun;
+        $obj->priceInCents = $priceInCents;
         return $obj;
     }
 
@@ -118,7 +129,9 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative1
     {
         $output = [];
         $output['dryRun'] = $this->dryRun;
-        $output['priceInCents'] = $this->priceInCents;
+        if (isset($this->priceInCents)) {
+            $output['priceInCents'] = $this->priceInCents;
+        }
 
         return $output;
     }

@@ -18,16 +18,31 @@ class ExtensionListContributorsRequest
         'type' => 'object',
         'properties' => [
             'limit' => [
-                'default' => 1000,
                 'type' => 'integer',
+                'minimum' => 1,
             ],
             'skip' => [
-                'default' => 0,
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
-                'default' => 1,
                 'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'name',
+                ],
+                'default' => 'name',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'asc',
             ],
         ],
         'required' => [
@@ -35,11 +50,15 @@ class ExtensionListContributorsRequest
         ],
     ];
 
-    private int $limit = 1000;
+    private ?int $limit = null;
 
     private int $skip = 0;
 
-    private int $page = 1;
+    private ?int $page = null;
+
+    private ExtensionListContributorsRequestSort $sort = ExtensionListContributorsRequestSort::name;
+
+    private ExtensionListContributorsRequestOrder $order = ExtensionListContributorsRequestOrder::asc;
 
     private array $headers = [
 
@@ -52,9 +71,9 @@ class ExtensionListContributorsRequest
     {
     }
 
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
-        return $this->limit;
+        return $this->limit ?? null;
     }
 
     public function getSkip(): int
@@ -62,9 +81,19 @@ class ExtensionListContributorsRequest
         return $this->skip;
     }
 
-    public function getPage(): int
+    public function getPage(): ?int
     {
-        return $this->page;
+        return $this->page ?? null;
+    }
+
+    public function getSort(): ExtensionListContributorsRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): ExtensionListContributorsRequestOrder
+    {
+        return $this->order;
     }
 
     public function withLimit(int $limit): self
@@ -77,6 +106,14 @@ class ExtensionListContributorsRequest
 
         $clone = clone $this;
         $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
 
         return $clone;
     }
@@ -109,6 +146,30 @@ class ExtensionListContributorsRequest
         return $clone;
     }
 
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
+    public function withSort(ExtensionListContributorsRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(ExtensionListContributorsRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -124,7 +185,7 @@ class ExtensionListContributorsRequest
             static::validateInput($input);
         }
 
-        $limit = 1000;
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -132,15 +193,25 @@ class ExtensionListContributorsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
-        $page = 1;
+        $page = null;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
+        }
+        $sort = ExtensionListContributorsRequestSort::name;
+        if (isset($input->{'sort'})) {
+            $sort = ExtensionListContributorsRequestSort::from($input->{'sort'});
+        }
+        $order = ExtensionListContributorsRequestOrder::asc;
+        if (isset($input->{'order'})) {
+            $order = ExtensionListContributorsRequestOrder::from($input->{'order'});
         }
 
         $obj = new self();
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -152,9 +223,15 @@ class ExtensionListContributorsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['limit'] = $this->limit;
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
         $output['skip'] = $this->skip;
-        $output['page'] = $this->page;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -223,6 +300,12 @@ class ExtensionListContributorsRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

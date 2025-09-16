@@ -23,6 +23,9 @@ class RequestAppinstallationRequestBody
             'description' => [
                 'type' => 'string',
             ],
+            'installationPath' => [
+                'type' => 'string',
+            ],
             'updatePolicy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
             ],
@@ -45,6 +48,8 @@ class RequestAppinstallationRequestBody
     private string $appVersionId;
 
     private string $description;
+
+    private ?string $installationPath = null;
 
     private AppUpdatePolicy $updatePolicy;
 
@@ -72,6 +77,11 @@ class RequestAppinstallationRequestBody
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getInstallationPath(): ?string
+    {
+        return $this->installationPath ?? null;
     }
 
     public function getUpdatePolicy(): AppUpdatePolicy
@@ -115,6 +125,28 @@ class RequestAppinstallationRequestBody
         return $clone;
     }
 
+    public function withInstallationPath(string $installationPath): self
+    {
+        $validator = new Validator();
+        $validator->validate($installationPath, self::$internalValidationSchema['properties']['installationPath']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->installationPath = $installationPath;
+
+        return $clone;
+    }
+
+    public function withoutInstallationPath(): self
+    {
+        $clone = clone $this;
+        unset($clone->installationPath);
+
+        return $clone;
+    }
+
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -151,11 +183,15 @@ class RequestAppinstallationRequestBody
 
         $appVersionId = $input->{'appVersionId'};
         $description = $input->{'description'};
+        $installationPath = null;
+        if (isset($input->{'installationPath'})) {
+            $installationPath = $input->{'installationPath'};
+        }
         $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appVersionId, $description, $updatePolicy, $userInputs);
-
+        $obj->installationPath = $installationPath;
         return $obj;
     }
 
@@ -169,6 +205,9 @@ class RequestAppinstallationRequestBody
         $output = [];
         $output['appVersionId'] = $this->appVersionId;
         $output['description'] = $this->description;
+        if (isset($this->installationPath)) {
+            $output['installationPath'] = $this->installationPath;
+        }
         $output['updatePolicy'] = $this->updatePolicy->value;
         $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
 

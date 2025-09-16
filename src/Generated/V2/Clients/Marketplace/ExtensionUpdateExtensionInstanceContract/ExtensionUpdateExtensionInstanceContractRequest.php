@@ -22,13 +22,6 @@ class ExtensionUpdateExtensionInstanceContractRequest
                 'type' => 'string',
             ],
             'body' => [
-                'properties' => [
-                    'variantKey' => [
-                        'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
-                        'example' => 'default',
-                        'type' => 'string',
-                    ],
-                ],
                 'type' => 'object',
             ],
         ],

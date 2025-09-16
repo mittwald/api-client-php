@@ -2,74 +2,50 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Extension\PricePlan;
 
-class ExtensionUpdateExtensionPricingRequestBodyAlternative2
+class OrderCreateOrderUnprocessableEntityResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'dryRun' => [
-                'default' => false,
-                'description' => 'If set to true, the request will be validated but not executed.',
-                'type' => 'boolean',
-            ],
-            'pricePlan' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.extension.PricePlan',
+            'error' => [
+                'type' => 'object',
             ],
         ],
-        'required' => [
-            'pricePlan',
-        ],
-        'type' => 'object',
     ];
 
+    private ?OrderCreateOrderUnprocessableEntityResponseBodyError $error = null;
+
     /**
-     * If set to true, the request will be validated but not executed.
+     *
      */
-    private bool $dryRun = false;
-
-    private PricePlan $pricePlan;
-
-    public function __construct(PricePlan $pricePlan)
+    public function __construct()
     {
-        $this->pricePlan = $pricePlan;
     }
 
-    public function getDryRun(): bool
+    public function getError(): ?OrderCreateOrderUnprocessableEntityResponseBodyError
     {
-        return $this->dryRun;
+        return $this->error ?? null;
     }
 
-    public function getPricePlan(): PricePlan
+    public function withError(OrderCreateOrderUnprocessableEntityResponseBodyError $error): self
     {
-        return $this->pricePlan;
-    }
-
-    public function withDryRun(bool $dryRun): self
-    {
-        $validator = new Validator();
-        $validator->validate($dryRun, self::$internalValidationSchema['properties']['dryRun']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->dryRun = $dryRun;
+        $clone->error = $error;
 
         return $clone;
     }
 
-    public function withPricePlan(PricePlan $pricePlan): self
+    public function withoutError(): self
     {
         $clone = clone $this;
-        $clone->pricePlan = $pricePlan;
+        unset($clone->error);
 
         return $clone;
     }
@@ -79,24 +55,23 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative2
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionPricingRequestBodyAlternative2 Created instance
+     * @return OrderCreateOrderUnprocessableEntityResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBodyAlternative2
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderUnprocessableEntityResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $dryRun = false;
-        if (isset($input->{'dryRun'})) {
-            $dryRun = (bool)($input->{'dryRun'});
+        $error = null;
+        if (isset($input->{'error'})) {
+            $error = OrderCreateOrderUnprocessableEntityResponseBodyError::buildFromInput($input->{'error'}, validate: $validate);
         }
-        $pricePlan = PricePlan::buildFromInput($input->{'pricePlan'}, validate: $validate);
 
-        $obj = new self($pricePlan);
-        $obj->dryRun = $dryRun;
+        $obj = new self();
+        $obj->error = $error;
         return $obj;
     }
 
@@ -108,8 +83,9 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative2
     public function toJson(): array
     {
         $output = [];
-        $output['dryRun'] = $this->dryRun;
-        $output['pricePlan'] = $this->pricePlan->toJson();
+        if (isset($this->error)) {
+            $output['error'] = ($this->error)->toJson();
+        }
 
         return $output;
     }
@@ -140,5 +116,8 @@ class ExtensionUpdateExtensionPricingRequestBodyAlternative2
 
     public function __clone()
     {
+        if (isset($this->error)) {
+            $this->error = clone $this->error;
+        }
     }
 }

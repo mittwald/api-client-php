@@ -7,7 +7,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class OrderCreateOrderUnprocessableEntityResponse implements ResponseContainer
@@ -22,26 +21,30 @@ class OrderCreateOrderUnprocessableEntityResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                'properties' => [
+                    'error' => [
+                        'type' => 'object',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private Error $body;
+    private OrderCreateOrderUnprocessableEntityResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(OrderCreateOrderUnprocessableEntityResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): OrderCreateOrderUnprocessableEntityResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(OrderCreateOrderUnprocessableEntityResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,7 +67,7 @@ class OrderCreateOrderUnprocessableEntityResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = OrderCreateOrderUnprocessableEntityResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +82,7 @@ class OrderCreateOrderUnprocessableEntityResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +113,7 @@ class OrderCreateOrderUnprocessableEntityResponse implements ResponseContainer
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
