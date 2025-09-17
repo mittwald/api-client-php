@@ -141,6 +141,7 @@ class OwnExtension
                 'type' => 'array',
             ],
             'state' => [
+                'deprecated' => true,
                 'description' => 'deprecated',
                 'enum' => [
                     'enabled',
@@ -278,6 +279,8 @@ class OwnExtension
 
     /**
      * deprecated
+     *
+     * @deprecated
      */
     private ?OwnExtensionState $state = null;
 
@@ -446,6 +449,9 @@ class OwnExtension
         return $this->secrets;
     }
 
+    /**
+     * @deprecated
+     */
     public function getState(): ?OwnExtensionState
     {
         return $this->state ?? null;
@@ -860,6 +866,9 @@ class OwnExtension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withState(OwnExtensionState $state): self
     {
         $clone = clone $this;

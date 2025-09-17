@@ -2,31 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionUpdateExtensionInstanceContractRequestBody
+class AuthenticateUnprocessableEntityResponseBodyErrorsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'properties' => [
-            'variantKey' => [
-                'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
-                'example' => 'default',
-                'type' => 'string',
-            ],
-        ],
         'type' => 'object',
     ];
-
-    /**
-     * The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.
-     */
-    private ?string $variantKey = null;
 
     /**
      *
@@ -35,55 +23,25 @@ class ExtensionUpdateExtensionInstanceContractRequestBody
     {
     }
 
-    public function getVariantKey(): ?string
-    {
-        return $this->variantKey ?? null;
-    }
-
-    public function withVariantKey(string $variantKey): self
-    {
-        $validator = new Validator();
-        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->variantKey = $variantKey;
-
-        return $clone;
-    }
-
-    public function withoutVariantKey(): self
-    {
-        $clone = clone $this;
-        unset($clone->variantKey);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionInstanceContractRequestBody Created instance
+     * @return AuthenticateUnprocessableEntityResponseBodyErrorsItem Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionInstanceContractRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateUnprocessableEntityResponseBodyErrorsItem
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $variantKey = null;
-        if (isset($input->{'variantKey'})) {
-            $variantKey = $input->{'variantKey'};
-        }
+
 
         $obj = new self();
-        $obj->variantKey = $variantKey;
+
         return $obj;
     }
 
@@ -95,9 +53,7 @@ class ExtensionUpdateExtensionInstanceContractRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->variantKey)) {
-            $output['variantKey'] = $this->variantKey;
-        }
+
 
         return $output;
     }

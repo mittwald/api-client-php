@@ -51,6 +51,15 @@ class SubscriptionBasedContract
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'variantDescription' => [
+                'type' => 'string',
+            ],
+            'variantKey' => [
+                'type' => 'string',
+            ],
+            'variantName' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'status',
@@ -71,6 +80,12 @@ class SubscriptionBasedContract
     private SubscriptionBasedContractStatus $status;
 
     private ?DateTime $terminationTargetDate = null;
+
+    private ?string $variantDescription = null;
+
+    private ?string $variantKey = null;
+
+    private ?string $variantName = null;
 
     public function __construct(bool $interactionRequired, SubscriptionBasedContractStatus $status)
     {
@@ -101,6 +116,21 @@ class SubscriptionBasedContract
     public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
+    }
+
+    public function getVariantDescription(): ?string
+    {
+        return $this->variantDescription ?? null;
+    }
+
+    public function getVariantKey(): ?string
+    {
+        return $this->variantKey ?? null;
+    }
+
+    public function getVariantName(): ?string
+    {
+        return $this->variantName ?? null;
     }
 
     public function withCurrentPrice(int $currentPrice): self
@@ -179,6 +209,72 @@ class SubscriptionBasedContract
         return $clone;
     }
 
+    public function withVariantDescription(string $variantDescription): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantDescription, self::$internalValidationSchema['properties']['variantDescription']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantDescription = $variantDescription;
+
+        return $clone;
+    }
+
+    public function withoutVariantDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantDescription);
+
+        return $clone;
+    }
+
+    public function withVariantKey(string $variantKey): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantKey = $variantKey;
+
+        return $clone;
+    }
+
+    public function withoutVariantKey(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantKey);
+
+        return $clone;
+    }
+
+    public function withVariantName(string $variantName): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantName, self::$internalValidationSchema['properties']['variantName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantName = $variantName;
+
+        return $clone;
+    }
+
+    public function withoutVariantName(): self
+    {
+        $clone = clone $this;
+        unset($clone->variantName);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -208,11 +304,26 @@ class SubscriptionBasedContract
         if (isset($input->{'terminationTargetDate'})) {
             $terminationTargetDate = new DateTime($input->{'terminationTargetDate'});
         }
+        $variantDescription = null;
+        if (isset($input->{'variantDescription'})) {
+            $variantDescription = $input->{'variantDescription'};
+        }
+        $variantKey = null;
+        if (isset($input->{'variantKey'})) {
+            $variantKey = $input->{'variantKey'};
+        }
+        $variantName = null;
+        if (isset($input->{'variantName'})) {
+            $variantName = $input->{'variantName'};
+        }
 
         $obj = new self($interactionRequired, $status);
         $obj->currentPrice = $currentPrice;
         $obj->interactionDeadline = $interactionDeadline;
         $obj->terminationTargetDate = $terminationTargetDate;
+        $obj->variantDescription = $variantDescription;
+        $obj->variantKey = $variantKey;
+        $obj->variantName = $variantName;
         return $obj;
     }
 
@@ -234,6 +345,15 @@ class SubscriptionBasedContract
         $output['status'] = ($this->status)->value;
         if (isset($this->terminationTargetDate)) {
             $output['terminationTargetDate'] = ($this->terminationTargetDate)->format(DateTime::ATOM);
+        }
+        if (isset($this->variantDescription)) {
+            $output['variantDescription'] = $this->variantDescription;
+        }
+        if (isset($this->variantKey)) {
+            $output['variantKey'] = $this->variantKey;
+        }
+        if (isset($this->variantName)) {
+            $output['variantName'] = $this->variantName;
         }
 
         return $output;

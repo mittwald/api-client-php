@@ -25,18 +25,41 @@ class ExtensionUpdateExtensionPricingRequest
                 'type' => 'string',
             ],
             'body' => [
-                'properties' => [
-                    'dryRun' => [
-                        'default' => false,
-                        'description' => 'If set to true, the request will be validated but not executed.',
-                        'type' => 'boolean',
+                'oneOf' => [
+                    [
+                        'properties' => [
+                            'dryRun' => [
+                                'default' => false,
+                                'description' => 'If set to true, the request will be validated but not executed.',
+                                'type' => 'boolean',
+                            ],
+                            'priceInCents' => [
+                                'description' => 'Price in cents.',
+                                'type' => 'number',
+                            ],
+                        ],
+                        'required' => [
+                            'priceInCents',
+                        ],
+                        'type' => 'object',
                     ],
-                    'priceInCents' => [
-                        'description' => 'Price in cents.',
-                        'type' => 'number',
+                    [
+                        'properties' => [
+                            'dryRun' => [
+                                'default' => false,
+                                'description' => 'If set to true, the request will be validated but not executed.',
+                                'type' => 'boolean',
+                            ],
+                            'pricePlan' => [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.extension.PricePlan',
+                            ],
+                        ],
+                        'required' => [
+                            'pricePlan',
+                        ],
+                        'type' => 'object',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
         'required' => [
@@ -50,13 +73,13 @@ class ExtensionUpdateExtensionPricingRequest
 
     private string $contributorId;
 
-    private ExtensionUpdateExtensionPricingRequestBody $body;
+    private ExtensionUpdateExtensionPricingRequestBodyAlternative1|ExtensionUpdateExtensionPricingRequestBodyAlternative2 $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $extensionId, string $contributorId, ExtensionUpdateExtensionPricingRequestBody $body)
+    public function __construct(string $extensionId, string $contributorId, ExtensionUpdateExtensionPricingRequestBodyAlternative1|ExtensionUpdateExtensionPricingRequestBodyAlternative2 $body)
     {
         $this->extensionId = $extensionId;
         $this->contributorId = $contributorId;
@@ -73,7 +96,7 @@ class ExtensionUpdateExtensionPricingRequest
         return $this->contributorId;
     }
 
-    public function getBody(): ExtensionUpdateExtensionPricingRequestBody
+    public function getBody(): ExtensionUpdateExtensionPricingRequestBodyAlternative1|ExtensionUpdateExtensionPricingRequestBodyAlternative2
     {
         return $this->body;
     }
@@ -106,7 +129,7 @@ class ExtensionUpdateExtensionPricingRequest
         return $clone;
     }
 
-    public function withBody(ExtensionUpdateExtensionPricingRequestBody $body): self
+    public function withBody(ExtensionUpdateExtensionPricingRequestBodyAlternative1|ExtensionUpdateExtensionPricingRequestBodyAlternative2 $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -131,7 +154,11 @@ class ExtensionUpdateExtensionPricingRequest
 
         $extensionId = $input->{'extensionId'};
         $contributorId = $input->{'contributorId'};
-        $body = ExtensionUpdateExtensionPricingRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = match (true) {
+            ExtensionUpdateExtensionPricingRequestBodyAlternative1::validateInput($input->{'body'}, true) => ExtensionUpdateExtensionPricingRequestBodyAlternative1::buildFromInput($input->{'body'}, validate: $validate),
+            ExtensionUpdateExtensionPricingRequestBodyAlternative2::validateInput($input->{'body'}, true) => ExtensionUpdateExtensionPricingRequestBodyAlternative2::buildFromInput($input->{'body'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
+        };
 
         $obj = new self($extensionId, $contributorId, $body);
 
@@ -148,7 +175,9 @@ class ExtensionUpdateExtensionPricingRequest
         $output = [];
         $output['extensionId'] = $this->extensionId;
         $output['contributorId'] = $this->contributorId;
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = match (true) {
+            $this->body instanceof ExtensionUpdateExtensionPricingRequestBodyAlternative1, $this->body instanceof ExtensionUpdateExtensionPricingRequestBodyAlternative2 => ($this->body)->toJson(),
+        };
 
         return $output;
     }
@@ -179,7 +208,9 @@ class ExtensionUpdateExtensionPricingRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
+        $this->body = match (true) {
+            $this->body instanceof ExtensionUpdateExtensionPricingRequestBodyAlternative1, $this->body instanceof ExtensionUpdateExtensionPricingRequestBodyAlternative2 => clone $this->body,
+        };
     }
 
     /**

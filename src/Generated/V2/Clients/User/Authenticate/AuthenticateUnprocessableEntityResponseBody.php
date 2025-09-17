@@ -2,40 +2,37 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionUpdateExtensionPricingRequestBody
+class AuthenticateUnprocessableEntityResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'dryRun' => [
-                'default' => false,
-                'description' => 'If set to true, the request will be validated but not executed.',
-                'type' => 'boolean',
+            'errors' => [
+                'items' => [
+                    'type' => 'object',
+                ],
+                'type' => 'array',
             ],
-            'priceInCents' => [
-                'description' => 'Price in cents.',
-                'type' => 'number',
+            'message' => [
+                'type' => 'string',
             ],
         ],
         'type' => 'object',
     ];
 
     /**
-     * If set to true, the request will be validated but not executed.
+     * @var AuthenticateUnprocessableEntityResponseBodyErrorsItem[]|null
      */
-    private bool $dryRun = false;
+    private ?array $errors = null;
 
-    /**
-     * Price in cents.
-     */
-    private int|float|null $priceInCents = null;
+    private ?string $message = null;
 
     /**
      *
@@ -44,48 +41,56 @@ class ExtensionUpdateExtensionPricingRequestBody
     {
     }
 
-    public function getDryRun(): bool
+    /**
+     * @return AuthenticateUnprocessableEntityResponseBodyErrorsItem[]|null
+     */
+    public function getErrors(): ?array
     {
-        return $this->dryRun;
+        return $this->errors ?? null;
     }
 
-    public function getPriceInCents(): int|float|null
+    public function getMessage(): ?string
     {
-        return $this->priceInCents;
+        return $this->message ?? null;
     }
 
-    public function withDryRun(bool $dryRun): self
+    /**
+     * @param AuthenticateUnprocessableEntityResponseBodyErrorsItem[] $errors
+     */
+    public function withErrors(array $errors): self
+    {
+        $clone = clone $this;
+        $clone->errors = $errors;
+
+        return $clone;
+    }
+
+    public function withoutErrors(): self
+    {
+        $clone = clone $this;
+        unset($clone->errors);
+
+        return $clone;
+    }
+
+    public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($dryRun, self::$internalValidationSchema['properties']['dryRun']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->dryRun = $dryRun;
+        $clone->message = $message;
 
         return $clone;
     }
 
-    public function withPriceInCents(int|float $priceInCents): self
-    {
-        $validator = new Validator();
-        $validator->validate($priceInCents, self::$internalValidationSchema['properties']['priceInCents']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->priceInCents = $priceInCents;
-
-        return $clone;
-    }
-
-    public function withoutPriceInCents(): self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
-        unset($clone->priceInCents);
+        unset($clone->message);
 
         return $clone;
     }
@@ -95,28 +100,28 @@ class ExtensionUpdateExtensionPricingRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionPricingRequestBody Created instance
+     * @return AuthenticateUnprocessableEntityResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateUnprocessableEntityResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $dryRun = false;
-        if (isset($input->{'dryRun'})) {
-            $dryRun = (bool)($input->{'dryRun'});
+        $errors = null;
+        if (isset($input->{'errors'})) {
+            $errors = array_map(fn (array|object $i): AuthenticateUnprocessableEntityResponseBodyErrorsItem => AuthenticateUnprocessableEntityResponseBodyErrorsItem::buildFromInput($i, validate: $validate), $input->{'errors'});
         }
-        $priceInCents = null;
-        if (isset($input->{'priceInCents'})) {
-            $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
+        $message = null;
+        if (isset($input->{'message'})) {
+            $message = $input->{'message'};
         }
 
         $obj = new self();
-        $obj->dryRun = $dryRun;
-        $obj->priceInCents = $priceInCents;
+        $obj->errors = $errors;
+        $obj->message = $message;
         return $obj;
     }
 
@@ -128,9 +133,11 @@ class ExtensionUpdateExtensionPricingRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['dryRun'] = $this->dryRun;
-        if (isset($this->priceInCents)) {
-            $output['priceInCents'] = $this->priceInCents;
+        if (isset($this->errors)) {
+            $output['errors'] = array_map(fn (AuthenticateUnprocessableEntityResponseBodyErrorsItem $i) => $i->toJson(), $this->errors);
+        }
+        if (isset($this->message)) {
+            $output['message'] = $this->message;
         }
 
         return $output;
@@ -162,5 +169,8 @@ class ExtensionUpdateExtensionPricingRequestBody
 
     public function __clone()
     {
+        if (isset($this->errors)) {
+            $this->errors = array_map(fn (AuthenticateUnprocessableEntityResponseBodyErrorsItem $i) => clone $i, $this->errors);
+        }
     }
 }
