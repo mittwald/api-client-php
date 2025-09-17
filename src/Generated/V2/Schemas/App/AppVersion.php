@@ -42,6 +42,12 @@ class AppVersion
                 ],
                 'type' => 'array',
             ],
+            'defaultCronjobs' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.app.DefaultCronjob',
+                ],
+                'type' => 'array',
+            ],
             'docRoot' => [
                 'type' => 'string',
             ],
@@ -101,6 +107,11 @@ class AppVersion
      */
     private ?array $databases = null;
 
+    /**
+     * @var DefaultCronjob[]|null
+     */
+    private ?array $defaultCronjobs = null;
+
     private string $docRoot;
 
     private bool $docRootUserEditable;
@@ -156,6 +167,14 @@ class AppVersion
     public function getDatabases(): ?array
     {
         return $this->databases ?? null;
+    }
+
+    /**
+     * @return DefaultCronjob[]|null
+     */
+    public function getDefaultCronjobs(): ?array
+    {
+        return $this->defaultCronjobs ?? null;
     }
 
     public function getDocRoot(): string
@@ -276,6 +295,25 @@ class AppVersion
     {
         $clone = clone $this;
         unset($clone->databases);
+
+        return $clone;
+    }
+
+    /**
+     * @param DefaultCronjob[] $defaultCronjobs
+     */
+    public function withDefaultCronjobs(array $defaultCronjobs): self
+    {
+        $clone = clone $this;
+        $clone->defaultCronjobs = $defaultCronjobs;
+
+        return $clone;
+    }
+
+    public function withoutDefaultCronjobs(): self
+    {
+        $clone = clone $this;
+        unset($clone->defaultCronjobs);
 
         return $clone;
     }
@@ -454,6 +492,10 @@ class AppVersion
         if (isset($input->{'databases'})) {
             $databases = array_map(fn (array|object $i): DatabaseDependency => DatabaseDependency::buildFromInput($i, validate: $validate), $input->{'databases'});
         }
+        $defaultCronjobs = null;
+        if (isset($input->{'defaultCronjobs'})) {
+            $defaultCronjobs = array_map(fn (array|object $i): DefaultCronjob => DefaultCronjob::buildFromInput($i, validate: $validate), $input->{'defaultCronjobs'});
+        }
         $docRoot = $input->{'docRoot'};
         $docRootUserEditable = (bool)($input->{'docRootUserEditable'});
         $externalVersion = $input->{'externalVersion'};
@@ -480,6 +522,7 @@ class AppVersion
         $obj->backendPathTemplate = $backendPathTemplate;
         $obj->breakingNote = $breakingNote;
         $obj->databases = $databases;
+        $obj->defaultCronjobs = $defaultCronjobs;
         $obj->recommended = $recommended;
         $obj->requestHandler = $requestHandler;
         $obj->systemSoftwareDependencies = $systemSoftwareDependencies;
@@ -504,6 +547,9 @@ class AppVersion
         }
         if (isset($this->databases)) {
             $output['databases'] = array_map(fn (DatabaseDependency $i): array => $i->toJson(), $this->databases);
+        }
+        if (isset($this->defaultCronjobs)) {
+            $output['defaultCronjobs'] = array_map(fn (DefaultCronjob $i): array => $i->toJson(), $this->defaultCronjobs);
         }
         $output['docRoot'] = $this->docRoot;
         $output['docRootUserEditable'] = $this->docRootUserEditable;

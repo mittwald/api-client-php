@@ -549,7 +549,7 @@ interface MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionListContributorsRequest $request An object representing the request for this operation
-     * @return ExtensionListContributorsOKResponse OK
+     * @return ExtensionListContributorsOKResponse A List of Contributors within the mStudio.
      */
     public function extensionListContributors(ExtensionListContributorsRequest $request): ExtensionListContributorsOKResponse;
     /**
