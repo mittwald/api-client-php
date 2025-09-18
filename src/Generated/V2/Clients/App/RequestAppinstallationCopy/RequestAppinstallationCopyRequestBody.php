@@ -17,6 +17,9 @@ class RequestAppinstallationCopyRequestBody
             'description' => [
                 'type' => 'string',
             ],
+            'installationPath' => [
+                'type' => 'string',
+            ],
             'targetProjectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -30,6 +33,8 @@ class RequestAppinstallationCopyRequestBody
 
     private string $description;
 
+    private ?string $installationPath = null;
+
     private ?string $targetProjectId = null;
 
     public function __construct(string $description)
@@ -40,6 +45,11 @@ class RequestAppinstallationCopyRequestBody
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getInstallationPath(): ?string
+    {
+        return $this->installationPath ?? null;
     }
 
     public function getTargetProjectId(): ?string
@@ -57,6 +67,28 @@ class RequestAppinstallationCopyRequestBody
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withInstallationPath(string $installationPath): self
+    {
+        $validator = new Validator();
+        $validator->validate($installationPath, self::$internalValidationSchema['properties']['installationPath']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->installationPath = $installationPath;
+
+        return $clone;
+    }
+
+    public function withoutInstallationPath(): self
+    {
+        $clone = clone $this;
+        unset($clone->installationPath);
 
         return $clone;
     }
@@ -99,12 +131,17 @@ class RequestAppinstallationCopyRequestBody
         }
 
         $description = $input->{'description'};
+        $installationPath = null;
+        if (isset($input->{'installationPath'})) {
+            $installationPath = $input->{'installationPath'};
+        }
         $targetProjectId = null;
         if (isset($input->{'targetProjectId'})) {
             $targetProjectId = $input->{'targetProjectId'};
         }
 
         $obj = new self($description);
+        $obj->installationPath = $installationPath;
         $obj->targetProjectId = $targetProjectId;
         return $obj;
     }
@@ -118,6 +155,9 @@ class RequestAppinstallationCopyRequestBody
     {
         $output = [];
         $output['description'] = $this->description;
+        if (isset($this->installationPath)) {
+            $output['installationPath'] = $this->installationPath;
+        }
         if (isset($this->targetProjectId)) {
             $output['targetProjectId'] = $this->targetProjectId;
         }

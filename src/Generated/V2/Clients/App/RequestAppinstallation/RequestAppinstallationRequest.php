@@ -30,6 +30,9 @@ class RequestAppinstallationRequest
                     'description' => [
                         'type' => 'string',
                     ],
+                    'installationPath' => [
+                        'type' => 'string',
+                    ],
                     'updatePolicy' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
                     ],

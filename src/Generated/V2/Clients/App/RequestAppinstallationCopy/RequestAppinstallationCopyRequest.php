@@ -26,6 +26,9 @@ class RequestAppinstallationCopyRequest
                     'description' => [
                         'type' => 'string',
                     ],
+                    'installationPath' => [
+                        'type' => 'string',
+                    ],
                     'targetProjectId' => [
                         'format' => 'uuid',
                         'type' => 'string',
