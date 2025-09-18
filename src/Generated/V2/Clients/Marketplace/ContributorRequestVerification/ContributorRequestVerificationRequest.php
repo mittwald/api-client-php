@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetProjectBackupTocRequest
+class ContributorRequestVerificationRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,73 +17,41 @@ class GetProjectBackupTocRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'projectBackupId' => [
-                'type' => 'string',
-            ],
-            'directory' => [
+            'contributorId' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'projectBackupId',
+            'contributorId',
         ],
     ];
 
-    private string $projectBackupId;
-
-    private ?string $directory = null;
+    private string $contributorId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId)
+    public function __construct(string $contributorId)
     {
-        $this->projectBackupId = $projectBackupId;
+        $this->contributorId = $contributorId;
     }
 
-    public function getProjectBackupId(): string
+    public function getContributorId(): string
     {
-        return $this->projectBackupId;
+        return $this->contributorId;
     }
 
-    public function getDirectory(): ?string
-    {
-        return $this->directory ?? null;
-    }
-
-    public function withProjectBackupId(string $projectBackupId): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectBackupId = $projectBackupId;
-
-        return $clone;
-    }
-
-    public function withDirectory(string $directory): self
-    {
-        $validator = new Validator();
-        $validator->validate($directory, self::$internalValidationSchema['properties']['directory']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->directory = $directory;
-
-        return $clone;
-    }
-
-    public function withoutDirectory(): self
-    {
-        $clone = clone $this;
-        unset($clone->directory);
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
@@ -93,24 +61,20 @@ class GetProjectBackupTocRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocRequest Created instance
+     * @return ContributorRequestVerificationRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRequestVerificationRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectBackupId = $input->{'projectBackupId'};
-        $directory = null;
-        if (isset($input->{'directory'})) {
-            $directory = $input->{'directory'};
-        }
+        $contributorId = $input->{'contributorId'};
 
-        $obj = new self($projectBackupId);
-        $obj->directory = $directory;
+        $obj = new self($contributorId);
+
         return $obj;
     }
 
@@ -122,10 +86,7 @@ class GetProjectBackupTocRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectBackupId'] = $this->projectBackupId;
-        if (isset($this->directory)) {
-            $output['directory'] = $this->directory;
-        }
+        $output['contributorId'] = $this->contributorId;
 
         return $output;
     }
@@ -170,8 +131,8 @@ class GetProjectBackupTocRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/paths';
+        $contributorId = urlencode($mapped['contributorId']);
+        return '/v2/contributors/' . $contributorId . '/verification-process';
     }
 
     /**
@@ -187,9 +148,6 @@ class GetProjectBackupTocRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['directory'])) {
-            $query['directory'] = $mapped['directory'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
