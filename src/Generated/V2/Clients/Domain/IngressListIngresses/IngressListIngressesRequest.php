@@ -24,6 +24,10 @@ class IngressListIngressesRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'hostnameSubstring' => [
+                'pattern' => '^[a-zA-Z0-9\\-\\.äöüÄÖÜß]{3,253}$',
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
@@ -46,6 +50,8 @@ class IngressListIngressesRequest
     private ?string $projectId = null;
 
     private ?string $certificateId = null;
+
+    private ?string $hostnameSubstring = null;
 
     private int $limit = 10000;
 
@@ -72,6 +78,11 @@ class IngressListIngressesRequest
     public function getCertificateId(): ?string
     {
         return $this->certificateId ?? null;
+    }
+
+    public function getHostnameSubstring(): ?string
+    {
+        return $this->hostnameSubstring ?? null;
     }
 
     public function getLimit(): int
@@ -129,6 +140,28 @@ class IngressListIngressesRequest
     {
         $clone = clone $this;
         unset($clone->certificateId);
+
+        return $clone;
+    }
+
+    public function withHostnameSubstring(string $hostnameSubstring): self
+    {
+        $validator = new Validator();
+        $validator->validate($hostnameSubstring, self::$internalValidationSchema['properties']['hostnameSubstring']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hostnameSubstring = $hostnameSubstring;
+
+        return $clone;
+    }
+
+    public function withoutHostnameSubstring(): self
+    {
+        $clone = clone $this;
+        unset($clone->hostnameSubstring);
 
         return $clone;
     }
@@ -206,6 +239,10 @@ class IngressListIngressesRequest
         if (isset($input->{'certificateId'})) {
             $certificateId = $input->{'certificateId'};
         }
+        $hostnameSubstring = null;
+        if (isset($input->{'hostnameSubstring'})) {
+            $hostnameSubstring = $input->{'hostnameSubstring'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -222,6 +259,7 @@ class IngressListIngressesRequest
         $obj = new self();
         $obj->projectId = $projectId;
         $obj->certificateId = $certificateId;
+        $obj->hostnameSubstring = $hostnameSubstring;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -241,6 +279,9 @@ class IngressListIngressesRequest
         }
         if (isset($this->certificateId)) {
             $output['certificateId'] = $this->certificateId;
+        }
+        if (isset($this->hostnameSubstring)) {
+            $output['hostnameSubstring'] = $this->hostnameSubstring;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -312,6 +353,9 @@ class IngressListIngressesRequest
         }
         if (isset($mapped['certificateId'])) {
             $query['certificateId'] = $mapped['certificateId'];
+        }
+        if (isset($mapped['hostnameSubstring'])) {
+            $query['hostnameSubstring'] = $mapped['hostnameSubstring'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

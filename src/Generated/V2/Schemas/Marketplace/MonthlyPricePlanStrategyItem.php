@@ -28,6 +28,10 @@ class MonthlyPricePlanStrategyItem
             'description' => [
                 'type' => 'string',
             ],
+            'isBookingStopped' => [
+                'example' => 'If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created.',
+                'type' => 'boolean',
+            ],
             'key' => [
                 'type' => 'string',
             ],
@@ -42,11 +46,14 @@ class MonthlyPricePlanStrategyItem
         'required' => [
             'key',
             'priceInCents',
+            'isBookingStopped',
         ],
         'type' => 'object',
     ];
 
     private ?string $description = null;
+
+    private bool $isBookingStopped;
 
     private string $key;
 
@@ -57,8 +64,9 @@ class MonthlyPricePlanStrategyItem
      */
     private int $priceInCents;
 
-    public function __construct(string $key, int $priceInCents)
+    public function __construct(bool $isBookingStopped, string $key, int $priceInCents)
     {
+        $this->isBookingStopped = $isBookingStopped;
         $this->key = $key;
         $this->priceInCents = $priceInCents;
     }
@@ -66,6 +74,11 @@ class MonthlyPricePlanStrategyItem
     public function getDescription(): ?string
     {
         return $this->description ?? null;
+    }
+
+    public function getIsBookingStopped(): bool
+    {
+        return $this->isBookingStopped;
     }
 
     public function getKey(): string
@@ -101,6 +114,20 @@ class MonthlyPricePlanStrategyItem
     {
         $clone = clone $this;
         unset($clone->description);
+
+        return $clone;
+    }
+
+    public function withIsBookingStopped(bool $isBookingStopped): self
+    {
+        $validator = new Validator();
+        $validator->validate($isBookingStopped, self::$internalValidationSchema['properties']['isBookingStopped']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isBookingStopped = $isBookingStopped;
 
         return $clone;
     }
@@ -174,6 +201,7 @@ class MonthlyPricePlanStrategyItem
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
         }
+        $isBookingStopped = (bool)($input->{'isBookingStopped'});
         $key = $input->{'key'};
         $name = null;
         if (isset($input->{'name'})) {
@@ -181,7 +209,7 @@ class MonthlyPricePlanStrategyItem
         }
         $priceInCents = (int)($input->{'priceInCents'});
 
-        $obj = new self($key, $priceInCents);
+        $obj = new self($isBookingStopped, $key, $priceInCents);
         $obj->description = $description;
         $obj->name = $name;
         return $obj;
@@ -198,6 +226,7 @@ class MonthlyPricePlanStrategyItem
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
+        $output['isBookingStopped'] = $this->isBookingStopped;
         $output['key'] = $this->key;
         if (isset($this->name)) {
             $output['name'] = $this->name;
