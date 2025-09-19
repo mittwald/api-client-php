@@ -70,6 +70,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviat
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification\ContributorRequestVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification\ContributorRequestVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification\ContributorRequestVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification\ContributorRequestVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarRequest;
@@ -608,6 +612,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ContributorRequestDeviatingContributorAvatarUploadNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorRequestDeviatingContributorAvatarUploadTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorRequestDeviatingContributorAvatarUploadDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Start the verification process of a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-request-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorRequestVerificationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The verification process has been started.
+     */
+    public function contributorRequestVerification(ContributorRequestVerificationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ContributorRequestVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorRequestVerificationBadRequestResponse::fromResponse($httpResponse),
+            429 => ContributorRequestVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorRequestVerificationDefaultResponse::fromResponse($httpResponse),
         });
     }
 

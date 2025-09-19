@@ -101,11 +101,19 @@ class OwnContributor
                 'deprecated' => true,
                 'type' => 'string',
             ],
+            'verificationRequested' => [
+                'type' => 'boolean',
+            ],
+            'verified' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'id',
             'customerId',
             'state',
+            'verified',
+            'verificationRequested',
             'name',
             'nameInherited',
             'supportInformation',
@@ -162,7 +170,11 @@ class OwnContributor
      */
     private ?string $url = null;
 
-    public function __construct(string $contactPersonUserId, ContractOwner $contractOwner, string $contributorNumber, string $customerId, string $email, string $id, string $name, bool $nameInherited, ContributorState $state, OwnContributorSupportInformation $supportInformation)
+    private bool $verificationRequested;
+
+    private bool $verified;
+
+    public function __construct(string $contactPersonUserId, ContractOwner $contractOwner, string $contributorNumber, string $customerId, string $email, string $id, string $name, bool $nameInherited, ContributorState $state, OwnContributorSupportInformation $supportInformation, bool $verificationRequested, bool $verified)
     {
         $this->contactPersonUserId = $contactPersonUserId;
         $this->contractOwner = $contractOwner;
@@ -174,6 +186,8 @@ class OwnContributor
         $this->nameInherited = $nameInherited;
         $this->state = $state;
         $this->supportInformation = $supportInformation;
+        $this->verificationRequested = $verificationRequested;
+        $this->verified = $verified;
     }
 
     public function getContactPersonUserId(): string
@@ -273,6 +287,16 @@ class OwnContributor
     public function getUrl(): ?string
     {
         return $this->url ?? null;
+    }
+
+    public function getVerificationRequested(): bool
+    {
+        return $this->verificationRequested;
+    }
+
+    public function getVerified(): bool
+    {
+        return $this->verified;
     }
 
     public function withContactPersonUserId(string $contactPersonUserId): self
@@ -570,6 +594,34 @@ class OwnContributor
         return $clone;
     }
 
+    public function withVerificationRequested(bool $verificationRequested): self
+    {
+        $validator = new Validator();
+        $validator->validate($verificationRequested, self::$internalValidationSchema['properties']['verificationRequested']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->verificationRequested = $verificationRequested;
+
+        return $clone;
+    }
+
+    public function withVerified(bool $verified): self
+    {
+        $validator = new Validator();
+        $validator->validate($verified, self::$internalValidationSchema['properties']['verified']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->verified = $verified;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -631,8 +683,10 @@ class OwnContributor
         if (isset($input->{'url'})) {
             $url = $input->{'url'};
         }
+        $verificationRequested = (bool)($input->{'verificationRequested'});
+        $verified = (bool)($input->{'verified'});
 
-        $obj = new self($contactPersonUserId, $contractOwner, $contributorNumber, $customerId, $email, $id, $name, $nameInherited, $state, $supportInformation);
+        $obj = new self($contactPersonUserId, $contractOwner, $contributorNumber, $customerId, $email, $id, $name, $nameInherited, $state, $supportInformation, $verificationRequested, $verified);
         $obj->description = $description;
         $obj->descriptions = $descriptions;
         $obj->homepage = $homepage;
@@ -689,6 +743,8 @@ class OwnContributor
         if (isset($this->url)) {
             $output['url'] = $this->url;
         }
+        $output['verificationRequested'] = $this->verificationRequested;
+        $output['verified'] = $this->verified;
 
         return $output;
     }

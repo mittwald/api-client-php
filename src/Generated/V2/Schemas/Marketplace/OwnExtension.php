@@ -53,6 +53,7 @@ class OwnExtension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
             ],
             'disabled' => [
+                'deprecated' => true,
                 'type' => 'boolean',
             ],
             'externalFrontends' => [
@@ -141,6 +142,7 @@ class OwnExtension
                 'type' => 'array',
             ],
             'state' => [
+                'deprecated' => true,
                 'description' => 'deprecated',
                 'enum' => [
                     'enabled',
@@ -228,6 +230,9 @@ class OwnExtension
 
     private ?DetailedDescriptions $detailedDescriptions = null;
 
+    /**
+     * @deprecated
+     */
     private ?bool $disabled = null;
 
     /**
@@ -278,6 +283,8 @@ class OwnExtension
 
     /**
      * deprecated
+     *
+     * @deprecated
      */
     private ?OwnExtensionState $state = null;
 
@@ -362,6 +369,9 @@ class OwnExtension
         return $this->detailedDescriptions ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getDisabled(): ?bool
     {
         return $this->disabled ?? null;
@@ -446,6 +456,9 @@ class OwnExtension
         return $this->secrets;
     }
 
+    /**
+     * @deprecated
+     */
     public function getState(): ?OwnExtensionState
     {
         return $this->state ?? null;
@@ -625,6 +638,9 @@ class OwnExtension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
@@ -860,6 +876,9 @@ class OwnExtension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withState(OwnExtensionState $state): self
     {
         $clone = clone $this;

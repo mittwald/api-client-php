@@ -29,6 +29,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFil
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestDeviatingContributorAvatarUpload\ContributorRequestDeviatingContributorAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRequestVerification\ContributorRequestVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorResetContributorAvatar\ContributorResetContributorAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
@@ -246,6 +247,16 @@ interface MarketplaceClient
      * @return ContributorRequestDeviatingContributorAvatarUploadOKResponse The Upload of an avatar for the contributor has been requested.
      */
     public function contributorRequestDeviatingContributorAvatarUpload(ContributorRequestDeviatingContributorAvatarUploadRequest $request): ContributorRequestDeviatingContributorAvatarUploadOKResponse;
+    /**
+     * Start the verification process of a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-request-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorRequestVerificationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The verification process has been started.
+     */
+    public function contributorRequestVerification(ContributorRequestVerificationRequest $request): EmptyResponse;
     /**
      * Delete deviating contributor avatar und return to the inherited customer avatar.
      *

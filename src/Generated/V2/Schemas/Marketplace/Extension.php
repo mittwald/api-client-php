@@ -59,6 +59,7 @@ class Extension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
             ],
             'disabled' => [
+                'deprecated' => true,
                 'type' => 'boolean',
             ],
             'externalFrontends' => [
@@ -205,6 +206,9 @@ class Extension
 
     private ?DetailedDescriptions $detailedDescriptions = null;
 
+    /**
+     * @deprecated
+     */
     private bool $disabled;
 
     /**
@@ -337,6 +341,9 @@ class Extension
         return $this->detailedDescriptions ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getDisabled(): bool
     {
         return $this->disabled;
@@ -538,6 +545,9 @@ class Extension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
