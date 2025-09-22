@@ -18,7 +18,6 @@ class GetDetailOfContractByServerRequest
         'type' => 'object',
         'properties' => [
             'serverId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
