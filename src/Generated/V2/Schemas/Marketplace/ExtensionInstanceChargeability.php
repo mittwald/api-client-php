@@ -31,6 +31,9 @@ class ExtensionInstanceChargeability
             ],
             'reasons' => [
                 'properties' => [
+                    'isNonChargeableCustomer' => [
+                        'type' => 'boolean',
+                    ],
                     'isOwnExtension' => [
                         'type' => 'boolean',
                     ],

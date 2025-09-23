@@ -25,6 +25,9 @@ class ExtensionInstanceChargeabilityReasons
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'isNonChargeableCustomer' => [
+                'type' => 'boolean',
+            ],
             'isOwnExtension' => [
                 'type' => 'boolean',
             ],
@@ -35,6 +38,8 @@ class ExtensionInstanceChargeabilityReasons
         'type' => 'object',
     ];
 
+    private ?bool $isNonChargeableCustomer = null;
+
     private bool $isOwnExtension;
 
     public function __construct(bool $isOwnExtension)
@@ -42,9 +47,36 @@ class ExtensionInstanceChargeabilityReasons
         $this->isOwnExtension = $isOwnExtension;
     }
 
+    public function getIsNonChargeableCustomer(): ?bool
+    {
+        return $this->isNonChargeableCustomer ?? null;
+    }
+
     public function getIsOwnExtension(): bool
     {
         return $this->isOwnExtension;
+    }
+
+    public function withIsNonChargeableCustomer(bool $isNonChargeableCustomer): self
+    {
+        $validator = new Validator();
+        $validator->validate($isNonChargeableCustomer, self::$internalValidationSchema['properties']['isNonChargeableCustomer']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isNonChargeableCustomer = $isNonChargeableCustomer;
+
+        return $clone;
+    }
+
+    public function withoutIsNonChargeableCustomer(): self
+    {
+        $clone = clone $this;
+        unset($clone->isNonChargeableCustomer);
+
+        return $clone;
     }
 
     public function withIsOwnExtension(bool $isOwnExtension): self
@@ -76,10 +108,14 @@ class ExtensionInstanceChargeabilityReasons
             static::validateInput($input);
         }
 
+        $isNonChargeableCustomer = null;
+        if (isset($input->{'isNonChargeableCustomer'})) {
+            $isNonChargeableCustomer = (bool)($input->{'isNonChargeableCustomer'});
+        }
         $isOwnExtension = (bool)($input->{'isOwnExtension'});
 
         $obj = new self($isOwnExtension);
-
+        $obj->isNonChargeableCustomer = $isNonChargeableCustomer;
         return $obj;
     }
 
@@ -91,6 +127,9 @@ class ExtensionInstanceChargeabilityReasons
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->isNonChargeableCustomer)) {
+            $output['isNonChargeableCustomer'] = $this->isNonChargeableCustomer;
+        }
         $output['isOwnExtension'] = $this->isOwnExtension;
 
         return $output;

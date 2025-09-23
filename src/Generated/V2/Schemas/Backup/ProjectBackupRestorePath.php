@@ -26,7 +26,7 @@ class ProjectBackupRestorePath
         'properties' => [
             'clearTargetPath' => [
                 'default' => false,
-                'description' => 'Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.',
+                'description' => 'If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.',
                 'type' => 'boolean',
             ],
             'sourcePath' => [
@@ -44,7 +44,7 @@ class ProjectBackupRestorePath
     ];
 
     /**
-     * Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.
+     * If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.
      */
     private bool $clearTargetPath = false;
 

@@ -380,7 +380,7 @@ class BackupClientImpl implements BackupClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param RequestProjectBackupRestorePathRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse The restore has been requested.
      */
     public function requestProjectBackupRestorePath(RequestProjectBackupRestorePathRequest $request): EmptyResponse
     {
