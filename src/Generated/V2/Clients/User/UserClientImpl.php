@@ -22,7 +22,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResp
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
@@ -1230,7 +1229,6 @@ class UserClientImpl implements UserClient
             202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
             400 => AuthenticateBadRequestResponse::fromResponse($httpResponse),
             401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
-            422 => AuthenticateUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => AuthenticateTooManyRequestsResponse::fromResponse($httpResponse),
             default => AuthenticateDefaultResponse::fromResponse($httpResponse),
         });

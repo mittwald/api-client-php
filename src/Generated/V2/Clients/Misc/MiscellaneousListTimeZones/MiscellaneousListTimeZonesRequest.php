@@ -2,18 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateUnprocessableEntityResponseBodyErrorsItem
+class MiscellaneousListTimeZonesRequest
 {
+    public const method = 'get';
+
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'type' => 'object',
+        'properties' => [
+
+        ],
+        'required' => [
+
+        ],
+    ];
+
+    private array $headers = [
+
     ];
 
     /**
@@ -28,10 +40,10 @@ class AuthenticateUnprocessableEntityResponseBodyErrorsItem
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateUnprocessableEntityResponseBodyErrorsItem Created instance
+     * @return MiscellaneousListTimeZonesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateUnprocessableEntityResponseBodyErrorsItem
+    public static function buildFromInput(array|object $input, bool $validate = true): MiscellaneousListTimeZonesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -84,5 +96,55 @@ class AuthenticateUnprocessableEntityResponseBodyErrorsItem
 
     public function __clone()
     {
+    }
+
+    /**
+     * Builds the URL for this request
+     *
+     * This method is used internally by the client to build the URL for this request.
+     * You should not need to call this method directly.
+     *
+     * @internal
+     * @return string The URL for this request
+     */
+    public function buildUrl(): string
+    {
+        $mapped = $this->toJson();
+        return '/v2/time-zones';
+    }
+
+    /**
+     * Builds the request options for this request
+     *
+     * This method is used internally by the client to build the Guzzle request options
+     * for this request. You should not need to call this method directly.
+     *
+     * @internal
+     * @return array The Guzzle request options for this request
+     */
+    public function buildRequestOptions(): array
+    {
+        $mapped = $this->toJson();
+        $query = [];
+        return [
+            'query' => $query,
+            'headers' => $this->headers,
+        ];
+    }
+
+    /**
+     * Adds a header to this request
+     *
+     * You can use this method to add custom HTTP headers to the request.
+     *
+     * @param string $name The name of the header to add
+     * @param string|array $value The value of the header to add
+     * @return self A clone of this request with the header added
+     */
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
     }
 }

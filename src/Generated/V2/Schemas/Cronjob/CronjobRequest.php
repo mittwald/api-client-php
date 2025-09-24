@@ -53,6 +53,10 @@ class CronjobRequest
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'timeZone' => [
+                'example' => 'Europe/Berlin',
+                'type' => 'string',
+            ],
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
@@ -81,6 +85,8 @@ class CronjobRequest
     private ?string $email = null;
 
     private string $interval;
+
+    private ?string $timeZone = null;
 
     private int $timeout;
 
@@ -122,6 +128,11 @@ class CronjobRequest
     public function getInterval(): string
     {
         return $this->interval;
+    }
+
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone ?? null;
     }
 
     public function getTimeout(): int
@@ -215,6 +226,28 @@ class CronjobRequest
         return $clone;
     }
 
+    public function withTimeZone(string $timeZone): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeZone, self::$internalValidationSchema['properties']['timeZone']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeZone = $timeZone;
+
+        return $clone;
+    }
+
+    public function withoutTimeZone(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeZone);
+
+        return $clone;
+    }
+
     public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
@@ -257,10 +290,15 @@ class CronjobRequest
             $email = $input->{'email'};
         }
         $interval = $input->{'interval'};
+        $timeZone = null;
+        if (isset($input->{'timeZone'})) {
+            $timeZone = $input->{'timeZone'};
+        }
         $timeout = (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
         $obj->email = $email;
+        $obj->timeZone = $timeZone;
         return $obj;
     }
 
@@ -282,6 +320,9 @@ class CronjobRequest
             $output['email'] = $this->email;
         }
         $output['interval'] = $this->interval;
+        if (isset($this->timeZone)) {
+            $output['timeZone'] = $this->timeZone;
+        }
         $output['timeout'] = $this->timeout;
 
         return $output;

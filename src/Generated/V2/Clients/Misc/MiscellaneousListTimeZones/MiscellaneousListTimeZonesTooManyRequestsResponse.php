@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class AuthenticateUnprocessableEntityResponse implements ResponseContainer
+class MiscellaneousListTimeZonesTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,37 +21,36 @@ class AuthenticateUnprocessableEntityResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
+                'type' => 'object',
                 'properties' => [
-                    'errors' => [
-                        'items' => [
-                            'type' => 'object',
-                        ],
-                        'type' => 'array',
-                    ],
                     'message' => [
                         'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
     ];
 
-    private AuthenticateUnprocessableEntityResponseBody $body;
+    private MiscellaneousListTimeZonesTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(AuthenticateUnprocessableEntityResponseBody $body)
+    public function __construct(MiscellaneousListTimeZonesTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): AuthenticateUnprocessableEntityResponseBody
+    public function getBody(): MiscellaneousListTimeZonesTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(AuthenticateUnprocessableEntityResponseBody $body): self
+    public function withBody(MiscellaneousListTimeZonesTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,17 +63,17 @@ class AuthenticateUnprocessableEntityResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateUnprocessableEntityResponse Created instance
+     * @return MiscellaneousListTimeZonesTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateUnprocessableEntityResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): MiscellaneousListTimeZonesTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = AuthenticateUnprocessableEntityResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = MiscellaneousListTimeZonesTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

@@ -2,37 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateUnprocessableEntityResponseBody
+class MiscellaneousListTimeZonesTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'type' => 'object',
         'properties' => [
-            'errors' => [
-                'items' => [
-                    'type' => 'object',
-                ],
-                'type' => 'array',
-            ],
             'message' => [
                 'type' => 'string',
+                'example' => 'too many requests',
+            ],
+            'type' => [
+                'type' => 'string',
+                'example' => 'RateLimitError',
             ],
         ],
-        'type' => 'object',
     ];
 
-    /**
-     * @var AuthenticateUnprocessableEntityResponseBodyErrorsItem[]|null
-     */
-    private ?array $errors = null;
-
     private ?string $message = null;
+
+    private ?string $type = null;
 
     /**
      *
@@ -41,36 +37,14 @@ class AuthenticateUnprocessableEntityResponseBody
     {
     }
 
-    /**
-     * @return AuthenticateUnprocessableEntityResponseBodyErrorsItem[]|null
-     */
-    public function getErrors(): ?array
-    {
-        return $this->errors ?? null;
-    }
-
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @param AuthenticateUnprocessableEntityResponseBodyErrorsItem[] $errors
-     */
-    public function withErrors(array $errors): self
+    public function getType(): ?string
     {
-        $clone = clone $this;
-        $clone->errors = $errors;
-
-        return $clone;
-    }
-
-    public function withoutErrors(): self
-    {
-        $clone = clone $this;
-        unset($clone->errors);
-
-        return $clone;
+        return $this->type ?? null;
     }
 
     public function withMessage(string $message): self
@@ -95,33 +69,55 @@ class AuthenticateUnprocessableEntityResponseBody
         return $clone;
     }
 
+    public function withType(string $type): self
+    {
+        $validator = new Validator();
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->type = $type;
+
+        return $clone;
+    }
+
+    public function withoutType(): self
+    {
+        $clone = clone $this;
+        unset($clone->type);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateUnprocessableEntityResponseBody Created instance
+     * @return MiscellaneousListTimeZonesTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateUnprocessableEntityResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): MiscellaneousListTimeZonesTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $errors = null;
-        if (isset($input->{'errors'})) {
-            $errors = array_map(fn (array|object $i): AuthenticateUnprocessableEntityResponseBodyErrorsItem => AuthenticateUnprocessableEntityResponseBodyErrorsItem::buildFromInput($i, validate: $validate), $input->{'errors'});
-        }
         $message = null;
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
+        $type = null;
+        if (isset($input->{'type'})) {
+            $type = $input->{'type'};
+        }
 
         $obj = new self();
-        $obj->errors = $errors;
         $obj->message = $message;
+        $obj->type = $type;
         return $obj;
     }
 
@@ -133,11 +129,11 @@ class AuthenticateUnprocessableEntityResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->errors)) {
-            $output['errors'] = array_map(fn (AuthenticateUnprocessableEntityResponseBodyErrorsItem $i) => $i->toJson(), $this->errors);
-        }
         if (isset($this->message)) {
             $output['message'] = $this->message;
+        }
+        if (isset($this->type)) {
+            $output['type'] = $this->type;
         }
 
         return $output;
@@ -169,8 +165,5 @@ class AuthenticateUnprocessableEntityResponseBody
 
     public function __clone()
     {
-        if (isset($this->errors)) {
-            $this->errors = array_map(fn (AuthenticateUnprocessableEntityResponseBodyErrorsItem $i) => clone $i, $this->errors);
-        }
     }
 }
