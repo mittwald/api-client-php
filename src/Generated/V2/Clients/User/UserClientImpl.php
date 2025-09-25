@@ -16,7 +16,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberDe
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateAcceptedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
@@ -1227,7 +1226,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
-            400 => AuthenticateBadRequestResponse::fromResponse($httpResponse),
+            400 => UntypedResponse::fromResponse($httpResponse),
             401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
             429 => AuthenticateTooManyRequestsResponse::fromResponse($httpResponse),
             default => AuthenticateDefaultResponse::fromResponse($httpResponse),

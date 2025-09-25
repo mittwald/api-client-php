@@ -10,6 +10,10 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorRequest;
@@ -347,6 +351,29 @@ class MarketplaceClientImpl implements MarketplaceClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Cancel the verification-process of a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-cancel-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorCancelVerificationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The verification process has been cancelled.
+     */
+    public function contributorCancelVerification(ContributorCancelVerificationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ContributorCancelVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorCancelVerificationBadRequestResponse::fromResponse($httpResponse),
+            429 => ContributorCancelVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorCancelVerificationDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
