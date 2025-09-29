@@ -49,6 +49,10 @@ class CronjobRequest
                 'format' => 'email',
                 'type' => 'string',
             ],
+            'failedExecutionAlertThreshold' => [
+                'minimum' => 0,
+                'type' => 'integer',
+            ],
             'interval' => [
                 'example' => '*/5 * * * *',
                 'type' => 'string',
@@ -79,6 +83,8 @@ class CronjobRequest
     private CronjobUrl|CronjobCommand $destination;
 
     private ?string $email = null;
+
+    private ?int $failedExecutionAlertThreshold = null;
 
     private string $interval;
 
@@ -117,6 +123,11 @@ class CronjobRequest
     public function getEmail(): ?string
     {
         return $this->email ?? null;
+    }
+
+    public function getFailedExecutionAlertThreshold(): ?int
+    {
+        return $this->failedExecutionAlertThreshold ?? null;
     }
 
     public function getInterval(): string
@@ -201,6 +212,28 @@ class CronjobRequest
         return $clone;
     }
 
+    public function withFailedExecutionAlertThreshold(int $failedExecutionAlertThreshold): self
+    {
+        $validator = new Validator();
+        $validator->validate($failedExecutionAlertThreshold, self::$internalValidationSchema['properties']['failedExecutionAlertThreshold']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
+
+        return $clone;
+    }
+
+    public function withoutFailedExecutionAlertThreshold(): self
+    {
+        $clone = clone $this;
+        unset($clone->failedExecutionAlertThreshold);
+
+        return $clone;
+    }
+
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
@@ -256,11 +289,16 @@ class CronjobRequest
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
         }
+        $failedExecutionAlertThreshold = null;
+        if (isset($input->{'failedExecutionAlertThreshold'})) {
+            $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
+        }
         $interval = $input->{'interval'};
         $timeout = (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
         $obj->email = $email;
+        $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         return $obj;
     }
 
@@ -280,6 +318,9 @@ class CronjobRequest
         };
         if (isset($this->email)) {
             $output['email'] = $this->email;
+        }
+        if (isset($this->failedExecutionAlertThreshold)) {
+            $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
         }
         $output['interval'] = $this->interval;
         $output['timeout'] = $this->timeout;
