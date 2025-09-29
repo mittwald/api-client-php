@@ -46,25 +46,29 @@ class ProjectBackupRestorePathResponse
         ],
         'required' => [
             'phase',
+            'sourcePath',
+            'determinedSourcePath',
         ],
         'type' => 'object',
     ];
 
     private bool $clearTargetPath = false;
 
-    private ?string $determinedSourcePath = null;
+    private string $determinedSourcePath;
 
     private ?string $determinedTargetPath = null;
 
     private RestorePathPhase $phase;
 
-    private ?string $sourcePath = null;
+    private string $sourcePath;
 
     private ?string $targetPath = null;
 
-    public function __construct(RestorePathPhase $phase)
+    public function __construct(string $determinedSourcePath, RestorePathPhase $phase, string $sourcePath)
     {
+        $this->determinedSourcePath = $determinedSourcePath;
         $this->phase = $phase;
+        $this->sourcePath = $sourcePath;
     }
 
     public function getClearTargetPath(): bool
@@ -72,9 +76,9 @@ class ProjectBackupRestorePathResponse
         return $this->clearTargetPath;
     }
 
-    public function getDeterminedSourcePath(): ?string
+    public function getDeterminedSourcePath(): string
     {
-        return $this->determinedSourcePath ?? null;
+        return $this->determinedSourcePath;
     }
 
     public function getDeterminedTargetPath(): ?string
@@ -87,9 +91,9 @@ class ProjectBackupRestorePathResponse
         return $this->phase;
     }
 
-    public function getSourcePath(): ?string
+    public function getSourcePath(): string
     {
-        return $this->sourcePath ?? null;
+        return $this->sourcePath;
     }
 
     public function getTargetPath(): ?string
@@ -121,14 +125,6 @@ class ProjectBackupRestorePathResponse
 
         $clone = clone $this;
         $clone->determinedSourcePath = $determinedSourcePath;
-
-        return $clone;
-    }
-
-    public function withoutDeterminedSourcePath(): self
-    {
-        $clone = clone $this;
-        unset($clone->determinedSourcePath);
 
         return $clone;
     }
@@ -177,14 +173,6 @@ class ProjectBackupRestorePathResponse
         return $clone;
     }
 
-    public function withoutSourcePath(): self
-    {
-        $clone = clone $this;
-        unset($clone->sourcePath);
-
-        return $clone;
-    }
-
     public function withTargetPath(string $targetPath): self
     {
         $validator = new Validator();
@@ -226,29 +214,21 @@ class ProjectBackupRestorePathResponse
         if (isset($input->{'clearTargetPath'})) {
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
-        $determinedSourcePath = null;
-        if (isset($input->{'determinedSourcePath'})) {
-            $determinedSourcePath = $input->{'determinedSourcePath'};
-        }
+        $determinedSourcePath = $input->{'determinedSourcePath'};
         $determinedTargetPath = null;
         if (isset($input->{'determinedTargetPath'})) {
             $determinedTargetPath = $input->{'determinedTargetPath'};
         }
         $phase = RestorePathPhase::from($input->{'phase'});
-        $sourcePath = null;
-        if (isset($input->{'sourcePath'})) {
-            $sourcePath = $input->{'sourcePath'};
-        }
+        $sourcePath = $input->{'sourcePath'};
         $targetPath = null;
         if (isset($input->{'targetPath'})) {
             $targetPath = $input->{'targetPath'};
         }
 
-        $obj = new self($phase);
+        $obj = new self($determinedSourcePath, $phase, $sourcePath);
         $obj->clearTargetPath = $clearTargetPath;
-        $obj->determinedSourcePath = $determinedSourcePath;
         $obj->determinedTargetPath = $determinedTargetPath;
-        $obj->sourcePath = $sourcePath;
         $obj->targetPath = $targetPath;
         return $obj;
     }
@@ -262,16 +242,12 @@ class ProjectBackupRestorePathResponse
     {
         $output = [];
         $output['clearTargetPath'] = $this->clearTargetPath;
-        if (isset($this->determinedSourcePath)) {
-            $output['determinedSourcePath'] = $this->determinedSourcePath;
-        }
+        $output['determinedSourcePath'] = $this->determinedSourcePath;
         if (isset($this->determinedTargetPath)) {
             $output['determinedTargetPath'] = $this->determinedTargetPath;
         }
         $output['phase'] = $this->phase->value;
-        if (isset($this->sourcePath)) {
-            $output['sourcePath'] = $this->sourcePath;
-        }
+        $output['sourcePath'] = $this->sourcePath;
         if (isset($this->targetPath)) {
             $output['targetPath'] = $this->targetPath;
         }

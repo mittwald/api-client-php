@@ -23,7 +23,13 @@ class ExtensionUpdateExtensionPricingOKResponse implements ResponseContainer
             'body' => [
                 'properties' => [
                     'extensionId' => [
+                        'description' => 'The ID of the Extension.',
                         'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                    'nextPossiblePriceChange' => [
+                        'description' => 'The time until which the contributor is blocked from changing the price again.',
+                        'format' => 'date-time',
                         'type' => 'string',
                     ],
                     'priceChangeConsequence' => [
@@ -77,6 +83,10 @@ class ExtensionUpdateExtensionPricingOKResponse implements ResponseContainer
                         ],
                         'type' => 'object',
                     ],
+                ],
+                'required' => [
+                    'extensionId',
+                    'priceChangeConsequence',
                 ],
                 'type' => 'object',
             ],

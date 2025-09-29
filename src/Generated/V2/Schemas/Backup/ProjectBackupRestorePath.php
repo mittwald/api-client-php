@@ -30,15 +30,18 @@ class ProjectBackupRestorePath
                 'type' => 'boolean',
             ],
             'sourcePath' => [
-                'description' => 'Source path within the backup to restore from. If not set, a full restore of the project will be triggered.',
-                'example' => '/data-p-shortId-userdata/p-shortId/web',
+                'description' => 'Source path within the backup to restore from.',
+                'example' => '/html/mainApp/config',
                 'type' => 'string',
             ],
             'targetDir' => [
-                'description' => 'Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source, e.g. source path=\'/data-p-shortid-userdata/p-shortid/web/myapp\' target path=\'data-p-shortid-userdata/p-shortid/web/\'. This e.g. will restore the /myapp folder to /web. Also the target path should always be a folder, no files allowed here.',
-                'example' => 'data-p-shortId-userdata/p-shortId',
+                'description' => 'Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path should always be a folder, no files allowed here.',
+                'example' => '/html/mainApp',
                 'type' => 'string',
             ],
+        ],
+        'required' => [
+            'sourcePath',
         ],
         'type' => 'object',
     ];
@@ -49,20 +52,18 @@ class ProjectBackupRestorePath
     private bool $clearTargetPath = false;
 
     /**
-     * Source path within the backup to restore from. If not set, a full restore of the project will be triggered.
+     * Source path within the backup to restore from.
      */
-    private ?string $sourcePath = null;
+    private string $sourcePath;
 
     /**
-     * Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source, e.g. source path='/data-p-shortid-userdata/p-shortid/web/myapp' target path='data-p-shortid-userdata/p-shortid/web/'. This e.g. will restore the /myapp folder to /web. Also the target path should always be a folder, no files allowed here.
+     * Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path should always be a folder, no files allowed here.
      */
     private ?string $targetDir = null;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $sourcePath)
     {
+        $this->sourcePath = $sourcePath;
     }
 
     public function getClearTargetPath(): bool
@@ -70,9 +71,9 @@ class ProjectBackupRestorePath
         return $this->clearTargetPath;
     }
 
-    public function getSourcePath(): ?string
+    public function getSourcePath(): string
     {
-        return $this->sourcePath ?? null;
+        return $this->sourcePath;
     }
 
     public function getTargetDir(): ?string
@@ -104,14 +105,6 @@ class ProjectBackupRestorePath
 
         $clone = clone $this;
         $clone->sourcePath = $sourcePath;
-
-        return $clone;
-    }
-
-    public function withoutSourcePath(): self
-    {
-        $clone = clone $this;
-        unset($clone->sourcePath);
 
         return $clone;
     }
@@ -157,18 +150,14 @@ class ProjectBackupRestorePath
         if (isset($input->{'clearTargetPath'})) {
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
-        $sourcePath = null;
-        if (isset($input->{'sourcePath'})) {
-            $sourcePath = $input->{'sourcePath'};
-        }
+        $sourcePath = $input->{'sourcePath'};
         $targetDir = null;
         if (isset($input->{'targetDir'})) {
             $targetDir = $input->{'targetDir'};
         }
 
-        $obj = new self();
+        $obj = new self($sourcePath);
         $obj->clearTargetPath = $clearTargetPath;
-        $obj->sourcePath = $sourcePath;
         $obj->targetDir = $targetDir;
         return $obj;
     }
@@ -182,9 +171,7 @@ class ProjectBackupRestorePath
     {
         $output = [];
         $output['clearTargetPath'] = $this->clearTargetPath;
-        if (isset($this->sourcePath)) {
-            $output['sourcePath'] = $this->sourcePath;
-        }
+        $output['sourcePath'] = $this->sourcePath;
         if (isset($this->targetDir)) {
             $output['targetDir'] = $this->targetDir;
         }

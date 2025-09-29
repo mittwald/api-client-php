@@ -44,6 +44,10 @@ class UpdateCronjobRequest
                         'format' => 'email',
                         'type' => 'string',
                     ],
+                    'failedExecutionAlertThreshold' => [
+                        'minimum' => 0,
+                        'type' => 'integer',
+                    ],
                     'interval' => [
                         'example' => '*/5 * * * *',
                         'type' => 'string',

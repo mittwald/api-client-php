@@ -25,7 +25,10 @@ class IngressListIngressesRequest
                 'type' => 'string',
             ],
             'hostnameSubstring' => [
-                'pattern' => '^[a-zA-Z0-9\\-\\.äöüÄÖÜß]{3,253}$',
+                'maxLength' => 253,
+                'type' => 'string',
+            ],
+            'appInstallationId' => [
                 'type' => 'string',
             ],
             'limit' => [
@@ -52,6 +55,8 @@ class IngressListIngressesRequest
     private ?string $certificateId = null;
 
     private ?string $hostnameSubstring = null;
+
+    private ?string $appInstallationId = null;
 
     private int $limit = 10000;
 
@@ -83,6 +88,11 @@ class IngressListIngressesRequest
     public function getHostnameSubstring(): ?string
     {
         return $this->hostnameSubstring ?? null;
+    }
+
+    public function getAppInstallationId(): ?string
+    {
+        return $this->appInstallationId ?? null;
     }
 
     public function getLimit(): int
@@ -166,6 +176,28 @@ class IngressListIngressesRequest
         return $clone;
     }
 
+    public function withAppInstallationId(string $appInstallationId): self
+    {
+        $validator = new Validator();
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appInstallationId = $appInstallationId;
+
+        return $clone;
+    }
+
+    public function withoutAppInstallationId(): self
+    {
+        $clone = clone $this;
+        unset($clone->appInstallationId);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -243,6 +275,10 @@ class IngressListIngressesRequest
         if (isset($input->{'hostnameSubstring'})) {
             $hostnameSubstring = $input->{'hostnameSubstring'};
         }
+        $appInstallationId = null;
+        if (isset($input->{'appInstallationId'})) {
+            $appInstallationId = $input->{'appInstallationId'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -260,6 +296,7 @@ class IngressListIngressesRequest
         $obj->projectId = $projectId;
         $obj->certificateId = $certificateId;
         $obj->hostnameSubstring = $hostnameSubstring;
+        $obj->appInstallationId = $appInstallationId;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -282,6 +319,9 @@ class IngressListIngressesRequest
         }
         if (isset($this->hostnameSubstring)) {
             $output['hostnameSubstring'] = $this->hostnameSubstring;
+        }
+        if (isset($this->appInstallationId)) {
+            $output['appInstallationId'] = $this->appInstallationId;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -356,6 +396,9 @@ class IngressListIngressesRequest
         }
         if (isset($mapped['hostnameSubstring'])) {
             $query['hostnameSubstring'] = $mapped['hostnameSubstring'];
+        }
+        if (isset($mapped['appInstallationId'])) {
+            $query['appInstallationId'] = $mapped['appInstallationId'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

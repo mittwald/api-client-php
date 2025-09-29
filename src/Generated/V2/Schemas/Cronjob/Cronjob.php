@@ -54,6 +54,9 @@ class Cronjob
                 'format' => 'email',
                 'type' => 'string',
             ],
+            'failedExecutionAlertThreshold' => [
+                'type' => 'integer',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -75,9 +78,6 @@ class Cronjob
             ],
             'shortId' => [
                 'example' => 'cron-bd26li',
-                'type' => 'string',
-            ],
-            'timeZone' => [
                 'type' => 'string',
             ],
             'timeout' => [
@@ -117,6 +117,8 @@ class Cronjob
 
     private ?string $email = null;
 
+    private ?int $failedExecutionAlertThreshold = null;
+
     private string $id;
 
     private string $interval;
@@ -128,8 +130,6 @@ class Cronjob
     private ?string $projectId = null;
 
     private string $shortId;
-
-    private ?string $timeZone = null;
 
     private int $timeout;
 
@@ -179,6 +179,11 @@ class Cronjob
         return $this->email ?? null;
     }
 
+    public function getFailedExecutionAlertThreshold(): ?int
+    {
+        return $this->failedExecutionAlertThreshold ?? null;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -207,11 +212,6 @@ class Cronjob
     public function getShortId(): string
     {
         return $this->shortId;
-    }
-
-    public function getTimeZone(): ?string
-    {
-        return $this->timeZone ?? null;
     }
 
     public function getTimeout(): int
@@ -300,6 +300,28 @@ class Cronjob
     {
         $clone = clone $this;
         unset($clone->email);
+
+        return $clone;
+    }
+
+    public function withFailedExecutionAlertThreshold(int $failedExecutionAlertThreshold): self
+    {
+        $validator = new Validator();
+        $validator->validate($failedExecutionAlertThreshold, self::$internalValidationSchema['properties']['failedExecutionAlertThreshold']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
+
+        return $clone;
+    }
+
+    public function withoutFailedExecutionAlertThreshold(): self
+    {
+        $clone = clone $this;
+        unset($clone->failedExecutionAlertThreshold);
 
         return $clone;
     }
@@ -400,28 +422,6 @@ class Cronjob
         return $clone;
     }
 
-    public function withTimeZone(string $timeZone): self
-    {
-        $validator = new Validator();
-        $validator->validate($timeZone, self::$internalValidationSchema['properties']['timeZone']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->timeZone = $timeZone;
-
-        return $clone;
-    }
-
-    public function withoutTimeZone(): self
-    {
-        $clone = clone $this;
-        unset($clone->timeZone);
-
-        return $clone;
-    }
-
     public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
@@ -472,6 +472,10 @@ class Cronjob
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
         }
+        $failedExecutionAlertThreshold = null;
+        if (isset($input->{'failedExecutionAlertThreshold'})) {
+            $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
+        }
         $id = $input->{'id'};
         $interval = $input->{'interval'};
         $latestExecution = null;
@@ -487,19 +491,15 @@ class Cronjob
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
-        $timeZone = null;
-        if (isset($input->{'timeZone'})) {
-            $timeZone = $input->{'timeZone'};
-        }
         $timeout = (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $timeout, $updatedAt);
         $obj->email = $email;
+        $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         $obj->latestExecution = $latestExecution;
         $obj->nextExecutionTime = $nextExecutionTime;
         $obj->projectId = $projectId;
-        $obj->timeZone = $timeZone;
         return $obj;
     }
 
@@ -521,6 +521,9 @@ class Cronjob
         if (isset($this->email)) {
             $output['email'] = $this->email;
         }
+        if (isset($this->failedExecutionAlertThreshold)) {
+            $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
+        }
         $output['id'] = $this->id;
         $output['interval'] = $this->interval;
         if (isset($this->latestExecution)) {
@@ -533,9 +536,6 @@ class Cronjob
             $output['projectId'] = $this->projectId;
         }
         $output['shortId'] = $this->shortId;
-        if (isset($this->timeZone)) {
-            $output['timeZone'] = $this->timeZone;
-        }
         $output['timeout'] = $this->timeout;
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 

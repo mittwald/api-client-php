@@ -37,25 +37,28 @@ class CronjobCommand
                 'type' => 'string',
             ],
         ],
+        'required' => [
+            'interpreterTemplate',
+            'pathTemplate',
+        ],
         'type' => 'object',
     ];
 
-    private ?string $interpreterTemplate = null;
+    private string $interpreterTemplate;
 
     private ?string $parametersTemplate = null;
 
-    private ?string $pathTemplate = null;
+    private string $pathTemplate;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $interpreterTemplate, string $pathTemplate)
     {
+        $this->interpreterTemplate = $interpreterTemplate;
+        $this->pathTemplate = $pathTemplate;
     }
 
-    public function getInterpreterTemplate(): ?string
+    public function getInterpreterTemplate(): string
     {
-        return $this->interpreterTemplate ?? null;
+        return $this->interpreterTemplate;
     }
 
     public function getParametersTemplate(): ?string
@@ -63,9 +66,9 @@ class CronjobCommand
         return $this->parametersTemplate ?? null;
     }
 
-    public function getPathTemplate(): ?string
+    public function getPathTemplate(): string
     {
-        return $this->pathTemplate ?? null;
+        return $this->pathTemplate;
     }
 
     public function withInterpreterTemplate(string $interpreterTemplate): self
@@ -78,14 +81,6 @@ class CronjobCommand
 
         $clone = clone $this;
         $clone->interpreterTemplate = $interpreterTemplate;
-
-        return $clone;
-    }
-
-    public function withoutInterpreterTemplate(): self
-    {
-        $clone = clone $this;
-        unset($clone->interpreterTemplate);
 
         return $clone;
     }
@@ -126,14 +121,6 @@ class CronjobCommand
         return $clone;
     }
 
-    public function withoutPathTemplate(): self
-    {
-        $clone = clone $this;
-        unset($clone->pathTemplate);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -149,23 +136,15 @@ class CronjobCommand
             static::validateInput($input);
         }
 
-        $interpreterTemplate = null;
-        if (isset($input->{'interpreterTemplate'})) {
-            $interpreterTemplate = $input->{'interpreterTemplate'};
-        }
+        $interpreterTemplate = $input->{'interpreterTemplate'};
         $parametersTemplate = null;
         if (isset($input->{'parametersTemplate'})) {
             $parametersTemplate = $input->{'parametersTemplate'};
         }
-        $pathTemplate = null;
-        if (isset($input->{'pathTemplate'})) {
-            $pathTemplate = $input->{'pathTemplate'};
-        }
+        $pathTemplate = $input->{'pathTemplate'};
 
-        $obj = new self();
-        $obj->interpreterTemplate = $interpreterTemplate;
+        $obj = new self($interpreterTemplate, $pathTemplate);
         $obj->parametersTemplate = $parametersTemplate;
-        $obj->pathTemplate = $pathTemplate;
         return $obj;
     }
 
@@ -177,15 +156,11 @@ class CronjobCommand
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->interpreterTemplate)) {
-            $output['interpreterTemplate'] = $this->interpreterTemplate;
-        }
+        $output['interpreterTemplate'] = $this->interpreterTemplate;
         if (isset($this->parametersTemplate)) {
             $output['parametersTemplate'] = $this->parametersTemplate;
         }
-        if (isset($this->pathTemplate)) {
-            $output['pathTemplate'] = $this->pathTemplate;
-        }
+        $output['pathTemplate'] = $this->pathTemplate;
 
         return $output;
     }
