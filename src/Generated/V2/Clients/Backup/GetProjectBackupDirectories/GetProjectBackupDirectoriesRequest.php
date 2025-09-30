@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetProjectBackupTocRequest
+class GetProjectBackupDirectoriesRequest
 {
     public const method = 'get';
 
@@ -93,10 +93,10 @@ class GetProjectBackupTocRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocRequest Created instance
+     * @return GetProjectBackupDirectoriesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDirectoriesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -171,7 +171,7 @@ class GetProjectBackupTocRequest
     {
         $mapped = $this->toJson();
         $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/paths';
+        return '/v2/project-backups/' . $projectBackupId . '/path';
     }
 
     /**

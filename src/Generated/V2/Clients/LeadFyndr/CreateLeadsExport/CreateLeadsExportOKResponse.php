@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupTocForbiddenResponse implements ResponseContainer
+class CreateLeadsExportOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +21,39 @@ class GetProjectBackupTocForbiddenResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                'properties' => [
+                    'contentBase64' => [
+                        'description' => 'The base64 encoded csv content of the export.',
+                        'type' => 'string',
+                    ],
+                    'exportId' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'exportId',
+                    'contentBase64',
+                ],
+                'type' => 'object',
             ],
         ],
     ];
 
-    private Error $body;
+    private CreateLeadsExportOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(CreateLeadsExportOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): CreateLeadsExportOKResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(CreateLeadsExportOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +66,17 @@ class GetProjectBackupTocForbiddenResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocForbiddenResponse Created instance
+     * @return CreateLeadsExportOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocForbiddenResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateLeadsExportOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CreateLeadsExportOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +91,7 @@ class GetProjectBackupTocForbiddenResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +122,7 @@ class GetProjectBackupTocForbiddenResponse implements ResponseContainer
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

@@ -26,43 +26,44 @@ class ProjectBackupRestorePath
         'properties' => [
             'clearTargetPath' => [
                 'default' => false,
-                'description' => 'If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.',
                 'type' => 'boolean',
             ],
-            'sourcePath' => [
-                'description' => 'Source path within the backup to restore from.',
-                'example' => '/html/mainApp/config',
+            'determinedTargetPath' => [
                 'type' => 'string',
             ],
-            'targetDir' => [
-                'description' => 'Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path should always be a folder, no files allowed here.',
-                'example' => '/html/mainApp',
+            'phase' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.RestorePathPhase',
+            ],
+            'sourcePath' => [
+                'type' => 'string',
+            ],
+            'targetPath' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
+            'phase',
             'sourcePath',
+            'determinedTargetPath',
+            'clearTargetPath',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.
-     */
     private bool $clearTargetPath = false;
 
-    /**
-     * Source path within the backup to restore from.
-     */
+    private string $determinedTargetPath;
+
+    private RestorePathPhase $phase;
+
     private string $sourcePath;
 
-    /**
-     * Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path should always be a folder, no files allowed here.
-     */
-    private ?string $targetDir = null;
+    private ?string $targetPath = null;
 
-    public function __construct(string $sourcePath)
+    public function __construct(string $determinedTargetPath, RestorePathPhase $phase, string $sourcePath)
     {
+        $this->determinedTargetPath = $determinedTargetPath;
+        $this->phase = $phase;
         $this->sourcePath = $sourcePath;
     }
 
@@ -71,14 +72,24 @@ class ProjectBackupRestorePath
         return $this->clearTargetPath;
     }
 
+    public function getDeterminedTargetPath(): string
+    {
+        return $this->determinedTargetPath;
+    }
+
+    public function getPhase(): RestorePathPhase
+    {
+        return $this->phase;
+    }
+
     public function getSourcePath(): string
     {
         return $this->sourcePath;
     }
 
-    public function getTargetDir(): ?string
+    public function getTargetPath(): ?string
     {
-        return $this->targetDir ?? null;
+        return $this->targetPath ?? null;
     }
 
     public function withClearTargetPath(bool $clearTargetPath): self
@@ -91,6 +102,28 @@ class ProjectBackupRestorePath
 
         $clone = clone $this;
         $clone->clearTargetPath = $clearTargetPath;
+
+        return $clone;
+    }
+
+    public function withDeterminedTargetPath(string $determinedTargetPath): self
+    {
+        $validator = new Validator();
+        $validator->validate($determinedTargetPath, self::$internalValidationSchema['properties']['determinedTargetPath']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->determinedTargetPath = $determinedTargetPath;
+
+        return $clone;
+    }
+
+    public function withPhase(RestorePathPhase $phase): self
+    {
+        $clone = clone $this;
+        $clone->phase = $phase;
 
         return $clone;
     }
@@ -109,24 +142,24 @@ class ProjectBackupRestorePath
         return $clone;
     }
 
-    public function withTargetDir(string $targetDir): self
+    public function withTargetPath(string $targetPath): self
     {
         $validator = new Validator();
-        $validator->validate($targetDir, self::$internalValidationSchema['properties']['targetDir']);
+        $validator->validate($targetPath, self::$internalValidationSchema['properties']['targetPath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->targetDir = $targetDir;
+        $clone->targetPath = $targetPath;
 
         return $clone;
     }
 
-    public function withoutTargetDir(): self
+    public function withoutTargetPath(): self
     {
         $clone = clone $this;
-        unset($clone->targetDir);
+        unset($clone->targetPath);
 
         return $clone;
     }
@@ -150,15 +183,17 @@ class ProjectBackupRestorePath
         if (isset($input->{'clearTargetPath'})) {
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
+        $determinedTargetPath = $input->{'determinedTargetPath'};
+        $phase = RestorePathPhase::from($input->{'phase'});
         $sourcePath = $input->{'sourcePath'};
-        $targetDir = null;
-        if (isset($input->{'targetDir'})) {
-            $targetDir = $input->{'targetDir'};
+        $targetPath = null;
+        if (isset($input->{'targetPath'})) {
+            $targetPath = $input->{'targetPath'};
         }
 
-        $obj = new self($sourcePath);
+        $obj = new self($determinedTargetPath, $phase, $sourcePath);
         $obj->clearTargetPath = $clearTargetPath;
-        $obj->targetDir = $targetDir;
+        $obj->targetPath = $targetPath;
         return $obj;
     }
 
@@ -171,9 +206,11 @@ class ProjectBackupRestorePath
     {
         $output = [];
         $output['clearTargetPath'] = $this->clearTargetPath;
+        $output['determinedTargetPath'] = $this->determinedTargetPath;
+        $output['phase'] = $this->phase->value;
         $output['sourcePath'] = $this->sourcePath;
-        if (isset($this->targetDir)) {
-            $output['targetDir'] = $this->targetDir;
+        if (isset($this->targetPath)) {
+            $output['targetPath'] = $this->targetPath;
         }
 
         return $output;

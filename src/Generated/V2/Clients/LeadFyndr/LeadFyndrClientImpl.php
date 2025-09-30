@@ -17,6 +17,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessReque
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessRequest\CreateLeadFyndrAccessRequestNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessRequest\CreateLeadFyndrAccessRequestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessRequest\CreateLeadFyndrAccessRequestTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetCities\GetCitiesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetCities\GetCitiesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetCities\GetCitiesForbiddenResponse;
@@ -51,6 +59,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffO
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffOptions\GetLeadFyndrProfileTariffOptionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffOptions\GetLeadFyndrProfileTariffOptionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffOptions\GetLeadFyndrProfileTariffOptionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadForbiddenResponse;
@@ -135,6 +150,31 @@ class LeadFyndrClientImpl implements LeadFyndrClient
             409 => CreateLeadFyndrAccessRequestConflictResponse::fromResponse($httpResponse),
             429 => CreateLeadFyndrAccessRequestTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateLeadFyndrAccessRequestDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create an export of unlocked leads for the given customerId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/LeadFyndr/operation/leadfyndr-create-leads-export
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateLeadsExportRequest $request An object representing the request for this operation
+     */
+    public function createLeadsExport(CreateLeadsExportRequest $request): CreateLeadsExportOKResponse
+    {
+        $httpRequest = new Request(CreateLeadsExportRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CreateLeadsExportOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateLeadsExportBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateLeadsExportForbiddenResponse::fromResponse($httpResponse),
+            404 => CreateLeadsExportNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateLeadsExportConflictResponse::fromResponse($httpResponse),
+            429 => CreateLeadsExportTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateLeadsExportDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -260,6 +300,31 @@ class LeadFyndrClientImpl implements LeadFyndrClient
             404 => GetLeadFyndrProfileTariffOptionsNotFoundResponse::fromResponse($httpResponse),
             429 => GetLeadFyndrProfileTariffOptionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetLeadFyndrProfileTariffOptionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get unlocked leads export history for the given customerId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/LeadFyndr/operation/leadfyndr-get-leads-export-history
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetLeadsExportHistoryRequest $request An object representing the request for this operation
+     * @return GetLeadsExportHistoryOKResponse A list of unlocked leads exports.
+     */
+    public function getLeadsExportHistory(GetLeadsExportHistoryRequest $request): GetLeadsExportHistoryOKResponse
+    {
+        $httpRequest = new Request(GetLeadsExportHistoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetLeadsExportHistoryOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetLeadsExportHistoryBadRequestResponse::fromResponse($httpResponse),
+            403 => GetLeadsExportHistoryForbiddenResponse::fromResponse($httpResponse),
+            404 => GetLeadsExportHistoryNotFoundResponse::fromResponse($httpResponse),
+            429 => GetLeadsExportHistoryTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetLeadsExportHistoryDefaultResponse::fromResponse($httpResponse),
         });
     }
 

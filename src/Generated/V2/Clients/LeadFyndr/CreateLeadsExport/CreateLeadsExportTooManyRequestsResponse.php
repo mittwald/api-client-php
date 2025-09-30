@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupTocTooManyRequestsResponse implements ResponseContainer
+class CreateLeadsExportTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class GetProjectBackupTocTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private GetProjectBackupTocTooManyRequestsResponseBody $body;
+    private CreateLeadsExportTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(GetProjectBackupTocTooManyRequestsResponseBody $body)
+    public function __construct(CreateLeadsExportTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): GetProjectBackupTocTooManyRequestsResponseBody
+    public function getBody(): CreateLeadsExportTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(GetProjectBackupTocTooManyRequestsResponseBody $body): self
+    public function withBody(CreateLeadsExportTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class GetProjectBackupTocTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocTooManyRequestsResponse Created instance
+     * @return CreateLeadsExportTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateLeadsExportTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = GetProjectBackupTocTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CreateLeadsExportTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

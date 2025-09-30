@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath;
+namespace Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestorePathRequest;
 
-class RequestProjectBackupRestorePathRequest
+class CreateLeadsExportRequest
 {
     public const method = 'post';
 
@@ -18,58 +17,91 @@ class RequestProjectBackupRestorePathRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'projectBackupId' => [
+            'customerId' => [
                 'type' => 'string',
             ],
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequest',
+                'properties' => [
+                    'exportAllLeads' => [
+                        'description' => 'Whether to export all leads or only not already exported leads.',
+                        'type' => 'boolean',
+                    ],
+                    'fieldKeys' => [
+                        'description' => 'The fields to include in the export.',
+                        'items' => [
+                            'enum' => [
+                                'domain',
+                                'potential',
+                                'performance',
+                                'generalLook',
+                                'companyName',
+                                'emails',
+                                'phoneNumbers',
+                                'address',
+                                'employeeCount',
+                                'revenue',
+                                'a-record',
+                                'nameserver',
+                                'mailserver',
+                                'techStack',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
+                ],
+                'required' => [
+                    'fieldKeys',
+                    'exportAllLeads',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'projectBackupId',
+            'customerId',
             'body',
         ],
     ];
 
-    private string $projectBackupId;
+    private string $customerId;
 
-    private ProjectBackupRestorePathRequest $body;
+    private CreateLeadsExportRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId, ProjectBackupRestorePathRequest $body)
+    public function __construct(string $customerId, CreateLeadsExportRequestBody $body)
     {
-        $this->projectBackupId = $projectBackupId;
+        $this->customerId = $customerId;
         $this->body = $body;
     }
 
-    public function getProjectBackupId(): string
+    public function getCustomerId(): string
     {
-        return $this->projectBackupId;
+        return $this->customerId;
     }
 
-    public function getBody(): ProjectBackupRestorePathRequest
+    public function getBody(): CreateLeadsExportRequestBody
     {
         return $this->body;
     }
 
-    public function withProjectBackupId(string $projectBackupId): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectBackupId = $projectBackupId;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
-    public function withBody(ProjectBackupRestorePathRequest $body): self
+    public function withBody(CreateLeadsExportRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -82,20 +114,20 @@ class RequestProjectBackupRestorePathRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestorePathRequest Created instance
+     * @return CreateLeadsExportRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateLeadsExportRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectBackupId = $input->{'projectBackupId'};
-        $body = ProjectBackupRestorePathRequest::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
+        $body = CreateLeadsExportRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectBackupId, $body);
+        $obj = new self($customerId, $body);
 
         return $obj;
     }
@@ -108,8 +140,8 @@ class RequestProjectBackupRestorePathRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectBackupId'] = $this->projectBackupId;
-        $output['body'] = $this->body->toJson();
+        $output['customerId'] = $this->customerId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -140,6 +172,7 @@ class RequestProjectBackupRestorePathRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -154,8 +187,8 @@ class RequestProjectBackupRestorePathRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/restore-path';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/unlocked-leads-export';
     }
 
     /**

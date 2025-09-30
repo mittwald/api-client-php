@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupDirectory;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupTocOKResponse implements ResponseContainer
+class GetProjectBackupDirectoriesBadGatewayResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class GetProjectBackupTocOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupDirectory',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private ProjectBackupDirectory $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ProjectBackupDirectory $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ProjectBackupDirectory
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(ProjectBackupDirectory $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class GetProjectBackupTocOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocOKResponse Created instance
+     * @return GetProjectBackupDirectoriesBadGatewayResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDirectoriesBadGatewayResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ProjectBackupDirectory::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

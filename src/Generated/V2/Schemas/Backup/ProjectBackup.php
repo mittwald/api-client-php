@@ -60,7 +60,7 @@ class ProjectBackup
                 'type' => 'string',
             ],
             'restorePath' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathResponse',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath',
             ],
             'status' => [
                 'example' => 'Completed',
@@ -95,7 +95,7 @@ class ProjectBackup
 
     private DateTime $requestedAt;
 
-    private ?ProjectBackupRestorePathResponse $restorePath = null;
+    private ?ProjectBackupRestorePath $restorePath = null;
 
     private string $status;
 
@@ -153,7 +153,7 @@ class ProjectBackup
         return $this->requestedAt;
     }
 
-    public function getRestorePath(): ?ProjectBackupRestorePathResponse
+    public function getRestorePath(): ?ProjectBackupRestorePath
     {
         return $this->restorePath ?? null;
     }
@@ -305,7 +305,7 @@ class ProjectBackup
         return $clone;
     }
 
-    public function withRestorePath(ProjectBackupRestorePathResponse $restorePath): self
+    public function withRestorePath(ProjectBackupRestorePath $restorePath): self
     {
         $clone = clone $this;
         $clone->restorePath = $restorePath;
@@ -376,7 +376,7 @@ class ProjectBackup
         $requestedAt = new DateTime($input->{'requestedAt'});
         $restorePath = null;
         if (isset($input->{'restorePath'})) {
-            $restorePath = ProjectBackupRestorePathResponse::buildFromInput($input->{'restorePath'}, validate: $validate);
+            $restorePath = ProjectBackupRestorePath::buildFromInput($input->{'restorePath'}, validate: $validate);
         }
         $status = $input->{'status'};
 

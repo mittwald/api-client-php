@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupPath;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupTocServiceUnavailableResponse implements ResponseContainer
+class GetProjectBackupDirectoriesOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class GetProjectBackupTocServiceUnavailableResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupPath',
             ],
         ],
     ];
 
-    private Error $body;
+    private ProjectBackupPath $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(ProjectBackupPath $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): ProjectBackupPath
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(ProjectBackupPath $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class GetProjectBackupTocServiceUnavailableResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupTocServiceUnavailableResponse Created instance
+     * @return GetProjectBackupDirectoriesOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupTocServiceUnavailableResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDirectoriesOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ProjectBackupPath::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

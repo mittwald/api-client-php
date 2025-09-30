@@ -48,20 +48,20 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBa
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupToc\GetProjectBackupTocTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
@@ -280,6 +280,32 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
+     * Get table of contents for a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-directories
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetProjectBackupDirectoriesRequest $request An object representing the request for this operation
+     * @return GetProjectBackupDirectoriesOKResponse OK
+     */
+    public function getProjectBackupDirectories(GetProjectBackupDirectoriesRequest $request): GetProjectBackupDirectoriesOKResponse
+    {
+        $httpRequest = new Request(GetProjectBackupDirectoriesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetProjectBackupDirectoriesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetProjectBackupDirectoriesForbiddenResponse::fromResponse($httpResponse),
+            404 => GetProjectBackupDirectoriesNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectBackupDirectoriesTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetProjectBackupDirectoriesBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetProjectBackupDirectoriesServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetProjectBackupDirectoriesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a ProjectBackupSchedule.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-schedule
@@ -300,32 +326,6 @@ class BackupClientImpl implements BackupClient
             404 => GetProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
             429 => GetProjectBackupScheduleTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get table of contents for a Project Backup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-toc
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetProjectBackupTocRequest $request An object representing the request for this operation
-     * @return GetProjectBackupTocOKResponse OK
-     */
-    public function getProjectBackupToc(GetProjectBackupTocRequest $request): GetProjectBackupTocOKResponse
-    {
-        $httpRequest = new Request(GetProjectBackupTocRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetProjectBackupTocOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => GetProjectBackupTocForbiddenResponse::fromResponse($httpResponse),
-            404 => GetProjectBackupTocNotFoundResponse::fromResponse($httpResponse),
-            429 => GetProjectBackupTocTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => GetProjectBackupTocBadGatewayResponse::fromResponse($httpResponse),
-            503 => GetProjectBackupTocServiceUnavailableResponse::fromResponse($httpResponse),
-            default => GetProjectBackupTocDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -380,7 +380,7 @@ class BackupClientImpl implements BackupClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param RequestProjectBackupRestorePathRequest $request An object representing the request for this operation
-     * @return EmptyResponse The restore has been requested.
+     * @return EmptyResponse NoContent
      */
     public function requestProjectBackupRestorePath(RequestProjectBackupRestorePathRequest $request): EmptyResponse
     {
