@@ -26,11 +26,11 @@ class ProjectBackupRestorePathRequest
         'properties' => [
             'clearTargetPath' => [
                 'default' => false,
-                'description' => 'Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path must be a directory',
+                'description' => 'Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.',
                 'type' => 'boolean',
             ],
             'sourcePath' => [
-                'example' => '/html/mainApp/config',
+                'example' => '/html/mainApp/config/',
                 'type' => 'string',
             ],
             'targetPath' => [
@@ -46,7 +46,7 @@ class ProjectBackupRestorePathRequest
     ];
 
     /**
-     * Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path must be a directory
+     * Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup.
      */
     private bool $clearTargetPath = false;
 

@@ -36,33 +36,7 @@ class LeadsExport
                 'type' => 'string',
             ],
             'exportedBy' => [
-                'properties' => [
-                    'avatarRefId' => [
-                        'type' => 'string',
-                    ],
-                    'person' => [
-                        'properties' => [
-                            'firstName' => [
-                                'type' => 'string',
-                            ],
-                            'lastName' => [
-                                'type' => 'string',
-                            ],
-                        ],
-                        'required' => [
-                            'firstName',
-                            'lastName',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'required' => [
-                        'userId',
-                    ],
-                    'userId' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.leadfyndr.LeadsExportExporter',
             ],
             'leadCount' => [
                 'description' => 'The number of leads included in the export.',
@@ -85,7 +59,7 @@ class LeadsExport
 
     private DateTime $exportedAt;
 
-    private ?LeadsExportExportedBy $exportedBy = null;
+    private ?LeadsExportExporter $exportedBy = null;
 
     /**
      * The number of leads included in the export.
@@ -115,7 +89,7 @@ class LeadsExport
         return $this->exportedAt;
     }
 
-    public function getExportedBy(): ?LeadsExportExportedBy
+    public function getExportedBy(): ?LeadsExportExporter
     {
         return $this->exportedBy ?? null;
     }
@@ -161,7 +135,7 @@ class LeadsExport
         return $clone;
     }
 
-    public function withExportedBy(LeadsExportExportedBy $exportedBy): self
+    public function withExportedBy(LeadsExportExporter $exportedBy): self
     {
         $clone = clone $this;
         $clone->exportedBy = $exportedBy;
@@ -211,7 +185,7 @@ class LeadsExport
         $exportedAt = new DateTime($input->{'exportedAt'});
         $exportedBy = null;
         if (isset($input->{'exportedBy'})) {
-            $exportedBy = LeadsExportExportedBy::buildFromInput($input->{'exportedBy'}, validate: $validate);
+            $exportedBy = LeadsExportExporter::buildFromInput($input->{'exportedBy'}, validate: $validate);
         }
         $leadCount = (int)($input->{'leadCount'});
 
@@ -232,7 +206,7 @@ class LeadsExport
         $output['exportId'] = $this->exportId;
         $output['exportedAt'] = ($this->exportedAt)->format(DateTime::ATOM);
         if (isset($this->exportedBy)) {
-            $output['exportedBy'] = ($this->exportedBy)->toJson();
+            $output['exportedBy'] = $this->exportedBy->toJson();
         }
         $output['leadCount'] = $this->leadCount;
 
@@ -266,8 +240,5 @@ class LeadsExport
     public function __clone()
     {
         $this->exportedAt = clone $this->exportedAt;
-        if (isset($this->exportedBy)) {
-            $this->exportedBy = clone $this->exportedBy;
-        }
     }
 }
