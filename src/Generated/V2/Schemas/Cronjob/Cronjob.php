@@ -55,6 +55,7 @@ class Cronjob
                 'type' => 'string',
             ],
             'failedExecutionAlertThreshold' => [
+                'minimum' => 1,
                 'type' => 'integer',
             ],
             'id' => [
@@ -101,6 +102,7 @@ class Cronjob
             'description',
             'destination',
             'timeout',
+            'failedExecutionAlertThreshold',
         ],
         'type' => 'object',
     ];
@@ -117,7 +119,7 @@ class Cronjob
 
     private ?string $email = null;
 
-    private ?int $failedExecutionAlertThreshold = null;
+    private int $failedExecutionAlertThreshold;
 
     private string $id;
 
@@ -135,13 +137,14 @@ class Cronjob
 
     private DateTime $updatedAt;
 
-    public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, int $timeout, DateTime $updatedAt)
+    public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, int $failedExecutionAlertThreshold, string $id, string $interval, string $shortId, int $timeout, DateTime $updatedAt)
     {
         $this->active = $active;
         $this->appId = $appId;
         $this->createdAt = $createdAt;
         $this->description = $description;
         $this->destination = $destination;
+        $this->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         $this->id = $id;
         $this->interval = $interval;
         $this->shortId = $shortId;
@@ -179,9 +182,9 @@ class Cronjob
         return $this->email ?? null;
     }
 
-    public function getFailedExecutionAlertThreshold(): ?int
+    public function getFailedExecutionAlertThreshold(): int
     {
-        return $this->failedExecutionAlertThreshold ?? null;
+        return $this->failedExecutionAlertThreshold;
     }
 
     public function getId(): string
@@ -314,14 +317,6 @@ class Cronjob
 
         $clone = clone $this;
         $clone->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
-
-        return $clone;
-    }
-
-    public function withoutFailedExecutionAlertThreshold(): self
-    {
-        $clone = clone $this;
-        unset($clone->failedExecutionAlertThreshold);
 
         return $clone;
     }
@@ -472,10 +467,7 @@ class Cronjob
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
         }
-        $failedExecutionAlertThreshold = null;
-        if (isset($input->{'failedExecutionAlertThreshold'})) {
-            $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
-        }
+        $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
         $id = $input->{'id'};
         $interval = $input->{'interval'};
         $latestExecution = null;
@@ -494,9 +486,8 @@ class Cronjob
         $timeout = (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
-        $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $timeout, $updatedAt);
+        $obj = new self($active, $appId, $createdAt, $description, $destination, $failedExecutionAlertThreshold, $id, $interval, $shortId, $timeout, $updatedAt);
         $obj->email = $email;
-        $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         $obj->latestExecution = $latestExecution;
         $obj->nextExecutionTime = $nextExecutionTime;
         $obj->projectId = $projectId;
@@ -521,9 +512,7 @@ class Cronjob
         if (isset($this->email)) {
             $output['email'] = $this->email;
         }
-        if (isset($this->failedExecutionAlertThreshold)) {
-            $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
-        }
+        $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
         $output['id'] = $this->id;
         $output['interval'] = $this->interval;
         if (isset($this->latestExecution)) {

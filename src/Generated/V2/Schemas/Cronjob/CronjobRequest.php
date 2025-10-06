@@ -50,7 +50,7 @@ class CronjobRequest
                 'type' => 'string',
             ],
             'failedExecutionAlertThreshold' => [
-                'minimum' => 0,
+                'minimum' => 1,
                 'type' => 'integer',
             ],
             'interval' => [
