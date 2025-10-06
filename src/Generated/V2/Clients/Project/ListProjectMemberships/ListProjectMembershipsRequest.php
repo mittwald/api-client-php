@@ -24,6 +24,10 @@ class ListProjectMembershipsRequest
             'skip' => [
                 'type' => 'integer',
             ],
+            'page' => [
+                'minimum' => 0,
+                'type' => 'integer',
+            ],
             'hasExpiry' => [
                 'type' => 'boolean',
             ],
@@ -42,6 +46,8 @@ class ListProjectMembershipsRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?int $page = null;
 
     private ?bool $hasExpiry = null;
 
@@ -68,6 +74,11 @@ class ListProjectMembershipsRequest
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function getHasExpiry(): ?bool
@@ -125,6 +136,28 @@ class ListProjectMembershipsRequest
     {
         $clone = clone $this;
         unset($clone->skip);
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
 
         return $clone;
     }
@@ -212,6 +245,10 @@ class ListProjectMembershipsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
         $hasExpiry = null;
         if (isset($input->{'hasExpiry'})) {
             $hasExpiry = (bool)($input->{'hasExpiry'});
@@ -228,6 +265,7 @@ class ListProjectMembershipsRequest
         $obj = new self();
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         $obj->hasExpiry = $hasExpiry;
         $obj->isInherited = $isInherited;
         $obj->role = $role;
@@ -247,6 +285,9 @@ class ListProjectMembershipsRequest
         }
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
+        }
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
         if (isset($this->hasExpiry)) {
             $output['hasExpiry'] = $this->hasExpiry;
@@ -322,6 +363,9 @@ class ListProjectMembershipsRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         if (isset($mapped['hasExpiry'])) {
             $query['hasExpiry'] = $mapped['hasExpiry'];

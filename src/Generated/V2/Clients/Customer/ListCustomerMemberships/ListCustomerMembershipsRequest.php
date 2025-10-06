@@ -24,6 +24,10 @@ class ListCustomerMembershipsRequest
             'skip' => [
                 'type' => 'integer',
             ],
+            'page' => [
+                'minimum' => 0,
+                'type' => 'integer',
+            ],
             'hasExpiry' => [
                 'type' => 'boolean',
             ],
@@ -39,6 +43,8 @@ class ListCustomerMembershipsRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?int $page = null;
 
     private ?bool $hasExpiry = null;
 
@@ -63,6 +69,11 @@ class ListCustomerMembershipsRequest
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function getHasExpiry(): ?bool
@@ -115,6 +126,28 @@ class ListCustomerMembershipsRequest
     {
         $clone = clone $this;
         unset($clone->skip);
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
 
         return $clone;
     }
@@ -180,6 +213,10 @@ class ListCustomerMembershipsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
         $hasExpiry = null;
         if (isset($input->{'hasExpiry'})) {
             $hasExpiry = (bool)($input->{'hasExpiry'});
@@ -192,6 +229,7 @@ class ListCustomerMembershipsRequest
         $obj = new self();
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         $obj->hasExpiry = $hasExpiry;
         $obj->role = $role;
         return $obj;
@@ -210,6 +248,9 @@ class ListCustomerMembershipsRequest
         }
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
+        }
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
         if (isset($this->hasExpiry)) {
             $output['hasExpiry'] = $this->hasExpiry;
@@ -282,6 +323,9 @@ class ListCustomerMembershipsRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         if (isset($mapped['hasExpiry'])) {
             $query['hasExpiry'] = $mapped['hasExpiry'];

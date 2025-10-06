@@ -23,6 +23,10 @@ class ListCustomerInvitesRequest
             'skip' => [
                 'type' => 'integer',
             ],
+            'page' => [
+                'minimum' => 0,
+                'type' => 'integer',
+            ],
         ],
         'required' => [
 
@@ -32,6 +36,8 @@ class ListCustomerInvitesRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -52,6 +58,11 @@ class ListCustomerInvitesRequest
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withLimit(int $limit): self
@@ -98,6 +109,28 @@ class ListCustomerInvitesRequest
         return $clone;
     }
 
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -121,10 +154,15 @@ class ListCustomerInvitesRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self();
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -141,6 +179,9 @@ class ListCustomerInvitesRequest
         }
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
+        }
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -207,6 +248,9 @@ class ListCustomerInvitesRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
