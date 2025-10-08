@@ -31,6 +31,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesO
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceRequest;
@@ -181,6 +183,16 @@ interface ContainerClient
      * @return ListServicesOKResponse OK
      */
     public function listServices(ListServicesRequest $request): ListServicesOKResponse;
+    /**
+     * List Volumes belonging to a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-stack-volumes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListStackVolumesRequest $request An object representing the request for this operation
+     * @return ListStackVolumesOKResponse OK
+     */
+    public function listStackVolumes(ListStackVolumesRequest $request): ListStackVolumesOKResponse;
     /**
      * List Stacks belonging to a Project.
      *

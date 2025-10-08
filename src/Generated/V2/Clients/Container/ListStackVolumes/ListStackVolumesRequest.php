@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Container\VolumeSortOrder;
 
-class OrderListOrdersRequest
+class ListStackVolumesRequest
 {
     public const method = 'get';
 
@@ -18,23 +18,15 @@ class OrderListOrdersRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'includesStatus' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.order.OrderStatus',
-                ],
-                'type' => 'array',
+            'stackId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
-            'excludesStatus' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.order.OrderStatus',
-                ],
-                'type' => 'array',
+            'searchTerm' => [
+                'type' => 'string',
             ],
-            'templateNames' => [
-                'items' => [
-                    'type' => 'string',
-                ],
-                'type' => 'array',
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeSortOrder',
             ],
             'limit' => [
                 'type' => 'integer',
@@ -51,24 +43,15 @@ class OrderListOrdersRequest
             ],
         ],
         'required' => [
-
+            'stackId',
         ],
     ];
 
-    /**
-     * @var OrderStatus[]|null
-     */
-    private ?array $includesStatus = null;
+    private string $stackId;
 
-    /**
-     * @var OrderStatus[]|null
-     */
-    private ?array $excludesStatus = null;
+    private ?string $searchTerm = null;
 
-    /**
-     * @var string[]|null
-     */
-    private ?array $templateNames = null;
+    private ?VolumeSortOrder $sortOrder = null;
 
     private int $limit = 1000;
 
@@ -80,35 +63,24 @@ class OrderListOrdersRequest
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $stackId)
     {
+        $this->stackId = $stackId;
     }
 
-    /**
-     * @return OrderStatus[]|null
-     */
-    public function getIncludesStatus(): ?array
+    public function getStackId(): string
     {
-        return $this->includesStatus ?? null;
+        return $this->stackId;
     }
 
-    /**
-     * @return OrderStatus[]|null
-     */
-    public function getExcludesStatus(): ?array
+    public function getSearchTerm(): ?string
     {
-        return $this->excludesStatus ?? null;
+        return $this->searchTerm ?? null;
     }
 
-    /**
-     * @return string[]|null
-     */
-    public function getTemplateNames(): ?array
+    public function getSortOrder(): ?VolumeSortOrder
     {
-        return $this->templateNames ?? null;
+        return $this->sortOrder ?? null;
     }
 
     public function getLimit(): int
@@ -126,65 +98,54 @@ class OrderListOrdersRequest
         return $this->page ?? null;
     }
 
-    /**
-     * @param OrderStatus[] $includesStatus
-     */
-    public function withIncludesStatus(array $includesStatus): self
-    {
-        $clone = clone $this;
-        $clone->includesStatus = $includesStatus;
-
-        return $clone;
-    }
-
-    public function withoutIncludesStatus(): self
-    {
-        $clone = clone $this;
-        unset($clone->includesStatus);
-
-        return $clone;
-    }
-
-    /**
-     * @param OrderStatus[] $excludesStatus
-     */
-    public function withExcludesStatus(array $excludesStatus): self
-    {
-        $clone = clone $this;
-        $clone->excludesStatus = $excludesStatus;
-
-        return $clone;
-    }
-
-    public function withoutExcludesStatus(): self
-    {
-        $clone = clone $this;
-        unset($clone->excludesStatus);
-
-        return $clone;
-    }
-
-    /**
-     * @param string[] $templateNames
-     */
-    public function withTemplateNames(array $templateNames): self
+    public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($templateNames, self::$internalValidationSchema['properties']['templateNames']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->templateNames = $templateNames;
+        $clone->stackId = $stackId;
 
         return $clone;
     }
 
-    public function withoutTemplateNames(): self
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
     {
         $clone = clone $this;
-        unset($clone->templateNames);
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withSortOrder(VolumeSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
 
         return $clone;
     }
@@ -244,27 +205,24 @@ class OrderListOrdersRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderListOrdersRequest Created instance
+     * @return ListStackVolumesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderListOrdersRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListStackVolumesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $includesStatus = null;
-        if (isset($input->{'includesStatus'})) {
-            $includesStatus = array_map(fn (string $i): OrderStatus => OrderStatus::from($i), $input->{'includesStatus'});
+        $stackId = $input->{'stackId'};
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
         }
-        $excludesStatus = null;
-        if (isset($input->{'excludesStatus'})) {
-            $excludesStatus = array_map(fn (string $i): OrderStatus => OrderStatus::from($i), $input->{'excludesStatus'});
-        }
-        $templateNames = null;
-        if (isset($input->{'templateNames'})) {
-            $templateNames = $input->{'templateNames'};
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = VolumeSortOrder::from($input->{'sortOrder'});
         }
         $limit = 1000;
         if (isset($input->{'limit'})) {
@@ -279,10 +237,9 @@ class OrderListOrdersRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self();
-        $obj->includesStatus = $includesStatus;
-        $obj->excludesStatus = $excludesStatus;
-        $obj->templateNames = $templateNames;
+        $obj = new self($stackId);
+        $obj->searchTerm = $searchTerm;
+        $obj->sortOrder = $sortOrder;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -297,14 +254,12 @@ class OrderListOrdersRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->includesStatus)) {
-            $output['includesStatus'] = array_map(fn (OrderStatus $i): string => $i->value, $this->includesStatus);
+        $output['stackId'] = $this->stackId;
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
         }
-        if (isset($this->excludesStatus)) {
-            $output['excludesStatus'] = array_map(fn (OrderStatus $i): string => $i->value, $this->excludesStatus);
-        }
-        if (isset($this->templateNames)) {
-            $output['templateNames'] = $this->templateNames;
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -355,7 +310,8 @@ class OrderListOrdersRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/orders';
+        $stackId = urlencode($mapped['stackId']);
+        return '/v2/stacks/' . $stackId . '/volumes';
     }
 
     /**
@@ -371,14 +327,11 @@ class OrderListOrdersRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['includesStatus'])) {
-            $query['includesStatus'] = $mapped['includesStatus'];
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
         }
-        if (isset($mapped['excludesStatus'])) {
-            $query['excludesStatus'] = $mapped['excludesStatus'];
-        }
-        if (isset($mapped['templateNames'])) {
-            $query['templateNames'] = $mapped['templateNames'];
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
