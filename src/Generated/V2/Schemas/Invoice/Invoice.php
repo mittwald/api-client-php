@@ -33,7 +33,7 @@ class Invoice
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.Cancellation',
             ],
             'cancellationOf' => [
-                'description' => 'The ID of the invoice that this invoice cancels.',
+                'description' => 'The ID of the Invoice that this invoice cancels.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -101,6 +101,11 @@ class Invoice
             'recipient' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.Recipient',
             ],
+            'reissuedBy' => [
+                'description' => 'The ID of the Invoice that is a Reissue of this one.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'status' => [
                 'enum' => [
                     'NEW',
@@ -148,7 +153,7 @@ class Invoice
     private ?Cancellation $cancellation = null;
 
     /**
-     * The ID of the invoice that this invoice cancels.
+     * The ID of the Invoice that this invoice cancels.
      */
     private ?string $cancellationOf = null;
 
@@ -174,6 +179,11 @@ class Invoice
     private string $pdfId;
 
     private Recipient $recipient;
+
+    /**
+     * The ID of the Invoice that is a Reissue of this one.
+     */
+    private ?string $reissuedBy = null;
 
     private InvoiceStatus $status;
 
@@ -269,6 +279,11 @@ class Invoice
     public function getRecipient(): Recipient
     {
         return $this->recipient;
+    }
+
+    public function getReissuedBy(): ?string
+    {
+        return $this->reissuedBy ?? null;
     }
 
     public function getStatus(): InvoiceStatus
@@ -464,6 +479,28 @@ class Invoice
         return $clone;
     }
 
+    public function withReissuedBy(string $reissuedBy): self
+    {
+        $validator = new Validator();
+        $validator->validate($reissuedBy, self::$internalValidationSchema['properties']['reissuedBy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->reissuedBy = $reissuedBy;
+
+        return $clone;
+    }
+
+    public function withoutReissuedBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->reissuedBy);
+
+        return $clone;
+    }
+
     public function withStatus(InvoiceStatus $status): self
     {
         $clone = clone $this;
@@ -563,6 +600,10 @@ class Invoice
         }
         $pdfId = $input->{'pdfId'};
         $recipient = Recipient::buildFromInput($input->{'recipient'}, validate: $validate);
+        $reissuedBy = null;
+        if (isset($input->{'reissuedBy'})) {
+            $reissuedBy = $input->{'reissuedBy'};
+        }
         $status = InvoiceStatus::from($input->{'status'});
         $totalGross = str_contains((string)($input->{'totalGross'}), '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
         $totalNet = str_contains((string)($input->{'totalNet'}), '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
@@ -575,6 +616,7 @@ class Invoice
         $obj->cancellation = $cancellation;
         $obj->cancellationOf = $cancellationOf;
         $obj->paymentSettings = $paymentSettings;
+        $obj->reissuedBy = $reissuedBy;
         $obj->vatId = $vatId;
         return $obj;
     }
@@ -609,6 +651,9 @@ class Invoice
         }
         $output['pdfId'] = $this->pdfId;
         $output['recipient'] = $this->recipient->toJson();
+        if (isset($this->reissuedBy)) {
+            $output['reissuedBy'] = $this->reissuedBy;
+        }
         $output['status'] = ($this->status)->value;
         $output['totalGross'] = $this->totalGross;
         $output['totalNet'] = $this->totalNet;

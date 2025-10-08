@@ -112,6 +112,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksInter
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesForbiddenResponse;
@@ -527,6 +534,31 @@ class ContainerClientImpl implements ContainerClient
             429 => ListServicesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListServicesInternalServerErrorResponse::fromResponse($httpResponse),
             default => ListServicesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Volumes belonging to a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-stack-volumes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListStackVolumesRequest $request An object representing the request for this operation
+     * @return ListStackVolumesOKResponse OK
+     */
+    public function listStackVolumes(ListStackVolumesRequest $request): ListStackVolumesOKResponse
+    {
+        $httpRequest = new Request(ListStackVolumesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListStackVolumesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListStackVolumesBadRequestResponse::fromResponse($httpResponse),
+            403 => ListStackVolumesForbiddenResponse::fromResponse($httpResponse),
+            429 => ListStackVolumesTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListStackVolumesInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListStackVolumesDefaultResponse::fromResponse($httpResponse),
         });
     }
 

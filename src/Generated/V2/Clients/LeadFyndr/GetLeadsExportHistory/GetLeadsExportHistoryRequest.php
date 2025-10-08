@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites;
+namespace Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListCustomerInvitesRequest
+class GetLeadsExportHistoryRequest
 {
     public const method = 'get';
 
@@ -17,37 +17,66 @@ class ListCustomerInvitesRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'customerId' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'exportedAt',
+                ],
+                'default' => 'exportedAt',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'desc',
             ],
         ],
         'required' => [
-
+            'customerId',
         ],
     ];
 
+    private string $customerId;
+
     private ?int $limit = null;
 
-    private ?int $skip = null;
+    private int $skip = 0;
 
     private ?int $page = null;
+
+    private GetLeadsExportHistoryRequestSort $sort = GetLeadsExportHistoryRequestSort::exportedAt;
+
+    private GetLeadsExportHistoryRequestOrder $order = GetLeadsExportHistoryRequestOrder::desc;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $customerId)
     {
+        $this->customerId = $customerId;
+    }
+
+    public function getCustomerId(): string
+    {
+        return $this->customerId;
     }
 
     public function getLimit(): ?int
@@ -55,14 +84,38 @@ class ListCustomerInvitesRequest
         return $this->limit ?? null;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function getPage(): ?int
     {
         return $this->page ?? null;
+    }
+
+    public function getSort(): GetLeadsExportHistoryRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): GetLeadsExportHistoryRequestOrder
+    {
+        return $this->order;
+    }
+
+    public function withCustomerId(string $customerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerId = $customerId;
+
+        return $clone;
     }
 
     public function withLimit(int $limit): self
@@ -101,14 +154,6 @@ class ListCustomerInvitesRequest
         return $clone;
     }
 
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
-
-        return $clone;
-    }
-
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -131,26 +176,43 @@ class ListCustomerInvitesRequest
         return $clone;
     }
 
+    public function withSort(GetLeadsExportHistoryRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(GetLeadsExportHistoryRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListCustomerInvitesRequest Created instance
+     * @return GetLeadsExportHistoryRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListCustomerInvitesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetLeadsExportHistoryRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $customerId = $input->{'customerId'};
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -158,11 +220,21 @@ class ListCustomerInvitesRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = GetLeadsExportHistoryRequestSort::exportedAt;
+        if (isset($input->{'sort'})) {
+            $sort = GetLeadsExportHistoryRequestSort::from($input->{'sort'});
+        }
+        $order = GetLeadsExportHistoryRequestOrder::desc;
+        if (isset($input->{'order'})) {
+            $order = GetLeadsExportHistoryRequestOrder::from($input->{'order'});
+        }
 
-        $obj = new self();
+        $obj = new self($customerId);
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -174,15 +246,16 @@ class ListCustomerInvitesRequest
     public function toJson(): array
     {
         $output = [];
+        $output['customerId'] = $this->customerId;
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -227,7 +300,8 @@ class ListCustomerInvitesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/customer-invites';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/unlocked-leads-exports';
     }
 
     /**
@@ -251,6 +325,12 @@ class ListCustomerInvitesRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

@@ -9,6 +9,8 @@ use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessRequest\CreateLeadFyndrAccessRequestCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadFyndrAccessRequest\CreateLeadFyndrAccessRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\CreateLeadsExport\CreateLeadsExportRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetCities\GetCitiesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetCities\GetCitiesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLead\GetLeadOKResponse;
@@ -18,6 +20,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileRequest
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileRequest\GetLeadFyndrProfileRequestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffOptions\GetLeadFyndrProfileTariffOptionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadFyndrProfileTariffOptions\GetLeadFyndrProfileTariffOptionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetLeadsExportHistory\GetLeadsExportHistoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsOKResponse;
@@ -54,6 +58,15 @@ interface LeadFyndrClient
      * @param CreateLeadFyndrAccessRequestRequest $request An object representing the request for this operation
      */
     public function createLeadFyndrAccessRequest(CreateLeadFyndrAccessRequestRequest $request): CreateLeadFyndrAccessRequestCreatedResponse;
+    /**
+     * Create an export of unlocked leads for the given customerId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/LeadFyndr/operation/leadfyndr-create-leads-export
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateLeadsExportRequest $request An object representing the request for this operation
+     */
+    public function createLeadsExport(CreateLeadsExportRequest $request): CreateLeadsExportOKResponse;
     /**
      * Get cities in DACH.
      *
@@ -104,6 +117,16 @@ interface LeadFyndrClient
      * @return GetLeadFyndrProfileTariffOptionsOKResponse The lead tariff options.
      */
     public function getLeadFyndrProfileTariffOptions(GetLeadFyndrProfileTariffOptionsRequest $request): GetLeadFyndrProfileTariffOptionsOKResponse;
+    /**
+     * Get unlocked leads export history for the given customerId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/LeadFyndr/operation/leadfyndr-get-leads-export-history
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetLeadsExportHistoryRequest $request An object representing the request for this operation
+     * @return GetLeadsExportHistoryOKResponse A list of unlocked leads exports.
+     */
+    public function getLeadsExportHistory(GetLeadsExportHistoryRequest $request): GetLeadsExportHistoryOKResponse;
     /**
      * Get a detail of a unlocked lead. Organisation can unlock leads.
      *

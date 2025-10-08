@@ -39,7 +39,6 @@ class ProjectBackupExport
             ],
             'phase' => [
                 'enum' => [
-                    '',
                     'Pending',
                     'Exporting',
                     'Failed',
