@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeRequest;
@@ -131,6 +132,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtension
  */
 interface MarketplaceClient
 {
+    /**
+     * Cancel the verification-process of a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-cancel-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorCancelVerificationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The verification process has been cancelled.
+     */
+    public function contributorCancelVerification(ContributorCancelVerificationRequest $request): EmptyResponse;
     /**
      * Delete a Contributor.
      *
