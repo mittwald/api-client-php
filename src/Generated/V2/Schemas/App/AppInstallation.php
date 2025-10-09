@@ -42,6 +42,10 @@ class AppInstallation
             'customDocumentRoot' => [
                 'type' => 'string',
             ],
+            'deletionRequested' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
             'description' => [
                 'type' => 'string',
             ],
@@ -129,6 +133,8 @@ class AppInstallation
 
     private ?string $customDocumentRoot = null;
 
+    private bool $deletionRequested = false;
+
     private string $description;
 
     private bool $disabled = false;
@@ -209,6 +215,11 @@ class AppInstallation
     public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
+    }
+
+    public function getDeletionRequested(): bool
+    {
+        return $this->deletionRequested;
     }
 
     public function getDescription(): string
@@ -341,6 +352,20 @@ class AppInstallation
     {
         $clone = clone $this;
         unset($clone->customDocumentRoot);
+
+        return $clone;
+    }
+
+    public function withDeletionRequested(bool $deletionRequested): self
+    {
+        $validator = new Validator();
+        $validator->validate($deletionRequested, self::$internalValidationSchema['properties']['deletionRequested']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deletionRequested = $deletionRequested;
 
         return $clone;
     }
@@ -569,6 +594,10 @@ class AppInstallation
         if (isset($input->{'customDocumentRoot'})) {
             $customDocumentRoot = $input->{'customDocumentRoot'};
         }
+        $deletionRequested = false;
+        if (isset($input->{'deletionRequested'})) {
+            $deletionRequested = (bool)($input->{'deletionRequested'});
+        }
         $description = $input->{'description'};
         $disabled = false;
         if (isset($input->{'disabled'})) {
@@ -598,6 +627,7 @@ class AppInstallation
 
         $obj = new self($appId, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
         $obj->customDocumentRoot = $customDocumentRoot;
+        $obj->deletionRequested = $deletionRequested;
         $obj->disabled = $disabled;
         $obj->lockedBy = $lockedBy;
         $obj->screenshotId = $screenshotId;
@@ -619,6 +649,7 @@ class AppInstallation
         if (isset($this->customDocumentRoot)) {
             $output['customDocumentRoot'] = $this->customDocumentRoot;
         }
+        $output['deletionRequested'] = $this->deletionRequested;
         $output['description'] = $this->description;
         $output['disabled'] = $this->disabled;
         $output['id'] = $this->id;
