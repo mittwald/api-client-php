@@ -30,6 +30,10 @@ class TerminateContractItemCreatedResponse implements ResponseContainer
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'explanation' => [
+                        'example' => 'I consolidated multiple servers into one instance to reduce overhead',
+                        'type' => 'string',
+                    ],
                     'reason' => [
                         'example' => 'Server wird nicht mehr benötigt',
                         'type' => 'string',

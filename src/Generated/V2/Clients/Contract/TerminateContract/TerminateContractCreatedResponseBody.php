@@ -19,6 +19,10 @@ class TerminateContractCreatedResponseBody
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'explanation' => [
+                'example' => 'The website for my temporary project is no longer needed',
+                'type' => 'string',
+            ],
             'itemsScheduledForTermination' => [
                 'items' => [
                     'format' => 'uuid',
@@ -39,6 +43,8 @@ class TerminateContractCreatedResponseBody
 
     private ?string $contractId = null;
 
+    private ?string $explanation = null;
+
     /**
      * @var string[]|null
      */
@@ -58,6 +64,11 @@ class TerminateContractCreatedResponseBody
     public function getContractId(): ?string
     {
         return $this->contractId ?? null;
+    }
+
+    public function getExplanation(): ?string
+    {
+        return $this->explanation ?? null;
     }
 
     /**
@@ -96,6 +107,28 @@ class TerminateContractCreatedResponseBody
     {
         $clone = clone $this;
         unset($clone->contractId);
+
+        return $clone;
+    }
+
+    public function withExplanation(string $explanation): self
+    {
+        $validator = new Validator();
+        $validator->validate($explanation, self::$internalValidationSchema['properties']['explanation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->explanation = $explanation;
+
+        return $clone;
+    }
+
+    public function withoutExplanation(): self
+    {
+        $clone = clone $this;
+        unset($clone->explanation);
 
         return $clone;
     }
@@ -182,6 +215,10 @@ class TerminateContractCreatedResponseBody
         if (isset($input->{'contractId'})) {
             $contractId = $input->{'contractId'};
         }
+        $explanation = null;
+        if (isset($input->{'explanation'})) {
+            $explanation = $input->{'explanation'};
+        }
         $itemsScheduledForTermination = null;
         if (isset($input->{'itemsScheduledForTermination'})) {
             $itemsScheduledForTermination = $input->{'itemsScheduledForTermination'};
@@ -197,6 +234,7 @@ class TerminateContractCreatedResponseBody
 
         $obj = new self();
         $obj->contractId = $contractId;
+        $obj->explanation = $explanation;
         $obj->itemsScheduledForTermination = $itemsScheduledForTermination;
         $obj->reason = $reason;
         $obj->terminationTargetDate = $terminationTargetDate;
@@ -213,6 +251,9 @@ class TerminateContractCreatedResponseBody
         $output = [];
         if (isset($this->contractId)) {
             $output['contractId'] = $this->contractId;
+        }
+        if (isset($this->explanation)) {
+            $output['explanation'] = $this->explanation;
         }
         if (isset($this->itemsScheduledForTermination)) {
             $output['itemsScheduledForTermination'] = $this->itemsScheduledForTermination;

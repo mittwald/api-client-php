@@ -29,6 +29,10 @@ class Termination
                 'description' => 'Indicates whether the User is allowed to cancel the Termination.',
                 'type' => 'boolean',
             ],
+            'explanation' => [
+                'example' => 'Not needed anymore',
+                'type' => 'string',
+            ],
             'reason' => [
                 'example' => 'Not needed anymore',
                 'type' => 'string',
@@ -57,6 +61,8 @@ class Termination
      */
     private ?bool $cancellationForbidden = null;
 
+    private ?string $explanation = null;
+
     private ?string $reason = null;
 
     private DateTime $scheduledAtDate;
@@ -74,6 +80,11 @@ class Termination
     public function getCancellationForbidden(): ?bool
     {
         return $this->cancellationForbidden ?? null;
+    }
+
+    public function getExplanation(): ?string
+    {
+        return $this->explanation ?? null;
     }
 
     public function getReason(): ?string
@@ -114,6 +125,28 @@ class Termination
     {
         $clone = clone $this;
         unset($clone->cancellationForbidden);
+
+        return $clone;
+    }
+
+    public function withExplanation(string $explanation): self
+    {
+        $validator = new Validator();
+        $validator->validate($explanation, self::$internalValidationSchema['properties']['explanation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->explanation = $explanation;
+
+        return $clone;
+    }
+
+    public function withoutExplanation(): self
+    {
+        $clone = clone $this;
+        unset($clone->explanation);
 
         return $clone;
     }
@@ -197,6 +230,10 @@ class Termination
         if (isset($input->{'cancellationForbidden'})) {
             $cancellationForbidden = (bool)($input->{'cancellationForbidden'});
         }
+        $explanation = null;
+        if (isset($input->{'explanation'})) {
+            $explanation = $input->{'explanation'};
+        }
         $reason = null;
         if (isset($input->{'reason'})) {
             $reason = $input->{'reason'};
@@ -210,6 +247,7 @@ class Termination
 
         $obj = new self($scheduledAtDate, $targetDate);
         $obj->cancellationForbidden = $cancellationForbidden;
+        $obj->explanation = $explanation;
         $obj->reason = $reason;
         $obj->scheduledByUserId = $scheduledByUserId;
         return $obj;
@@ -225,6 +263,9 @@ class Termination
         $output = [];
         if (isset($this->cancellationForbidden)) {
             $output['cancellationForbidden'] = $this->cancellationForbidden;
+        }
+        if (isset($this->explanation)) {
+            $output['explanation'] = $this->explanation;
         }
         if (isset($this->reason)) {
             $output['reason'] = $this->reason;

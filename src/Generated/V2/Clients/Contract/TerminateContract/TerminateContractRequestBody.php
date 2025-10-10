@@ -15,6 +15,10 @@ class TerminateContractRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'explanation' => [
+                'example' => 'The website for my temporary project is no longer needed',
+                'type' => 'string',
+            ],
             'reason' => [
                 'description' => 'A reason for the termination can be given as plain text.',
                 'example' => 'Projekt wird nicht mehr benötigt',
@@ -27,6 +31,8 @@ class TerminateContractRequestBody
             ],
         ],
     ];
+
+    private ?string $explanation = null;
 
     /**
      * A reason for the termination can be given as plain text.
@@ -45,6 +51,11 @@ class TerminateContractRequestBody
     {
     }
 
+    public function getExplanation(): ?string
+    {
+        return $this->explanation ?? null;
+    }
+
     public function getReason(): ?string
     {
         return $this->reason ?? null;
@@ -53,6 +64,28 @@ class TerminateContractRequestBody
     public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
+    }
+
+    public function withExplanation(string $explanation): self
+    {
+        $validator = new Validator();
+        $validator->validate($explanation, self::$internalValidationSchema['properties']['explanation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->explanation = $explanation;
+
+        return $clone;
+    }
+
+    public function withoutExplanation(): self
+    {
+        $clone = clone $this;
+        unset($clone->explanation);
+
+        return $clone;
     }
 
     public function withReason(string $reason): self
@@ -108,6 +141,10 @@ class TerminateContractRequestBody
             static::validateInput($input);
         }
 
+        $explanation = null;
+        if (isset($input->{'explanation'})) {
+            $explanation = $input->{'explanation'};
+        }
         $reason = null;
         if (isset($input->{'reason'})) {
             $reason = $input->{'reason'};
@@ -118,6 +155,7 @@ class TerminateContractRequestBody
         }
 
         $obj = new self();
+        $obj->explanation = $explanation;
         $obj->reason = $reason;
         $obj->terminationTargetDate = $terminationTargetDate;
         return $obj;
@@ -131,6 +169,9 @@ class TerminateContractRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->explanation)) {
+            $output['explanation'] = $this->explanation;
+        }
         if (isset($this->reason)) {
             $output['reason'] = $this->reason;
         }
