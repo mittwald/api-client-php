@@ -26,6 +26,10 @@ class TerminateContractCreatedResponse implements ResponseContainer
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'explanation' => [
+                        'example' => 'The website for my temporary project is no longer needed',
+                        'type' => 'string',
+                    ],
                     'itemsScheduledForTermination' => [
                         'items' => [
                             'format' => 'uuid',
