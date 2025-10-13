@@ -56,6 +56,9 @@ class Project
                 'example' => 'f282f1a8-2b15-4b08-9850-6788e3b20136',
                 'type' => 'string',
             ],
+            'deletionRequested' => [
+                'type' => 'boolean',
+            ],
             'description' => [
                 'example' => 'My first Project!',
                 'type' => 'string',
@@ -195,6 +198,8 @@ class Project
 
     private string $customerId;
 
+    private ?bool $deletionRequested = null;
+
     private string $description;
 
     /**
@@ -306,6 +311,11 @@ class Project
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    public function getDeletionRequested(): ?bool
+    {
+        return $this->deletionRequested ?? null;
     }
 
     public function getDescription(): string
@@ -510,6 +520,28 @@ class Project
 
         $clone = clone $this;
         $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withDeletionRequested(bool $deletionRequested): self
+    {
+        $validator = new Validator();
+        $validator->validate($deletionRequested, self::$internalValidationSchema['properties']['deletionRequested']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deletionRequested = $deletionRequested;
+
+        return $clone;
+    }
+
+    public function withoutDeletionRequested(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionRequested);
 
         return $clone;
     }
@@ -870,6 +902,10 @@ class Project
         }
         $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
+        $deletionRequested = null;
+        if (isset($input->{'deletionRequested'})) {
+            $deletionRequested = (bool)($input->{'deletionRequested'});
+        }
         $description = $input->{'description'};
         $directories = (array)$input->{'directories'};
         $disableReason = null;
@@ -927,6 +963,7 @@ class Project
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->clusterId = $clusterId;
+        $obj->deletionRequested = $deletionRequested;
         $obj->disableReason = $disableReason;
         $obj->disabledAt = $disabledAt;
         $obj->features = $features;
@@ -960,6 +997,9 @@ class Project
         }
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
+        if (isset($this->deletionRequested)) {
+            $output['deletionRequested'] = $this->deletionRequested;
+        }
         $output['description'] = $this->description;
         $output['directories'] = $this->directories;
         if (isset($this->disableReason)) {
