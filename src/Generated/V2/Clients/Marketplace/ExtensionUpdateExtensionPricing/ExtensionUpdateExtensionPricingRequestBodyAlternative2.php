@@ -2,62 +2,74 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Extension\PricePlan;
 
-class ExtensionUpdateExtensionInstanceContractRequestBody
+class ExtensionUpdateExtensionPricingRequestBodyAlternative2
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'variantKey' => [
-                'description' => 'The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.',
-                'example' => 'default',
-                'type' => 'string',
+            'dryRun' => [
+                'default' => false,
+                'description' => 'If set to true, the request will be validated but not executed.',
+                'type' => 'boolean',
             ],
+            'pricePlan' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.extension.PricePlan',
+            ],
+        ],
+        'required' => [
+            'pricePlan',
         ],
         'type' => 'object',
     ];
 
     /**
-     * The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants.
+     * If set to true, the request will be validated but not executed.
      */
-    private ?string $variantKey = null;
+    private bool $dryRun = false;
 
-    /**
-     *
-     */
-    public function __construct()
+    private PricePlan $pricePlan;
+
+    public function __construct(PricePlan $pricePlan)
     {
+        $this->pricePlan = $pricePlan;
     }
 
-    public function getVariantKey(): ?string
+    public function getDryRun(): bool
     {
-        return $this->variantKey ?? null;
+        return $this->dryRun;
     }
 
-    public function withVariantKey(string $variantKey): self
+    public function getPricePlan(): PricePlan
+    {
+        return $this->pricePlan;
+    }
+
+    public function withDryRun(bool $dryRun): self
     {
         $validator = new Validator();
-        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        $validator->validate($dryRun, self::$internalValidationSchema['properties']['dryRun']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->variantKey = $variantKey;
+        $clone->dryRun = $dryRun;
 
         return $clone;
     }
 
-    public function withoutVariantKey(): self
+    public function withPricePlan(PricePlan $pricePlan): self
     {
         $clone = clone $this;
-        unset($clone->variantKey);
+        $clone->pricePlan = $pricePlan;
 
         return $clone;
     }
@@ -67,23 +79,24 @@ class ExtensionUpdateExtensionInstanceContractRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionInstanceContractRequestBody Created instance
+     * @return ExtensionUpdateExtensionPricingRequestBodyAlternative2 Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionInstanceContractRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBodyAlternative2
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $variantKey = null;
-        if (isset($input->{'variantKey'})) {
-            $variantKey = $input->{'variantKey'};
+        $dryRun = false;
+        if (isset($input->{'dryRun'})) {
+            $dryRun = (bool)($input->{'dryRun'});
         }
+        $pricePlan = PricePlan::buildFromInput($input->{'pricePlan'}, validate: $validate);
 
-        $obj = new self();
-        $obj->variantKey = $variantKey;
+        $obj = new self($pricePlan);
+        $obj->dryRun = $dryRun;
         return $obj;
     }
 
@@ -95,9 +108,8 @@ class ExtensionUpdateExtensionInstanceContractRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->variantKey)) {
-            $output['variantKey'] = $this->variantKey;
-        }
+        $output['dryRun'] = $this->dryRun;
+        $output['pricePlan'] = $this->pricePlan->toJson();
 
         return $output;
     }

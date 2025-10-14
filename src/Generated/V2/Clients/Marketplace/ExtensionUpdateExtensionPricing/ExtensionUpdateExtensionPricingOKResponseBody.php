@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -15,7 +16,13 @@ class ExtensionUpdateExtensionPricingOKResponseBody
     private static array $internalValidationSchema = [
         'properties' => [
             'extensionId' => [
+                'description' => 'The ID of the Extension.',
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'nextPossiblePriceChange' => [
+                'description' => 'The time until which the contributor is blocked from changing the price again.',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'priceChangeConsequence' => [
@@ -70,28 +77,44 @@ class ExtensionUpdateExtensionPricingOKResponseBody
                 'type' => 'object',
             ],
         ],
+        'required' => [
+            'extensionId',
+            'priceChangeConsequence',
+        ],
         'type' => 'object',
     ];
 
-    private ?string $extensionId = null;
-
-    private ?ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence $priceChangeConsequence = null;
+    /**
+     * The ID of the Extension.
+     */
+    private string $extensionId;
 
     /**
-     *
+     * The time until which the contributor is blocked from changing the price again.
      */
-    public function __construct()
+    private ?DateTime $nextPossiblePriceChange = null;
+
+    private ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence $priceChangeConsequence;
+
+    public function __construct(string $extensionId, ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence $priceChangeConsequence)
     {
+        $this->extensionId = $extensionId;
+        $this->priceChangeConsequence = $priceChangeConsequence;
     }
 
-    public function getExtensionId(): ?string
+    public function getExtensionId(): string
     {
-        return $this->extensionId ?? null;
+        return $this->extensionId;
     }
 
-    public function getPriceChangeConsequence(): ?ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence
+    public function getNextPossiblePriceChange(): ?DateTime
     {
-        return $this->priceChangeConsequence ?? null;
+        return $this->nextPossiblePriceChange ?? null;
+    }
+
+    public function getPriceChangeConsequence(): ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence
+    {
+        return $this->priceChangeConsequence;
     }
 
     public function withExtensionId(string $extensionId): self
@@ -108,10 +131,18 @@ class ExtensionUpdateExtensionPricingOKResponseBody
         return $clone;
     }
 
-    public function withoutExtensionId(): self
+    public function withNextPossiblePriceChange(DateTime $nextPossiblePriceChange): self
     {
         $clone = clone $this;
-        unset($clone->extensionId);
+        $clone->nextPossiblePriceChange = $nextPossiblePriceChange;
+
+        return $clone;
+    }
+
+    public function withoutNextPossiblePriceChange(): self
+    {
+        $clone = clone $this;
+        unset($clone->nextPossiblePriceChange);
 
         return $clone;
     }
@@ -120,14 +151,6 @@ class ExtensionUpdateExtensionPricingOKResponseBody
     {
         $clone = clone $this;
         $clone->priceChangeConsequence = $priceChangeConsequence;
-
-        return $clone;
-    }
-
-    public function withoutPriceChangeConsequence(): self
-    {
-        $clone = clone $this;
-        unset($clone->priceChangeConsequence);
 
         return $clone;
     }
@@ -147,18 +170,15 @@ class ExtensionUpdateExtensionPricingOKResponseBody
             static::validateInput($input);
         }
 
-        $extensionId = null;
-        if (isset($input->{'extensionId'})) {
-            $extensionId = $input->{'extensionId'};
+        $extensionId = $input->{'extensionId'};
+        $nextPossiblePriceChange = null;
+        if (isset($input->{'nextPossiblePriceChange'})) {
+            $nextPossiblePriceChange = new DateTime($input->{'nextPossiblePriceChange'});
         }
-        $priceChangeConsequence = null;
-        if (isset($input->{'priceChangeConsequence'})) {
-            $priceChangeConsequence = ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence::buildFromInput($input->{'priceChangeConsequence'}, validate: $validate);
-        }
+        $priceChangeConsequence = ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence::buildFromInput($input->{'priceChangeConsequence'}, validate: $validate);
 
-        $obj = new self();
-        $obj->extensionId = $extensionId;
-        $obj->priceChangeConsequence = $priceChangeConsequence;
+        $obj = new self($extensionId, $priceChangeConsequence);
+        $obj->nextPossiblePriceChange = $nextPossiblePriceChange;
         return $obj;
     }
 
@@ -170,12 +190,11 @@ class ExtensionUpdateExtensionPricingOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->extensionId)) {
-            $output['extensionId'] = $this->extensionId;
+        $output['extensionId'] = $this->extensionId;
+        if (isset($this->nextPossiblePriceChange)) {
+            $output['nextPossiblePriceChange'] = ($this->nextPossiblePriceChange)->format(DateTime::ATOM);
         }
-        if (isset($this->priceChangeConsequence)) {
-            $output['priceChangeConsequence'] = ($this->priceChangeConsequence)->toJson();
-        }
+        $output['priceChangeConsequence'] = ($this->priceChangeConsequence)->toJson();
 
         return $output;
     }
@@ -206,8 +225,9 @@ class ExtensionUpdateExtensionPricingOKResponseBody
 
     public function __clone()
     {
-        if (isset($this->priceChangeConsequence)) {
-            $this->priceChangeConsequence = clone $this->priceChangeConsequence;
+        if (isset($this->nextPossiblePriceChange)) {
+            $this->nextPossiblePriceChange = clone $this->nextPossiblePriceChange;
         }
+        $this->priceChangeConsequence = clone $this->priceChangeConsequence;
     }
 }
