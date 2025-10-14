@@ -112,13 +112,14 @@ class ExtensionInstance
             'aggregateReference',
             'extensionName',
             'contributorName',
+            'chargeability',
         ],
         'type' => 'object',
     ];
 
     private ExtensionInstanceAggregateReference $aggregateReference;
 
-    private ?ExtensionInstanceChargeability $chargeability = null;
+    private ExtensionInstanceChargeability $chargeability;
 
     /**
      * @var string[]
@@ -155,9 +156,10 @@ class ExtensionInstance
     /**
      * @param string[] $consentedScopes
      */
-    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, string $contributorId, string $contributorName, string $extensionId, string $extensionName, string $id)
+    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, ExtensionInstanceChargeability $chargeability, array $consentedScopes, string $contributorId, string $contributorName, string $extensionId, string $extensionName, string $id)
     {
         $this->aggregateReference = $aggregateReference;
+        $this->chargeability = $chargeability;
         $this->consentedScopes = $consentedScopes;
         $this->contributorId = $contributorId;
         $this->contributorName = $contributorName;
@@ -171,9 +173,9 @@ class ExtensionInstance
         return $this->aggregateReference;
     }
 
-    public function getChargeability(): ?ExtensionInstanceChargeability
+    public function getChargeability(): ExtensionInstanceChargeability
     {
-        return $this->chargeability ?? null;
+        return $this->chargeability;
     }
 
     /**
@@ -259,14 +261,6 @@ class ExtensionInstance
     {
         $clone = clone $this;
         $clone->chargeability = $chargeability;
-
-        return $clone;
-    }
-
-    public function withoutChargeability(): self
-    {
-        $clone = clone $this;
-        unset($clone->chargeability);
 
         return $clone;
     }
@@ -495,10 +489,7 @@ class ExtensionInstance
         }
 
         $aggregateReference = ExtensionInstanceAggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
-        $chargeability = null;
-        if (isset($input->{'chargeability'})) {
-            $chargeability = ExtensionInstanceChargeability::buildFromInput($input->{'chargeability'}, validate: $validate);
-        }
+        $chargeability = ExtensionInstanceChargeability::buildFromInput($input->{'chargeability'}, validate: $validate);
         $consentedScopes = $input->{'consentedScopes'};
         $contributorId = $input->{'contributorId'};
         $contributorName = $input->{'contributorName'};
@@ -534,8 +525,7 @@ class ExtensionInstance
             $variantKey = $input->{'variantKey'};
         }
 
-        $obj = new self($aggregateReference, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
-        $obj->chargeability = $chargeability;
+        $obj = new self($aggregateReference, $chargeability, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
         $obj->createdAt = $createdAt;
         $obj->disabled = $disabled;
         $obj->extensionSubTitle = $extensionSubTitle;
@@ -555,9 +545,7 @@ class ExtensionInstance
     {
         $output = [];
         $output['aggregateReference'] = ($this->aggregateReference)->toJson();
-        if (isset($this->chargeability)) {
-            $output['chargeability'] = $this->chargeability->toJson();
-        }
+        $output['chargeability'] = $this->chargeability->toJson();
         $output['consentedScopes'] = $this->consentedScopes;
         $output['contributorId'] = $this->contributorId;
         $output['contributorName'] = $this->contributorName;
