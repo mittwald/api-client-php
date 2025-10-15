@@ -7,6 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Database;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserCreatedResponse;
@@ -60,6 +62,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescript
  */
 interface DatabaseClient
 {
+    /**
+     * Copy a MySQLDatabase with a MySQLUser.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-copy-mysql-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CopyMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return CopyMysqlDatabaseCreatedResponse Created
+     */
+    public function copyMysqlDatabase(CopyMysqlDatabaseRequest $request): CopyMysqlDatabaseCreatedResponse;
     /**
      * Create a MySQLDatabase with a MySQLUser.
      *

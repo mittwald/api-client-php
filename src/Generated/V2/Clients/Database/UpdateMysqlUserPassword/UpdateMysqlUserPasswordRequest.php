@@ -18,7 +18,6 @@ class UpdateMysqlUserPasswordRequest
         'type' => 'object',
         'properties' => [
             'mysqlUserId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

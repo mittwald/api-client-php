@@ -18,7 +18,6 @@ class UpdateRedisDatabaseConfigurationRequest
         'type' => 'object',
         'properties' => [
             'redisDatabaseId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

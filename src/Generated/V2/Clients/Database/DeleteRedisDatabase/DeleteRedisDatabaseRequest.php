@@ -18,7 +18,6 @@ class DeleteRedisDatabaseRequest
         'type' => 'object',
         'properties' => [
             'redisDatabaseId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

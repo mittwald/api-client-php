@@ -18,7 +18,6 @@ class GetMysqlDatabaseRequest
         'type' => 'object',
         'properties' => [
             'mysqlDatabaseId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

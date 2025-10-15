@@ -39,6 +39,10 @@ class Variant
                 ],
                 'type' => 'string',
             ],
+            'isBookingStopped' => [
+                'description' => 'stop extension variant from being booked',
+                'type' => 'boolean',
+            ],
             'key' => [
                 'description' => 'Key that needs to be unique in Variant.',
                 'type' => 'string',
@@ -73,6 +77,11 @@ class Variant
     private ?VariantDescriptionChangeType $descriptionChangeType = null;
 
     /**
+     * stop extension variant from being booked
+     */
+    private ?bool $isBookingStopped = null;
+
+    /**
      * Key that needs to be unique in Variant.
      */
     private string $key;
@@ -101,6 +110,11 @@ class Variant
     public function getDescriptionChangeType(): ?VariantDescriptionChangeType
     {
         return $this->descriptionChangeType ?? null;
+    }
+
+    public function getIsBookingStopped(): ?bool
+    {
+        return $this->isBookingStopped ?? null;
     }
 
     public function getKey(): string
@@ -152,6 +166,28 @@ class Variant
     {
         $clone = clone $this;
         unset($clone->descriptionChangeType);
+
+        return $clone;
+    }
+
+    public function withIsBookingStopped(bool $isBookingStopped): self
+    {
+        $validator = new Validator();
+        $validator->validate($isBookingStopped, self::$internalValidationSchema['properties']['isBookingStopped']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isBookingStopped = $isBookingStopped;
+
+        return $clone;
+    }
+
+    public function withoutIsBookingStopped(): self
+    {
+        $clone = clone $this;
+        unset($clone->isBookingStopped);
 
         return $clone;
     }
@@ -229,6 +265,10 @@ class Variant
         if (isset($input->{'descriptionChangeType'})) {
             $descriptionChangeType = VariantDescriptionChangeType::from($input->{'descriptionChangeType'});
         }
+        $isBookingStopped = null;
+        if (isset($input->{'isBookingStopped'})) {
+            $isBookingStopped = (bool)($input->{'isBookingStopped'});
+        }
         $key = $input->{'key'};
         $name = null;
         if (isset($input->{'name'})) {
@@ -239,6 +279,7 @@ class Variant
         $obj = new self($key, $priceInCents);
         $obj->description = $description;
         $obj->descriptionChangeType = $descriptionChangeType;
+        $obj->isBookingStopped = $isBookingStopped;
         $obj->name = $name;
         return $obj;
     }
@@ -256,6 +297,9 @@ class Variant
         }
         if (isset($this->descriptionChangeType)) {
             $output['descriptionChangeType'] = ($this->descriptionChangeType)->value;
+        }
+        if (isset($this->isBookingStopped)) {
+            $output['isBookingStopped'] = $this->isBookingStopped;
         }
         $output['key'] = $this->key;
         if (isset($this->name)) {

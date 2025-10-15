@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlDatabaseDescriptionRequest
+class CopyMysqlDatabaseRequest
 {
-    public const method = 'patch';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -25,10 +25,15 @@ class UpdateMysqlDatabaseDescriptionRequest
                     'description' => [
                         'type' => 'string',
                     ],
+                    'user' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.database.CreateMySqlUserWithDatabase',
+                    ],
                 ],
                 'required' => [
                     'description',
+                    'user',
                 ],
+                'type' => 'object',
             ],
         ],
         'required' => [
@@ -39,13 +44,13 @@ class UpdateMysqlDatabaseDescriptionRequest
 
     private string $mysqlDatabaseId;
 
-    private UpdateMysqlDatabaseDescriptionRequestBody $body;
+    private CopyMysqlDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mysqlDatabaseId, UpdateMysqlDatabaseDescriptionRequestBody $body)
+    public function __construct(string $mysqlDatabaseId, CopyMysqlDatabaseRequestBody $body)
     {
         $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
@@ -56,7 +61,7 @@ class UpdateMysqlDatabaseDescriptionRequest
         return $this->mysqlDatabaseId;
     }
 
-    public function getBody(): UpdateMysqlDatabaseDescriptionRequestBody
+    public function getBody(): CopyMysqlDatabaseRequestBody
     {
         return $this->body;
     }
@@ -75,7 +80,7 @@ class UpdateMysqlDatabaseDescriptionRequest
         return $clone;
     }
 
-    public function withBody(UpdateMysqlDatabaseDescriptionRequestBody $body): self
+    public function withBody(CopyMysqlDatabaseRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -88,10 +93,10 @@ class UpdateMysqlDatabaseDescriptionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlDatabaseDescriptionRequest Created instance
+     * @return CopyMysqlDatabaseRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlDatabaseDescriptionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CopyMysqlDatabaseRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -99,7 +104,7 @@ class UpdateMysqlDatabaseDescriptionRequest
         }
 
         $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
-        $body = UpdateMysqlDatabaseDescriptionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CopyMysqlDatabaseRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($mysqlDatabaseId, $body);
 
@@ -162,7 +167,7 @@ class UpdateMysqlDatabaseDescriptionRequest
     {
         $mapped = $this->toJson();
         $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
-        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/description';
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/actions/copy';
     }
 
     /**
