@@ -22,7 +22,6 @@ class RestartServiceRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

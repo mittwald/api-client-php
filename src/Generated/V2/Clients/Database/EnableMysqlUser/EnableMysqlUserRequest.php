@@ -18,7 +18,6 @@ class EnableMysqlUserRequest
         'type' => 'object',
         'properties' => [
             'mysqlUserId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

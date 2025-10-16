@@ -22,7 +22,6 @@ class PullImageForServiceRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'skipRecreate' => [

@@ -9,6 +9,12 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CopyMysqlDatabase\CopyMysqlDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseDefaultResponse;
@@ -169,6 +175,30 @@ class DatabaseClientImpl implements DatabaseClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Copy a MySQLDatabase with a MySQLUser.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-copy-mysql-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CopyMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return CopyMysqlDatabaseCreatedResponse Created
+     */
+    public function copyMysqlDatabase(CopyMysqlDatabaseRequest $request): CopyMysqlDatabaseCreatedResponse
+    {
+        $httpRequest = new Request(CopyMysqlDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CopyMysqlDatabaseCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CopyMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => CopyMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
+            429 => CopyMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CopyMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**

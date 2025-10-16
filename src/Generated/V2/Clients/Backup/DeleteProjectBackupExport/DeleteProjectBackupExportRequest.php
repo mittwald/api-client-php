@@ -18,7 +18,6 @@ class DeleteProjectBackupExportRequest
         'type' => 'object',
         'properties' => [
             'projectBackupId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

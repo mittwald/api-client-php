@@ -18,7 +18,6 @@ class GetMysqlUserPhpMyAdminUrlRequest
         'type' => 'object',
         'properties' => [
             'mysqlUserId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

@@ -19,7 +19,6 @@ class ListVolumesRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'stackId' => [

@@ -18,7 +18,6 @@ class DeleteProjectBackupRequest
         'type' => 'object',
         'properties' => [
             'projectBackupId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

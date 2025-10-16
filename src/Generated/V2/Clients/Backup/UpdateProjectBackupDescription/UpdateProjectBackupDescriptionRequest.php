@@ -18,7 +18,6 @@ class UpdateProjectBackupDescriptionRequest
         'type' => 'object',
         'properties' => [
             'projectBackupId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
