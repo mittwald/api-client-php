@@ -22,7 +22,6 @@ class GetServiceRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

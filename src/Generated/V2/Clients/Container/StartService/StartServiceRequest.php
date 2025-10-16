@@ -22,7 +22,6 @@ class StartServiceRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

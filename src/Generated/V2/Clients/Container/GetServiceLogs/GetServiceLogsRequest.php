@@ -22,7 +22,6 @@ class GetServiceLogsRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'tail' => [

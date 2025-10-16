@@ -22,7 +22,6 @@ class RecreateServiceRequest
                 'type' => 'string',
             ],
             'serviceId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
