@@ -18,7 +18,6 @@ class ProjectFileSystemGetDiskUsageRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'directory' => [

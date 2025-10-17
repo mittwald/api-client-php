@@ -18,7 +18,6 @@ class DeleteServerAvatarRequest
         'type' => 'object',
         'properties' => [
             'serverId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

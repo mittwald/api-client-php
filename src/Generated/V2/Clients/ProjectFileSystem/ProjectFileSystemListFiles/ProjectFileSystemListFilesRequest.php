@@ -18,7 +18,6 @@ class ProjectFileSystemListFilesRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'file' => [

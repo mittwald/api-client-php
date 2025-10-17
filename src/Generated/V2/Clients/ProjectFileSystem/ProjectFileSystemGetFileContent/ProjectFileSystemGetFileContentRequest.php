@@ -18,7 +18,6 @@ class ProjectFileSystemGetFileContentRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'file' => [

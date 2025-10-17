@@ -18,7 +18,6 @@ class UpdateProjectDescriptionRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

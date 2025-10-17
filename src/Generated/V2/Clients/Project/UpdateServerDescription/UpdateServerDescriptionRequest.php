@@ -18,7 +18,6 @@ class UpdateServerDescriptionRequest
         'type' => 'object',
         'properties' => [
             'serverId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

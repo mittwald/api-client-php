@@ -18,7 +18,6 @@ class CreateProjectRequest
         'type' => 'object',
         'properties' => [
             'serverId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
