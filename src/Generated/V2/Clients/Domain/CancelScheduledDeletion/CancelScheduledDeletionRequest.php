@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CreateCustomerInviteRequest
+class CancelScheduledDeletionRequest
 {
-    public const method = 'post';
+    public const method = 'delete';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,84 +17,41 @@ class CreateCustomerInviteRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'customerId' => [
+            'domainId' => [
                 'type' => 'string',
-            ],
-            'body' => [
-                'properties' => [
-                    'mailAddress' => [
-                        'description' => 'Mail-address of the person to be invited.',
-                        'format' => 'email',
-                        'type' => 'string',
-                    ],
-                    'membershipExpiresAt' => [
-                        'description' => 'Time the resulting CustomerMembership should expire at.',
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'message' => [
-                        'description' => 'Message contained in the CustomerInvite.',
-                        'type' => 'string',
-                    ],
-                    'role' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.membership.CustomerRoles',
-                    ],
-                ],
-                'required' => [
-                    'mailAddress',
-                    'role',
-                ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'customerId',
-            'body',
+            'domainId',
         ],
     ];
 
-    private string $customerId;
-
-    private CreateCustomerInviteRequestBody $body;
+    private string $domainId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $customerId, CreateCustomerInviteRequestBody $body)
+    public function __construct(string $domainId)
     {
-        $this->customerId = $customerId;
-        $this->body = $body;
+        $this->domainId = $domainId;
     }
 
-    public function getCustomerId(): string
+    public function getDomainId(): string
     {
-        return $this->customerId;
+        return $this->domainId;
     }
 
-    public function getBody(): CreateCustomerInviteRequestBody
-    {
-        return $this->body;
-    }
-
-    public function withCustomerId(string $customerId): self
+    public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
+        $validator->validate($domainId, self::$internalValidationSchema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->customerId = $customerId;
-
-        return $clone;
-    }
-
-    public function withBody(CreateCustomerInviteRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->domainId = $domainId;
 
         return $clone;
     }
@@ -104,20 +61,19 @@ class CreateCustomerInviteRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateCustomerInviteRequest Created instance
+     * @return CancelScheduledDeletionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateCustomerInviteRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CancelScheduledDeletionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $customerId = $input->{'customerId'};
-        $body = CreateCustomerInviteRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $domainId = $input->{'domainId'};
 
-        $obj = new self($customerId, $body);
+        $obj = new self($domainId);
 
         return $obj;
     }
@@ -130,8 +86,7 @@ class CreateCustomerInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['customerId'] = $this->customerId;
-        $output['body'] = ($this->body)->toJson();
+        $output['domainId'] = $this->domainId;
 
         return $output;
     }
@@ -162,7 +117,6 @@ class CreateCustomerInviteRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -177,8 +131,8 @@ class CreateCustomerInviteRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $customerId = urlencode($mapped['customerId']);
-        return '/v2/customers/' . $customerId . '/invites';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/scheduled-deletion';
     }
 
     /**
@@ -197,7 +151,6 @@ class CreateCustomerInviteRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

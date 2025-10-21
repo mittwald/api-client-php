@@ -18,7 +18,6 @@ class AbortExecutionRequest
         'type' => 'object',
         'properties' => [
             'cronjobId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'executionId' => [

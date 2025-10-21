@@ -20,7 +20,6 @@ class ListExecutionsRequest
         'type' => 'object',
         'properties' => [
             'cronjobId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'limit' => [

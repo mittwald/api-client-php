@@ -15,6 +15,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortD
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
@@ -31,6 +35,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateScheduledDeletion\CreateScheduledDeletionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateScheduledDeletion\CreateScheduledDeletionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateScheduledDeletion\CreateScheduledDeletionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateScheduledDeletion\CreateScheduledDeletionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainNotFoundResponse;
@@ -1027,6 +1035,29 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Cancel a scheduled deletion of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-cancel-scheduled-deletion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CancelScheduledDeletionRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function cancelScheduledDeletion(CancelScheduledDeletionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(CancelScheduledDeletionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CancelScheduledDeletionBadRequestResponse::fromResponse($httpResponse),
+            429 => CancelScheduledDeletionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CancelScheduledDeletionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Check if a Domain is available to register.
      *
      * If false, you have to start a transfer with an auth code instead.
@@ -1097,6 +1128,29 @@ class DomainClientImpl implements DomainClient
             404 => CreateDomainAuthCodeNotFoundResponse::fromResponse($httpResponse),
             429 => CreateDomainAuthCodeTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a scheduled deletion of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-scheduled-deletion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateScheduledDeletionRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function createScheduledDeletion(CreateScheduledDeletionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(CreateScheduledDeletionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateScheduledDeletionBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateScheduledDeletionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateScheduledDeletionDefaultResponse::fromResponse($httpResponse),
         });
     }
 

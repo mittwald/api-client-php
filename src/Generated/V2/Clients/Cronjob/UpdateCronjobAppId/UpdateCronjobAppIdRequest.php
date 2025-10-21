@@ -18,7 +18,6 @@ class UpdateCronjobAppIdRequest
         'type' => 'object',
         'properties' => [
             'cronjobId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

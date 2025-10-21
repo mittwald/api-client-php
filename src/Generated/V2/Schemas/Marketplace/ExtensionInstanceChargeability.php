@@ -31,12 +31,16 @@ class ExtensionInstanceChargeability
             ],
             'reasons' => [
                 'properties' => [
+                    'isNonChargeableCustomer' => [
+                        'type' => 'boolean',
+                    ],
                     'isOwnExtension' => [
                         'type' => 'boolean',
                     ],
                 ],
                 'required' => [
                     'isOwnExtension',
+                    'isNonChargeableCustomer',
                 ],
                 'type' => 'object',
             ],
