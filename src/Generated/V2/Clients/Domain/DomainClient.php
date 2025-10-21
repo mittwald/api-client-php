@@ -9,12 +9,14 @@ use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateScheduledDeletion\CreateScheduledDeletionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordASetCustom\DeprecatedDnsRecordASetCustomRequest;
@@ -455,6 +457,16 @@ interface DomainClient
      */
     public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse;
     /**
+     * Cancel a scheduled deletion of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-cancel-scheduled-deletion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CancelScheduledDeletionRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function cancelScheduledDeletion(CancelScheduledDeletionRequest $request): EmptyResponse;
+    /**
      * Check if a Domain is available to register.
      *
      * If false, you have to start a transfer with an auth code instead.
@@ -488,6 +500,16 @@ interface DomainClient
      * @return CreateDomainAuthCodeCreatedResponse Created
      */
     public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse;
+    /**
+     * Create a scheduled deletion of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-scheduled-deletion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateScheduledDeletionRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function createScheduledDeletion(CreateScheduledDeletionRequest $request): EmptyResponse;
     /**
      * Delete a Domain.
      *

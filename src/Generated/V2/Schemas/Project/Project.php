@@ -98,9 +98,6 @@ class Project
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'ipAddress' => [
-                'type' => 'string',
-            ],
             'isReady' => [
                 'deprecated' => true,
                 'description' => 'deprecated by property status',
@@ -227,8 +224,6 @@ class Project
     private string $id;
 
     private ?string $imageRefId = null;
-
-    private ?string $ipAddress = null;
 
     /**
      * deprecated by property status
@@ -368,11 +363,6 @@ class Project
     public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
-    }
-
-    public function getIpAddress(): ?string
-    {
-        return $this->ipAddress ?? null;
     }
 
     /**
@@ -689,28 +679,6 @@ class Project
         return $clone;
     }
 
-    public function withIpAddress(string $ipAddress): self
-    {
-        $validator = new Validator();
-        $validator->validate($ipAddress, self::$internalValidationSchema['properties']['ipAddress']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->ipAddress = $ipAddress;
-
-        return $clone;
-    }
-
-    public function withoutIpAddress(): self
-    {
-        $clone = clone $this;
-        unset($clone->ipAddress);
-
-        return $clone;
-    }
-
     /**
      * @deprecated
      */
@@ -958,10 +926,6 @@ class Project
         if (isset($input->{'imageRefId'})) {
             $imageRefId = $input->{'imageRefId'};
         }
-        $ipAddress = null;
-        if (isset($input->{'ipAddress'})) {
-            $ipAddress = $input->{'ipAddress'};
-        }
         $isReady = (bool)($input->{'isReady'});
         $projectHostingId = null;
         if (isset($input->{'projectHostingId'})) {
@@ -1004,7 +968,6 @@ class Project
         $obj->disabledAt = $disabledAt;
         $obj->features = $features;
         $obj->imageRefId = $imageRefId;
-        $obj->ipAddress = $ipAddress;
         $obj->projectHostingId = $projectHostingId;
         $obj->serverId = $serverId;
         $obj->serverShortId = $serverShortId;
@@ -1052,9 +1015,6 @@ class Project
         $output['id'] = $this->id;
         if (isset($this->imageRefId)) {
             $output['imageRefId'] = $this->imageRefId;
-        }
-        if (isset($this->ipAddress)) {
-            $output['ipAddress'] = $this->ipAddress;
         }
         $output['isReady'] = $this->isReady;
         if (isset($this->projectHostingId)) {

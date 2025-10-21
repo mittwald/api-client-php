@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -79,6 +80,10 @@ class Domain
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'scheduledDeletionDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'transferInAuthCode' => [
                 'type' => 'string',
             ],
@@ -127,6 +132,8 @@ class Domain
     private ?array $processes = null;
 
     private string $projectId;
+
+    private ?DateTime $scheduledDeletionDate = null;
 
     private ?string $transferInAuthCode = null;
 
@@ -206,6 +213,11 @@ class Domain
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getScheduledDeletionDate(): ?DateTime
+    {
+        return $this->scheduledDeletionDate ?? null;
     }
 
     public function getTransferInAuthCode(): ?string
@@ -386,6 +398,22 @@ class Domain
         return $clone;
     }
 
+    public function withScheduledDeletionDate(DateTime $scheduledDeletionDate): self
+    {
+        $clone = clone $this;
+        $clone->scheduledDeletionDate = $scheduledDeletionDate;
+
+        return $clone;
+    }
+
+    public function withoutScheduledDeletionDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->scheduledDeletionDate);
+
+        return $clone;
+    }
+
     public function withTransferInAuthCode(string $transferInAuthCode): self
     {
         $validator = new Validator();
@@ -460,6 +488,10 @@ class Domain
             $processes = array_map(fn (array|object $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
         }
         $projectId = $input->{'projectId'};
+        $scheduledDeletionDate = null;
+        if (isset($input->{'scheduledDeletionDate'})) {
+            $scheduledDeletionDate = new DateTime($input->{'scheduledDeletionDate'});
+        }
         $transferInAuthCode = null;
         if (isset($input->{'transferInAuthCode'})) {
             $transferInAuthCode = $input->{'transferInAuthCode'};
@@ -471,6 +503,7 @@ class Domain
         $obj->authCode2 = $authCode2;
         $obj->contactHash = $contactHash;
         $obj->processes = $processes;
+        $obj->scheduledDeletionDate = $scheduledDeletionDate;
         $obj->transferInAuthCode = $transferInAuthCode;
         return $obj;
     }
@@ -502,6 +535,9 @@ class Domain
             $output['processes'] = array_map(fn (Process $i): array => $i->toJson(), $this->processes);
         }
         $output['projectId'] = $this->projectId;
+        if (isset($this->scheduledDeletionDate)) {
+            $output['scheduledDeletionDate'] = ($this->scheduledDeletionDate)->format(DateTime::ATOM);
+        }
         if (isset($this->transferInAuthCode)) {
             $output['transferInAuthCode'] = $this->transferInAuthCode;
         }
@@ -537,5 +573,8 @@ class Domain
     public function __clone()
     {
         $this->handles = clone $this->handles;
+        if (isset($this->scheduledDeletionDate)) {
+            $this->scheduledDeletionDate = clone $this->scheduledDeletionDate;
+        }
     }
 }

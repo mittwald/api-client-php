@@ -18,7 +18,6 @@ class GetCronjobRequest
         'type' => 'object',
         'properties' => [
             'cronjobId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

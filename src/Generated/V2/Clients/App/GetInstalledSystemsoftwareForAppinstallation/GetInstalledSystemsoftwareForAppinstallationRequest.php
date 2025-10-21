@@ -18,7 +18,6 @@ class GetInstalledSystemsoftwareForAppinstallationRequest
         'type' => 'object',
         'properties' => [
             'appInstallationId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'tagFilter' => [

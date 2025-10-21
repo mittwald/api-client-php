@@ -18,7 +18,6 @@ class ListCronjobsRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'limit' => [

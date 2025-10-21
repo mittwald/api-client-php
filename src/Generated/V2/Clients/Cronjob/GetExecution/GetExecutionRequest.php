@@ -21,7 +21,6 @@ class GetExecutionRequest
                 'type' => 'string',
             ],
             'cronjobId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

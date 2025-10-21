@@ -18,7 +18,6 @@ class CreateCustomerInviteRequest
         'type' => 'object',
         'properties' => [
             'customerId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [

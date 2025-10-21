@@ -18,7 +18,6 @@ class SetDatabaseUsersRequest
         'type' => 'object',
         'properties' => [
             'appInstallationId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'databaseId' => [

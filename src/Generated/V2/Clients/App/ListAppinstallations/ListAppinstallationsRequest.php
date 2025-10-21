@@ -18,7 +18,6 @@ class ListAppinstallationsRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'appIds' => [

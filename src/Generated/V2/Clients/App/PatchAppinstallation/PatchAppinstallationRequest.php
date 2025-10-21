@@ -18,7 +18,6 @@ class PatchAppinstallationRequest
         'type' => 'object',
         'properties' => [
             'appInstallationId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
