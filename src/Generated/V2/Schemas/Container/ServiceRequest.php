@@ -34,6 +34,29 @@ class ServiceRequest
                 ],
                 'type' => 'array',
             ],
+            'deploy' => [
+                'properties' => [
+                    'resources' => [
+                        'properties' => [
+                            'limits' => [
+                                'properties' => [
+                                    'cpus' => [
+                                        'example' => 1.5,
+                                        'type' => 'string',
+                                    ],
+                                    'memory' => [
+                                        'example' => '1gb',
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                'type' => 'object',
+                            ],
+                        ],
+                        'type' => 'object',
+                    ],
+                ],
+                'type' => 'object',
+            ],
             'description' => [
                 'example' => 'MySQL DB',
                 'type' => 'string',
@@ -107,6 +130,8 @@ class ServiceRequest
      */
     private ?array $command = null;
 
+    private ?ServiceRequestDeploy $deploy = null;
+
     private ?string $description = null;
 
     /**
@@ -154,6 +179,11 @@ class ServiceRequest
     public function getCommand(): ?array
     {
         return $this->command ?? null;
+    }
+
+    public function getDeploy(): ?ServiceRequestDeploy
+    {
+        return $this->deploy ?? null;
     }
 
     public function getDescription(): ?string
@@ -228,6 +258,22 @@ class ServiceRequest
     {
         $clone = clone $this;
         unset($clone->command);
+
+        return $clone;
+    }
+
+    public function withDeploy(ServiceRequestDeploy $deploy): self
+    {
+        $clone = clone $this;
+        $clone->deploy = $deploy;
+
+        return $clone;
+    }
+
+    public function withoutDeploy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deploy);
 
         return $clone;
     }
@@ -421,6 +467,10 @@ class ServiceRequest
         if (isset($input->{'command'})) {
             $command = $input->{'command'};
         }
+        $deploy = null;
+        if (isset($input->{'deploy'})) {
+            $deploy = ServiceRequestDeploy::buildFromInput($input->{'deploy'}, validate: $validate);
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -452,6 +502,7 @@ class ServiceRequest
 
         $obj = new self();
         $obj->command = $command;
+        $obj->deploy = $deploy;
         $obj->description = $description;
         $obj->entrypoint = $entrypoint;
         $obj->environment = $environment;
@@ -472,6 +523,9 @@ class ServiceRequest
         $output = [];
         if (isset($this->command)) {
             $output['command'] = $this->command;
+        }
+        if (isset($this->deploy)) {
+            $output['deploy'] = ($this->deploy)->toJson();
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;
@@ -524,5 +578,8 @@ class ServiceRequest
 
     public function __clone()
     {
+        if (isset($this->deploy)) {
+            $this->deploy = clone $this->deploy;
+        }
     }
 }

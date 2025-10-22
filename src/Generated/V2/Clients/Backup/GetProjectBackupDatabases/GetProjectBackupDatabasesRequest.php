@@ -20,7 +20,7 @@ class GetProjectBackupDatabasesRequest
             'projectBackupId' => [
                 'type' => 'string',
             ],
-            'directory' => [
+            'databaseName' => [
                 'type' => 'string',
             ],
         ],
@@ -31,7 +31,7 @@ class GetProjectBackupDatabasesRequest
 
     private string $projectBackupId;
 
-    private ?string $directory = null;
+    private ?string $databaseName = null;
 
     private array $headers = [
 
@@ -47,9 +47,9 @@ class GetProjectBackupDatabasesRequest
         return $this->projectBackupId;
     }
 
-    public function getDirectory(): ?string
+    public function getDatabaseName(): ?string
     {
-        return $this->directory ?? null;
+        return $this->databaseName ?? null;
     }
 
     public function withProjectBackupId(string $projectBackupId): self
@@ -66,24 +66,24 @@ class GetProjectBackupDatabasesRequest
         return $clone;
     }
 
-    public function withDirectory(string $directory): self
+    public function withDatabaseName(string $databaseName): self
     {
         $validator = new Validator();
-        $validator->validate($directory, self::$internalValidationSchema['properties']['directory']);
+        $validator->validate($databaseName, self::$internalValidationSchema['properties']['databaseName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->directory = $directory;
+        $clone->databaseName = $databaseName;
 
         return $clone;
     }
 
-    public function withoutDirectory(): self
+    public function withoutDatabaseName(): self
     {
         $clone = clone $this;
-        unset($clone->directory);
+        unset($clone->databaseName);
 
         return $clone;
     }
@@ -104,13 +104,13 @@ class GetProjectBackupDatabasesRequest
         }
 
         $projectBackupId = $input->{'projectBackupId'};
-        $directory = null;
-        if (isset($input->{'directory'})) {
-            $directory = $input->{'directory'};
+        $databaseName = null;
+        if (isset($input->{'databaseName'})) {
+            $databaseName = $input->{'databaseName'};
         }
 
         $obj = new self($projectBackupId);
-        $obj->directory = $directory;
+        $obj->databaseName = $databaseName;
         return $obj;
     }
 
@@ -123,8 +123,8 @@ class GetProjectBackupDatabasesRequest
     {
         $output = [];
         $output['projectBackupId'] = $this->projectBackupId;
-        if (isset($this->directory)) {
-            $output['directory'] = $this->directory;
+        if (isset($this->databaseName)) {
+            $output['databaseName'] = $this->databaseName;
         }
 
         return $output;
@@ -187,8 +187,8 @@ class GetProjectBackupDatabasesRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['directory'])) {
-            $query['directory'] = $mapped['directory'];
+        if (isset($mapped['databaseName'])) {
+            $query['databaseName'] = $mapped['databaseName'];
         }
         return [
             'query' => $query,

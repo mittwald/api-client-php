@@ -36,6 +36,17 @@ class ServiceResponse
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'limits' => [
+                'properties' => [
+                    'cpus' => [
+                        'type' => 'string',
+                    ],
+                    'memory' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'type' => 'object',
+            ],
             'message' => [
                 'example' => 'Container ready',
                 'type' => 'string',
@@ -92,6 +103,8 @@ class ServiceResponse
 
     private string $id;
 
+    private ?ServiceResponseLimits $limits = null;
+
     private ?string $message = null;
 
     private ServiceState $pendingState;
@@ -138,6 +151,11 @@ class ServiceResponse
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getLimits(): ?ServiceResponseLimits
+    {
+        return $this->limits ?? null;
     }
 
     public function getMessage(): ?string
@@ -217,6 +235,22 @@ class ServiceResponse
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withLimits(ServiceResponseLimits $limits): self
+    {
+        $clone = clone $this;
+        $clone->limits = $limits;
+
+        return $clone;
+    }
+
+    public function withoutLimits(): self
+    {
+        $clone = clone $this;
+        unset($clone->limits);
 
         return $clone;
     }
@@ -355,6 +389,10 @@ class ServiceResponse
         $deployedState = ServiceState::buildFromInput($input->{'deployedState'}, validate: $validate);
         $description = $input->{'description'};
         $id = $input->{'id'};
+        $limits = null;
+        if (isset($input->{'limits'})) {
+            $limits = ServiceResponseLimits::buildFromInput($input->{'limits'}, validate: $validate);
+        }
         $message = null;
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
@@ -369,6 +407,7 @@ class ServiceResponse
         $statusSetAt = new DateTime($input->{'statusSetAt'});
 
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
+        $obj->limits = $limits;
         $obj->message = $message;
         return $obj;
     }
@@ -384,6 +423,9 @@ class ServiceResponse
         $output['deployedState'] = $this->deployedState->toJson();
         $output['description'] = $this->description;
         $output['id'] = $this->id;
+        if (isset($this->limits)) {
+            $output['limits'] = ($this->limits)->toJson();
+        }
         if (isset($this->message)) {
             $output['message'] = $this->message;
         }
@@ -425,6 +467,9 @@ class ServiceResponse
 
     public function __clone()
     {
+        if (isset($this->limits)) {
+            $this->limits = clone $this->limits;
+        }
         $this->statusSetAt = clone $this->statusSetAt;
     }
 }
