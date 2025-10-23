@@ -35,27 +35,7 @@ class ServiceRequest
                 'type' => 'array',
             ],
             'deploy' => [
-                'properties' => [
-                    'resources' => [
-                        'properties' => [
-                            'limits' => [
-                                'properties' => [
-                                    'cpus' => [
-                                        'example' => 1.5,
-                                        'type' => 'string',
-                                    ],
-                                    'memory' => [
-                                        'example' => '1gb',
-                                        'type' => 'string',
-                                    ],
-                                ],
-                                'type' => 'object',
-                            ],
-                        ],
-                        'type' => 'object',
-                    ],
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.DeployOptions',
             ],
             'description' => [
                 'example' => 'MySQL DB',
@@ -130,7 +110,7 @@ class ServiceRequest
      */
     private ?array $command = null;
 
-    private ?ServiceRequestDeploy $deploy = null;
+    private ?DeployOptions $deploy = null;
 
     private ?string $description = null;
 
@@ -181,7 +161,7 @@ class ServiceRequest
         return $this->command ?? null;
     }
 
-    public function getDeploy(): ?ServiceRequestDeploy
+    public function getDeploy(): ?DeployOptions
     {
         return $this->deploy ?? null;
     }
@@ -262,7 +242,7 @@ class ServiceRequest
         return $clone;
     }
 
-    public function withDeploy(ServiceRequestDeploy $deploy): self
+    public function withDeploy(DeployOptions $deploy): self
     {
         $clone = clone $this;
         $clone->deploy = $deploy;
@@ -469,7 +449,7 @@ class ServiceRequest
         }
         $deploy = null;
         if (isset($input->{'deploy'})) {
-            $deploy = ServiceRequestDeploy::buildFromInput($input->{'deploy'}, validate: $validate);
+            $deploy = DeployOptions::buildFromInput($input->{'deploy'}, validate: $validate);
         }
         $description = null;
         if (isset($input->{'description'})) {
@@ -525,7 +505,7 @@ class ServiceRequest
             $output['command'] = $this->command;
         }
         if (isset($this->deploy)) {
-            $output['deploy'] = ($this->deploy)->toJson();
+            $output['deploy'] = $this->deploy->toJson();
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;
@@ -578,8 +558,5 @@ class ServiceRequest
 
     public function __clone()
     {
-        if (isset($this->deploy)) {
-            $this->deploy = clone $this->deploy;
-        }
     }
 }

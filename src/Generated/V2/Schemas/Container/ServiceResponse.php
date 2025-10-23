@@ -37,15 +37,7 @@ class ServiceResponse
                 'type' => 'string',
             ],
             'limits' => [
-                'properties' => [
-                    'cpus' => [
-                        'type' => 'string',
-                    ],
-                    'memory' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.Resources',
             ],
             'message' => [
                 'example' => 'Container ready',
@@ -103,7 +95,7 @@ class ServiceResponse
 
     private string $id;
 
-    private ?ServiceResponseLimits $limits = null;
+    private ?Resources $limits = null;
 
     private ?string $message = null;
 
@@ -153,7 +145,7 @@ class ServiceResponse
         return $this->id;
     }
 
-    public function getLimits(): ?ServiceResponseLimits
+    public function getLimits(): ?Resources
     {
         return $this->limits ?? null;
     }
@@ -239,7 +231,7 @@ class ServiceResponse
         return $clone;
     }
 
-    public function withLimits(ServiceResponseLimits $limits): self
+    public function withLimits(Resources $limits): self
     {
         $clone = clone $this;
         $clone->limits = $limits;
@@ -391,7 +383,7 @@ class ServiceResponse
         $id = $input->{'id'};
         $limits = null;
         if (isset($input->{'limits'})) {
-            $limits = ServiceResponseLimits::buildFromInput($input->{'limits'}, validate: $validate);
+            $limits = Resources::buildFromInput($input->{'limits'}, validate: $validate);
         }
         $message = null;
         if (isset($input->{'message'})) {
@@ -424,7 +416,7 @@ class ServiceResponse
         $output['description'] = $this->description;
         $output['id'] = $this->id;
         if (isset($this->limits)) {
-            $output['limits'] = ($this->limits)->toJson();
+            $output['limits'] = $this->limits->toJson();
         }
         if (isset($this->message)) {
             $output['message'] = $this->message;
@@ -467,9 +459,6 @@ class ServiceResponse
 
     public function __clone()
     {
-        if (isset($this->limits)) {
-            $this->limits = clone $this->limits;
-        }
         $this->statusSetAt = clone $this->statusSetAt;
     }
 }
