@@ -35,7 +35,7 @@ class ServiceRequest
                 'type' => 'array',
             ],
             'deploy' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.container.DeployOptions',
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.Deploy',
             ],
             'description' => [
                 'example' => 'MySQL DB',
@@ -110,7 +110,7 @@ class ServiceRequest
      */
     private ?array $command = null;
 
-    private ?DeployOptions $deploy = null;
+    private ?Deploy $deploy = null;
 
     private ?string $description = null;
 
@@ -161,7 +161,7 @@ class ServiceRequest
         return $this->command ?? null;
     }
 
-    public function getDeploy(): ?DeployOptions
+    public function getDeploy(): ?Deploy
     {
         return $this->deploy ?? null;
     }
@@ -242,7 +242,7 @@ class ServiceRequest
         return $clone;
     }
 
-    public function withDeploy(DeployOptions $deploy): self
+    public function withDeploy(Deploy $deploy): self
     {
         $clone = clone $this;
         $clone->deploy = $deploy;
@@ -449,7 +449,7 @@ class ServiceRequest
         }
         $deploy = null;
         if (isset($input->{'deploy'})) {
-            $deploy = DeployOptions::buildFromInput($input->{'deploy'}, validate: $validate);
+            $deploy = Deploy::buildFromInput($input->{'deploy'}, validate: $validate);
         }
         $description = null;
         if (isset($input->{'description'})) {

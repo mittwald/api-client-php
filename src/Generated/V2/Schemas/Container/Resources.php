@@ -24,18 +24,14 @@ class Resources
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'cpus' => [
-                'type' => 'string',
-            ],
-            'memory' => [
-                'type' => 'string',
+            'limits' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.ResourceSpec',
             ],
         ],
+        'type' => 'object',
     ];
 
-    private ?string $cpus = null;
-
-    private ?string $memory = null;
+    private ?ResourceSpec $limits = null;
 
     /**
      *
@@ -44,56 +40,23 @@ class Resources
     {
     }
 
-    public function getCpus(): ?string
+    public function getLimits(): ?ResourceSpec
     {
-        return $this->cpus ?? null;
+        return $this->limits ?? null;
     }
 
-    public function getMemory(): ?string
+    public function withLimits(ResourceSpec $limits): self
     {
-        return $this->memory ?? null;
-    }
-
-    public function withCpus(string $cpus): self
-    {
-        $validator = new Validator();
-        $validator->validate($cpus, self::$internalValidationSchema['properties']['cpus']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->cpus = $cpus;
+        $clone->limits = $limits;
 
         return $clone;
     }
 
-    public function withoutCpus(): self
+    public function withoutLimits(): self
     {
         $clone = clone $this;
-        unset($clone->cpus);
-
-        return $clone;
-    }
-
-    public function withMemory(string $memory): self
-    {
-        $validator = new Validator();
-        $validator->validate($memory, self::$internalValidationSchema['properties']['memory']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->memory = $memory;
-
-        return $clone;
-    }
-
-    public function withoutMemory(): self
-    {
-        $clone = clone $this;
-        unset($clone->memory);
+        unset($clone->limits);
 
         return $clone;
     }
@@ -113,18 +76,13 @@ class Resources
             static::validateInput($input);
         }
 
-        $cpus = null;
-        if (isset($input->{'cpus'})) {
-            $cpus = $input->{'cpus'};
-        }
-        $memory = null;
-        if (isset($input->{'memory'})) {
-            $memory = $input->{'memory'};
+        $limits = null;
+        if (isset($input->{'limits'})) {
+            $limits = ResourceSpec::buildFromInput($input->{'limits'}, validate: $validate);
         }
 
         $obj = new self();
-        $obj->cpus = $cpus;
-        $obj->memory = $memory;
+        $obj->limits = $limits;
         return $obj;
     }
 
@@ -136,11 +94,8 @@ class Resources
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->cpus)) {
-            $output['cpus'] = $this->cpus;
-        }
-        if (isset($this->memory)) {
-            $output['memory'] = $this->memory;
+        if (isset($this->limits)) {
+            $output['limits'] = $this->limits->toJson();
         }
 
         return $output;

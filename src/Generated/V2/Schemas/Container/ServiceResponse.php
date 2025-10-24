@@ -25,6 +25,9 @@ class ServiceResponse
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'deploy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.Deploy',
+            ],
             'deployedState' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceState',
             ],
@@ -35,9 +38,6 @@ class ServiceResponse
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
-            ],
-            'limits' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.container.Resources',
             ],
             'message' => [
                 'example' => 'Container ready',
@@ -89,13 +89,13 @@ class ServiceResponse
         'type' => 'object',
     ];
 
+    private ?Deploy $deploy = null;
+
     private ServiceState $deployedState;
 
     private string $description;
 
     private string $id;
-
-    private ?Resources $limits = null;
 
     private ?string $message = null;
 
@@ -130,6 +130,11 @@ class ServiceResponse
         $this->statusSetAt = $statusSetAt;
     }
 
+    public function getDeploy(): ?Deploy
+    {
+        return $this->deploy ?? null;
+    }
+
     public function getDeployedState(): ServiceState
     {
         return $this->deployedState;
@@ -143,11 +148,6 @@ class ServiceResponse
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function getLimits(): ?Resources
-    {
-        return $this->limits ?? null;
     }
 
     public function getMessage(): ?string
@@ -195,6 +195,22 @@ class ServiceResponse
         return $this->statusSetAt;
     }
 
+    public function withDeploy(Deploy $deploy): self
+    {
+        $clone = clone $this;
+        $clone->deploy = $deploy;
+
+        return $clone;
+    }
+
+    public function withoutDeploy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deploy);
+
+        return $clone;
+    }
+
     public function withDeployedState(ServiceState $deployedState): self
     {
         $clone = clone $this;
@@ -227,22 +243,6 @@ class ServiceResponse
 
         $clone = clone $this;
         $clone->id = $id;
-
-        return $clone;
-    }
-
-    public function withLimits(Resources $limits): self
-    {
-        $clone = clone $this;
-        $clone->limits = $limits;
-
-        return $clone;
-    }
-
-    public function withoutLimits(): self
-    {
-        $clone = clone $this;
-        unset($clone->limits);
 
         return $clone;
     }
@@ -378,13 +378,13 @@ class ServiceResponse
             static::validateInput($input);
         }
 
+        $deploy = null;
+        if (isset($input->{'deploy'})) {
+            $deploy = Deploy::buildFromInput($input->{'deploy'}, validate: $validate);
+        }
         $deployedState = ServiceState::buildFromInput($input->{'deployedState'}, validate: $validate);
         $description = $input->{'description'};
         $id = $input->{'id'};
-        $limits = null;
-        if (isset($input->{'limits'})) {
-            $limits = Resources::buildFromInput($input->{'limits'}, validate: $validate);
-        }
         $message = null;
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
@@ -399,7 +399,7 @@ class ServiceResponse
         $statusSetAt = new DateTime($input->{'statusSetAt'});
 
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
-        $obj->limits = $limits;
+        $obj->deploy = $deploy;
         $obj->message = $message;
         return $obj;
     }
@@ -412,12 +412,12 @@ class ServiceResponse
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->deploy)) {
+            $output['deploy'] = $this->deploy->toJson();
+        }
         $output['deployedState'] = $this->deployedState->toJson();
         $output['description'] = $this->description;
         $output['id'] = $this->id;
-        if (isset($this->limits)) {
-            $output['limits'] = $this->limits->toJson();
-        }
         if (isset($this->message)) {
             $output['message'] = $this->message;
         }
