@@ -24,6 +24,12 @@ class PossibleCheckErrors
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'activeMailArchiveForAddress' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorActiveMailArchiveForAddress',
+                ],
+                'type' => 'array',
+            ],
             'alreadyExistingMailAddress' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAlreadyExistingMailAddress',
@@ -68,9 +74,15 @@ class PossibleCheckErrors
             'catchAllTargetWithoutAlias',
             'missingVerifiedIngress',
             'alreadyExistingMailAddress',
+            'activeMailArchiveForAddress',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * @var CheckMigrationIsPossibleErrorActiveMailArchiveForAddress[]
+     */
+    private array $activeMailArchiveForAddress;
 
     /**
      * @var CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[]
@@ -103,6 +115,7 @@ class PossibleCheckErrors
     private array $missingVerifiedIngress;
 
     /**
+     * @param CheckMigrationIsPossibleErrorActiveMailArchiveForAddress[] $activeMailArchiveForAddress
      * @param CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[] $alreadyExistingMailAddress
      * @param CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[] $ambiguousMailAddressDelivery
      * @param CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[] $ambiguousMailboxDelivery
@@ -110,14 +123,23 @@ class PossibleCheckErrors
      * @param CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[] $catchAllTargetWithoutAlias
      * @param CheckMigrationIsPossibleErrorMissingVerifiedIngress[] $missingVerifiedIngress
      */
-    public function __construct(array $alreadyExistingMailAddress, array $ambiguousMailAddressDelivery, array $ambiguousMailboxDelivery, array $catchAllMissingAddress, array $catchAllTargetWithoutAlias, array $missingVerifiedIngress)
+    public function __construct(array $activeMailArchiveForAddress, array $alreadyExistingMailAddress, array $ambiguousMailAddressDelivery, array $ambiguousMailboxDelivery, array $catchAllMissingAddress, array $catchAllTargetWithoutAlias, array $missingVerifiedIngress)
     {
+        $this->activeMailArchiveForAddress = $activeMailArchiveForAddress;
         $this->alreadyExistingMailAddress = $alreadyExistingMailAddress;
         $this->ambiguousMailAddressDelivery = $ambiguousMailAddressDelivery;
         $this->ambiguousMailboxDelivery = $ambiguousMailboxDelivery;
         $this->catchAllMissingAddress = $catchAllMissingAddress;
         $this->catchAllTargetWithoutAlias = $catchAllTargetWithoutAlias;
         $this->missingVerifiedIngress = $missingVerifiedIngress;
+    }
+
+    /**
+     * @return CheckMigrationIsPossibleErrorActiveMailArchiveForAddress[]
+     */
+    public function getActiveMailArchiveForAddress(): array
+    {
+        return $this->activeMailArchiveForAddress;
     }
 
     /**
@@ -166,6 +188,17 @@ class PossibleCheckErrors
     public function getMissingVerifiedIngress(): array
     {
         return $this->missingVerifiedIngress;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorActiveMailArchiveForAddress[] $activeMailArchiveForAddress
+     */
+    public function withActiveMailArchiveForAddress(array $activeMailArchiveForAddress): self
+    {
+        $clone = clone $this;
+        $clone->activeMailArchiveForAddress = $activeMailArchiveForAddress;
+
+        return $clone;
     }
 
     /**
@@ -249,6 +282,7 @@ class PossibleCheckErrors
             static::validateInput($input);
         }
 
+        $activeMailArchiveForAddress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorActiveMailArchiveForAddress => CheckMigrationIsPossibleErrorActiveMailArchiveForAddress::buildFromInput($i, validate: $validate), $input->{'activeMailArchiveForAddress'});
         $alreadyExistingMailAddress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAlreadyExistingMailAddress => CheckMigrationIsPossibleErrorAlreadyExistingMailAddress::buildFromInput($i, validate: $validate), $input->{'alreadyExistingMailAddress'});
         $ambiguousMailAddressDelivery = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery => CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery::buildFromInput($i, validate: $validate), $input->{'ambiguousMailAddressDelivery'});
         $ambiguousMailboxDelivery = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery => CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery::buildFromInput($i, validate: $validate), $input->{'ambiguousMailboxDelivery'});
@@ -256,7 +290,7 @@ class PossibleCheckErrors
         $catchAllTargetWithoutAlias = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias => CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias::buildFromInput($i, validate: $validate), $input->{'catchAllTargetWithoutAlias'});
         $missingVerifiedIngress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorMissingVerifiedIngress => CheckMigrationIsPossibleErrorMissingVerifiedIngress::buildFromInput($i, validate: $validate), $input->{'missingVerifiedIngress'});
 
-        $obj = new self($alreadyExistingMailAddress, $ambiguousMailAddressDelivery, $ambiguousMailboxDelivery, $catchAllMissingAddress, $catchAllTargetWithoutAlias, $missingVerifiedIngress);
+        $obj = new self($activeMailArchiveForAddress, $alreadyExistingMailAddress, $ambiguousMailAddressDelivery, $ambiguousMailboxDelivery, $catchAllMissingAddress, $catchAllTargetWithoutAlias, $missingVerifiedIngress);
 
         return $obj;
     }
@@ -269,6 +303,7 @@ class PossibleCheckErrors
     public function toJson(): array
     {
         $output = [];
+        $output['activeMailArchiveForAddress'] = array_map(fn (CheckMigrationIsPossibleErrorActiveMailArchiveForAddress $i): array => $i->toJson(), $this->activeMailArchiveForAddress);
         $output['alreadyExistingMailAddress'] = array_map(fn (CheckMigrationIsPossibleErrorAlreadyExistingMailAddress $i): array => $i->toJson(), $this->alreadyExistingMailAddress);
         $output['ambiguousMailAddressDelivery'] = array_map(fn (CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery $i): array => $i->toJson(), $this->ambiguousMailAddressDelivery);
         $output['ambiguousMailboxDelivery'] = array_map(fn (CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery $i): array => $i->toJson(), $this->ambiguousMailboxDelivery);

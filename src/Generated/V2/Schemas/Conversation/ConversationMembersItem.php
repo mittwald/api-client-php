@@ -31,9 +31,6 @@ class ConversationMembersItem
             'active' => [
                 'type' => 'boolean',
             ],
-            'atlasGroup' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Group',
-            ],
             'avatarRefId' => [
                 'type' => 'string',
             ],
@@ -43,9 +40,6 @@ class ConversationMembersItem
             'department' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Department',
             ],
-            'group' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Group',
-            ],
             'userId' => [
                 'type' => 'string',
             ],
@@ -54,15 +48,11 @@ class ConversationMembersItem
 
     private bool $active;
 
-    private ?Group $atlasGroup = null;
-
     private ?string $avatarRefId = null;
 
     private ?string $clearName = null;
 
     private ?Department $department = null;
-
-    private ?Group $group = null;
 
     private string $userId;
 
@@ -75,11 +65,6 @@ class ConversationMembersItem
     public function getActive(): bool
     {
         return $this->active;
-    }
-
-    public function getAtlasGroup(): ?Group
-    {
-        return $this->atlasGroup ?? null;
     }
 
     public function getAvatarRefId(): ?string
@@ -97,11 +82,6 @@ class ConversationMembersItem
         return $this->department ?? null;
     }
 
-    public function getGroup(): ?Group
-    {
-        return $this->group ?? null;
-    }
-
     public function getUserId(): string
     {
         return $this->userId;
@@ -117,22 +97,6 @@ class ConversationMembersItem
 
         $clone = clone $this;
         $clone->active = $active;
-
-        return $clone;
-    }
-
-    public function withAtlasGroup(Group $atlasGroup): self
-    {
-        $clone = clone $this;
-        $clone->atlasGroup = $atlasGroup;
-
-        return $clone;
-    }
-
-    public function withoutAtlasGroup(): self
-    {
-        $clone = clone $this;
-        unset($clone->atlasGroup);
 
         return $clone;
     }
@@ -197,22 +161,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    public function withGroup(Group $group): self
-    {
-        $clone = clone $this;
-        $clone->group = $group;
-
-        return $clone;
-    }
-
-    public function withoutGroup(): self
-    {
-        $clone = clone $this;
-        unset($clone->group);
-
-        return $clone;
-    }
-
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -243,10 +191,6 @@ class ConversationMembersItem
         }
 
         $active = (bool)($input->{'active'});
-        $atlasGroup = null;
-        if (isset($input->{'atlasGroup'})) {
-            $atlasGroup = Group::buildFromInput($input->{'atlasGroup'}, validate: $validate);
-        }
         $avatarRefId = null;
         if (isset($input->{'avatarRefId'})) {
             $avatarRefId = $input->{'avatarRefId'};
@@ -259,18 +203,12 @@ class ConversationMembersItem
         if (isset($input->{'department'})) {
             $department = Department::from($input->{'department'});
         }
-        $group = null;
-        if (isset($input->{'group'})) {
-            $group = Group::buildFromInput($input->{'group'}, validate: $validate);
-        }
         $userId = $input->{'userId'};
 
         $obj = new self($active, $userId);
-        $obj->atlasGroup = $atlasGroup;
         $obj->avatarRefId = $avatarRefId;
         $obj->clearName = $clearName;
         $obj->department = $department;
-        $obj->group = $group;
         return $obj;
     }
 
@@ -283,9 +221,6 @@ class ConversationMembersItem
     {
         $output = [];
         $output['active'] = $this->active;
-        if (isset($this->atlasGroup)) {
-            $output['atlasGroup'] = $this->atlasGroup->toJson();
-        }
         if (isset($this->avatarRefId)) {
             $output['avatarRefId'] = $this->avatarRefId;
         }
@@ -294,9 +229,6 @@ class ConversationMembersItem
         }
         if (isset($this->department)) {
             $output['department'] = $this->department->value;
-        }
-        if (isset($this->group)) {
-            $output['group'] = $this->group->toJson();
         }
         $output['userId'] = $this->userId;
 
