@@ -50,7 +50,17 @@ class ListLeadsRequest
             ],
             'technologies' => [
                 'items' => [
-                    'type' => 'string',
+                    'oneOf' => [
+                        [
+                            'type' => 'string',
+                        ],
+                        [
+                            'enum' => [
+                                'none',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
                 ],
                 'type' => 'array',
             ],
@@ -151,7 +161,7 @@ class ListLeadsRequest
     private ?int $salesVolumeMax = null;
 
     /**
-     * @var string[]|null
+     * @var mixed[]|null
      */
     private ?array $technologies = null;
 
@@ -233,7 +243,7 @@ class ListLeadsRequest
     }
 
     /**
-     * @return string[]|null
+     * @return mixed[]|null
      */
     public function getTechnologies(): ?array
     {
@@ -465,7 +475,7 @@ class ListLeadsRequest
     }
 
     /**
-     * @param string[] $technologies
+     * @param mixed[] $technologies
      */
     public function withTechnologies(array $technologies): self
     {

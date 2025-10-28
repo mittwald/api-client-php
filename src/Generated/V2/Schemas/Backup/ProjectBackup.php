@@ -59,6 +59,9 @@ class ProjectBackup
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'restoreDatabase' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabase',
+            ],
             'restorePath' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath',
             ],
@@ -94,6 +97,8 @@ class ProjectBackup
     private string $projectId;
 
     private DateTime $requestedAt;
+
+    private ?ProjectBackupRestoreDatabase $restoreDatabase = null;
 
     private ?ProjectBackupRestorePath $restorePath = null;
 
@@ -151,6 +156,11 @@ class ProjectBackup
     public function getRequestedAt(): DateTime
     {
         return $this->requestedAt;
+    }
+
+    public function getRestoreDatabase(): ?ProjectBackupRestoreDatabase
+    {
+        return $this->restoreDatabase ?? null;
     }
 
     public function getRestorePath(): ?ProjectBackupRestorePath
@@ -305,6 +315,22 @@ class ProjectBackup
         return $clone;
     }
 
+    public function withRestoreDatabase(ProjectBackupRestoreDatabase $restoreDatabase): self
+    {
+        $clone = clone $this;
+        $clone->restoreDatabase = $restoreDatabase;
+
+        return $clone;
+    }
+
+    public function withoutRestoreDatabase(): self
+    {
+        $clone = clone $this;
+        unset($clone->restoreDatabase);
+
+        return $clone;
+    }
+
     public function withRestorePath(ProjectBackupRestorePath $restorePath): self
     {
         $clone = clone $this;
@@ -374,6 +400,10 @@ class ProjectBackup
         }
         $projectId = $input->{'projectId'};
         $requestedAt = new DateTime($input->{'requestedAt'});
+        $restoreDatabase = null;
+        if (isset($input->{'restoreDatabase'})) {
+            $restoreDatabase = ProjectBackupRestoreDatabase::buildFromInput($input->{'restoreDatabase'}, validate: $validate);
+        }
         $restorePath = null;
         if (isset($input->{'restorePath'})) {
             $restorePath = ProjectBackupRestorePath::buildFromInput($input->{'restorePath'}, validate: $validate);
@@ -386,6 +416,7 @@ class ProjectBackup
         $obj->expiresAt = $expiresAt;
         $obj->export = $export;
         $obj->parentId = $parentId;
+        $obj->restoreDatabase = $restoreDatabase;
         $obj->restorePath = $restorePath;
         return $obj;
     }
@@ -417,6 +448,9 @@ class ProjectBackup
         }
         $output['projectId'] = $this->projectId;
         $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        if (isset($this->restoreDatabase)) {
+            $output['restoreDatabase'] = $this->restoreDatabase->toJson();
+        }
         if (isset($this->restorePath)) {
             $output['restorePath'] = $this->restorePath->toJson();
         }

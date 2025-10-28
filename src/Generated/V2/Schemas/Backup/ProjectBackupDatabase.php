@@ -30,12 +30,8 @@ class ProjectBackupDatabase
                 ],
                 'type' => 'array',
             ],
-            'projectBackupId' => [
-                'type' => 'string',
-            ],
         ],
         'required' => [
-            'projectBackupId',
             'databases',
         ],
         'type' => 'object',
@@ -46,15 +42,12 @@ class ProjectBackupDatabase
      */
     private array $databases;
 
-    private string $projectBackupId;
-
     /**
      * @param string[] $databases
      */
-    public function __construct(array $databases, string $projectBackupId)
+    public function __construct(array $databases)
     {
         $this->databases = $databases;
-        $this->projectBackupId = $projectBackupId;
     }
 
     /**
@@ -63,11 +56,6 @@ class ProjectBackupDatabase
     public function getDatabases(): array
     {
         return $this->databases;
-    }
-
-    public function getProjectBackupId(): string
-    {
-        return $this->projectBackupId;
     }
 
     /**
@@ -83,20 +71,6 @@ class ProjectBackupDatabase
 
         $clone = clone $this;
         $clone->databases = $databases;
-
-        return $clone;
-    }
-
-    public function withProjectBackupId(string $projectBackupId): self
-    {
-        $validator = new Validator();
-        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->projectBackupId = $projectBackupId;
 
         return $clone;
     }
@@ -117,9 +91,8 @@ class ProjectBackupDatabase
         }
 
         $databases = $input->{'databases'};
-        $projectBackupId = $input->{'projectBackupId'};
 
-        $obj = new self($databases, $projectBackupId);
+        $obj = new self($databases);
 
         return $obj;
     }
@@ -133,7 +106,6 @@ class ProjectBackupDatabase
     {
         $output = [];
         $output['databases'] = $this->databases;
-        $output['projectBackupId'] = $this->projectBackupId;
 
         return $output;
     }

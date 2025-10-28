@@ -117,7 +117,7 @@ interface BackupClient
      */
     public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse;
     /**
-     * Get databases for a ProjectBackup.
+     * Check databases for a ProjectBackup.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-databases
      * @throws GuzzleException

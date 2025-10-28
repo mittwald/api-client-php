@@ -25,71 +25,72 @@ class ProjectBackupRestoreDatabaseRequest
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'databaseName' => [
+            'sourceDatabaseId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
-            'destination' => [
-                'oneOf' => [
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.backup.NewDatabase',
-                    ],
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.backup.ExistingDatabase',
-                    ],
-                ],
+            'targetDatabaseId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'databaseName',
+            'sourceDatabaseId',
         ],
         'type' => 'object',
     ];
 
-    private string $databaseName;
+    private string $sourceDatabaseId;
 
-    private NewDatabase|ExistingDatabase|null $destination = null;
+    private ?string $targetDatabaseId = null;
 
-    public function __construct(string $databaseName)
+    public function __construct(string $sourceDatabaseId)
     {
-        $this->databaseName = $databaseName;
+        $this->sourceDatabaseId = $sourceDatabaseId;
     }
 
-    public function getDatabaseName(): string
+    public function getSourceDatabaseId(): string
     {
-        return $this->databaseName;
+        return $this->sourceDatabaseId;
     }
 
-    public function getDestination(): ExistingDatabase|NewDatabase|null
+    public function getTargetDatabaseId(): ?string
     {
-        return $this->destination;
+        return $this->targetDatabaseId ?? null;
     }
 
-    public function withDatabaseName(string $databaseName): self
+    public function withSourceDatabaseId(string $sourceDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseName, self::$internalValidationSchema['properties']['databaseName']);
+        $validator->validate($sourceDatabaseId, self::$internalValidationSchema['properties']['sourceDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->databaseName = $databaseName;
+        $clone->sourceDatabaseId = $sourceDatabaseId;
 
         return $clone;
     }
 
-    public function withDestination(ExistingDatabase|NewDatabase $destination): self
+    public function withTargetDatabaseId(string $targetDatabaseId): self
     {
+        $validator = new Validator();
+        $validator->validate($targetDatabaseId, self::$internalValidationSchema['properties']['targetDatabaseId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->destination = $destination;
+        $clone->targetDatabaseId = $targetDatabaseId;
 
         return $clone;
     }
 
-    public function withoutDestination(): self
+    public function withoutTargetDatabaseId(): self
     {
         $clone = clone $this;
-        unset($clone->destination);
+        unset($clone->targetDatabaseId);
 
         return $clone;
     }
@@ -109,18 +110,14 @@ class ProjectBackupRestoreDatabaseRequest
             static::validateInput($input);
         }
 
-        $databaseName = $input->{'databaseName'};
-        $destination = null;
-        if (isset($input->{'destination'})) {
-            $destination = match (true) {
-                NewDatabase::validateInput($input->{'destination'}, true) => NewDatabase::buildFromInput($input->{'destination'}, validate: $validate),
-                ExistingDatabase::validateInput($input->{'destination'}, true) => ExistingDatabase::buildFromInput($input->{'destination'}, validate: $validate),
-                default => throw new InvalidArgumentException("could not build property 'destination' from JSON"),
-            };
+        $sourceDatabaseId = $input->{'sourceDatabaseId'};
+        $targetDatabaseId = null;
+        if (isset($input->{'targetDatabaseId'})) {
+            $targetDatabaseId = $input->{'targetDatabaseId'};
         }
 
-        $obj = new self($databaseName);
-        $obj->destination = $destination;
+        $obj = new self($sourceDatabaseId);
+        $obj->targetDatabaseId = $targetDatabaseId;
         return $obj;
     }
 
@@ -132,11 +129,9 @@ class ProjectBackupRestoreDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['databaseName'] = $this->databaseName;
-        if (isset($this->destination)) {
-            $output['destination'] = match (true) {
-                ($this->destination) instanceof NewDatabase, ($this->destination) instanceof ExistingDatabase => $this->destination->toJson(),
-            };
+        $output['sourceDatabaseId'] = $this->sourceDatabaseId;
+        if (isset($this->targetDatabaseId)) {
+            $output['targetDatabaseId'] = $this->targetDatabaseId;
         }
 
         return $output;
@@ -168,10 +163,5 @@ class ProjectBackupRestoreDatabaseRequest
 
     public function __clone()
     {
-        if (isset($this->destination)) {
-            $this->destination = match (true) {
-                ($this->destination) instanceof NewDatabase, ($this->destination) instanceof ExistingDatabase => $this->destination,
-            };
-        }
     }
 }

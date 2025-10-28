@@ -50,7 +50,17 @@ class ListUnlockedLeadsRequest
             ],
             'technologies' => [
                 'items' => [
-                    'type' => 'string',
+                    'oneOf' => [
+                        [
+                            'type' => 'string',
+                        ],
+                        [
+                            'enum' => [
+                                'none',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
                 ],
                 'type' => 'array',
             ],
@@ -155,7 +165,7 @@ class ListUnlockedLeadsRequest
     private ?int $salesVolumeMax = null;
 
     /**
-     * @var string[]|null
+     * @var mixed[]|null
      */
     private ?array $technologies = null;
 
@@ -239,7 +249,7 @@ class ListUnlockedLeadsRequest
     }
 
     /**
-     * @return string[]|null
+     * @return mixed[]|null
      */
     public function getTechnologies(): ?array
     {
@@ -476,7 +486,7 @@ class ListUnlockedLeadsRequest
     }
 
     /**
-     * @param string[] $technologies
+     * @param mixed[] $technologies
      */
     public function withTechnologies(array $technologies): self
     {
