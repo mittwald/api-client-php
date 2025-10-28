@@ -34,6 +34,9 @@ class ServiceDeclareRequest
                 ],
                 'type' => 'array',
             ],
+            'deploy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.Deploy',
+            ],
             'description' => [
                 'example' => 'MySQL DB',
                 'type' => 'string',
@@ -110,6 +113,8 @@ class ServiceDeclareRequest
      */
     private ?array $command = null;
 
+    private ?Deploy $deploy = null;
+
     private ?string $description = null;
 
     /**
@@ -155,6 +160,11 @@ class ServiceDeclareRequest
     public function getCommand(): ?array
     {
         return $this->command ?? null;
+    }
+
+    public function getDeploy(): ?Deploy
+    {
+        return $this->deploy ?? null;
     }
 
     public function getDescription(): ?string
@@ -229,6 +239,22 @@ class ServiceDeclareRequest
     {
         $clone = clone $this;
         unset($clone->command);
+
+        return $clone;
+    }
+
+    public function withDeploy(Deploy $deploy): self
+    {
+        $clone = clone $this;
+        $clone->deploy = $deploy;
+
+        return $clone;
+    }
+
+    public function withoutDeploy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deploy);
 
         return $clone;
     }
@@ -414,6 +440,10 @@ class ServiceDeclareRequest
         if (isset($input->{'command'})) {
             $command = $input->{'command'};
         }
+        $deploy = null;
+        if (isset($input->{'deploy'})) {
+            $deploy = Deploy::buildFromInput($input->{'deploy'}, validate: $validate);
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -442,6 +472,7 @@ class ServiceDeclareRequest
 
         $obj = new self($image);
         $obj->command = $command;
+        $obj->deploy = $deploy;
         $obj->description = $description;
         $obj->entrypoint = $entrypoint;
         $obj->environment = $environment;
@@ -461,6 +492,9 @@ class ServiceDeclareRequest
         $output = [];
         if (isset($this->command)) {
             $output['command'] = $this->command;
+        }
+        if (isset($this->deploy)) {
+            $output['deploy'] = $this->deploy->toJson();
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;

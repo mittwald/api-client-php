@@ -25,6 +25,9 @@ class ServiceResponse
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'deploy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.Deploy',
+            ],
             'deployedState' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceState',
             ],
@@ -86,6 +89,8 @@ class ServiceResponse
         'type' => 'object',
     ];
 
+    private ?Deploy $deploy = null;
+
     private ServiceState $deployedState;
 
     private string $description;
@@ -123,6 +128,11 @@ class ServiceResponse
         $this->stackId = $stackId;
         $this->status = $status;
         $this->statusSetAt = $statusSetAt;
+    }
+
+    public function getDeploy(): ?Deploy
+    {
+        return $this->deploy ?? null;
     }
 
     public function getDeployedState(): ServiceState
@@ -183,6 +193,22 @@ class ServiceResponse
     public function getStatusSetAt(): DateTime
     {
         return $this->statusSetAt;
+    }
+
+    public function withDeploy(Deploy $deploy): self
+    {
+        $clone = clone $this;
+        $clone->deploy = $deploy;
+
+        return $clone;
+    }
+
+    public function withoutDeploy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deploy);
+
+        return $clone;
     }
 
     public function withDeployedState(ServiceState $deployedState): self
@@ -352,6 +378,10 @@ class ServiceResponse
             static::validateInput($input);
         }
 
+        $deploy = null;
+        if (isset($input->{'deploy'})) {
+            $deploy = Deploy::buildFromInput($input->{'deploy'}, validate: $validate);
+        }
         $deployedState = ServiceState::buildFromInput($input->{'deployedState'}, validate: $validate);
         $description = $input->{'description'};
         $id = $input->{'id'};
@@ -369,6 +399,7 @@ class ServiceResponse
         $statusSetAt = new DateTime($input->{'statusSetAt'});
 
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
+        $obj->deploy = $deploy;
         $obj->message = $message;
         return $obj;
     }
@@ -381,6 +412,9 @@ class ServiceResponse
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->deploy)) {
+            $output['deploy'] = $this->deploy->toJson();
+        }
         $output['deployedState'] = $this->deployedState->toJson();
         $output['description'] = $this->description;
         $output['id'] = $this->id;
