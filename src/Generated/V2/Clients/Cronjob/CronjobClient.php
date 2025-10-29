@@ -17,6 +17,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsOKResponse;
@@ -98,6 +100,16 @@ interface CronjobClient
      * @return GetExecutionOKResponse OK
      */
     public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse;
+    /**
+     * Get a CronjobExecution analysis for failed executions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetExecutionAnalysisRequest $request An object representing the request for this operation
+     * @return GetExecutionAnalysisOKResponse OK
+     */
+    public function getExecutionAnalysis(GetExecutionAnalysisRequest $request): GetExecutionAnalysisOKResponse;
     /**
      * List Cronjobs belonging to a Project.
      *

@@ -40,6 +40,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionNot
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecutionAnalysis\GetExecutionAnalysisTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsRequest;
@@ -219,6 +228,33 @@ class CronjobClientImpl implements CronjobClient
             404 => GetExecutionNotFoundResponse::fromResponse($httpResponse),
             429 => GetExecutionTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetExecutionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a CronjobExecution analysis for failed executions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetExecutionAnalysisRequest $request An object representing the request for this operation
+     * @return GetExecutionAnalysisOKResponse OK
+     */
+    public function getExecutionAnalysis(GetExecutionAnalysisRequest $request): GetExecutionAnalysisOKResponse
+    {
+        $httpRequest = new Request(GetExecutionAnalysisRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetExecutionAnalysisOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetExecutionAnalysisBadRequestResponse::fromResponse($httpResponse),
+            403 => GetExecutionAnalysisForbiddenResponse::fromResponse($httpResponse),
+            404 => GetExecutionAnalysisNotFoundResponse::fromResponse($httpResponse),
+            412 => GetExecutionAnalysisPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => GetExecutionAnalysisTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetExecutionAnalysisInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetExecutionAnalysisDefaultResponse::fromResponse($httpResponse),
         });
     }
 

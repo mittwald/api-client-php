@@ -24,19 +24,19 @@ class ContactAddress
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'address_prefix' => [
+            'addressPrefix' => [
                 'type' => 'string',
             ],
             'city' => [
                 'minLength' => 1,
                 'type' => 'string',
             ],
-            'country_code' => [
+            'countryCode' => [
                 'maxLength' => 2,
                 'minLength' => 2,
                 'type' => 'string',
             ],
-            'house_number' => [
+            'houseNumber' => [
                 'minLength' => 1,
                 'type' => 'string',
             ],
@@ -104,7 +104,7 @@ class ContactAddress
     public function withAddressPrefix(string $addressPrefix): self
     {
         $validator = new Validator();
-        $validator->validate($addressPrefix, self::$internalValidationSchema['properties']['address_prefix']);
+        $validator->validate($addressPrefix, self::$internalValidationSchema['properties']['addressPrefix']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -148,7 +148,7 @@ class ContactAddress
     public function withCountryCode(string $countryCode): self
     {
         $validator = new Validator();
-        $validator->validate($countryCode, self::$internalValidationSchema['properties']['country_code']);
+        $validator->validate($countryCode, self::$internalValidationSchema['properties']['countryCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class ContactAddress
     public function withHouseNumber(string $houseNumber): self
     {
         $validator = new Validator();
-        $validator->validate($houseNumber, self::$internalValidationSchema['properties']['house_number']);
+        $validator->validate($houseNumber, self::$internalValidationSchema['properties']['houseNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,20 +249,20 @@ class ContactAddress
         }
 
         $addressPrefix = null;
-        if (isset($input->{'address_prefix'})) {
-            $addressPrefix = $input->{'address_prefix'};
+        if (isset($input->{'addressPrefix'})) {
+            $addressPrefix = $input->{'addressPrefix'};
         }
         $city = null;
         if (isset($input->{'city'})) {
             $city = $input->{'city'};
         }
         $countryCode = null;
-        if (isset($input->{'country_code'})) {
-            $countryCode = $input->{'country_code'};
+        if (isset($input->{'countryCode'})) {
+            $countryCode = $input->{'countryCode'};
         }
         $houseNumber = null;
-        if (isset($input->{'house_number'})) {
-            $houseNumber = $input->{'house_number'};
+        if (isset($input->{'houseNumber'})) {
+            $houseNumber = $input->{'houseNumber'};
         }
         $street = null;
         if (isset($input->{'street'})) {
@@ -292,16 +292,16 @@ class ContactAddress
     {
         $output = [];
         if (isset($this->addressPrefix)) {
-            $output['address_prefix'] = $this->addressPrefix;
+            $output['addressPrefix'] = $this->addressPrefix;
         }
         if (isset($this->city)) {
             $output['city'] = $this->city;
         }
         if (isset($this->countryCode)) {
-            $output['country_code'] = $this->countryCode;
+            $output['countryCode'] = $this->countryCode;
         }
         if (isset($this->houseNumber)) {
-            $output['house_number'] = $this->houseNumber;
+            $output['houseNumber'] = $this->houseNumber;
         }
         if (isset($this->street)) {
             $output['street'] = $this->street;

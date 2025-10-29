@@ -26,19 +26,19 @@ class Contact
         'properties' => [
             'address' => [
                 'properties' => [
-                    'address_prefix' => [
+                    'addressPrefix' => [
                         'type' => 'string',
                     ],
                     'city' => [
                         'minLength' => 1,
                         'type' => 'string',
                     ],
-                    'country_code' => [
+                    'countryCode' => [
                         'maxLength' => 2,
                         'minLength' => 2,
                         'type' => 'string',
                     ],
-                    'house_number' => [
+                    'houseNumber' => [
                         'minLength' => 1,
                         'type' => 'string',
                     ],
