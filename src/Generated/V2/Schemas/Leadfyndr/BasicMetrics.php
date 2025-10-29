@@ -26,7 +26,6 @@ class BasicMetrics
         'properties' => [
             'co2' => [
                 'format' => 'float',
-                'maximum' => 1,
                 'minimum' => 0,
                 'type' => 'number',
             ],
