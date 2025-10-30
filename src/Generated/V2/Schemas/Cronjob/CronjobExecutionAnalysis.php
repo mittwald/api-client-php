@@ -24,17 +24,8 @@ class CronjobExecutionAnalysis
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'issues' => [
-                'items' => [
-                    'type' => 'string',
-                ],
-                'type' => 'array',
-            ],
             'message' => [
-                'example' => '**Mögliche Fehlerursache**: Der zur Verfügung stehende Speicherplatz reicht für die Durchführung des Backups nicht aus. **Möglicher Lösungsansatz:** Passe den reservierten Speicherplatz für den Pod in den Umgebungsvariablen an.',
-                'type' => 'string',
-            ],
-            'recommendation' => [
+                'example' => 'Überprüfe die URL im Cronjob-Konfigurationsformular und korrigiere sie gegebenenfalls. Stelle sicher, dass die Domain gültig ist und DNS-Einträge korrekt konfiguriert wurden. Falls die URL falsch ist, aktualisiere sie mit der richtigen Adresse.',
                 'type' => 'string',
             ],
         ],
@@ -44,61 +35,16 @@ class CronjobExecutionAnalysis
         'type' => 'object',
     ];
 
-    /**
-     * @var string[]|null
-     */
-    private ?array $issues = null;
-
     private string $message;
-
-    private ?string $recommendation = null;
 
     public function __construct(string $message)
     {
         $this->message = $message;
     }
 
-    /**
-     * @return string[]|null
-     */
-    public function getIssues(): ?array
-    {
-        return $this->issues ?? null;
-    }
-
     public function getMessage(): string
     {
         return $this->message;
-    }
-
-    public function getRecommendation(): ?string
-    {
-        return $this->recommendation ?? null;
-    }
-
-    /**
-     * @param string[] $issues
-     */
-    public function withIssues(array $issues): self
-    {
-        $validator = new Validator();
-        $validator->validate($issues, self::$internalValidationSchema['properties']['issues']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->issues = $issues;
-
-        return $clone;
-    }
-
-    public function withoutIssues(): self
-    {
-        $clone = clone $this;
-        unset($clone->issues);
-
-        return $clone;
     }
 
     public function withMessage(string $message): self
@@ -111,28 +57,6 @@ class CronjobExecutionAnalysis
 
         $clone = clone $this;
         $clone->message = $message;
-
-        return $clone;
-    }
-
-    public function withRecommendation(string $recommendation): self
-    {
-        $validator = new Validator();
-        $validator->validate($recommendation, self::$internalValidationSchema['properties']['recommendation']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->recommendation = $recommendation;
-
-        return $clone;
-    }
-
-    public function withoutRecommendation(): self
-    {
-        $clone = clone $this;
-        unset($clone->recommendation);
 
         return $clone;
     }
@@ -152,19 +76,10 @@ class CronjobExecutionAnalysis
             static::validateInput($input);
         }
 
-        $issues = null;
-        if (isset($input->{'issues'})) {
-            $issues = $input->{'issues'};
-        }
         $message = $input->{'message'};
-        $recommendation = null;
-        if (isset($input->{'recommendation'})) {
-            $recommendation = $input->{'recommendation'};
-        }
 
         $obj = new self($message);
-        $obj->issues = $issues;
-        $obj->recommendation = $recommendation;
+
         return $obj;
     }
 
@@ -176,13 +91,7 @@ class CronjobExecutionAnalysis
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->issues)) {
-            $output['issues'] = $this->issues;
-        }
         $output['message'] = $this->message;
-        if (isset($this->recommendation)) {
-            $output['recommendation'] = $this->recommendation;
-        }
 
         return $output;
     }
