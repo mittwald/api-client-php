@@ -34,7 +34,7 @@ class IngressListIngressesRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',

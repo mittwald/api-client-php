@@ -51,7 +51,7 @@ class NotificationsListNotificationsRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 500,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',

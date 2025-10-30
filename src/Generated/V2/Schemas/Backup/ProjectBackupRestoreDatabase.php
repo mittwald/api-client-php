@@ -24,11 +24,11 @@ class ProjectBackupRestoreDatabase
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'databaseBackupDump' => [
+                'type' => 'string',
+            ],
             'phase' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.backup.RestorePhase',
-            ],
-            'sourceDatabaseId' => [
-                'type' => 'string',
             ],
             'targetDatabaseId' => [
                 'type' => 'string',
@@ -36,23 +36,28 @@ class ProjectBackupRestoreDatabase
         ],
         'required' => [
             'phase',
-            'sourceDatabaseId',
+            'databaseBackupDump',
             'targetDatabaseId',
         ],
         'type' => 'object',
     ];
 
-    private RestorePhase $phase;
+    private string $databaseBackupDump;
 
-    private string $sourceDatabaseId;
+    private RestorePhase $phase;
 
     private string $targetDatabaseId;
 
-    public function __construct(RestorePhase $phase, string $sourceDatabaseId, string $targetDatabaseId)
+    public function __construct(string $databaseBackupDump, RestorePhase $phase, string $targetDatabaseId)
     {
+        $this->databaseBackupDump = $databaseBackupDump;
         $this->phase = $phase;
-        $this->sourceDatabaseId = $sourceDatabaseId;
         $this->targetDatabaseId = $targetDatabaseId;
+    }
+
+    public function getDatabaseBackupDump(): string
+    {
+        return $this->databaseBackupDump;
     }
 
     public function getPhase(): RestorePhase
@@ -60,34 +65,29 @@ class ProjectBackupRestoreDatabase
         return $this->phase;
     }
 
-    public function getSourceDatabaseId(): string
-    {
-        return $this->sourceDatabaseId;
-    }
-
     public function getTargetDatabaseId(): string
     {
         return $this->targetDatabaseId;
+    }
+
+    public function withDatabaseBackupDump(string $databaseBackupDump): self
+    {
+        $validator = new Validator();
+        $validator->validate($databaseBackupDump, self::$internalValidationSchema['properties']['databaseBackupDump']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->databaseBackupDump = $databaseBackupDump;
+
+        return $clone;
     }
 
     public function withPhase(RestorePhase $phase): self
     {
         $clone = clone $this;
         $clone->phase = $phase;
-
-        return $clone;
-    }
-
-    public function withSourceDatabaseId(string $sourceDatabaseId): self
-    {
-        $validator = new Validator();
-        $validator->validate($sourceDatabaseId, self::$internalValidationSchema['properties']['sourceDatabaseId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->sourceDatabaseId = $sourceDatabaseId;
 
         return $clone;
     }
@@ -121,11 +121,11 @@ class ProjectBackupRestoreDatabase
             static::validateInput($input);
         }
 
+        $databaseBackupDump = $input->{'databaseBackupDump'};
         $phase = RestorePhase::from($input->{'phase'});
-        $sourceDatabaseId = $input->{'sourceDatabaseId'};
         $targetDatabaseId = $input->{'targetDatabaseId'};
 
-        $obj = new self($phase, $sourceDatabaseId, $targetDatabaseId);
+        $obj = new self($databaseBackupDump, $phase, $targetDatabaseId);
 
         return $obj;
     }
@@ -138,8 +138,8 @@ class ProjectBackupRestoreDatabase
     public function toJson(): array
     {
         $output = [];
+        $output['databaseBackupDump'] = $this->databaseBackupDump;
         $output['phase'] = $this->phase->value;
-        $output['sourceDatabaseId'] = $this->sourceDatabaseId;
         $output['targetDatabaseId'] = $this->targetDatabaseId;
 
         return $output;

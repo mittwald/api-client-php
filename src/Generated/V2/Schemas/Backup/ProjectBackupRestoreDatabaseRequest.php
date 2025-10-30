@@ -25,50 +25,59 @@ class ProjectBackupRestoreDatabaseRequest
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'sourceDatabaseId' => [
-                'format' => 'uuid',
+            'databaseBackupDump' => [
+                'description' => 'Database backup dump from the backup to restore from.',
                 'type' => 'string',
             ],
             'targetDatabaseId' => [
+                'description' => 'ID of the target database to restore to.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'sourceDatabaseId',
+            'databaseBackupDump',
+            'targetDatabaseId',
         ],
         'type' => 'object',
     ];
 
-    private string $sourceDatabaseId;
+    /**
+     * Database backup dump from the backup to restore from.
+     */
+    private string $databaseBackupDump;
 
-    private ?string $targetDatabaseId = null;
+    /**
+     * ID of the target database to restore to.
+     */
+    private string $targetDatabaseId;
 
-    public function __construct(string $sourceDatabaseId)
+    public function __construct(string $databaseBackupDump, string $targetDatabaseId)
     {
-        $this->sourceDatabaseId = $sourceDatabaseId;
+        $this->databaseBackupDump = $databaseBackupDump;
+        $this->targetDatabaseId = $targetDatabaseId;
     }
 
-    public function getSourceDatabaseId(): string
+    public function getDatabaseBackupDump(): string
     {
-        return $this->sourceDatabaseId;
+        return $this->databaseBackupDump;
     }
 
-    public function getTargetDatabaseId(): ?string
+    public function getTargetDatabaseId(): string
     {
-        return $this->targetDatabaseId ?? null;
+        return $this->targetDatabaseId;
     }
 
-    public function withSourceDatabaseId(string $sourceDatabaseId): self
+    public function withDatabaseBackupDump(string $databaseBackupDump): self
     {
         $validator = new Validator();
-        $validator->validate($sourceDatabaseId, self::$internalValidationSchema['properties']['sourceDatabaseId']);
+        $validator->validate($databaseBackupDump, self::$internalValidationSchema['properties']['databaseBackupDump']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->sourceDatabaseId = $sourceDatabaseId;
+        $clone->databaseBackupDump = $databaseBackupDump;
 
         return $clone;
     }
@@ -83,14 +92,6 @@ class ProjectBackupRestoreDatabaseRequest
 
         $clone = clone $this;
         $clone->targetDatabaseId = $targetDatabaseId;
-
-        return $clone;
-    }
-
-    public function withoutTargetDatabaseId(): self
-    {
-        $clone = clone $this;
-        unset($clone->targetDatabaseId);
 
         return $clone;
     }
@@ -110,14 +111,11 @@ class ProjectBackupRestoreDatabaseRequest
             static::validateInput($input);
         }
 
-        $sourceDatabaseId = $input->{'sourceDatabaseId'};
-        $targetDatabaseId = null;
-        if (isset($input->{'targetDatabaseId'})) {
-            $targetDatabaseId = $input->{'targetDatabaseId'};
-        }
+        $databaseBackupDump = $input->{'databaseBackupDump'};
+        $targetDatabaseId = $input->{'targetDatabaseId'};
 
-        $obj = new self($sourceDatabaseId);
-        $obj->targetDatabaseId = $targetDatabaseId;
+        $obj = new self($databaseBackupDump, $targetDatabaseId);
+
         return $obj;
     }
 
@@ -129,10 +127,8 @@ class ProjectBackupRestoreDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['sourceDatabaseId'] = $this->sourceDatabaseId;
-        if (isset($this->targetDatabaseId)) {
-            $output['targetDatabaseId'] = $this->targetDatabaseId;
-        }
+        $output['databaseBackupDump'] = $this->databaseBackupDump;
+        $output['targetDatabaseId'] = $this->targetDatabaseId;
 
         return $output;
     }

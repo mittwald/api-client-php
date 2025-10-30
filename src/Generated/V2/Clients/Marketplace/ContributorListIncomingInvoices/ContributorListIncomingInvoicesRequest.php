@@ -25,7 +25,7 @@ class ContributorListIncomingInvoicesRequest
             ],
             'limit' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
