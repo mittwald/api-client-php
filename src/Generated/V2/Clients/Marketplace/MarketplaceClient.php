@@ -383,7 +383,7 @@ interface MarketplaceClient
     /**
      * Delete an extension.
      *
-     * This action deletes all ExtensionInstances and afterwards the Extension itself.
+     * Remove the Extension. Make sure that there are no instances for this extension
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
      * @throws GuzzleException

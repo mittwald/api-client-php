@@ -151,6 +151,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrieval
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
@@ -929,7 +930,7 @@ class MarketplaceClientImpl implements MarketplaceClient
     /**
      * Delete an extension.
      *
-     * This action deletes all ExtensionInstances and afterwards the Extension itself.
+     * Remove the Extension. Make sure that there are no instances for this extension
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
      * @throws GuzzleException
@@ -946,6 +947,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionDeleteExtensionNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionDeleteExtensionPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionDeleteExtensionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDeleteExtensionDefaultResponse::fromResponse($httpResponse),
         });
