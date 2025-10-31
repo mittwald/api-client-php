@@ -114,7 +114,7 @@ class ListLeadsRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 10,
-                'minimum' => 0,
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',

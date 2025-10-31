@@ -41,7 +41,7 @@ class ListServicesRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 0,
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',
