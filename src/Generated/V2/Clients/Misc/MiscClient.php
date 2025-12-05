@@ -6,8 +6,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressOKResponse;
@@ -29,16 +27,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\Verif
  */
 interface MiscClient
 {
-    /**
-     * Get a list of currently active llm models.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/misc-get-llm-models-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmModelsExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmModelsExperimentalOKResponse List of currently active llm models.
-     */
-    public function getLlmModelsExperimental(GetLlmModelsExperimentalRequest $request): GetLlmModelsExperimentalOKResponse;
     /**
      * Check if an email is from mittwald.
      *

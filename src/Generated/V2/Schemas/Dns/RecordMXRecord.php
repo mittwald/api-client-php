@@ -26,7 +26,7 @@ class RecordMXRecord
         'properties' => [
             'fqdn' => [
                 'format' => 'idn-dnsname',
-                'maxLength' => 50,
+                'maxLength' => 255,
                 'minLength' => 1,
                 'type' => 'string',
             ],

@@ -29,7 +29,7 @@ class AttributeConfiguration
                 'type' => 'string',
             ],
             'value' => [
-                'example' => 10,
+                'example' => '10',
                 'type' => 'string',
             ],
         ],

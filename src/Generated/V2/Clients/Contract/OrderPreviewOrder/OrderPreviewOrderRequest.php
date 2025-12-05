@@ -39,6 +39,9 @@ class OrderPreviewOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -49,6 +52,7 @@ class OrderPreviewOrderRequest
                             'externalCertificate',
                             'leadFyndr',
                             'mailArchive',
+                            'aiHosting',
                         ],
                         'type' => 'string',
                     ],

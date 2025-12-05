@@ -21,7 +21,7 @@ class VerifyRegistrationRequestBody
             ],
             'token' => [
                 'description' => 'The token that was send to your email address',
-                'example' => 123456,
+                'example' => '123456',
                 'maxLength' => 16,
                 'minLength' => 6,
                 'type' => 'string',

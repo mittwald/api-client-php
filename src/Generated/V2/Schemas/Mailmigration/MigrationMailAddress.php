@@ -44,7 +44,6 @@ class MigrationMailAddress
         'required' => [
             'id',
             'address',
-            'preMigrationJobs',
             'migrationJobs',
             'finished',
         ],
@@ -59,15 +58,14 @@ class MigrationMailAddress
 
     private MigrationMailAddressMigrationJob $migrationJobs;
 
-    private MigrationMailAddressPreMigrationJob $preMigrationJobs;
+    private ?MigrationMailAddressPreMigrationJob $preMigrationJobs = null;
 
-    public function __construct(string $address, bool $finished, string $id, MigrationMailAddressMigrationJob $migrationJobs, MigrationMailAddressPreMigrationJob $preMigrationJobs)
+    public function __construct(string $address, bool $finished, string $id, MigrationMailAddressMigrationJob $migrationJobs)
     {
         $this->address = $address;
         $this->finished = $finished;
         $this->id = $id;
         $this->migrationJobs = $migrationJobs;
-        $this->preMigrationJobs = $preMigrationJobs;
     }
 
     public function getAddress(): string
@@ -90,9 +88,9 @@ class MigrationMailAddress
         return $this->migrationJobs;
     }
 
-    public function getPreMigrationJobs(): MigrationMailAddressPreMigrationJob
+    public function getPreMigrationJobs(): ?MigrationMailAddressPreMigrationJob
     {
-        return $this->preMigrationJobs;
+        return $this->preMigrationJobs ?? null;
     }
 
     public function withAddress(string $address): self
@@ -153,6 +151,14 @@ class MigrationMailAddress
         return $clone;
     }
 
+    public function withoutPreMigrationJobs(): self
+    {
+        $clone = clone $this;
+        unset($clone->preMigrationJobs);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -172,10 +178,13 @@ class MigrationMailAddress
         $finished = (bool)($input->{'finished'});
         $id = $input->{'id'};
         $migrationJobs = MigrationMailAddressMigrationJob::buildFromInput($input->{'migrationJobs'}, validate: $validate);
-        $preMigrationJobs = MigrationMailAddressPreMigrationJob::buildFromInput($input->{'preMigrationJobs'}, validate: $validate);
+        $preMigrationJobs = null;
+        if (isset($input->{'preMigrationJobs'})) {
+            $preMigrationJobs = MigrationMailAddressPreMigrationJob::buildFromInput($input->{'preMigrationJobs'}, validate: $validate);
+        }
 
-        $obj = new self($address, $finished, $id, $migrationJobs, $preMigrationJobs);
-
+        $obj = new self($address, $finished, $id, $migrationJobs);
+        $obj->preMigrationJobs = $preMigrationJobs;
         return $obj;
     }
 
@@ -191,7 +200,9 @@ class MigrationMailAddress
         $output['finished'] = $this->finished;
         $output['id'] = $this->id;
         $output['migrationJobs'] = $this->migrationJobs->toJson();
-        $output['preMigrationJobs'] = $this->preMigrationJobs->toJson();
+        if (isset($this->preMigrationJobs)) {
+            $output['preMigrationJobs'] = $this->preMigrationJobs->toJson();
+        }
 
         return $output;
     }

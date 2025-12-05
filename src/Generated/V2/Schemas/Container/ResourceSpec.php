@@ -25,9 +25,11 @@ class ResourceSpec
     private static array $internalValidationSchema = [
         'properties' => [
             'cpus' => [
+                'example' => '0.5',
                 'type' => 'string',
             ],
             'memory' => [
+                'example' => '1gb',
                 'type' => 'string',
             ],
         ],

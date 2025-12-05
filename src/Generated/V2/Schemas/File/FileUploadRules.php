@@ -25,12 +25,12 @@ class FileUploadRules
     private static array $internalValidationSchema = [
         'properties' => [
             'extensions' => [
+                'example' => [
+                    '.png',
+                    '.jpeg',
+                    '.jpg',
+                ],
                 'items' => [
-                    'example' => [
-                        '.png',
-                        '.jpeg',
-                        '.jpg',
-                    ],
                     'type' => 'string',
                 ],
                 'type' => 'array',
@@ -65,11 +65,11 @@ class FileUploadRules
                 'type' => 'integer',
             ],
             'mimeTypes' => [
+                'example' => [
+                    'image/png',
+                    'image/jpeg',
+                ],
                 'items' => [
-                    'example' => [
-                        'image/png',
-                        'image/jpeg',
-                    ],
                     'type' => 'string',
                 ],
                 'type' => 'array',

@@ -101,6 +101,9 @@ class Extension
                     ],
                 ],
             ],
+            'pricingDetails' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.PricePlanDetails',
+            ],
             'published' => [
                 'description' => 'Whether the extension has been published by the contributor.',
                 'enum' => [
@@ -240,6 +243,8 @@ class Extension
      * @var MonthlyPricePlanStrategyItem[]|null
      */
     private ?array $pricing = null;
+
+    private ?PricePlanDetails $pricingDetails = null;
 
     /**
      * Whether the extension has been published by the contributor.
@@ -395,6 +400,11 @@ class Extension
     public function getPricing(): ?array
     {
         return $this->pricing ?? null;
+    }
+
+    public function getPricingDetails(): ?PricePlanDetails
+    {
+        return $this->pricingDetails ?? null;
     }
 
     public function getPublished(): bool
@@ -687,6 +697,22 @@ class Extension
         return $clone;
     }
 
+    public function withPricingDetails(PricePlanDetails $pricingDetails): self
+    {
+        $clone = clone $this;
+        $clone->pricingDetails = $pricingDetails;
+
+        return $clone;
+    }
+
+    public function withoutPricingDetails(): self
+    {
+        $clone = clone $this;
+        unset($clone->pricingDetails);
+
+        return $clone;
+    }
+
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
@@ -822,6 +848,10 @@ class Extension
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
+        $pricingDetails = null;
+        if (isset($input->{'pricingDetails'})) {
+            $pricingDetails = PricePlanDetails::buildFromInput($input->{'pricingDetails'}, validate: $validate);
+        }
         $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
@@ -837,6 +867,7 @@ class Extension
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
         $obj->pricing = $pricing;
+        $obj->pricingDetails = $pricingDetails;
         return $obj;
     }
 
@@ -877,6 +908,9 @@ class Extension
             $output['pricing'] = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn ($item): array => $item->toJson(), $this->pricing),
             };
+        }
+        if (isset($this->pricingDetails)) {
+            $output['pricingDetails'] = $this->pricingDetails->toJson();
         }
         $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;

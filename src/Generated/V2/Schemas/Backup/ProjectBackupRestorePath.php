@@ -32,7 +32,7 @@ class ProjectBackupRestorePath
                 'type' => 'string',
             ],
             'phase' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.RestorePhase',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.RestorePathPhase',
             ],
             'sourcePath' => [
                 'type' => 'string',
@@ -54,13 +54,13 @@ class ProjectBackupRestorePath
 
     private string $determinedTargetPath;
 
-    private RestorePhase $phase;
+    private RestorePathPhase $phase;
 
     private string $sourcePath;
 
     private ?string $targetPath = null;
 
-    public function __construct(string $determinedTargetPath, RestorePhase $phase, string $sourcePath)
+    public function __construct(string $determinedTargetPath, RestorePathPhase $phase, string $sourcePath)
     {
         $this->determinedTargetPath = $determinedTargetPath;
         $this->phase = $phase;
@@ -77,7 +77,7 @@ class ProjectBackupRestorePath
         return $this->determinedTargetPath;
     }
 
-    public function getPhase(): RestorePhase
+    public function getPhase(): RestorePathPhase
     {
         return $this->phase;
     }
@@ -120,7 +120,7 @@ class ProjectBackupRestorePath
         return $clone;
     }
 
-    public function withPhase(RestorePhase $phase): self
+    public function withPhase(RestorePathPhase $phase): self
     {
         $clone = clone $this;
         $clone->phase = $phase;
@@ -184,7 +184,7 @@ class ProjectBackupRestorePath
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
         $determinedTargetPath = $input->{'determinedTargetPath'};
-        $phase = RestorePhase::from($input->{'phase'});
+        $phase = RestorePathPhase::from($input->{'phase'});
         $sourcePath = $input->{'sourcePath'};
         $targetPath = null;
         if (isset($input->{'targetPath'})) {

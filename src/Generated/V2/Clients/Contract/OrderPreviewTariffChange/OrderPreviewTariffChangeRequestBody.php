@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffCha
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\AIHostingTariffChange;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\LeadFyndrTariffChange;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange;
@@ -28,6 +29,9 @@ class OrderPreviewTariffChangeRequestBody
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingTariffChange',
+                    ],
                 ],
             ],
             'tariffChangeType' => [
@@ -35,6 +39,7 @@ class OrderPreviewTariffChangeRequestBody
                     'projectHosting',
                     'server',
                     'leadFyndr',
+                    'aiHosting',
                 ],
                 'type' => 'string',
             ],
@@ -42,7 +47,7 @@ class OrderPreviewTariffChangeRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingTariffChange|ServerTariffChange|LeadFyndrTariffChange|null $tariffChangeData = null;
+    private ProjectHostingTariffChange|ServerTariffChange|LeadFyndrTariffChange|AIHostingTariffChange|null $tariffChangeData = null;
 
     private ?OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
 
@@ -53,7 +58,7 @@ class OrderPreviewTariffChangeRequestBody
     {
     }
 
-    public function getTariffChangeData(): LeadFyndrTariffChange|ProjectHostingTariffChange|ServerTariffChange|null
+    public function getTariffChangeData(): AIHostingTariffChange|LeadFyndrTariffChange|ProjectHostingTariffChange|ServerTariffChange|null
     {
         return $this->tariffChangeData;
     }
@@ -63,7 +68,7 @@ class OrderPreviewTariffChangeRequestBody
         return $this->tariffChangeType ?? null;
     }
 
-    public function withTariffChangeData(LeadFyndrTariffChange|ProjectHostingTariffChange|ServerTariffChange $tariffChangeData): self
+    public function withTariffChangeData(AIHostingTariffChange|LeadFyndrTariffChange|ProjectHostingTariffChange|ServerTariffChange $tariffChangeData): self
     {
         $clone = clone $this;
         $clone->tariffChangeData = $tariffChangeData;
@@ -116,6 +121,7 @@ class OrderPreviewTariffChangeRequestBody
                 ProjectHostingTariffChange::validateInput($input->{'tariffChangeData'}, true) => ProjectHostingTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
                 ServerTariffChange::validateInput($input->{'tariffChangeData'}, true) => ServerTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
                 LeadFyndrTariffChange::validateInput($input->{'tariffChangeData'}, true) => LeadFyndrTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
+                AIHostingTariffChange::validateInput($input->{'tariffChangeData'}, true) => AIHostingTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'tariffChangeData' from JSON"),
             };
         }
@@ -140,7 +146,7 @@ class OrderPreviewTariffChangeRequestBody
         $output = [];
         if (isset($this->tariffChangeData)) {
             $output['tariffChangeData'] = match (true) {
-                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange, ($this->tariffChangeData) instanceof LeadFyndrTariffChange => $this->tariffChangeData->toJson(),
+                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange, ($this->tariffChangeData) instanceof LeadFyndrTariffChange, ($this->tariffChangeData) instanceof AIHostingTariffChange => $this->tariffChangeData->toJson(),
             };
         }
         if (isset($this->tariffChangeType)) {
@@ -178,7 +184,7 @@ class OrderPreviewTariffChangeRequestBody
     {
         if (isset($this->tariffChangeData)) {
             $this->tariffChangeData = match (true) {
-                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange, ($this->tariffChangeData) instanceof LeadFyndrTariffChange => $this->tariffChangeData,
+                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange, ($this->tariffChangeData) instanceof LeadFyndrTariffChange, ($this->tariffChangeData) instanceof AIHostingTariffChange => $this->tariffChangeData,
             };
         }
     }

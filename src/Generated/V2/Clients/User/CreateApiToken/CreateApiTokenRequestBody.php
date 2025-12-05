@@ -26,9 +26,7 @@ class CreateApiTokenRequestBody
             'roles' => [
                 'description' => 'Determines the access rights of the ApiToken.',
                 'example' => [
-                    'value' => [
-                        'api_read',
-                    ],
+                    'api_read',
                 ],
                 'items' => [
                     'enum' => [

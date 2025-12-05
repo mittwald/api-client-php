@@ -17,6 +17,19 @@ class IngressListIngressesCompatibleWithCertificateRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'limit' => [
+                'type' => 'integer',
+                'default' => 10000,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
             'body' => [
                 'properties' => [
                     'certificate' => [
@@ -42,6 +55,12 @@ class IngressListIngressesCompatibleWithCertificateRequest
         ],
     ];
 
+    private int $limit = 10000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
+
     private IngressListIngressesCompatibleWithCertificateRequestBody $body;
 
     private array $headers = [
@@ -53,9 +72,74 @@ class IngressListIngressesCompatibleWithCertificateRequest
         $this->body = $body;
     }
 
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function getBody(): IngressListIngressesCompatibleWithCertificateRequestBody
     {
         return $this->body;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
     }
 
     public function withBody(IngressListIngressesCompatibleWithCertificateRequestBody $body): self
@@ -81,10 +165,24 @@ class IngressListIngressesCompatibleWithCertificateRequest
             static::validateInput($input);
         }
 
+        $limit = 10000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
         $body = IngressListIngressesCompatibleWithCertificateRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
-
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -96,6 +194,11 @@ class IngressListIngressesCompatibleWithCertificateRequest
     public function toJson(): array
     {
         $output = [];
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -158,6 +261,15 @@ class IngressListIngressesCompatibleWithCertificateRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

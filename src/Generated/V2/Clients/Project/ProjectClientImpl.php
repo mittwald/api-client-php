@@ -15,15 +15,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptPr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInvitePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalConflictResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectDefaultResponse;
@@ -66,20 +57,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteSer
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
@@ -187,15 +164,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNot
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalConflictResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionForbiddenResponse;
@@ -277,34 +245,6 @@ class ProjectClientImpl implements ProjectClient
             412 => AcceptProjectInvitePreconditionFailedResponse::fromResponse($httpResponse),
             429 => AcceptProjectInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => AcceptProjectInviteDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Creates a new llm beta Licence for a project. Will be purged on end of beta.
-     *
-     * Deprecated route which will be removed on end of beta. Please do not use for production.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-llm-beta-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateLlmBetaLicenceExperimentalRequest $request An object representing the request for this operation
-     */
-    public function createLlmBetaLicenceExperimental(CreateLlmBetaLicenceExperimentalRequest $request): CreateLlmBetaLicenceExperimentalCreatedResponse
-    {
-        $httpRequest = new Request(CreateLlmBetaLicenceExperimentalRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateLlmBetaLicenceExperimentalCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateLlmBetaLicenceExperimentalBadRequestResponse::fromResponse($httpResponse),
-            403 => CreateLlmBetaLicenceExperimentalForbiddenResponse::fromResponse($httpResponse),
-            404 => CreateLlmBetaLicenceExperimentalNotFoundResponse::fromResponse($httpResponse),
-            409 => CreateLlmBetaLicenceExperimentalConflictResponse::fromResponse($httpResponse),
-            412 => CreateLlmBetaLicenceExperimentalPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => CreateLlmBetaLicenceExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CreateLlmBetaLicenceExperimentalDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -492,56 +432,6 @@ class ProjectClientImpl implements ProjectClient
             403 => DeleteServerAvatarForbiddenResponse::fromResponse($httpResponse),
             429 => DeleteServerAvatarTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a licence of a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-llm-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmLicenceExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmLicenceExperimentalOKResponse The llm licence of a project.
-     */
-    public function getLlmLicenceExperimental(GetLlmLicenceExperimentalRequest $request): GetLlmLicenceExperimentalOKResponse
-    {
-        $httpRequest = new Request(GetLlmLicenceExperimentalRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetLlmLicenceExperimentalOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetLlmLicenceExperimentalBadRequestResponse::fromResponse($httpResponse),
-            403 => GetLlmLicenceExperimentalForbiddenResponse::fromResponse($httpResponse),
-            404 => GetLlmLicenceExperimentalNotFoundResponse::fromResponse($httpResponse),
-            429 => GetLlmLicenceExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetLlmLicenceExperimentalDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a list of already created llm licences.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-llm-licences-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmLicencesExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmLicencesExperimentalOKResponse List of llm licences of a project.
-     */
-    public function getLlmLicencesExperimental(GetLlmLicencesExperimentalRequest $request): GetLlmLicencesExperimentalOKResponse
-    {
-        $httpRequest = new Request(GetLlmLicencesExperimentalRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetLlmLicencesExperimentalOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetLlmLicencesExperimentalBadRequestResponse::fromResponse($httpResponse),
-            403 => GetLlmLicencesExperimentalForbiddenResponse::fromResponse($httpResponse),
-            404 => GetLlmLicencesExperimentalNotFoundResponse::fromResponse($httpResponse),
-            429 => GetLlmLicencesExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetLlmLicencesExperimentalDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -892,32 +782,6 @@ class ProjectClientImpl implements ProjectClient
             403 => ResendProjectInviteMailForbiddenResponse::fromResponse($httpResponse),
             429 => ResendProjectInviteMailTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResendProjectInviteMailDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a llm Licence for a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-llm-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateLlmLicenceExperimentalRequest $request An object representing the request for this operation
-     */
-    public function updateLlmLicenceExperimental(UpdateLlmLicenceExperimentalRequest $request): UpdateLlmLicenceExperimentalOKResponse
-    {
-        $httpRequest = new Request(UpdateLlmLicenceExperimentalRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return UpdateLlmLicenceExperimentalOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateLlmLicenceExperimentalBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateLlmLicenceExperimentalForbiddenResponse::fromResponse($httpResponse),
-            404 => UpdateLlmLicenceExperimentalNotFoundResponse::fromResponse($httpResponse),
-            409 => UpdateLlmLicenceExperimentalConflictResponse::fromResponse($httpResponse),
-            412 => UpdateLlmLicenceExperimentalPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => UpdateLlmLicenceExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateLlmLicenceExperimentalDefaultResponse::fromResponse($httpResponse),
         });
     }
 

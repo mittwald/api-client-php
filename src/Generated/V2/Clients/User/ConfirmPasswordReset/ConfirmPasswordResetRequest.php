@@ -25,8 +25,8 @@ class ConfirmPasswordResetRequest
                     ],
                     'token' => [
                         'description' => 'Password reset token',
-                        'maxLength' => 6,
-                        'minLength' => 6,
+                        'maxLength' => 20,
+                        'minLength' => 20,
                         'type' => 'string',
                     ],
                     'userId' => [

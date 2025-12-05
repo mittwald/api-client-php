@@ -44,24 +44,7 @@ class Licence
                 'type' => 'string',
             ],
             'limit' => [
-                'description' => 'The number of allowed requests per unit. Limits are shared across all licences within the same project.',
-                'properties' => [
-                    'allowedRequestsPerUnit' => [
-                        'type' => 'number',
-                    ],
-                    'unit' => [
-                        'enum' => [
-                            'minute',
-                            'hour',
-                        ],
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'allowedRequestsPerUnit',
-                    'unit',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
             ],
             'models' => [
                 'description' => 'An array of LLM model identifiers enabled for this licence.',
@@ -76,10 +59,8 @@ class Licence
             'projectId' => [
                 'type' => 'string',
             ],
-            'rateLimit' => [
-                'deprecated' => true,
-                'description' => 'Deprecated, please us limit.allowedRequestsPerUnit',
-                'type' => 'number',
+            'tokenUsage' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TokenUsage',
             ],
         ],
         'required' => [
@@ -87,8 +68,8 @@ class Licence
             'licenceKey',
             'models',
             'name',
-            'rateLimit',
             'isBlocked',
+            'tokenUsage',
             'limit',
         ],
         'type' => 'object',
@@ -113,10 +94,7 @@ class Licence
      */
     private string $licenceKey;
 
-    /**
-     * The number of allowed requests per unit. Limits are shared across all licences within the same project.
-     */
-    private LicenceLimit $limit;
+    private RateLimit $limit;
 
     /**
      * An array of LLM model identifiers enabled for this licence.
@@ -129,24 +107,19 @@ class Licence
 
     private ?string $projectId = null;
 
-    /**
-     * Deprecated, please us limit.allowedRequestsPerUnit
-     *
-     * @deprecated
-     */
-    private int|float $rateLimit;
+    private TokenUsage $tokenUsage;
 
     /**
      * @param string[] $models
      */
-    public function __construct(string $licenceId, string $licenceKey, LicenceLimit $limit, array $models, string $name, int|float $rateLimit)
+    public function __construct(string $licenceId, string $licenceKey, RateLimit $limit, array $models, string $name, TokenUsage $tokenUsage)
     {
         $this->licenceId = $licenceId;
         $this->licenceKey = $licenceKey;
         $this->limit = $limit;
         $this->models = $models;
         $this->name = $name;
-        $this->rateLimit = $rateLimit;
+        $this->tokenUsage = $tokenUsage;
     }
 
     public function getContainerMeta(): ?ContainerMeta
@@ -174,7 +147,7 @@ class Licence
         return $this->licenceKey;
     }
 
-    public function getLimit(): LicenceLimit
+    public function getLimit(): RateLimit
     {
         return $this->limit;
     }
@@ -197,12 +170,9 @@ class Licence
         return $this->projectId ?? null;
     }
 
-    /**
-     * @deprecated
-     */
-    public function getRateLimit(): int|float
+    public function getTokenUsage(): TokenUsage
     {
-        return $this->rateLimit;
+        return $this->tokenUsage;
     }
 
     public function withContainerMeta(ContainerMeta $containerMeta): self
@@ -285,7 +255,7 @@ class Licence
         return $clone;
     }
 
-    public function withLimit(LicenceLimit $limit): self
+    public function withLimit(RateLimit $limit): self
     {
         $clone = clone $this;
         $clone->limit = $limit;
@@ -346,19 +316,10 @@ class Licence
         return $clone;
     }
 
-    /**
-     * @deprecated
-     */
-    public function withRateLimit(int|float $rateLimit): self
+    public function withTokenUsage(TokenUsage $tokenUsage): self
     {
-        $validator = new Validator();
-        $validator->validate($rateLimit, self::$internalValidationSchema['properties']['rateLimit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->rateLimit = $rateLimit;
+        $clone->tokenUsage = $tokenUsage;
 
         return $clone;
     }
@@ -392,16 +353,16 @@ class Licence
         }
         $licenceId = $input->{'licenceId'};
         $licenceKey = $input->{'licenceKey'};
-        $limit = LicenceLimit::buildFromInput($input->{'limit'}, validate: $validate);
+        $limit = RateLimit::buildFromInput($input->{'limit'}, validate: $validate);
         $models = $input->{'models'};
         $name = $input->{'name'};
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
         }
-        $rateLimit = str_contains((string)($input->{'rateLimit'}), '.') ? (float)($input->{'rateLimit'}) : (int)($input->{'rateLimit'});
+        $tokenUsage = TokenUsage::buildFromInput($input->{'tokenUsage'}, validate: $validate);
 
-        $obj = new self($licenceId, $licenceKey, $limit, $models, $name, $rateLimit);
+        $obj = new self($licenceId, $licenceKey, $limit, $models, $name, $tokenUsage);
         $obj->containerMeta = $containerMeta;
         $obj->customerId = $customerId;
         $obj->isBlocked = $isBlocked;
@@ -426,13 +387,13 @@ class Licence
         $output['isBlocked'] = $this->isBlocked;
         $output['licenceId'] = $this->licenceId;
         $output['licenceKey'] = $this->licenceKey;
-        $output['limit'] = ($this->limit)->toJson();
+        $output['limit'] = $this->limit->toJson();
         $output['models'] = $this->models;
         $output['name'] = $this->name;
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }
-        $output['rateLimit'] = $this->rateLimit;
+        $output['tokenUsage'] = $this->tokenUsage->toJson();
 
         return $output;
     }
@@ -463,6 +424,5 @@ class Licence
 
     public function __clone()
     {
-        $this->limit = clone $this->limit;
     }
 }

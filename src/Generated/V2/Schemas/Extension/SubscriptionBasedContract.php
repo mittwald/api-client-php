@@ -26,6 +26,10 @@ class SubscriptionBasedContract
     private static array $internalValidationSchema = [
         'description' => 'A strategy for Contracts that will be paid periodically.',
         'properties' => [
+            'contractPeriodEndDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'currentPrice' => [
                 'description' => 'monthly price in Euro Cent',
                 'example' => 999,
@@ -37,6 +41,22 @@ class SubscriptionBasedContract
             ],
             'interactionRequired' => [
                 'type' => 'boolean',
+            ],
+            'pendingVariantChange' => [
+                'properties' => [
+                    'effectiveDate' => [
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                    'targetVariantKey' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'targetVariantKey',
+                    'effectiveDate',
+                ],
+                'type' => 'object',
             ],
             'status' => [
                 'enum' => [
@@ -68,6 +88,8 @@ class SubscriptionBasedContract
         'type' => 'object',
     ];
 
+    private ?DateTime $contractPeriodEndDate = null;
+
     /**
      * monthly price in Euro Cent
      */
@@ -76,6 +98,8 @@ class SubscriptionBasedContract
     private ?DateTime $interactionDeadline = null;
 
     private bool $interactionRequired;
+
+    private ?SubscriptionBasedContractPendingVariantChange $pendingVariantChange = null;
 
     private SubscriptionBasedContractStatus $status;
 
@@ -93,6 +117,11 @@ class SubscriptionBasedContract
         $this->status = $status;
     }
 
+    public function getContractPeriodEndDate(): ?DateTime
+    {
+        return $this->contractPeriodEndDate ?? null;
+    }
+
     public function getCurrentPrice(): ?int
     {
         return $this->currentPrice ?? null;
@@ -106,6 +135,11 @@ class SubscriptionBasedContract
     public function getInteractionRequired(): bool
     {
         return $this->interactionRequired;
+    }
+
+    public function getPendingVariantChange(): ?SubscriptionBasedContractPendingVariantChange
+    {
+        return $this->pendingVariantChange ?? null;
     }
 
     public function getStatus(): SubscriptionBasedContractStatus
@@ -131,6 +165,22 @@ class SubscriptionBasedContract
     public function getVariantName(): ?string
     {
         return $this->variantName ?? null;
+    }
+
+    public function withContractPeriodEndDate(DateTime $contractPeriodEndDate): self
+    {
+        $clone = clone $this;
+        $clone->contractPeriodEndDate = $contractPeriodEndDate;
+
+        return $clone;
+    }
+
+    public function withoutContractPeriodEndDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->contractPeriodEndDate);
+
+        return $clone;
     }
 
     public function withCurrentPrice(int $currentPrice): self
@@ -181,6 +231,22 @@ class SubscriptionBasedContract
 
         $clone = clone $this;
         $clone->interactionRequired = $interactionRequired;
+
+        return $clone;
+    }
+
+    public function withPendingVariantChange(SubscriptionBasedContractPendingVariantChange $pendingVariantChange): self
+    {
+        $clone = clone $this;
+        $clone->pendingVariantChange = $pendingVariantChange;
+
+        return $clone;
+    }
+
+    public function withoutPendingVariantChange(): self
+    {
+        $clone = clone $this;
+        unset($clone->pendingVariantChange);
 
         return $clone;
     }
@@ -290,6 +356,10 @@ class SubscriptionBasedContract
             static::validateInput($input);
         }
 
+        $contractPeriodEndDate = null;
+        if (isset($input->{'contractPeriodEndDate'})) {
+            $contractPeriodEndDate = new DateTime($input->{'contractPeriodEndDate'});
+        }
         $currentPrice = null;
         if (isset($input->{'currentPrice'})) {
             $currentPrice = (int)($input->{'currentPrice'});
@@ -299,6 +369,10 @@ class SubscriptionBasedContract
             $interactionDeadline = new DateTime($input->{'interactionDeadline'});
         }
         $interactionRequired = (bool)($input->{'interactionRequired'});
+        $pendingVariantChange = null;
+        if (isset($input->{'pendingVariantChange'})) {
+            $pendingVariantChange = SubscriptionBasedContractPendingVariantChange::buildFromInput($input->{'pendingVariantChange'}, validate: $validate);
+        }
         $status = SubscriptionBasedContractStatus::from($input->{'status'});
         $terminationTargetDate = null;
         if (isset($input->{'terminationTargetDate'})) {
@@ -318,8 +392,10 @@ class SubscriptionBasedContract
         }
 
         $obj = new self($interactionRequired, $status);
+        $obj->contractPeriodEndDate = $contractPeriodEndDate;
         $obj->currentPrice = $currentPrice;
         $obj->interactionDeadline = $interactionDeadline;
+        $obj->pendingVariantChange = $pendingVariantChange;
         $obj->terminationTargetDate = $terminationTargetDate;
         $obj->variantDescription = $variantDescription;
         $obj->variantKey = $variantKey;
@@ -335,6 +411,9 @@ class SubscriptionBasedContract
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->contractPeriodEndDate)) {
+            $output['contractPeriodEndDate'] = ($this->contractPeriodEndDate)->format(DateTime::ATOM);
+        }
         if (isset($this->currentPrice)) {
             $output['currentPrice'] = $this->currentPrice;
         }
@@ -342,6 +421,9 @@ class SubscriptionBasedContract
             $output['interactionDeadline'] = ($this->interactionDeadline)->format(DateTime::ATOM);
         }
         $output['interactionRequired'] = $this->interactionRequired;
+        if (isset($this->pendingVariantChange)) {
+            $output['pendingVariantChange'] = ($this->pendingVariantChange)->toJson();
+        }
         $output['status'] = ($this->status)->value;
         if (isset($this->terminationTargetDate)) {
             $output['terminationTargetDate'] = ($this->terminationTargetDate)->format(DateTime::ATOM);
@@ -385,8 +467,14 @@ class SubscriptionBasedContract
 
     public function __clone()
     {
+        if (isset($this->contractPeriodEndDate)) {
+            $this->contractPeriodEndDate = clone $this->contractPeriodEndDate;
+        }
         if (isset($this->interactionDeadline)) {
             $this->interactionDeadline = clone $this->interactionDeadline;
+        }
+        if (isset($this->pendingVariantChange)) {
+            $this->pendingVariantChange = clone $this->pendingVariantChange;
         }
         if (isset($this->terminationTargetDate)) {
             $this->terminationTargetDate = clone $this->terminationTargetDate;

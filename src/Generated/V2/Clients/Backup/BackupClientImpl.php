@@ -48,14 +48,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBa
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabases\GetProjectBackupDatabasesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesBadGatewayResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesForbiddenResponse;
@@ -78,12 +70,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreDatabase\RequestProjectBackupRestoreDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathForbiddenResponse;
@@ -294,33 +280,7 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * Check databases for a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-databases
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetProjectBackupDatabasesRequest $request An object representing the request for this operation
-     * @return GetProjectBackupDatabasesOKResponse OK
-     */
-    public function getProjectBackupDatabases(GetProjectBackupDatabasesRequest $request): GetProjectBackupDatabasesOKResponse
-    {
-        $httpRequest = new Request(GetProjectBackupDatabasesRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetProjectBackupDatabasesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => GetProjectBackupDatabasesForbiddenResponse::fromResponse($httpResponse),
-            404 => GetProjectBackupDatabasesNotFoundResponse::fromResponse($httpResponse),
-            429 => GetProjectBackupDatabasesTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => GetProjectBackupDatabasesBadGatewayResponse::fromResponse($httpResponse),
-            503 => GetProjectBackupDatabasesServiceUnavailableResponse::fromResponse($httpResponse),
-            default => GetProjectBackupDatabasesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get paths for a ProjectBackup.
+     * Get table of contents for a ProjectBackup.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-directories
      * @throws GuzzleException
@@ -410,31 +370,6 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ListProjectBackupsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListProjectBackupsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Restore a ProjectBackup's database.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore-database
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param RequestProjectBackupRestoreDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function requestProjectBackupRestoreDatabase(RequestProjectBackupRestoreDatabaseRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(RequestProjectBackupRestoreDatabaseRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => RequestProjectBackupRestoreDatabaseBadRequestResponse::fromResponse($httpResponse),
-            403 => RequestProjectBackupRestoreDatabaseForbiddenResponse::fromResponse($httpResponse),
-            404 => RequestProjectBackupRestoreDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => RequestProjectBackupRestoreDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
-            default => RequestProjectBackupRestoreDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 

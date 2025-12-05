@@ -23,6 +23,9 @@ class DeleteDomainRequest
             'transit' => [
                 'type' => 'boolean',
             ],
+            'deleteIngresses' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'domainId',
@@ -32,6 +35,8 @@ class DeleteDomainRequest
     private string $domainId;
 
     private ?bool $transit = null;
+
+    private ?bool $deleteIngresses = null;
 
     private array $headers = [
 
@@ -50,6 +55,11 @@ class DeleteDomainRequest
     public function getTransit(): ?bool
     {
         return $this->transit ?? null;
+    }
+
+    public function getDeleteIngresses(): ?bool
+    {
+        return $this->deleteIngresses ?? null;
     }
 
     public function withDomainId(string $domainId): self
@@ -88,6 +98,28 @@ class DeleteDomainRequest
         return $clone;
     }
 
+    public function withDeleteIngresses(bool $deleteIngresses): self
+    {
+        $validator = new Validator();
+        $validator->validate($deleteIngresses, self::$internalValidationSchema['properties']['deleteIngresses']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deleteIngresses = $deleteIngresses;
+
+        return $clone;
+    }
+
+    public function withoutDeleteIngresses(): self
+    {
+        $clone = clone $this;
+        unset($clone->deleteIngresses);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -108,9 +140,14 @@ class DeleteDomainRequest
         if (isset($input->{'transit'})) {
             $transit = (bool)($input->{'transit'});
         }
+        $deleteIngresses = null;
+        if (isset($input->{'deleteIngresses'})) {
+            $deleteIngresses = (bool)($input->{'deleteIngresses'});
+        }
 
         $obj = new self($domainId);
         $obj->transit = $transit;
+        $obj->deleteIngresses = $deleteIngresses;
         return $obj;
     }
 
@@ -125,6 +162,9 @@ class DeleteDomainRequest
         $output['domainId'] = $this->domainId;
         if (isset($this->transit)) {
             $output['transit'] = $this->transit;
+        }
+        if (isset($this->deleteIngresses)) {
+            $output['deleteIngresses'] = $this->deleteIngresses;
         }
 
         return $output;
@@ -189,6 +229,9 @@ class DeleteDomainRequest
         $query = [];
         if (isset($mapped['transit'])) {
             $query['transit'] = $mapped['transit'];
+        }
+        if (isset($mapped['deleteIngresses'])) {
+            $query['deleteIngresses'] = $mapped['deleteIngresses'];
         }
         return [
             'query' => $query,

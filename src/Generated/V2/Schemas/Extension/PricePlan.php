@@ -25,6 +25,14 @@ class PricePlan
     private static array $internalValidationSchema = [
         'description' => 'PricePlan with Variants.',
         'properties' => [
+            'isDowngradeAllowed' => [
+                'description' => 'Indicates whether downgrading between variants is allowed.',
+                'type' => 'boolean',
+            ],
+            'isUpgradeAllowed' => [
+                'description' => 'Indicates whether upgrading between variants is allowed.',
+                'type' => 'boolean',
+            ],
             'variants' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.extension.Variant',
@@ -39,6 +47,16 @@ class PricePlan
     ];
 
     /**
+     * Indicates whether downgrading between variants is allowed.
+     */
+    private ?bool $isDowngradeAllowed = null;
+
+    /**
+     * Indicates whether upgrading between variants is allowed.
+     */
+    private ?bool $isUpgradeAllowed = null;
+
+    /**
      * @var Variant[]
      */
     private array $variants;
@@ -51,12 +69,66 @@ class PricePlan
         $this->variants = $variants;
     }
 
+    public function getIsDowngradeAllowed(): ?bool
+    {
+        return $this->isDowngradeAllowed ?? null;
+    }
+
+    public function getIsUpgradeAllowed(): ?bool
+    {
+        return $this->isUpgradeAllowed ?? null;
+    }
+
     /**
      * @return Variant[]
      */
     public function getVariants(): array
     {
         return $this->variants;
+    }
+
+    public function withIsDowngradeAllowed(bool $isDowngradeAllowed): self
+    {
+        $validator = new Validator();
+        $validator->validate($isDowngradeAllowed, self::$internalValidationSchema['properties']['isDowngradeAllowed']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isDowngradeAllowed = $isDowngradeAllowed;
+
+        return $clone;
+    }
+
+    public function withoutIsDowngradeAllowed(): self
+    {
+        $clone = clone $this;
+        unset($clone->isDowngradeAllowed);
+
+        return $clone;
+    }
+
+    public function withIsUpgradeAllowed(bool $isUpgradeAllowed): self
+    {
+        $validator = new Validator();
+        $validator->validate($isUpgradeAllowed, self::$internalValidationSchema['properties']['isUpgradeAllowed']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isUpgradeAllowed = $isUpgradeAllowed;
+
+        return $clone;
+    }
+
+    public function withoutIsUpgradeAllowed(): self
+    {
+        $clone = clone $this;
+        unset($clone->isUpgradeAllowed);
+
+        return $clone;
     }
 
     /**
@@ -85,10 +157,19 @@ class PricePlan
             static::validateInput($input);
         }
 
+        $isDowngradeAllowed = null;
+        if (isset($input->{'isDowngradeAllowed'})) {
+            $isDowngradeAllowed = (bool)($input->{'isDowngradeAllowed'});
+        }
+        $isUpgradeAllowed = null;
+        if (isset($input->{'isUpgradeAllowed'})) {
+            $isUpgradeAllowed = (bool)($input->{'isUpgradeAllowed'});
+        }
         $variants = array_map(fn (array|object $i): Variant => Variant::buildFromInput($i, validate: $validate), $input->{'variants'});
 
         $obj = new self($variants);
-
+        $obj->isDowngradeAllowed = $isDowngradeAllowed;
+        $obj->isUpgradeAllowed = $isUpgradeAllowed;
         return $obj;
     }
 
@@ -100,6 +181,12 @@ class PricePlan
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->isDowngradeAllowed)) {
+            $output['isDowngradeAllowed'] = $this->isDowngradeAllowed;
+        }
+        if (isset($this->isUpgradeAllowed)) {
+            $output['isUpgradeAllowed'] = $this->isUpgradeAllowed;
+        }
         $output['variants'] = array_map(fn (Variant $i): array => $i->toJson(), $this->variants);
 
         return $output;

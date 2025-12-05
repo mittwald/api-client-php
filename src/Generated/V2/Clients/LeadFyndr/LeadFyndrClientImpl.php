@@ -73,10 +73,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlocke
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\GetUnlockedLead\GetUnlockedLeadTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListLeads\ListLeadsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListUnlockedLeads\ListUnlockedLeadsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListUnlockedLeads\ListUnlockedLeadsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListUnlockedLeads\ListUnlockedLeadsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\ListUnlockedLeads\ListUnlockedLeadsNotFoundResponse;
@@ -370,6 +372,7 @@ class LeadFyndrClientImpl implements LeadFyndrClient
             return ListLeadsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListLeadsBadRequestResponse::fromResponse($httpResponse),
             429 => ListLeadsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListLeadsDefaultResponse::fromResponse($httpResponse),
         });
@@ -392,6 +395,7 @@ class LeadFyndrClientImpl implements LeadFyndrClient
             return ListUnlockedLeadsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListUnlockedLeadsBadRequestResponse::fromResponse($httpResponse),
             403 => ListUnlockedLeadsForbiddenResponse::fromResponse($httpResponse),
             404 => ListUnlockedLeadsNotFoundResponse::fromResponse($httpResponse),
             429 => ListUnlockedLeadsTooManyRequestsResponse::fromResponse($httpResponse),

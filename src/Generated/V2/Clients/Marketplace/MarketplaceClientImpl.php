@@ -121,6 +121,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
@@ -155,7 +161,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstancePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceTooManyRequestsResponse;
@@ -313,6 +318,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
@@ -807,6 +818,30 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Cancel an Extension Instance Variant Change.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-variant-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCancelExtensionVariantChangeRequest $request An object representing the request for this operation
+     * @return ExtensionCancelExtensionVariantChangeOKResponse The Variant Change was cancelled.
+     */
+    public function extensionCancelExtensionVariantChange(ExtensionCancelExtensionVariantChangeRequest $request): ExtensionCancelExtensionVariantChangeOKResponse
+    {
+        $httpRequest = new Request(ExtensionCancelExtensionVariantChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionCancelExtensionVariantChangeOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionCancelExtensionVariantChangeBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionCancelExtensionVariantChangeNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionCancelExtensionVariantChangeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionCancelExtensionVariantChangeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Change the context of an Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
@@ -970,7 +1005,6 @@ class MarketplaceClientImpl implements MarketplaceClient
             return UntypedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionDeleteExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
             412 => ExtensionDeleteExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionDeleteExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDeleteExtensionInstanceDefaultResponse::fromResponse($httpResponse),
@@ -1677,6 +1711,30 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionScheduleExtensionTerminationNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionScheduleExtensionTerminationTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionScheduleExtensionTerminationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Schedule an Extension Instance Variant change for the next possible date.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-schedule-extension-variant-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionScheduleExtensionVariantChangeRequest $request An object representing the request for this operation
+     * @return ExtensionScheduleExtensionVariantChangeCreatedResponse A Variant Change was scheduled.
+     */
+    public function extensionScheduleExtensionVariantChange(ExtensionScheduleExtensionVariantChangeRequest $request): ExtensionScheduleExtensionVariantChangeCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionScheduleExtensionVariantChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionScheduleExtensionVariantChangeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionScheduleExtensionVariantChangeBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionScheduleExtensionVariantChangeNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionScheduleExtensionVariantChangeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionScheduleExtensionVariantChangeDefaultResponse::fromResponse($httpResponse),
         });
     }
 

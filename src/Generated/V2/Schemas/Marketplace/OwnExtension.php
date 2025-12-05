@@ -97,6 +97,9 @@ class OwnExtension
                     ],
                 ],
             ],
+            'pricingDetails' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.PricePlanDetails',
+            ],
             'published' => [
                 'type' => 'boolean',
             ],
@@ -267,6 +270,8 @@ class OwnExtension
      */
     private ?array $pricing = null;
 
+    private ?PricePlanDetails $pricingDetails = null;
+
     private bool $published;
 
     private ?OwnExtensionRequestedChanges $requestedChanges = null;
@@ -428,6 +433,11 @@ class OwnExtension
     public function getPricing(): ?array
     {
         return $this->pricing ?? null;
+    }
+
+    public function getPricingDetails(): ?PricePlanDetails
+    {
+        return $this->pricingDetails ?? null;
     }
 
     public function getPublished(): bool
@@ -810,6 +820,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withPricingDetails(PricePlanDetails $pricingDetails): self
+    {
+        $clone = clone $this;
+        $clone->pricingDetails = $pricingDetails;
+
+        return $clone;
+    }
+
+    public function withoutPricingDetails(): self
+    {
+        $clone = clone $this;
+        unset($clone->pricingDetails);
+
+        return $clone;
+    }
+
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
@@ -1075,6 +1101,10 @@ class OwnExtension
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
+        $pricingDetails = null;
+        if (isset($input->{'pricingDetails'})) {
+            $pricingDetails = PricePlanDetails::buildFromInput($input->{'pricingDetails'}, validate: $validate);
+        }
         $published = (bool)($input->{'published'});
         $requestedChanges = null;
         if (isset($input->{'requestedChanges'})) {
@@ -1122,6 +1152,7 @@ class OwnExtension
         $obj->frontendFragments = $frontendFragments;
         $obj->logoRefId = $logoRefId;
         $obj->pricing = $pricing;
+        $obj->pricingDetails = $pricingDetails;
         $obj->requestedChanges = $requestedChanges;
         $obj->scopes = $scopes;
         $obj->state = $state;
@@ -1182,6 +1213,9 @@ class OwnExtension
             $output['pricing'] = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn ($item): array => $item->toJson(), $this->pricing),
             };
+        }
+        if (isset($this->pricingDetails)) {
+            $output['pricingDetails'] = $this->pricingDetails->toJson();
         }
         $output['published'] = $this->published;
         if (isset($this->requestedChanges)) {

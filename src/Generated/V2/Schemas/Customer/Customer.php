@@ -53,6 +53,18 @@ class Customer
             'customerNumber' => [
                 'type' => 'string',
             ],
+            'deletionProhibitedBy' => [
+                'items' => [
+                    'enum' => [
+                        'hasOpenInvoices',
+                        'hasActiveContracts',
+                        'hasActiveExtensionSubscriptions',
+                        'isActiveContributor',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'executingUserRoles' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.customer.Role',
@@ -72,6 +84,9 @@ class Customer
                 'type' => 'boolean',
             ],
             'isInDefaultOfPayment' => [
+                'type' => 'boolean',
+            ],
+            'is_mail_address_invalid' => [
                 'type' => 'boolean',
             ],
             'levelOfUndeliverableDunningNotice' => [
@@ -132,6 +147,11 @@ class Customer
     private string $customerNumber;
 
     /**
+     * @var string[]|null
+     */
+    private ?array $deletionProhibitedBy = null;
+
+    /**
      * @var Role[]|null
      */
     private ?array $executingUserRoles = null;
@@ -146,6 +166,8 @@ class Customer
     private ?bool $isBanned = null;
 
     private ?bool $isInDefaultOfPayment = null;
+
+    private ?bool $isMailAddressInvalid = null;
 
     private ?CustomerLevelOfUndeliverableDunningNotice $levelOfUndeliverableDunningNotice = null;
 
@@ -202,6 +224,14 @@ class Customer
     }
 
     /**
+     * @return string[]|null
+     */
+    public function getDeletionProhibitedBy(): ?array
+    {
+        return $this->deletionProhibitedBy ?? null;
+    }
+
+    /**
      * @return Role[]|null
      */
     public function getExecutingUserRoles(): ?array
@@ -230,6 +260,11 @@ class Customer
     public function getIsInDefaultOfPayment(): ?bool
     {
         return $this->isInDefaultOfPayment ?? null;
+    }
+
+    public function getIsMailAddressInvalid(): ?bool
+    {
+        return $this->isMailAddressInvalid ?? null;
     }
 
     public function getLevelOfUndeliverableDunningNotice(): ?CustomerLevelOfUndeliverableDunningNotice
@@ -364,6 +399,31 @@ class Customer
     }
 
     /**
+     * @param string[] $deletionProhibitedBy
+     */
+    public function withDeletionProhibitedBy(array $deletionProhibitedBy): self
+    {
+        $validator = new Validator();
+        $validator->validate($deletionProhibitedBy, self::$internalValidationSchema['properties']['deletionProhibitedBy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deletionProhibitedBy = $deletionProhibitedBy;
+
+        return $clone;
+    }
+
+    public function withoutDeletionProhibitedBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionProhibitedBy);
+
+        return $clone;
+    }
+
+    /**
      * @param Role[] $executingUserRoles
      */
     public function withExecutingUserRoles(array $executingUserRoles): self
@@ -463,6 +523,28 @@ class Customer
     {
         $clone = clone $this;
         unset($clone->isInDefaultOfPayment);
+
+        return $clone;
+    }
+
+    public function withIsMailAddressInvalid(bool $isMailAddressInvalid): self
+    {
+        $validator = new Validator();
+        $validator->validate($isMailAddressInvalid, self::$internalValidationSchema['properties']['is_mail_address_invalid']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isMailAddressInvalid = $isMailAddressInvalid;
+
+        return $clone;
+    }
+
+    public function withoutIsMailAddressInvalid(): self
+    {
+        $clone = clone $this;
+        unset($clone->isMailAddressInvalid);
 
         return $clone;
     }
@@ -609,6 +691,10 @@ class Customer
         $creationDate = new DateTime($input->{'creationDate'});
         $customerId = $input->{'customerId'};
         $customerNumber = $input->{'customerNumber'};
+        $deletionProhibitedBy = null;
+        if (isset($input->{'deletionProhibitedBy'})) {
+            $deletionProhibitedBy = $input->{'deletionProhibitedBy'};
+        }
         $executingUserRoles = null;
         if (isset($input->{'executingUserRoles'})) {
             $executingUserRoles = array_map(fn (string $i): Role => Role::from($i), $input->{'executingUserRoles'});
@@ -628,6 +714,10 @@ class Customer
         $isInDefaultOfPayment = null;
         if (isset($input->{'isInDefaultOfPayment'})) {
             $isInDefaultOfPayment = (bool)($input->{'isInDefaultOfPayment'});
+        }
+        $isMailAddressInvalid = null;
+        if (isset($input->{'is_mail_address_invalid'})) {
+            $isMailAddressInvalid = (bool)($input->{'is_mail_address_invalid'});
         }
         $levelOfUndeliverableDunningNotice = null;
         if (isset($input->{'levelOfUndeliverableDunningNotice'})) {
@@ -653,11 +743,13 @@ class Customer
         $obj->activeSuspension = $activeSuspension;
         $obj->avatarRefId = $avatarRefId;
         $obj->categoryId = $categoryId;
+        $obj->deletionProhibitedBy = $deletionProhibitedBy;
         $obj->executingUserRoles = $executingUserRoles;
         $obj->flags = $flags;
         $obj->isAllowedToPlaceOrders = $isAllowedToPlaceOrders;
         $obj->isBanned = $isBanned;
         $obj->isInDefaultOfPayment = $isInDefaultOfPayment;
+        $obj->isMailAddressInvalid = $isMailAddressInvalid;
         $obj->levelOfUndeliverableDunningNotice = $levelOfUndeliverableDunningNotice;
         $obj->owner = $owner;
         $obj->vatId = $vatId;
@@ -685,6 +777,9 @@ class Customer
         $output['creationDate'] = ($this->creationDate)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['customerNumber'] = $this->customerNumber;
+        if (isset($this->deletionProhibitedBy)) {
+            $output['deletionProhibitedBy'] = $this->deletionProhibitedBy;
+        }
         if (isset($this->executingUserRoles)) {
             $output['executingUserRoles'] = array_map(fn (Role $i): string => $i->value, $this->executingUserRoles);
         }
@@ -699,6 +794,9 @@ class Customer
         }
         if (isset($this->isInDefaultOfPayment)) {
             $output['isInDefaultOfPayment'] = $this->isInDefaultOfPayment;
+        }
+        if (isset($this->isMailAddressInvalid)) {
+            $output['is_mail_address_invalid'] = $this->isMailAddressInvalid;
         }
         if (isset($this->levelOfUndeliverableDunningNotice)) {
             $output['levelOfUndeliverableDunningNotice'] = ($this->levelOfUndeliverableDunningNotice)->value;

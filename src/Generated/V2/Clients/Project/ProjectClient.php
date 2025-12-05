@@ -8,8 +8,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateLlmBetaLicenceExperimental\CreateLlmBetaLicenceExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteCreatedResponse;
@@ -21,10 +19,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeletePr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicenceExperimental\GetLlmLicenceExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetLlmLicencesExperimental\GetLlmLicencesExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
@@ -60,8 +54,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatist
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateLlmLicenceExperimental\UpdateLlmLicenceExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
@@ -102,17 +94,6 @@ interface ProjectClient
      * @param AcceptProjectInviteRequest $request An object representing the request for this operation
      */
     public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse;
-    /**
-     * Creates a new llm beta Licence for a project. Will be purged on end of beta.
-     *
-     * Deprecated route which will be removed on end of beta. Please do not use for production.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-llm-beta-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateLlmBetaLicenceExperimentalRequest $request An object representing the request for this operation
-     */
-    public function createLlmBetaLicenceExperimental(CreateLlmBetaLicenceExperimentalRequest $request): CreateLlmBetaLicenceExperimentalCreatedResponse;
     /**
      * Create a Project belonging to a Server.
      *
@@ -191,26 +172,6 @@ interface ProjectClient
      * @return EmptyResponse NoContent
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse;
-    /**
-     * Get a licence of a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-llm-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmLicenceExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmLicenceExperimentalOKResponse The llm licence of a project.
-     */
-    public function getLlmLicenceExperimental(GetLlmLicenceExperimentalRequest $request): GetLlmLicenceExperimentalOKResponse;
-    /**
-     * Get a list of already created llm licences.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-llm-licences-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmLicencesExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmLicencesExperimentalOKResponse List of llm licences of a project.
-     */
-    public function getLlmLicencesExperimental(GetLlmLicencesExperimentalRequest $request): GetLlmLicencesExperimentalOKResponse;
     /**
      * Get a Project.
      *
@@ -359,15 +320,6 @@ interface ProjectClient
      * @param ResendProjectInviteMailRequest $request An object representing the request for this operation
      */
     public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse;
-    /**
-     * Update a llm Licence for a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-llm-licence-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateLlmLicenceExperimentalRequest $request An object representing the request for this operation
-     */
-    public function updateLlmLicenceExperimental(UpdateLlmLicenceExperimentalRequest $request): UpdateLlmLicenceExperimentalOKResponse;
     /**
      * Update a Project's description.
      *

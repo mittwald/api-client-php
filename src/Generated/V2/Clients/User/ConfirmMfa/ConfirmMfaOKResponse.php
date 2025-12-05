@@ -24,7 +24,7 @@ class ConfirmMfaOKResponse implements ResponseContainer
                 'properties' => [
                     'recoveryCodesList' => [
                         'items' => [
-                            'example' => 1234123412341234,
+                            'example' => '1234123412341234',
                             'maxLength' => 16,
                             'minLength' => 16,
                             'type' => 'string',

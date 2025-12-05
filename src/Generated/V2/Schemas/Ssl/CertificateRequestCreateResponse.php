@@ -58,14 +58,13 @@ class CertificateRequestCreateResponse
         ],
         'required' => [
             'id',
-            'contact',
         ],
         'type' => 'object',
     ];
 
     private ?string $commonName = null;
 
-    private Contact $contact;
+    private ?Contact $contact = null;
 
     /**
      * @var string[]|null
@@ -82,9 +81,8 @@ class CertificateRequestCreateResponse
 
     private ?DateTime $validTo = null;
 
-    public function __construct(Contact $contact, string $id)
+    public function __construct(string $id)
     {
-        $this->contact = $contact;
         $this->id = $id;
     }
 
@@ -93,9 +91,9 @@ class CertificateRequestCreateResponse
         return $this->commonName ?? null;
     }
 
-    public function getContact(): Contact
+    public function getContact(): ?Contact
     {
-        return $this->contact;
+        return $this->contact ?? null;
     }
 
     /**
@@ -157,6 +155,14 @@ class CertificateRequestCreateResponse
     {
         $clone = clone $this;
         $clone->contact = $contact;
+
+        return $clone;
+    }
+
+    public function withoutContact(): self
+    {
+        $clone = clone $this;
+        unset($clone->contact);
 
         return $clone;
     }
@@ -295,7 +301,10 @@ class CertificateRequestCreateResponse
         if (isset($input->{'commonName'})) {
             $commonName = $input->{'commonName'};
         }
-        $contact = Contact::buildFromInput($input->{'contact'}, validate: $validate);
+        $contact = null;
+        if (isset($input->{'contact'})) {
+            $contact = Contact::buildFromInput($input->{'contact'}, validate: $validate);
+        }
         $dnsNames = null;
         if (isset($input->{'dnsNames'})) {
             $dnsNames = $input->{'dnsNames'};
@@ -318,8 +327,9 @@ class CertificateRequestCreateResponse
             $validTo = new DateTime($input->{'validTo'});
         }
 
-        $obj = new self($contact, $id);
+        $obj = new self($id);
         $obj->commonName = $commonName;
+        $obj->contact = $contact;
         $obj->dnsNames = $dnsNames;
         $obj->issuer = $issuer;
         $obj->signingRequest = $signingRequest;
@@ -339,7 +349,9 @@ class CertificateRequestCreateResponse
         if (isset($this->commonName)) {
             $output['commonName'] = $this->commonName;
         }
-        $output['contact'] = $this->contact->toJson();
+        if (isset($this->contact)) {
+            $output['contact'] = $this->contact->toJson();
+        }
         if (isset($this->dnsNames)) {
             $output['dnsNames'] = $this->dnsNames;
         }

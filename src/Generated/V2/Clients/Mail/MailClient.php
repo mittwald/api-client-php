@@ -36,6 +36,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryB
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleOKResponse;
@@ -327,6 +329,16 @@ interface MailClient
      * @return ListMailAddressesOKResponse OK
      */
     public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse;
+    /**
+     * List MailAddresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses-for-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailAddressesForUserRequest $request An object representing the request for this operation
+     * @return ListMailAddressesForUserOKResponse OK
+     */
+    public function listMailAddressesForUser(ListMailAddressesForUserRequest $request): ListMailAddressesForUserOKResponse;
     /**
      * List mail settings of a Project.
      *
