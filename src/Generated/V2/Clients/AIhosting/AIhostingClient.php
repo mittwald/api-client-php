@@ -7,30 +7,30 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\AIhosting;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerCreateLlmLicence\AiHostingCustomerCreateLlmLicenceCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerCreateLlmLicence\AiHostingCustomerCreateLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerDeleteLlmLicence\AiHostingCustomerDeleteLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmLicence\AiHostingCustomerGetLlmLicenceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmLicence\AiHostingCustomerGetLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmLicences\AiHostingCustomerGetLlmLicencesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmLicences\AiHostingCustomerGetLlmLicencesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmTariffOptions\AiHostingCustomerGetLlmTariffOptionsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetLlmTariffOptions\AiHostingCustomerGetLlmTariffOptionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerUpdateLlmLicence\AiHostingCustomerUpdateLlmLicenceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerUpdateLlmLicence\AiHostingCustomerUpdateLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingGetLlmModels\AiHostingGetLlmModelsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingGetLlmModels\AiHostingGetLlmModelsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectCreateLlmLicence\AiHostingProjectCreateLlmLicenceCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectCreateLlmLicence\AiHostingProjectCreateLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectDeleteLlmLicence\AiHostingProjectDeleteLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmLicence\AiHostingProjectGetLlmLicenceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmLicence\AiHostingProjectGetLlmLicenceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmLicences\AiHostingProjectGetLlmLicencesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmLicences\AiHostingProjectGetLlmLicencesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmTariffOptions\AiHostingProjectGetLlmTariffOptionsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetLlmTariffOptions\AiHostingProjectGetLlmTariffOptionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectUpdateLlmLicence\AiHostingProjectUpdateLlmLicenceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectUpdateLlmLicence\AiHostingProjectUpdateLlmLicenceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerCreateKey\AiHostingCustomerCreateKeyCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerCreateKey\AiHostingCustomerCreateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerDeleteKey\AiHostingCustomerDeleteKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetKey\AiHostingCustomerGetKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetKey\AiHostingCustomerGetKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetKeys\AiHostingCustomerGetKeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetKeys\AiHostingCustomerGetKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetUsage\AiHostingCustomerGetUsageOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGetUsage\AiHostingCustomerGetUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerUpdateKey\AiHostingCustomerUpdateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerUpdateKey\AiHostingCustomerUpdateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingGetModels\AiHostingGetModelsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingGetModels\AiHostingGetModelsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectCreateKey\AiHostingProjectCreateKeyCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectCreateKey\AiHostingProjectCreateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectDeleteKey\AiHostingProjectDeleteKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetKey\AiHostingProjectGetKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetKey\AiHostingProjectGetKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetKeys\AiHostingProjectGetKeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetKeys\AiHostingProjectGetKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetUsage\AiHostingProjectGetUsageOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetUsage\AiHostingProjectGetUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectUpdateKey\AiHostingProjectUpdateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectUpdateKey\AiHostingProjectUpdateKeyRequest;
 
 /**
  * Client for AI hosting API
@@ -48,133 +48,133 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectUpdateLlmL
 interface AIhostingClient
 {
     /**
-     * Creates a new llm licence for a customer.
+     * Creates a new key.
      *
-     * Creates a new llm licence for a customer. Can be linked with a project to directly create web-ui container.
+     * Creates a new key. Can be linked with a project to directly create web-ui container.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-create-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-create-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerCreateLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingCustomerCreateKeyRequest $request An object representing the request for this operation
      */
-    public function aiHostingCustomerCreateLlmLicence(AiHostingCustomerCreateLlmLicenceRequest $request): AiHostingCustomerCreateLlmLicenceCreatedResponse;
+    public function aiHostingCustomerCreateKey(AiHostingCustomerCreateKeyRequest $request): AiHostingCustomerCreateKeyCreatedResponse;
     /**
-     * Delete a llm Licence for a customer.
+     * Delete a key for a customer.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-delete-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-delete-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerDeleteLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingCustomerDeleteKeyRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
-    public function aiHostingCustomerDeleteLlmLicence(AiHostingCustomerDeleteLlmLicenceRequest $request): EmptyResponse;
+    public function aiHostingCustomerDeleteKey(AiHostingCustomerDeleteKeyRequest $request): EmptyResponse;
     /**
-     * Get a licence of a customer.
+     * Get a key of a customer.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerGetLlmLicenceRequest $request An object representing the request for this operation
-     * @return AiHostingCustomerGetLlmLicenceOKResponse The llm licence of a customer.
+     * @param AiHostingCustomerGetKeyRequest $request An object representing the request for this operation
+     * @return AiHostingCustomerGetKeyOKResponse The key of a customer.
      */
-    public function aiHostingCustomerGetLlmLicence(AiHostingCustomerGetLlmLicenceRequest $request): AiHostingCustomerGetLlmLicenceOKResponse;
+    public function aiHostingCustomerGetKey(AiHostingCustomerGetKeyRequest $request): AiHostingCustomerGetKeyOKResponse;
     /**
-     * Get a list of already created llm licences.
+     * Get a list of already created keys.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-llm-licences
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-keys
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerGetLlmLicencesRequest $request An object representing the request for this operation
-     * @return AiHostingCustomerGetLlmLicencesOKResponse List of llm licences of a customer.
+     * @param AiHostingCustomerGetKeysRequest $request An object representing the request for this operation
+     * @return AiHostingCustomerGetKeysOKResponse List of keys of a customer.
      */
-    public function aiHostingCustomerGetLlmLicences(AiHostingCustomerGetLlmLicencesRequest $request): AiHostingCustomerGetLlmLicencesOKResponse;
+    public function aiHostingCustomerGetKeys(AiHostingCustomerGetKeysRequest $request): AiHostingCustomerGetKeysOKResponse;
     /**
-     * Get llm tariff and usages of a customer.
+     * Get ai hosting tariff and usages of a customer.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-llm-tariff-options
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerGetLlmTariffOptionsRequest $request An object representing the request for this operation
-     * @return AiHostingCustomerGetLlmTariffOptionsOKResponse The customer llm tariff options.
+     * @param AiHostingCustomerGetUsageRequest $request An object representing the request for this operation
+     * @return AiHostingCustomerGetUsageOKResponse The customer usage and tariff.
      */
-    public function aiHostingCustomerGetLlmTariffOptions(AiHostingCustomerGetLlmTariffOptionsRequest $request): AiHostingCustomerGetLlmTariffOptionsOKResponse;
+    public function aiHostingCustomerGetUsage(AiHostingCustomerGetUsageRequest $request): AiHostingCustomerGetUsageOKResponse;
     /**
-     * Update a llm Licence for a customer.
+     * Update a key for a customer.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-update-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-update-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingCustomerUpdateLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingCustomerUpdateKeyRequest $request An object representing the request for this operation
      */
-    public function aiHostingCustomerUpdateLlmLicence(AiHostingCustomerUpdateLlmLicenceRequest $request): AiHostingCustomerUpdateLlmLicenceOKResponse;
+    public function aiHostingCustomerUpdateKey(AiHostingCustomerUpdateKeyRequest $request): AiHostingCustomerUpdateKeyOKResponse;
     /**
-     * Get a list of currently active llm models.
+     * Get a list of currently active models.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-get-llm-models
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-get-models
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingGetLlmModelsRequest $request An object representing the request for this operation
-     * @return AiHostingGetLlmModelsOKResponse List of currently active llm models.
+     * @param AiHostingGetModelsRequest $request An object representing the request for this operation
+     * @return AiHostingGetModelsOKResponse List of currently active models.
      */
-    public function aiHostingGetLlmModels(AiHostingGetLlmModelsRequest $request): AiHostingGetLlmModelsOKResponse;
+    public function aiHostingGetModels(AiHostingGetModelsRequest $request): AiHostingGetModelsOKResponse;
     /**
-     * Creates a new llm Licence for a project.
+     * Creates a new key for a project.
      *
-     * Creates a new llm Licence for a project. Can be linked with a project to directly create web-ui container.
+     * Creates a new key for a project. Same as the customer route but with required projectId. And project users can create it.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-create-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-create-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectCreateLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingProjectCreateKeyRequest $request An object representing the request for this operation
      */
-    public function aiHostingProjectCreateLlmLicence(AiHostingProjectCreateLlmLicenceRequest $request): AiHostingProjectCreateLlmLicenceCreatedResponse;
+    public function aiHostingProjectCreateKey(AiHostingProjectCreateKeyRequest $request): AiHostingProjectCreateKeyCreatedResponse;
     /**
-     * Delete a llm Licence for a project.
+     * Delete a key for a project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-delete-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-delete-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectDeleteLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingProjectDeleteKeyRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
-    public function aiHostingProjectDeleteLlmLicence(AiHostingProjectDeleteLlmLicenceRequest $request): EmptyResponse;
+    public function aiHostingProjectDeleteKey(AiHostingProjectDeleteKeyRequest $request): EmptyResponse;
     /**
-     * Get a licence of a project.
+     * Get a key of a project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectGetLlmLicenceRequest $request An object representing the request for this operation
-     * @return AiHostingProjectGetLlmLicenceOKResponse The llm licence of a project.
+     * @param AiHostingProjectGetKeyRequest $request An object representing the request for this operation
+     * @return AiHostingProjectGetKeyOKResponse The key of a project.
      */
-    public function aiHostingProjectGetLlmLicence(AiHostingProjectGetLlmLicenceRequest $request): AiHostingProjectGetLlmLicenceOKResponse;
+    public function aiHostingProjectGetKey(AiHostingProjectGetKeyRequest $request): AiHostingProjectGetKeyOKResponse;
     /**
-     * Get a list of already created llm licences of a project.
+     * Get a list of keys of a project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-llm-licences
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-keys
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectGetLlmLicencesRequest $request An object representing the request for this operation
-     * @return AiHostingProjectGetLlmLicencesOKResponse List of llm licences of a project.
+     * @param AiHostingProjectGetKeysRequest $request An object representing the request for this operation
+     * @return AiHostingProjectGetKeysOKResponse List of keys of a project.
      */
-    public function aiHostingProjectGetLlmLicences(AiHostingProjectGetLlmLicencesRequest $request): AiHostingProjectGetLlmLicencesOKResponse;
+    public function aiHostingProjectGetKeys(AiHostingProjectGetKeysRequest $request): AiHostingProjectGetKeysOKResponse;
     /**
-     * Get llm tariff and usages of a project. Same as the customer route, but less details.
+     * Get ai hosting tariff and usages of a project. Same as the customer route, but less details.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-llm-tariff-options
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectGetLlmTariffOptionsRequest $request An object representing the request for this operation
-     * @return AiHostingProjectGetLlmTariffOptionsOKResponse The project llm tariff options.
+     * @param AiHostingProjectGetUsageRequest $request An object representing the request for this operation
+     * @return AiHostingProjectGetUsageOKResponse The project usage and tariff.
      */
-    public function aiHostingProjectGetLlmTariffOptions(AiHostingProjectGetLlmTariffOptionsRequest $request): AiHostingProjectGetLlmTariffOptionsOKResponse;
+    public function aiHostingProjectGetUsage(AiHostingProjectGetUsageRequest $request): AiHostingProjectGetUsageOKResponse;
     /**
-     * Update a llm Licence for a project.
+     * Update a key for a project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-update-llm-licence
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-update-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AiHostingProjectUpdateLlmLicenceRequest $request An object representing the request for this operation
+     * @param AiHostingProjectUpdateKeyRequest $request An object representing the request for this operation
      */
-    public function aiHostingProjectUpdateLlmLicence(AiHostingProjectUpdateLlmLicenceRequest $request): AiHostingProjectUpdateLlmLicenceOKResponse;
+    public function aiHostingProjectUpdateKey(AiHostingProjectUpdateKeyRequest $request): AiHostingProjectUpdateKeyOKResponse;
 }

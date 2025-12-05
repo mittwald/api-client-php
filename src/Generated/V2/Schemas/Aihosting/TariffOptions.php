@@ -24,7 +24,10 @@ class TariffOptions
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'licences' => [
+            'customerId' => [
+                'type' => 'string',
+            ],
+            'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
             ],
             'limit' => [
@@ -36,10 +39,10 @@ class TariffOptions
             'topUsages' => [
                 'items' => [
                     'properties' => [
-                        'licenceId' => [
+                        'keyId' => [
                             'type' => 'string',
                         ],
-                        'licenceName' => [
+                        'name' => [
                             'type' => 'string',
                         ],
                         'projectId' => [
@@ -51,7 +54,7 @@ class TariffOptions
                         ],
                     ],
                     'required' => [
-                        'licenceName',
+                        'name',
                         'tokenUsed',
                     ],
                     'type' => 'object',
@@ -60,14 +63,17 @@ class TariffOptions
             ],
         ],
         'required' => [
-            'licences',
+            'customerId',
+            'keys',
             'tokens',
             'limit',
         ],
         'type' => 'object',
     ];
 
-    private TariffUsage $licences;
+    private string $customerId;
+
+    private TariffUsage $keys;
 
     private RateLimit $limit;
 
@@ -78,16 +84,22 @@ class TariffOptions
      */
     private ?array $topUsages = null;
 
-    public function __construct(TariffUsage $licences, RateLimit $limit, TariffUsageBig $tokens)
+    public function __construct(string $customerId, TariffUsage $keys, RateLimit $limit, TariffUsageBig $tokens)
     {
-        $this->licences = $licences;
+        $this->customerId = $customerId;
+        $this->keys = $keys;
         $this->limit = $limit;
         $this->tokens = $tokens;
     }
 
-    public function getLicences(): TariffUsage
+    public function getCustomerId(): string
     {
-        return $this->licences;
+        return $this->customerId;
+    }
+
+    public function getKeys(): TariffUsage
+    {
+        return $this->keys;
     }
 
     public function getLimit(): RateLimit
@@ -108,10 +120,24 @@ class TariffOptions
         return $this->topUsages ?? null;
     }
 
-    public function withLicences(TariffUsage $licences): self
+    public function withCustomerId(string $customerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withKeys(TariffUsage $keys): self
     {
         $clone = clone $this;
-        $clone->licences = $licences;
+        $clone->keys = $keys;
 
         return $clone;
     }
@@ -166,7 +192,8 @@ class TariffOptions
             static::validateInput($input);
         }
 
-        $licences = TariffUsage::buildFromInput($input->{'licences'}, validate: $validate);
+        $customerId = $input->{'customerId'};
+        $keys = TariffUsage::buildFromInput($input->{'keys'}, validate: $validate);
         $limit = RateLimit::buildFromInput($input->{'limit'}, validate: $validate);
         $tokens = TariffUsageBig::buildFromInput($input->{'tokens'}, validate: $validate);
         $topUsages = null;
@@ -174,7 +201,7 @@ class TariffOptions
             $topUsages = array_map(fn (array|object $i): TariffOptionsTopUsagesItem => TariffOptionsTopUsagesItem::buildFromInput($i, validate: $validate), $input->{'topUsages'});
         }
 
-        $obj = new self($licences, $limit, $tokens);
+        $obj = new self($customerId, $keys, $limit, $tokens);
         $obj->topUsages = $topUsages;
         return $obj;
     }
@@ -187,7 +214,8 @@ class TariffOptions
     public function toJson(): array
     {
         $output = [];
-        $output['licences'] = $this->licences->toJson();
+        $output['customerId'] = $this->customerId;
+        $output['keys'] = $this->keys->toJson();
         $output['limit'] = $this->limit->toJson();
         $output['tokens'] = $this->tokens->toJson();
         if (isset($this->topUsages)) {
