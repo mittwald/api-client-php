@@ -4,7 +4,7 @@ This package contains a (mostly auto-generated) PHP client for the mittwald mStu
 
 ## License
 
-Copyright (c) 2023 Mittwald CM Service GmbH & Co. KG and contributors
+Copyright (c) 2025 Mittwald CM Service GmbH & Co. KG and contributors
 
 This project is licensed under the MIT License; see the [LICENSE](./LICENSE) file for details.
 
