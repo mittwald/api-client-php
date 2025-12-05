@@ -46,6 +46,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWit
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -110,6 +112,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUplo
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
@@ -328,6 +332,16 @@ interface MarketplaceClient
      * @return ExtensionCancelExtensionTerminationOKResponse The Termination was cancelled.
      */
     public function extensionCancelExtensionTermination(ExtensionCancelExtensionTerminationRequest $request): ExtensionCancelExtensionTerminationOKResponse;
+    /**
+     * Cancel an Extension Instance Variant Change.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-variant-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCancelExtensionVariantChangeRequest $request An object representing the request for this operation
+     * @return ExtensionCancelExtensionVariantChangeOKResponse The Variant Change was cancelled.
+     */
+    public function extensionCancelExtensionVariantChange(ExtensionCancelExtensionVariantChangeRequest $request): ExtensionCancelExtensionVariantChangeOKResponse;
     /**
      * Change the context of an Extension.
      *
@@ -704,6 +718,16 @@ interface MarketplaceClient
      * @return ExtensionScheduleExtensionTerminationCreatedResponse A Termination was scheduled.
      */
     public function extensionScheduleExtensionTermination(ExtensionScheduleExtensionTerminationRequest $request): ExtensionScheduleExtensionTerminationCreatedResponse;
+    /**
+     * Schedule an Extension Instance Variant change for the next possible date.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-schedule-extension-variant-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionScheduleExtensionVariantChangeRequest $request An object representing the request for this operation
+     * @return ExtensionScheduleExtensionVariantChangeCreatedResponse A Variant Change was scheduled.
+     */
+    public function extensionScheduleExtensionVariantChange(ExtensionScheduleExtensionVariantChangeRequest $request): ExtensionScheduleExtensionVariantChangeCreatedResponse;
     /**
      * Publish or withdraw an Extension.
      *

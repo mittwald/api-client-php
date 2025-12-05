@@ -53,6 +53,18 @@ class Customer
             'customerNumber' => [
                 'type' => 'string',
             ],
+            'deletionProhibitedBy' => [
+                'items' => [
+                    'enum' => [
+                        'hasOpenInvoices',
+                        'hasActiveContracts',
+                        'hasActiveExtensionSubscriptions',
+                        'isActiveContributor',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'executingUserRoles' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.customer.Role',
@@ -132,6 +144,11 @@ class Customer
     private string $customerNumber;
 
     /**
+     * @var string[]|null
+     */
+    private ?array $deletionProhibitedBy = null;
+
+    /**
      * @var Role[]|null
      */
     private ?array $executingUserRoles = null;
@@ -199,6 +216,14 @@ class Customer
     public function getCustomerNumber(): string
     {
         return $this->customerNumber;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getDeletionProhibitedBy(): ?array
+    {
+        return $this->deletionProhibitedBy ?? null;
     }
 
     /**
@@ -359,6 +384,31 @@ class Customer
 
         $clone = clone $this;
         $clone->customerNumber = $customerNumber;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $deletionProhibitedBy
+     */
+    public function withDeletionProhibitedBy(array $deletionProhibitedBy): self
+    {
+        $validator = new Validator();
+        $validator->validate($deletionProhibitedBy, self::$internalValidationSchema['properties']['deletionProhibitedBy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deletionProhibitedBy = $deletionProhibitedBy;
+
+        return $clone;
+    }
+
+    public function withoutDeletionProhibitedBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionProhibitedBy);
 
         return $clone;
     }
@@ -609,6 +659,10 @@ class Customer
         $creationDate = new DateTime($input->{'creationDate'});
         $customerId = $input->{'customerId'};
         $customerNumber = $input->{'customerNumber'};
+        $deletionProhibitedBy = null;
+        if (isset($input->{'deletionProhibitedBy'})) {
+            $deletionProhibitedBy = $input->{'deletionProhibitedBy'};
+        }
         $executingUserRoles = null;
         if (isset($input->{'executingUserRoles'})) {
             $executingUserRoles = array_map(fn (string $i): Role => Role::from($i), $input->{'executingUserRoles'});
@@ -653,6 +707,7 @@ class Customer
         $obj->activeSuspension = $activeSuspension;
         $obj->avatarRefId = $avatarRefId;
         $obj->categoryId = $categoryId;
+        $obj->deletionProhibitedBy = $deletionProhibitedBy;
         $obj->executingUserRoles = $executingUserRoles;
         $obj->flags = $flags;
         $obj->isAllowedToPlaceOrders = $isAllowedToPlaceOrders;
@@ -685,6 +740,9 @@ class Customer
         $output['creationDate'] = ($this->creationDate)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['customerNumber'] = $this->customerNumber;
+        if (isset($this->deletionProhibitedBy)) {
+            $output['deletionProhibitedBy'] = $this->deletionProhibitedBy;
+        }
         if (isset($this->executingUserRoles)) {
             $output['executingUserRoles'] = array_map(fn (Role $i): string => $i->value, $this->executingUserRoles);
         }

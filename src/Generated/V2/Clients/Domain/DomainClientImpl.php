@@ -182,6 +182,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatest
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressNotFoundResponse;
@@ -1464,6 +1465,7 @@ class DomainClientImpl implements DomainClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => IngressCreateIngressNotFoundResponse::fromResponse($httpResponse),
+            409 => IngressCreateIngressConflictResponse::fromResponse($httpResponse),
             429 => IngressCreateIngressTooManyRequestsResponse::fromResponse($httpResponse),
             default => IngressCreateIngressDefaultResponse::fromResponse($httpResponse),
         });

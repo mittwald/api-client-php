@@ -20,7 +20,7 @@ class DeprecatedMailUpdateProjectMailSettingRequest
             'projectId' => [
                 'type' => 'string',
             ],
-            'setting' => [
+            'mailSetting' => [
                 'enum' => [
                     'blacklist',
                     'whitelist',
@@ -64,14 +64,14 @@ class DeprecatedMailUpdateProjectMailSettingRequest
         ],
         'required' => [
             'projectId',
-            'setting',
+            'mailSetting',
             'body',
         ],
     ];
 
     private string $projectId;
 
-    private DeprecatedMailUpdateProjectMailSettingRequestSetting $setting;
+    private DeprecatedMailUpdateProjectMailSettingRequestMailSetting $mailSetting;
 
     private DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body;
 
@@ -79,10 +79,10 @@ class DeprecatedMailUpdateProjectMailSettingRequest
 
     ];
 
-    public function __construct(string $projectId, DeprecatedMailUpdateProjectMailSettingRequestSetting $setting, DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body)
+    public function __construct(string $projectId, DeprecatedMailUpdateProjectMailSettingRequestMailSetting $mailSetting, DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body)
     {
         $this->projectId = $projectId;
-        $this->setting = $setting;
+        $this->mailSetting = $mailSetting;
         $this->body = $body;
     }
 
@@ -91,9 +91,9 @@ class DeprecatedMailUpdateProjectMailSettingRequest
         return $this->projectId;
     }
 
-    public function getSetting(): DeprecatedMailUpdateProjectMailSettingRequestSetting
+    public function getMailSetting(): DeprecatedMailUpdateProjectMailSettingRequestMailSetting
     {
-        return $this->setting;
+        return $this->mailSetting;
     }
 
     public function getBody(): DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2
@@ -115,10 +115,10 @@ class DeprecatedMailUpdateProjectMailSettingRequest
         return $clone;
     }
 
-    public function withSetting(DeprecatedMailUpdateProjectMailSettingRequestSetting $setting): self
+    public function withMailSetting(DeprecatedMailUpdateProjectMailSettingRequestMailSetting $mailSetting): self
     {
         $clone = clone $this;
-        $clone->setting = $setting;
+        $clone->mailSetting = $mailSetting;
 
         return $clone;
     }
@@ -147,14 +147,14 @@ class DeprecatedMailUpdateProjectMailSettingRequest
         }
 
         $projectId = $input->{'projectId'};
-        $setting = DeprecatedMailUpdateProjectMailSettingRequestSetting::from($input->{'setting'});
+        $mailSetting = DeprecatedMailUpdateProjectMailSettingRequestMailSetting::from($input->{'mailSetting'});
         $body = match (true) {
             DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1::validateInput($input->{'body'}, true) => DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1::buildFromInput($input->{'body'}, validate: $validate),
             DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2::validateInput($input->{'body'}, true) => DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2::buildFromInput($input->{'body'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
-        $obj = new self($projectId, $setting, $body);
+        $obj = new self($projectId, $mailSetting, $body);
 
         return $obj;
     }
@@ -168,7 +168,7 @@ class DeprecatedMailUpdateProjectMailSettingRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        $output['setting'] = ($this->setting)->value;
+        $output['mailSetting'] = ($this->mailSetting)->value;
         $output['body'] = match (true) {
             $this->body instanceof DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1, $this->body instanceof DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 => ($this->body)->toJson(),
         };
@@ -220,8 +220,8 @@ class DeprecatedMailUpdateProjectMailSettingRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        $setting = urlencode($mapped['setting']);
-        return '/v2/projects/' . $projectId . '/mail-settings/' . $setting;
+        $mailSetting = urlencode($mapped['mailSetting']);
+        return '/v2/projects/' . $projectId . '/mail-settings/' . $mailSetting;
     }
 
     /**

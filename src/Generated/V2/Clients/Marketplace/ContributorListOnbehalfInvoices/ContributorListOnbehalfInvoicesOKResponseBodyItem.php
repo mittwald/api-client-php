@@ -25,6 +25,13 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
             'invoiceNumber' => [
                 'type' => 'string',
             ],
+            'invoiceType' => [
+                'enum' => [
+                    'INVOICE',
+                    'CREDIT_NOTE',
+                ],
+                'type' => 'string',
+            ],
             'pdfLink' => [
                 'type' => 'string',
             ],
@@ -44,8 +51,8 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
             'invoiceDate',
             'totalNet',
             'totalGross',
-            'webLink',
             'pdfLink',
+            'invoiceType',
         ],
         'type' => 'object',
     ];
@@ -56,23 +63,25 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
 
     private string $invoiceNumber;
 
+    private ContributorListOnbehalfInvoicesOKResponseBodyItemInvoiceType $invoiceType;
+
     private string $pdfLink;
 
     private int|float $totalGross;
 
     private int|float $totalNet;
 
-    private string $webLink;
+    private ?string $webLink = null;
 
-    public function __construct(DateTime $invoiceDate, string $invoiceId, string $invoiceNumber, string $pdfLink, int|float $totalGross, int|float $totalNet, string $webLink)
+    public function __construct(DateTime $invoiceDate, string $invoiceId, string $invoiceNumber, ContributorListOnbehalfInvoicesOKResponseBodyItemInvoiceType $invoiceType, string $pdfLink, int|float $totalGross, int|float $totalNet)
     {
         $this->invoiceDate = $invoiceDate;
         $this->invoiceId = $invoiceId;
         $this->invoiceNumber = $invoiceNumber;
+        $this->invoiceType = $invoiceType;
         $this->pdfLink = $pdfLink;
         $this->totalGross = $totalGross;
         $this->totalNet = $totalNet;
-        $this->webLink = $webLink;
     }
 
     public function getInvoiceDate(): DateTime
@@ -90,6 +99,11 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         return $this->invoiceNumber;
     }
 
+    public function getInvoiceType(): ContributorListOnbehalfInvoicesOKResponseBodyItemInvoiceType
+    {
+        return $this->invoiceType;
+    }
+
     public function getPdfLink(): string
     {
         return $this->pdfLink;
@@ -105,9 +119,9 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         return $this->totalNet;
     }
 
-    public function getWebLink(): string
+    public function getWebLink(): ?string
     {
-        return $this->webLink;
+        return $this->webLink ?? null;
     }
 
     public function withInvoiceDate(DateTime $invoiceDate): self
@@ -142,6 +156,14 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
 
         $clone = clone $this;
         $clone->invoiceNumber = $invoiceNumber;
+
+        return $clone;
+    }
+
+    public function withInvoiceType(ContributorListOnbehalfInvoicesOKResponseBodyItemInvoiceType $invoiceType): self
+    {
+        $clone = clone $this;
+        $clone->invoiceType = $invoiceType;
 
         return $clone;
     }
@@ -202,6 +224,14 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         return $clone;
     }
 
+    public function withoutWebLink(): self
+    {
+        $clone = clone $this;
+        unset($clone->webLink);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -220,13 +250,17 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         $invoiceDate = new DateTime($input->{'invoiceDate'});
         $invoiceId = $input->{'invoiceId'};
         $invoiceNumber = $input->{'invoiceNumber'};
+        $invoiceType = ContributorListOnbehalfInvoicesOKResponseBodyItemInvoiceType::from($input->{'invoiceType'});
         $pdfLink = $input->{'pdfLink'};
         $totalGross = str_contains((string)($input->{'totalGross'}), '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
         $totalNet = str_contains((string)($input->{'totalNet'}), '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
-        $webLink = $input->{'webLink'};
+        $webLink = null;
+        if (isset($input->{'webLink'})) {
+            $webLink = $input->{'webLink'};
+        }
 
-        $obj = new self($invoiceDate, $invoiceId, $invoiceNumber, $pdfLink, $totalGross, $totalNet, $webLink);
-
+        $obj = new self($invoiceDate, $invoiceId, $invoiceNumber, $invoiceType, $pdfLink, $totalGross, $totalNet);
+        $obj->webLink = $webLink;
         return $obj;
     }
 
@@ -241,10 +275,13 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         $output['invoiceDate'] = ($this->invoiceDate)->format(DateTime::ATOM);
         $output['invoiceId'] = $this->invoiceId;
         $output['invoiceNumber'] = $this->invoiceNumber;
+        $output['invoiceType'] = ($this->invoiceType)->value;
         $output['pdfLink'] = $this->pdfLink;
         $output['totalGross'] = $this->totalGross;
         $output['totalNet'] = $this->totalNet;
-        $output['webLink'] = $this->webLink;
+        if (isset($this->webLink)) {
+            $output['webLink'] = $this->webLink;
+        }
 
         return $output;
     }

@@ -29,7 +29,7 @@ class MonthlyPricePlanStrategyItem
                 'type' => 'string',
             ],
             'isBookingStopped' => [
-                'example' => 'If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created.',
+                'description' => 'If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created.',
                 'type' => 'boolean',
             ],
             'key' => [
@@ -53,6 +53,9 @@ class MonthlyPricePlanStrategyItem
 
     private ?string $description = null;
 
+    /**
+     * If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created.
+     */
     private bool $isBookingStopped;
 
     private string $key;

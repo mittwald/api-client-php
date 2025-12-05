@@ -59,6 +59,9 @@ class ProjectBackup
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'restorePath' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath',
+            ],
             'status' => [
                 'example' => 'Completed',
                 'type' => 'string',
@@ -91,6 +94,8 @@ class ProjectBackup
     private string $projectId;
 
     private DateTime $requestedAt;
+
+    private ?ProjectBackupRestorePath $restorePath = null;
 
     private string $status;
 
@@ -146,6 +151,11 @@ class ProjectBackup
     public function getRequestedAt(): DateTime
     {
         return $this->requestedAt;
+    }
+
+    public function getRestorePath(): ?ProjectBackupRestorePath
+    {
+        return $this->restorePath ?? null;
     }
 
     public function getStatus(): string
@@ -295,6 +305,22 @@ class ProjectBackup
         return $clone;
     }
 
+    public function withRestorePath(ProjectBackupRestorePath $restorePath): self
+    {
+        $clone = clone $this;
+        $clone->restorePath = $restorePath;
+
+        return $clone;
+    }
+
+    public function withoutRestorePath(): self
+    {
+        $clone = clone $this;
+        unset($clone->restorePath);
+
+        return $clone;
+    }
+
     public function withStatus(string $status): self
     {
         $validator = new Validator();
@@ -348,6 +374,10 @@ class ProjectBackup
         }
         $projectId = $input->{'projectId'};
         $requestedAt = new DateTime($input->{'requestedAt'});
+        $restorePath = null;
+        if (isset($input->{'restorePath'})) {
+            $restorePath = ProjectBackupRestorePath::buildFromInput($input->{'restorePath'}, validate: $validate);
+        }
         $status = $input->{'status'};
 
         $obj = new self($deletable, $id, $projectId, $requestedAt, $status);
@@ -356,6 +386,7 @@ class ProjectBackup
         $obj->expiresAt = $expiresAt;
         $obj->export = $export;
         $obj->parentId = $parentId;
+        $obj->restorePath = $restorePath;
         return $obj;
     }
 
@@ -386,6 +417,9 @@ class ProjectBackup
         }
         $output['projectId'] = $this->projectId;
         $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        if (isset($this->restorePath)) {
+            $output['restorePath'] = $this->restorePath->toJson();
+        }
         $output['status'] = $this->status;
 
         return $output;

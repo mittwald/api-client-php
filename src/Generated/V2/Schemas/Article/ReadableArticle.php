@@ -69,11 +69,11 @@ class ReadableArticle
             'machineType' => [
                 'properties' => [
                     'cpu' => [
-                        'example' => 1,
+                        'example' => '1',
                         'type' => 'string',
                     ],
                     'memory' => [
-                        'example' => 10,
+                        'example' => '10',
                         'type' => 'string',
                     ],
                     'name' => [

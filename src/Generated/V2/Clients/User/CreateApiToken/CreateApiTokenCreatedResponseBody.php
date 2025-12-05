@@ -16,6 +16,7 @@ class CreateApiTokenCreatedResponseBody
         'properties' => [
             'token' => [
                 'description' => 'The `ApiToken`.',
+                'example' => '00000000-0000-4000-0000-000000000000:foobar:mittwald_a',
                 'type' => 'string',
             ],
         ],

@@ -83,7 +83,7 @@ class ServiceDeclareRequest
             ],
             'ports' => [
                 'example' => [
-                    '3306:3306/tcp',
+                    '3306/tcp',
                 ],
                 'items' => [
                     'type' => 'string',

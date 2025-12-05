@@ -161,6 +161,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsForbiddenResponse;
@@ -878,6 +887,33 @@ class MailClientImpl implements MailClient
             500 => ListMailAddressesInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListMailAddressesServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List MailAddresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses-for-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailAddressesForUserRequest $request An object representing the request for this operation
+     * @return ListMailAddressesForUserOKResponse OK
+     */
+    public function listMailAddressesForUser(ListMailAddressesForUserRequest $request): ListMailAddressesForUserOKResponse
+    {
+        $httpRequest = new Request(ListMailAddressesForUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListMailAddressesForUserOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListMailAddressesForUserBadRequestResponse::fromResponse($httpResponse),
+            403 => ListMailAddressesForUserForbiddenResponse::fromResponse($httpResponse),
+            404 => ListMailAddressesForUserNotFoundResponse::fromResponse($httpResponse),
+            429 => ListMailAddressesForUserTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListMailAddressesForUserInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => ListMailAddressesForUserServiceUnavailableResponse::fromResponse($httpResponse),
+            default => ListMailAddressesForUserDefaultResponse::fromResponse($httpResponse),
         });
     }
 

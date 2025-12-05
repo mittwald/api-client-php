@@ -26,6 +26,8 @@ class RecordCNAMEComponent
         'properties' => [
             'fqdn' => [
                 'format' => 'idn-dnsname',
+                'maxLength' => 255,
+                'minLength' => 1,
                 'type' => 'string',
             ],
             'settings' => [

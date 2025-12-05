@@ -25,12 +25,12 @@ class FileType
     private static array $internalValidationSchema = [
         'properties' => [
             'extensions' => [
+                'example' => [
+                    '.jpe',
+                    '.jpeg',
+                    '.jpg',
+                ],
                 'items' => [
-                    'example' => [
-                        '.jpe',
-                        '.jpeg',
-                        '.jpg',
-                    ],
                     'type' => 'string',
                 ],
                 'type' => 'array',

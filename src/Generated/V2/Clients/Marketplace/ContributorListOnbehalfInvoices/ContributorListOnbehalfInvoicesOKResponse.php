@@ -33,6 +33,13 @@ class ContributorListOnbehalfInvoicesOKResponse implements ResponseContainer
                         'invoiceNumber' => [
                             'type' => 'string',
                         ],
+                        'invoiceType' => [
+                            'enum' => [
+                                'INVOICE',
+                                'CREDIT_NOTE',
+                            ],
+                            'type' => 'string',
+                        ],
                         'pdfLink' => [
                             'type' => 'string',
                         ],
@@ -52,8 +59,8 @@ class ContributorListOnbehalfInvoicesOKResponse implements ResponseContainer
                         'invoiceDate',
                         'totalNet',
                         'totalGross',
-                        'webLink',
                         'pdfLink',
+                        'invoiceType',
                     ],
                     'type' => 'object',
                 ],

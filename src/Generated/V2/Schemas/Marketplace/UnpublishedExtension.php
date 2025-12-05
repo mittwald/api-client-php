@@ -95,6 +95,9 @@ class UnpublishedExtension
                     ],
                 ],
             ],
+            'pricingDetails' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.PricePlanDetails',
+            ],
             'published' => [
                 'description' => 'Whether the extension has been published by the contributor.',
                 'enum' => [
@@ -222,6 +225,8 @@ class UnpublishedExtension
      * @var MonthlyPricePlanStrategyItem[]|null
      */
     private ?array $pricing = null;
+
+    private ?PricePlanDetails $pricingDetails = null;
 
     /**
      * Whether the extension has been published by the contributor.
@@ -363,6 +368,11 @@ class UnpublishedExtension
     public function getPricing(): ?array
     {
         return $this->pricing ?? null;
+    }
+
+    public function getPricingDetails(): ?PricePlanDetails
+    {
+        return $this->pricingDetails ?? null;
     }
 
     public function getPublished(): ?bool
@@ -660,6 +670,22 @@ class UnpublishedExtension
         return $clone;
     }
 
+    public function withPricingDetails(PricePlanDetails $pricingDetails): self
+    {
+        $clone = clone $this;
+        $clone->pricingDetails = $pricingDetails;
+
+        return $clone;
+    }
+
+    public function withoutPricingDetails(): self
+    {
+        $clone = clone $this;
+        unset($clone->pricingDetails);
+
+        return $clone;
+    }
+
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
@@ -824,6 +850,10 @@ class UnpublishedExtension
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
+        $pricingDetails = null;
+        if (isset($input->{'pricingDetails'})) {
+            $pricingDetails = PricePlanDetails::buildFromInput($input->{'pricingDetails'}, validate: $validate);
+        }
         $published = null;
         if (isset($input->{'published'})) {
             $published = (bool)($input->{'published'});
@@ -850,6 +880,7 @@ class UnpublishedExtension
         $obj->frontendFragments = $frontendFragments;
         $obj->logoRefId = $logoRefId;
         $obj->pricing = $pricing;
+        $obj->pricingDetails = $pricingDetails;
         $obj->published = $published;
         $obj->subTitle = $subTitle;
         $obj->support = $support;
@@ -896,6 +927,9 @@ class UnpublishedExtension
             $output['pricing'] = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => array_map(fn ($item): array => $item->toJson(), $this->pricing),
             };
+        }
+        if (isset($this->pricingDetails)) {
+            $output['pricingDetails'] = $this->pricingDetails->toJson();
         }
         if (isset($this->published)) {
             $output['published'] = $this->published;

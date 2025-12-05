@@ -17,12 +17,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\Del
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest;
 
@@ -111,6 +114,16 @@ interface BackupClient
      */
     public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse;
     /**
+     * Get table of contents for a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-directories
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetProjectBackupDirectoriesRequest $request An object representing the request for this operation
+     * @return GetProjectBackupDirectoriesOKResponse OK
+     */
+    public function getProjectBackupDirectories(GetProjectBackupDirectoriesRequest $request): GetProjectBackupDirectoriesOKResponse;
+    /**
      * Get a ProjectBackupSchedule.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-schedule
@@ -140,6 +153,16 @@ interface BackupClient
      * @return ListProjectBackupsOKResponse OK
      */
     public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse;
+    /**
+     * Restore a ProjectBackup's path.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore-path
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestProjectBackupRestorePathRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function requestProjectBackupRestorePath(RequestProjectBackupRestorePathRequest $request): EmptyResponse;
     /**
      * Change the description of a ProjectBackup.
      *
