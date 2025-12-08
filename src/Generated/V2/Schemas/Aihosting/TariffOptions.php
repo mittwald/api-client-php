@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Aihosting;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -27,11 +28,19 @@ class TariffOptions
             'customerId' => [
                 'type' => 'string',
             ],
+            'deletedAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
             ],
             'limit' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
+            ],
+            'nextTokenReset' => [
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'tokens' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsageBig',
@@ -67,15 +76,20 @@ class TariffOptions
             'keys',
             'tokens',
             'limit',
+            'nextTokenReset',
         ],
         'type' => 'object',
     ];
 
     private string $customerId;
 
+    private ?DateTime $deletedAt = null;
+
     private TariffUsage $keys;
 
     private RateLimit $limit;
+
+    private DateTime $nextTokenReset;
 
     private TariffUsageBig $tokens;
 
@@ -84,17 +98,23 @@ class TariffOptions
      */
     private ?array $topUsages = null;
 
-    public function __construct(string $customerId, TariffUsage $keys, RateLimit $limit, TariffUsageBig $tokens)
+    public function __construct(string $customerId, TariffUsage $keys, RateLimit $limit, DateTime $nextTokenReset, TariffUsageBig $tokens)
     {
         $this->customerId = $customerId;
         $this->keys = $keys;
         $this->limit = $limit;
+        $this->nextTokenReset = $nextTokenReset;
         $this->tokens = $tokens;
     }
 
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    public function getDeletedAt(): ?DateTime
+    {
+        return $this->deletedAt ?? null;
     }
 
     public function getKeys(): TariffUsage
@@ -105,6 +125,11 @@ class TariffOptions
     public function getLimit(): RateLimit
     {
         return $this->limit;
+    }
+
+    public function getNextTokenReset(): DateTime
+    {
+        return $this->nextTokenReset;
     }
 
     public function getTokens(): TariffUsageBig
@@ -134,6 +159,22 @@ class TariffOptions
         return $clone;
     }
 
+    public function withDeletedAt(DateTime $deletedAt): self
+    {
+        $clone = clone $this;
+        $clone->deletedAt = $deletedAt;
+
+        return $clone;
+    }
+
+    public function withoutDeletedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletedAt);
+
+        return $clone;
+    }
+
     public function withKeys(TariffUsage $keys): self
     {
         $clone = clone $this;
@@ -146,6 +187,14 @@ class TariffOptions
     {
         $clone = clone $this;
         $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withNextTokenReset(DateTime $nextTokenReset): self
+    {
+        $clone = clone $this;
+        $clone->nextTokenReset = $nextTokenReset;
 
         return $clone;
     }
@@ -193,15 +242,21 @@ class TariffOptions
         }
 
         $customerId = $input->{'customerId'};
+        $deletedAt = null;
+        if (isset($input->{'deletedAt'})) {
+            $deletedAt = new DateTime($input->{'deletedAt'});
+        }
         $keys = TariffUsage::buildFromInput($input->{'keys'}, validate: $validate);
         $limit = RateLimit::buildFromInput($input->{'limit'}, validate: $validate);
+        $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         $tokens = TariffUsageBig::buildFromInput($input->{'tokens'}, validate: $validate);
         $topUsages = null;
         if (isset($input->{'topUsages'})) {
             $topUsages = array_map(fn (array|object $i): TariffOptionsTopUsagesItem => TariffOptionsTopUsagesItem::buildFromInput($i, validate: $validate), $input->{'topUsages'});
         }
 
-        $obj = new self($customerId, $keys, $limit, $tokens);
+        $obj = new self($customerId, $keys, $limit, $nextTokenReset, $tokens);
+        $obj->deletedAt = $deletedAt;
         $obj->topUsages = $topUsages;
         return $obj;
     }
@@ -215,8 +270,12 @@ class TariffOptions
     {
         $output = [];
         $output['customerId'] = $this->customerId;
+        if (isset($this->deletedAt)) {
+            $output['deletedAt'] = ($this->deletedAt)->format(DateTime::ATOM);
+        }
         $output['keys'] = $this->keys->toJson();
         $output['limit'] = $this->limit->toJson();
+        $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         $output['tokens'] = $this->tokens->toJson();
         if (isset($this->topUsages)) {
             $output['topUsages'] = array_map(fn (TariffOptionsTopUsagesItem $i) => $i->toJson(), $this->topUsages);
@@ -251,6 +310,10 @@ class TariffOptions
 
     public function __clone()
     {
+        if (isset($this->deletedAt)) {
+            $this->deletedAt = clone $this->deletedAt;
+        }
+        $this->nextTokenReset = clone $this->nextTokenReset;
         if (isset($this->topUsages)) {
             $this->topUsages = array_map(fn (TariffOptionsTopUsagesItem $i) => clone $i, $this->topUsages);
         }

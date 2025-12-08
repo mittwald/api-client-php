@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetUsage;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\TariffUsage;
@@ -18,6 +19,10 @@ class AiHostingProjectGetUsageOKResponseBody
             'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
             ],
+            'nextTokenReset' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'projectId' => [
                 'type' => 'string',
             ],
@@ -30,6 +35,8 @@ class AiHostingProjectGetUsageOKResponseBody
     ];
 
     private TariffUsage $keys;
+
+    private ?DateTime $nextTokenReset = null;
 
     private string $projectId;
 
@@ -44,6 +51,11 @@ class AiHostingProjectGetUsageOKResponseBody
         return $this->keys;
     }
 
+    public function getNextTokenReset(): ?DateTime
+    {
+        return $this->nextTokenReset ?? null;
+    }
+
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -53,6 +65,22 @@ class AiHostingProjectGetUsageOKResponseBody
     {
         $clone = clone $this;
         $clone->keys = $keys;
+
+        return $clone;
+    }
+
+    public function withNextTokenReset(DateTime $nextTokenReset): self
+    {
+        $clone = clone $this;
+        $clone->nextTokenReset = $nextTokenReset;
+
+        return $clone;
+    }
+
+    public function withoutNextTokenReset(): self
+    {
+        $clone = clone $this;
+        unset($clone->nextTokenReset);
 
         return $clone;
     }
@@ -87,10 +115,14 @@ class AiHostingProjectGetUsageOKResponseBody
         }
 
         $keys = TariffUsage::buildFromInput($input->{'keys'}, validate: $validate);
+        $nextTokenReset = null;
+        if (isset($input->{'nextTokenReset'})) {
+            $nextTokenReset = new DateTime($input->{'nextTokenReset'});
+        }
         $projectId = $input->{'projectId'};
 
         $obj = new self($keys, $projectId);
-
+        $obj->nextTokenReset = $nextTokenReset;
         return $obj;
     }
 
@@ -103,6 +135,9 @@ class AiHostingProjectGetUsageOKResponseBody
     {
         $output = [];
         $output['keys'] = $this->keys->toJson();
+        if (isset($this->nextTokenReset)) {
+            $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
+        }
         $output['projectId'] = $this->projectId;
 
         return $output;
@@ -134,5 +169,8 @@ class AiHostingProjectGetUsageOKResponseBody
 
     public function __clone()
     {
+        if (isset($this->nextTokenReset)) {
+            $this->nextTokenReset = clone $this->nextTokenReset;
+        }
     }
 }

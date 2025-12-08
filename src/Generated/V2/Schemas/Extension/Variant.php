@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Extension;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -24,6 +25,11 @@ class Variant
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'deletionDeadline' => [
+                'description' => 'deadline for scheduled deletion of extension variant',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'description' => [
                 'description' => 'Description of Variant.',
                 'type' => 'string',
@@ -41,6 +47,10 @@ class Variant
             ],
             'isBookingStopped' => [
                 'description' => 'stop extension variant from being booked',
+                'type' => 'boolean',
+            ],
+            'isDeletionScheduled' => [
+                'description' => 'deletion of extension variant is scheduled',
                 'type' => 'boolean',
             ],
             'key' => [
@@ -64,6 +74,11 @@ class Variant
     ];
 
     /**
+     * deadline for scheduled deletion of extension variant
+     */
+    private ?DateTime $deletionDeadline = null;
+
+    /**
      * Description of Variant.
      */
     private ?string $description = null;
@@ -80,6 +95,11 @@ class Variant
      * stop extension variant from being booked
      */
     private ?bool $isBookingStopped = null;
+
+    /**
+     * deletion of extension variant is scheduled
+     */
+    private ?bool $isDeletionScheduled = null;
 
     /**
      * Key that needs to be unique in Variant.
@@ -102,6 +122,11 @@ class Variant
         $this->priceInCents = $priceInCents;
     }
 
+    public function getDeletionDeadline(): ?DateTime
+    {
+        return $this->deletionDeadline ?? null;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -117,6 +142,11 @@ class Variant
         return $this->isBookingStopped ?? null;
     }
 
+    public function getIsDeletionScheduled(): ?bool
+    {
+        return $this->isDeletionScheduled ?? null;
+    }
+
     public function getKey(): string
     {
         return $this->key;
@@ -130,6 +160,22 @@ class Variant
     public function getPriceInCents(): int|float
     {
         return $this->priceInCents;
+    }
+
+    public function withDeletionDeadline(DateTime $deletionDeadline): self
+    {
+        $clone = clone $this;
+        $clone->deletionDeadline = $deletionDeadline;
+
+        return $clone;
+    }
+
+    public function withoutDeletionDeadline(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionDeadline);
+
+        return $clone;
     }
 
     public function withDescription(string $description): self
@@ -188,6 +234,28 @@ class Variant
     {
         $clone = clone $this;
         unset($clone->isBookingStopped);
+
+        return $clone;
+    }
+
+    public function withIsDeletionScheduled(bool $isDeletionScheduled): self
+    {
+        $validator = new Validator();
+        $validator->validate($isDeletionScheduled, self::$internalValidationSchema['properties']['isDeletionScheduled']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isDeletionScheduled = $isDeletionScheduled;
+
+        return $clone;
+    }
+
+    public function withoutIsDeletionScheduled(): self
+    {
+        $clone = clone $this;
+        unset($clone->isDeletionScheduled);
 
         return $clone;
     }
@@ -257,6 +325,10 @@ class Variant
             static::validateInput($input);
         }
 
+        $deletionDeadline = null;
+        if (isset($input->{'deletionDeadline'})) {
+            $deletionDeadline = new DateTime($input->{'deletionDeadline'});
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -269,6 +341,10 @@ class Variant
         if (isset($input->{'isBookingStopped'})) {
             $isBookingStopped = (bool)($input->{'isBookingStopped'});
         }
+        $isDeletionScheduled = null;
+        if (isset($input->{'isDeletionScheduled'})) {
+            $isDeletionScheduled = (bool)($input->{'isDeletionScheduled'});
+        }
         $key = $input->{'key'};
         $name = null;
         if (isset($input->{'name'})) {
@@ -277,9 +353,11 @@ class Variant
         $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
 
         $obj = new self($key, $priceInCents);
+        $obj->deletionDeadline = $deletionDeadline;
         $obj->description = $description;
         $obj->descriptionChangeType = $descriptionChangeType;
         $obj->isBookingStopped = $isBookingStopped;
+        $obj->isDeletionScheduled = $isDeletionScheduled;
         $obj->name = $name;
         return $obj;
     }
@@ -292,6 +370,9 @@ class Variant
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->deletionDeadline)) {
+            $output['deletionDeadline'] = ($this->deletionDeadline)->format(DateTime::ATOM);
+        }
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
@@ -300,6 +381,9 @@ class Variant
         }
         if (isset($this->isBookingStopped)) {
             $output['isBookingStopped'] = $this->isBookingStopped;
+        }
+        if (isset($this->isDeletionScheduled)) {
+            $output['isDeletionScheduled'] = $this->isDeletionScheduled;
         }
         $output['key'] = $this->key;
         if (isset($this->name)) {
@@ -336,5 +420,8 @@ class Variant
 
     public function __clone()
     {
+        if (isset($this->deletionDeadline)) {
+            $this->deletionDeadline = clone $this->deletionDeadline;
+        }
     }
 }
