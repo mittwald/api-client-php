@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OrderCreateTariffChangeRequest
+class GetProjectBackupDatabaseDumpsRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,58 +17,41 @@ class OrderCreateTariffChangeRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'tariffChangeData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerTariffChange',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange',
-                            ],
-                        ],
-                    ],
-                    'tariffChangeType' => [
-                        'enum' => [
-                            'projectHosting',
-                            'server',
-                            'leadFyndr',
-                        ],
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+            'projectBackupId' => [
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'projectBackupId',
         ],
     ];
 
-    private OrderCreateTariffChangeRequestBody $body;
+    private string $projectBackupId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderCreateTariffChangeRequestBody $body)
+    public function __construct(string $projectBackupId)
     {
-        $this->body = $body;
+        $this->projectBackupId = $projectBackupId;
     }
 
-    public function getBody(): OrderCreateTariffChangeRequestBody
+    public function getProjectBackupId(): string
     {
-        return $this->body;
+        return $this->projectBackupId;
     }
 
-    public function withBody(OrderCreateTariffChangeRequestBody $body): self
+    public function withProjectBackupId(string $projectBackupId): self
     {
+        $validator = new Validator();
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->projectBackupId = $projectBackupId;
 
         return $clone;
     }
@@ -78,19 +61,19 @@ class OrderCreateTariffChangeRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderCreateTariffChangeRequest Created instance
+     * @return GetProjectBackupDatabaseDumpsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateTariffChangeRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderCreateTariffChangeRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectBackupId = $input->{'projectBackupId'};
 
-        $obj = new self($body);
+        $obj = new self($projectBackupId);
 
         return $obj;
     }
@@ -103,7 +86,7 @@ class OrderCreateTariffChangeRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['projectBackupId'] = $this->projectBackupId;
 
         return $output;
     }
@@ -134,7 +117,6 @@ class OrderCreateTariffChangeRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -149,7 +131,8 @@ class OrderCreateTariffChangeRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/tariff-changes';
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId . '/database-dumps';
     }
 
     /**
@@ -168,7 +151,6 @@ class OrderCreateTariffChangeRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

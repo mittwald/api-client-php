@@ -6,7 +6,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Order\AIHostingOrderPreview;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrderPreview;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\LeadFyndrOrderPreview;
@@ -41,9 +40,6 @@ class OrderPreviewOrderRequestBody
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview',
                     ],
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview',
-                    ],
                 ],
             ],
             'orderType' => [
@@ -54,7 +50,6 @@ class OrderPreviewOrderRequestBody
                     'externalCertificate',
                     'leadFyndr',
                     'mailArchive',
-                    'aiHosting',
                 ],
                 'type' => 'string',
             ],
@@ -62,7 +57,7 @@ class OrderPreviewOrderRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|AIHostingOrderPreview|null $orderData = null;
+    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|null $orderData = null;
 
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
 
@@ -73,7 +68,7 @@ class OrderPreviewOrderRequestBody
     {
     }
 
-    public function getOrderData(): AIHostingOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
+    public function getOrderData(): DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
     {
         return $this->orderData;
     }
@@ -83,7 +78,7 @@ class OrderPreviewOrderRequestBody
         return $this->orderType ?? null;
     }
 
-    public function withOrderData(AIHostingOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
+    public function withOrderData(DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -139,7 +134,6 @@ class OrderPreviewOrderRequestBody
                 ExternalCertificateOrderPreview::validateInput($input->{'orderData'}, true) => ExternalCertificateOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 LeadFyndrOrderPreview::validateInput($input->{'orderData'}, true) => LeadFyndrOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 MailArchiveOrderPreview::validateInput($input->{'orderData'}, true) => MailArchiveOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
-                AIHostingOrderPreview::validateInput($input->{'orderData'}, true) => AIHostingOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'orderData' from JSON"),
             };
         }
@@ -164,7 +158,7 @@ class OrderPreviewOrderRequestBody
         $output = [];
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview, ($this->orderData) instanceof LeadFyndrOrderPreview, ($this->orderData) instanceof MailArchiveOrderPreview, ($this->orderData) instanceof AIHostingOrderPreview => $this->orderData->toJson(),
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview, ($this->orderData) instanceof LeadFyndrOrderPreview, ($this->orderData) instanceof MailArchiveOrderPreview => $this->orderData->toJson(),
             };
         }
         if (isset($this->orderType)) {
@@ -202,7 +196,7 @@ class OrderPreviewOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview, ($this->orderData) instanceof LeadFyndrOrderPreview, ($this->orderData) instanceof MailArchiveOrderPreview, ($this->orderData) instanceof AIHostingOrderPreview => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview, ($this->orderData) instanceof LeadFyndrOrderPreview, ($this->orderData) instanceof MailArchiveOrderPreview => $this->orderData,
             };
         }
     }

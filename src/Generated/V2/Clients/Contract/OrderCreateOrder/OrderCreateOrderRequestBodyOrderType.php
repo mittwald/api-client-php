@@ -12,5 +12,4 @@ enum OrderCreateOrderRequestBodyOrderType: string
     case externalCertificate = 'externalCertificate';
     case leadFyndr = 'leadFyndr';
     case mailArchive = 'mailArchive';
-    case aiHosting = 'aiHosting';
 }

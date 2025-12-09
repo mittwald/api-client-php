@@ -52,6 +52,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDeta
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateNotFoundResponse;
@@ -319,6 +325,30 @@ class ContractClientImpl implements ContractClient
             404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the AI Hosting Contract for the given Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-ai-hosting
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     */
+    public function getDetailOfContractByAiHosting(GetDetailOfContractByAiHostingRequest $request): GetDetailOfContractByAiHostingOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractByAiHostingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractByAiHostingOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractByAiHostingBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractByAiHostingNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByAiHostingTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractByAiHostingDefaultResponse::fromResponse($httpResponse),
         });
     }
 

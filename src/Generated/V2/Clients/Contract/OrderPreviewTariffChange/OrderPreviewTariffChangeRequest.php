@@ -30,9 +30,6 @@ class OrderPreviewTariffChangeRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange',
                             ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingTariffChange',
-                            ],
                         ],
                     ],
                     'tariffChangeType' => [
@@ -40,7 +37,6 @@ class OrderPreviewTariffChangeRequest
                             'projectHosting',
                             'server',
                             'leadFyndr',
-                            'aiHosting',
                         ],
                         'type' => 'string',
                     ],

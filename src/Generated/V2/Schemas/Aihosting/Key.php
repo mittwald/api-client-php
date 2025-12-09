@@ -43,9 +43,6 @@ class Key
                 'description' => 'Auto generated uuid to identify keys in requests.',
                 'type' => 'string',
             ],
-            'limit' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
-            ],
             'models' => [
                 'description' => 'An array of LLM model identifiers enabled for this key.',
                 'items' => [
@@ -59,6 +56,9 @@ class Key
             'projectId' => [
                 'type' => 'string',
             ],
+            'rateLimit' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
+            ],
             'tokenUsage' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TokenUsage',
             ],
@@ -70,7 +70,7 @@ class Key
             'name',
             'isBlocked',
             'tokenUsage',
-            'limit',
+            'rateLimit',
         ],
         'type' => 'object',
     ];
@@ -94,8 +94,6 @@ class Key
      */
     private string $keyId;
 
-    private RateLimit $limit;
-
     /**
      * An array of LLM model identifiers enabled for this key.
      *
@@ -107,18 +105,20 @@ class Key
 
     private ?string $projectId = null;
 
+    private RateLimit $rateLimit;
+
     private TokenUsage $tokenUsage;
 
     /**
      * @param string[] $models
      */
-    public function __construct(string $key, string $keyId, RateLimit $limit, array $models, string $name, TokenUsage $tokenUsage)
+    public function __construct(string $key, string $keyId, array $models, string $name, RateLimit $rateLimit, TokenUsage $tokenUsage)
     {
         $this->key = $key;
         $this->keyId = $keyId;
-        $this->limit = $limit;
         $this->models = $models;
         $this->name = $name;
+        $this->rateLimit = $rateLimit;
         $this->tokenUsage = $tokenUsage;
     }
 
@@ -147,11 +147,6 @@ class Key
         return $this->keyId;
     }
 
-    public function getLimit(): RateLimit
-    {
-        return $this->limit;
-    }
-
     /**
      * @return string[]
      */
@@ -168,6 +163,11 @@ class Key
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
+    }
+
+    public function getRateLimit(): RateLimit
+    {
+        return $this->rateLimit;
     }
 
     public function getTokenUsage(): TokenUsage
@@ -255,14 +255,6 @@ class Key
         return $clone;
     }
 
-    public function withLimit(RateLimit $limit): self
-    {
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
     /**
      * @param string[] $models
      */
@@ -316,6 +308,14 @@ class Key
         return $clone;
     }
 
+    public function withRateLimit(RateLimit $rateLimit): self
+    {
+        $clone = clone $this;
+        $clone->rateLimit = $rateLimit;
+
+        return $clone;
+    }
+
     public function withTokenUsage(TokenUsage $tokenUsage): self
     {
         $clone = clone $this;
@@ -353,16 +353,16 @@ class Key
         }
         $key = $input->{'key'};
         $keyId = $input->{'keyId'};
-        $limit = RateLimit::buildFromInput($input->{'limit'}, validate: $validate);
         $models = $input->{'models'};
         $name = $input->{'name'};
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
         }
+        $rateLimit = RateLimit::buildFromInput($input->{'rateLimit'}, validate: $validate);
         $tokenUsage = TokenUsage::buildFromInput($input->{'tokenUsage'}, validate: $validate);
 
-        $obj = new self($key, $keyId, $limit, $models, $name, $tokenUsage);
+        $obj = new self($key, $keyId, $models, $name, $rateLimit, $tokenUsage);
         $obj->containerMeta = $containerMeta;
         $obj->customerId = $customerId;
         $obj->isBlocked = $isBlocked;
@@ -387,12 +387,12 @@ class Key
         $output['isBlocked'] = $this->isBlocked;
         $output['key'] = $this->key;
         $output['keyId'] = $this->keyId;
-        $output['limit'] = $this->limit->toJson();
         $output['models'] = $this->models;
         $output['name'] = $this->name;
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }
+        $output['rateLimit'] = $this->rateLimit->toJson();
         $output['tokenUsage'] = $this->tokenUsage->toJson();
 
         return $output;

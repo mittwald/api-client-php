@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestoreRequest;
 
-class OrderCreateTariffChangeRequest
+class RequestProjectBackupRestoreRequest
 {
     public const method = 'post';
 
@@ -17,55 +18,58 @@ class OrderCreateTariffChangeRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'projectBackupId' => [
+                'type' => 'string',
+            ],
             'body' => [
-                'properties' => [
-                    'tariffChangeData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerTariffChange',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange',
-                            ],
-                        ],
-                    ],
-                    'tariffChangeType' => [
-                        'enum' => [
-                            'projectHosting',
-                            'server',
-                            'leadFyndr',
-                        ],
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreRequest',
             ],
         ],
         'required' => [
+            'projectBackupId',
             'body',
         ],
     ];
 
-    private OrderCreateTariffChangeRequestBody $body;
+    private string $projectBackupId;
+
+    private ProjectBackupRestoreRequest $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderCreateTariffChangeRequestBody $body)
+    public function __construct(string $projectBackupId, ProjectBackupRestoreRequest $body)
     {
+        $this->projectBackupId = $projectBackupId;
         $this->body = $body;
     }
 
-    public function getBody(): OrderCreateTariffChangeRequestBody
+    public function getProjectBackupId(): string
+    {
+        return $this->projectBackupId;
+    }
+
+    public function getBody(): ProjectBackupRestoreRequest
     {
         return $this->body;
     }
 
-    public function withBody(OrderCreateTariffChangeRequestBody $body): self
+    public function withProjectBackupId(string $projectBackupId): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectBackupId = $projectBackupId;
+
+        return $clone;
+    }
+
+    public function withBody(ProjectBackupRestoreRequest $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -78,19 +82,20 @@ class OrderCreateTariffChangeRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderCreateTariffChangeRequest Created instance
+     * @return RequestProjectBackupRestoreRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateTariffChangeRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderCreateTariffChangeRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectBackupId = $input->{'projectBackupId'};
+        $body = ProjectBackupRestoreRequest::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($projectBackupId, $body);
 
         return $obj;
     }
@@ -103,7 +108,8 @@ class OrderCreateTariffChangeRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['projectBackupId'] = $this->projectBackupId;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -134,7 +140,6 @@ class OrderCreateTariffChangeRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -149,7 +154,8 @@ class OrderCreateTariffChangeRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/tariff-changes';
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId . '/restore';
     }
 
     /**

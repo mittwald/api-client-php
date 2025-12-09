@@ -59,8 +59,13 @@ class ProjectBackup
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'restore' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestore',
+            ],
             'restorePath' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathDeprecated',
+                'deprecated' => true,
+                'description' => 'Deprecated: Use \'restore.pathRestore\' instead. This field will be removed in a future version.',
             ],
             'status' => [
                 'example' => 'Completed',
@@ -95,7 +100,14 @@ class ProjectBackup
 
     private DateTime $requestedAt;
 
-    private ?ProjectBackupRestorePath $restorePath = null;
+    private ?ProjectBackupRestore $restore = null;
+
+    /**
+     * Deprecated: Use 'restore.pathRestore' instead. This field will be removed in a future version.
+     *
+     * @deprecated
+     */
+    private ?ProjectBackupRestorePathDeprecated $restorePath = null;
 
     private string $status;
 
@@ -153,7 +165,15 @@ class ProjectBackup
         return $this->requestedAt;
     }
 
-    public function getRestorePath(): ?ProjectBackupRestorePath
+    public function getRestore(): ?ProjectBackupRestore
+    {
+        return $this->restore ?? null;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getRestorePath(): ?ProjectBackupRestorePathDeprecated
     {
         return $this->restorePath ?? null;
     }
@@ -305,7 +325,26 @@ class ProjectBackup
         return $clone;
     }
 
-    public function withRestorePath(ProjectBackupRestorePath $restorePath): self
+    public function withRestore(ProjectBackupRestore $restore): self
+    {
+        $clone = clone $this;
+        $clone->restore = $restore;
+
+        return $clone;
+    }
+
+    public function withoutRestore(): self
+    {
+        $clone = clone $this;
+        unset($clone->restore);
+
+        return $clone;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function withRestorePath(ProjectBackupRestorePathDeprecated $restorePath): self
     {
         $clone = clone $this;
         $clone->restorePath = $restorePath;
@@ -374,9 +413,13 @@ class ProjectBackup
         }
         $projectId = $input->{'projectId'};
         $requestedAt = new DateTime($input->{'requestedAt'});
+        $restore = null;
+        if (isset($input->{'restore'})) {
+            $restore = ProjectBackupRestore::buildFromInput($input->{'restore'}, validate: $validate);
+        }
         $restorePath = null;
         if (isset($input->{'restorePath'})) {
-            $restorePath = ProjectBackupRestorePath::buildFromInput($input->{'restorePath'}, validate: $validate);
+            $restorePath = ProjectBackupRestorePathDeprecated::buildFromInput($input->{'restorePath'}, validate: $validate);
         }
         $status = $input->{'status'};
 
@@ -386,6 +429,7 @@ class ProjectBackup
         $obj->expiresAt = $expiresAt;
         $obj->export = $export;
         $obj->parentId = $parentId;
+        $obj->restore = $restore;
         $obj->restorePath = $restorePath;
         return $obj;
     }
@@ -417,6 +461,9 @@ class ProjectBackup
         }
         $output['projectId'] = $this->projectId;
         $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        if (isset($this->restore)) {
+            $output['restore'] = $this->restore->toJson();
+        }
         if (isset($this->restorePath)) {
             $output['restorePath'] = $this->restorePath->toJson();
         }

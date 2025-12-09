@@ -35,12 +35,12 @@ class TariffOptions
             'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
             ],
-            'limit' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
-            ],
             'nextTokenReset' => [
                 'format' => 'date-time',
                 'type' => 'string',
+            ],
+            'rateLimit' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
             ],
             'tokens' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsageBig',
@@ -75,7 +75,7 @@ class TariffOptions
             'customerId',
             'keys',
             'tokens',
-            'limit',
+            'rateLimit',
             'nextTokenReset',
         ],
         'type' => 'object',
@@ -87,9 +87,9 @@ class TariffOptions
 
     private TariffUsage $keys;
 
-    private RateLimit $limit;
-
     private DateTime $nextTokenReset;
+
+    private RateLimit $rateLimit;
 
     private TariffUsageBig $tokens;
 
@@ -98,12 +98,12 @@ class TariffOptions
      */
     private ?array $topUsages = null;
 
-    public function __construct(string $customerId, TariffUsage $keys, RateLimit $limit, DateTime $nextTokenReset, TariffUsageBig $tokens)
+    public function __construct(string $customerId, TariffUsage $keys, DateTime $nextTokenReset, RateLimit $rateLimit, TariffUsageBig $tokens)
     {
         $this->customerId = $customerId;
         $this->keys = $keys;
-        $this->limit = $limit;
         $this->nextTokenReset = $nextTokenReset;
+        $this->rateLimit = $rateLimit;
         $this->tokens = $tokens;
     }
 
@@ -122,14 +122,14 @@ class TariffOptions
         return $this->keys;
     }
 
-    public function getLimit(): RateLimit
-    {
-        return $this->limit;
-    }
-
     public function getNextTokenReset(): DateTime
     {
         return $this->nextTokenReset;
+    }
+
+    public function getRateLimit(): RateLimit
+    {
+        return $this->rateLimit;
     }
 
     public function getTokens(): TariffUsageBig
@@ -183,18 +183,18 @@ class TariffOptions
         return $clone;
     }
 
-    public function withLimit(RateLimit $limit): self
-    {
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
     public function withNextTokenReset(DateTime $nextTokenReset): self
     {
         $clone = clone $this;
         $clone->nextTokenReset = $nextTokenReset;
+
+        return $clone;
+    }
+
+    public function withRateLimit(RateLimit $rateLimit): self
+    {
+        $clone = clone $this;
+        $clone->rateLimit = $rateLimit;
 
         return $clone;
     }
@@ -247,15 +247,15 @@ class TariffOptions
             $deletedAt = new DateTime($input->{'deletedAt'});
         }
         $keys = TariffUsage::buildFromInput($input->{'keys'}, validate: $validate);
-        $limit = RateLimit::buildFromInput($input->{'limit'}, validate: $validate);
         $nextTokenReset = new DateTime($input->{'nextTokenReset'});
+        $rateLimit = RateLimit::buildFromInput($input->{'rateLimit'}, validate: $validate);
         $tokens = TariffUsageBig::buildFromInput($input->{'tokens'}, validate: $validate);
         $topUsages = null;
         if (isset($input->{'topUsages'})) {
             $topUsages = array_map(fn (array|object $i): TariffOptionsTopUsagesItem => TariffOptionsTopUsagesItem::buildFromInput($i, validate: $validate), $input->{'topUsages'});
         }
 
-        $obj = new self($customerId, $keys, $limit, $nextTokenReset, $tokens);
+        $obj = new self($customerId, $keys, $nextTokenReset, $rateLimit, $tokens);
         $obj->deletedAt = $deletedAt;
         $obj->topUsages = $topUsages;
         return $obj;
@@ -274,8 +274,8 @@ class TariffOptions
             $output['deletedAt'] = ($this->deletedAt)->format(DateTime::ATOM);
         }
         $output['keys'] = $this->keys->toJson();
-        $output['limit'] = $this->limit->toJson();
         $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
+        $output['rateLimit'] = $this->rateLimit->toJson();
         $output['tokens'] = $this->tokens->toJson();
         if (isset($this->topUsages)) {
             $output['topUsages'] = array_map(fn (TariffOptionsTopUsagesItem $i) => $i->toJson(), $this->topUsages);
