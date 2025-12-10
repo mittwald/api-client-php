@@ -29,7 +29,6 @@ class ListAppinstallationsForUserRequest
             ],
             'limit' => [
                 'type' => 'integer',
-                'default' => 1000,
                 'minimum' => 1,
             ],
             'skip' => [
@@ -53,7 +52,7 @@ class ListAppinstallationsForUserRequest
 
     private ?string $searchTerm = null;
 
-    private int $limit = 1000;
+    private ?int $limit = null;
 
     private int $skip = 0;
 
@@ -83,9 +82,9 @@ class ListAppinstallationsForUserRequest
         return $this->searchTerm ?? null;
     }
 
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
-        return $this->limit;
+        return $this->limit ?? null;
     }
 
     public function getSkip(): int
@@ -159,6 +158,14 @@ class ListAppinstallationsForUserRequest
         return $clone;
     }
 
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
+
+        return $clone;
+    }
+
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -218,7 +225,7 @@ class ListAppinstallationsForUserRequest
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
-        $limit = 1000;
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -254,7 +261,9 @@ class ListAppinstallationsForUserRequest
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
         }
-        $output['limit'] = $this->limit;
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;

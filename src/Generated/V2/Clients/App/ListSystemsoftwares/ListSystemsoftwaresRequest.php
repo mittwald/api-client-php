@@ -19,7 +19,6 @@ class ListSystemsoftwaresRequest
         'properties' => [
             'limit' => [
                 'type' => 'integer',
-                'default' => 1000,
                 'minimum' => 1,
             ],
             'skip' => [
@@ -36,7 +35,7 @@ class ListSystemsoftwaresRequest
         ],
     ];
 
-    private int $limit = 1000;
+    private ?int $limit = null;
 
     private int $skip = 0;
 
@@ -53,9 +52,9 @@ class ListSystemsoftwaresRequest
     {
     }
 
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
-        return $this->limit;
+        return $this->limit ?? null;
     }
 
     public function getSkip(): int
@@ -78,6 +77,14 @@ class ListSystemsoftwaresRequest
 
         $clone = clone $this;
         $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
 
         return $clone;
     }
@@ -133,7 +140,7 @@ class ListSystemsoftwaresRequest
             static::validateInput($input);
         }
 
-        $limit = 1000;
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -161,7 +168,9 @@ class ListSystemsoftwaresRequest
     public function toJson(): array
     {
         $output = [];
-        $output['limit'] = $this->limit;
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
