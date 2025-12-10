@@ -39,6 +39,9 @@ class OrderCreateOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrder',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrder',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -49,6 +52,7 @@ class OrderCreateOrderRequest
                             'externalCertificate',
                             'leadFyndr',
                             'mailArchive',
+                            'aiHosting',
                         ],
                         'example' => 'projectHosting',
                         'type' => 'string',

@@ -64,8 +64,6 @@ class ProjectBackup
             ],
             'restorePath' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathDeprecated',
-                'deprecated' => true,
-                'description' => 'Deprecated: Use \'restore.pathRestore\' instead. This field will be removed in a future version.',
             ],
             'status' => [
                 'example' => 'Completed',
@@ -102,11 +100,6 @@ class ProjectBackup
 
     private ?ProjectBackupRestore $restore = null;
 
-    /**
-     * Deprecated: Use 'restore.pathRestore' instead. This field will be removed in a future version.
-     *
-     * @deprecated
-     */
     private ?ProjectBackupRestorePathDeprecated $restorePath = null;
 
     private string $status;
@@ -170,9 +163,6 @@ class ProjectBackup
         return $this->restore ?? null;
     }
 
-    /**
-     * @deprecated
-     */
     public function getRestorePath(): ?ProjectBackupRestorePathDeprecated
     {
         return $this->restorePath ?? null;
@@ -341,9 +331,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @deprecated
-     */
     public function withRestorePath(ProjectBackupRestorePathDeprecated $restorePath): self
     {
         $clone = clone $this;
