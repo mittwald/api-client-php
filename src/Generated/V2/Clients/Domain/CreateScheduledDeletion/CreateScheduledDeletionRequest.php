@@ -22,6 +22,10 @@ class CreateScheduledDeletionRequest
             ],
             'body' => [
                 'properties' => [
+                    'deleteIngresses' => [
+                        'description' => 'Whether to also delete the corresponding Ingress and subdomain Ingresses.',
+                        'type' => 'boolean',
+                    ],
                     'deletionDate' => [
                         'format' => 'date-time',
                         'type' => 'string',

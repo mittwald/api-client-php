@@ -15,6 +15,10 @@ class CreateScheduledDeletionRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'deleteIngresses' => [
+                'description' => 'Whether to also delete the corresponding Ingress and subdomain Ingresses.',
+                'type' => 'boolean',
+            ],
             'deletionDate' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -25,6 +29,11 @@ class CreateScheduledDeletionRequestBody
         ],
     ];
 
+    /**
+     * Whether to also delete the corresponding Ingress and subdomain Ingresses.
+     */
+    private ?bool $deleteIngresses = null;
+
     private DateTime $deletionDate;
 
     public function __construct(DateTime $deletionDate)
@@ -32,9 +41,36 @@ class CreateScheduledDeletionRequestBody
         $this->deletionDate = $deletionDate;
     }
 
+    public function getDeleteIngresses(): ?bool
+    {
+        return $this->deleteIngresses ?? null;
+    }
+
     public function getDeletionDate(): DateTime
     {
         return $this->deletionDate;
+    }
+
+    public function withDeleteIngresses(bool $deleteIngresses): self
+    {
+        $validator = new Validator();
+        $validator->validate($deleteIngresses, self::$internalValidationSchema['properties']['deleteIngresses']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->deleteIngresses = $deleteIngresses;
+
+        return $clone;
+    }
+
+    public function withoutDeleteIngresses(): self
+    {
+        $clone = clone $this;
+        unset($clone->deleteIngresses);
+
+        return $clone;
     }
 
     public function withDeletionDate(DateTime $deletionDate): self
@@ -60,10 +96,14 @@ class CreateScheduledDeletionRequestBody
             static::validateInput($input);
         }
 
+        $deleteIngresses = null;
+        if (isset($input->{'deleteIngresses'})) {
+            $deleteIngresses = (bool)($input->{'deleteIngresses'});
+        }
         $deletionDate = new DateTime($input->{'deletionDate'});
 
         $obj = new self($deletionDate);
-
+        $obj->deleteIngresses = $deleteIngresses;
         return $obj;
     }
 
@@ -75,6 +115,9 @@ class CreateScheduledDeletionRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->deleteIngresses)) {
+            $output['deleteIngresses'] = $this->deleteIngresses;
+        }
         $output['deletionDate'] = ($this->deletionDate)->format(DateTime::ATOM);
 
         return $output;
