@@ -93,8 +93,6 @@ class Certificate
             'certificateType',
             'certificateRequestId',
             'projectId',
-            'validFrom',
-            'validTo',
         ],
         'type' => 'object',
     ];
@@ -130,18 +128,16 @@ class Certificate
 
     private string $projectId;
 
-    private DateTime $validFrom;
+    private ?DateTime $validFrom = null;
 
-    private DateTime $validTo;
+    private ?DateTime $validTo = null;
 
-    public function __construct(string $certificateRequestId, CertificateType $certificateType, string $id, string $projectId, DateTime $validFrom, DateTime $validTo)
+    public function __construct(string $certificateRequestId, CertificateType $certificateType, string $id, string $projectId)
     {
         $this->certificateRequestId = $certificateRequestId;
         $this->certificateType = $certificateType;
         $this->id = $id;
         $this->projectId = $projectId;
-        $this->validFrom = $validFrom;
-        $this->validTo = $validTo;
     }
 
     public function getCaBundle(): ?string
@@ -217,14 +213,14 @@ class Certificate
         return $this->projectId;
     }
 
-    public function getValidFrom(): DateTime
+    public function getValidFrom(): ?DateTime
     {
-        return $this->validFrom;
+        return $this->validFrom ?? null;
     }
 
-    public function getValidTo(): DateTime
+    public function getValidTo(): ?DateTime
     {
-        return $this->validTo;
+        return $this->validTo ?? null;
     }
 
     public function withCaBundle(string $caBundle): self
@@ -496,10 +492,26 @@ class Certificate
         return $clone;
     }
 
+    public function withoutValidFrom(): self
+    {
+        $clone = clone $this;
+        unset($clone->validFrom);
+
+        return $clone;
+    }
+
     public function withValidTo(DateTime $validTo): self
     {
         $clone = clone $this;
         $clone->validTo = $validTo;
+
+        return $clone;
+    }
+
+    public function withoutValidTo(): self
+    {
+        $clone = clone $this;
+        unset($clone->validTo);
 
         return $clone;
     }
@@ -563,10 +575,16 @@ class Certificate
             $lastExpirationThresholdHit = (int)($input->{'lastExpirationThresholdHit'});
         }
         $projectId = $input->{'projectId'};
-        $validFrom = new DateTime($input->{'validFrom'});
-        $validTo = new DateTime($input->{'validTo'});
+        $validFrom = null;
+        if (isset($input->{'validFrom'})) {
+            $validFrom = new DateTime($input->{'validFrom'});
+        }
+        $validTo = null;
+        if (isset($input->{'validTo'})) {
+            $validTo = new DateTime($input->{'validTo'});
+        }
 
-        $obj = new self($certificateRequestId, $certificateType, $id, $projectId, $validFrom, $validTo);
+        $obj = new self($certificateRequestId, $certificateType, $id, $projectId);
         $obj->caBundle = $caBundle;
         $obj->certificate = $certificate;
         $obj->certificateOrderId = $certificateOrderId;
@@ -577,6 +595,8 @@ class Certificate
         $obj->isExpired = $isExpired;
         $obj->issuer = $issuer;
         $obj->lastExpirationThresholdHit = $lastExpirationThresholdHit;
+        $obj->validFrom = $validFrom;
+        $obj->validTo = $validTo;
         return $obj;
     }
 
@@ -622,8 +642,12 @@ class Certificate
             $output['lastExpirationThresholdHit'] = $this->lastExpirationThresholdHit;
         }
         $output['projectId'] = $this->projectId;
-        $output['validFrom'] = ($this->validFrom)->format(DateTime::ATOM);
-        $output['validTo'] = ($this->validTo)->format(DateTime::ATOM);
+        if (isset($this->validFrom)) {
+            $output['validFrom'] = ($this->validFrom)->format(DateTime::ATOM);
+        }
+        if (isset($this->validTo)) {
+            $output['validTo'] = ($this->validTo)->format(DateTime::ATOM);
+        }
 
         return $output;
     }
@@ -657,7 +681,11 @@ class Certificate
         if (isset($this->dnsCertSpec)) {
             $this->dnsCertSpec = clone $this->dnsCertSpec;
         }
-        $this->validFrom = clone $this->validFrom;
-        $this->validTo = clone $this->validTo;
+        if (isset($this->validFrom)) {
+            $this->validFrom = clone $this->validFrom;
+        }
+        if (isset($this->validTo)) {
+            $this->validTo = clone $this->validTo;
+        }
     }
 }
