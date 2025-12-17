@@ -21,6 +21,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBa
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
@@ -130,6 +132,16 @@ interface ContractClient
      * @param GetDetailOfContractRequest $request An object representing the request for this operation
      */
     public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse;
+    /**
+     * Return the AI Hosting Contract for the given Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-ai-hosting
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     */
+    public function getDetailOfContractByAiHosting(GetDetailOfContractByAiHostingRequest $request): GetDetailOfContractByAiHostingOKResponse;
     /**
      * Return the Contract for the given Certificate.
      *
