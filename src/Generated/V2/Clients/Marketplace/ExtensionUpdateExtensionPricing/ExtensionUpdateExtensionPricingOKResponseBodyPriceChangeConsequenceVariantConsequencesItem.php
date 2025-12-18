@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -24,6 +25,11 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
                 ],
                 'type' => 'string',
             ],
+            'deletionDeadline' => [
+                'description' => 'The date the variant will ne deleted',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'variantKey' => [
                 'description' => 'The key of the variant of the Extension.',
                 'type' => 'string',
@@ -37,6 +43,11 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
      *
      */
     private ?ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariantConsequencesItemConsequence $consequence = null;
+
+    /**
+     * The date the variant will ne deleted
+     */
+    private ?DateTime $deletionDeadline = null;
 
     /**
      * The key of the variant of the Extension.
@@ -53,6 +64,11 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
     public function getConsequence(): ?ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariantConsequencesItemConsequence
     {
         return $this->consequence ?? null;
+    }
+
+    public function getDeletionDeadline(): ?DateTime
+    {
+        return $this->deletionDeadline ?? null;
     }
 
     public function getVariantKey(): ?string
@@ -72,6 +88,22 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
     {
         $clone = clone $this;
         unset($clone->consequence);
+
+        return $clone;
+    }
+
+    public function withDeletionDeadline(DateTime $deletionDeadline): self
+    {
+        $clone = clone $this;
+        $clone->deletionDeadline = $deletionDeadline;
+
+        return $clone;
+    }
+
+    public function withoutDeletionDeadline(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionDeadline);
 
         return $clone;
     }
@@ -117,6 +149,10 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
         if (isset($input->{'consequence'})) {
             $consequence = ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariantConsequencesItemConsequence::from($input->{'consequence'});
         }
+        $deletionDeadline = null;
+        if (isset($input->{'deletionDeadline'})) {
+            $deletionDeadline = new DateTime($input->{'deletionDeadline'});
+        }
         $variantKey = null;
         if (isset($input->{'variantKey'})) {
             $variantKey = $input->{'variantKey'};
@@ -124,6 +160,7 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
 
         $obj = new self();
         $obj->consequence = $consequence;
+        $obj->deletionDeadline = $deletionDeadline;
         $obj->variantKey = $variantKey;
         return $obj;
     }
@@ -138,6 +175,9 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
         $output = [];
         if (isset($this->consequence)) {
             $output['consequence'] = ($this->consequence)->value;
+        }
+        if (isset($this->deletionDeadline)) {
+            $output['deletionDeadline'] = ($this->deletionDeadline)->format(DateTime::ATOM);
         }
         if (isset($this->variantKey)) {
             $output['variantKey'] = $this->variantKey;
@@ -172,5 +212,8 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
 
     public function __clone()
     {
+        if (isset($this->deletionDeadline)) {
+            $this->deletionDeadline = clone $this->deletionDeadline;
+        }
     }
 }

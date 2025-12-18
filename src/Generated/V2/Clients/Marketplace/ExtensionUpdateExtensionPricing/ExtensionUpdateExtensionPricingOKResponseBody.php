@@ -59,6 +59,11 @@ class ExtensionUpdateExtensionPricingOKResponseBody
                                     ],
                                     'type' => 'string',
                                 ],
+                                'deletionDeadline' => [
+                                    'description' => 'The date the variant will ne deleted',
+                                    'format' => 'date-time',
+                                    'type' => 'string',
+                                ],
                                 'variantKey' => [
                                     'description' => 'The key of the variant of the Extension.',
                                     'type' => 'string',
