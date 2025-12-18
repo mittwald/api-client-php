@@ -39,6 +39,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemG
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesBadGatewayResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesForbiddenResponse;
@@ -164,6 +165,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
             return ProjectFileSystemGetJwtOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            401 => ProjectFileSystemGetJwtUnauthorizedResponse::fromResponse($httpResponse),
             403 => ProjectFileSystemGetJwtForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemGetJwtNotFoundResponse::fromResponse($httpResponse),
             429 => ProjectFileSystemGetJwtTooManyRequestsResponse::fromResponse($httpResponse),
