@@ -51,6 +51,15 @@ class ContributorListIncomingInvoicesOKResponse implements ResponseContainer
                             'example' => 'RG1234567',
                             'type' => 'string',
                         ],
+                        'invoiceType' => [
+                            'enum' => [
+                                'REGULAR',
+                                'CORRECTION',
+                                'REISSUE',
+                                'CANCELLATION',
+                            ],
+                            'type' => 'string',
+                        ],
                         'pdfId' => [
                             'format' => 'uuid',
                             'type' => 'string',
