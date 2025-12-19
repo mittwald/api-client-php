@@ -44,6 +44,15 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
                 'example' => 'RG1234567',
                 'type' => 'string',
             ],
+            'invoiceType' => [
+                'enum' => [
+                    'REGULAR',
+                    'CORRECTION',
+                    'REISSUE',
+                    'CANCELLATION',
+                ],
+                'type' => 'string',
+            ],
             'pdfId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -89,6 +98,8 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     private string $id;
 
     private string $invoiceNumber;
+
+    private ?ContributorListIncomingInvoicesOKResponseBodyItemInvoiceType $invoiceType = null;
 
     private string $pdfId;
 
@@ -146,6 +157,11 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function getInvoiceNumber(): string
     {
         return $this->invoiceNumber;
+    }
+
+    public function getInvoiceType(): ?ContributorListIncomingInvoicesOKResponseBodyItemInvoiceType
+    {
+        return $this->invoiceType ?? null;
     }
 
     public function getPdfId(): string
@@ -260,6 +276,22 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
         return $clone;
     }
 
+    public function withInvoiceType(ContributorListIncomingInvoicesOKResponseBodyItemInvoiceType $invoiceType): self
+    {
+        $clone = clone $this;
+        $clone->invoiceType = $invoiceType;
+
+        return $clone;
+    }
+
+    public function withoutInvoiceType(): self
+    {
+        $clone = clone $this;
+        unset($clone->invoiceType);
+
+        return $clone;
+    }
+
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
@@ -332,13 +364,17 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
         $date = new DateTime($input->{'date'});
         $id = $input->{'id'};
         $invoiceNumber = $input->{'invoiceNumber'};
+        $invoiceType = null;
+        if (isset($input->{'invoiceType'})) {
+            $invoiceType = ContributorListIncomingInvoicesOKResponseBodyItemInvoiceType::from($input->{'invoiceType'});
+        }
         $pdfId = $input->{'pdfId'};
         $recipient = Recipient::buildFromInput($input->{'recipient'}, validate: $validate);
         $totalGross = str_contains((string)($input->{'totalGross'}), '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
         $totalNet = str_contains((string)($input->{'totalNet'}), '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
 
         $obj = new self($currency, $customerId, $customerName, $customerNumber, $date, $id, $invoiceNumber, $pdfId, $recipient, $totalGross, $totalNet);
-
+        $obj->invoiceType = $invoiceType;
         return $obj;
     }
 
@@ -357,6 +393,9 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
         $output['date'] = ($this->date)->format(DateTime::ATOM);
         $output['id'] = $this->id;
         $output['invoiceNumber'] = $this->invoiceNumber;
+        if (isset($this->invoiceType)) {
+            $output['invoiceType'] = ($this->invoiceType)->value;
+        }
         $output['pdfId'] = $this->pdfId;
         $output['recipient'] = $this->recipient->toJson();
         $output['totalGross'] = $this->totalGross;
