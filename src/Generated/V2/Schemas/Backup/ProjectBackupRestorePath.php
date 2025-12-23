@@ -43,6 +43,7 @@ class ProjectBackupRestorePath
         ],
         'required' => [
             'sourcePaths',
+            'determinedTargetPath',
             'clearTargetPath',
         ],
         'type' => 'object',
@@ -50,7 +51,7 @@ class ProjectBackupRestorePath
 
     private bool $clearTargetPath = false;
 
-    private ?string $determinedTargetPath = null;
+    private string $determinedTargetPath;
 
     /**
      * @var string[]
@@ -62,8 +63,9 @@ class ProjectBackupRestorePath
     /**
      * @param string[] $sourcePaths
      */
-    public function __construct(array $sourcePaths)
+    public function __construct(string $determinedTargetPath, array $sourcePaths)
     {
+        $this->determinedTargetPath = $determinedTargetPath;
         $this->sourcePaths = $sourcePaths;
     }
 
@@ -72,9 +74,9 @@ class ProjectBackupRestorePath
         return $this->clearTargetPath;
     }
 
-    public function getDeterminedTargetPath(): ?string
+    public function getDeterminedTargetPath(): string
     {
-        return $this->determinedTargetPath ?? null;
+        return $this->determinedTargetPath;
     }
 
     /**
@@ -114,14 +116,6 @@ class ProjectBackupRestorePath
 
         $clone = clone $this;
         $clone->determinedTargetPath = $determinedTargetPath;
-
-        return $clone;
-    }
-
-    public function withoutDeterminedTargetPath(): self
-    {
-        $clone = clone $this;
-        unset($clone->determinedTargetPath);
 
         return $clone;
     }
@@ -184,19 +178,15 @@ class ProjectBackupRestorePath
         if (isset($input->{'clearTargetPath'})) {
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
-        $determinedTargetPath = null;
-        if (isset($input->{'determinedTargetPath'})) {
-            $determinedTargetPath = $input->{'determinedTargetPath'};
-        }
+        $determinedTargetPath = $input->{'determinedTargetPath'};
         $sourcePaths = $input->{'sourcePaths'};
         $targetRestorePath = null;
         if (isset($input->{'targetRestorePath'})) {
             $targetRestorePath = $input->{'targetRestorePath'};
         }
 
-        $obj = new self($sourcePaths);
+        $obj = new self($determinedTargetPath, $sourcePaths);
         $obj->clearTargetPath = $clearTargetPath;
-        $obj->determinedTargetPath = $determinedTargetPath;
         $obj->targetRestorePath = $targetRestorePath;
         return $obj;
     }
@@ -210,9 +200,7 @@ class ProjectBackupRestorePath
     {
         $output = [];
         $output['clearTargetPath'] = $this->clearTargetPath;
-        if (isset($this->determinedTargetPath)) {
-            $output['determinedTargetPath'] = $this->determinedTargetPath;
-        }
+        $output['determinedTargetPath'] = $this->determinedTargetPath;
         $output['sourcePaths'] = $this->sourcePaths;
         if (isset($this->targetRestorePath)) {
             $output['targetRestorePath'] = $this->targetRestorePath;

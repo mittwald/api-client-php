@@ -24,8 +24,11 @@ class ProjectBackupRestore
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'databaseRestore' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabase',
+            'databaseRestores' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabase',
+                ],
+                'type' => 'array',
             ],
             'pathRestore' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath',
@@ -41,9 +44,9 @@ class ProjectBackupRestore
     ];
 
     /**
-     * @var ProjectBackupRestoreDatabaseItem[]|null
+     * @var ProjectBackupRestoreDatabase[]|null
      */
-    private ?array $databaseRestore = null;
+    private ?array $databaseRestores = null;
 
     private ?ProjectBackupRestorePath $pathRestore = null;
 
@@ -55,11 +58,11 @@ class ProjectBackupRestore
     }
 
     /**
-     * @return ProjectBackupRestoreDatabaseItem[]|null
+     * @return ProjectBackupRestoreDatabase[]|null
      */
-    public function getDatabaseRestore(): ?array
+    public function getDatabaseRestores(): ?array
     {
-        return $this->databaseRestore ?? null;
+        return $this->databaseRestores ?? null;
     }
 
     public function getPathRestore(): ?ProjectBackupRestorePath
@@ -73,20 +76,20 @@ class ProjectBackupRestore
     }
 
     /**
-     * @param ProjectBackupRestoreDatabaseItem[] $databaseRestore
+     * @param ProjectBackupRestoreDatabase[] $databaseRestores
      */
-    public function withDatabaseRestore(array $databaseRestore): self
+    public function withDatabaseRestores(array $databaseRestores): self
     {
         $clone = clone $this;
-        $clone->databaseRestore = $databaseRestore;
+        $clone->databaseRestores = $databaseRestores;
 
         return $clone;
     }
 
-    public function withoutDatabaseRestore(): self
+    public function withoutDatabaseRestores(): self
     {
         $clone = clone $this;
-        unset($clone->databaseRestore);
+        unset($clone->databaseRestores);
 
         return $clone;
     }
@@ -130,9 +133,9 @@ class ProjectBackupRestore
             static::validateInput($input);
         }
 
-        $databaseRestore = null;
-        if (isset($input->{'databaseRestore'})) {
-            $databaseRestore = array_map(fn (array|object $item): ProjectBackupRestoreDatabaseItem => ProjectBackupRestoreDatabaseItem::buildFromInput($item, validate: $validate), $input->{'databaseRestore'});
+        $databaseRestores = null;
+        if (isset($input->{'databaseRestores'})) {
+            $databaseRestores = array_map(fn (array|object $i): ProjectBackupRestoreDatabase => ProjectBackupRestoreDatabase::buildFromInput($i, validate: $validate), $input->{'databaseRestores'});
         }
         $pathRestore = null;
         if (isset($input->{'pathRestore'})) {
@@ -141,7 +144,7 @@ class ProjectBackupRestore
         $phase = ProjectBackupRestorePhase::from($input->{'phase'});
 
         $obj = new self($phase);
-        $obj->databaseRestore = $databaseRestore;
+        $obj->databaseRestores = $databaseRestores;
         $obj->pathRestore = $pathRestore;
         return $obj;
     }
@@ -154,8 +157,8 @@ class ProjectBackupRestore
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->databaseRestore)) {
-            $output['databaseRestore'] = array_map(fn ($item): array => $item->toJson(), $this->databaseRestore);
+        if (isset($this->databaseRestores)) {
+            $output['databaseRestores'] = array_map(fn (ProjectBackupRestoreDatabase $i): array => $i->toJson(), $this->databaseRestores);
         }
         if (isset($this->pathRestore)) {
             $output['pathRestore'] = $this->pathRestore->toJson();

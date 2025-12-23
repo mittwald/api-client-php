@@ -167,7 +167,7 @@ interface BackupClient
      */
     public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse;
     /**
-     * Restore a ProjectBackup (path or database).
+     * Restore a ProjectBackup.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore
      * @throws GuzzleException
