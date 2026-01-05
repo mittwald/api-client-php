@@ -30,9 +30,6 @@ class ListProjectBackupsRequest
             'sortOrder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.backup.BackupSortOrder',
             ],
-            'runningRestoresOnly' => [
-                'type' => 'boolean',
-            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -59,8 +56,6 @@ class ListProjectBackupsRequest
     private ?bool $withExportsOnly = null;
 
     private ?BackupSortOrder $sortOrder = null;
-
-    private ?bool $runningRestoresOnly = null;
 
     private int $limit = 1000;
 
@@ -95,11 +90,6 @@ class ListProjectBackupsRequest
     public function getSortOrder(): ?BackupSortOrder
     {
         return $this->sortOrder ?? null;
-    }
-
-    public function getRunningRestoresOnly(): ?bool
-    {
-        return $this->runningRestoresOnly ?? null;
     }
 
     public function getLimit(): int
@@ -191,28 +181,6 @@ class ListProjectBackupsRequest
         return $clone;
     }
 
-    public function withRunningRestoresOnly(bool $runningRestoresOnly): self
-    {
-        $validator = new Validator();
-        $validator->validate($runningRestoresOnly, self::$internalValidationSchema['properties']['runningRestoresOnly']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->runningRestoresOnly = $runningRestoresOnly;
-
-        return $clone;
-    }
-
-    public function withoutRunningRestoresOnly(): self
-    {
-        $clone = clone $this;
-        unset($clone->runningRestoresOnly);
-
-        return $clone;
-    }
-
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -291,10 +259,6 @@ class ListProjectBackupsRequest
         if (isset($input->{'sortOrder'})) {
             $sortOrder = BackupSortOrder::from($input->{'sortOrder'});
         }
-        $runningRestoresOnly = null;
-        if (isset($input->{'runningRestoresOnly'})) {
-            $runningRestoresOnly = (bool)($input->{'runningRestoresOnly'});
-        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -312,7 +276,6 @@ class ListProjectBackupsRequest
         $obj->searchTerm = $searchTerm;
         $obj->withExportsOnly = $withExportsOnly;
         $obj->sortOrder = $sortOrder;
-        $obj->runningRestoresOnly = $runningRestoresOnly;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -336,9 +299,6 @@ class ListProjectBackupsRequest
         }
         if (isset($this->sortOrder)) {
             $output['sortOrder'] = $this->sortOrder->value;
-        }
-        if (isset($this->runningRestoresOnly)) {
-            $output['runningRestoresOnly'] = $this->runningRestoresOnly;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -414,9 +374,6 @@ class ListProjectBackupsRequest
         }
         if (isset($mapped['sortOrder'])) {
             $query['sortOrder'] = $mapped['sortOrder'];
-        }
-        if (isset($mapped['runningRestoresOnly'])) {
-            $query['runningRestoresOnly'] = $mapped['runningRestoresOnly'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

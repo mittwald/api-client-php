@@ -31,18 +31,19 @@ class ProjectBackupRestorePath
             'determinedTargetPath' => [
                 'type' => 'string',
             ],
-            'sourcePaths' => [
-                'items' => [
-                    'type' => 'string',
-                ],
-                'type' => 'array',
+            'phase' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.RestorePathPhase',
             ],
-            'targetRestorePath' => [
+            'sourcePath' => [
+                'type' => 'string',
+            ],
+            'targetPath' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'sourcePaths',
+            'phase',
+            'sourcePath',
             'determinedTargetPath',
             'clearTargetPath',
         ],
@@ -53,20 +54,17 @@ class ProjectBackupRestorePath
 
     private string $determinedTargetPath;
 
-    /**
-     * @var string[]
-     */
-    private array $sourcePaths;
+    private RestorePathPhase $phase;
 
-    private ?string $targetRestorePath = null;
+    private string $sourcePath;
 
-    /**
-     * @param string[] $sourcePaths
-     */
-    public function __construct(string $determinedTargetPath, array $sourcePaths)
+    private ?string $targetPath = null;
+
+    public function __construct(string $determinedTargetPath, RestorePathPhase $phase, string $sourcePath)
     {
         $this->determinedTargetPath = $determinedTargetPath;
-        $this->sourcePaths = $sourcePaths;
+        $this->phase = $phase;
+        $this->sourcePath = $sourcePath;
     }
 
     public function getClearTargetPath(): bool
@@ -79,17 +77,19 @@ class ProjectBackupRestorePath
         return $this->determinedTargetPath;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getSourcePaths(): array
+    public function getPhase(): RestorePathPhase
     {
-        return $this->sourcePaths;
+        return $this->phase;
     }
 
-    public function getTargetRestorePath(): ?string
+    public function getSourcePath(): string
     {
-        return $this->targetRestorePath ?? null;
+        return $this->sourcePath;
+    }
+
+    public function getTargetPath(): ?string
+    {
+        return $this->targetPath ?? null;
     }
 
     public function withClearTargetPath(bool $clearTargetPath): self
@@ -120,41 +120,46 @@ class ProjectBackupRestorePath
         return $clone;
     }
 
-    /**
-     * @param string[] $sourcePaths
-     */
-    public function withSourcePaths(array $sourcePaths): self
+    public function withPhase(RestorePathPhase $phase): self
+    {
+        $clone = clone $this;
+        $clone->phase = $phase;
+
+        return $clone;
+    }
+
+    public function withSourcePath(string $sourcePath): self
     {
         $validator = new Validator();
-        $validator->validate($sourcePaths, self::$internalValidationSchema['properties']['sourcePaths']);
+        $validator->validate($sourcePath, self::$internalValidationSchema['properties']['sourcePath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->sourcePaths = $sourcePaths;
+        $clone->sourcePath = $sourcePath;
 
         return $clone;
     }
 
-    public function withTargetRestorePath(string $targetRestorePath): self
+    public function withTargetPath(string $targetPath): self
     {
         $validator = new Validator();
-        $validator->validate($targetRestorePath, self::$internalValidationSchema['properties']['targetRestorePath']);
+        $validator->validate($targetPath, self::$internalValidationSchema['properties']['targetPath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->targetRestorePath = $targetRestorePath;
+        $clone->targetPath = $targetPath;
 
         return $clone;
     }
 
-    public function withoutTargetRestorePath(): self
+    public function withoutTargetPath(): self
     {
         $clone = clone $this;
-        unset($clone->targetRestorePath);
+        unset($clone->targetPath);
 
         return $clone;
     }
@@ -179,15 +184,16 @@ class ProjectBackupRestorePath
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
         $determinedTargetPath = $input->{'determinedTargetPath'};
-        $sourcePaths = $input->{'sourcePaths'};
-        $targetRestorePath = null;
-        if (isset($input->{'targetRestorePath'})) {
-            $targetRestorePath = $input->{'targetRestorePath'};
+        $phase = RestorePathPhase::from($input->{'phase'});
+        $sourcePath = $input->{'sourcePath'};
+        $targetPath = null;
+        if (isset($input->{'targetPath'})) {
+            $targetPath = $input->{'targetPath'};
         }
 
-        $obj = new self($determinedTargetPath, $sourcePaths);
+        $obj = new self($determinedTargetPath, $phase, $sourcePath);
         $obj->clearTargetPath = $clearTargetPath;
-        $obj->targetRestorePath = $targetRestorePath;
+        $obj->targetPath = $targetPath;
         return $obj;
     }
 
@@ -201,9 +207,10 @@ class ProjectBackupRestorePath
         $output = [];
         $output['clearTargetPath'] = $this->clearTargetPath;
         $output['determinedTargetPath'] = $this->determinedTargetPath;
-        $output['sourcePaths'] = $this->sourcePaths;
-        if (isset($this->targetRestorePath)) {
-            $output['targetRestorePath'] = $this->targetRestorePath;
+        $output['phase'] = $this->phase->value;
+        $output['sourcePath'] = $this->sourcePath;
+        if (isset($this->targetPath)) {
+            $output['targetPath'] = $this->targetPath;
         }
 
         return $output;
