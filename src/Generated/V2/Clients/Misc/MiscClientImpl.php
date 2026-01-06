@@ -8,7 +8,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
@@ -42,6 +46,28 @@ class MiscClientImpl implements MiscClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * List valid time zones.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/miscellaneous-list-time-zones
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MiscellaneousListTimeZonesRequest $request An object representing the request for this operation
+     * @return UntypedResponse OK
+     */
+    public function miscellaneousListTimeZones(MiscellaneousListTimeZonesRequest $request): UntypedResponse
+    {
+        $httpRequest = new Request(MiscellaneousListTimeZonesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UntypedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => MiscellaneousListTimeZonesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MiscellaneousListTimeZonesDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**

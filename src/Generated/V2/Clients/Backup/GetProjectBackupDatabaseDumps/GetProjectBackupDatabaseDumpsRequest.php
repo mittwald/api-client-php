@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobRequest
+class GetProjectBackupDatabaseDumpsRequest
 {
-    public const method = 'patch';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,103 +17,41 @@ class UpdateCronjobRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'projectBackupId' => [
                 'type' => 'string',
-            ],
-            'body' => [
-                'properties' => [
-                    'active' => [
-                        'type' => 'boolean',
-                    ],
-                    'concurrencyPolicy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy',
-                    ],
-                    'description' => [
-                        'example' => 'i am a cronjob',
-                        'type' => 'string',
-                    ],
-                    'destination' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand',
-                            ],
-                        ],
-                    ],
-                    'email' => [
-                        'format' => 'email',
-                        'type' => 'string',
-                    ],
-                    'failedExecutionAlertThreshold' => [
-                        'minimum' => 0,
-                        'type' => 'integer',
-                    ],
-                    'interval' => [
-                        'example' => '*/5 * * * *',
-                        'type' => 'string',
-                    ],
-                    'timeZone' => [
-                        'type' => 'string',
-                    ],
-                    'timeout' => [
-                        'maximum' => 86400,
-                        'minimum' => 1,
-                        'type' => 'integer',
-                    ],
-                ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'cronjobId',
-            'body',
+            'projectBackupId',
         ],
     ];
 
-    private string $cronjobId;
-
-    private UpdateCronjobRequestBody $body;
+    private string $projectBackupId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, UpdateCronjobRequestBody $body)
+    public function __construct(string $projectBackupId)
     {
-        $this->cronjobId = $cronjobId;
-        $this->body = $body;
+        $this->projectBackupId = $projectBackupId;
     }
 
-    public function getCronjobId(): string
+    public function getProjectBackupId(): string
     {
-        return $this->cronjobId;
+        return $this->projectBackupId;
     }
 
-    public function getBody(): UpdateCronjobRequestBody
-    {
-        return $this->body;
-    }
-
-    public function withCronjobId(string $cronjobId): self
+    public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    public function withBody(UpdateCronjobRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->projectBackupId = $projectBackupId;
 
         return $clone;
     }
@@ -123,20 +61,19 @@ class UpdateCronjobRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobRequest Created instance
+     * @return GetProjectBackupDatabaseDumpsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $body = UpdateCronjobRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectBackupId = $input->{'projectBackupId'};
 
-        $obj = new self($cronjobId, $body);
+        $obj = new self($projectBackupId);
 
         return $obj;
     }
@@ -149,8 +86,7 @@ class UpdateCronjobRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['body'] = ($this->body)->toJson();
+        $output['projectBackupId'] = $this->projectBackupId;
 
         return $output;
     }
@@ -181,7 +117,6 @@ class UpdateCronjobRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -196,8 +131,8 @@ class UpdateCronjobRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId;
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId . '/database-dumps';
     }
 
     /**
@@ -216,7 +151,6 @@ class UpdateCronjobRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

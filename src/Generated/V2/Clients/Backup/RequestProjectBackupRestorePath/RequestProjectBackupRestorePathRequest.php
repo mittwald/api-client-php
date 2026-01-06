@@ -6,7 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRes
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestorePathRequest;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestorePathRequestDeprecated;
 
 class RequestProjectBackupRestorePathRequest
 {
@@ -22,7 +22,7 @@ class RequestProjectBackupRestorePathRequest
                 'type' => 'string',
             ],
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequest',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequestDeprecated',
             ],
         ],
         'required' => [
@@ -33,13 +33,13 @@ class RequestProjectBackupRestorePathRequest
 
     private string $projectBackupId;
 
-    private ProjectBackupRestorePathRequest $body;
+    private ProjectBackupRestorePathRequestDeprecated $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId, ProjectBackupRestorePathRequest $body)
+    public function __construct(string $projectBackupId, ProjectBackupRestorePathRequestDeprecated $body)
     {
         $this->projectBackupId = $projectBackupId;
         $this->body = $body;
@@ -50,7 +50,7 @@ class RequestProjectBackupRestorePathRequest
         return $this->projectBackupId;
     }
 
-    public function getBody(): ProjectBackupRestorePathRequest
+    public function getBody(): ProjectBackupRestorePathRequestDeprecated
     {
         return $this->body;
     }
@@ -69,7 +69,7 @@ class RequestProjectBackupRestorePathRequest
         return $clone;
     }
 
-    public function withBody(ProjectBackupRestorePathRequest $body): self
+    public function withBody(ProjectBackupRestorePathRequestDeprecated $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -93,7 +93,7 @@ class RequestProjectBackupRestorePathRequest
         }
 
         $projectBackupId = $input->{'projectBackupId'};
-        $body = ProjectBackupRestorePathRequest::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ProjectBackupRestorePathRequestDeprecated::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($projectBackupId, $body);
 

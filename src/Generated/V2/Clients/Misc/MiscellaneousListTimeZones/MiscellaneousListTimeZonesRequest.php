@@ -2,51 +2,37 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateError;
-use Psr\Http\Message\ResponseInterface;
 
-class SslReplaceCertificateBadRequestResponse implements ResponseContainer
+class MiscellaneousListTimeZonesRequest
 {
+    public const method = 'get';
+
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateError',
-            ],
+
+        ],
+        'required' => [
+
         ],
     ];
 
-    private CertificateError $body;
+    private array $headers = [
 
-    private ResponseInterface|null $httpResponse = null;
+    ];
 
-    public function __construct(CertificateError $body)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->body = $body;
-    }
-
-    public function getBody(): CertificateError
-    {
-        return $this->body;
-    }
-
-    public function withBody(CertificateError $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
-
-        return $clone;
     }
 
     /**
@@ -54,19 +40,19 @@ class SslReplaceCertificateBadRequestResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return SslReplaceCertificateBadRequestResponse Created instance
+     * @return MiscellaneousListTimeZonesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): SslReplaceCertificateBadRequestResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): MiscellaneousListTimeZonesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CertificateError::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+
+        $obj = new self();
 
         return $obj;
     }
@@ -79,7 +65,7 @@ class SslReplaceCertificateBadRequestResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+
 
         return $output;
     }
@@ -112,16 +98,53 @@ class SslReplaceCertificateBadRequestResponse implements ResponseContainer
     {
     }
 
-    public static function fromResponse(ResponseInterface $httpResponse): self
+    /**
+     * Builds the URL for this request
+     *
+     * This method is used internally by the client to build the URL for this request.
+     * You should not need to call this method directly.
+     *
+     * @internal
+     * @return string The URL for this request
+     */
+    public function buildUrl(): string
     {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
+        $mapped = $this->toJson();
+        return '/v2/time-zones';
     }
 
-    public function getResponse(): ResponseInterface|null
+    /**
+     * Builds the request options for this request
+     *
+     * This method is used internally by the client to build the Guzzle request options
+     * for this request. You should not need to call this method directly.
+     *
+     * @internal
+     * @return array The Guzzle request options for this request
+     */
+    public function buildRequestOptions(): array
     {
-        return $this->httpResponse;
+        $mapped = $this->toJson();
+        $query = [];
+        return [
+            'query' => $query,
+            'headers' => $this->headers,
+        ];
+    }
+
+    /**
+     * Adds a header to this request
+     *
+     * You can use this method to add custom HTTP headers to the request.
+     *
+     * @param string $name The name of the header to add
+     * @param string|array $value The value of the header to add
+     * @return self A clone of this request with the header added
+     */
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
     }
 }

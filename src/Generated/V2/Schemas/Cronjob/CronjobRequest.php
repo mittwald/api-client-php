@@ -31,6 +31,9 @@ class CronjobRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'concurrencyPolicy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy',
+            ],
             'description' => [
                 'example' => 'i am a cronjob',
                 'type' => 'string',
@@ -57,6 +60,10 @@ class CronjobRequest
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'timeZone' => [
+                'example' => 'Europe/Berlin',
+                'type' => 'string',
+            ],
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
@@ -78,6 +85,8 @@ class CronjobRequest
 
     private string $appId;
 
+    private ?ConcurrencyPolicy $concurrencyPolicy = null;
+
     private string $description;
 
     private CronjobUrl|CronjobCommand $destination;
@@ -87,6 +96,8 @@ class CronjobRequest
     private ?int $failedExecutionAlertThreshold = null;
 
     private string $interval;
+
+    private ?string $timeZone = null;
 
     private int $timeout;
 
@@ -108,6 +119,11 @@ class CronjobRequest
     public function getAppId(): string
     {
         return $this->appId;
+    }
+
+    public function getConcurrencyPolicy(): ?ConcurrencyPolicy
+    {
+        return $this->concurrencyPolicy ?? null;
     }
 
     public function getDescription(): string
@@ -133,6 +149,11 @@ class CronjobRequest
     public function getInterval(): string
     {
         return $this->interval;
+    }
+
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone ?? null;
     }
 
     public function getTimeout(): int
@@ -164,6 +185,22 @@ class CronjobRequest
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withConcurrencyPolicy(ConcurrencyPolicy $concurrencyPolicy): self
+    {
+        $clone = clone $this;
+        $clone->concurrencyPolicy = $concurrencyPolicy;
+
+        return $clone;
+    }
+
+    public function withoutConcurrencyPolicy(): self
+    {
+        $clone = clone $this;
+        unset($clone->concurrencyPolicy);
 
         return $clone;
     }
@@ -248,6 +285,28 @@ class CronjobRequest
         return $clone;
     }
 
+    public function withTimeZone(string $timeZone): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeZone, self::$internalValidationSchema['properties']['timeZone']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeZone = $timeZone;
+
+        return $clone;
+    }
+
+    public function withoutTimeZone(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeZone);
+
+        return $clone;
+    }
+
     public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
@@ -279,6 +338,10 @@ class CronjobRequest
 
         $active = (bool)($input->{'active'});
         $appId = $input->{'appId'};
+        $concurrencyPolicy = null;
+        if (isset($input->{'concurrencyPolicy'})) {
+            $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
+        }
         $description = $input->{'description'};
         $destination = match (true) {
             CronjobUrl::validateInput($input->{'destination'}, true) => CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
@@ -294,11 +357,17 @@ class CronjobRequest
             $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
         }
         $interval = $input->{'interval'};
+        $timeZone = null;
+        if (isset($input->{'timeZone'})) {
+            $timeZone = $input->{'timeZone'};
+        }
         $timeout = (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
+        $obj->concurrencyPolicy = $concurrencyPolicy;
         $obj->email = $email;
         $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
+        $obj->timeZone = $timeZone;
         return $obj;
     }
 
@@ -312,6 +381,9 @@ class CronjobRequest
         $output = [];
         $output['active'] = $this->active;
         $output['appId'] = $this->appId;
+        if (isset($this->concurrencyPolicy)) {
+            $output['concurrencyPolicy'] = $this->concurrencyPolicy->value;
+        }
         $output['description'] = $this->description;
         $output['destination'] = match (true) {
             ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination->toJson(),
@@ -323,6 +395,9 @@ class CronjobRequest
             $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
         }
         $output['interval'] = $this->interval;
+        if (isset($this->timeZone)) {
+            $output['timeZone'] = $this->timeZone;
+        }
         $output['timeout'] = $this->timeout;
 
         return $output;

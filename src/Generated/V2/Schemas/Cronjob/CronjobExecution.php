@@ -56,6 +56,11 @@ class CronjobExecution
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'exitCode' => [
+                'example' => 0,
+                'format' => 'int32',
+                'type' => 'integer',
+            ],
             'id' => [
                 'example' => 'cron-bd26li-28027320',
                 'type' => 'string',
@@ -82,6 +87,9 @@ class CronjobExecution
             ],
             'successful' => [
                 'type' => 'boolean',
+            ],
+            'summary' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.StatusSummary',
             ],
             'triggeredBy' => [
                 'properties' => [
@@ -120,6 +128,8 @@ class CronjobExecution
      */
     private ?DateTime $executionStart = null;
 
+    private ?int $exitCode = null;
+
     private string $id;
 
     private ?string $logPath = null;
@@ -129,6 +139,8 @@ class CronjobExecution
     private CronjobExecutionStatus $status;
 
     private bool $successful;
+
+    private ?StatusSummary $summary = null;
 
     private ?CronjobExecutionTriggeredBy $triggeredBy = null;
 
@@ -176,6 +188,11 @@ class CronjobExecution
         return $this->executionStart ?? null;
     }
 
+    public function getExitCode(): ?int
+    {
+        return $this->exitCode ?? null;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -199,6 +216,11 @@ class CronjobExecution
     public function getSuccessful(): bool
     {
         return $this->successful;
+    }
+
+    public function getSummary(): ?StatusSummary
+    {
+        return $this->summary ?? null;
     }
 
     public function getTriggeredBy(): ?CronjobExecutionTriggeredBy
@@ -312,6 +334,28 @@ class CronjobExecution
         return $clone;
     }
 
+    public function withExitCode(int $exitCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($exitCode, self::$internalValidationSchema['properties']['exitCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->exitCode = $exitCode;
+
+        return $clone;
+    }
+
+    public function withoutExitCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->exitCode);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -386,6 +430,22 @@ class CronjobExecution
         return $clone;
     }
 
+    public function withSummary(StatusSummary $summary): self
+    {
+        $clone = clone $this;
+        $clone->summary = $summary;
+
+        return $clone;
+    }
+
+    public function withoutSummary(): self
+    {
+        $clone = clone $this;
+        unset($clone->summary);
+
+        return $clone;
+    }
+
     public function withTriggeredBy(CronjobExecutionTriggeredBy $triggeredBy): self
     {
         $clone = clone $this;
@@ -438,6 +498,10 @@ class CronjobExecution
         if (isset($input->{'executionStart'})) {
             $executionStart = new DateTime($input->{'executionStart'});
         }
+        $exitCode = null;
+        if (isset($input->{'exitCode'})) {
+            $exitCode = (int)($input->{'exitCode'});
+        }
         $id = $input->{'id'};
         $logPath = null;
         if (isset($input->{'logPath'})) {
@@ -449,6 +513,10 @@ class CronjobExecution
         }
         $status = CronjobExecutionStatus::from($input->{'status'});
         $successful = (bool)($input->{'successful'});
+        $summary = null;
+        if (isset($input->{'summary'})) {
+            $summary = StatusSummary::from($input->{'summary'});
+        }
         $triggeredBy = null;
         if (isset($input->{'triggeredBy'})) {
             $triggeredBy = CronjobExecutionTriggeredBy::buildFromInput($input->{'triggeredBy'}, validate: $validate);
@@ -460,8 +528,10 @@ class CronjobExecution
         $obj->end = $end;
         $obj->executionEnd = $executionEnd;
         $obj->executionStart = $executionStart;
+        $obj->exitCode = $exitCode;
         $obj->logPath = $logPath;
         $obj->start = $start;
+        $obj->summary = $summary;
         $obj->triggeredBy = $triggeredBy;
         return $obj;
     }
@@ -490,6 +560,9 @@ class CronjobExecution
         if (isset($this->executionStart)) {
             $output['executionStart'] = ($this->executionStart)->format(DateTime::ATOM);
         }
+        if (isset($this->exitCode)) {
+            $output['exitCode'] = $this->exitCode;
+        }
         $output['id'] = $this->id;
         if (isset($this->logPath)) {
             $output['logPath'] = $this->logPath;
@@ -499,6 +572,9 @@ class CronjobExecution
         }
         $output['status'] = ($this->status)->value;
         $output['successful'] = $this->successful;
+        if (isset($this->summary)) {
+            $output['summary'] = $this->summary->value;
+        }
         if (isset($this->triggeredBy)) {
             $output['triggeredBy'] = ($this->triggeredBy)->toJson();
         }
