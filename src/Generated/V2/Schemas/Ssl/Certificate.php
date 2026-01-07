@@ -50,7 +50,7 @@ class Certificate
             ],
             'dnsCertSpec' => [
                 'properties' => [
-                    'cNameTarget' => [
+                    'cnameTarget' => [
                         'type' => 'string',
                     ],
                 ],

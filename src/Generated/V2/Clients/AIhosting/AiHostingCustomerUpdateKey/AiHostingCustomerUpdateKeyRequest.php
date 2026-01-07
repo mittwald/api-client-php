@@ -196,7 +196,7 @@ class AiHostingCustomerUpdateKeyRequest
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
         $keyId = urlencode($mapped['keyId']);
-        return '/v2/customers/' . $customerId . '/ai-hosting/keys/' . $keyId;
+        return '/v2/customers/' . $customerId . '/ai-hosting-keys/' . $keyId;
     }
 
     /**

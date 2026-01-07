@@ -82,14 +82,13 @@ class CronjobExecution
                     'Running',
                     'AbortedByUser',
                     'TimedOut',
+                    'Error',
+                    'Suspended',
                 ],
                 'type' => 'string',
             ],
             'successful' => [
                 'type' => 'boolean',
-            ],
-            'summary' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.StatusSummary',
             ],
             'triggeredBy' => [
                 'properties' => [
@@ -139,8 +138,6 @@ class CronjobExecution
     private CronjobExecutionStatus $status;
 
     private bool $successful;
-
-    private ?StatusSummary $summary = null;
 
     private ?CronjobExecutionTriggeredBy $triggeredBy = null;
 
@@ -216,11 +213,6 @@ class CronjobExecution
     public function getSuccessful(): bool
     {
         return $this->successful;
-    }
-
-    public function getSummary(): ?StatusSummary
-    {
-        return $this->summary ?? null;
     }
 
     public function getTriggeredBy(): ?CronjobExecutionTriggeredBy
@@ -430,22 +422,6 @@ class CronjobExecution
         return $clone;
     }
 
-    public function withSummary(StatusSummary $summary): self
-    {
-        $clone = clone $this;
-        $clone->summary = $summary;
-
-        return $clone;
-    }
-
-    public function withoutSummary(): self
-    {
-        $clone = clone $this;
-        unset($clone->summary);
-
-        return $clone;
-    }
-
     public function withTriggeredBy(CronjobExecutionTriggeredBy $triggeredBy): self
     {
         $clone = clone $this;
@@ -513,10 +489,6 @@ class CronjobExecution
         }
         $status = CronjobExecutionStatus::from($input->{'status'});
         $successful = (bool)($input->{'successful'});
-        $summary = null;
-        if (isset($input->{'summary'})) {
-            $summary = StatusSummary::from($input->{'summary'});
-        }
         $triggeredBy = null;
         if (isset($input->{'triggeredBy'})) {
             $triggeredBy = CronjobExecutionTriggeredBy::buildFromInput($input->{'triggeredBy'}, validate: $validate);
@@ -531,7 +503,6 @@ class CronjobExecution
         $obj->exitCode = $exitCode;
         $obj->logPath = $logPath;
         $obj->start = $start;
-        $obj->summary = $summary;
         $obj->triggeredBy = $triggeredBy;
         return $obj;
     }
@@ -572,9 +543,6 @@ class CronjobExecution
         }
         $output['status'] = ($this->status)->value;
         $output['successful'] = $this->successful;
-        if (isset($this->summary)) {
-            $output['summary'] = $this->summary->value;
-        }
         if (isset($this->triggeredBy)) {
             $output['triggeredBy'] = ($this->triggeredBy)->toJson();
         }

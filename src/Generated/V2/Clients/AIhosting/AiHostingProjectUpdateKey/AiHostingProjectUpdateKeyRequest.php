@@ -193,7 +193,7 @@ class AiHostingProjectUpdateKeyRequest
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         $keyId = urlencode($mapped['keyId']);
-        return '/v2/projects/' . $projectId . '/ai-hosting/keys/' . $keyId;
+        return '/v2/projects/' . $projectId . '/ai-hosting-keys/' . $keyId;
     }
 
     /**

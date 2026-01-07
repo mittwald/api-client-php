@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AbortExecutionTooManyRequestsResponseBody
+class DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class AbortExecutionTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AbortExecutionTooManyRequestsResponseBody Created instance
+     * @return DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

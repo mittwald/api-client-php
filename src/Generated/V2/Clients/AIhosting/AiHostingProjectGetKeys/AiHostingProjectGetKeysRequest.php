@@ -132,7 +132,7 @@ class AiHostingProjectGetKeysRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/ai-hosting/keys';
+        return '/v2/projects/' . $projectId . '/ai-hosting-keys';
     }
 
     /**

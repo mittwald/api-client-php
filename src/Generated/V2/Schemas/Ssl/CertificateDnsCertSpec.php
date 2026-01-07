@@ -24,14 +24,14 @@ class CertificateDnsCertSpec
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'cNameTarget' => [
+            'cnameTarget' => [
                 'type' => 'string',
             ],
         ],
         'type' => 'object',
     ];
 
-    private ?string $cNameTarget = null;
+    private ?string $cnameTarget = null;
 
     /**
      *
@@ -40,29 +40,29 @@ class CertificateDnsCertSpec
     {
     }
 
-    public function getCNameTarget(): ?string
+    public function getCnameTarget(): ?string
     {
-        return $this->cNameTarget ?? null;
+        return $this->cnameTarget ?? null;
     }
 
-    public function withCNameTarget(string $cNameTarget): self
+    public function withCnameTarget(string $cnameTarget): self
     {
         $validator = new Validator();
-        $validator->validate($cNameTarget, self::$internalValidationSchema['properties']['cNameTarget']);
+        $validator->validate($cnameTarget, self::$internalValidationSchema['properties']['cnameTarget']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cNameTarget = $cNameTarget;
+        $clone->cnameTarget = $cnameTarget;
 
         return $clone;
     }
 
-    public function withoutCNameTarget(): self
+    public function withoutCnameTarget(): self
     {
         $clone = clone $this;
-        unset($clone->cNameTarget);
+        unset($clone->cnameTarget);
 
         return $clone;
     }
@@ -82,13 +82,13 @@ class CertificateDnsCertSpec
             static::validateInput($input);
         }
 
-        $cNameTarget = null;
-        if (isset($input->{'cNameTarget'})) {
-            $cNameTarget = $input->{'cNameTarget'};
+        $cnameTarget = null;
+        if (isset($input->{'cnameTarget'})) {
+            $cnameTarget = $input->{'cnameTarget'};
         }
 
         $obj = new self();
-        $obj->cNameTarget = $cNameTarget;
+        $obj->cnameTarget = $cnameTarget;
         return $obj;
     }
 
@@ -100,8 +100,8 @@ class CertificateDnsCertSpec
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->cNameTarget)) {
-            $output['cNameTarget'] = $this->cNameTarget;
+        if (isset($this->cnameTarget)) {
+            $output['cnameTarget'] = $this->cnameTarget;
         }
 
         return $output;
