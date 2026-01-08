@@ -30,7 +30,6 @@ class CreateMySqlUserWithDatabase
             'accessLevel' => [
                 'enum' => [
                     'full',
-                    'readonly',
                 ],
                 'type' => 'string',
             ],

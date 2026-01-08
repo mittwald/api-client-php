@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobRequest
+class DeprecatedCronjobAbortExecutionRequest
 {
-    public const method = 'patch';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -20,70 +20,29 @@ class UpdateCronjobRequest
             'cronjobId' => [
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'active' => [
-                        'type' => 'boolean',
-                    ],
-                    'concurrencyPolicy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy',
-                    ],
-                    'description' => [
-                        'example' => 'i am a cronjob',
-                        'type' => 'string',
-                    ],
-                    'destination' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand',
-                            ],
-                        ],
-                    ],
-                    'email' => [
-                        'format' => 'email',
-                        'type' => 'string',
-                    ],
-                    'failedExecutionAlertThreshold' => [
-                        'minimum' => 0,
-                        'type' => 'integer',
-                    ],
-                    'interval' => [
-                        'example' => '*/5 * * * *',
-                        'type' => 'string',
-                    ],
-                    'timeZone' => [
-                        'type' => 'string',
-                    ],
-                    'timeout' => [
-                        'maximum' => 86400,
-                        'minimum' => 1,
-                        'type' => 'integer',
-                    ],
-                ],
-                'type' => 'object',
+            'executionId' => [
+                'example' => 'cron-bd26li-28027320',
+                'type' => 'string',
             ],
         ],
         'required' => [
             'cronjobId',
-            'body',
+            'executionId',
         ],
     ];
 
     private string $cronjobId;
 
-    private UpdateCronjobRequestBody $body;
+    private string $executionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, UpdateCronjobRequestBody $body)
+    public function __construct(string $cronjobId, string $executionId)
     {
         $this->cronjobId = $cronjobId;
-        $this->body = $body;
+        $this->executionId = $executionId;
     }
 
     public function getCronjobId(): string
@@ -91,9 +50,9 @@ class UpdateCronjobRequest
         return $this->cronjobId;
     }
 
-    public function getBody(): UpdateCronjobRequestBody
+    public function getExecutionId(): string
     {
-        return $this->body;
+        return $this->executionId;
     }
 
     public function withCronjobId(string $cronjobId): self
@@ -110,10 +69,16 @@ class UpdateCronjobRequest
         return $clone;
     }
 
-    public function withBody(UpdateCronjobRequestBody $body): self
+    public function withExecutionId(string $executionId): self
     {
+        $validator = new Validator();
+        $validator->validate($executionId, self::$internalValidationSchema['properties']['executionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->executionId = $executionId;
 
         return $clone;
     }
@@ -123,10 +88,10 @@ class UpdateCronjobRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobRequest Created instance
+     * @return DeprecatedCronjobAbortExecutionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -134,9 +99,9 @@ class UpdateCronjobRequest
         }
 
         $cronjobId = $input->{'cronjobId'};
-        $body = UpdateCronjobRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $executionId = $input->{'executionId'};
 
-        $obj = new self($cronjobId, $body);
+        $obj = new self($cronjobId, $executionId);
 
         return $obj;
     }
@@ -150,7 +115,7 @@ class UpdateCronjobRequest
     {
         $output = [];
         $output['cronjobId'] = $this->cronjobId;
-        $output['body'] = ($this->body)->toJson();
+        $output['executionId'] = $this->executionId;
 
         return $output;
     }
@@ -181,7 +146,6 @@ class UpdateCronjobRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -197,7 +161,8 @@ class UpdateCronjobRequest
     {
         $mapped = $this->toJson();
         $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId;
+        $executionId = urlencode($mapped['executionId']);
+        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
     }
 
     /**
@@ -216,7 +181,6 @@ class UpdateCronjobRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

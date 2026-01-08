@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
@@ -41,6 +43,16 @@ interface MiscClient
      * @return GetLlmModelsExperimentalOKResponse List of currently active llm models.
      */
     public function getLlmModelsExperimental(GetLlmModelsExperimentalRequest $request): GetLlmModelsExperimentalOKResponse;
+    /**
+     * List valid time zones.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/miscellaneous-list-time-zones
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MiscellaneousListTimeZonesRequest $request An object representing the request for this operation
+     * @return UntypedResponse OK
+     */
+    public function miscellaneousListTimeZones(MiscellaneousListTimeZonesRequest $request): UntypedResponse;
     /**
      * Obtain a service token.
      *

@@ -56,6 +56,11 @@ class CronjobExecution
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'exitCode' => [
+                'example' => 0,
+                'format' => 'int32',
+                'type' => 'integer',
+            ],
             'id' => [
                 'example' => 'cron-bd26li-28027320',
                 'type' => 'string',
@@ -120,6 +125,8 @@ class CronjobExecution
      */
     private ?DateTime $executionStart = null;
 
+    private ?int $exitCode = null;
+
     private string $id;
 
     private ?string $logPath = null;
@@ -174,6 +181,11 @@ class CronjobExecution
     public function getExecutionStart(): ?DateTime
     {
         return $this->executionStart ?? null;
+    }
+
+    public function getExitCode(): ?int
+    {
+        return $this->exitCode ?? null;
     }
 
     public function getId(): string
@@ -312,6 +324,28 @@ class CronjobExecution
         return $clone;
     }
 
+    public function withExitCode(int $exitCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($exitCode, self::$internalValidationSchema['properties']['exitCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->exitCode = $exitCode;
+
+        return $clone;
+    }
+
+    public function withoutExitCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->exitCode);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -438,6 +472,10 @@ class CronjobExecution
         if (isset($input->{'executionStart'})) {
             $executionStart = new DateTime($input->{'executionStart'});
         }
+        $exitCode = null;
+        if (isset($input->{'exitCode'})) {
+            $exitCode = (int)($input->{'exitCode'});
+        }
         $id = $input->{'id'};
         $logPath = null;
         if (isset($input->{'logPath'})) {
@@ -460,6 +498,7 @@ class CronjobExecution
         $obj->end = $end;
         $obj->executionEnd = $executionEnd;
         $obj->executionStart = $executionStart;
+        $obj->exitCode = $exitCode;
         $obj->logPath = $logPath;
         $obj->start = $start;
         $obj->triggeredBy = $triggeredBy;
@@ -489,6 +528,9 @@ class CronjobExecution
         }
         if (isset($this->executionStart)) {
             $output['executionStart'] = ($this->executionStart)->format(DateTime::ATOM);
+        }
+        if (isset($this->exitCode)) {
+            $output['exitCode'] = $this->exitCode;
         }
         $output['id'] = $this->id;
         if (isset($this->logPath)) {

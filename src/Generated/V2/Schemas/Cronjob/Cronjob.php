@@ -32,6 +32,9 @@ class Cronjob
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'concurrencyPolicy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy',
+            ],
             'createdAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -81,6 +84,9 @@ class Cronjob
                 'example' => 'cron-bd26li',
                 'type' => 'string',
             ],
+            'timeZone' => [
+                'type' => 'string',
+            ],
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
@@ -111,6 +117,8 @@ class Cronjob
 
     private string $appId;
 
+    private ?ConcurrencyPolicy $concurrencyPolicy = null;
+
     private DateTime $createdAt;
 
     private string $description;
@@ -132,6 +140,8 @@ class Cronjob
     private ?string $projectId = null;
 
     private string $shortId;
+
+    private ?string $timeZone = null;
 
     private int $timeout;
 
@@ -160,6 +170,11 @@ class Cronjob
     public function getAppId(): string
     {
         return $this->appId;
+    }
+
+    public function getConcurrencyPolicy(): ?ConcurrencyPolicy
+    {
+        return $this->concurrencyPolicy ?? null;
     }
 
     public function getCreatedAt(): DateTime
@@ -217,6 +232,11 @@ class Cronjob
         return $this->shortId;
     }
 
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone ?? null;
+    }
+
     public function getTimeout(): int
     {
         return $this->timeout;
@@ -251,6 +271,22 @@ class Cronjob
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withConcurrencyPolicy(ConcurrencyPolicy $concurrencyPolicy): self
+    {
+        $clone = clone $this;
+        $clone->concurrencyPolicy = $concurrencyPolicy;
+
+        return $clone;
+    }
+
+    public function withoutConcurrencyPolicy(): self
+    {
+        $clone = clone $this;
+        unset($clone->concurrencyPolicy);
 
         return $clone;
     }
@@ -417,6 +453,28 @@ class Cronjob
         return $clone;
     }
 
+    public function withTimeZone(string $timeZone): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeZone, self::$internalValidationSchema['properties']['timeZone']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeZone = $timeZone;
+
+        return $clone;
+    }
+
+    public function withoutTimeZone(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeZone);
+
+        return $clone;
+    }
+
     public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
@@ -456,6 +514,10 @@ class Cronjob
 
         $active = (bool)($input->{'active'});
         $appId = $input->{'appId'};
+        $concurrencyPolicy = null;
+        if (isset($input->{'concurrencyPolicy'})) {
+            $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
+        }
         $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $destination = match (true) {
@@ -483,14 +545,20 @@ class Cronjob
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
+        $timeZone = null;
+        if (isset($input->{'timeZone'})) {
+            $timeZone = $input->{'timeZone'};
+        }
         $timeout = (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($active, $appId, $createdAt, $description, $destination, $failedExecutionAlertThreshold, $id, $interval, $shortId, $timeout, $updatedAt);
+        $obj->concurrencyPolicy = $concurrencyPolicy;
         $obj->email = $email;
         $obj->latestExecution = $latestExecution;
         $obj->nextExecutionTime = $nextExecutionTime;
         $obj->projectId = $projectId;
+        $obj->timeZone = $timeZone;
         return $obj;
     }
 
@@ -504,6 +572,9 @@ class Cronjob
         $output = [];
         $output['active'] = $this->active;
         $output['appId'] = $this->appId;
+        if (isset($this->concurrencyPolicy)) {
+            $output['concurrencyPolicy'] = $this->concurrencyPolicy->value;
+        }
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         $output['destination'] = match (true) {
@@ -525,6 +596,9 @@ class Cronjob
             $output['projectId'] = $this->projectId;
         }
         $output['shortId'] = $this->shortId;
+        if (isset($this->timeZone)) {
+            $output['timeZone'] = $this->timeZone;
+        }
         $output['timeout'] = $this->timeout;
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 

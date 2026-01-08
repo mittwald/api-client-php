@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\ConcurrencyPolicy;
 use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand;
 use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl;
 
@@ -18,6 +19,9 @@ class UpdateCronjobRequestBody
         'properties' => [
             'active' => [
                 'type' => 'boolean',
+            ],
+            'concurrencyPolicy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy',
             ],
             'description' => [
                 'example' => 'i am a cronjob',
@@ -45,6 +49,9 @@ class UpdateCronjobRequestBody
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'timeZone' => [
+                'type' => 'string',
+            ],
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
@@ -56,6 +63,8 @@ class UpdateCronjobRequestBody
 
     private ?bool $active = null;
 
+    private ?ConcurrencyPolicy $concurrencyPolicy = null;
+
     private ?string $description = null;
 
     private CronjobUrl|CronjobCommand|null $destination = null;
@@ -65,6 +74,8 @@ class UpdateCronjobRequestBody
     private ?int $failedExecutionAlertThreshold = null;
 
     private ?string $interval = null;
+
+    private ?string $timeZone = null;
 
     private ?int $timeout = null;
 
@@ -78,6 +89,11 @@ class UpdateCronjobRequestBody
     public function getActive(): ?bool
     {
         return $this->active ?? null;
+    }
+
+    public function getConcurrencyPolicy(): ?ConcurrencyPolicy
+    {
+        return $this->concurrencyPolicy ?? null;
     }
 
     public function getDescription(): ?string
@@ -105,6 +121,11 @@ class UpdateCronjobRequestBody
         return $this->interval ?? null;
     }
 
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone ?? null;
+    }
+
     public function getTimeout(): ?int
     {
         return $this->timeout ?? null;
@@ -128,6 +149,22 @@ class UpdateCronjobRequestBody
     {
         $clone = clone $this;
         unset($clone->active);
+
+        return $clone;
+    }
+
+    public function withConcurrencyPolicy(ConcurrencyPolicy $concurrencyPolicy): self
+    {
+        $clone = clone $this;
+        $clone->concurrencyPolicy = $concurrencyPolicy;
+
+        return $clone;
+    }
+
+    public function withoutConcurrencyPolicy(): self
+    {
+        $clone = clone $this;
+        unset($clone->concurrencyPolicy);
 
         return $clone;
     }
@@ -236,6 +273,28 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
+    public function withTimeZone(string $timeZone): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeZone, self::$internalValidationSchema['properties']['timeZone']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeZone = $timeZone;
+
+        return $clone;
+    }
+
+    public function withoutTimeZone(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeZone);
+
+        return $clone;
+    }
+
     public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
@@ -277,6 +336,10 @@ class UpdateCronjobRequestBody
         if (isset($input->{'active'})) {
             $active = (bool)($input->{'active'});
         }
+        $concurrencyPolicy = null;
+        if (isset($input->{'concurrencyPolicy'})) {
+            $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -301,6 +364,10 @@ class UpdateCronjobRequestBody
         if (isset($input->{'interval'})) {
             $interval = $input->{'interval'};
         }
+        $timeZone = null;
+        if (isset($input->{'timeZone'})) {
+            $timeZone = $input->{'timeZone'};
+        }
         $timeout = null;
         if (isset($input->{'timeout'})) {
             $timeout = (int)($input->{'timeout'});
@@ -308,11 +375,13 @@ class UpdateCronjobRequestBody
 
         $obj = new self();
         $obj->active = $active;
+        $obj->concurrencyPolicy = $concurrencyPolicy;
         $obj->description = $description;
         $obj->destination = $destination;
         $obj->email = $email;
         $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         $obj->interval = $interval;
+        $obj->timeZone = $timeZone;
         $obj->timeout = $timeout;
         return $obj;
     }
@@ -327,6 +396,9 @@ class UpdateCronjobRequestBody
         $output = [];
         if (isset($this->active)) {
             $output['active'] = $this->active;
+        }
+        if (isset($this->concurrencyPolicy)) {
+            $output['concurrencyPolicy'] = $this->concurrencyPolicy->value;
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;
@@ -344,6 +416,9 @@ class UpdateCronjobRequestBody
         }
         if (isset($this->interval)) {
             $output['interval'] = $this->interval;
+        }
+        if (isset($this->timeZone)) {
+            $output['timeZone'] = $this->timeZone;
         }
         if (isset($this->timeout)) {
             $output['timeout'] = $this->timeout;

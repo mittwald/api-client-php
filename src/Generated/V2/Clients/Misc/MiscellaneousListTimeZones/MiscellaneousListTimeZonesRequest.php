@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AbortExecutionRequest
+class MiscellaneousListTimeZonesRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,70 +17,22 @@ class AbortExecutionRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
-                'type' => 'string',
-            ],
-            'executionId' => [
-                'example' => 'cron-bd26li-28027320',
-                'type' => 'string',
-            ],
+
         ],
         'required' => [
-            'cronjobId',
-            'executionId',
+
         ],
     ];
-
-    private string $cronjobId;
-
-    private string $executionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, string $executionId)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->cronjobId = $cronjobId;
-        $this->executionId = $executionId;
-    }
-
-    public function getCronjobId(): string
-    {
-        return $this->cronjobId;
-    }
-
-    public function getExecutionId(): string
-    {
-        return $this->executionId;
-    }
-
-    public function withCronjobId(string $cronjobId): self
-    {
-        $validator = new Validator();
-        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    public function withExecutionId(string $executionId): self
-    {
-        $validator = new Validator();
-        $validator->validate($executionId, self::$internalValidationSchema['properties']['executionId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->executionId = $executionId;
-
-        return $clone;
     }
 
     /**
@@ -88,20 +40,19 @@ class AbortExecutionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AbortExecutionRequest Created instance
+     * @return MiscellaneousListTimeZonesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): MiscellaneousListTimeZonesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $executionId = $input->{'executionId'};
 
-        $obj = new self($cronjobId, $executionId);
+
+        $obj = new self();
 
         return $obj;
     }
@@ -114,8 +65,7 @@ class AbortExecutionRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['executionId'] = $this->executionId;
+
 
         return $output;
     }
@@ -160,9 +110,7 @@ class AbortExecutionRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        $executionId = urlencode($mapped['executionId']);
-        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
+        return '/v2/time-zones';
     }
 
     /**
