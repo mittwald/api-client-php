@@ -82,8 +82,6 @@ class CronjobExecution
                     'Running',
                     'AbortedByUser',
                     'TimedOut',
-                    'Error',
-                    'Suspended',
                 ],
                 'type' => 'string',
             ],

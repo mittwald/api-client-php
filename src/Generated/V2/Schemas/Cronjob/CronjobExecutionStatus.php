@@ -13,6 +13,4 @@ enum CronjobExecutionStatus: string
     case Running = 'Running';
     case AbortedByUser = 'AbortedByUser';
     case TimedOut = 'TimedOut';
-    case Error = 'Error';
-    case Suspended = 'Suspended';
 }
