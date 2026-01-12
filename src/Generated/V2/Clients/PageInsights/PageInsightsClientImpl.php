@@ -30,6 +30,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStr
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStracePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceTooManyRequestsResponse;
 
@@ -145,6 +146,7 @@ class PageInsightsClientImpl implements PageInsightsClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PageinsightsScheduleStraceBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsScheduleStraceForbiddenResponse::fromResponse($httpResponse),
+            412 => PageinsightsScheduleStracePreconditionFailedResponse::fromResponse($httpResponse),
             429 => PageinsightsScheduleStraceTooManyRequestsResponse::fromResponse($httpResponse),
             default => PageinsightsScheduleStraceDefaultResponse::fromResponse($httpResponse),
         });
