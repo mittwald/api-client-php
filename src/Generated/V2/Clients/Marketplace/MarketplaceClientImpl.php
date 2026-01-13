@@ -871,7 +871,7 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionConsentToExtensionScopesRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse The scopes have been applied.
      */
     public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): EmptyResponse
     {
