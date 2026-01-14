@@ -7,8 +7,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
@@ -33,16 +31,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\Verif
  */
 interface MiscClient
 {
-    /**
-     * Get a list of currently active llm models.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/misc-get-llm-models-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmModelsExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmModelsExperimentalOKResponse List of currently active llm models.
-     */
-    public function getLlmModelsExperimental(GetLlmModelsExperimentalRequest $request): GetLlmModelsExperimentalOKResponse;
     /**
      * List valid time zones.
      *

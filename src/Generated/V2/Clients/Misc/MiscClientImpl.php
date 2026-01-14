@@ -10,13 +10,6 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\GetLlmModelsExperimental\GetLlmModelsExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesTooManyRequestsResponse;
@@ -57,31 +50,6 @@ class MiscClientImpl implements MiscClient
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Get a list of currently active llm models.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/misc-get-llm-models-experimental
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetLlmModelsExperimentalRequest $request An object representing the request for this operation
-     * @return GetLlmModelsExperimentalOKResponse List of currently active llm models.
-     */
-    public function getLlmModelsExperimental(GetLlmModelsExperimentalRequest $request): GetLlmModelsExperimentalOKResponse
-    {
-        $httpRequest = new Request(GetLlmModelsExperimentalRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetLlmModelsExperimentalOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetLlmModelsExperimentalBadRequestResponse::fromResponse($httpResponse),
-            403 => GetLlmModelsExperimentalForbiddenResponse::fromResponse($httpResponse),
-            404 => GetLlmModelsExperimentalNotFoundResponse::fromResponse($httpResponse),
-            429 => GetLlmModelsExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetLlmModelsExperimentalDefaultResponse::fromResponse($httpResponse),
-        });
     }
 
     /**
