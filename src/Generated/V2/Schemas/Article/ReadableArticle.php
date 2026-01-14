@@ -100,11 +100,12 @@ class ReadableArticle
                 'type' => 'string',
             ],
             'orderable' => [
+                'description' => 'Only Articles with the value \'full\' can be ordered by everyone. Forbidden Articles are not allowed to be ordered. Internal Articles have to be ordered by a mittwald employee. Beta testing Articles can be ordered but maybe feature incomplete. Deprecated Articles are not orderable anymore.',
                 'enum' => [
+                    'full',
                     'forbidden',
                     'internal',
                     'beta_testing',
-                    'full',
                     'deprecated',
                 ],
                 'type' => 'string',
@@ -172,6 +173,9 @@ class ReadableArticle
 
     private string $name;
 
+    /**
+     * Only Articles with the value 'full' can be ordered by everyone. Forbidden Articles are not allowed to be ordered. Internal Articles have to be ordered by a mittwald employee. Beta testing Articles can be ordered but maybe feature incomplete. Deprecated Articles are not orderable anymore.
+     */
     private ReadableArticleOrderable $orderable;
 
     /**
