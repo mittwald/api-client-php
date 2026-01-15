@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingProjectGetU
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\TariffUsage;
+use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\PlanUsage;
 
 class AiHostingProjectGetUsageOKResponseBody
 {
@@ -17,7 +17,7 @@ class AiHostingProjectGetUsageOKResponseBody
     private static array $internalValidationSchema = [
         'properties' => [
             'keys' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
             ],
             'nextTokenReset' => [
                 'format' => 'date-time',
@@ -34,19 +34,19 @@ class AiHostingProjectGetUsageOKResponseBody
         'type' => 'object',
     ];
 
-    private TariffUsage $keys;
+    private PlanUsage $keys;
 
     private ?DateTime $nextTokenReset = null;
 
     private string $projectId;
 
-    public function __construct(TariffUsage $keys, string $projectId)
+    public function __construct(PlanUsage $keys, string $projectId)
     {
         $this->keys = $keys;
         $this->projectId = $projectId;
     }
 
-    public function getKeys(): TariffUsage
+    public function getKeys(): PlanUsage
     {
         return $this->keys;
     }
@@ -61,7 +61,7 @@ class AiHostingProjectGetUsageOKResponseBody
         return $this->projectId;
     }
 
-    public function withKeys(TariffUsage $keys): self
+    public function withKeys(PlanUsage $keys): self
     {
         $clone = clone $this;
         $clone->keys = $keys;
@@ -114,7 +114,7 @@ class AiHostingProjectGetUsageOKResponseBody
             static::validateInput($input);
         }
 
-        $keys = TariffUsage::buildFromInput($input->{'keys'}, validate: $validate);
+        $keys = PlanUsage::buildFromInput($input->{'keys'}, validate: $validate);
         $nextTokenReset = null;
         if (isset($input->{'nextTokenReset'})) {
             $nextTokenReset = new DateTime($input->{'nextTokenReset'});

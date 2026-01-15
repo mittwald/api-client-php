@@ -23,7 +23,7 @@ class AiHostingProjectGetUsageOKResponse implements ResponseContainer
             'body' => [
                 'properties' => [
                     'keys' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffUsage',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
                     ],
                     'nextTokenReset' => [
                         'format' => 'date-time',

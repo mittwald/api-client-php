@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AiHostingCustomerGet
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\TariffOptions;
+use Mittwald\ApiClient\Generated\V2\Schemas\Aihosting\PlanOptions;
 use Psr\Http\Message\ResponseInterface;
 
 class AiHostingCustomerGetUsageOKResponse implements ResponseContainer
@@ -22,26 +22,26 @@ class AiHostingCustomerGetUsageOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.TariffOptions',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanOptions',
             ],
         ],
     ];
 
-    private TariffOptions $body;
+    private PlanOptions $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(TariffOptions $body)
+    public function __construct(PlanOptions $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): TariffOptions
+    public function getBody(): PlanOptions
     {
         return $this->body;
     }
 
-    public function withBody(TariffOptions $body): self
+    public function withBody(PlanOptions $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,7 +64,7 @@ class AiHostingCustomerGetUsageOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = TariffOptions::buildFromInput($input->{'body'}, validate: $validate);
+        $body = PlanOptions::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

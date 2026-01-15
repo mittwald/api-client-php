@@ -89,13 +89,13 @@ interface AIhostingClient
      */
     public function aiHostingCustomerGetKeys(AiHostingCustomerGetKeysRequest $request): AiHostingCustomerGetKeysOKResponse;
     /**
-     * Get ai hosting tariff and usages of a customer.
+     * Get ai hosting plan and usages of a customer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AiHostingCustomerGetUsageRequest $request An object representing the request for this operation
-     * @return AiHostingCustomerGetUsageOKResponse The customer usage and tariff.
+     * @return AiHostingCustomerGetUsageOKResponse The customer usage and plan.
      */
     public function aiHostingCustomerGetUsage(AiHostingCustomerGetUsageRequest $request): AiHostingCustomerGetUsageOKResponse;
     /**
@@ -159,13 +159,13 @@ interface AIhostingClient
      */
     public function aiHostingProjectGetKeys(AiHostingProjectGetKeysRequest $request): AiHostingProjectGetKeysOKResponse;
     /**
-     * Get ai hosting tariff and usages of a project. Same as the customer route, but less details.
+     * Get ai hosting plan and usages of a project. Same as the customer route, but less details.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AiHostingProjectGetUsageRequest $request An object representing the request for this operation
-     * @return AiHostingProjectGetUsageOKResponse The project usage and tariff.
+     * @return AiHostingProjectGetUsageOKResponse The project usage and plan.
      */
     public function aiHostingProjectGetUsage(AiHostingProjectGetUsageRequest $request): AiHostingProjectGetUsageOKResponse;
     /**
