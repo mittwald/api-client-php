@@ -24,7 +24,13 @@ class TokenUsage
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'planLimit' => [
+                'format' => 'int64',
+                'minimum' => -1,
+                'type' => 'integer',
+            ],
             'tariffLimit' => [
+                'deprecated' => true,
                 'format' => 'int64',
                 'minimum' => -1,
                 'type' => 'integer',
@@ -38,20 +44,35 @@ class TokenUsage
         'required' => [
             'used',
             'tariffLimit',
+            'planLimit',
         ],
         'type' => 'object',
     ];
 
+    private int $planLimit;
+
+    /**
+     * @deprecated
+     */
     private int $tariffLimit;
 
     private int $used;
 
-    public function __construct(int $tariffLimit, int $used)
+    public function __construct(int $planLimit, int $tariffLimit, int $used)
     {
+        $this->planLimit = $planLimit;
         $this->tariffLimit = $tariffLimit;
         $this->used = $used;
     }
 
+    public function getPlanLimit(): int
+    {
+        return $this->planLimit;
+    }
+
+    /**
+     * @deprecated
+     */
     public function getTariffLimit(): int
     {
         return $this->tariffLimit;
@@ -62,6 +83,23 @@ class TokenUsage
         return $this->used;
     }
 
+    public function withPlanLimit(int $planLimit): self
+    {
+        $validator = new Validator();
+        $validator->validate($planLimit, self::$internalValidationSchema['properties']['planLimit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planLimit = $planLimit;
+
+        return $clone;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withTariffLimit(int $tariffLimit): self
     {
         $validator = new Validator();
@@ -105,10 +143,11 @@ class TokenUsage
             static::validateInput($input);
         }
 
+        $planLimit = (int)($input->{'planLimit'});
         $tariffLimit = (int)($input->{'tariffLimit'});
         $used = (int)($input->{'used'});
 
-        $obj = new self($tariffLimit, $used);
+        $obj = new self($planLimit, $tariffLimit, $used);
 
         return $obj;
     }
@@ -121,6 +160,7 @@ class TokenUsage
     public function toJson(): array
     {
         $output = [];
+        $output['planLimit'] = $this->planLimit;
         $output['tariffLimit'] = $this->tariffLimit;
         $output['used'] = $this->used;
 

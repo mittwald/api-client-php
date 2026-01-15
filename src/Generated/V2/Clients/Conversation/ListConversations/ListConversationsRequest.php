@@ -17,6 +17,32 @@ class ListConversationsRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'fullTextSearch' => [
+                'type' => 'string',
+            ],
+            'status' => [
+                'items' => [
+                    'enum' => [
+                        'open',
+                        'closed',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 100,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
             'sort' => [
                 'type' => 'array',
                 'items' => [
@@ -25,7 +51,6 @@ class ListConversationsRequest
                         'createdAt',
                         'lastMessage.createdAt',
                         'title',
-                        'priority',
                         'shortId',
                         'conversationId',
                     ],
@@ -53,6 +78,19 @@ class ListConversationsRequest
         ],
     ];
 
+    private ?string $fullTextSearch = null;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $status = null;
+
+    private int $limit = 100;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
+
     /**
      * @var string[]
      */
@@ -78,6 +116,34 @@ class ListConversationsRequest
     {
     }
 
+    public function getFullTextSearch(): ?string
+    {
+        return $this->fullTextSearch ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getStatus(): ?array
+    {
+        return $this->status ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     /**
      * @return string[]
      */
@@ -92,6 +158,103 @@ class ListConversationsRequest
     public function getOrder(): array
     {
         return $this->order;
+    }
+
+    public function withFullTextSearch(string $fullTextSearch): self
+    {
+        $validator = new Validator();
+        $validator->validate($fullTextSearch, self::$internalValidationSchema['properties']['fullTextSearch']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->fullTextSearch = $fullTextSearch;
+
+        return $clone;
+    }
+
+    public function withoutFullTextSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->fullTextSearch);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $status
+     */
+    public function withStatus(array $status): self
+    {
+        $validator = new Validator();
+        $validator->validate($status, self::$internalValidationSchema['properties']['status']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withoutStatus(): self
+    {
+        $clone = clone $this;
+        unset($clone->status);
+
+        return $clone;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
     }
 
     /**
@@ -143,6 +306,26 @@ class ListConversationsRequest
             static::validateInput($input);
         }
 
+        $fullTextSearch = null;
+        if (isset($input->{'fullTextSearch'})) {
+            $fullTextSearch = $input->{'fullTextSearch'};
+        }
+        $status = null;
+        if (isset($input->{'status'})) {
+            $status = $input->{'status'};
+        }
+        $limit = 100;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
         $sort = [
                 'lastMessage.createdAt',
             ];
@@ -157,6 +340,11 @@ class ListConversationsRequest
         }
 
         $obj = new self();
+        $obj->fullTextSearch = $fullTextSearch;
+        $obj->status = $status;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         $obj->sort = $sort;
         $obj->order = $order;
         return $obj;
@@ -170,6 +358,17 @@ class ListConversationsRequest
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->fullTextSearch)) {
+            $output['fullTextSearch'] = $this->fullTextSearch;
+        }
+        if (isset($this->status)) {
+            $output['status'] = $this->status;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
         $output['sort'] = $this->sort;
         $output['order'] = $this->order;
 
@@ -232,6 +431,21 @@ class ListConversationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['fullTextSearch'])) {
+            $query['fullTextSearch'] = $mapped['fullTextSearch'];
+        }
+        if (isset($mapped['status'])) {
+            $query['status'] = $mapped['status'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
+        }
         if (isset($mapped['sort'])) {
             $query['sort'] = $mapped['sort'];
         }
