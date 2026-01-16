@@ -54,7 +54,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
 
     private ?int $page = null;
 
-    private ListIngressesCompatibleWithCertificateRequest|ListIngressesCompatibleWithCertificateIDRequest $body;
+    private ListIngressesCompatibleWithCertificateIDRequest|ListIngressesCompatibleWithCertificateRequest $body;
 
     private array $headers = [
 

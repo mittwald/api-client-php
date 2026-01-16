@@ -67,7 +67,7 @@ class UpdateCronjobRequestBody
 
     private ?string $description = null;
 
-    private CronjobUrl|CronjobCommand|null $destination = null;
+    private CronjobCommand|CronjobUrl|null $destination = null;
 
     private ?string $email = null;
 

@@ -89,7 +89,7 @@ class CronjobRequest
 
     private string $description;
 
-    private CronjobUrl|CronjobCommand $destination;
+    private CronjobCommand|CronjobUrl $destination;
 
     private ?string $email = null;
 

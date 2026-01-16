@@ -42,7 +42,7 @@ class DeprecatedDnsRecordMxSetCustomRequest
 
     private string $zoneId;
 
-    private RecordUnset|RecordMXCustom $body;
+    private RecordMXCustom|RecordUnset $body;
 
     private array $headers = [
 

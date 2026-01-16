@@ -54,7 +54,7 @@ class ProjectHostingTariffChange
 
     private int|float $diskspaceInGiB;
 
-    private MachineTypeSpec|HardwareSpec $spec;
+    private HardwareSpec|MachineTypeSpec $spec;
 
     public function __construct(string $contractId, int|float $diskspaceInGiB, HardwareSpec|MachineTypeSpec $spec)
     {

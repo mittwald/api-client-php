@@ -7,15 +7,15 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesRequest;
 
 /**
  * Client for Project File System API
@@ -37,48 +37,48 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-directories
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDirectoriesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDirectoriesOKResponse OK
+     * @param GetDirectoriesRequest $request An object representing the request for this operation
+     * @return GetDirectoriesOKResponse OK
      */
-    public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectoriesOKResponse;
+    public function getDirectories(GetDirectoriesRequest $request): GetDirectoriesOKResponse;
     /**
      * Get a Project directory filesystem usage.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-disk-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDiskUsageRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDiskUsageOKResponse OK
+     * @param GetDiskUsageRequest $request An object representing the request for this operation
+     * @return GetDiskUsageOKResponse OK
      */
-    public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsageOKResponse;
+    public function getDiskUsage(GetDiskUsageRequest $request): GetDiskUsageOKResponse;
     /**
      * Get a Project file's content.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-file-content
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetFileContentRequest $request An object representing the request for this operation
+     * @param GetFileContentRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
-    public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse;
+    public function getFileContent(GetFileContentRequest $request): StringResponse;
     /**
      * Get a Project's file/filesystem authorization token.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-jwt
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetJwtRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetJwtOKResponse OK
+     * @param GetJwtRequest $request An object representing the request for this operation
+     * @return GetJwtOKResponse OK
      */
-    public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwtOKResponse;
+    public function getJwt(GetJwtRequest $request): GetJwtOKResponse;
     /**
      * Get a Project file's information.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-list-files
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemListFilesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemListFilesOKResponse OK
+     * @param ListFilesRequest $request An object representing the request for this operation
+     * @return ListFilesOKResponse OK
      */
-    public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFilesOKResponse;
+    public function listFiles(ListFilesRequest $request): ListFilesOKResponse;
 }

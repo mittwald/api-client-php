@@ -76,7 +76,7 @@ class DnsUpdateRecordSetRequest
 
     private DnsUpdateRecordSetRequestRecordSet $recordSet;
 
-    private RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent|RecordCAAComponent $body;
+    private CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body;
 
     private array $headers = [
 

@@ -38,7 +38,7 @@ class KeyResponse
         'type' => 'object',
     ];
 
-    private Key|ExternalKey|null $keyReference = null;
+    private ExternalKey|Key|null $keyReference = null;
 
     /**
      *

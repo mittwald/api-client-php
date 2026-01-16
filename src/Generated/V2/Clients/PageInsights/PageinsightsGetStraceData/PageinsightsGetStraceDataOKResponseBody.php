@@ -48,7 +48,7 @@ class PageinsightsGetStraceDataOKResponseBody
 
     private string $id;
 
-    private Error|Data $result;
+    private Data|Error $result;
 
     public function __construct(DateTime $executedAt, string $id, Data|Error $result)
     {

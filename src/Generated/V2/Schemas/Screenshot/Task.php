@@ -78,7 +78,7 @@ class Task
 
     private Target $target;
 
-    private string|Error|null $taskState = null;
+    private Error|string|null $taskState = null;
 
     public function __construct(string $id, int $priority, ScreenshotSettings $settings, Target $target)
     {

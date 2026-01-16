@@ -53,7 +53,7 @@ class Path
 
     private string $path;
 
-    private TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target;
+    private TargetContainer|TargetInstallation|TargetUrl|TargetUseDefaultPage $target;
 
     public function __construct(string $path, TargetContainer|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
     {

@@ -65,7 +65,7 @@ class ProjectHostingOrderPreview
 
     private ?string $promotionCode = null;
 
-    private MachineTypeSpec|HardwareSpec $spec;
+    private HardwareSpec|MachineTypeSpec $spec;
 
     public function __construct(int|float $diskspaceInGiB, HardwareSpec|MachineTypeSpec $spec)
     {

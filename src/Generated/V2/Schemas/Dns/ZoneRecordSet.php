@@ -54,17 +54,17 @@ class ZoneRecordSet
         'type' => 'object',
     ];
 
-    private RecordUnset|RecordCAAComponent $caa;
+    private RecordCAAComponent|RecordUnset $caa;
 
-    private RecordUnset|RecordCNAMEComponent $cname;
+    private RecordCNAMEComponent|RecordUnset $cname;
 
-    private RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords;
+    private CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords;
 
-    private RecordUnset|RecordMXManaged|RecordMXCustom $mx;
+    private RecordMXCustom|RecordMXManaged|RecordUnset $mx;
 
-    private RecordUnset|RecordSRVComponent $srv;
+    private RecordSRVComponent|RecordUnset $srv;
 
-    private RecordUnset|RecordTXTComponent $txt;
+    private RecordTXTComponent|RecordUnset $txt;
 
     public function __construct(RecordCAAComponent|RecordUnset $caa, RecordCNAMEComponent|RecordUnset $cname, CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords, RecordMXCustom|RecordMXManaged|RecordUnset $mx, RecordSRVComponent|RecordUnset $srv, RecordTXTComponent|RecordUnset $txt)
     {

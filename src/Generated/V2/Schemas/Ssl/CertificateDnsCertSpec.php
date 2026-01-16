@@ -27,11 +27,16 @@ class CertificateDnsCertSpec
             'cnameTarget' => [
                 'type' => 'string',
             ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.ssl.DNSCertStatus',
+            ],
         ],
         'type' => 'object',
     ];
 
     private ?string $cnameTarget = null;
+
+    private ?DNSCertStatus $status = null;
 
     /**
      *
@@ -43,6 +48,11 @@ class CertificateDnsCertSpec
     public function getCnameTarget(): ?string
     {
         return $this->cnameTarget ?? null;
+    }
+
+    public function getStatus(): ?DNSCertStatus
+    {
+        return $this->status ?? null;
     }
 
     public function withCnameTarget(string $cnameTarget): self
@@ -67,6 +77,22 @@ class CertificateDnsCertSpec
         return $clone;
     }
 
+    public function withStatus(DNSCertStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withoutStatus(): self
+    {
+        $clone = clone $this;
+        unset($clone->status);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -86,9 +112,14 @@ class CertificateDnsCertSpec
         if (isset($input->{'cnameTarget'})) {
             $cnameTarget = $input->{'cnameTarget'};
         }
+        $status = null;
+        if (isset($input->{'status'})) {
+            $status = DNSCertStatus::buildFromInput($input->{'status'}, validate: $validate);
+        }
 
         $obj = new self();
         $obj->cnameTarget = $cnameTarget;
+        $obj->status = $status;
         return $obj;
     }
 
@@ -102,6 +133,9 @@ class CertificateDnsCertSpec
         $output = [];
         if (isset($this->cnameTarget)) {
             $output['cnameTarget'] = $this->cnameTarget;
+        }
+        if (isset($this->status)) {
+            $output['status'] = $this->status->toJson();
         }
 
         return $output;

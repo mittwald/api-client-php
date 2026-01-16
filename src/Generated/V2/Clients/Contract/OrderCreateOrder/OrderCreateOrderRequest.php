@@ -42,6 +42,9 @@ class OrderCreateOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrder',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenceOrder',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -53,6 +56,7 @@ class OrderCreateOrderRequest
                             'leadFyndr',
                             'mailArchive',
                             'aiHosting',
+                            'licence',
                         ],
                         'example' => 'projectHosting',
                         'type' => 'string',
