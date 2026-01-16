@@ -59,7 +59,7 @@ class OwnExtensionRequestedChanges
      */
     private ?array $scopes = null;
 
-    private WebhookUrls|OwnExtensionRequestedChangesWebhookUrlsAlternative2|null $webhookUrls = null;
+    private OwnExtensionRequestedChangesWebhookUrlsAlternative2|WebhookUrls|null $webhookUrls = null;
 
     /**
      *

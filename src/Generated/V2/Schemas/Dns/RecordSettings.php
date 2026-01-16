@@ -38,7 +38,7 @@ class RecordSettings
         'type' => 'object',
     ];
 
-    private TtlSeconds|TtlAuto|null $ttl = null;
+    private TtlAuto|TtlSeconds|null $ttl = null;
 
     /**
      *

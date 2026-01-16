@@ -68,7 +68,7 @@ class CreateRelocationRequestBodyProvider
     /**
      * Name of your provider
      */
-    private string|CreateRelocationRequestBodyProviderNameAlternative2 $name;
+    private CreateRelocationRequestBodyProviderNameAlternative2|string $name;
 
     private string $password;
 

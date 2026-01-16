@@ -70,7 +70,7 @@ class CreateRelocationRequestBodyTarget
     /**
      * Help our customer service finding your target account
      */
-    private string|CreateRelocationRequestBodyTargetProductAlternative2 $product;
+    private CreateRelocationRequestBodyTargetProductAlternative2|string $product;
 
     /**
      * In which p-account or short project id your project should be moved.

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2;
 
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AIhostingClient;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
@@ -59,5 +59,5 @@ interface Client
     public function marketplace(): MarketplaceClient;
     public function misc(): MiscClient;
     public function leadFyndr(): LeadFyndrClient;
-    public function aIhosting(): AIhostingClient;
+    public function aIHosting(): AIHostingClient;
 }

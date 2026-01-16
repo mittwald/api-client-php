@@ -47,7 +47,7 @@ class OrderPreviewTariffChangeRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingTariffChange|ServerTariffChange|LeadFyndrTariffChange|AIHostingTariffChange|null $tariffChangeData = null;
+    private AIHostingTariffChange|LeadFyndrTariffChange|ProjectHostingTariffChange|ServerTariffChange|null $tariffChangeData = null;
 
     private ?OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
 

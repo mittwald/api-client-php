@@ -42,7 +42,7 @@ class DeprecatedDnsRecordSrvSetRequest
 
     private string $zoneId;
 
-    private RecordUnset|RecordSRVComponent $body;
+    private RecordSRVComponent|RecordUnset $body;
 
     private array $headers = [
 

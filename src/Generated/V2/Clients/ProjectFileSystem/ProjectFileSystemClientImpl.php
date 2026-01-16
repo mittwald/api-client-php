@@ -9,45 +9,45 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesBadGatewayResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDirectories\GetDirectoriesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetDiskUsage\GetDiskUsageTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ListFiles\ListFilesTooManyRequestsResponse;
 
 /**
  * Client for Project File System API
@@ -76,23 +76,23 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-directories
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDirectoriesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDirectoriesOKResponse OK
+     * @param GetDirectoriesRequest $request An object representing the request for this operation
+     * @return GetDirectoriesOKResponse OK
      */
-    public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectoriesOKResponse
+    public function getDirectories(GetDirectoriesRequest $request): GetDirectoriesOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetDirectoriesRequest::method, $request->buildUrl());
+        $httpRequest = new Request(GetDirectoriesRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ProjectFileSystemGetDirectoriesOKResponse::fromResponse($httpResponse);
+            return GetDirectoriesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => ProjectFileSystemGetDirectoriesForbiddenResponse::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetDirectoriesNotFoundResponse::fromResponse($httpResponse),
-            429 => ProjectFileSystemGetDirectoriesTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => ProjectFileSystemGetDirectoriesBadGatewayResponse::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetDirectoriesServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ProjectFileSystemGetDirectoriesDefaultResponse::fromResponse($httpResponse),
+            403 => GetDirectoriesForbiddenResponse::fromResponse($httpResponse),
+            404 => GetDirectoriesNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDirectoriesTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetDirectoriesBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetDirectoriesServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetDirectoriesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -102,23 +102,23 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-disk-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDiskUsageRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDiskUsageOKResponse OK
+     * @param GetDiskUsageRequest $request An object representing the request for this operation
+     * @return GetDiskUsageOKResponse OK
      */
-    public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsageOKResponse
+    public function getDiskUsage(GetDiskUsageRequest $request): GetDiskUsageOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetDiskUsageRequest::method, $request->buildUrl());
+        $httpRequest = new Request(GetDiskUsageRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ProjectFileSystemGetDiskUsageOKResponse::fromResponse($httpResponse);
+            return GetDiskUsageOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => ProjectFileSystemGetDiskUsageForbiddenResponse::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetDiskUsageNotFoundResponse::fromResponse($httpResponse),
-            429 => ProjectFileSystemGetDiskUsageTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => ProjectFileSystemGetDiskUsageBadGatewayResponse::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetDiskUsageServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ProjectFileSystemGetDiskUsageDefaultResponse::fromResponse($httpResponse),
+            403 => GetDiskUsageForbiddenResponse::fromResponse($httpResponse),
+            404 => GetDiskUsageNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDiskUsageTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetDiskUsageBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetDiskUsageServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetDiskUsageDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -128,23 +128,23 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-file-content
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetFileContentRequest $request An object representing the request for this operation
+     * @param GetFileContentRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
-    public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse
+    public function getFileContent(GetFileContentRequest $request): StringResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetFileContentRequest::method, $request->buildUrl());
+        $httpRequest = new Request(GetFileContentRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => ProjectFileSystemGetFileContentForbiddenResponse::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetFileContentNotFoundResponse::fromResponse($httpResponse),
-            429 => ProjectFileSystemGetFileContentTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => ProjectFileSystemGetFileContentBadGatewayResponse::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetFileContentServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ProjectFileSystemGetFileContentDefaultResponse::fromResponse($httpResponse),
+            403 => GetFileContentForbiddenResponse::fromResponse($httpResponse),
+            404 => GetFileContentNotFoundResponse::fromResponse($httpResponse),
+            429 => GetFileContentTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetFileContentBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetFileContentServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetFileContentDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -154,23 +154,23 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-jwt
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetJwtRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetJwtOKResponse OK
+     * @param GetJwtRequest $request An object representing the request for this operation
+     * @return GetJwtOKResponse OK
      */
-    public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwtOKResponse
+    public function getJwt(GetJwtRequest $request): GetJwtOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetJwtRequest::method, $request->buildUrl());
+        $httpRequest = new Request(GetJwtRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ProjectFileSystemGetJwtOKResponse::fromResponse($httpResponse);
+            return GetJwtOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            401 => ProjectFileSystemGetJwtUnauthorizedResponse::fromResponse($httpResponse),
-            403 => ProjectFileSystemGetJwtForbiddenResponse::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetJwtNotFoundResponse::fromResponse($httpResponse),
-            429 => ProjectFileSystemGetJwtTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => ProjectFileSystemGetJwtBadGatewayResponse::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetJwtServiceUnavailableResponse::fromResponse($httpResponse),
+            401 => GetJwtUnauthorizedResponse::fromResponse($httpResponse),
+            403 => GetJwtForbiddenResponse::fromResponse($httpResponse),
+            404 => GetJwtNotFoundResponse::fromResponse($httpResponse),
+            429 => GetJwtTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetJwtBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetJwtServiceUnavailableResponse::fromResponse($httpResponse),
         });
     }
 
@@ -180,23 +180,23 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-list-files
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemListFilesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemListFilesOKResponse OK
+     * @param ListFilesRequest $request An object representing the request for this operation
+     * @return ListFilesOKResponse OK
      */
-    public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFilesOKResponse
+    public function listFiles(ListFilesRequest $request): ListFilesOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemListFilesRequest::method, $request->buildUrl());
+        $httpRequest = new Request(ListFilesRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ProjectFileSystemListFilesOKResponse::fromResponse($httpResponse);
+            return ListFilesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => ProjectFileSystemListFilesForbiddenResponse::fromResponse($httpResponse),
-            404 => ProjectFileSystemListFilesNotFoundResponse::fromResponse($httpResponse),
-            429 => ProjectFileSystemListFilesTooManyRequestsResponse::fromResponse($httpResponse),
-            502 => ProjectFileSystemListFilesBadGatewayResponse::fromResponse($httpResponse),
-            503 => ProjectFileSystemListFilesServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ProjectFileSystemListFilesDefaultResponse::fromResponse($httpResponse),
+            403 => ListFilesForbiddenResponse::fromResponse($httpResponse),
+            404 => ListFilesNotFoundResponse::fromResponse($httpResponse),
+            429 => ListFilesTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => ListFilesBadGatewayResponse::fromResponse($httpResponse),
+            503 => ListFilesServiceUnavailableResponse::fromResponse($httpResponse),
+            default => ListFilesDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

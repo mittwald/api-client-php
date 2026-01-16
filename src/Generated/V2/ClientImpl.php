@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2;
 
 use Mittwald\ApiClient\Client\BaseClient;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AIhostingClient;
-use Mittwald\ApiClient\Generated\V2\Clients\AIhosting\AIhostingClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
@@ -171,8 +171,8 @@ class ClientImpl extends BaseClient implements Client
         return new LeadFyndrClientImpl($this->client);
     }
 
-    public function aIhosting(): AIhostingClient
+    public function aIHosting(): AIHostingClient
     {
-        return new AIhostingClientImpl($this->client);
+        return new AIHostingClientImpl($this->client);
     }
 }

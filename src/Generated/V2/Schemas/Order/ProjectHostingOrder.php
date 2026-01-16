@@ -77,7 +77,7 @@ class ProjectHostingOrder
 
     private ?string $recommendationCode = null;
 
-    private MachineTypeSpec|HardwareSpec $spec;
+    private HardwareSpec|MachineTypeSpec $spec;
 
     private ?bool $useFreeTrial = null;
 

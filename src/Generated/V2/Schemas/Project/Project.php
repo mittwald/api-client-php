@@ -242,7 +242,7 @@ class Project
 
     private string $shortId;
 
-    private VisitorSpec|HardwareSpec|null $spec = null;
+    private HardwareSpec|VisitorSpec|null $spec = null;
 
     private ?string $statisticsBaseDomain = null;
 

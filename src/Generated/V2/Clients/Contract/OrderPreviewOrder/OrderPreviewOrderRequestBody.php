@@ -62,7 +62,7 @@ class OrderPreviewOrderRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|AIHostingOrderPreview|null $orderData = null;
+    private AIHostingOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|LeadFyndrOrderPreview|MailArchiveOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null $orderData = null;
 
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
 

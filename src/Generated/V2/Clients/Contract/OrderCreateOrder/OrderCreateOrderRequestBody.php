@@ -63,7 +63,7 @@ class OrderCreateOrderRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingOrder|ServerOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|AIHostingOrder|null $orderData = null;
+    private AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null $orderData = null;
 
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
 
