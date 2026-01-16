@@ -36,20 +36,21 @@ class DNSCertStatus
                 'type' => 'string',
             ],
         ],
+        'required' => [
+            'status',
+        ],
         'type' => 'object',
     ];
 
     private ?string $message = null;
 
-    private ?ProjectCertificateStatus $status = null;
+    private ProjectCertificateStatus $status;
 
     private ?DateTime $updatedAt = null;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(ProjectCertificateStatus $status)
     {
+        $this->status = $status;
     }
 
     public function getMessage(): ?string
@@ -57,9 +58,9 @@ class DNSCertStatus
         return $this->message ?? null;
     }
 
-    public function getStatus(): ?ProjectCertificateStatus
+    public function getStatus(): ProjectCertificateStatus
     {
-        return $this->status ?? null;
+        return $this->status;
     }
 
     public function getUpdatedAt(): ?DateTime
@@ -93,14 +94,6 @@ class DNSCertStatus
     {
         $clone = clone $this;
         $clone->status = $status;
-
-        return $clone;
-    }
-
-    public function withoutStatus(): self
-    {
-        $clone = clone $this;
-        unset($clone->status);
 
         return $clone;
     }
@@ -140,18 +133,14 @@ class DNSCertStatus
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $status = null;
-        if (isset($input->{'status'})) {
-            $status = ProjectCertificateStatus::from($input->{'status'});
-        }
+        $status = ProjectCertificateStatus::from($input->{'status'});
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {
             $updatedAt = new DateTime($input->{'updatedAt'});
         }
 
-        $obj = new self();
+        $obj = new self($status);
         $obj->message = $message;
-        $obj->status = $status;
         $obj->updatedAt = $updatedAt;
         return $obj;
     }
@@ -167,9 +156,7 @@ class DNSCertStatus
         if (isset($this->message)) {
             $output['message'] = $this->message;
         }
-        if (isset($this->status)) {
-            $output['status'] = $this->status->value;
-        }
+        $output['status'] = $this->status->value;
         if (isset($this->updatedAt)) {
             $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         }
