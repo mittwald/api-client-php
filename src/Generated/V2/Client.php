@@ -59,5 +59,5 @@ interface Client
     public function marketplace(): MarketplaceClient;
     public function misc(): MiscClient;
     public function leadFyndr(): LeadFyndrClient;
-    public function aIHosting(): AIHostingClient;
+    public function aiHosting(): AIHostingClient;
 }
