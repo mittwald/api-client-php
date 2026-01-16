@@ -171,7 +171,7 @@ class ClientImpl extends BaseClient implements Client
         return new LeadFyndrClientImpl($this->client);
     }
 
-    public function aIHosting(): AIHostingClient
+    public function aiHosting(): AIHostingClient
     {
         return new AIHostingClientImpl($this->client);
     }
