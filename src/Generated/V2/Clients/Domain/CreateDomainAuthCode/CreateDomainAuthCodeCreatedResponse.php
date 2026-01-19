@@ -25,6 +25,10 @@ class CreateDomainAuthCodeCreatedResponse implements ResponseContainer
                     'authCode' => [
                         'type' => 'string',
                     ],
+                    'expirationDate' => [
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
                 ],
                 'required' => [
                     'authCode',
