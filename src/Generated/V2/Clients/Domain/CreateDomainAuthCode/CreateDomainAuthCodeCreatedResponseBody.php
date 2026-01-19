@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -17,6 +18,10 @@ class CreateDomainAuthCodeCreatedResponseBody
             'authCode' => [
                 'type' => 'string',
             ],
+            'expirationDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'authCode',
@@ -26,6 +31,8 @@ class CreateDomainAuthCodeCreatedResponseBody
 
     private string $authCode;
 
+    private ?DateTime $expirationDate = null;
+
     public function __construct(string $authCode)
     {
         $this->authCode = $authCode;
@@ -34,6 +41,11 @@ class CreateDomainAuthCodeCreatedResponseBody
     public function getAuthCode(): string
     {
         return $this->authCode;
+    }
+
+    public function getExpirationDate(): ?DateTime
+    {
+        return $this->expirationDate ?? null;
     }
 
     public function withAuthCode(string $authCode): self
@@ -46,6 +58,22 @@ class CreateDomainAuthCodeCreatedResponseBody
 
         $clone = clone $this;
         $clone->authCode = $authCode;
+
+        return $clone;
+    }
+
+    public function withExpirationDate(DateTime $expirationDate): self
+    {
+        $clone = clone $this;
+        $clone->expirationDate = $expirationDate;
+
+        return $clone;
+    }
+
+    public function withoutExpirationDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->expirationDate);
 
         return $clone;
     }
@@ -66,9 +94,13 @@ class CreateDomainAuthCodeCreatedResponseBody
         }
 
         $authCode = $input->{'authCode'};
+        $expirationDate = null;
+        if (isset($input->{'expirationDate'})) {
+            $expirationDate = new DateTime($input->{'expirationDate'});
+        }
 
         $obj = new self($authCode);
-
+        $obj->expirationDate = $expirationDate;
         return $obj;
     }
 
@@ -81,6 +113,9 @@ class CreateDomainAuthCodeCreatedResponseBody
     {
         $output = [];
         $output['authCode'] = $this->authCode;
+        if (isset($this->expirationDate)) {
+            $output['expirationDate'] = ($this->expirationDate)->format(DateTime::ATOM);
+        }
 
         return $output;
     }
@@ -111,5 +146,8 @@ class CreateDomainAuthCodeCreatedResponseBody
 
     public function __clone()
     {
+        if (isset($this->expirationDate)) {
+            $this->expirationDate = clone $this->expirationDate;
+        }
     }
 }
