@@ -8,7 +8,7 @@ enum ProjectCertificateStatus: string
 {
     case issuing = 'issuing';
     case ready = 'ready';
-    case cnameerror = 'cname_error';
+    case cnameError = 'cnameError';
     case error = 'error';
-    case undefined = 'undefined';
+    case unspecified = 'unspecified';
 }

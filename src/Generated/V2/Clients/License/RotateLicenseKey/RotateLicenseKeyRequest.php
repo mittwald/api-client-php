@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
+namespace Mittwald\ApiClient\Generated\V2\Clients\License\RotateLicenseKey;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OrderCreateOrderRequest
+class RotateLicenseKeyRequest
 {
     public const method = 'post';
 
@@ -17,48 +17,14 @@ class OrderCreateOrderRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'licenseId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'body' => [
+                'description' => 'Optional reference to a file containing the new key if it was not procured via mittwald.',
                 'properties' => [
-                    'orderData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenseOrder',
-                            ],
-                        ],
-                    ],
-                    'orderType' => [
-                        'enum' => [
-                            'domain',
-                            'projectHosting',
-                            'server',
-                            'externalCertificate',
-                            'leadFyndr',
-                            'mailArchive',
-                            'aiHosting',
-                            'license',
-                        ],
-                        'example' => 'projectHosting',
+                    'externalKey' => [
                         'type' => 'string',
                     ],
                 ],
@@ -66,27 +32,53 @@ class OrderCreateOrderRequest
             ],
         ],
         'required' => [
+            'licenseId',
             'body',
         ],
     ];
 
-    private OrderCreateOrderRequestBody $body;
+    private string $licenseId;
+
+    /**
+     * Optional reference to a file containing the new key if it was not procured via mittwald.
+     */
+    private RotateLicenseKeyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderCreateOrderRequestBody $body)
+    public function __construct(string $licenseId, RotateLicenseKeyRequestBody $body)
     {
+        $this->licenseId = $licenseId;
         $this->body = $body;
     }
 
-    public function getBody(): OrderCreateOrderRequestBody
+    public function getLicenseId(): string
+    {
+        return $this->licenseId;
+    }
+
+    public function getBody(): RotateLicenseKeyRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(OrderCreateOrderRequestBody $body): self
+    public function withLicenseId(string $licenseId): self
+    {
+        $validator = new Validator();
+        $validator->validate($licenseId, self::$internalValidationSchema['properties']['licenseId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->licenseId = $licenseId;
+
+        return $clone;
+    }
+
+    public function withBody(RotateLicenseKeyRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -99,19 +91,20 @@ class OrderCreateOrderRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderCreateOrderRequest Created instance
+     * @return RotateLicenseKeyRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RotateLicenseKeyRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderCreateOrderRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $licenseId = $input->{'licenseId'};
+        $body = RotateLicenseKeyRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($licenseId, $body);
 
         return $obj;
     }
@@ -124,6 +117,7 @@ class OrderCreateOrderRequest
     public function toJson(): array
     {
         $output = [];
+        $output['licenseId'] = $this->licenseId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -170,7 +164,8 @@ class OrderCreateOrderRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/orders';
+        $licenseId = urlencode($mapped['licenseId']);
+        return '/v2/licenses/' . $licenseId . '/actions/rotate-license-key';
     }
 
     /**

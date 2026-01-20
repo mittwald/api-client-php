@@ -43,7 +43,7 @@ class OrderPreviewOrderRequest
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview',
                             ],
                             [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenceOrderPreview',
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenseOrderPreview',
                             ],
                         ],
                     ],
@@ -56,7 +56,7 @@ class OrderPreviewOrderRequest
                             'leadFyndr',
                             'mailArchive',
                             'aiHosting',
-                            'licence',
+                            'license',
                         ],
                         'type' => 'string',
                     ],

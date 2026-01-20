@@ -305,7 +305,7 @@ class CronjobClientImpl implements CronjobClient
     }
 
     /**
-     * Update a Cronjob's app id.
+     * Update a Cronjob's app installation id.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id
      * @throws GuzzleException

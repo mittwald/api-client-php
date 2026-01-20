@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Schemas\Licence;
+namespace Mittwald\ApiClient\Generated\V2\Schemas\License;
 
 enum Kind: string
 {

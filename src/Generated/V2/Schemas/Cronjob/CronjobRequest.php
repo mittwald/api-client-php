@@ -28,6 +28,12 @@ class CronjobRequest
                 'type' => 'boolean',
             ],
             'appId' => [
+                'deprecated' => true,
+                'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'appInstallationId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -83,7 +89,14 @@ class CronjobRequest
 
     private bool $active;
 
+    /**
+     * DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version.
+     *
+     * @deprecated
+     */
     private string $appId;
+
+    private ?string $appInstallationId = null;
 
     private ?ConcurrencyPolicy $concurrencyPolicy = null;
 
@@ -116,9 +129,17 @@ class CronjobRequest
         return $this->active;
     }
 
+    /**
+     * @deprecated
+     */
     public function getAppId(): string
     {
         return $this->appId;
+    }
+
+    public function getAppInstallationId(): ?string
+    {
+        return $this->appInstallationId ?? null;
     }
 
     public function getConcurrencyPolicy(): ?ConcurrencyPolicy
@@ -175,6 +196,9 @@ class CronjobRequest
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -185,6 +209,28 @@ class CronjobRequest
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withAppInstallationId(string $appInstallationId): self
+    {
+        $validator = new Validator();
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appInstallationId = $appInstallationId;
+
+        return $clone;
+    }
+
+    public function withoutAppInstallationId(): self
+    {
+        $clone = clone $this;
+        unset($clone->appInstallationId);
 
         return $clone;
     }
@@ -338,6 +384,10 @@ class CronjobRequest
 
         $active = (bool)($input->{'active'});
         $appId = $input->{'appId'};
+        $appInstallationId = null;
+        if (isset($input->{'appInstallationId'})) {
+            $appInstallationId = $input->{'appInstallationId'};
+        }
         $concurrencyPolicy = null;
         if (isset($input->{'concurrencyPolicy'})) {
             $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
@@ -364,6 +414,7 @@ class CronjobRequest
         $timeout = (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
+        $obj->appInstallationId = $appInstallationId;
         $obj->concurrencyPolicy = $concurrencyPolicy;
         $obj->email = $email;
         $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
@@ -381,6 +432,9 @@ class CronjobRequest
         $output = [];
         $output['active'] = $this->active;
         $output['appId'] = $this->appId;
+        if (isset($this->appInstallationId)) {
+            $output['appInstallationId'] = $this->appInstallationId;
+        }
         if (isset($this->concurrencyPolicy)) {
             $output['concurrencyPolicy'] = $this->concurrencyPolicy->value;
         }
