@@ -15,6 +15,12 @@ class UpdateCronjobAppIdRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'appId' => [
+                'deprecated' => true,
+                'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'appInstallationId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -25,18 +31,36 @@ class UpdateCronjobAppIdRequestBody
         'type' => 'object',
     ];
 
+    /**
+     * DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version.
+     *
+     * @deprecated
+     */
     private string $appId;
+
+    private ?string $appInstallationId = null;
 
     public function __construct(string $appId)
     {
         $this->appId = $appId;
     }
 
+    /**
+     * @deprecated
+     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
+    public function getAppInstallationId(): ?string
+    {
+        return $this->appInstallationId ?? null;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -47,6 +71,28 @@ class UpdateCronjobAppIdRequestBody
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withAppInstallationId(string $appInstallationId): self
+    {
+        $validator = new Validator();
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appInstallationId = $appInstallationId;
+
+        return $clone;
+    }
+
+    public function withoutAppInstallationId(): self
+    {
+        $clone = clone $this;
+        unset($clone->appInstallationId);
 
         return $clone;
     }
@@ -67,9 +113,13 @@ class UpdateCronjobAppIdRequestBody
         }
 
         $appId = $input->{'appId'};
+        $appInstallationId = null;
+        if (isset($input->{'appInstallationId'})) {
+            $appInstallationId = $input->{'appInstallationId'};
+        }
 
         $obj = new self($appId);
-
+        $obj->appInstallationId = $appInstallationId;
         return $obj;
     }
 
@@ -82,6 +132,9 @@ class UpdateCronjobAppIdRequestBody
     {
         $output = [];
         $output['appId'] = $this->appId;
+        if (isset($this->appInstallationId)) {
+            $output['appInstallationId'] = $this->appInstallationId;
+        }
 
         return $output;
     }

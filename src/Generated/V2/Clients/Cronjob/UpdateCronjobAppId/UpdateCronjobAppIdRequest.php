@@ -23,6 +23,12 @@ class UpdateCronjobAppIdRequest
             'body' => [
                 'properties' => [
                     'appId' => [
+                        'deprecated' => true,
+                        'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                    'appInstallationId' => [
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
@@ -164,7 +170,7 @@ class UpdateCronjobAppIdRequest
     {
         $mapped = $this->toJson();
         $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId . '/app-id';
+        return '/v2/cronjobs/' . $cronjobId . '/app-installation-id';
     }
 
     /**
