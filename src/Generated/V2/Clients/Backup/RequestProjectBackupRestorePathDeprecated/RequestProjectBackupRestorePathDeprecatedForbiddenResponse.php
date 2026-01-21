@@ -2,65 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupDatabaseDumpsOKResponseBody
+class RequestProjectBackupRestorePathDeprecatedForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'databases' => [
-                'items' => [
-                    'type' => 'string',
-                ],
-                'type' => 'array',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'databases',
-        ],
-        'type' => 'object',
     ];
 
-    /**
-     * @var string[]
-     */
-    private array $databases;
+    private Error $body;
 
-    /**
-     * @param string[] $databases
-     */
-    public function __construct(array $databases)
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Error $body)
     {
-        $this->databases = $databases;
+        $this->body = $body;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getDatabases(): array
+    public function getBody(): Error
     {
-        return $this->databases;
+        return $this->body;
     }
 
-    /**
-     * @param string[] $databases
-     */
-    public function withDatabases(array $databases): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($databases, self::$internalValidationSchema['properties']['databases']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->databases = $databases;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -70,19 +54,19 @@ class GetProjectBackupDatabaseDumpsOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupDatabaseDumpsOKResponseBody Created instance
+     * @return RequestProjectBackupRestorePathDeprecatedForbiddenResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathDeprecatedForbiddenResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $databases = $input->{'databases'};
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($databases);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -95,7 +79,7 @@ class GetProjectBackupDatabaseDumpsOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['databases'] = $this->databases;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -126,5 +110,18 @@ class GetProjectBackupDatabaseDumpsOKResponseBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

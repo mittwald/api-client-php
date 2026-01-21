@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupDatabaseDumpsBadGatewayResponse implements ResponseContainer
+class RequestProjectBackupRestoreV2ExperimentalNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -54,10 +54,10 @@ class GetProjectBackupDatabaseDumpsBadGatewayResponse implements ResponseContain
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupDatabaseDumpsBadGatewayResponse Created instance
+     * @return RequestProjectBackupRestoreV2ExperimentalNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsBadGatewayResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreV2ExperimentalNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

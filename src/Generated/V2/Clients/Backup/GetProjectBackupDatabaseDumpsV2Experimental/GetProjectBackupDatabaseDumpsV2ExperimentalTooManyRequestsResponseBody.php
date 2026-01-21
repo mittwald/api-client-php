@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class RequestProjectBackupRestoreTooManyRequestsResponseBody
+class GetProjectBackupDatabaseDumpsV2ExperimentalTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class RequestProjectBackupRestoreTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestoreTooManyRequestsResponseBody Created instance
+     * @return GetProjectBackupDatabaseDumpsV2ExperimentalTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsV2ExperimentalTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

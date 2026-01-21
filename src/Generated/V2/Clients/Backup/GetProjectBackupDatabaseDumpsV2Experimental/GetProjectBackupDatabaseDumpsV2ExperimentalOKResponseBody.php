@@ -2,49 +2,65 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
-use Psr\Http\Message\ResponseInterface;
 
-class RequestProjectBackupRestorePathBadRequestResponse implements ResponseContainer
+class GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+            'databases' => [
+                'items' => [
+                    'type' => 'string',
+                ],
+                'type' => 'array',
             ],
         ],
+        'required' => [
+            'databases',
+        ],
+        'type' => 'object',
     ];
 
-    private ValidationErrors $body;
+    /**
+     * @var string[]
+     */
+    private array $databases;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(ValidationErrors $body)
+    /**
+     * @param string[] $databases
+     */
+    public function __construct(array $databases)
     {
-        $this->body = $body;
+        $this->databases = $databases;
     }
 
-    public function getBody(): ValidationErrors
+    /**
+     * @return string[]
+     */
+    public function getDatabases(): array
     {
-        return $this->body;
+        return $this->databases;
     }
 
-    public function withBody(ValidationErrors $body): self
+    /**
+     * @param string[] $databases
+     */
+    public function withDatabases(array $databases): self
     {
+        $validator = new Validator();
+        $validator->validate($databases, self::$internalValidationSchema['properties']['databases']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->databases = $databases;
 
         return $clone;
     }
@@ -54,19 +70,19 @@ class RequestProjectBackupRestorePathBadRequestResponse implements ResponseConta
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestorePathBadRequestResponse Created instance
+     * @return GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathBadRequestResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
+        $databases = $input->{'databases'};
 
-        $obj = new self($body);
+        $obj = new self($databases);
 
         return $obj;
     }
@@ -79,7 +95,7 @@ class RequestProjectBackupRestorePathBadRequestResponse implements ResponseConta
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['databases'] = $this->databases;
 
         return $output;
     }
@@ -110,18 +126,5 @@ class RequestProjectBackupRestorePathBadRequestResponse implements ResponseConta
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestorePathRequestDeprecated;
 
-class GetProjectBackupDatabaseDumpsRequest
+class RequestProjectBackupRestorePathDeprecatedRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -20,26 +21,38 @@ class GetProjectBackupDatabaseDumpsRequest
             'projectBackupId' => [
                 'type' => 'string',
             ],
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequestDeprecated',
+            ],
         ],
         'required' => [
             'projectBackupId',
+            'body',
         ],
     ];
 
     private string $projectBackupId;
 
+    private ProjectBackupRestorePathRequestDeprecated $body;
+
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId)
+    public function __construct(string $projectBackupId, ProjectBackupRestorePathRequestDeprecated $body)
     {
         $this->projectBackupId = $projectBackupId;
+        $this->body = $body;
     }
 
     public function getProjectBackupId(): string
     {
         return $this->projectBackupId;
+    }
+
+    public function getBody(): ProjectBackupRestorePathRequestDeprecated
+    {
+        return $this->body;
     }
 
     public function withProjectBackupId(string $projectBackupId): self
@@ -56,15 +69,23 @@ class GetProjectBackupDatabaseDumpsRequest
         return $clone;
     }
 
+    public function withBody(ProjectBackupRestorePathRequestDeprecated $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupDatabaseDumpsRequest Created instance
+     * @return RequestProjectBackupRestorePathDeprecatedRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathDeprecatedRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -72,8 +93,9 @@ class GetProjectBackupDatabaseDumpsRequest
         }
 
         $projectBackupId = $input->{'projectBackupId'};
+        $body = ProjectBackupRestorePathRequestDeprecated::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectBackupId);
+        $obj = new self($projectBackupId, $body);
 
         return $obj;
     }
@@ -87,6 +109,7 @@ class GetProjectBackupDatabaseDumpsRequest
     {
         $output = [];
         $output['projectBackupId'] = $this->projectBackupId;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -132,7 +155,7 @@ class GetProjectBackupDatabaseDumpsRequest
     {
         $mapped = $this->toJson();
         $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/database-dumps';
+        return '/v2/project-backups/' . $projectBackupId . '/restore-path';
     }
 
     /**
@@ -151,6 +174,7 @@ class GetProjectBackupDatabaseDumpsRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

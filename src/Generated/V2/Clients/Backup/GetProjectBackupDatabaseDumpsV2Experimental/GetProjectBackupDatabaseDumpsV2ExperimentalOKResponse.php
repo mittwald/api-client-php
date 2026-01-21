@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumps;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetProjectBackupDatabaseDumpsServiceUnavailableResponse implements ResponseContainer
+class GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +21,37 @@ class GetProjectBackupDatabaseDumpsServiceUnavailableResponse implements Respons
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                'properties' => [
+                    'databases' => [
+                        'items' => [
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
+                ],
+                'required' => [
+                    'databases',
+                ],
+                'type' => 'object',
             ],
         ],
     ];
 
-    private Error $body;
+    private GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +64,17 @@ class GetProjectBackupDatabaseDumpsServiceUnavailableResponse implements Respons
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectBackupDatabaseDumpsServiceUnavailableResponse Created instance
+     * @return GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsServiceUnavailableResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +89,7 @@ class GetProjectBackupDatabaseDumpsServiceUnavailableResponse implements Respons
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +120,7 @@ class GetProjectBackupDatabaseDumpsServiceUnavailableResponse implements Respons
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestoreRequest;
 
-class RequestProjectBackupRestoreRequest
+class RequestProjectBackupRestoreV2ExperimentalRequest
 {
     public const method = 'post';
 
@@ -82,10 +82,10 @@ class RequestProjectBackupRestoreRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestoreRequest Created instance
+     * @return RequestProjectBackupRestoreV2ExperimentalRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreV2ExperimentalRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
