@@ -9,7 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
-use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse;
@@ -257,10 +256,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\Ss
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateDefaultResponse;
@@ -291,10 +292,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCe
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificatePreconditionFailedResponse;
@@ -1711,9 +1714,10 @@ class DomainClientImpl implements DomainClient
             return SslCreateCertificateRequestCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UntypedResponse::fromResponse($httpResponse),
+            400 => SslCreateCertificateRequestBadRequestResponse::fromResponse($httpResponse),
             404 => SslCreateCertificateRequestNotFoundResponse::fromResponse($httpResponse),
             409 => SslCreateCertificateRequestConflictResponse::fromResponse($httpResponse),
+            412 => SslCreateCertificateRequestPreconditionFailedResponse::fromResponse($httpResponse),
             429 => SslCreateCertificateRequestTooManyRequestsResponse::fromResponse($httpResponse),
             default => SslCreateCertificateRequestDefaultResponse::fromResponse($httpResponse),
         });
@@ -1874,7 +1878,7 @@ class DomainClientImpl implements DomainClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UntypedResponse::fromResponse($httpResponse),
+            400 => SslReplaceCertificateBadRequestResponse::fromResponse($httpResponse),
             404 => SslReplaceCertificateNotFoundResponse::fromResponse($httpResponse),
             429 => SslReplaceCertificateTooManyRequestsResponse::fromResponse($httpResponse),
             default => SslReplaceCertificateDefaultResponse::fromResponse($httpResponse),
@@ -1898,7 +1902,7 @@ class DomainClientImpl implements DomainClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UntypedResponse::fromResponse($httpResponse),
+            400 => SslSetCertificateRequestCertificateBadRequestResponse::fromResponse($httpResponse),
             404 => SslSetCertificateRequestCertificateNotFoundResponse::fromResponse($httpResponse),
             412 => SslSetCertificateRequestCertificatePreconditionFailedResponse::fromResponse($httpResponse),
             429 => SslSetCertificateRequestCertificateTooManyRequestsResponse::fromResponse($httpResponse),

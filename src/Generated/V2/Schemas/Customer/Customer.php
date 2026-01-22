@@ -86,9 +86,6 @@ class Customer
             'isInDefaultOfPayment' => [
                 'type' => 'boolean',
             ],
-            'isMailAddressInvalid' => [
-                'type' => 'boolean',
-            ],
             'levelOfUndeliverableDunningNotice' => [
                 'enum' => [
                     'first',
@@ -166,8 +163,6 @@ class Customer
     private ?bool $isBanned = null;
 
     private ?bool $isInDefaultOfPayment = null;
-
-    private ?bool $isMailAddressInvalid = null;
 
     private ?CustomerLevelOfUndeliverableDunningNotice $levelOfUndeliverableDunningNotice = null;
 
@@ -260,11 +255,6 @@ class Customer
     public function getIsInDefaultOfPayment(): ?bool
     {
         return $this->isInDefaultOfPayment ?? null;
-    }
-
-    public function getIsMailAddressInvalid(): ?bool
-    {
-        return $this->isMailAddressInvalid ?? null;
     }
 
     public function getLevelOfUndeliverableDunningNotice(): ?CustomerLevelOfUndeliverableDunningNotice
@@ -527,28 +517,6 @@ class Customer
         return $clone;
     }
 
-    public function withIsMailAddressInvalid(bool $isMailAddressInvalid): self
-    {
-        $validator = new Validator();
-        $validator->validate($isMailAddressInvalid, self::$internalValidationSchema['properties']['isMailAddressInvalid']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->isMailAddressInvalid = $isMailAddressInvalid;
-
-        return $clone;
-    }
-
-    public function withoutIsMailAddressInvalid(): self
-    {
-        $clone = clone $this;
-        unset($clone->isMailAddressInvalid);
-
-        return $clone;
-    }
-
     public function withLevelOfUndeliverableDunningNotice(CustomerLevelOfUndeliverableDunningNotice $levelOfUndeliverableDunningNotice): self
     {
         $clone = clone $this;
@@ -715,10 +683,6 @@ class Customer
         if (isset($input->{'isInDefaultOfPayment'})) {
             $isInDefaultOfPayment = (bool)($input->{'isInDefaultOfPayment'});
         }
-        $isMailAddressInvalid = null;
-        if (isset($input->{'isMailAddressInvalid'})) {
-            $isMailAddressInvalid = (bool)($input->{'isMailAddressInvalid'});
-        }
         $levelOfUndeliverableDunningNotice = null;
         if (isset($input->{'levelOfUndeliverableDunningNotice'})) {
             $levelOfUndeliverableDunningNotice = CustomerLevelOfUndeliverableDunningNotice::from($input->{'levelOfUndeliverableDunningNotice'});
@@ -749,7 +713,6 @@ class Customer
         $obj->isAllowedToPlaceOrders = $isAllowedToPlaceOrders;
         $obj->isBanned = $isBanned;
         $obj->isInDefaultOfPayment = $isInDefaultOfPayment;
-        $obj->isMailAddressInvalid = $isMailAddressInvalid;
         $obj->levelOfUndeliverableDunningNotice = $levelOfUndeliverableDunningNotice;
         $obj->owner = $owner;
         $obj->vatId = $vatId;
@@ -794,9 +757,6 @@ class Customer
         }
         if (isset($this->isInDefaultOfPayment)) {
             $output['isInDefaultOfPayment'] = $this->isInDefaultOfPayment;
-        }
-        if (isset($this->isMailAddressInvalid)) {
-            $output['isMailAddressInvalid'] = $this->isMailAddressInvalid;
         }
         if (isset($this->levelOfUndeliverableDunningNotice)) {
             $output['levelOfUndeliverableDunningNotice'] = ($this->levelOfUndeliverableDunningNotice)->value;

@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Schemas\Ssl;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 
 /**
  * Auto-generated class for de.mittwald.v1.ssl.CertificateError.
@@ -152,6 +153,9 @@ class CertificateError
                         ],
                         'type' => 'string',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                    ],
                 ],
             ],
         ],
@@ -161,19 +165,19 @@ class CertificateError
         'type' => 'object',
     ];
 
-    private CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message;
+    private Error|CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message;
 
-    public function __construct(CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message)
+    public function __construct(Error|CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message)
     {
         $this->message = $message;
     }
 
-    public function getMessage(): CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9
+    public function getMessage(): Error|CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9
     {
         return $this->message;
     }
 
-    public function withMessage(CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message): self
+    public function withMessage(Error|CertificateErrorMessageAlternative1|CertificateErrorMessageAlternative10|CertificateErrorMessageAlternative11|CertificateErrorMessageAlternative12|CertificateErrorMessageAlternative13|CertificateErrorMessageAlternative14|CertificateErrorMessageAlternative15|CertificateErrorMessageAlternative16|CertificateErrorMessageAlternative17|CertificateErrorMessageAlternative18|CertificateErrorMessageAlternative2|CertificateErrorMessageAlternative3|CertificateErrorMessageAlternative4|CertificateErrorMessageAlternative5|CertificateErrorMessageAlternative6|CertificateErrorMessageAlternative7|CertificateErrorMessageAlternative8|CertificateErrorMessageAlternative9 $message): self
     {
         $clone = clone $this;
         $clone->message = $message;
@@ -215,6 +219,7 @@ class CertificateError
             CertificateErrorMessageAlternative16::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative16::from($input->{'message'}),
             CertificateErrorMessageAlternative17::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative17::from($input->{'message'}),
             CertificateErrorMessageAlternative18::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative18::from($input->{'message'}),
+            Error::validateInput($input->{'message'}, true) => Error::buildFromInput($input->{'message'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'message' from JSON"),
         };
 
@@ -233,6 +238,7 @@ class CertificateError
         $output = [];
         $output['message'] = match (true) {
             $this->message instanceof CertificateErrorMessageAlternative1, $this->message instanceof CertificateErrorMessageAlternative2, $this->message instanceof CertificateErrorMessageAlternative3, $this->message instanceof CertificateErrorMessageAlternative4, $this->message instanceof CertificateErrorMessageAlternative5, $this->message instanceof CertificateErrorMessageAlternative6, $this->message instanceof CertificateErrorMessageAlternative7, $this->message instanceof CertificateErrorMessageAlternative8, $this->message instanceof CertificateErrorMessageAlternative9, $this->message instanceof CertificateErrorMessageAlternative10, $this->message instanceof CertificateErrorMessageAlternative11, $this->message instanceof CertificateErrorMessageAlternative12, $this->message instanceof CertificateErrorMessageAlternative13, $this->message instanceof CertificateErrorMessageAlternative14, $this->message instanceof CertificateErrorMessageAlternative15, $this->message instanceof CertificateErrorMessageAlternative16, $this->message instanceof CertificateErrorMessageAlternative17, $this->message instanceof CertificateErrorMessageAlternative18 => ($this->message)->value,
+            ($this->message) instanceof Error => $this->message->toJson(),
         };
 
         return $output;
@@ -265,7 +271,7 @@ class CertificateError
     public function __clone()
     {
         $this->message = match (true) {
-            $this->message instanceof CertificateErrorMessageAlternative1, $this->message instanceof CertificateErrorMessageAlternative2, $this->message instanceof CertificateErrorMessageAlternative3, $this->message instanceof CertificateErrorMessageAlternative4, $this->message instanceof CertificateErrorMessageAlternative5, $this->message instanceof CertificateErrorMessageAlternative6, $this->message instanceof CertificateErrorMessageAlternative7, $this->message instanceof CertificateErrorMessageAlternative8, $this->message instanceof CertificateErrorMessageAlternative9, $this->message instanceof CertificateErrorMessageAlternative10, $this->message instanceof CertificateErrorMessageAlternative11, $this->message instanceof CertificateErrorMessageAlternative12, $this->message instanceof CertificateErrorMessageAlternative13, $this->message instanceof CertificateErrorMessageAlternative14, $this->message instanceof CertificateErrorMessageAlternative15, $this->message instanceof CertificateErrorMessageAlternative16, $this->message instanceof CertificateErrorMessageAlternative17, $this->message instanceof CertificateErrorMessageAlternative18 => $this->message,
+            $this->message instanceof CertificateErrorMessageAlternative1, $this->message instanceof CertificateErrorMessageAlternative2, $this->message instanceof CertificateErrorMessageAlternative3, $this->message instanceof CertificateErrorMessageAlternative4, $this->message instanceof CertificateErrorMessageAlternative5, $this->message instanceof CertificateErrorMessageAlternative6, $this->message instanceof CertificateErrorMessageAlternative7, $this->message instanceof CertificateErrorMessageAlternative8, $this->message instanceof CertificateErrorMessageAlternative9, $this->message instanceof CertificateErrorMessageAlternative10, $this->message instanceof CertificateErrorMessageAlternative11, $this->message instanceof CertificateErrorMessageAlternative12, $this->message instanceof CertificateErrorMessageAlternative13, $this->message instanceof CertificateErrorMessageAlternative14, $this->message instanceof CertificateErrorMessageAlternative15, $this->message instanceof CertificateErrorMessageAlternative16, $this->message instanceof CertificateErrorMessageAlternative17, $this->message instanceof CertificateErrorMessageAlternative18, ($this->message) instanceof Error => $this->message,
         };
     }
 }

@@ -25,6 +25,10 @@ class LicenseOrderAlternative1
     private static array $internalValidationSchema = [
         'description' => 'TYPO3 ELTS license',
         'properties' => [
+            'description' => [
+                'description' => 'Describe for which typo3 instance the license will be used.',
+                'type' => 'string',
+            ],
             'licenseType' => [
                 'enum' => [
                     'typo3',
@@ -45,9 +49,15 @@ class LicenseOrderAlternative1
             'licenseType',
             'projectId',
             'majorVersion',
+            'description',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * Describe for which typo3 instance the license will be used.
+     */
+    private string $description;
 
     private LicenseOrderAlternative1LicenseType $licenseType;
 
@@ -58,11 +68,17 @@ class LicenseOrderAlternative1
 
     private string $projectId;
 
-    public function __construct(LicenseOrderAlternative1LicenseType $licenseType, int|float $majorVersion, string $projectId)
+    public function __construct(string $description, LicenseOrderAlternative1LicenseType $licenseType, int|float $majorVersion, string $projectId)
     {
+        $this->description = $description;
         $this->licenseType = $licenseType;
         $this->majorVersion = $majorVersion;
         $this->projectId = $projectId;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     public function getLicenseType(): LicenseOrderAlternative1LicenseType
@@ -78,6 +94,20 @@ class LicenseOrderAlternative1
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
     }
 
     public function withLicenseType(LicenseOrderAlternative1LicenseType $licenseType): self
@@ -131,11 +161,12 @@ class LicenseOrderAlternative1
             static::validateInput($input);
         }
 
+        $description = $input->{'description'};
         $licenseType = LicenseOrderAlternative1LicenseType::from($input->{'licenseType'});
         $majorVersion = str_contains((string)($input->{'majorVersion'}), '.') ? (float)($input->{'majorVersion'}) : (int)($input->{'majorVersion'});
         $projectId = $input->{'projectId'};
 
-        $obj = new self($licenseType, $majorVersion, $projectId);
+        $obj = new self($description, $licenseType, $majorVersion, $projectId);
 
         return $obj;
     }
@@ -148,6 +179,7 @@ class LicenseOrderAlternative1
     public function toJson(): array
     {
         $output = [];
+        $output['description'] = $this->description;
         $output['licenseType'] = ($this->licenseType)->value;
         $output['majorVersion'] = $this->majorVersion;
         $output['projectId'] = $this->projectId;
