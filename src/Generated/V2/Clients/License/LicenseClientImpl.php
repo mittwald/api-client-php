@@ -12,7 +12,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseBadRequ
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\License\GetLicense\GetLicenseTooManyRequestsResponse;
@@ -82,7 +81,6 @@ class LicenseClientImpl implements LicenseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetLicenseBadRequestResponse::fromResponse($httpResponse),
             403 => GetLicenseForbiddenResponse::fromResponse($httpResponse),
-            404 => GetLicenseNotFoundResponse::fromResponse($httpResponse),
             429 => GetLicenseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetLicenseInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetLicenseDefaultResponse::fromResponse($httpResponse),
