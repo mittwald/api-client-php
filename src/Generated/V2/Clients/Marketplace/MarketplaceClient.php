@@ -50,6 +50,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVariantChange\ExtensionCancelExtensionVariantChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessRequest;
@@ -353,13 +355,23 @@ interface MarketplaceClient
      */
     public function extensionChangeContext(ExtensionChangeContextRequest $request): ExtensionChangeContextOKResponse;
     /**
+     * Check if an Extension is unchargable for this specific context or if it must be charged.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-check-extension-is-chargable
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCheckExtensionIsChargableRequest $request An object representing the request for this operation
+     * @return ExtensionCheckExtensionIsChargableOKResponse The calculated chargeability of an extension instance to be created.
+     */
+    public function extensionCheckExtensionIsChargable(ExtensionCheckExtensionIsChargableRequest $request): ExtensionCheckExtensionIsChargableOKResponse;
+    /**
      * Consent to extension scopes.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-consent-to-extension-scopes
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionConsentToExtensionScopesRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse The scopes have been applied.
      */
     public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): EmptyResponse;
     /**

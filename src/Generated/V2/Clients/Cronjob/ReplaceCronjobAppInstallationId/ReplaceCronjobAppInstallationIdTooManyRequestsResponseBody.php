@@ -2,97 +2,91 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobAppIdRequestBody
+class ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'properties' => [
-            'appId' => [
-                'deprecated' => true,
-                'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'appInstallationId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-        ],
-        'required' => [
-            'appId',
-        ],
         'type' => 'object',
+        'properties' => [
+            'message' => [
+                'type' => 'string',
+                'example' => 'too many requests',
+            ],
+            'type' => [
+                'type' => 'string',
+                'example' => 'RateLimitError',
+            ],
+        ],
     ];
 
+    private ?string $message = null;
+
+    private ?string $type = null;
+
     /**
-     * DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version.
      *
-     * @deprecated
      */
-    private string $appId;
-
-    private ?string $appInstallationId = null;
-
-    public function __construct(string $appId)
+    public function __construct()
     {
-        $this->appId = $appId;
     }
 
-    /**
-     * @deprecated
-     */
-    public function getAppId(): string
+    public function getMessage(): ?string
     {
-        return $this->appId;
+        return $this->message ?? null;
     }
 
-    public function getAppInstallationId(): ?string
+    public function getType(): ?string
     {
-        return $this->appInstallationId ?? null;
+        return $this->type ?? null;
     }
 
-    /**
-     * @deprecated
-     */
-    public function withAppId(string $appId): self
+    public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appId = $appId;
+        $clone->message = $message;
 
         return $clone;
     }
 
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withoutMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->message);
+
+        return $clone;
+    }
+
+    public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->type = $type;
 
         return $clone;
     }
 
-    public function withoutAppInstallationId(): self
+    public function withoutType(): self
     {
         $clone = clone $this;
-        unset($clone->appInstallationId);
+        unset($clone->type);
 
         return $clone;
     }
@@ -102,24 +96,28 @@ class UpdateCronjobAppIdRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdRequestBody Created instance
+     * @return ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appId = $input->{'appId'};
-        $appInstallationId = null;
-        if (isset($input->{'appInstallationId'})) {
-            $appInstallationId = $input->{'appInstallationId'};
+        $message = null;
+        if (isset($input->{'message'})) {
+            $message = $input->{'message'};
+        }
+        $type = null;
+        if (isset($input->{'type'})) {
+            $type = $input->{'type'};
         }
 
-        $obj = new self($appId);
-        $obj->appInstallationId = $appInstallationId;
+        $obj = new self();
+        $obj->message = $message;
+        $obj->type = $type;
         return $obj;
     }
 
@@ -131,9 +129,11 @@ class UpdateCronjobAppIdRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['appId'] = $this->appId;
-        if (isset($this->appInstallationId)) {
-            $output['appInstallationId'] = $this->appInstallationId;
+        if (isset($this->message)) {
+            $output['message'] = $this->message;
+        }
+        if (isset($this->type)) {
+            $output['type'] = $this->type;
         }
 
         return $output;

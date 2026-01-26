@@ -57,17 +57,22 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecution
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedTooManyRequestsResponse;
 
 /**
  * Client for Cronjob API
@@ -280,6 +285,30 @@ class CronjobClientImpl implements CronjobClient
     }
 
     /**
+     * Update a Cronjob's app installation id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-replace-cronjob-app-installation-id
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceCronjobAppInstallationIdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function replaceCronjobAppInstallationId(ReplaceCronjobAppInstallationIdRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ReplaceCronjobAppInstallationIdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ReplaceCronjobAppInstallationIdBadRequestResponse::fromResponse($httpResponse),
+            412 => ReplaceCronjobAppInstallationIdPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ReplaceCronjobAppInstallationIdTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ReplaceCronjobAppInstallationIdDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Update a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
@@ -307,24 +336,27 @@ class CronjobClientImpl implements CronjobClient
     /**
      * Update a Cronjob's app installation id.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id
+     * Deprecated by PUT /v2/cronjobs/{cronjobId}/app-installation-id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCronjobAppIdRequest $request An object representing the request for this operation
+     * @param UpdateCronjobAppIdDeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): EmptyResponse
+    public function updateCronjobAppIdDeprecated(UpdateCronjobAppIdDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateCronjobAppIdRequest::method, $request->buildUrl());
+        $httpRequest = new Request(UpdateCronjobAppIdDeprecatedRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateCronjobAppIdBadRequestResponse::fromResponse($httpResponse),
-            412 => UpdateCronjobAppIdPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => UpdateCronjobAppIdTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateCronjobAppIdDefaultResponse::fromResponse($httpResponse),
+            400 => UpdateCronjobAppIdDeprecatedBadRequestResponse::fromResponse($httpResponse),
+            412 => UpdateCronjobAppIdDeprecatedPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => UpdateCronjobAppIdDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UpdateCronjobAppIdDeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 

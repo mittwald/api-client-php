@@ -23,8 +23,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsOKR
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId\ReplaceCronjobAppInstallationIdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated\UpdateCronjobAppIdDeprecatedRequest;
 
 /**
  * Client for Cronjob API
@@ -121,6 +122,16 @@ interface CronjobClient
      */
     public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse;
     /**
+     * Update a Cronjob's app installation id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-replace-cronjob-app-installation-id
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceCronjobAppInstallationIdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function replaceCronjobAppInstallationId(ReplaceCronjobAppInstallationIdRequest $request): EmptyResponse;
+    /**
      * Update a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
@@ -133,13 +144,16 @@ interface CronjobClient
     /**
      * Update a Cronjob's app installation id.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id
+     * Deprecated by PUT /v2/cronjobs/{cronjobId}/app-installation-id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCronjobAppIdRequest $request An object representing the request for this operation
+     * @param UpdateCronjobAppIdDeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): EmptyResponse;
+    public function updateCronjobAppIdDeprecated(UpdateCronjobAppIdDeprecatedRequest $request): EmptyResponse;
     /**
      * Abort a CronjobExecution. Deprecated because this feature is not available at this time.
      *
