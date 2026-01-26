@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobAppIdRequest
+class ExtensionCheckExtensionIsChargableRequest
 {
-    public const method = 'patch';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,76 +17,100 @@ class UpdateCronjobAppIdRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'extensionId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'appId' => [
-                        'deprecated' => true,
-                        'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                    'appInstallationId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'appId',
-                ],
-                'type' => 'object',
+            'contextId' => [
+                'type' => 'string',
+            ],
+            'variantKey' => [
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'cronjobId',
-            'body',
+            'extensionId',
+            'contextId',
         ],
     ];
 
-    private string $cronjobId;
+    private string $extensionId;
 
-    private UpdateCronjobAppIdRequestBody $body;
+    private string $contextId;
+
+    private ?string $variantKey = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, UpdateCronjobAppIdRequestBody $body)
+    public function __construct(string $extensionId, string $contextId)
     {
-        $this->cronjobId = $cronjobId;
-        $this->body = $body;
+        $this->extensionId = $extensionId;
+        $this->contextId = $contextId;
     }
 
-    public function getCronjobId(): string
+    public function getExtensionId(): string
     {
-        return $this->cronjobId;
+        return $this->extensionId;
     }
 
-    public function getBody(): UpdateCronjobAppIdRequestBody
+    public function getContextId(): string
     {
-        return $this->body;
+        return $this->contextId;
     }
 
-    public function withCronjobId(string $cronjobId): self
+    public function getVariantKey(): ?string
+    {
+        return $this->variantKey ?? null;
+    }
+
+    public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
 
-    public function withBody(UpdateCronjobAppIdRequestBody $body): self
+    public function withContextId(string $contextId): self
+    {
+        $validator = new Validator();
+        $validator->validate($contextId, self::$internalValidationSchema['properties']['contextId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contextId = $contextId;
+
+        return $clone;
+    }
+
+    public function withVariantKey(string $variantKey): self
+    {
+        $validator = new Validator();
+        $validator->validate($variantKey, self::$internalValidationSchema['properties']['variantKey']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->variantKey = $variantKey;
+
+        return $clone;
+    }
+
+    public function withoutVariantKey(): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->variantKey);
 
         return $clone;
     }
@@ -96,21 +120,25 @@ class UpdateCronjobAppIdRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdRequest Created instance
+     * @return ExtensionCheckExtensionIsChargableRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionCheckExtensionIsChargableRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $body = UpdateCronjobAppIdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $extensionId = $input->{'extensionId'};
+        $contextId = $input->{'contextId'};
+        $variantKey = null;
+        if (isset($input->{'variantKey'})) {
+            $variantKey = $input->{'variantKey'};
+        }
 
-        $obj = new self($cronjobId, $body);
-
+        $obj = new self($extensionId, $contextId);
+        $obj->variantKey = $variantKey;
         return $obj;
     }
 
@@ -122,8 +150,11 @@ class UpdateCronjobAppIdRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['body'] = ($this->body)->toJson();
+        $output['extensionId'] = $this->extensionId;
+        $output['contextId'] = $this->contextId;
+        if (isset($this->variantKey)) {
+            $output['variantKey'] = $this->variantKey;
+        }
 
         return $output;
     }
@@ -154,7 +185,6 @@ class UpdateCronjobAppIdRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -169,8 +199,9 @@ class UpdateCronjobAppIdRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId . '/app-installation-id';
+        $extensionId = urlencode($mapped['extensionId']);
+        $contextId = urlencode($mapped['contextId']);
+        return '/v2/extensions/' . $extensionId . '/contexts/' . $contextId . '/chargability';
     }
 
     /**
@@ -186,10 +217,12 @@ class UpdateCronjobAppIdRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['variantKey'])) {
+            $query['variantKey'] = $mapped['variantKey'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

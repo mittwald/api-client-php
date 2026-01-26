@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateCronjobAppIdDefaultResponse implements ResponseContainer
+class ReplaceCronjobAppInstallationIdDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -54,10 +54,10 @@ class UpdateCronjobAppIdDefaultResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdDefaultResponse Created instance
+     * @return ReplaceCronjobAppInstallationIdDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdDefaultResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceCronjobAppInstallationIdDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

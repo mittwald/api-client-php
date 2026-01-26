@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateCronjobAppIdTooManyRequestsResponse implements ResponseContainer
+class UpdateCronjobAppIdDeprecatedTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class UpdateCronjobAppIdTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private UpdateCronjobAppIdTooManyRequestsResponseBody $body;
+    private UpdateCronjobAppIdDeprecatedTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(UpdateCronjobAppIdTooManyRequestsResponseBody $body)
+    public function __construct(UpdateCronjobAppIdDeprecatedTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): UpdateCronjobAppIdTooManyRequestsResponseBody
+    public function getBody(): UpdateCronjobAppIdDeprecatedTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(UpdateCronjobAppIdTooManyRequestsResponseBody $body): self
+    public function withBody(UpdateCronjobAppIdDeprecatedTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class UpdateCronjobAppIdTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdTooManyRequestsResponse Created instance
+     * @return UpdateCronjobAppIdDeprecatedTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdDeprecatedTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = UpdateCronjobAppIdTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = UpdateCronjobAppIdDeprecatedTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

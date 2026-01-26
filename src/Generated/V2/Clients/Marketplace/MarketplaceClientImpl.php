@@ -132,6 +132,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\E
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCheckExtensionIsChargable\ExtensionCheckExtensionIsChargableTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -861,6 +866,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionChangeContextNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionChangeContextTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionChangeContextDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if an Extension is unchargable for this specific context or if it must be charged.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-check-extension-is-chargable
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCheckExtensionIsChargableRequest $request An object representing the request for this operation
+     * @return ExtensionCheckExtensionIsChargableOKResponse The calculated chargeability of an extension instance to be created.
+     */
+    public function extensionCheckExtensionIsChargable(ExtensionCheckExtensionIsChargableRequest $request): ExtensionCheckExtensionIsChargableOKResponse
+    {
+        $httpRequest = new Request(ExtensionCheckExtensionIsChargableRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionCheckExtensionIsChargableOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionCheckExtensionIsChargableNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionCheckExtensionIsChargableTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionCheckExtensionIsChargableDefaultResponse::fromResponse($httpResponse),
         });
     }
 
