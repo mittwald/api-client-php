@@ -6,8 +6,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCom
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\ListIngressesCompatibleWithCertificateIDRequest;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\ListIngressesCompatibleWithCertificateRequest;
 
 class IngressListIngressesCompatibleWithCertificateRequest
 {
@@ -33,14 +31,23 @@ class IngressListIngressesCompatibleWithCertificateRequest
                 'minimum' => 1,
             ],
             'body' => [
-                'oneOf' => [
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.ListIngressesCompatibleWithCertificateRequest',
+                'properties' => [
+                    'certificate' => [
+                        'description' => 'PEM-encoded certificate. Linebreaks have to be escaped with 
+.',
+                        'type' => 'string',
                     ],
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.ListIngressesCompatibleWithCertificateIDRequest',
+                    'projectId' => [
+                        'description' => 'The projects UUID.',
+                        'format' => 'uuid',
+                        'type' => 'string',
                     ],
                 ],
+                'required' => [
+                    'projectId',
+                    'certificate',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
@@ -54,13 +61,13 @@ class IngressListIngressesCompatibleWithCertificateRequest
 
     private ?int $page = null;
 
-    private ListIngressesCompatibleWithCertificateIDRequest|ListIngressesCompatibleWithCertificateRequest $body;
+    private IngressListIngressesCompatibleWithCertificateRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(ListIngressesCompatibleWithCertificateIDRequest|ListIngressesCompatibleWithCertificateRequest $body)
+    public function __construct(IngressListIngressesCompatibleWithCertificateRequestBody $body)
     {
         $this->body = $body;
     }
@@ -80,7 +87,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
         return $this->page ?? null;
     }
 
-    public function getBody(): ListIngressesCompatibleWithCertificateIDRequest|ListIngressesCompatibleWithCertificateRequest
+    public function getBody(): IngressListIngressesCompatibleWithCertificateRequestBody
     {
         return $this->body;
     }
@@ -135,7 +142,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
         return $clone;
     }
 
-    public function withBody(ListIngressesCompatibleWithCertificateIDRequest|ListIngressesCompatibleWithCertificateRequest $body): self
+    public function withBody(IngressListIngressesCompatibleWithCertificateRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -170,11 +177,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
-        $body = match (true) {
-            ListIngressesCompatibleWithCertificateRequest::validateInput($input->{'body'}, true) => ListIngressesCompatibleWithCertificateRequest::buildFromInput($input->{'body'}, validate: $validate),
-            ListIngressesCompatibleWithCertificateIDRequest::validateInput($input->{'body'}, true) => ListIngressesCompatibleWithCertificateIDRequest::buildFromInput($input->{'body'}, validate: $validate),
-            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
-        };
+        $body = IngressListIngressesCompatibleWithCertificateRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
         $obj->limit = $limit;
@@ -196,9 +199,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
-        $output['body'] = match (true) {
-            ($this->body) instanceof ListIngressesCompatibleWithCertificateRequest, ($this->body) instanceof ListIngressesCompatibleWithCertificateIDRequest => $this->body->toJson(),
-        };
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -229,9 +230,7 @@ class IngressListIngressesCompatibleWithCertificateRequest
 
     public function __clone()
     {
-        $this->body = match (true) {
-            ($this->body) instanceof ListIngressesCompatibleWithCertificateRequest, ($this->body) instanceof ListIngressesCompatibleWithCertificateIDRequest => $this->body,
-        };
+        $this->body = clone $this->body;
     }
 
     /**
