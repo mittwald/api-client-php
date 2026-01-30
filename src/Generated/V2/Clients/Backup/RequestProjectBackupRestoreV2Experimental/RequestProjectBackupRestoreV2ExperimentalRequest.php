@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestorePathRequest;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\ProjectBackupRestoreRequest;
 
-class RequestProjectBackupRestorePathRequest
+class RequestProjectBackupRestoreV2ExperimentalRequest
 {
     public const method = 'post';
 
@@ -22,7 +22,7 @@ class RequestProjectBackupRestorePathRequest
                 'type' => 'string',
             ],
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequest',
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreRequest',
             ],
         ],
         'required' => [
@@ -33,13 +33,13 @@ class RequestProjectBackupRestorePathRequest
 
     private string $projectBackupId;
 
-    private ProjectBackupRestorePathRequest $body;
+    private ProjectBackupRestoreRequest $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId, ProjectBackupRestorePathRequest $body)
+    public function __construct(string $projectBackupId, ProjectBackupRestoreRequest $body)
     {
         $this->projectBackupId = $projectBackupId;
         $this->body = $body;
@@ -50,7 +50,7 @@ class RequestProjectBackupRestorePathRequest
         return $this->projectBackupId;
     }
 
-    public function getBody(): ProjectBackupRestorePathRequest
+    public function getBody(): ProjectBackupRestoreRequest
     {
         return $this->body;
     }
@@ -69,7 +69,7 @@ class RequestProjectBackupRestorePathRequest
         return $clone;
     }
 
-    public function withBody(ProjectBackupRestorePathRequest $body): self
+    public function withBody(ProjectBackupRestoreRequest $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -82,10 +82,10 @@ class RequestProjectBackupRestorePathRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestorePathRequest Created instance
+     * @return RequestProjectBackupRestoreV2ExperimentalRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestoreV2ExperimentalRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -93,7 +93,7 @@ class RequestProjectBackupRestorePathRequest
         }
 
         $projectBackupId = $input->{'projectBackupId'};
-        $body = ProjectBackupRestorePathRequest::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ProjectBackupRestoreRequest::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($projectBackupId, $body);
 
@@ -155,7 +155,7 @@ class RequestProjectBackupRestorePathRequest
     {
         $mapped = $this->toJson();
         $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/restore-path';
+        return '/v2/project-backups/' . $projectBackupId . '/restore';
     }
 
     /**

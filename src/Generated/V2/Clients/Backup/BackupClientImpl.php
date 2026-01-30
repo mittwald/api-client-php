@@ -48,6 +48,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBa
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalBadGatewayResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental\GetProjectBackupDatabaseDumpsV2ExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesBadGatewayResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDirectories\GetProjectBackupDirectoriesForbiddenResponse;
@@ -70,12 +78,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath\RequestProjectBackupRestorePathTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionForbiddenResponse;
@@ -280,7 +294,33 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * Get table of contents for a ProjectBackup.
+     * List database dump's for a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-database-dumps-v2-experimental
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetProjectBackupDatabaseDumpsV2ExperimentalRequest $request An object representing the request for this operation
+     * @return GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse OK
+     */
+    public function getProjectBackupDatabaseDumpsV2Experimental(GetProjectBackupDatabaseDumpsV2ExperimentalRequest $request): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse
+    {
+        $httpRequest = new Request(GetProjectBackupDatabaseDumpsV2ExperimentalRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetProjectBackupDatabaseDumpsV2ExperimentalForbiddenResponse::fromResponse($httpResponse),
+            404 => GetProjectBackupDatabaseDumpsV2ExperimentalNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectBackupDatabaseDumpsV2ExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
+            502 => GetProjectBackupDatabaseDumpsV2ExperimentalBadGatewayResponse::fromResponse($httpResponse),
+            503 => GetProjectBackupDatabaseDumpsV2ExperimentalServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetProjectBackupDatabaseDumpsV2ExperimentalDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List paths for a ProjectBackup.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-directories
      * @throws GuzzleException
@@ -376,25 +416,55 @@ class BackupClientImpl implements BackupClient
     /**
      * Restore a ProjectBackup's path.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore-path
+     * **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
+     * This endpoint will be removed in a future version.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore-path-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestProjectBackupRestorePathRequest $request An object representing the request for this operation
+     * @param RequestProjectBackupRestorePathDeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function requestProjectBackupRestorePath(RequestProjectBackupRestorePathRequest $request): EmptyResponse
+    public function requestProjectBackupRestorePathDeprecated(RequestProjectBackupRestorePathDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(RequestProjectBackupRestorePathRequest::method, $request->buildUrl());
+        $httpRequest = new Request(RequestProjectBackupRestorePathDeprecatedRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => RequestProjectBackupRestorePathBadRequestResponse::fromResponse($httpResponse),
-            403 => RequestProjectBackupRestorePathForbiddenResponse::fromResponse($httpResponse),
-            404 => RequestProjectBackupRestorePathNotFoundResponse::fromResponse($httpResponse),
-            429 => RequestProjectBackupRestorePathTooManyRequestsResponse::fromResponse($httpResponse),
-            default => RequestProjectBackupRestorePathDefaultResponse::fromResponse($httpResponse),
+            400 => RequestProjectBackupRestorePathDeprecatedBadRequestResponse::fromResponse($httpResponse),
+            403 => RequestProjectBackupRestorePathDeprecatedForbiddenResponse::fromResponse($httpResponse),
+            404 => RequestProjectBackupRestorePathDeprecatedNotFoundResponse::fromResponse($httpResponse),
+            429 => RequestProjectBackupRestorePathDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
+            default => RequestProjectBackupRestorePathDeprecatedDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Restore a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore-v2-experimental
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestProjectBackupRestoreV2ExperimentalRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function requestProjectBackupRestoreV2Experimental(RequestProjectBackupRestoreV2ExperimentalRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(RequestProjectBackupRestoreV2ExperimentalRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RequestProjectBackupRestoreV2ExperimentalBadRequestResponse::fromResponse($httpResponse),
+            403 => RequestProjectBackupRestoreV2ExperimentalForbiddenResponse::fromResponse($httpResponse),
+            404 => RequestProjectBackupRestoreV2ExperimentalNotFoundResponse::fromResponse($httpResponse),
+            429 => RequestProjectBackupRestoreV2ExperimentalTooManyRequestsResponse::fromResponse($httpResponse),
+            default => RequestProjectBackupRestoreV2ExperimentalDefaultResponse::fromResponse($httpResponse),
         });
     }
 

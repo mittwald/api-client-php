@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePath;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupDatabaseDumpsV2Experimental;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class RequestProjectBackupRestorePathTooManyRequestsResponse implements ResponseContainer
+class GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,36 +21,37 @@ class RequestProjectBackupRestorePathTooManyRequestsResponse implements Response
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
                 'properties' => [
-                    'message' => [
-                        'type' => 'string',
-                        'example' => 'too many requests',
-                    ],
-                    'type' => [
-                        'type' => 'string',
-                        'example' => 'RateLimitError',
+                    'databases' => [
+                        'items' => [
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
                     ],
                 ],
+                'required' => [
+                    'databases',
+                ],
+                'type' => 'object',
             ],
         ],
     ];
 
-    private RequestProjectBackupRestorePathTooManyRequestsResponseBody $body;
+    private GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(RequestProjectBackupRestorePathTooManyRequestsResponseBody $body)
+    public function __construct(GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): RequestProjectBackupRestorePathTooManyRequestsResponseBody
+    public function getBody(): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(RequestProjectBackupRestorePathTooManyRequestsResponseBody $body): self
+    public function withBody(GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +64,17 @@ class RequestProjectBackupRestorePathTooManyRequestsResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestProjectBackupRestorePathTooManyRequestsResponse Created instance
+     * @return GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectBackupRestorePathTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectBackupDatabaseDumpsV2ExperimentalOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = RequestProjectBackupRestorePathTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = GetProjectBackupDatabaseDumpsV2ExperimentalOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
