@@ -20,19 +20,24 @@ class ListDomainsRequest
             'projectId' => [
                 'type' => 'string',
             ],
-            'page' => [
-                'minimum' => 1,
-                'type' => 'integer',
-            ],
-            'limit' => [
-                'minimum' => 1,
-                'type' => 'integer',
-            ],
             'domainSearchName' => [
                 'type' => 'string',
             ],
             'contactHash' => [
                 'type' => 'string',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 10000,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -42,13 +47,15 @@ class ListDomainsRequest
 
     private ?string $projectId = null;
 
-    private ?int $page = null;
-
-    private ?int $limit = null;
-
     private ?string $domainSearchName = null;
 
     private ?string $contactHash = null;
+
+    private int $limit = 10000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -66,16 +73,6 @@ class ListDomainsRequest
         return $this->projectId ?? null;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
     public function getDomainSearchName(): ?string
     {
         return $this->domainSearchName ?? null;
@@ -84,6 +81,21 @@ class ListDomainsRequest
     public function getContactHash(): ?string
     {
         return $this->contactHash ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -104,50 +116,6 @@ class ListDomainsRequest
     {
         $clone = clone $this;
         unset($clone->projectId);
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
-
-        return $clone;
-    }
-
-    public function withLimit(int $limit): self
-    {
-        $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
 
         return $clone;
     }
@@ -196,6 +164,56 @@ class ListDomainsRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -215,14 +233,6 @@ class ListDomainsRequest
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
         }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
         $domainSearchName = null;
         if (isset($input->{'domainSearchName'})) {
             $domainSearchName = $input->{'domainSearchName'};
@@ -231,13 +241,26 @@ class ListDomainsRequest
         if (isset($input->{'contactHash'})) {
             $contactHash = $input->{'contactHash'};
         }
+        $limit = 10000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self();
         $obj->projectId = $projectId;
-        $obj->page = $page;
-        $obj->limit = $limit;
         $obj->domainSearchName = $domainSearchName;
         $obj->contactHash = $contactHash;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -252,17 +275,16 @@ class ListDomainsRequest
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
         if (isset($this->domainSearchName)) {
             $output['domainSearchName'] = $this->domainSearchName;
         }
         if (isset($this->contactHash)) {
             $output['contactHash'] = $this->contactHash;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -327,17 +349,20 @@ class ListDomainsRequest
         if (isset($mapped['projectId'])) {
             $query['projectId'] = $mapped['projectId'];
         }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
         if (isset($mapped['domainSearchName'])) {
             $query['domainSearchName'] = $mapped['domainSearchName'];
         }
         if (isset($mapped['contactHash'])) {
             $query['contactHash'] = $mapped['contactHash'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
