@@ -613,7 +613,7 @@ interface UserClient
      */
     public function confirmPasswordReset(ConfirmPasswordResetRequest $request): EmptyResponse;
     /**
-     * Store a new ApiToken.
+     * Create a new ApiToken.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-api-token
      * @throws GuzzleException
