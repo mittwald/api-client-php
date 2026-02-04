@@ -33,11 +33,6 @@ class InviteInformation
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'userId' => [
-                'description' => 'ID of the user this invite is for.',
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'invitedBy',
@@ -55,11 +50,6 @@ class InviteInformation
      */
     private string $invitedBy;
 
-    /**
-     * ID of the user this invite is for.
-     */
-    private ?string $userId = null;
-
     public function __construct(string $invitedBy)
     {
         $this->invitedBy = $invitedBy;
@@ -73,11 +63,6 @@ class InviteInformation
     public function getInvitedBy(): string
     {
         return $this->invitedBy;
-    }
-
-    public function getUserId(): ?string
-    {
-        return $this->userId ?? null;
     }
 
     public function withInvitationToken(string $invitationToken): self
@@ -116,28 +101,6 @@ class InviteInformation
         return $clone;
     }
 
-    public function withUserId(string $userId): self
-    {
-        $validator = new Validator();
-        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->userId = $userId;
-
-        return $clone;
-    }
-
-    public function withoutUserId(): self
-    {
-        $clone = clone $this;
-        unset($clone->userId);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -158,14 +121,9 @@ class InviteInformation
             $invitationToken = $input->{'invitationToken'};
         }
         $invitedBy = $input->{'invitedBy'};
-        $userId = null;
-        if (isset($input->{'userId'})) {
-            $userId = $input->{'userId'};
-        }
 
         $obj = new self($invitedBy);
         $obj->invitationToken = $invitationToken;
-        $obj->userId = $userId;
         return $obj;
     }
 
@@ -181,9 +139,6 @@ class InviteInformation
             $output['invitationToken'] = $this->invitationToken;
         }
         $output['invitedBy'] = $this->invitedBy;
-        if (isset($this->userId)) {
-            $output['userId'] = $this->userId;
-        }
 
         return $output;
     }

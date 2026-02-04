@@ -26,7 +26,7 @@ class CustomerInvite
     private static array $internalValidationSchema = [
         'properties' => [
             'avatarRefId' => [
-                'description' => 'Reference to the Project\'s avatar.',
+                'description' => 'Reference to the Customer\'s avatar.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -78,7 +78,7 @@ class CustomerInvite
     ];
 
     /**
-     * Reference to the Project's avatar.
+     * Reference to the Customer's avatar.
      */
     private ?string $avatarRefId = null;
 

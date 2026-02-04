@@ -155,6 +155,9 @@ interface DatabaseClient
     /**
      * Get a MySQLDatabase.
      *
+     * Returns a MySQLDatabase resource and its current status. Note that establishing a connection requires the linked user to have a status of ready; relying solely on the database status is insufficient.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
