@@ -60,10 +60,6 @@ class AppInstallation
             'installationPath' => [
                 'type' => 'string',
             ],
-            'lastError' => [
-                'description' => 'The last error that occurred during an update. Resets on success.',
-                'type' => 'string',
-            ],
             'linkedDatabases' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.LinkedDatabase',
@@ -146,11 +142,6 @@ class AppInstallation
     private string $id;
 
     private string $installationPath;
-
-    /**
-     * The last error that occurred during an update. Resets on success.
-     */
-    private ?string $lastError = null;
 
     /**
      * @var LinkedDatabase[]
@@ -249,11 +240,6 @@ class AppInstallation
     public function getInstallationPath(): string
     {
         return $this->installationPath;
-    }
-
-    public function getLastError(): ?string
-    {
-        return $this->lastError ?? null;
     }
 
     /**
@@ -440,28 +426,6 @@ class AppInstallation
         return $clone;
     }
 
-    public function withLastError(string $lastError): self
-    {
-        $validator = new Validator();
-        $validator->validate($lastError, self::$internalValidationSchema['properties']['lastError']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->lastError = $lastError;
-
-        return $clone;
-    }
-
-    public function withoutLastError(): self
-    {
-        $clone = clone $this;
-        unset($clone->lastError);
-
-        return $clone;
-    }
-
     /**
      * @param LinkedDatabase[] $linkedDatabases
      */
@@ -641,10 +605,6 @@ class AppInstallation
         }
         $id = $input->{'id'};
         $installationPath = $input->{'installationPath'};
-        $lastError = null;
-        if (isset($input->{'lastError'})) {
-            $lastError = $input->{'lastError'};
-        }
         $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
         $lockedBy = null;
         if (isset($input->{'lockedBy'})) {
@@ -669,7 +629,6 @@ class AppInstallation
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->deletionRequested = $deletionRequested;
         $obj->disabled = $disabled;
-        $obj->lastError = $lastError;
         $obj->lockedBy = $lockedBy;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
@@ -695,9 +654,6 @@ class AppInstallation
         $output['disabled'] = $this->disabled;
         $output['id'] = $this->id;
         $output['installationPath'] = $this->installationPath;
-        if (isset($this->lastError)) {
-            $output['lastError'] = $this->lastError;
-        }
         $output['linkedDatabases'] = array_map(fn (LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
         if (isset($this->lockedBy)) {
             $output['lockedBy'] = $this->lockedBy;
