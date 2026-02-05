@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateWithCSRRequest;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateWithDNSRequest;
 
 class SslCreateCertificateRequestRequest
 {
@@ -27,6 +28,9 @@ class SslCreateCertificateRequestRequest
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithCSRRequest',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithDNSRequest',
+                    ],
                 ],
             ],
         ],
@@ -35,23 +39,23 @@ class SslCreateCertificateRequestRequest
         ],
     ];
 
-    private CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body;
+    private CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest|CertificateRequestCreateWithDNSRequest $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body)
+    public function __construct(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest|CertificateRequestCreateWithDNSRequest $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest
+    public function getBody(): CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest|CertificateRequestCreateWithDNSRequest
     {
         return $this->body;
     }
 
-    public function withBody(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body): self
+    public function withBody(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest|CertificateRequestCreateWithDNSRequest $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -77,6 +81,7 @@ class SslCreateCertificateRequestRequest
         $body = match (true) {
             CertificateRequestCreateRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateRequest::buildFromInput($input->{'body'}, validate: $validate),
             CertificateRequestCreateWithCSRRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateWithCSRRequest::buildFromInput($input->{'body'}, validate: $validate),
+            CertificateRequestCreateWithDNSRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateWithDNSRequest::buildFromInput($input->{'body'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
@@ -94,7 +99,7 @@ class SslCreateCertificateRequestRequest
     {
         $output = [];
         $output['body'] = match (true) {
-            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest => $this->body->toJson(),
+            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest, ($this->body) instanceof CertificateRequestCreateWithDNSRequest => $this->body->toJson(),
         };
 
         return $output;
@@ -127,7 +132,7 @@ class SslCreateCertificateRequestRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest => $this->body,
+            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest, ($this->body) instanceof CertificateRequestCreateWithDNSRequest => $this->body,
         };
     }
 

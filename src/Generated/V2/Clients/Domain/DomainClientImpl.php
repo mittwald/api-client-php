@@ -257,9 +257,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\Ss
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateDefaultResponse;
@@ -1708,6 +1710,8 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => SslCreateCertificateRequestBadRequestResponse::fromResponse($httpResponse),
             404 => SslCreateCertificateRequestNotFoundResponse::fromResponse($httpResponse),
+            409 => SslCreateCertificateRequestConflictResponse::fromResponse($httpResponse),
+            412 => SslCreateCertificateRequestPreconditionFailedResponse::fromResponse($httpResponse),
             429 => SslCreateCertificateRequestTooManyRequestsResponse::fromResponse($httpResponse),
             default => SslCreateCertificateRequestDefaultResponse::fromResponse($httpResponse),
         });

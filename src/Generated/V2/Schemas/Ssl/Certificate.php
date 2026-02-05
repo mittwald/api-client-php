@@ -48,6 +48,17 @@ class Certificate
             'contact' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.ssl.Contact',
             ],
+            'dnsCertSpec' => [
+                'properties' => [
+                    'cnameTarget' => [
+                        'type' => 'string',
+                    ],
+                    'status' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.ssl.DNSCertStatus',
+                    ],
+                ],
+                'type' => 'object',
+            ],
             'dnsNames' => [
                 'items' => [
                     'type' => 'string',
@@ -85,18 +96,13 @@ class Certificate
             'certificateType',
             'certificateRequestId',
             'projectId',
-            'validFrom',
-            'validTo',
-            'certificate',
-            'isExpired',
-            'lastExpirationThresholdHit',
         ],
         'type' => 'object',
     ];
 
     private ?string $caBundle = null;
 
-    private string $certificate;
+    private ?string $certificate = null;
 
     private ?string $certificateOrderId = null;
 
@@ -108,6 +114,8 @@ class Certificate
 
     private ?Contact $contact = null;
 
+    private ?CertificateDnsCertSpec $dnsCertSpec = null;
+
     /**
      * @var string[]|null
      */
@@ -115,29 +123,24 @@ class Certificate
 
     private string $id;
 
-    private bool $isExpired;
+    private ?bool $isExpired = null;
 
     private ?string $issuer = null;
 
-    private int $lastExpirationThresholdHit;
+    private ?int $lastExpirationThresholdHit = null;
 
     private string $projectId;
 
-    private DateTime $validFrom;
+    private ?DateTime $validFrom = null;
 
-    private DateTime $validTo;
+    private ?DateTime $validTo = null;
 
-    public function __construct(string $certificate, string $certificateRequestId, CertificateType $certificateType, string $id, bool $isExpired, int $lastExpirationThresholdHit, string $projectId, DateTime $validFrom, DateTime $validTo)
+    public function __construct(string $certificateRequestId, CertificateType $certificateType, string $id, string $projectId)
     {
-        $this->certificate = $certificate;
         $this->certificateRequestId = $certificateRequestId;
         $this->certificateType = $certificateType;
         $this->id = $id;
-        $this->isExpired = $isExpired;
-        $this->lastExpirationThresholdHit = $lastExpirationThresholdHit;
         $this->projectId = $projectId;
-        $this->validFrom = $validFrom;
-        $this->validTo = $validTo;
     }
 
     public function getCaBundle(): ?string
@@ -145,9 +148,9 @@ class Certificate
         return $this->caBundle ?? null;
     }
 
-    public function getCertificate(): string
+    public function getCertificate(): ?string
     {
-        return $this->certificate;
+        return $this->certificate ?? null;
     }
 
     public function getCertificateOrderId(): ?string
@@ -175,6 +178,11 @@ class Certificate
         return $this->contact ?? null;
     }
 
+    public function getDnsCertSpec(): ?CertificateDnsCertSpec
+    {
+        return $this->dnsCertSpec ?? null;
+    }
+
     /**
      * @return string[]|null
      */
@@ -188,9 +196,9 @@ class Certificate
         return $this->id;
     }
 
-    public function getIsExpired(): bool
+    public function getIsExpired(): ?bool
     {
-        return $this->isExpired;
+        return $this->isExpired ?? null;
     }
 
     public function getIssuer(): ?string
@@ -198,9 +206,9 @@ class Certificate
         return $this->issuer ?? null;
     }
 
-    public function getLastExpirationThresholdHit(): int
+    public function getLastExpirationThresholdHit(): ?int
     {
-        return $this->lastExpirationThresholdHit;
+        return $this->lastExpirationThresholdHit ?? null;
     }
 
     public function getProjectId(): string
@@ -208,14 +216,14 @@ class Certificate
         return $this->projectId;
     }
 
-    public function getValidFrom(): DateTime
+    public function getValidFrom(): ?DateTime
     {
-        return $this->validFrom;
+        return $this->validFrom ?? null;
     }
 
-    public function getValidTo(): DateTime
+    public function getValidTo(): ?DateTime
     {
-        return $this->validTo;
+        return $this->validTo ?? null;
     }
 
     public function withCaBundle(string $caBundle): self
@@ -250,6 +258,14 @@ class Certificate
 
         $clone = clone $this;
         $clone->certificate = $certificate;
+
+        return $clone;
+    }
+
+    public function withoutCertificate(): self
+    {
+        $clone = clone $this;
+        unset($clone->certificate);
 
         return $clone;
     }
@@ -336,6 +352,22 @@ class Certificate
         return $clone;
     }
 
+    public function withDnsCertSpec(CertificateDnsCertSpec $dnsCertSpec): self
+    {
+        $clone = clone $this;
+        $clone->dnsCertSpec = $dnsCertSpec;
+
+        return $clone;
+    }
+
+    public function withoutDnsCertSpec(): self
+    {
+        $clone = clone $this;
+        unset($clone->dnsCertSpec);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $dnsNames
      */
@@ -389,6 +421,14 @@ class Certificate
         return $clone;
     }
 
+    public function withoutIsExpired(): self
+    {
+        $clone = clone $this;
+        unset($clone->isExpired);
+
+        return $clone;
+    }
+
     public function withIssuer(string $issuer): self
     {
         $validator = new Validator();
@@ -425,6 +465,14 @@ class Certificate
         return $clone;
     }
 
+    public function withoutLastExpirationThresholdHit(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastExpirationThresholdHit);
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -447,10 +495,26 @@ class Certificate
         return $clone;
     }
 
+    public function withoutValidFrom(): self
+    {
+        $clone = clone $this;
+        unset($clone->validFrom);
+
+        return $clone;
+    }
+
     public function withValidTo(DateTime $validTo): self
     {
         $clone = clone $this;
         $clone->validTo = $validTo;
+
+        return $clone;
+    }
+
+    public function withoutValidTo(): self
+    {
+        $clone = clone $this;
+        unset($clone->validTo);
 
         return $clone;
     }
@@ -474,7 +538,10 @@ class Certificate
         if (isset($input->{'caBundle'})) {
             $caBundle = $input->{'caBundle'};
         }
-        $certificate = $input->{'certificate'};
+        $certificate = null;
+        if (isset($input->{'certificate'})) {
+            $certificate = $input->{'certificate'};
+        }
         $certificateOrderId = null;
         if (isset($input->{'certificateOrderId'})) {
             $certificateOrderId = $input->{'certificateOrderId'};
@@ -489,28 +556,50 @@ class Certificate
         if (isset($input->{'contact'})) {
             $contact = Contact::buildFromInput($input->{'contact'}, validate: $validate);
         }
+        $dnsCertSpec = null;
+        if (isset($input->{'dnsCertSpec'})) {
+            $dnsCertSpec = CertificateDnsCertSpec::buildFromInput($input->{'dnsCertSpec'}, validate: $validate);
+        }
         $dnsNames = null;
         if (isset($input->{'dnsNames'})) {
             $dnsNames = $input->{'dnsNames'};
         }
         $id = $input->{'id'};
-        $isExpired = (bool)($input->{'isExpired'});
+        $isExpired = null;
+        if (isset($input->{'isExpired'})) {
+            $isExpired = (bool)($input->{'isExpired'});
+        }
         $issuer = null;
         if (isset($input->{'issuer'})) {
             $issuer = $input->{'issuer'};
         }
-        $lastExpirationThresholdHit = (int)($input->{'lastExpirationThresholdHit'});
+        $lastExpirationThresholdHit = null;
+        if (isset($input->{'lastExpirationThresholdHit'})) {
+            $lastExpirationThresholdHit = (int)($input->{'lastExpirationThresholdHit'});
+        }
         $projectId = $input->{'projectId'};
-        $validFrom = new DateTime($input->{'validFrom'});
-        $validTo = new DateTime($input->{'validTo'});
+        $validFrom = null;
+        if (isset($input->{'validFrom'})) {
+            $validFrom = new DateTime($input->{'validFrom'});
+        }
+        $validTo = null;
+        if (isset($input->{'validTo'})) {
+            $validTo = new DateTime($input->{'validTo'});
+        }
 
-        $obj = new self($certificate, $certificateRequestId, $certificateType, $id, $isExpired, $lastExpirationThresholdHit, $projectId, $validFrom, $validTo);
+        $obj = new self($certificateRequestId, $certificateType, $id, $projectId);
         $obj->caBundle = $caBundle;
+        $obj->certificate = $certificate;
         $obj->certificateOrderId = $certificateOrderId;
         $obj->commonName = $commonName;
         $obj->contact = $contact;
+        $obj->dnsCertSpec = $dnsCertSpec;
         $obj->dnsNames = $dnsNames;
+        $obj->isExpired = $isExpired;
         $obj->issuer = $issuer;
+        $obj->lastExpirationThresholdHit = $lastExpirationThresholdHit;
+        $obj->validFrom = $validFrom;
+        $obj->validTo = $validTo;
         return $obj;
     }
 
@@ -525,7 +614,9 @@ class Certificate
         if (isset($this->caBundle)) {
             $output['caBundle'] = $this->caBundle;
         }
-        $output['certificate'] = $this->certificate;
+        if (isset($this->certificate)) {
+            $output['certificate'] = $this->certificate;
+        }
         if (isset($this->certificateOrderId)) {
             $output['certificateOrderId'] = $this->certificateOrderId;
         }
@@ -537,18 +628,29 @@ class Certificate
         if (isset($this->contact)) {
             $output['contact'] = $this->contact->toJson();
         }
+        if (isset($this->dnsCertSpec)) {
+            $output['dnsCertSpec'] = ($this->dnsCertSpec)->toJson();
+        }
         if (isset($this->dnsNames)) {
             $output['dnsNames'] = $this->dnsNames;
         }
         $output['id'] = $this->id;
-        $output['isExpired'] = $this->isExpired;
+        if (isset($this->isExpired)) {
+            $output['isExpired'] = $this->isExpired;
+        }
         if (isset($this->issuer)) {
             $output['issuer'] = $this->issuer;
         }
-        $output['lastExpirationThresholdHit'] = $this->lastExpirationThresholdHit;
+        if (isset($this->lastExpirationThresholdHit)) {
+            $output['lastExpirationThresholdHit'] = $this->lastExpirationThresholdHit;
+        }
         $output['projectId'] = $this->projectId;
-        $output['validFrom'] = ($this->validFrom)->format(DateTime::ATOM);
-        $output['validTo'] = ($this->validTo)->format(DateTime::ATOM);
+        if (isset($this->validFrom)) {
+            $output['validFrom'] = ($this->validFrom)->format(DateTime::ATOM);
+        }
+        if (isset($this->validTo)) {
+            $output['validTo'] = ($this->validTo)->format(DateTime::ATOM);
+        }
 
         return $output;
     }
@@ -579,7 +681,14 @@ class Certificate
 
     public function __clone()
     {
-        $this->validFrom = clone $this->validFrom;
-        $this->validTo = clone $this->validTo;
+        if (isset($this->dnsCertSpec)) {
+            $this->dnsCertSpec = clone $this->dnsCertSpec;
+        }
+        if (isset($this->validFrom)) {
+            $this->validFrom = clone $this->validFrom;
+        }
+        if (isset($this->validTo)) {
+            $this->validTo = clone $this->validTo;
+        }
     }
 }

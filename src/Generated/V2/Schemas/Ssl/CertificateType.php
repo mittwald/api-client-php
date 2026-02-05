@@ -9,4 +9,5 @@ enum CertificateType: int
     case VALUE_0 = 0;
     case VALUE_1 = 1;
     case VALUE_2 = 2;
+    case VALUE_3 = 3;
 }

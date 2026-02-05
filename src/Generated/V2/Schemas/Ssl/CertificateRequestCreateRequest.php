@@ -23,6 +23,7 @@ class CertificateRequestCreateRequest
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'additionalProperties' => false,
         'properties' => [
             'certificate' => [
                 'type' => 'string',
