@@ -37,6 +37,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
@@ -510,6 +511,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ContributorGetLoginLinkBadRequestResponse::fromResponse($httpResponse),
+            403 => ContributorGetLoginLinkForbiddenResponse::fromResponse($httpResponse),
             404 => ContributorGetLoginLinkNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorGetLoginLinkTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorGetLoginLinkDefaultResponse::fromResponse($httpResponse),
