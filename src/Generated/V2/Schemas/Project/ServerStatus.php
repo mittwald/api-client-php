@@ -10,4 +10,5 @@ enum ServerStatus: string
     case ready = 'ready';
     case unready = 'unready';
     case suspended = 'suspended';
+    case migrating = 'migrating';
 }
