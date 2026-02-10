@@ -22,16 +22,12 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'properties' => [
-                    'confidence' => [
-                        'type' => 'string',
-                    ],
                     'exists' => [
                         'type' => 'boolean',
                     ],
                 ],
                 'required' => [
                     'exists',
-                    'confidence',
                 ],
                 'type' => 'object',
             ],

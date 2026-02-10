@@ -14,52 +14,26 @@ class VerificationVerifyAddressOKResponseBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'confidence' => [
-                'type' => 'string',
-            ],
             'exists' => [
                 'type' => 'boolean',
             ],
         ],
         'required' => [
             'exists',
-            'confidence',
         ],
         'type' => 'object',
     ];
 
-    private string $confidence;
-
     private bool $exists;
 
-    public function __construct(string $confidence, bool $exists)
+    public function __construct(bool $exists)
     {
-        $this->confidence = $confidence;
         $this->exists = $exists;
-    }
-
-    public function getConfidence(): string
-    {
-        return $this->confidence;
     }
 
     public function getExists(): bool
     {
         return $this->exists;
-    }
-
-    public function withConfidence(string $confidence): self
-    {
-        $validator = new Validator();
-        $validator->validate($confidence, self::$internalValidationSchema['properties']['confidence']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->confidence = $confidence;
-
-        return $clone;
     }
 
     public function withExists(bool $exists): self
@@ -91,10 +65,9 @@ class VerificationVerifyAddressOKResponseBody
             static::validateInput($input);
         }
 
-        $confidence = $input->{'confidence'};
         $exists = (bool)($input->{'exists'});
 
-        $obj = new self($confidence, $exists);
+        $obj = new self($exists);
 
         return $obj;
     }
@@ -107,7 +80,6 @@ class VerificationVerifyAddressOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['confidence'] = $this->confidence;
         $output['exists'] = $this->exists;
 
         return $output;
