@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponse implements ResponseContainer
+class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,34 +21,36 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
+                'type' => 'object',
                 'properties' => [
-                    'exists' => [
-                        'type' => 'boolean',
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
                     ],
                 ],
-                'required' => [
-                    'exists',
-                ],
-                'type' => 'object',
             ],
         ],
     ];
 
-    private VerificationVerifyAddressOKResponseBody $body;
+    private UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(VerificationVerifyAddressOKResponseBody $body)
+    public function __construct(UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): VerificationVerifyAddressOKResponseBody
+    public function getBody(): UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(VerificationVerifyAddressOKResponseBody $body): self
+    public function withBody(UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -61,17 +63,17 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponse Created instance
+     * @return UpdateProjectBackupExpirationTimeTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

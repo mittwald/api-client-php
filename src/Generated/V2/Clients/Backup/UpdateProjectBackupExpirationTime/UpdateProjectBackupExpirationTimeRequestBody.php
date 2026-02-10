@@ -2,50 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerificationVerifyAddressOKResponseBody
+class UpdateProjectBackupExpirationTimeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'exists' => [
-                'type' => 'boolean',
+            'expirationTime' => [
+                'description' => 'Time when to expire the Backup.',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
-        ],
-        'required' => [
-            'exists',
         ],
         'type' => 'object',
     ];
 
-    private bool $exists;
+    /**
+     * Time when to expire the Backup.
+     */
+    private ?DateTime $expirationTime = null;
 
-    public function __construct(bool $exists)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->exists = $exists;
     }
 
-    public function getExists(): bool
+    public function getExpirationTime(): ?DateTime
     {
-        return $this->exists;
+        return $this->expirationTime ?? null;
     }
 
-    public function withExists(bool $exists): self
+    public function withExpirationTime(DateTime $expirationTime): self
     {
-        $validator = new Validator();
-        $validator->validate($exists, self::$internalValidationSchema['properties']['exists']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->exists = $exists;
+        $clone->expirationTime = $expirationTime;
+
+        return $clone;
+    }
+
+    public function withoutExpirationTime(): self
+    {
+        $clone = clone $this;
+        unset($clone->expirationTime);
 
         return $clone;
     }
@@ -55,20 +62,23 @@ class VerificationVerifyAddressOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponseBody Created instance
+     * @return UpdateProjectBackupExpirationTimeRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $exists = (bool)($input->{'exists'});
+        $expirationTime = null;
+        if (isset($input->{'expirationTime'})) {
+            $expirationTime = new DateTime($input->{'expirationTime'});
+        }
 
-        $obj = new self($exists);
-
+        $obj = new self();
+        $obj->expirationTime = $expirationTime;
         return $obj;
     }
 
@@ -80,7 +90,9 @@ class VerificationVerifyAddressOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['exists'] = $this->exists;
+        if (isset($this->expirationTime)) {
+            $output['expirationTime'] = ($this->expirationTime)->format(DateTime::ATOM);
+        }
 
         return $output;
     }
@@ -111,5 +123,8 @@ class VerificationVerifyAddressOKResponseBody
 
     public function __clone()
     {
+        if (isset($this->expirationTime)) {
+            $this->expirationTime = clone $this->expirationTime;
+        }
     }
 }
