@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class DeleteUserConflictResponse implements ResponseContainer
@@ -21,51 +22,26 @@ class DeleteUserConflictResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'info' => [
-                        'description' => 'A json object, given further information about the error',
-                        'example' => [
-                            'customerId' => 'xyz',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'message' => [
-                        'description' => 'more information about the error',
-                        'example' => 'The user cannot be removed because it is the last owner of the customer with the id \'xyz\'',
-                        'type' => 'string',
-                    ],
-                    'name' => [
-                        'enum' => [
-                            'RemovingLastOwnerNotAllowedError',
-                        ],
-                        'example' => 'RemovingLastOwnerNotAllowedError',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'name',
-                    'message',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private DeleteUserConflictResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(DeleteUserConflictResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): DeleteUserConflictResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(DeleteUserConflictResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -88,7 +64,7 @@ class DeleteUserConflictResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = DeleteUserConflictResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -103,7 +79,7 @@ class DeleteUserConflictResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -134,7 +110,6 @@ class DeleteUserConflictResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

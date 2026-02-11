@@ -2,29 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Psr\Http\Message\ResponseInterface;
 
-class DeleteUserConflictResponseBodyInfo
+class VerificationVerifyAddressBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'description' => 'A json object, given further information about the error',
-        'example' => [
-            'customerId' => 'xyz',
-        ],
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+            ],
+        ],
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    private ValidationErrors $body;
+
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(ValidationErrors $body)
     {
+        $this->body = $body;
+    }
+
+    public function getBody(): ValidationErrors
+    {
+        return $this->body;
+    }
+
+    public function withBody(ValidationErrors $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -32,19 +54,19 @@ class DeleteUserConflictResponseBodyInfo
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeleteUserConflictResponseBodyInfo Created instance
+     * @return VerificationVerifyAddressBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeleteUserConflictResponseBodyInfo
+    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -57,7 +79,7 @@ class DeleteUserConflictResponseBodyInfo
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -88,5 +110,18 @@ class DeleteUserConflictResponseBodyInfo
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }
