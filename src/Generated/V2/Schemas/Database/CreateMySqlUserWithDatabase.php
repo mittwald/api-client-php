@@ -28,12 +28,21 @@ class CreateMySqlUserWithDatabase
                 'type' => 'string',
             ],
             'accessLevel' => [
+                'description' => 'The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
+
+For MySQLUsers that are created in the same step as the database itself, `full` is the only available option.
+',
                 'enum' => [
                     'full',
                 ],
                 'type' => 'string',
             ],
             'externalAccess' => [
+                'description' => 'Describes if users should be able to connection to this database from external
+sources. Defaults to `false` when not set.
+
+To find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.
+',
                 'type' => 'boolean',
             ],
             'password' => [
@@ -49,8 +58,21 @@ class CreateMySqlUserWithDatabase
 
     private ?string $accessIpMask = null;
 
+    /**
+     * The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
+     *
+     * For MySQLUsers that are created in the same step as the database itself, `full` is the only available option.
+     *
+     */
     private CreateMySqlUserWithDatabaseAccessLevel $accessLevel;
 
+    /**
+     * Describes if users should be able to connection to this database from external
+     * sources. Defaults to `false` when not set.
+     *
+     * To find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.
+     *
+     */
     private ?bool $externalAccess = null;
 
     private string $password;

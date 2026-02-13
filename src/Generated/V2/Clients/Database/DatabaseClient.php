@@ -75,6 +75,11 @@ interface DatabaseClient
     /**
      * Create a MySQLDatabase with a MySQLUser.
      *
+     * This operation creates a MySQLDatabase and an associated MySQLUser.
+     *
+     * Please note that this operation is asynchronous. Even after a successful response, you will still need to wait until the database is successfully provisioned. Currently, the recommended way for that is to poll the `GET /v2/mysql-databases/{id}` endpoint and observe the `mainUser.status` field in the response.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-mysql-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -155,7 +160,9 @@ interface DatabaseClient
     /**
      * Get a MySQLDatabase.
      *
-     * Returns a MySQLDatabase resource and its current status. Note that establishing a connection requires the linked user to have a status of ready; relying solely on the database status is insufficient.
+     * Returns a MySQLDatabase resource and its current status.
+     *
+     * Note that establishing a connection requires the linked user to have a status of `ready`; relying solely on the database status is insufficient.
      *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-database
