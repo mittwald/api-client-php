@@ -25,9 +25,15 @@ class CharacterSettings
     private static array $internalValidationSchema = [
         'properties' => [
             'characterSet' => [
+                'description' => 'A valid MySQL character set. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available character sets.
+',
+                'example' => 'utf8mb4',
                 'type' => 'string',
             ],
             'collation' => [
+                'description' => 'A valid MySQL collation. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available collations.
+',
+                'example' => 'utf8mb4_general_ci',
                 'type' => 'string',
             ],
         ],
@@ -38,8 +44,16 @@ class CharacterSettings
         'type' => 'object',
     ];
 
+    /**
+     * A valid MySQL character set. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available character sets.
+     *
+     */
     private string $characterSet;
 
+    /**
+     * A valid MySQL collation. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available collations.
+     *
+     */
     private string $collation;
 
     public function __construct(string $characterSet, string $collation)

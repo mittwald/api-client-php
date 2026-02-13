@@ -28,6 +28,8 @@ class CreateMySqlDatabase
                 '$ref' => '#/components/schemas/de.mittwald.v1.database.characterSettings',
             ],
             'description' => [
+                'description' => 'A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
+',
                 'type' => 'string',
             ],
             'projectId' => [
@@ -35,6 +37,9 @@ class CreateMySqlDatabase
                 'type' => 'string',
             ],
             'version' => [
+                'description' => 'The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
+',
+                'example' => '8.4',
                 'type' => 'string',
             ],
         ],
@@ -48,10 +53,18 @@ class CreateMySqlDatabase
 
     private ?CharacterSettings $characterSettings = null;
 
+    /**
+     * A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
+     *
+     */
     private string $description;
 
     private string $projectId;
 
+    /**
+     * The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
+     *
+     */
     private string $version;
 
     public function __construct(string $description, string $projectId, string $version)

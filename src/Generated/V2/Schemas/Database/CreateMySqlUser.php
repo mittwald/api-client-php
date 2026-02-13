@@ -25,9 +25,13 @@ class CreateMySqlUser
     private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
+                'description' => 'An IP range (in CIDR notation) for which access should be allowed.',
+                'example' => '203.0.113.123/32',
                 'type' => 'string',
             ],
             'accessLevel' => [
+                'description' => 'The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
+',
                 'enum' => [
                     'full',
                     'readonly',
@@ -42,6 +46,11 @@ class CreateMySqlUser
                 'type' => 'string',
             ],
             'externalAccess' => [
+                'description' => 'Describes if users should be able to connection to this database from external
+sources. Defaults to `false` when not set.
+
+To find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.
+',
                 'type' => 'boolean',
             ],
             'password' => [
@@ -57,14 +66,28 @@ class CreateMySqlUser
         'type' => 'object',
     ];
 
+    /**
+     * An IP range (in CIDR notation) for which access should be allowed.
+     */
     private ?string $accessIpMask = null;
 
+    /**
+     * The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
+     *
+     */
     private CreateMySqlUserAccessLevel $accessLevel;
 
     private string $databaseId;
 
     private string $description;
 
+    /**
+     * Describes if users should be able to connection to this database from external
+     * sources. Defaults to `false` when not set.
+     *
+     * To find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.
+     *
+     */
     private ?bool $externalAccess = null;
 
     private string $password;

@@ -33,9 +33,16 @@ class MySqlDatabase
                 'type' => 'string',
             ],
             'description' => [
+                'description' => 'A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
+',
                 'type' => 'string',
             ],
             'externalHostname' => [
+                'description' => 'The hostname that you can use to connect to this MySQLDatabase from external sources, like your local machine or services running outside the mittwald cloud platform.
+
+Note that you still need a database user with `externalAccess` enabled to connect via this hostname.
+',
+                'example' => 'mysql.example-cluster.project.host',
                 'type' => 'string',
             ],
             'finalizers' => [
@@ -47,6 +54,9 @@ class MySqlDatabase
                 'uniqueItems' => true,
             ],
             'hostname' => [
+                'description' => 'The hostname that you can use to connect to this MySQLDatabase from _within_ the hosting environment.
+',
+                'example' => 'mysql-XXXXXX.pg-YYYYYY.db.project.host',
                 'type' => 'string',
             ],
             'id' => [
@@ -63,6 +73,8 @@ class MySqlDatabase
                 '$ref' => '#/components/schemas/de.mittwald.v1.database.MySqlUser',
             ],
             'name' => [
+                'description' => 'The name of the MySQLDatabase. This is also the name of the database that you can use when connecting to it. It is automatically generated and cannot be changed.
+',
                 'type' => 'string',
             ],
             'projectId' => [
@@ -89,6 +101,9 @@ class MySqlDatabase
                 'type' => 'string',
             ],
             'version' => [
+                'description' => 'The MySQL version that this database is running, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
+',
+                'example' => '8.4',
                 'type' => 'string',
             ],
         ],
@@ -117,8 +132,18 @@ class MySqlDatabase
 
     private DateTime $createdAt;
 
+    /**
+     * A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
+     *
+     */
     private string $description;
 
+    /**
+     * The hostname that you can use to connect to this MySQLDatabase from external sources, like your local machine or services running outside the mittwald cloud platform.
+     *
+     * Note that you still need a database user with `externalAccess` enabled to connect via this hostname.
+     *
+     */
     private string $externalHostname;
 
     /**
@@ -126,6 +151,10 @@ class MySqlDatabase
      */
     private ?array $finalizers = null;
 
+    /**
+     * The hostname that you can use to connect to this MySQLDatabase from _within_ the hosting environment.
+     *
+     */
     private string $hostname;
 
     private string $id;
@@ -136,6 +165,10 @@ class MySqlDatabase
 
     private ?MySqlUser $mainUser = null;
 
+    /**
+     * The name of the MySQLDatabase. This is also the name of the database that you can use when connecting to it. It is automatically generated and cannot be changed.
+     *
+     */
     private string $name;
 
     private string $projectId;
@@ -150,6 +183,10 @@ class MySqlDatabase
 
     private DateTime $updatedAt;
 
+    /**
+     * The MySQL version that this database is running, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
+     *
+     */
     private string $version;
 
     public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $externalHostname, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DatabaseStatus $status, DateTime $statusSetAt, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)

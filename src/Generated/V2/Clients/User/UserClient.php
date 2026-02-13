@@ -82,8 +82,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswor
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
@@ -111,8 +109,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
@@ -753,15 +749,6 @@ interface UserClient
      */
     public function getPersonalizedSettings(GetPersonalizedSettingsRequest $request): GetPersonalizedSettingsOKResponse;
     /**
-     * Get poll settings for the specified user.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-poll-status
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetPollStatusRequest $request An object representing the request for this operation
-     */
-    public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse;
-    /**
      * Get a specific session.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
@@ -892,16 +879,6 @@ interface UserClient
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1).
      */
     public function oauthRetrieveAccessToken(OauthRetrieveAccessTokenRequest $request): OauthRetrieveAccessTokenOKResponse;
-    /**
-     * Store new or update poll settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-post-poll-status
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param PostPollStatusRequest $request An object representing the request for this operation
-     * @return PostPollStatusOKResponse The updated poll settings.
-     */
-    public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse;
     /**
      * Refresh a session.
      *
