@@ -1203,7 +1203,7 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AuthenticateRequest $request An object representing the request for this operation
-     * @return AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
+     * @return AuthenticateOKResponse Your authentication request was successful and you've got an access token.
      */
     public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse
     {
