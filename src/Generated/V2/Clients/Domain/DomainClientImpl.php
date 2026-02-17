@@ -137,6 +137,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\Deprecat
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
@@ -870,6 +871,7 @@ class DomainClientImpl implements DomainClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DnsCreateDnsZoneBadRequestResponse::fromResponse($httpResponse),
+            409 => DnsCreateDnsZoneConflictResponse::fromResponse($httpResponse),
             429 => DnsCreateDnsZoneTooManyRequestsResponse::fromResponse($httpResponse),
             default => DnsCreateDnsZoneDefaultResponse::fromResponse($httpResponse),
         });
