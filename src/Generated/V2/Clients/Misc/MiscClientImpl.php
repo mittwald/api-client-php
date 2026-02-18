@@ -150,7 +150,7 @@ class MiscClientImpl implements MiscClient
     /**
      * Check if a company exists.
      *
-     * Only companies registered in the german company register are currently supported.
+     * Only companies registered in the German company register are currently supported.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-company
      * @throws GuzzleException

@@ -32,10 +32,6 @@ class CreateMySqlDatabase
 ',
                 'type' => 'string',
             ],
-            'projectId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
             'version' => [
                 'description' => 'The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
 ',
@@ -44,7 +40,6 @@ class CreateMySqlDatabase
             ],
         ],
         'required' => [
-            'projectId',
             'version',
             'description',
         ],
@@ -59,18 +54,15 @@ class CreateMySqlDatabase
      */
     private string $description;
 
-    private string $projectId;
-
     /**
      * The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
      *
      */
     private string $version;
 
-    public function __construct(string $description, string $projectId, string $version)
+    public function __construct(string $description, string $version)
     {
         $this->description = $description;
-        $this->projectId = $projectId;
         $this->version = $version;
     }
 
@@ -82,11 +74,6 @@ class CreateMySqlDatabase
     public function getDescription(): string
     {
         return $this->description;
-    }
-
-    public function getProjectId(): string
-    {
-        return $this->projectId;
     }
 
     public function getVersion(): string
@@ -120,20 +107,6 @@ class CreateMySqlDatabase
 
         $clone = clone $this;
         $clone->description = $description;
-
-        return $clone;
-    }
-
-    public function withProjectId(string $projectId): self
-    {
-        $validator = new Validator();
-        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->projectId = $projectId;
 
         return $clone;
     }
@@ -172,10 +145,9 @@ class CreateMySqlDatabase
             $characterSettings = CharacterSettings::buildFromInput($input->{'characterSettings'}, validate: $validate);
         }
         $description = $input->{'description'};
-        $projectId = $input->{'projectId'};
         $version = $input->{'version'};
 
-        $obj = new self($description, $projectId, $version);
+        $obj = new self($description, $version);
         $obj->characterSettings = $characterSettings;
         return $obj;
     }
@@ -192,7 +164,6 @@ class CreateMySqlDatabase
             $output['characterSettings'] = $this->characterSettings->toJson();
         }
         $output['description'] = $this->description;
-        $output['projectId'] = $this->projectId;
         $output['version'] = $this->version;
 
         return $output;

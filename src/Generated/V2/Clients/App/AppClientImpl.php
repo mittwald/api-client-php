@@ -13,8 +13,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppDefaultResponse;
@@ -163,7 +165,9 @@ class AppClientImpl implements AppClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExecuteActionBadRequestResponse::fromResponse($httpResponse),
             404 => ExecuteActionNotFoundResponse::fromResponse($httpResponse),
+            412 => ExecuteActionPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExecuteActionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExecuteActionDefaultResponse::fromResponse($httpResponse),
         });
