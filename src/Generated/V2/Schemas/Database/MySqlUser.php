@@ -26,9 +26,14 @@ class MySqlUser
     private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
+                'description' => 'An IP range (in CIDR notation) for which access should be allowed.',
+                'example' => '203.0.113.123/32',
                 'type' => 'string',
             ],
             'accessLevel' => [
+                'description' => 'The access level that this MySQLUser should have for the database. The `full` access level grants
+the user read/write privileges on the database.
+',
                 'enum' => [
                     'full',
                     'readonly',
@@ -50,6 +55,12 @@ class MySqlUser
                 'type' => 'boolean',
             ],
             'externalAccess' => [
+                'description' => 'Describes if users should be able to connection to this database from external sources.
+Defaults to `false` when not set.
+
+To find out how to connect to your database from external sources, refer to the `externalHostname`
+field of the `GET /v2/mysql-databases/{id}` endpoint.
+',
                 'type' => 'boolean',
             ],
             'id' => [
@@ -57,9 +68,16 @@ class MySqlUser
                 'type' => 'string',
             ],
             'mainUser' => [
+                'description' => 'Indicates whether this MySQL user is the main user of the database. The main user is created by
+default when a new MySQL database is provisioned. It can neither be deleted nor disabled,
+but its password can be updated.
+',
                 'type' => 'boolean',
             ],
             'name' => [
+                'description' => 'The name of the MySQL user. This can be used as the username when connecting to the database.
+',
+                'example' => 'dbu_XXXXXX',
                 'type' => 'string',
             ],
             'passwordUpdatedAt' => [
@@ -95,8 +113,16 @@ class MySqlUser
         'type' => 'object',
     ];
 
+    /**
+     * An IP range (in CIDR notation) for which access should be allowed.
+     */
     private ?string $accessIpMask = null;
 
+    /**
+     * The access level that this MySQLUser should have for the database. The `full` access level grants
+     * the user read/write privileges on the database.
+     *
+     */
     private MySqlUserAccessLevel $accessLevel;
 
     private DateTime $createdAt;
@@ -107,12 +133,30 @@ class MySqlUser
 
     private bool $disabled;
 
+    /**
+     * Describes if users should be able to connection to this database from external sources.
+     * Defaults to `false` when not set.
+     *
+     * To find out how to connect to your database from external sources, refer to the `externalHostname`
+     * field of the `GET /v2/mysql-databases/{id}` endpoint.
+     *
+     */
     private bool $externalAccess;
 
     private string $id;
 
+    /**
+     * Indicates whether this MySQL user is the main user of the database. The main user is created by
+     * default when a new MySQL database is provisioned. It can neither be deleted nor disabled,
+     * but its password can be updated.
+     *
+     */
     private bool $mainUser;
 
+    /**
+     * The name of the MySQL user. This can be used as the username when connecting to the database.
+     *
+     */
     private string $name;
 
     private DateTime $passwordUpdatedAt;
