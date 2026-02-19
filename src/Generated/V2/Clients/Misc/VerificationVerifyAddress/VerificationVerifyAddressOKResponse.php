@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Verification\VerifyAddressResponse;
 use Psr\Http\Message\ResponseInterface;
 
 class VerificationVerifyAddressOKResponse implements ResponseContainer
@@ -21,34 +22,26 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'exists' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'exists',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.verification.VerifyAddressResponse',
             ],
         ],
     ];
 
-    private VerificationVerifyAddressOKResponseBody $body;
+    private VerifyAddressResponse $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(VerificationVerifyAddressOKResponseBody $body)
+    public function __construct(VerifyAddressResponse $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): VerificationVerifyAddressOKResponseBody
+    public function getBody(): VerifyAddressResponse
     {
         return $this->body;
     }
 
-    public function withBody(VerificationVerifyAddressOKResponseBody $body): self
+    public function withBody(VerifyAddressResponse $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -71,7 +64,7 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = VerifyAddressResponse::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -86,7 +79,7 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -117,7 +110,6 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
