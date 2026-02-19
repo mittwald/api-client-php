@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Verification\VerifyAddressResponse;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponse implements ResponseContainer
+class SetStackUpdateScheduleBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.verification.VerifyAddressResponse',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
-    private VerifyAddressResponse $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(VerifyAddressResponse $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): VerifyAddressResponse
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
-    public function withBody(VerifyAddressResponse $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponse Created instance
+     * @return SetStackUpdateScheduleBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerifyAddressResponse::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

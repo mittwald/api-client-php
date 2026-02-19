@@ -2,50 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponseBody
+class SetStackUpdateScheduleForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'exists' => [
-                'type' => 'boolean',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'exists',
-        ],
-        'type' => 'object',
     ];
 
-    private bool $exists;
+    private Error $body;
 
-    public function __construct(bool $exists)
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Error $body)
     {
-        $this->exists = $exists;
+        $this->body = $body;
     }
 
-    public function getExists(): bool
+    public function getBody(): Error
     {
-        return $this->exists;
+        return $this->body;
     }
 
-    public function withExists(bool $exists): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($exists, self::$internalValidationSchema['properties']['exists']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->exists = $exists;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -55,19 +54,19 @@ class VerificationVerifyAddressOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponseBody Created instance
+     * @return SetStackUpdateScheduleForbiddenResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleForbiddenResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $exists = (bool)($input->{'exists'});
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($exists);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -80,7 +79,7 @@ class VerificationVerifyAddressOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['exists'] = $this->exists;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -111,5 +110,18 @@ class VerificationVerifyAddressOKResponseBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

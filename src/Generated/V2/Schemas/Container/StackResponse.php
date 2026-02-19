@@ -48,6 +48,21 @@ class StackResponse
                 ],
                 'type' => 'array',
             ],
+            'updateSchedule' => [
+                'nullable' => true,
+                'properties' => [
+                    'schedule' => [
+                        'type' => 'string',
+                    ],
+                    'timezone' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'schedule',
+                ],
+                'type' => 'object',
+            ],
             'volumes' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeResponse',
@@ -82,6 +97,8 @@ class StackResponse
      * @var ServiceResponse[]|null
      */
     private ?array $services = null;
+
+    private ?StackResponseUpdateSchedule $updateSchedule = null;
 
     /**
      * @var VolumeResponse[]|null
@@ -128,6 +145,11 @@ class StackResponse
     public function getServices(): ?array
     {
         return $this->services ?? null;
+    }
+
+    public function getUpdateSchedule(): ?StackResponseUpdateSchedule
+    {
+        return $this->updateSchedule ?? null;
     }
 
     /**
@@ -227,6 +249,22 @@ class StackResponse
         return $clone;
     }
 
+    public function withUpdateSchedule(StackResponseUpdateSchedule $updateSchedule): self
+    {
+        $clone = clone $this;
+        $clone->updateSchedule = $updateSchedule;
+
+        return $clone;
+    }
+
+    public function withoutUpdateSchedule(): self
+    {
+        $clone = clone $this;
+        unset($clone->updateSchedule);
+
+        return $clone;
+    }
+
     /**
      * @param VolumeResponse[] $volumes
      */
@@ -270,6 +308,10 @@ class StackResponse
         if (isset($input->{'services'})) {
             $services = array_map(fn (array|object $i): ServiceResponse => ServiceResponse::buildFromInput($i, validate: $validate), $input->{'services'});
         }
+        $updateSchedule = null;
+        if (isset($input->{'updateSchedule'})) {
+            $updateSchedule = StackResponseUpdateSchedule::buildFromInput($input->{'updateSchedule'}, validate: $validate);
+        }
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = array_map(fn (array|object $i): VolumeResponse => VolumeResponse::buildFromInput($i, validate: $validate), $input->{'volumes'});
@@ -277,6 +319,7 @@ class StackResponse
 
         $obj = new self($description, $disabled, $id, $prefix, $projectId);
         $obj->services = $services;
+        $obj->updateSchedule = $updateSchedule;
         $obj->volumes = $volumes;
         return $obj;
     }
@@ -296,6 +339,9 @@ class StackResponse
         $output['projectId'] = $this->projectId;
         if (isset($this->services)) {
             $output['services'] = array_map(fn (ServiceResponse $i): array => $i->toJson(), $this->services);
+        }
+        if (isset($this->updateSchedule)) {
+            $output['updateSchedule'] = ($this->updateSchedule)->toJson();
         }
         if (isset($this->volumes)) {
             $output['volumes'] = array_map(fn (VolumeResponse $i): array => $i->toJson(), $this->volumes);
@@ -330,5 +376,8 @@ class StackResponse
 
     public function __clone()
     {
+        if (isset($this->updateSchedule)) {
+            $this->updateSchedule = clone $this->updateSchedule;
+        }
     }
 }

@@ -2,49 +2,64 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Verification\VerifyAddressResponse;
-use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponse implements ResponseContainer
+class SetStackUpdateScheduleRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.verification.VerifyAddressResponse',
+            'updateSchedule' => [
+                'nullable' => true,
+                'properties' => [
+                    'schedule' => [
+                        'example' => '* * * * *',
+                        'type' => 'string',
+                    ],
+                    'timezone' => [
+                        'example' => 'Europe/Berlin',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'schedule',
+                ],
+                'type' => 'object',
             ],
         ],
     ];
 
-    private VerifyAddressResponse $body;
+    private ?SetStackUpdateScheduleRequestBodyUpdateSchedule $updateSchedule = null;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(VerifyAddressResponse $body)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->body = $body;
     }
 
-    public function getBody(): VerifyAddressResponse
+    public function getUpdateSchedule(): ?SetStackUpdateScheduleRequestBodyUpdateSchedule
     {
-        return $this->body;
+        return $this->updateSchedule ?? null;
     }
 
-    public function withBody(VerifyAddressResponse $body): self
+    public function withUpdateSchedule(SetStackUpdateScheduleRequestBodyUpdateSchedule $updateSchedule): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->updateSchedule = $updateSchedule;
+
+        return $clone;
+    }
+
+    public function withoutUpdateSchedule(): self
+    {
+        $clone = clone $this;
+        unset($clone->updateSchedule);
 
         return $clone;
     }
@@ -54,20 +69,23 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponse Created instance
+     * @return SetStackUpdateScheduleRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerifyAddressResponse::buildFromInput($input->{'body'}, validate: $validate);
+        $updateSchedule = null;
+        if (isset($input->{'updateSchedule'})) {
+            $updateSchedule = SetStackUpdateScheduleRequestBodyUpdateSchedule::buildFromInput($input->{'updateSchedule'}, validate: $validate);
+        }
 
-        $obj = new self($body);
-
+        $obj = new self();
+        $obj->updateSchedule = $updateSchedule;
         return $obj;
     }
 
@@ -79,7 +97,9 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        if (isset($this->updateSchedule)) {
+            $output['updateSchedule'] = ($this->updateSchedule)->toJson();
+        }
 
         return $output;
     }
@@ -110,18 +130,8 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
+        if (isset($this->updateSchedule)) {
+            $this->updateSchedule = clone $this->updateSchedule;
+        }
     }
 }

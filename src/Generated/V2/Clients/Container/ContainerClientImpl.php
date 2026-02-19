@@ -150,6 +150,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServ
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServicePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateSchedulePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceForbiddenResponse;
@@ -690,6 +698,33 @@ class ContainerClientImpl implements ContainerClient
             429 => RestartServiceTooManyRequestsResponse::fromResponse($httpResponse),
             500 => RestartServiceInternalServerErrorResponse::fromResponse($httpResponse),
             default => RestartServiceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Set an update schedule for a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-set-stack-update-schedule
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SetStackUpdateScheduleRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function setStackUpdateSchedule(SetStackUpdateScheduleRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SetStackUpdateScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SetStackUpdateScheduleBadRequestResponse::fromResponse($httpResponse),
+            403 => SetStackUpdateScheduleForbiddenResponse::fromResponse($httpResponse),
+            404 => SetStackUpdateScheduleNotFoundResponse::fromResponse($httpResponse),
+            412 => SetStackUpdateSchedulePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => SetStackUpdateScheduleTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => SetStackUpdateScheduleInternalServerErrorResponse::fromResponse($httpResponse),
+            default => SetStackUpdateScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
 

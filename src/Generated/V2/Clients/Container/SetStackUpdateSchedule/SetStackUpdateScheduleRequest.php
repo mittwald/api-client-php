@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OrderPreviewOrderRequest
+class SetStackUpdateScheduleRequest
 {
-    public const method = 'post';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,71 +17,77 @@ class OrderPreviewOrderRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'stackId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'body' => [
                 'properties' => [
-                    'orderData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingOrderPreview',
+                    'updateSchedule' => [
+                        'nullable' => true,
+                        'properties' => [
+                            'schedule' => [
+                                'example' => '* * * * *',
+                                'type' => 'string',
                             ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerOrderPreview',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrderPreview',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview',
+                            'timezone' => [
+                                'example' => 'Europe/Berlin',
+                                'type' => 'string',
                             ],
                         ],
-                    ],
-                    'orderType' => [
-                        'enum' => [
-                            'domain',
-                            'projectHosting',
-                            'server',
-                            'externalCertificate',
-                            'leadFyndr',
-                            'mailArchive',
-                            'aiHosting',
+                        'required' => [
+                            'schedule',
                         ],
-                        'type' => 'string',
+                        'type' => 'object',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
         'required' => [
+            'stackId',
             'body',
         ],
     ];
 
-    private OrderPreviewOrderRequestBody $body;
+    private string $stackId;
+
+    private SetStackUpdateScheduleRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderPreviewOrderRequestBody $body)
+    public function __construct(string $stackId, SetStackUpdateScheduleRequestBody $body)
     {
+        $this->stackId = $stackId;
         $this->body = $body;
     }
 
-    public function getBody(): OrderPreviewOrderRequestBody
+    public function getStackId(): string
+    {
+        return $this->stackId;
+    }
+
+    public function getBody(): SetStackUpdateScheduleRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(OrderPreviewOrderRequestBody $body): self
+    public function withStackId(string $stackId): self
+    {
+        $validator = new Validator();
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->stackId = $stackId;
+
+        return $clone;
+    }
+
+    public function withBody(SetStackUpdateScheduleRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -94,19 +100,20 @@ class OrderPreviewOrderRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderPreviewOrderRequest Created instance
+     * @return SetStackUpdateScheduleRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewOrderRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderPreviewOrderRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $stackId = $input->{'stackId'};
+        $body = SetStackUpdateScheduleRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($stackId, $body);
 
         return $obj;
     }
@@ -119,6 +126,7 @@ class OrderPreviewOrderRequest
     public function toJson(): array
     {
         $output = [];
+        $output['stackId'] = $this->stackId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -165,7 +173,8 @@ class OrderPreviewOrderRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/order-previews';
+        $stackId = urlencode($mapped['stackId']);
+        return '/v2/stacks/' . $stackId . '/update-schedule';
     }
 
     /**
