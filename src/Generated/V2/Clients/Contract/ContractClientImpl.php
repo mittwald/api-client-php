@@ -76,6 +76,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFy
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressNotFoundResponse;
@@ -421,6 +427,30 @@ class ContractClientImpl implements ContractClient
             404 => GetDetailOfContractByLeadFyndrNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByLeadFyndrTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByLeadFyndrDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the Contract for the given License.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-license
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByLicenseRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByLicenseOKResponse Returns an active Contract for the given License.
+     */
+    public function getDetailOfContractByLicense(GetDetailOfContractByLicenseRequest $request): GetDetailOfContractByLicenseOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractByLicenseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractByLicenseOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractByLicenseBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractByLicenseNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByLicenseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractByLicenseDefaultResponse::fromResponse($httpResponse),
         });
     }
 

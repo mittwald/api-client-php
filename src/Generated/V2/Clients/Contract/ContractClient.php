@@ -29,6 +29,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse;
@@ -172,6 +174,16 @@ interface ContractClient
      * @return GetDetailOfContractByLeadFyndrOKResponse Returns an active Contract for the given LeadFyndrProfile.
      */
     public function getDetailOfContractByLeadFyndr(GetDetailOfContractByLeadFyndrRequest $request): GetDetailOfContractByLeadFyndrOKResponse;
+    /**
+     * Return the Contract for the given License.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-license
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByLicenseRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByLicenseOKResponse Returns an active Contract for the given License.
+     */
+    public function getDetailOfContractByLicense(GetDetailOfContractByLicenseRequest $request): GetDetailOfContractByLicenseOKResponse;
     /**
      * Return the Contract for the given Mail Address.
      *
