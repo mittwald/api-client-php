@@ -51,7 +51,7 @@ class StackResponse
             'updateSchedule' => [
                 'nullable' => true,
                 'properties' => [
-                    'schedule' => [
+                    'cron' => [
                         'type' => 'string',
                     ],
                     'timezone' => [
@@ -59,7 +59,7 @@ class StackResponse
                     ],
                 ],
                 'required' => [
-                    'schedule',
+                    'cron',
                 ],
                 'type' => 'object',
             ],

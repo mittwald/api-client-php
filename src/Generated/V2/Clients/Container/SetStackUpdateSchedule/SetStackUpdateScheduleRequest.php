@@ -26,17 +26,18 @@ class SetStackUpdateScheduleRequest
                     'updateSchedule' => [
                         'nullable' => true,
                         'properties' => [
-                            'schedule' => [
+                            'cron' => [
                                 'example' => '* * * * *',
                                 'type' => 'string',
                             ],
                             'timezone' => [
+                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
                                 'example' => 'Europe/Berlin',
                                 'type' => 'string',
                             ],
                         ],
                         'required' => [
-                            'schedule',
+                            'cron',
                         ],
                         'type' => 'object',
                     ],

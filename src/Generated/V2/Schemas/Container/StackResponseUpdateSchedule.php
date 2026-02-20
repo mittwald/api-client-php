@@ -25,7 +25,7 @@ class StackResponseUpdateSchedule
     private static array $internalValidationSchema = [
         'nullable' => true,
         'properties' => [
-            'schedule' => [
+            'cron' => [
                 'type' => 'string',
             ],
             'timezone' => [
@@ -33,23 +33,23 @@ class StackResponseUpdateSchedule
             ],
         ],
         'required' => [
-            'schedule',
+            'cron',
         ],
         'type' => 'object',
     ];
 
-    private string $schedule;
+    private string $cron;
 
     private ?string $timezone = null;
 
-    public function __construct(string $schedule)
+    public function __construct(string $cron)
     {
-        $this->schedule = $schedule;
+        $this->cron = $cron;
     }
 
-    public function getSchedule(): string
+    public function getCron(): string
     {
-        return $this->schedule;
+        return $this->cron;
     }
 
     public function getTimezone(): ?string
@@ -57,16 +57,16 @@ class StackResponseUpdateSchedule
         return $this->timezone ?? null;
     }
 
-    public function withSchedule(string $schedule): self
+    public function withCron(string $cron): self
     {
         $validator = new Validator();
-        $validator->validate($schedule, self::$internalValidationSchema['properties']['schedule']);
+        $validator->validate($cron, self::$internalValidationSchema['properties']['cron']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->schedule = $schedule;
+        $clone->cron = $cron;
 
         return $clone;
     }
@@ -108,13 +108,13 @@ class StackResponseUpdateSchedule
             static::validateInput($input);
         }
 
-        $schedule = $input->{'schedule'};
+        $cron = $input->{'cron'};
         $timezone = null;
         if (isset($input->{'timezone'})) {
             $timezone = $input->{'timezone'};
         }
 
-        $obj = new self($schedule);
+        $obj = new self($cron);
         $obj->timezone = $timezone;
         return $obj;
     }
@@ -127,7 +127,7 @@ class StackResponseUpdateSchedule
     public function toJson(): array
     {
         $output = [];
-        $output['schedule'] = $this->schedule;
+        $output['cron'] = $this->cron;
         if (isset($this->timezone)) {
             $output['timezone'] = $this->timezone;
         }

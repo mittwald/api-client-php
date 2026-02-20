@@ -15,33 +15,37 @@ class SetStackUpdateScheduleRequestBodyUpdateSchedule
     private static array $internalValidationSchema = [
         'nullable' => true,
         'properties' => [
-            'schedule' => [
+            'cron' => [
                 'example' => '* * * * *',
                 'type' => 'string',
             ],
             'timezone' => [
+                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
                 'example' => 'Europe/Berlin',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'schedule',
+            'cron',
         ],
         'type' => 'object',
     ];
 
-    private string $schedule;
+    private string $cron;
 
+    /**
+     * Valid timezones can be retrieved via GET /v2/time-zones
+     */
     private ?string $timezone = null;
 
-    public function __construct(string $schedule)
+    public function __construct(string $cron)
     {
-        $this->schedule = $schedule;
+        $this->cron = $cron;
     }
 
-    public function getSchedule(): string
+    public function getCron(): string
     {
-        return $this->schedule;
+        return $this->cron;
     }
 
     public function getTimezone(): ?string
@@ -49,16 +53,16 @@ class SetStackUpdateScheduleRequestBodyUpdateSchedule
         return $this->timezone ?? null;
     }
 
-    public function withSchedule(string $schedule): self
+    public function withCron(string $cron): self
     {
         $validator = new Validator();
-        $validator->validate($schedule, self::$internalValidationSchema['properties']['schedule']);
+        $validator->validate($cron, self::$internalValidationSchema['properties']['cron']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->schedule = $schedule;
+        $clone->cron = $cron;
 
         return $clone;
     }
@@ -100,13 +104,13 @@ class SetStackUpdateScheduleRequestBodyUpdateSchedule
             static::validateInput($input);
         }
 
-        $schedule = $input->{'schedule'};
+        $cron = $input->{'cron'};
         $timezone = null;
         if (isset($input->{'timezone'})) {
             $timezone = $input->{'timezone'};
         }
 
-        $obj = new self($schedule);
+        $obj = new self($cron);
         $obj->timezone = $timezone;
         return $obj;
     }
@@ -119,7 +123,7 @@ class SetStackUpdateScheduleRequestBodyUpdateSchedule
     public function toJson(): array
     {
         $output = [];
-        $output['schedule'] = $this->schedule;
+        $output['cron'] = $this->cron;
         if (isset($this->timezone)) {
             $output['timezone'] = $this->timezone;
         }
