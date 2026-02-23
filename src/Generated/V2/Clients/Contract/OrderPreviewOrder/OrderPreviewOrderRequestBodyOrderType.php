@@ -13,4 +13,5 @@ enum OrderPreviewOrderRequestBodyOrderType: string
     case leadFyndr = 'leadFyndr';
     case mailArchive = 'mailArchive';
     case aiHosting = 'aiHosting';
+    case license = 'license';
 }

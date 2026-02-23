@@ -215,7 +215,12 @@ interface ContainerClient
      */
     public function listVolumes(ListVolumesRequest $request): ListVolumesOKResponse;
     /**
-     * Pulls the latest version of the Service's image and optionally recreates the Service.
+     * Pull image and recreate
+     *
+     * Pulls the latest image for this container and recreates it.
+     *
+     * You can skip re-creation by setting the `skipRecreate` query parameter.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-pull-image-for-service
      * @throws GuzzleException

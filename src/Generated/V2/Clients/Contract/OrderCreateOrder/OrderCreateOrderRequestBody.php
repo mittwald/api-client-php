@@ -10,6 +10,7 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Order\AIHostingOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\LeadFyndrOrder;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\LicenseOrderAlternative1;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\MailArchiveOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder;
@@ -44,6 +45,9 @@ class OrderCreateOrderRequestBody
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrder',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenseOrder',
+                    ],
                 ],
             ],
             'orderType' => [
@@ -55,6 +59,7 @@ class OrderCreateOrderRequestBody
                     'leadFyndr',
                     'mailArchive',
                     'aiHosting',
+                    'license',
                 ],
                 'example' => 'projectHosting',
                 'type' => 'string',
@@ -63,7 +68,7 @@ class OrderCreateOrderRequestBody
         'type' => 'object',
     ];
 
-    private AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null $orderData = null;
+    private AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|LicenseOrderAlternative1|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null $orderData = null;
 
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
 
@@ -74,7 +79,7 @@ class OrderCreateOrderRequestBody
     {
     }
 
-    public function getOrderData(): AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null
+    public function getOrderData(): AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|LicenseOrderAlternative1|MailArchiveOrder|ProjectHostingOrder|ServerOrder|null
     {
         return $this->orderData;
     }
@@ -84,7 +89,7 @@ class OrderCreateOrderRequestBody
         return $this->orderType ?? null;
     }
 
-    public function withOrderData(AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|MailArchiveOrder|ProjectHostingOrder|ServerOrder $orderData): self
+    public function withOrderData(AIHostingOrder|DomainOrder|ExternalCertificateOrder|LeadFyndrOrder|LicenseOrderAlternative1|MailArchiveOrder|ProjectHostingOrder|ServerOrder $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -141,6 +146,10 @@ class OrderCreateOrderRequestBody
                 LeadFyndrOrder::validateInput($input->{'orderData'}, true) => LeadFyndrOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 MailArchiveOrder::validateInput($input->{'orderData'}, true) => MailArchiveOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 AIHostingOrder::validateInput($input->{'orderData'}, true) => AIHostingOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                (LicenseOrderAlternative1::validateInput($input->{'orderData'}, true)) => match (true) {
+                    default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                    LicenseOrderAlternative1::validateInput($input->{'orderData'}, true) => LicenseOrderAlternative1::buildFromInput($input->{'orderData'}, validate: $validate),
+                },
                 default => throw new InvalidArgumentException("could not build property 'orderData' from JSON"),
             };
         }
@@ -166,6 +175,10 @@ class OrderCreateOrderRequestBody
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
                 ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder, ($this->orderData) instanceof MailArchiveOrder, ($this->orderData) instanceof AIHostingOrder => $this->orderData->toJson(),
+                (($this->orderData) instanceof LicenseOrderAlternative1) => match (true) {
+                    default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                    ($this->orderData) instanceof LicenseOrderAlternative1 => $this->orderData->toJson(),
+                },
             };
         }
         if (isset($this->orderType)) {
@@ -203,7 +216,7 @@ class OrderCreateOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder, ($this->orderData) instanceof MailArchiveOrder, ($this->orderData) instanceof AIHostingOrder => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder, ($this->orderData) instanceof ExternalCertificateOrder, ($this->orderData) instanceof LeadFyndrOrder, ($this->orderData) instanceof MailArchiveOrder, ($this->orderData) instanceof AIHostingOrder, (($this->orderData) instanceof LicenseOrderAlternative1) => $this->orderData,
             };
         }
     }

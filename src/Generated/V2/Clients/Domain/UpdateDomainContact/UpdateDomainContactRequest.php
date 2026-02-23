@@ -28,6 +28,10 @@ class UpdateDomainContactRequest
             ],
             'body' => [
                 'properties' => [
+                    'avoidEmailConfirmation' => [
+                        'description' => 'Whether to avoid the email confirmation if possible. If set to true, a transfer lock of 60 days might be applied to the domain.',
+                        'type' => 'boolean',
+                    ],
                     'contact' => [
                         'items' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.domain.HandleField',

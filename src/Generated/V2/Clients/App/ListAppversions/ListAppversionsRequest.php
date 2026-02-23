@@ -21,6 +21,9 @@ class ListAppversionsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'versionRange' => [
+                'type' => 'string',
+            ],
             'recommended' => [
                 'type' => 'boolean',
             ],
@@ -31,6 +34,8 @@ class ListAppversionsRequest
     ];
 
     private string $appId;
+
+    private ?string $versionRange = null;
 
     private ?bool $recommended = null;
 
@@ -48,6 +53,11 @@ class ListAppversionsRequest
         return $this->appId;
     }
 
+    public function getVersionRange(): ?string
+    {
+        return $this->versionRange ?? null;
+    }
+
     public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
@@ -63,6 +73,28 @@ class ListAppversionsRequest
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withVersionRange(string $versionRange): self
+    {
+        $validator = new Validator();
+        $validator->validate($versionRange, self::$internalValidationSchema['properties']['versionRange']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->versionRange = $versionRange;
+
+        return $clone;
+    }
+
+    public function withoutVersionRange(): self
+    {
+        $clone = clone $this;
+        unset($clone->versionRange);
 
         return $clone;
     }
@@ -105,12 +137,17 @@ class ListAppversionsRequest
         }
 
         $appId = $input->{'appId'};
+        $versionRange = null;
+        if (isset($input->{'versionRange'})) {
+            $versionRange = $input->{'versionRange'};
+        }
         $recommended = null;
         if (isset($input->{'recommended'})) {
             $recommended = (bool)($input->{'recommended'});
         }
 
         $obj = new self($appId);
+        $obj->versionRange = $versionRange;
         $obj->recommended = $recommended;
         return $obj;
     }
@@ -124,6 +161,9 @@ class ListAppversionsRequest
     {
         $output = [];
         $output['appId'] = $this->appId;
+        if (isset($this->versionRange)) {
+            $output['versionRange'] = $this->versionRange;
+        }
         if (isset($this->recommended)) {
             $output['recommended'] = $this->recommended;
         }
@@ -188,6 +228,9 @@ class ListAppversionsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['versionRange'])) {
+            $query['versionRange'] = $mapped['versionRange'];
+        }
         if (isset($mapped['recommended'])) {
             $query['recommended'] = $mapped['recommended'];
         }
