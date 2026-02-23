@@ -12,7 +12,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobR
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution\DeprecatedCronjobAbortExecutionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionOKResponse;
@@ -154,15 +153,4 @@ interface CronjobClient
      * @return EmptyResponse NoContent
      */
     public function updateCronjobAppIdDeprecated(UpdateCronjobAppIdDeprecatedRequest $request): EmptyResponse;
-    /**
-     * Abort a CronjobExecution. Deprecated because this feature is not available at this time.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/deprecated-cronjob-abort-execution
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedCronjobAbortExecutionRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse NoContent
-     */
-    public function deprecatedCronjobAbortExecution(DeprecatedCronjobAbortExecutionRequest $request): EmptyResponse;
 }

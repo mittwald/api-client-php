@@ -15,6 +15,10 @@ class UpdateDomainContactRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'avoidEmailConfirmation' => [
+                'description' => 'Whether to avoid the email confirmation if possible. If set to true, a transfer lock of 60 days might be applied to the domain.',
+                'type' => 'boolean',
+            ],
             'contact' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.domain.HandleField',
@@ -29,6 +33,11 @@ class UpdateDomainContactRequestBody
     ];
 
     /**
+     * Whether to avoid the email confirmation if possible. If set to true, a transfer lock of 60 days might be applied to the domain.
+     */
+    private ?bool $avoidEmailConfirmation = null;
+
+    /**
      * @var HandleField[]
      */
     private array $contact;
@@ -41,12 +50,39 @@ class UpdateDomainContactRequestBody
         $this->contact = $contact;
     }
 
+    public function getAvoidEmailConfirmation(): ?bool
+    {
+        return $this->avoidEmailConfirmation ?? null;
+    }
+
     /**
      * @return HandleField[]
      */
     public function getContact(): array
     {
         return $this->contact;
+    }
+
+    public function withAvoidEmailConfirmation(bool $avoidEmailConfirmation): self
+    {
+        $validator = new Validator();
+        $validator->validate($avoidEmailConfirmation, self::$internalValidationSchema['properties']['avoidEmailConfirmation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->avoidEmailConfirmation = $avoidEmailConfirmation;
+
+        return $clone;
+    }
+
+    public function withoutAvoidEmailConfirmation(): self
+    {
+        $clone = clone $this;
+        unset($clone->avoidEmailConfirmation);
+
+        return $clone;
     }
 
     /**
@@ -75,10 +111,14 @@ class UpdateDomainContactRequestBody
             static::validateInput($input);
         }
 
+        $avoidEmailConfirmation = null;
+        if (isset($input->{'avoidEmailConfirmation'})) {
+            $avoidEmailConfirmation = (bool)($input->{'avoidEmailConfirmation'});
+        }
         $contact = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'contact'});
 
         $obj = new self($contact);
-
+        $obj->avoidEmailConfirmation = $avoidEmailConfirmation;
         return $obj;
     }
 
@@ -90,6 +130,9 @@ class UpdateDomainContactRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->avoidEmailConfirmation)) {
+            $output['avoidEmailConfirmation'] = $this->avoidEmailConfirmation;
+        }
         $output['contact'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->contact);
 
         return $output;
