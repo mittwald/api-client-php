@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
+namespace Mittwald\ApiClient\Generated\V2\Clients\License\ValidateLicenseKeyForProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OrderCreateOrderRequest
+class ValidateLicenseKeyForProjectRequest
 {
     public const method = 'post';
 
@@ -17,76 +17,75 @@ class OrderCreateOrderRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'projectId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'body' => [
+                'description' => 'The License key to validate.',
                 'properties' => [
-                    'orderData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.AIHostingOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LicenseOrder',
-                            ],
-                        ],
-                    ],
-                    'orderType' => [
-                        'enum' => [
-                            'domain',
-                            'projectHosting',
-                            'server',
-                            'externalCertificate',
-                            'leadFyndr',
-                            'mailArchive',
-                            'aiHosting',
-                            'license',
-                        ],
-                        'example' => 'projectHosting',
+                    'key' => [
                         'type' => 'string',
                     ],
+                    'kind' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.license.Kind',
+                    ],
+                ],
+                'required' => [
+                    'key',
+                    'kind',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
+            'projectId',
             'body',
         ],
     ];
 
-    private OrderCreateOrderRequestBody $body;
+    private string $projectId;
+
+    /**
+     * The License key to validate.
+     */
+    private ValidateLicenseKeyForProjectRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderCreateOrderRequestBody $body)
+    public function __construct(string $projectId, ValidateLicenseKeyForProjectRequestBody $body)
     {
+        $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    public function getBody(): OrderCreateOrderRequestBody
+    public function getProjectId(): string
+    {
+        return $this->projectId;
+    }
+
+    public function getBody(): ValidateLicenseKeyForProjectRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(OrderCreateOrderRequestBody $body): self
+    public function withProjectId(string $projectId): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withBody(ValidateLicenseKeyForProjectRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -99,19 +98,20 @@ class OrderCreateOrderRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderCreateOrderRequest Created instance
+     * @return ValidateLicenseKeyForProjectRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ValidateLicenseKeyForProjectRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderCreateOrderRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectId = $input->{'projectId'};
+        $body = ValidateLicenseKeyForProjectRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($projectId, $body);
 
         return $obj;
     }
@@ -124,6 +124,7 @@ class OrderCreateOrderRequest
     public function toJson(): array
     {
         $output = [];
+        $output['projectId'] = $this->projectId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -170,7 +171,8 @@ class OrderCreateOrderRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/orders';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/actions/validate-license-key';
     }
 
     /**

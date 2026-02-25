@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions;
+namespace Mittwald\ApiClient\Generated\V2\Clients\License\ListLicensesForProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAppversionsRequest
+class ListLicensesForProjectRequest
 {
     public const method = 'get';
 
@@ -17,106 +17,126 @@ class ListAppversionsRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'appId' => [
+            'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'versionRange' => [
-                'type' => 'string',
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
-            'recommended' => [
-                'type' => 'boolean',
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
-            'appId',
+            'projectId',
         ],
     ];
 
-    private string $appId;
+    private string $projectId;
 
-    private ?string $versionRange = null;
+    private int $limit = 1000;
 
-    private ?bool $recommended = null;
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $appId)
+    public function __construct(string $projectId)
     {
-        $this->appId = $appId;
+        $this->projectId = $projectId;
     }
 
-    public function getAppId(): string
+    public function getProjectId(): string
     {
-        return $this->appId;
+        return $this->projectId;
     }
 
-    public function getVersionRange(): ?string
+    public function getLimit(): int
     {
-        return $this->versionRange ?? null;
+        return $this->limit;
     }
 
-    public function getRecommended(): ?bool
+    public function getSkip(): int
     {
-        return $this->recommended ?? null;
+        return $this->skip;
     }
 
-    public function withAppId(string $appId): self
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appId = $appId;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
 
-    public function withVersionRange(string $versionRange): self
+    public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($versionRange, self::$internalValidationSchema['properties']['versionRange']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->versionRange = $versionRange;
+        $clone->limit = $limit;
 
         return $clone;
     }
 
-    public function withoutVersionRange(): self
-    {
-        $clone = clone $this;
-        unset($clone->versionRange);
-
-        return $clone;
-    }
-
-    public function withRecommended(bool $recommended): self
+    public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($recommended, self::$internalValidationSchema['properties']['recommended']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->recommended = $recommended;
+        $clone->skip = $skip;
 
         return $clone;
     }
 
-    public function withoutRecommended(): self
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
     {
         $clone = clone $this;
-        unset($clone->recommended);
+        unset($clone->page);
 
         return $clone;
     }
@@ -126,29 +146,34 @@ class ListAppversionsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAppversionsRequest Created instance
+     * @return ListLicensesForProjectRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAppversionsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListLicensesForProjectRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appId = $input->{'appId'};
-        $versionRange = null;
-        if (isset($input->{'versionRange'})) {
-            $versionRange = $input->{'versionRange'};
+        $projectId = $input->{'projectId'};
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
         }
-        $recommended = null;
-        if (isset($input->{'recommended'})) {
-            $recommended = (bool)($input->{'recommended'});
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
         }
 
-        $obj = new self($appId);
-        $obj->versionRange = $versionRange;
-        $obj->recommended = $recommended;
+        $obj = new self($projectId);
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -160,12 +185,11 @@ class ListAppversionsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['appId'] = $this->appId;
-        if (isset($this->versionRange)) {
-            $output['versionRange'] = $this->versionRange;
-        }
-        if (isset($this->recommended)) {
-            $output['recommended'] = $this->recommended;
+        $output['projectId'] = $this->projectId;
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -211,8 +235,8 @@ class ListAppversionsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $appId = urlencode($mapped['appId']);
-        return '/v2/apps/' . $appId . '/versions';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/licenses';
     }
 
     /**
@@ -228,11 +252,14 @@ class ListAppversionsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['versionRange'])) {
-            $query['versionRange'] = $mapped['versionRange'];
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
         }
-        if (isset($mapped['recommended'])) {
-            $query['recommended'] = $mapped['recommended'];
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
