@@ -165,7 +165,7 @@ class RotateLicenseKeyRequest
     {
         $mapped = $this->toJson();
         $licenseId = urlencode($mapped['licenseId']);
-        return '/v2/licenses/' . $licenseId . '/actions/rotate-license-key';
+        return '/v2/licenses/' . $licenseId . '/actions/rotate-key';
     }
 
     /**

@@ -25,11 +25,7 @@ class License
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'aggregateReference' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.license.AggregateReference',
-            ],
             'description' => [
-                'example' => '',
                 'type' => 'string',
             ],
             'expiryDate' => [
@@ -56,6 +52,9 @@ class License
             'meta' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.license.Meta',
             ],
+            'reference' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.license.Reference',
+            ],
             'volume' => [
                 'type' => 'integer',
             ],
@@ -64,13 +63,11 @@ class License
             'id',
             'description',
             'kind',
-            'aggregateReference',
+            'reference',
             'meta',
         ],
         'type' => 'object',
     ];
-
-    private AggregateReference $aggregateReference;
 
     private string $description;
 
@@ -84,20 +81,17 @@ class License
 
     private Meta $meta;
 
+    private Reference $reference;
+
     private ?int $volume = null;
 
-    public function __construct(AggregateReference $aggregateReference, string $description, string $id, Kind $kind, Meta $meta)
+    public function __construct(string $description, string $id, Kind $kind, Meta $meta, Reference $reference)
     {
-        $this->aggregateReference = $aggregateReference;
         $this->description = $description;
         $this->id = $id;
         $this->kind = $kind;
         $this->meta = $meta;
-    }
-
-    public function getAggregateReference(): AggregateReference
-    {
-        return $this->aggregateReference;
+        $this->reference = $reference;
     }
 
     public function getDescription(): string
@@ -130,17 +124,14 @@ class License
         return $this->meta;
     }
 
+    public function getReference(): Reference
+    {
+        return $this->reference;
+    }
+
     public function getVolume(): ?int
     {
         return $this->volume ?? null;
-    }
-
-    public function withAggregateReference(AggregateReference $aggregateReference): self
-    {
-        $clone = clone $this;
-        $clone->aggregateReference = $aggregateReference;
-
-        return $clone;
     }
 
     public function withDescription(string $description): self
@@ -219,6 +210,14 @@ class License
         return $clone;
     }
 
+    public function withReference(Reference $reference): self
+    {
+        $clone = clone $this;
+        $clone->reference = $reference;
+
+        return $clone;
+    }
+
     public function withVolume(int $volume): self
     {
         $validator = new Validator();
@@ -256,7 +255,6 @@ class License
             static::validateInput($input);
         }
 
-        $aggregateReference = AggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
         $description = $input->{'description'};
         $expiryDate = null;
         if (isset($input->{'expiryDate'})) {
@@ -273,12 +271,13 @@ class License
         }
         $kind = Kind::from($input->{'kind'});
         $meta = Meta::buildFromInput($input->{'meta'}, validate: $validate);
+        $reference = Reference::buildFromInput($input->{'reference'}, validate: $validate);
         $volume = null;
         if (isset($input->{'volume'})) {
             $volume = (int)($input->{'volume'});
         }
 
-        $obj = new self($aggregateReference, $description, $id, $kind, $meta);
+        $obj = new self($description, $id, $kind, $meta, $reference);
         $obj->expiryDate = $expiryDate;
         $obj->keyReference = $keyReference;
         $obj->volume = $volume;
@@ -293,7 +292,6 @@ class License
     public function toJson(): array
     {
         $output = [];
-        $output['aggregateReference'] = $this->aggregateReference->toJson();
         $output['description'] = $this->description;
         if (isset($this->expiryDate)) {
             $output['expiryDate'] = ($this->expiryDate)->format(DateTime::ATOM);
@@ -306,6 +304,7 @@ class License
         }
         $output['kind'] = $this->kind->value;
         $output['meta'] = $this->meta->toJson();
+        $output['reference'] = $this->reference->toJson();
         if (isset($this->volume)) {
             $output['volume'] = $this->volume;
         }
