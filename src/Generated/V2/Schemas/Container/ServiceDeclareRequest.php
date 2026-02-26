@@ -25,7 +25,8 @@ class ServiceDeclareRequest
     private static array $internalValidationSchema = [
         'properties' => [
             'command' => [
-                'description' => 'Defaults to image config on empty',
+                'description' => 'The container command (equivalent to the [Docker cmd](https://docs.docker.com/reference/dockerfile/#cmd)). When omitted, this defaults to the command defined in the image.
+',
                 'example' => [
                     'mysqld',
                 ],
@@ -42,7 +43,8 @@ class ServiceDeclareRequest
                 'type' => 'string',
             ],
             'entrypoint' => [
-                'description' => 'Defaults to image config on empty',
+                'description' => 'The container entrypoint (equivalent to the [Docker entrypoint](https://docs.docker.com/reference/dockerfile/#entrypoint)). When omitted, this defaults to the entrypoint defined in the image.
+',
                 'example' => [
                     'docker-entrypoint.sh',
                 ],
@@ -55,6 +57,8 @@ class ServiceDeclareRequest
                 'additionalProperties' => [
                     'type' => 'string',
                 ],
+                'description' => 'Key-value map of environment variables that should be passed into the container.
+',
                 'example' => [
                     'MYSQL_DATABASE' => 'my_db',
                     'MYSQL_PASSWORD' => 'my_password',
@@ -78,10 +82,19 @@ class ServiceDeclareRequest
                 'type' => 'object',
             ],
             'image' => [
-                'example' => 'mysql',
+                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. When
+the image is pulled from a private registry, make sure to create the registry first
+using the `container-create-registry` endpoint (you can push the image later, although
+the container will remain in a pending state until the image is actually available).
+
+The appropriate registry is matched by hostname.
+',
+                'example' => 'mysql:8.0',
                 'type' => 'string',
             ],
             'ports' => [
+                'description' => 'Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+',
                 'example' => [
                     '3306/tcp',
                 ],
@@ -91,8 +104,11 @@ class ServiceDeclareRequest
                 'type' => 'array',
             ],
             'volumes' => [
+                'description' => 'Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+',
                 'example' => [
                     'data:/var/lib/mysql:ro',
+                    '/home/p-XXXXX/html:/var/www',
                 ],
                 'items' => [
                     'type' => 'string',
@@ -107,7 +123,8 @@ class ServiceDeclareRequest
     ];
 
     /**
-     * Defaults to image config on empty
+     * The container command (equivalent to the [Docker cmd](https://docs.docker.com/reference/dockerfile/#cmd)). When omitted, this defaults to the command defined in the image.
+     *
      *
      * @var string[]|null
      */
@@ -118,13 +135,17 @@ class ServiceDeclareRequest
     private ?string $description = null;
 
     /**
-     * Defaults to image config on empty
+     * The container entrypoint (equivalent to the [Docker entrypoint](https://docs.docker.com/reference/dockerfile/#entrypoint)). When omitted, this defaults to the entrypoint defined in the image.
+     *
      *
      * @var string[]|null
      */
     private ?array $entrypoint = null;
 
     /**
+     * Key-value map of environment variables that should be passed into the container.
+     *
+     *
      * @var string[]|null
      */
     private ?array $environment = null;
@@ -137,14 +158,29 @@ class ServiceDeclareRequest
      */
     private ?array $envs = null;
 
+    /**
+     * The image to run, in the usual format also used by `docker run` and `docker compose`. When
+     * the image is pulled from a private registry, make sure to create the registry first
+     * using the `container-create-registry` endpoint (you can push the image later, although
+     * the container will remain in a pending state until the image is actually available).
+     *
+     * The appropriate registry is matched by hostname.
+     *
+     */
     private string $image;
 
     /**
+     * Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+     *
+     *
      * @var string[]|null
      */
     private ?array $ports = null;
 
     /**
+     * Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+     *
+     *
      * @var string[]|null
      */
     private ?array $volumes = null;

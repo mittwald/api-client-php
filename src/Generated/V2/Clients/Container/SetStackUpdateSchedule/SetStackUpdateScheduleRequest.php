@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeclareStackRequest
+class SetStackUpdateScheduleRequest
 {
     public const method = 'put';
 
@@ -23,32 +23,25 @@ class DeclareStackRequest
             ],
             'body' => [
                 'properties' => [
-                    'services' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceDeclareRequest',
+                    'updateSchedule' => [
+                        'nullable' => true,
+                        'properties' => [
+                            'cron' => [
+                                'example' => '* * * * *',
+                                'type' => 'string',
+                            ],
+                            'timezone' => [
+                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                                'example' => 'Europe/Berlin',
+                                'type' => 'string',
+                            ],
                         ],
-                        'description' => 'A set of containers that should be started in this stack. The key is relevant for
-network connectivity between containers, because you can use it as DNS name to
-resolve this containers from other containers running in the same project (or from
-managed apps running in the same project).
-
-To **delete** an existing container from a stack using a `PUT` request, simply omit
-it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
-',
-                        'type' => 'object',
-                    ],
-                    'volumes' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeDeclareRequest',
+                        'required' => [
+                            'cron',
                         ],
-                        'description' => 'A set of named volumes that should be created for this stack. Removing a volume
-from this set will not delete the volume (for safety), but only detach it from the
-stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
-',
                         'type' => 'object',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
         'required' => [
@@ -59,13 +52,13 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
 
     private string $stackId;
 
-    private DeclareStackRequestBody $body;
+    private SetStackUpdateScheduleRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $stackId, DeclareStackRequestBody $body)
+    public function __construct(string $stackId, SetStackUpdateScheduleRequestBody $body)
     {
         $this->stackId = $stackId;
         $this->body = $body;
@@ -76,7 +69,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $this->stackId;
     }
 
-    public function getBody(): DeclareStackRequestBody
+    public function getBody(): SetStackUpdateScheduleRequestBody
     {
         return $this->body;
     }
@@ -95,7 +88,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $clone;
     }
 
-    public function withBody(DeclareStackRequestBody $body): self
+    public function withBody(SetStackUpdateScheduleRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -108,10 +101,10 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeclareStackRequest Created instance
+     * @return SetStackUpdateScheduleRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeclareStackRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -119,7 +112,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         }
 
         $stackId = $input->{'stackId'};
-        $body = DeclareStackRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = SetStackUpdateScheduleRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($stackId, $body);
 
@@ -182,7 +175,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     {
         $mapped = $this->toJson();
         $stackId = urlencode($mapped['stackId']);
-        return '/v2/stacks/' . $stackId;
+        return '/v2/stacks/' . $stackId . '/update-schedule';
     }
 
     /**

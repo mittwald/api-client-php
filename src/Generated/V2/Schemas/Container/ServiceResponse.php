@@ -40,6 +40,8 @@ class ServiceResponse
                 'type' => 'string',
             ],
             'message' => [
+                'description' => 'Message explaining the current state of the container. This may contain information about the current state of the container, or errors that occurred during deployment.
+',
                 'example' => 'Container ready',
                 'type' => 'string',
             ],
@@ -58,6 +60,8 @@ class ServiceResponse
                 'type' => 'string',
             ],
             'shortId' => [
+                'description' => 'A short ID of the container. This is a unique identifier for the container within the project, and can be used to reference it in other API calls, or for SSH connections.
+',
                 'example' => 'c-12e4u6',
                 'type' => 'string',
             ],
@@ -97,6 +101,10 @@ class ServiceResponse
 
     private string $id;
 
+    /**
+     * Message explaining the current state of the container. This may contain information about the current state of the container, or errors that occurred during deployment.
+     *
+     */
     private ?string $message = null;
 
     private ServiceState $pendingState;
@@ -107,6 +115,10 @@ class ServiceResponse
 
     private string $serviceName;
 
+    /**
+     * A short ID of the container. This is a unique identifier for the container within the project, and can be used to reference it in other API calls, or for SSH connections.
+     *
+     */
     private string $shortId;
 
     private string $stackId;

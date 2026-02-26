@@ -25,18 +25,44 @@ class ResourceSpec
     private static array $internalValidationSchema = [
         'properties' => [
             'cpus' => [
+                'description' => 'CPU limit for the container. The value can be specified as a decimal number, where `1` corresponds to
+one full CPU core. For example, `0.5` means that the container is limited to using half of a CPU core.
+',
                 'example' => '0.5',
                 'type' => 'string',
             ],
             'memory' => [
+                'description' => 'Memory limit for the container. The value can be specified in bytes or using a suffix to indicate
+the unit.
+
+The format matches the one [used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values):
+
+> Values express a byte value as a string in `{amount}{byte unit}` format: The supported units are
+`b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).
+',
                 'example' => '1gb',
                 'type' => 'string',
             ],
         ],
     ];
 
+    /**
+     * CPU limit for the container. The value can be specified as a decimal number, where `1` corresponds to
+     * one full CPU core. For example, `0.5` means that the container is limited to using half of a CPU core.
+     *
+     */
     private ?string $cpus = null;
 
+    /**
+     * Memory limit for the container. The value can be specified in bytes or using a suffix to indicate
+     * the unit.
+     *
+     * The format matches the one [used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values):
+     *
+     * > Values express a byte value as a string in `{amount}{byte unit}` format: The supported units are
+     * `b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).
+     *
+     */
     private ?string $memory = null;
 
     /**
