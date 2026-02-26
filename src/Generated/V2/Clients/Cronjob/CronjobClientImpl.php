@@ -26,10 +26,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobD
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution\DeprecatedCronjobAbortExecutionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution\DeprecatedCronjobAbortExecutionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution\DeprecatedCronjobAbortExecutionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution\DeprecatedCronjobAbortExecutionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKResponse;
@@ -357,30 +353,6 @@ class CronjobClientImpl implements CronjobClient
             412 => UpdateCronjobAppIdDeprecatedPreconditionFailedResponse::fromResponse($httpResponse),
             429 => UpdateCronjobAppIdDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateCronjobAppIdDeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Abort a CronjobExecution. Deprecated because this feature is not available at this time.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/deprecated-cronjob-abort-execution
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedCronjobAbortExecutionRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse NoContent
-     */
-    public function deprecatedCronjobAbortExecution(DeprecatedCronjobAbortExecutionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeprecatedCronjobAbortExecutionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => DeprecatedCronjobAbortExecutionNotFoundResponse::fromResponse($httpResponse),
-            429 => DeprecatedCronjobAbortExecutionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeprecatedCronjobAbortExecutionDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

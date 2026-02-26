@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedCronjobAbortExecutionTooManyRequestsResponse implements ResponseContainer
+class PostPollStatusTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class DeprecatedCronjobAbortExecutionTooManyRequestsResponse implements Response
         ],
     ];
 
-    private DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody $body;
+    private PostPollStatusTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody $body)
+    public function __construct(PostPollStatusTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
+    public function getBody(): PostPollStatusTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody $body): self
+    public function withBody(PostPollStatusTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class DeprecatedCronjobAbortExecutionTooManyRequestsResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedCronjobAbortExecutionTooManyRequestsResponse Created instance
+     * @return PostPollStatusTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): PostPollStatusTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = PostPollStatusTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

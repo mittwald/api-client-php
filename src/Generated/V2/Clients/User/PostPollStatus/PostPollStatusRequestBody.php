@@ -2,91 +2,75 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
+class PostPollStatusRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
         'properties' => [
-            'message' => [
+            'status' => [
+                'enum' => [
+                    'completed',
+                    'muted',
+                    'ignored',
+                ],
                 'type' => 'string',
-                'example' => 'too many requests',
             ],
-            'type' => [
+            'userId' => [
                 'type' => 'string',
-                'example' => 'RateLimitError',
             ],
         ],
+        'required' => [
+            'userId',
+            'status',
+        ],
+        'type' => 'object',
     ];
 
-    private ?string $message = null;
+    private PostPollStatusRequestBodyStatus $status;
 
-    private ?string $type = null;
+    private string $userId;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(PostPollStatusRequestBodyStatus $status, string $userId)
     {
+        $this->status = $status;
+        $this->userId = $userId;
     }
 
-    public function getMessage(): ?string
+    public function getStatus(): PostPollStatusRequestBodyStatus
     {
-        return $this->message ?? null;
+        return $this->status;
     }
 
-    public function getType(): ?string
+    public function getUserId(): string
     {
-        return $this->type ?? null;
+        return $this->userId;
     }
 
-    public function withMessage(string $message): self
+    public function withStatus(PostPollStatusRequestBodyStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->message = $message;
-
-        return $clone;
-    }
-
-    public function withoutMessage(): self
-    {
-        $clone = clone $this;
-        unset($clone->message);
-
-        return $clone;
-    }
-
-    public function withType(string $type): self
-    {
-        $validator = new Validator();
-        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->type = $type;
-
-        return $clone;
-    }
-
-    public function withoutType(): self
-    {
-        $clone = clone $this;
-        unset($clone->type);
+        $clone->userId = $userId;
 
         return $clone;
     }
@@ -96,28 +80,21 @@ class DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody Created instance
+     * @return PostPollStatusRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): PostPollStatusRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $message = null;
-        if (isset($input->{'message'})) {
-            $message = $input->{'message'};
-        }
-        $type = null;
-        if (isset($input->{'type'})) {
-            $type = $input->{'type'};
-        }
+        $status = PostPollStatusRequestBodyStatus::from($input->{'status'});
+        $userId = $input->{'userId'};
 
-        $obj = new self();
-        $obj->message = $message;
-        $obj->type = $type;
+        $obj = new self($status, $userId);
+
         return $obj;
     }
 
@@ -129,12 +106,8 @@ class DeprecatedCronjobAbortExecutionTooManyRequestsResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->message)) {
-            $output['message'] = $this->message;
-        }
-        if (isset($this->type)) {
-            $output['type'] = $this->type;
-        }
+        $output['status'] = ($this->status)->value;
+        $output['userId'] = $this->userId;
 
         return $output;
     }

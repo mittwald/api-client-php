@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedCronjobAbortExecutionRequest
+class PostPollStatusRequest
 {
     public const method = 'post';
 
@@ -17,68 +17,78 @@ class DeprecatedCronjobAbortExecutionRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'userId' => [
                 'type' => 'string',
             ],
-            'executionId' => [
-                'example' => 'cron-bd26li-28027320',
-                'type' => 'string',
+            'body' => [
+                'properties' => [
+                    'status' => [
+                        'enum' => [
+                            'completed',
+                            'muted',
+                            'ignored',
+                        ],
+                        'type' => 'string',
+                    ],
+                    'userId' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'userId',
+                    'status',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'cronjobId',
-            'executionId',
+            'userId',
+            'body',
         ],
     ];
 
-    private string $cronjobId;
+    private string $userId;
 
-    private string $executionId;
+    private PostPollStatusRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, string $executionId)
+    public function __construct(string $userId, PostPollStatusRequestBody $body)
     {
-        $this->cronjobId = $cronjobId;
-        $this->executionId = $executionId;
+        $this->userId = $userId;
+        $this->body = $body;
     }
 
-    public function getCronjobId(): string
+    public function getUserId(): string
     {
-        return $this->cronjobId;
+        return $this->userId;
     }
 
-    public function getExecutionId(): string
+    public function getBody(): PostPollStatusRequestBody
     {
-        return $this->executionId;
+        return $this->body;
     }
 
-    public function withCronjobId(string $cronjobId): self
+    public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
+        $clone->userId = $userId;
 
         return $clone;
     }
 
-    public function withExecutionId(string $executionId): self
+    public function withBody(PostPollStatusRequestBody $body): self
     {
-        $validator = new Validator();
-        $validator->validate($executionId, self::$internalValidationSchema['properties']['executionId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->executionId = $executionId;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -88,20 +98,20 @@ class DeprecatedCronjobAbortExecutionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedCronjobAbortExecutionRequest Created instance
+     * @return PostPollStatusRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): PostPollStatusRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $executionId = $input->{'executionId'};
+        $userId = $input->{'userId'};
+        $body = PostPollStatusRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($cronjobId, $executionId);
+        $obj = new self($userId, $body);
 
         return $obj;
     }
@@ -114,8 +124,8 @@ class DeprecatedCronjobAbortExecutionRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['executionId'] = $this->executionId;
+        $output['userId'] = $this->userId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -146,6 +156,7 @@ class DeprecatedCronjobAbortExecutionRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -160,9 +171,8 @@ class DeprecatedCronjobAbortExecutionRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        $executionId = urlencode($mapped['executionId']);
-        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
+        $userId = urlencode($mapped['userId']);
+        return '/v2/poll-settings/' . $userId;
     }
 
     /**
@@ -181,6 +191,7 @@ class DeprecatedCronjobAbortExecutionRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

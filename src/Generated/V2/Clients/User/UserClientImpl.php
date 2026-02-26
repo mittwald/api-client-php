@@ -241,6 +241,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPers
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
@@ -304,6 +310,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
@@ -1706,6 +1718,29 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Get poll settings for the specified user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetPollStatusRequest $request An object representing the request for this operation
+     */
+    public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse
+    {
+        $httpRequest = new Request(GetPollStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetPollStatusOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetPollStatusBadRequestResponse::fromResponse($httpResponse),
+            404 => GetPollStatusNotFoundResponse::fromResponse($httpResponse),
+            429 => GetPollStatusTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetPollStatusDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a specific session.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
@@ -1986,6 +2021,30 @@ class UserClientImpl implements UserClient
             400 => OauthRetrieveAccessTokenBadRequestResponse::fromResponse($httpResponse),
             429 => OauthRetrieveAccessTokenTooManyRequestsResponse::fromResponse($httpResponse),
             default => OauthRetrieveAccessTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Store new or update poll settings.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-post-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PostPollStatusRequest $request An object representing the request for this operation
+     * @return PostPollStatusOKResponse The updated poll settings.
+     */
+    public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse
+    {
+        $httpRequest = new Request(PostPollStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PostPollStatusOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PostPollStatusBadRequestResponse::fromResponse($httpResponse),
+            403 => PostPollStatusForbiddenResponse::fromResponse($httpResponse),
+            429 => PostPollStatusTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PostPollStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
 

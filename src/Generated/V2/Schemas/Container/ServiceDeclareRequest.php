@@ -82,7 +82,12 @@ class ServiceDeclareRequest
                 'type' => 'object',
             ],
             'image' => [
-                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. When the image is pulled from a private registry, make sure to create it first, using the `container-create-registry` endpoint. The appropriate registry is matched by hostname.
+                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. When
+the image is pulled from a private registry, make sure to create the registry first
+using the `container-create-registry` endpoint (you can push the image later, although
+the container will remain in a pending state until the image is actually available).
+
+The appropriate registry is matched by hostname.
 ',
                 'example' => 'mysql:8.0',
                 'type' => 'string',
@@ -154,7 +159,12 @@ class ServiceDeclareRequest
     private ?array $envs = null;
 
     /**
-     * The image to run, in the usual format also used by `docker run` and `docker compose`. When the image is pulled from a private registry, make sure to create it first, using the `container-create-registry` endpoint. The appropriate registry is matched by hostname.
+     * The image to run, in the usual format also used by `docker run` and `docker compose`. When
+     * the image is pulled from a private registry, make sure to create the registry first
+     * using the `container-create-registry` endpoint (you can push the image later, although
+     * the container will remain in a pending state until the image is actually available).
+     *
+     * The appropriate registry is matched by hostname.
      *
      */
     private string $image;
