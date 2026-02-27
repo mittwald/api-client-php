@@ -16,7 +16,7 @@ class ListProjectMailSettingsOKResponseBody
         'properties' => [
             'blacklist' => [
                 'items' => [
-                    'format' => 'idn-email',
+                    'pattern' => '^([a-zA-Z0-9.!#$%&\'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$',
                     'type' => 'string',
                 ],
                 'type' => 'array',
@@ -26,7 +26,7 @@ class ListProjectMailSettingsOKResponseBody
             ],
             'whitelist' => [
                 'items' => [
-                    'format' => 'idn-email',
+                    'pattern' => '^([a-zA-Z0-9.!#$%&\'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$',
                     'type' => 'string',
                 ],
                 'type' => 'array',
