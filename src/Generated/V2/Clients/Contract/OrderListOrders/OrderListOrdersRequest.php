@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderType;
 
 class OrderListOrdersRequest
 {
@@ -33,6 +34,12 @@ class OrderListOrdersRequest
             'templateNames' => [
                 'items' => [
                     'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'types' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.order.OrderType',
                 ],
                 'type' => 'array',
             ],
@@ -69,6 +76,11 @@ class OrderListOrdersRequest
      * @var string[]|null
      */
     private ?array $templateNames = null;
+
+    /**
+     * @var OrderType[]|null
+     */
+    private ?array $types = null;
 
     private int $limit = 1000;
 
@@ -109,6 +121,14 @@ class OrderListOrdersRequest
     public function getTemplateNames(): ?array
     {
         return $this->templateNames ?? null;
+    }
+
+    /**
+     * @return OrderType[]|null
+     */
+    public function getTypes(): ?array
+    {
+        return $this->types ?? null;
     }
 
     public function getLimit(): int
@@ -185,6 +205,25 @@ class OrderListOrdersRequest
     {
         $clone = clone $this;
         unset($clone->templateNames);
+
+        return $clone;
+    }
+
+    /**
+     * @param OrderType[] $types
+     */
+    public function withTypes(array $types): self
+    {
+        $clone = clone $this;
+        $clone->types = $types;
+
+        return $clone;
+    }
+
+    public function withoutTypes(): self
+    {
+        $clone = clone $this;
+        unset($clone->types);
 
         return $clone;
     }
@@ -266,6 +305,10 @@ class OrderListOrdersRequest
         if (isset($input->{'templateNames'})) {
             $templateNames = $input->{'templateNames'};
         }
+        $types = null;
+        if (isset($input->{'types'})) {
+            $types = array_map(fn (string $i): OrderType => OrderType::from($i), $input->{'types'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -283,6 +326,7 @@ class OrderListOrdersRequest
         $obj->includesStatus = $includesStatus;
         $obj->excludesStatus = $excludesStatus;
         $obj->templateNames = $templateNames;
+        $obj->types = $types;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -305,6 +349,9 @@ class OrderListOrdersRequest
         }
         if (isset($this->templateNames)) {
             $output['templateNames'] = $this->templateNames;
+        }
+        if (isset($this->types)) {
+            $output['types'] = array_map(fn (OrderType $i): string => $i->value, $this->types);
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -379,6 +426,9 @@ class OrderListOrdersRequest
         }
         if (isset($mapped['templateNames'])) {
             $query['templateNames'] = $mapped['templateNames'];
+        }
+        if (isset($mapped['types'])) {
+            $query['types'] = $mapped['types'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

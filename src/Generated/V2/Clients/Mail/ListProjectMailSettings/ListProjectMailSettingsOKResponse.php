@@ -24,7 +24,7 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
                 'properties' => [
                     'blacklist' => [
                         'items' => [
-                            'format' => 'idn-email',
+                            'pattern' => '^([a-zA-Z0-9.!#$%&\'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$',
                             'type' => 'string',
                         ],
                         'type' => 'array',
@@ -34,7 +34,7 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
                     ],
                     'whitelist' => [
                         'items' => [
-                            'format' => 'idn-email',
+                            'pattern' => '^([a-zA-Z0-9.!#$%&\'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$',
                             'type' => 'string',
                         ],
                         'type' => 'array',
