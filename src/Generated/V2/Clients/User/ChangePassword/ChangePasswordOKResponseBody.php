@@ -20,6 +20,10 @@ class ChangePasswordOKResponseBody
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'refreshToken' => [
+                'description' => 'Refresh token to refresh your access token even after it has expired.',
+                'type' => 'string',
+            ],
             'token' => [
                 'description' => 'Public token to identify yourself against the api gateway.',
                 'type' => 'string',
@@ -28,6 +32,7 @@ class ChangePasswordOKResponseBody
         'required' => [
             'token',
             'expires',
+            'refreshToken',
         ],
         'type' => 'object',
     ];
@@ -38,19 +43,30 @@ class ChangePasswordOKResponseBody
     private DateTime $expires;
 
     /**
+     * Refresh token to refresh your access token even after it has expired.
+     */
+    private string $refreshToken;
+
+    /**
      * Public token to identify yourself against the api gateway.
      */
     private string $token;
 
-    public function __construct(DateTime $expires, string $token)
+    public function __construct(DateTime $expires, string $refreshToken, string $token)
     {
         $this->expires = $expires;
+        $this->refreshToken = $refreshToken;
         $this->token = $token;
     }
 
     public function getExpires(): DateTime
     {
         return $this->expires;
+    }
+
+    public function getRefreshToken(): string
+    {
+        return $this->refreshToken;
     }
 
     public function getToken(): string
@@ -62,6 +78,20 @@ class ChangePasswordOKResponseBody
     {
         $clone = clone $this;
         $clone->expires = $expires;
+
+        return $clone;
+    }
+
+    public function withRefreshToken(string $refreshToken): self
+    {
+        $validator = new Validator();
+        $validator->validate($refreshToken, self::$internalValidationSchema['properties']['refreshToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->refreshToken = $refreshToken;
 
         return $clone;
     }
@@ -96,9 +126,10 @@ class ChangePasswordOKResponseBody
         }
 
         $expires = new DateTime($input->{'expires'});
+        $refreshToken = $input->{'refreshToken'};
         $token = $input->{'token'};
 
-        $obj = new self($expires, $token);
+        $obj = new self($expires, $refreshToken, $token);
 
         return $obj;
     }
@@ -112,6 +143,7 @@ class ChangePasswordOKResponseBody
     {
         $output = [];
         $output['expires'] = ($this->expires)->format(DateTime::ATOM);
+        $output['refreshToken'] = $this->refreshToken;
         $output['token'] = $this->token;
 
         return $output;
