@@ -32,6 +32,7 @@ class ChangePasswordOKResponseBody
         'required' => [
             'token',
             'expires',
+            'refreshToken',
         ],
         'type' => 'object',
     ];
@@ -44,16 +45,17 @@ class ChangePasswordOKResponseBody
     /**
      * Refresh token to refresh your access token even after it has expired.
      */
-    private ?string $refreshToken = null;
+    private string $refreshToken;
 
     /**
      * Public token to identify yourself against the api gateway.
      */
     private string $token;
 
-    public function __construct(DateTime $expires, string $token)
+    public function __construct(DateTime $expires, string $refreshToken, string $token)
     {
         $this->expires = $expires;
+        $this->refreshToken = $refreshToken;
         $this->token = $token;
     }
 
@@ -62,9 +64,9 @@ class ChangePasswordOKResponseBody
         return $this->expires;
     }
 
-    public function getRefreshToken(): ?string
+    public function getRefreshToken(): string
     {
-        return $this->refreshToken ?? null;
+        return $this->refreshToken;
     }
 
     public function getToken(): string
@@ -90,14 +92,6 @@ class ChangePasswordOKResponseBody
 
         $clone = clone $this;
         $clone->refreshToken = $refreshToken;
-
-        return $clone;
-    }
-
-    public function withoutRefreshToken(): self
-    {
-        $clone = clone $this;
-        unset($clone->refreshToken);
 
         return $clone;
     }
@@ -132,14 +126,11 @@ class ChangePasswordOKResponseBody
         }
 
         $expires = new DateTime($input->{'expires'});
-        $refreshToken = null;
-        if (isset($input->{'refreshToken'})) {
-            $refreshToken = $input->{'refreshToken'};
-        }
+        $refreshToken = $input->{'refreshToken'};
         $token = $input->{'token'};
 
-        $obj = new self($expires, $token);
-        $obj->refreshToken = $refreshToken;
+        $obj = new self($expires, $refreshToken, $token);
+
         return $obj;
     }
 
@@ -152,9 +143,7 @@ class ChangePasswordOKResponseBody
     {
         $output = [];
         $output['expires'] = ($this->expires)->format(DateTime::ATOM);
-        if (isset($this->refreshToken)) {
-            $output['refreshToken'] = $this->refreshToken;
-        }
+        $output['refreshToken'] = $this->refreshToken;
         $output['token'] = $this->token;
 
         return $output;

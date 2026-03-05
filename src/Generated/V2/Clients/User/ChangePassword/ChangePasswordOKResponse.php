@@ -39,6 +39,7 @@ class ChangePasswordOKResponse implements ResponseContainer
                 'required' => [
                     'token',
                     'expires',
+                    'refreshToken',
                 ],
                 'type' => 'object',
             ],
