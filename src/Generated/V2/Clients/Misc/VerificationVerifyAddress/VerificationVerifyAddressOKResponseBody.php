@@ -6,52 +6,46 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponse implements ResponseContainer
+class VerificationVerifyAddressOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'exists' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'exists',
-                ],
-                'type' => 'object',
+            'exists' => [
+                'type' => 'boolean',
             ],
         ],
+        'required' => [
+            'exists',
+        ],
+        'type' => 'object',
     ];
 
-    private VerificationVerifyAddressOKResponseBody $body;
+    private bool $exists;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(VerificationVerifyAddressOKResponseBody $body)
+    public function __construct(bool $exists)
     {
-        $this->body = $body;
+        $this->exists = $exists;
     }
 
-    public function getBody(): VerificationVerifyAddressOKResponseBody
+    public function getExists(): bool
     {
-        return $this->body;
+        return $this->exists;
     }
 
-    public function withBody(VerificationVerifyAddressOKResponseBody $body): self
+    public function withExists(bool $exists): self
     {
+        $validator = new Validator();
+        $validator->validate($exists, self::$internalValidationSchema['properties']['exists']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->exists = $exists;
 
         return $clone;
     }
@@ -61,19 +55,19 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponse Created instance
+     * @return VerificationVerifyAddressOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $exists = (bool)($input->{'exists'});
 
-        $obj = new self($body);
+        $obj = new self($exists);
 
         return $obj;
     }
@@ -86,7 +80,7 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['exists'] = $this->exists;
 
         return $output;
     }
@@ -117,19 +111,5 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

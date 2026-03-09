@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExtensionInstanceWebhookExecution;
 use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyAddressOKResponse implements ResponseContainer
+class ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,34 +22,41 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'exists' => [
-                        'type' => 'boolean',
-                    ],
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionInstanceWebhookExecution',
                 ],
-                'required' => [
-                    'exists',
-                ],
-                'type' => 'object',
+                'type' => 'array',
             ],
         ],
     ];
 
-    private VerificationVerifyAddressOKResponseBody $body;
+    /**
+     * @var ExtensionInstanceWebhookExecution[]
+     */
+    private array $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(VerificationVerifyAddressOKResponseBody $body)
+    /**
+     * @param ExtensionInstanceWebhookExecution[] $body
+     */
+    public function __construct(array $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): VerificationVerifyAddressOKResponseBody
+    /**
+     * @return ExtensionInstanceWebhookExecution[]
+     */
+    public function getBody(): array
     {
         return $this->body;
     }
 
-    public function withBody(VerificationVerifyAddressOKResponseBody $body): self
+    /**
+     * @param ExtensionInstanceWebhookExecution[] $body
+     */
+    public function withBody(array $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -61,17 +69,17 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressOKResponse Created instance
+     * @return ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = array_map(fn (array|object $i): ExtensionInstanceWebhookExecution => ExtensionInstanceWebhookExecution::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -86,7 +94,7 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = array_map(fn (ExtensionInstanceWebhookExecution $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -117,7 +125,6 @@ class VerificationVerifyAddressOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

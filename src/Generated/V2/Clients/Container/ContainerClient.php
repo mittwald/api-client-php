@@ -25,6 +25,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKRespons
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesOKResponse;
@@ -164,6 +166,16 @@ interface ContainerClient
      * @return GetVolumeOKResponse OK
      */
     public function getVolume(GetVolumeRequest $request): GetVolumeOKResponse;
+    /**
+     * List all Stacks accessible by the authenticated User.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-accessible-stacks
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListAccessibleStacksRequest $request An object representing the request for this operation
+     * @return ListAccessibleStacksOKResponse OK
+     */
+    public function listAccessibleStacks(ListAccessibleStacksRequest $request): ListAccessibleStacksOKResponse;
     /**
      * List Registries belonging to a Project.
      *

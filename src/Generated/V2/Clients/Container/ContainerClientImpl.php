@@ -90,6 +90,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks\ListAccessibleStacksTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesForbiddenResponse;
@@ -491,6 +498,31 @@ class ContainerClientImpl implements ContainerClient
             429 => GetVolumeTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetVolumeInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetVolumeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List all Stacks accessible by the authenticated User.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-accessible-stacks
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListAccessibleStacksRequest $request An object representing the request for this operation
+     * @return ListAccessibleStacksOKResponse OK
+     */
+    public function listAccessibleStacks(ListAccessibleStacksRequest $request): ListAccessibleStacksOKResponse
+    {
+        $httpRequest = new Request(ListAccessibleStacksRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListAccessibleStacksOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListAccessibleStacksBadRequestResponse::fromResponse($httpResponse),
+            403 => ListAccessibleStacksForbiddenResponse::fromResponse($httpResponse),
+            429 => ListAccessibleStacksTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListAccessibleStacksInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListAccessibleStacksDefaultResponse::fromResponse($httpResponse),
         });
     }
 
