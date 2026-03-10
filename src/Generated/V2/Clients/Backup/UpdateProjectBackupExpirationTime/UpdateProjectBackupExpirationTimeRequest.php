@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerificationVerifyAddressRequest
+class UpdateProjectBackupExpirationTimeRequest
 {
-    public const method = 'post';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,58 +17,65 @@ class VerificationVerifyAddressRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'projectBackupId' => [
+                'type' => 'string',
+            ],
             'body' => [
                 'properties' => [
-                    'city' => [
-                        'example' => 'Bremen',
+                    'expirationTime' => [
+                        'description' => 'Time when to expire the Backup.',
+                        'format' => 'date-time',
                         'type' => 'string',
                     ],
-                    'country' => [
-                        'description' => 'The country format should be ISO 3166-2 Alpha 2 Country Code.',
-                        'example' => 'DE',
-                        'type' => 'string',
-                    ],
-                    'street' => [
-                        'description' => 'Includes the house number.',
-                        'example' => 'Bremer Straße 1',
-                        'type' => 'string',
-                    ],
-                    'zip' => [
-                        'example' => '28203',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'street',
-                    'zip',
-                    'city',
-                    'country',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
+            'projectBackupId',
             'body',
         ],
     ];
 
-    private VerificationVerifyAddressRequestBody $body;
+    private string $projectBackupId;
+
+    private UpdateProjectBackupExpirationTimeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(VerificationVerifyAddressRequestBody $body)
+    public function __construct(string $projectBackupId, UpdateProjectBackupExpirationTimeRequestBody $body)
     {
+        $this->projectBackupId = $projectBackupId;
         $this->body = $body;
     }
 
-    public function getBody(): VerificationVerifyAddressRequestBody
+    public function getProjectBackupId(): string
+    {
+        return $this->projectBackupId;
+    }
+
+    public function getBody(): UpdateProjectBackupExpirationTimeRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(VerificationVerifyAddressRequestBody $body): self
+    public function withProjectBackupId(string $projectBackupId): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectBackupId = $projectBackupId;
+
+        return $clone;
+    }
+
+    public function withBody(UpdateProjectBackupExpirationTimeRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -81,19 +88,20 @@ class VerificationVerifyAddressRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressRequest Created instance
+     * @return UpdateProjectBackupExpirationTimeRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectBackupId = $input->{'projectBackupId'};
+        $body = UpdateProjectBackupExpirationTimeRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($projectBackupId, $body);
 
         return $obj;
     }
@@ -106,6 +114,7 @@ class VerificationVerifyAddressRequest
     public function toJson(): array
     {
         $output = [];
+        $output['projectBackupId'] = $this->projectBackupId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -152,7 +161,8 @@ class VerificationVerifyAddressRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/actions/verify-address';
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId . '/expiration-time';
     }
 
     /**

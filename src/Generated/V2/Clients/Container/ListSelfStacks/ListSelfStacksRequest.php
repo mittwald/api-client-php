@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAccessibleStacksRequest
+class ListSelfStacksRequest
 {
     public const method = 'get';
 
@@ -123,10 +123,10 @@ class ListAccessibleStacksRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAccessibleStacksRequest Created instance
+     * @return ListSelfStacksRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAccessibleStacksRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListSelfStacksRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

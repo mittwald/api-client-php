@@ -18,6 +18,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressRequest;
@@ -114,6 +115,7 @@ class MiscClientImpl implements MiscClient
             return VerificationVerifyAddressOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => VerificationVerifyAddressBadRequestResponse::fromResponse($httpResponse),
             429 => VerificationVerifyAddressTooManyRequestsResponse::fromResponse($httpResponse),
             default => VerificationVerifyAddressDefaultResponse::fromResponse($httpResponse),
         });
@@ -122,7 +124,7 @@ class MiscClientImpl implements MiscClient
     /**
      * Check if a company exists.
      *
-     * Only companies registered in the german company register are currently supported.
+     * Only companies registered in the German company register are currently supported.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-company
      * @throws GuzzleException

@@ -40,14 +40,6 @@ class ExtensionInstanceWebhookExecution
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'failed' => [
-                'default' => false,
-                'type' => 'boolean',
-            ],
-            'halted' => [
-                'default' => false,
-                'type' => 'boolean',
-            ],
             'kind' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookKind',
                 'type' => 'string',
@@ -56,13 +48,14 @@ class ExtensionInstanceWebhookExecution
                 'format' => 'date-time',
                 'type' => 'string',
             ],
-            'running' => [
-                'default' => false,
-                'type' => 'boolean',
-            ],
-            'successful' => [
-                'default' => true,
-                'type' => 'boolean',
+            'state' => [
+                'enum' => [
+                    'running',
+                    'halted',
+                    'failed',
+                    'successful',
+                ],
+                'type' => 'string',
             ],
             'webhookTraceId' => [
                 'format' => 'uuid',
@@ -75,10 +68,7 @@ class ExtensionInstanceWebhookExecution
             'extensionId',
             'contributorId',
             'kind',
-            'successful',
-            'running',
-            'halted',
-            'failed',
+            'state',
             'attempts',
         ],
         'type' => 'object',
@@ -92,27 +82,22 @@ class ExtensionInstanceWebhookExecution
 
     private string $extensionInstanceId;
 
-    private bool $failed = false;
-
-    private bool $halted = false;
-
     private string $kind;
 
     private ?DateTime $nextScheduledExecution = null;
 
-    private bool $running = false;
-
-    private bool $successful = true;
+    private ExtensionInstanceWebhookExecutionState $state;
 
     private string $webhookTraceId;
 
-    public function __construct(int $attempts, string $contributorId, string $extensionId, string $extensionInstanceId, string $kind, string $webhookTraceId)
+    public function __construct(int $attempts, string $contributorId, string $extensionId, string $extensionInstanceId, string $kind, ExtensionInstanceWebhookExecutionState $state, string $webhookTraceId)
     {
         $this->attempts = $attempts;
         $this->contributorId = $contributorId;
         $this->extensionId = $extensionId;
         $this->extensionInstanceId = $extensionInstanceId;
         $this->kind = $kind;
+        $this->state = $state;
         $this->webhookTraceId = $webhookTraceId;
     }
 
@@ -136,16 +121,6 @@ class ExtensionInstanceWebhookExecution
         return $this->extensionInstanceId;
     }
 
-    public function getFailed(): bool
-    {
-        return $this->failed;
-    }
-
-    public function getHalted(): bool
-    {
-        return $this->halted;
-    }
-
     public function getKind(): string
     {
         return $this->kind;
@@ -156,14 +131,9 @@ class ExtensionInstanceWebhookExecution
         return $this->nextScheduledExecution ?? null;
     }
 
-    public function getRunning(): bool
+    public function getState(): ExtensionInstanceWebhookExecutionState
     {
-        return $this->running;
-    }
-
-    public function getSuccessful(): bool
-    {
-        return $this->successful;
+        return $this->state;
     }
 
     public function getWebhookTraceId(): string
@@ -227,34 +197,6 @@ class ExtensionInstanceWebhookExecution
         return $clone;
     }
 
-    public function withFailed(bool $failed): self
-    {
-        $validator = new Validator();
-        $validator->validate($failed, self::$internalValidationSchema['properties']['failed']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->failed = $failed;
-
-        return $clone;
-    }
-
-    public function withHalted(bool $halted): self
-    {
-        $validator = new Validator();
-        $validator->validate($halted, self::$internalValidationSchema['properties']['halted']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->halted = $halted;
-
-        return $clone;
-    }
-
     public function withKind(string $kind): self
     {
         $validator = new Validator();
@@ -285,30 +227,10 @@ class ExtensionInstanceWebhookExecution
         return $clone;
     }
 
-    public function withRunning(bool $running): self
+    public function withState(ExtensionInstanceWebhookExecutionState $state): self
     {
-        $validator = new Validator();
-        $validator->validate($running, self::$internalValidationSchema['properties']['running']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->running = $running;
-
-        return $clone;
-    }
-
-    public function withSuccessful(bool $successful): self
-    {
-        $validator = new Validator();
-        $validator->validate($successful, self::$internalValidationSchema['properties']['successful']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->successful = $successful;
+        $clone->state = $state;
 
         return $clone;
     }
@@ -346,35 +268,16 @@ class ExtensionInstanceWebhookExecution
         $contributorId = $input->{'contributorId'};
         $extensionId = $input->{'extensionId'};
         $extensionInstanceId = $input->{'extensionInstanceId'};
-        $failed = false;
-        if (isset($input->{'failed'})) {
-            $failed = (bool)($input->{'failed'});
-        }
-        $halted = false;
-        if (isset($input->{'halted'})) {
-            $halted = (bool)($input->{'halted'});
-        }
         $kind = $input->{'kind'};
         $nextScheduledExecution = null;
         if (isset($input->{'nextScheduledExecution'})) {
             $nextScheduledExecution = new DateTime($input->{'nextScheduledExecution'});
         }
-        $running = false;
-        if (isset($input->{'running'})) {
-            $running = (bool)($input->{'running'});
-        }
-        $successful = true;
-        if (isset($input->{'successful'})) {
-            $successful = (bool)($input->{'successful'});
-        }
+        $state = ExtensionInstanceWebhookExecutionState::from($input->{'state'});
         $webhookTraceId = $input->{'webhookTraceId'};
 
-        $obj = new self($attempts, $contributorId, $extensionId, $extensionInstanceId, $kind, $webhookTraceId);
-        $obj->failed = $failed;
-        $obj->halted = $halted;
+        $obj = new self($attempts, $contributorId, $extensionId, $extensionInstanceId, $kind, $state, $webhookTraceId);
         $obj->nextScheduledExecution = $nextScheduledExecution;
-        $obj->running = $running;
-        $obj->successful = $successful;
         return $obj;
     }
 
@@ -390,14 +293,11 @@ class ExtensionInstanceWebhookExecution
         $output['contributorId'] = $this->contributorId;
         $output['extensionId'] = $this->extensionId;
         $output['extensionInstanceId'] = $this->extensionInstanceId;
-        $output['failed'] = $this->failed;
-        $output['halted'] = $this->halted;
         $output['kind'] = $this->kind;
         if (isset($this->nextScheduledExecution)) {
             $output['nextScheduledExecution'] = ($this->nextScheduledExecution)->format(DateTime::ATOM);
         }
-        $output['running'] = $this->running;
-        $output['successful'] = $this->successful;
+        $output['state'] = ($this->state)->value;
         $output['webhookTraceId'] = $this->webhookTraceId;
 
         return $output;

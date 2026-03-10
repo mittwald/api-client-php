@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAccessibleStacksTooManyRequestsResponseBody
+class ListSelfStacksTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class ListAccessibleStacksTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAccessibleStacksTooManyRequestsResponseBody Created instance
+     * @return ListSelfStacksTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAccessibleStacksTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ListSelfStacksTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

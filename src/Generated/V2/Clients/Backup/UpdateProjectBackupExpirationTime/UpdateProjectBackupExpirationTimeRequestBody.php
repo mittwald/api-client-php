@@ -2,49 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
-use Psr\Http\Message\ResponseInterface;
 
-class ListAccessibleStacksForbiddenResponse implements ResponseContainer
+class UpdateProjectBackupExpirationTimeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            'expirationTime' => [
+                'description' => 'Time when to expire the Backup.',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
         ],
+        'type' => 'object',
     ];
 
-    private Error $body;
+    /**
+     * Time when to expire the Backup.
+     */
+    private ?DateTime $expirationTime = null;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(Error $body)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getExpirationTime(): ?DateTime
     {
-        return $this->body;
+        return $this->expirationTime ?? null;
     }
 
-    public function withBody(Error $body): self
+    public function withExpirationTime(DateTime $expirationTime): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->expirationTime = $expirationTime;
+
+        return $clone;
+    }
+
+    public function withoutExpirationTime(): self
+    {
+        $clone = clone $this;
+        unset($clone->expirationTime);
 
         return $clone;
     }
@@ -54,20 +62,23 @@ class ListAccessibleStacksForbiddenResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAccessibleStacksForbiddenResponse Created instance
+     * @return UpdateProjectBackupExpirationTimeRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAccessibleStacksForbiddenResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $expirationTime = null;
+        if (isset($input->{'expirationTime'})) {
+            $expirationTime = new DateTime($input->{'expirationTime'});
+        }
 
-        $obj = new self($body);
-
+        $obj = new self();
+        $obj->expirationTime = $expirationTime;
         return $obj;
     }
 
@@ -79,7 +90,9 @@ class ListAccessibleStacksForbiddenResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        if (isset($this->expirationTime)) {
+            $output['expirationTime'] = ($this->expirationTime)->format(DateTime::ATOM);
+        }
 
         return $output;
     }
@@ -110,18 +123,8 @@ class ListAccessibleStacksForbiddenResponse implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
+        if (isset($this->expirationTime)) {
+            $this->expirationTime = clone $this->expirationTime;
+        }
     }
 }

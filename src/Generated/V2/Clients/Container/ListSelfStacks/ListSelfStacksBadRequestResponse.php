@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleStacks;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Container\StackResponse;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class ListAccessibleStacksOKResponse implements ResponseContainer
+class ListSelfStacksBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,41 +22,26 @@ class ListAccessibleStacksOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.container.StackResponse',
-                ],
-                'type' => 'array',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
-    /**
-     * @var StackResponse[]
-     */
-    private array $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param StackResponse[] $body
-     */
-    public function __construct(array $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return StackResponse[]
-     */
-    public function getBody(): array
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
-    /**
-     * @param StackResponse[] $body
-     */
-    public function withBody(array $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -69,17 +54,17 @@ class ListAccessibleStacksOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAccessibleStacksOKResponse Created instance
+     * @return ListSelfStacksBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAccessibleStacksOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ListSelfStacksBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $i): StackResponse => StackResponse::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -94,7 +79,7 @@ class ListAccessibleStacksOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (StackResponse $i): array => $i->toJson(), $this->body);
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
