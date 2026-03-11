@@ -97,6 +97,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistr
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesForbiddenResponse;
@@ -516,6 +523,31 @@ class ContainerClientImpl implements ContainerClient
             429 => ListRegistriesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListRegistriesInternalServerErrorResponse::fromResponse($httpResponse),
             default => ListRegistriesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Stacks belonging to the executing user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-self-stacks
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSelfStacksRequest $request An object representing the request for this operation
+     * @return ListSelfStacksOKResponse OK
+     */
+    public function listSelfStacks(ListSelfStacksRequest $request): ListSelfStacksOKResponse
+    {
+        $httpRequest = new Request(ListSelfStacksRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListSelfStacksOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListSelfStacksBadRequestResponse::fromResponse($httpResponse),
+            403 => ListSelfStacksForbiddenResponse::fromResponse($httpResponse),
+            429 => ListSelfStacksTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListSelfStacksInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListSelfStacksDefaultResponse::fromResponse($httpResponse),
         });
     }
 

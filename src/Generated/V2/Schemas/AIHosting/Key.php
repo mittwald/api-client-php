@@ -44,7 +44,8 @@ class Key
                 'type' => 'string',
             ],
             'models' => [
-                'description' => 'An array of LLM model identifiers enabled for this key.',
+                'deprecated' => true,
+                'description' => 'This Field is deprecated. You can find the allowed models in the /ai-hosting route.',
                 'items' => [
                     'type' => 'string',
                 ],
@@ -95,9 +96,10 @@ class Key
     private string $keyId;
 
     /**
-     * An array of LLM model identifiers enabled for this key.
+     * This Field is deprecated. You can find the allowed models in the /ai-hosting route.
      *
      * @var string[]
+     * @deprecated
      */
     private array $models;
 
@@ -149,6 +151,7 @@ class Key
 
     /**
      * @return string[]
+     * @deprecated
      */
     public function getModels(): array
     {
@@ -257,6 +260,7 @@ class Key
 
     /**
      * @param string[] $models
+     * @deprecated
      */
     public function withModels(array $models): self
     {

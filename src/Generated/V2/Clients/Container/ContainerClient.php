@@ -27,6 +27,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices\ListServicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksOKResponse;
@@ -174,6 +176,16 @@ interface ContainerClient
      * @return ListRegistriesOKResponse OK
      */
     public function listRegistries(ListRegistriesRequest $request): ListRegistriesOKResponse;
+    /**
+     * List Stacks belonging to the executing user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-self-stacks
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSelfStacksRequest $request An object representing the request for this operation
+     * @return ListSelfStacksOKResponse OK
+     */
+    public function listSelfStacks(ListSelfStacksRequest $request): ListSelfStacksOKResponse;
     /**
      * List Services belonging to a Project.
      *
