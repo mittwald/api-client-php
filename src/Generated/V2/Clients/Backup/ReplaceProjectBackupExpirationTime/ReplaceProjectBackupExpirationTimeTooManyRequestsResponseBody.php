@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponseBody
+class ReplaceProjectBackupExpirationTimeTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponseB
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponseBody Created instance
+     * @return ReplaceProjectBackupExpirationTimeTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceProjectBackupExpirationTimeTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

@@ -100,10 +100,6 @@ class ExtensionInstance
                 'example' => 'default',
                 'type' => 'string',
             ],
-            'webhookExecutionHalted' => [
-                'default' => false,
-                'type' => 'boolean',
-            ],
         ],
         'required' => [
             'id',
@@ -117,7 +113,6 @@ class ExtensionInstance
             'extensionName',
             'contributorName',
             'chargeability',
-            'webhookExecutionHalted',
         ],
         'type' => 'object',
     ];
@@ -157,8 +152,6 @@ class ExtensionInstance
     private bool $pendingRemoval = false;
 
     private ?string $variantKey = null;
-
-    private bool $webhookExecutionHalted = false;
 
     /**
      * @param string[] $consentedScopes
@@ -254,11 +247,6 @@ class ExtensionInstance
     public function getVariantKey(): ?string
     {
         return $this->variantKey ?? null;
-    }
-
-    public function getWebhookExecutionHalted(): bool
-    {
-        return $this->webhookExecutionHalted;
     }
 
     public function withAggregateReference(ExtensionInstanceAggregateReference $aggregateReference): self
@@ -485,20 +473,6 @@ class ExtensionInstance
         return $clone;
     }
 
-    public function withWebhookExecutionHalted(bool $webhookExecutionHalted): self
-    {
-        $validator = new Validator();
-        $validator->validate($webhookExecutionHalted, self::$internalValidationSchema['properties']['webhookExecutionHalted']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->webhookExecutionHalted = $webhookExecutionHalted;
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -550,10 +524,6 @@ class ExtensionInstance
         if (isset($input->{'variantKey'})) {
             $variantKey = $input->{'variantKey'};
         }
-        $webhookExecutionHalted = false;
-        if (isset($input->{'webhookExecutionHalted'})) {
-            $webhookExecutionHalted = (bool)($input->{'webhookExecutionHalted'});
-        }
 
         $obj = new self($aggregateReference, $chargeability, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
         $obj->createdAt = $createdAt;
@@ -563,7 +533,6 @@ class ExtensionInstance
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
         $obj->variantKey = $variantKey;
-        $obj->webhookExecutionHalted = $webhookExecutionHalted;
         return $obj;
     }
 
@@ -598,7 +567,6 @@ class ExtensionInstance
         if (isset($this->variantKey)) {
             $output['variantKey'] = $this->variantKey;
         }
-        $output['webhookExecutionHalted'] = $this->webhookExecutionHalted;
 
         return $output;
     }

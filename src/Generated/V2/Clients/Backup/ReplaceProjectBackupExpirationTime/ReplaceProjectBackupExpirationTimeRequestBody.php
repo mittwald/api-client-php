@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime;
 
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateProjectBackupExpirationTimeRequestBody
+class ReplaceProjectBackupExpirationTimeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -62,10 +62,10 @@ class UpdateProjectBackupExpirationTimeRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateProjectBackupExpirationTimeRequestBody Created instance
+     * @return ReplaceProjectBackupExpirationTimeRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceProjectBackupExpirationTimeRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

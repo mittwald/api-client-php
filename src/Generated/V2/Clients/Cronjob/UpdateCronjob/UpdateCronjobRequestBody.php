@@ -6,7 +6,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\AppInstallationTarget;
 use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\ConcurrencyPolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\ContainerTarget;
 use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand;
 use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl;
 
@@ -28,6 +30,7 @@ class UpdateCronjobRequestBody
                 'type' => 'string',
             ],
             'destination' => [
+                'description' => 'deprecated, use target instead',
                 'oneOf' => [
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
@@ -49,6 +52,16 @@ class UpdateCronjobRequestBody
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'target' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget',
+                    ],
+                ],
+            ],
             'timeZone' => [
                 'type' => 'string',
             ],
@@ -67,6 +80,9 @@ class UpdateCronjobRequestBody
 
     private ?string $description = null;
 
+    /**
+     * deprecated, use target instead
+     */
     private CronjobCommand|CronjobUrl|null $destination = null;
 
     private ?string $email = null;
@@ -74,6 +90,8 @@ class UpdateCronjobRequestBody
     private ?int $failedExecutionAlertThreshold = null;
 
     private ?string $interval = null;
+
+    private AppInstallationTarget|ContainerTarget|null $target = null;
 
     private ?string $timeZone = null;
 
@@ -119,6 +137,11 @@ class UpdateCronjobRequestBody
     public function getInterval(): ?string
     {
         return $this->interval ?? null;
+    }
+
+    public function getTarget(): AppInstallationTarget|ContainerTarget|null
+    {
+        return $this->target;
     }
 
     public function getTimeZone(): ?string
@@ -273,6 +296,22 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
+    public function withTarget(AppInstallationTarget|ContainerTarget $target): self
+    {
+        $clone = clone $this;
+        $clone->target = $target;
+
+        return $clone;
+    }
+
+    public function withoutTarget(): self
+    {
+        $clone = clone $this;
+        unset($clone->target);
+
+        return $clone;
+    }
+
     public function withTimeZone(string $timeZone): self
     {
         $validator = new Validator();
@@ -364,6 +403,14 @@ class UpdateCronjobRequestBody
         if (isset($input->{'interval'})) {
             $interval = $input->{'interval'};
         }
+        $target = null;
+        if (isset($input->{'target'})) {
+            $target = match (true) {
+                AppInstallationTarget::validateInput($input->{'target'}, true) => AppInstallationTarget::buildFromInput($input->{'target'}, validate: $validate),
+                ContainerTarget::validateInput($input->{'target'}, true) => ContainerTarget::buildFromInput($input->{'target'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'target' from JSON"),
+            };
+        }
         $timeZone = null;
         if (isset($input->{'timeZone'})) {
             $timeZone = $input->{'timeZone'};
@@ -381,6 +428,7 @@ class UpdateCronjobRequestBody
         $obj->email = $email;
         $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
         $obj->interval = $interval;
+        $obj->target = $target;
         $obj->timeZone = $timeZone;
         $obj->timeout = $timeout;
         return $obj;
@@ -416,6 +464,11 @@ class UpdateCronjobRequestBody
         }
         if (isset($this->interval)) {
             $output['interval'] = $this->interval;
+        }
+        if (isset($this->target)) {
+            $output['target'] = match (true) {
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target->toJson(),
+            };
         }
         if (isset($this->timeZone)) {
             $output['timeZone'] = $this->timeZone;
@@ -456,6 +509,11 @@ class UpdateCronjobRequestBody
         if (isset($this->destination)) {
             $this->destination = match (true) {
                 ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination,
+            };
+        }
+        if (isset($this->target)) {
+            $this->target = match (true) {
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target,
             };
         }
     }

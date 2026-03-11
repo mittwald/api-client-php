@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateProjectBackupExpirationTimeRequest
+class ReplaceProjectBackupExpirationTimeRequest
 {
     public const method = 'put';
 
@@ -39,13 +39,13 @@ class UpdateProjectBackupExpirationTimeRequest
 
     private string $projectBackupId;
 
-    private UpdateProjectBackupExpirationTimeRequestBody $body;
+    private ReplaceProjectBackupExpirationTimeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectBackupId, UpdateProjectBackupExpirationTimeRequestBody $body)
+    public function __construct(string $projectBackupId, ReplaceProjectBackupExpirationTimeRequestBody $body)
     {
         $this->projectBackupId = $projectBackupId;
         $this->body = $body;
@@ -56,7 +56,7 @@ class UpdateProjectBackupExpirationTimeRequest
         return $this->projectBackupId;
     }
 
-    public function getBody(): UpdateProjectBackupExpirationTimeRequestBody
+    public function getBody(): ReplaceProjectBackupExpirationTimeRequestBody
     {
         return $this->body;
     }
@@ -75,7 +75,7 @@ class UpdateProjectBackupExpirationTimeRequest
         return $clone;
     }
 
-    public function withBody(UpdateProjectBackupExpirationTimeRequestBody $body): self
+    public function withBody(ReplaceProjectBackupExpirationTimeRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -88,10 +88,10 @@ class UpdateProjectBackupExpirationTimeRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateProjectBackupExpirationTimeRequest Created instance
+     * @return ReplaceProjectBackupExpirationTimeRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceProjectBackupExpirationTimeRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -99,7 +99,7 @@ class UpdateProjectBackupExpirationTimeRequest
         }
 
         $projectBackupId = $input->{'projectBackupId'};
-        $body = UpdateProjectBackupExpirationTimeRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ReplaceProjectBackupExpirationTimeRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($projectBackupId, $body);
 

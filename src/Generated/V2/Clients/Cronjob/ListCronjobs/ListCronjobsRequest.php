@@ -20,6 +20,9 @@ class ListCronjobsRequest
             'projectId' => [
                 'type' => 'string',
             ],
+            'includeContainerCronjobs' => [
+                'type' => 'boolean',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -41,6 +44,8 @@ class ListCronjobsRequest
 
     private string $projectId;
 
+    private ?bool $includeContainerCronjobs = null;
+
     private int $limit = 1000;
 
     private int $skip = 0;
@@ -59,6 +64,11 @@ class ListCronjobsRequest
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getIncludeContainerCronjobs(): ?bool
+    {
+        return $this->includeContainerCronjobs ?? null;
     }
 
     public function getLimit(): int
@@ -86,6 +96,28 @@ class ListCronjobsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withIncludeContainerCronjobs(bool $includeContainerCronjobs): self
+    {
+        $validator = new Validator();
+        $validator->validate($includeContainerCronjobs, self::$internalValidationSchema['properties']['includeContainerCronjobs']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->includeContainerCronjobs = $includeContainerCronjobs;
+
+        return $clone;
+    }
+
+    public function withoutIncludeContainerCronjobs(): self
+    {
+        $clone = clone $this;
+        unset($clone->includeContainerCronjobs);
 
         return $clone;
     }
@@ -156,6 +188,10 @@ class ListCronjobsRequest
         }
 
         $projectId = $input->{'projectId'};
+        $includeContainerCronjobs = null;
+        if (isset($input->{'includeContainerCronjobs'})) {
+            $includeContainerCronjobs = (bool)($input->{'includeContainerCronjobs'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -170,6 +206,7 @@ class ListCronjobsRequest
         }
 
         $obj = new self($projectId);
+        $obj->includeContainerCronjobs = $includeContainerCronjobs;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -185,6 +222,9 @@ class ListCronjobsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->includeContainerCronjobs)) {
+            $output['includeContainerCronjobs'] = $this->includeContainerCronjobs;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
@@ -251,6 +291,9 @@ class ListCronjobsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['includeContainerCronjobs'])) {
+            $query['includeContainerCronjobs'] = $mapped['includeContainerCronjobs'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

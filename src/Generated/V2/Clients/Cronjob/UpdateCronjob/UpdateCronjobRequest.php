@@ -33,6 +33,7 @@ class UpdateCronjobRequest
                         'type' => 'string',
                     ],
                     'destination' => [
+                        'description' => 'deprecated, use target instead',
                         'oneOf' => [
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
@@ -53,6 +54,16 @@ class UpdateCronjobRequest
                     'interval' => [
                         'example' => '*/5 * * * *',
                         'type' => 'string',
+                    ],
+                    'target' => [
+                        'oneOf' => [
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
+                            ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget',
+                            ],
+                        ],
                     ],
                     'timeZone' => [
                         'type' => 'string',

@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements ResponseContainer
+class ReplaceProjectBackupExpirationTimeDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,36 +22,26 @@ class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements Respon
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
-                'properties' => [
-                    'message' => [
-                        'type' => 'string',
-                        'example' => 'too many requests',
-                    ],
-                    'type' => [
-                        'type' => 'string',
-                        'example' => 'RateLimitError',
-                    ],
-                ],
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +54,17 @@ class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements Respon
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateProjectBackupExpirationTimeTooManyRequestsResponse Created instance
+     * @return ReplaceProjectBackupExpirationTimeDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupExpirationTimeTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceProjectBackupExpirationTimeDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = UpdateProjectBackupExpirationTimeTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -88,7 +79,7 @@ class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements Respon
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -119,7 +110,6 @@ class UpdateProjectBackupExpirationTimeTooManyRequestsResponse implements Respon
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

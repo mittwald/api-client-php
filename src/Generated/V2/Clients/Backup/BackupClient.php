@@ -27,10 +27,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjec
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestoreV2Experimental\RequestProjectBackupRestoreV2ExperimentalRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest;
 
 /**
@@ -168,6 +168,16 @@ interface BackupClient
      */
     public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse;
     /**
+     * Update a Backup's expiration time.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-replace-project-backup-expiration-time
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceProjectBackupExpirationTimeRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function replaceProjectBackupExpirationTime(ReplaceProjectBackupExpirationTimeRequest $request): EmptyResponse;
+    /**
      * Restore a ProjectBackup's path.
      *
      * **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
@@ -202,16 +212,6 @@ interface BackupClient
      * @return EmptyResponse NoContent
      */
     public function updateProjectBackupDescription(UpdateProjectBackupDescriptionRequest $request): EmptyResponse;
-    /**
-     * Change the expiry of a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-expiration-time
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupExpirationTimeRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateProjectBackupExpirationTime(UpdateProjectBackupExpirationTimeRequest $request): EmptyResponse;
     /**
      * Update a ProjectBackupSchedule.
      *

@@ -27,6 +27,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\Che
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeBadRequestResponse;
@@ -1113,6 +1114,7 @@ class DomainClientImpl implements DomainClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CheckDomainTransferabilityBadRequestResponse::fromResponse($httpResponse),
+            412 => CheckDomainTransferabilityPreconditionFailedResponse::fromResponse($httpResponse),
             429 => CheckDomainTransferabilityTooManyRequestsResponse::fromResponse($httpResponse),
             default => CheckDomainTransferabilityDefaultResponse::fromResponse($httpResponse),
         });

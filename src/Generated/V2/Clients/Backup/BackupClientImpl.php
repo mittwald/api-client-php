@@ -78,6 +78,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedForbiddenResponse;
@@ -96,12 +102,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescriptio
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupExpirationTime\UpdateProjectBackupExpirationTimeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleNotFoundResponse;
@@ -420,6 +420,31 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
+     * Update a Backup's expiration time.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-replace-project-backup-expiration-time
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceProjectBackupExpirationTimeRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function replaceProjectBackupExpirationTime(ReplaceProjectBackupExpirationTimeRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ReplaceProjectBackupExpirationTimeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ReplaceProjectBackupExpirationTimeBadRequestResponse::fromResponse($httpResponse),
+            403 => ReplaceProjectBackupExpirationTimeForbiddenResponse::fromResponse($httpResponse),
+            404 => ReplaceProjectBackupExpirationTimeNotFoundResponse::fromResponse($httpResponse),
+            429 => ReplaceProjectBackupExpirationTimeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ReplaceProjectBackupExpirationTimeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Restore a ProjectBackup's path.
      *
      * **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
@@ -496,31 +521,6 @@ class BackupClientImpl implements BackupClient
             404 => UpdateProjectBackupDescriptionNotFoundResponse::fromResponse($httpResponse),
             429 => UpdateProjectBackupDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateProjectBackupDescriptionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Change the expiry of a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-expiration-time
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupExpirationTimeRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateProjectBackupExpirationTime(UpdateProjectBackupExpirationTimeRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateProjectBackupExpirationTimeRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateProjectBackupExpirationTimeBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateProjectBackupExpirationTimeForbiddenResponse::fromResponse($httpResponse),
-            404 => UpdateProjectBackupExpirationTimeNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateProjectBackupExpirationTimeTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateProjectBackupExpirationTimeDefaultResponse::fromResponse($httpResponse),
         });
     }
 
