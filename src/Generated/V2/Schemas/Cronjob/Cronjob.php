@@ -96,7 +96,7 @@ class Cronjob
                         '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
                     ],
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTargetResponse',
                     ],
                 ],
             ],
@@ -169,7 +169,7 @@ class Cronjob
 
     private string $shortId;
 
-    private AppInstallationTarget|ContainerTarget|null $target = null;
+    private AppInstallationTarget|ContainerTargetResponse|null $target = null;
 
     private ?string $timeZone = null;
 
@@ -269,7 +269,7 @@ class Cronjob
         return $this->shortId;
     }
 
-    public function getTarget(): AppInstallationTarget|ContainerTarget|null
+    public function getTarget(): AppInstallationTarget|ContainerTargetResponse|null
     {
         return $this->target;
     }
@@ -528,7 +528,7 @@ class Cronjob
         return $clone;
     }
 
-    public function withTarget(AppInstallationTarget|ContainerTarget $target): self
+    public function withTarget(AppInstallationTarget|ContainerTargetResponse $target): self
     {
         $clone = clone $this;
         $clone->target = $target;
@@ -647,7 +647,7 @@ class Cronjob
         if (isset($input->{'target'})) {
             $target = match (true) {
                 AppInstallationTarget::validateInput($input->{'target'}, true) => AppInstallationTarget::buildFromInput($input->{'target'}, validate: $validate),
-                ContainerTarget::validateInput($input->{'target'}, true) => ContainerTarget::buildFromInput($input->{'target'}, validate: $validate),
+                ContainerTargetResponse::validateInput($input->{'target'}, true) => ContainerTargetResponse::buildFromInput($input->{'target'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'target' from JSON"),
             };
         }
@@ -712,7 +712,7 @@ class Cronjob
         $output['shortId'] = $this->shortId;
         if (isset($this->target)) {
             $output['target'] = match (true) {
-                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target->toJson(),
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTargetResponse => $this->target->toJson(),
             };
         }
         if (isset($this->timeZone)) {
@@ -761,7 +761,7 @@ class Cronjob
         }
         if (isset($this->target)) {
             $this->target = match (true) {
-                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target,
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTargetResponse => $this->target,
             };
         }
         $this->updatedAt = clone $this->updatedAt;

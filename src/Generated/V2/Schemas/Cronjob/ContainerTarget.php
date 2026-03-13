@@ -27,7 +27,7 @@ class ContainerTarget
             'command' => [
                 'type' => 'string',
             ],
-            'serviceName' => [
+            'containerIdentifier' => [
                 'type' => 'string',
             ],
             'stackId' => [
@@ -37,7 +37,7 @@ class ContainerTarget
         ],
         'required' => [
             'stackId',
-            'serviceName',
+            'containerIdentifier',
             'command',
         ],
         'type' => 'object',
@@ -45,14 +45,14 @@ class ContainerTarget
 
     private string $command;
 
-    private string $serviceName;
+    private string $containerIdentifier;
 
     private string $stackId;
 
-    public function __construct(string $command, string $serviceName, string $stackId)
+    public function __construct(string $command, string $containerIdentifier, string $stackId)
     {
         $this->command = $command;
-        $this->serviceName = $serviceName;
+        $this->containerIdentifier = $containerIdentifier;
         $this->stackId = $stackId;
     }
 
@@ -61,9 +61,9 @@ class ContainerTarget
         return $this->command;
     }
 
-    public function getServiceName(): string
+    public function getContainerIdentifier(): string
     {
-        return $this->serviceName;
+        return $this->containerIdentifier;
     }
 
     public function getStackId(): string
@@ -85,16 +85,16 @@ class ContainerTarget
         return $clone;
     }
 
-    public function withServiceName(string $serviceName): self
+    public function withContainerIdentifier(string $containerIdentifier): self
     {
         $validator = new Validator();
-        $validator->validate($serviceName, self::$internalValidationSchema['properties']['serviceName']);
+        $validator->validate($containerIdentifier, self::$internalValidationSchema['properties']['containerIdentifier']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->serviceName = $serviceName;
+        $clone->containerIdentifier = $containerIdentifier;
 
         return $clone;
     }
@@ -129,10 +129,10 @@ class ContainerTarget
         }
 
         $command = $input->{'command'};
-        $serviceName = $input->{'serviceName'};
+        $containerIdentifier = $input->{'containerIdentifier'};
         $stackId = $input->{'stackId'};
 
-        $obj = new self($command, $serviceName, $stackId);
+        $obj = new self($command, $containerIdentifier, $stackId);
 
         return $obj;
     }
@@ -146,7 +146,7 @@ class ContainerTarget
     {
         $output = [];
         $output['command'] = $this->command;
-        $output['serviceName'] = $this->serviceName;
+        $output['containerIdentifier'] = $this->containerIdentifier;
         $output['stackId'] = $this->stackId;
 
         return $output;
