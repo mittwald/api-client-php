@@ -19,7 +19,7 @@ class VerificationVerifyAddressRequestBody
                 'type' => 'string',
             ],
             'country' => [
-                'description' => 'The country format should be ISO 3166-2 Alpha 2 Country Code.',
+                'description' => 'Accepts the whole English or German name as well as the ISO 3166-2 country codes.',
                 'example' => 'DE',
                 'type' => 'string',
             ],
@@ -45,7 +45,7 @@ class VerificationVerifyAddressRequestBody
     private string $city;
 
     /**
-     * The country format should be ISO 3166-2 Alpha 2 Country Code.
+     * Accepts the whole English or German name as well as the ISO 3166-2 country codes.
      */
     private string $country;
 
