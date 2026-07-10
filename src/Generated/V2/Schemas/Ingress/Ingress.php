@@ -54,9 +54,17 @@ class Ingress
                         ],
                         'type' => 'array',
                     ],
+                    'v6' => [
+                        'items' => [
+                            'format' => 'ipv6',
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
                 ],
                 'required' => [
                     'v4',
+                    'v6',
                 ],
                 'type' => 'object',
             ],

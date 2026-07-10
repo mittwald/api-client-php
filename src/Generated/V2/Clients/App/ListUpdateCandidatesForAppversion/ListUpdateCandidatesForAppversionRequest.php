@@ -25,6 +25,9 @@ class ListUpdateCandidatesForAppversionRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'onlyRecommended' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'appId',
@@ -35,6 +38,8 @@ class ListUpdateCandidatesForAppversionRequest
     private string $appId;
 
     private string $baseAppVersionId;
+
+    private ?bool $onlyRecommended = null;
 
     private array $headers = [
 
@@ -54,6 +59,11 @@ class ListUpdateCandidatesForAppversionRequest
     public function getBaseAppVersionId(): string
     {
         return $this->baseAppVersionId;
+    }
+
+    public function getOnlyRecommended(): ?bool
+    {
+        return $this->onlyRecommended ?? null;
     }
 
     public function withAppId(string $appId): self
@@ -84,6 +94,28 @@ class ListUpdateCandidatesForAppversionRequest
         return $clone;
     }
 
+    public function withOnlyRecommended(bool $onlyRecommended): self
+    {
+        $validator = new Validator();
+        $validator->validate($onlyRecommended, self::$internalValidationSchema['properties']['onlyRecommended']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->onlyRecommended = $onlyRecommended;
+
+        return $clone;
+    }
+
+    public function withoutOnlyRecommended(): self
+    {
+        $clone = clone $this;
+        unset($clone->onlyRecommended);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -101,9 +133,13 @@ class ListUpdateCandidatesForAppversionRequest
 
         $appId = $input->{'appId'};
         $baseAppVersionId = $input->{'baseAppVersionId'};
+        $onlyRecommended = null;
+        if (isset($input->{'onlyRecommended'})) {
+            $onlyRecommended = (bool)($input->{'onlyRecommended'});
+        }
 
         $obj = new self($appId, $baseAppVersionId);
-
+        $obj->onlyRecommended = $onlyRecommended;
         return $obj;
     }
 
@@ -117,6 +153,9 @@ class ListUpdateCandidatesForAppversionRequest
         $output = [];
         $output['appId'] = $this->appId;
         $output['baseAppVersionId'] = $this->baseAppVersionId;
+        if (isset($this->onlyRecommended)) {
+            $output['onlyRecommended'] = $this->onlyRecommended;
+        }
 
         return $output;
     }
@@ -179,6 +218,9 @@ class ListUpdateCandidatesForAppversionRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['onlyRecommended'])) {
+            $query['onlyRecommended'] = $mapped['onlyRecommended'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

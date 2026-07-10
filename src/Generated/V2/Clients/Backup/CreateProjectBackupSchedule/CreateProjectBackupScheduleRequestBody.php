@@ -19,12 +19,12 @@ class CreateProjectBackupScheduleRequestBody
                 'type' => 'string',
             ],
             'schedule' => [
-                'description' => 'Execution schedule in crontab notation.',
+                'description' => 'Execution schedule in crontab notation. The backup interval must not be more frequent than hourly.',
                 'example' => '5 4 * * *',
                 'type' => 'string',
             ],
             'ttl' => [
-                'description' => 'TTL of the BackupSchedule as time string.',
+                'description' => 'TTL of the BackupSchedule as a duration string. Must be at least 7d and no more than 365d.',
                 'example' => '7d',
                 'type' => 'string',
             ],
@@ -42,12 +42,12 @@ class CreateProjectBackupScheduleRequestBody
     private ?string $description = null;
 
     /**
-     * Execution schedule in crontab notation.
+     * Execution schedule in crontab notation. The backup interval must not be more frequent than hourly.
      */
     private string $schedule;
 
     /**
-     * TTL of the BackupSchedule as time string.
+     * TTL of the BackupSchedule as a duration string. Must be at least 7d and no more than 365d.
      */
     private string $ttl;
 

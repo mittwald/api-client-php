@@ -48,6 +48,10 @@ class StackResponse
                 ],
                 'type' => 'array',
             ],
+            'templateId' => [
+                'description' => 'Id of the Template used to create this stack, if one was used.',
+                'type' => 'string',
+            ],
             'updateSchedule' => [
                 'nullable' => true,
                 'properties' => [
@@ -98,6 +102,11 @@ class StackResponse
      */
     private ?array $services = null;
 
+    /**
+     * Id of the Template used to create this stack, if one was used.
+     */
+    private ?string $templateId = null;
+
     private ?StackResponseUpdateSchedule $updateSchedule = null;
 
     /**
@@ -145,6 +154,11 @@ class StackResponse
     public function getServices(): ?array
     {
         return $this->services ?? null;
+    }
+
+    public function getTemplateId(): ?string
+    {
+        return $this->templateId ?? null;
     }
 
     public function getUpdateSchedule(): ?StackResponseUpdateSchedule
@@ -249,6 +263,28 @@ class StackResponse
         return $clone;
     }
 
+    public function withTemplateId(string $templateId): self
+    {
+        $validator = new Validator();
+        $validator->validate($templateId, self::$internalValidationSchema['properties']['templateId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->templateId = $templateId;
+
+        return $clone;
+    }
+
+    public function withoutTemplateId(): self
+    {
+        $clone = clone $this;
+        unset($clone->templateId);
+
+        return $clone;
+    }
+
     public function withUpdateSchedule(StackResponseUpdateSchedule $updateSchedule): self
     {
         $clone = clone $this;
@@ -308,6 +344,10 @@ class StackResponse
         if (isset($input->{'services'})) {
             $services = array_map(fn (array|object $i): ServiceResponse => ServiceResponse::buildFromInput($i, validate: $validate), $input->{'services'});
         }
+        $templateId = null;
+        if (isset($input->{'templateId'})) {
+            $templateId = $input->{'templateId'};
+        }
         $updateSchedule = null;
         if (isset($input->{'updateSchedule'})) {
             $updateSchedule = StackResponseUpdateSchedule::buildFromInput($input->{'updateSchedule'}, validate: $validate);
@@ -319,6 +359,7 @@ class StackResponse
 
         $obj = new self($description, $disabled, $id, $prefix, $projectId);
         $obj->services = $services;
+        $obj->templateId = $templateId;
         $obj->updateSchedule = $updateSchedule;
         $obj->volumes = $volumes;
         return $obj;
@@ -339,6 +380,9 @@ class StackResponse
         $output['projectId'] = $this->projectId;
         if (isset($this->services)) {
             $output['services'] = array_map(fn (ServiceResponse $i): array => $i->toJson(), $this->services);
+        }
+        if (isset($this->templateId)) {
+            $output['templateId'] = $this->templateId;
         }
         if (isset($this->updateSchedule)) {
             $output['updateSchedule'] = ($this->updateSchedule)->toJson();

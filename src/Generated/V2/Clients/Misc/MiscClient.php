@@ -8,8 +8,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressOKResponse;
@@ -42,16 +40,6 @@ interface MiscClient
      */
     public function miscellaneousListTimeZones(MiscellaneousListTimeZonesRequest $request): UntypedResponse;
     /**
-     * Obtain a service token.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/servicetoken-authenticate-service
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ServicetokenAuthenticateServiceRequest $request An object representing the request for this operation
-     * @return ServicetokenAuthenticateServiceOKResponse Authentication has been successful.
-     */
-    public function servicetokenAuthenticateService(ServicetokenAuthenticateServiceRequest $request): ServicetokenAuthenticateServiceOKResponse;
-    /**
      * Check if an email is from mittwald.
      *
      * Parses the eml-file of an email to check if it is a phishing mail or a valid email from mittwald. In some cases we can't confirm the validity of an email.
@@ -65,8 +53,6 @@ interface MiscClient
     public function verificationDetectPhishingEmail(VerificationDetectPhishingEmailRequest $request): VerificationDetectPhishingEmailOKResponse;
     /**
      * Check if an address exists.
-     *
-     * Only the DACH region is currently supported.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-address
      * @throws GuzzleException

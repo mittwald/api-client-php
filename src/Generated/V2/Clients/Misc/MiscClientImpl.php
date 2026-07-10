@@ -13,10 +13,6 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscellaneousListTimeZones\MiscellaneousListTimeZonesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationDetectPhishingEmail\VerificationDetectPhishingEmailOKResponse;
@@ -75,28 +71,6 @@ class MiscClientImpl implements MiscClient
     }
 
     /**
-     * Obtain a service token.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/servicetoken-authenticate-service
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ServicetokenAuthenticateServiceRequest $request An object representing the request for this operation
-     * @return ServicetokenAuthenticateServiceOKResponse Authentication has been successful.
-     */
-    public function servicetokenAuthenticateService(ServicetokenAuthenticateServiceRequest $request): ServicetokenAuthenticateServiceOKResponse
-    {
-        $httpRequest = new Request(ServicetokenAuthenticateServiceRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ServicetokenAuthenticateServiceOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ServicetokenAuthenticateServiceTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ServicetokenAuthenticateServiceDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Check if an email is from mittwald.
      *
      * Parses the eml-file of an email to check if it is a phishing mail or a valid email from mittwald. In some cases we can't confirm the validity of an email.
@@ -123,8 +97,6 @@ class MiscClientImpl implements MiscClient
 
     /**
      * Check if an address exists.
-     *
-     * Only the DACH region is currently supported.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-address
      * @throws GuzzleException

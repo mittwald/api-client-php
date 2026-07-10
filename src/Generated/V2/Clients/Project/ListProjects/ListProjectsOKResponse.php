@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectListItem;
 use Psr\Http\Message\ResponseInterface;
 
 class ListProjectsOKResponse implements ResponseContainer
@@ -22,119 +23,7 @@ class ListProjectsOKResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'items' => [
-                    'properties' => [
-                        'backupStorageUsageInBytes' => [
-                            'format' => 'int64',
-                            'type' => 'integer',
-                        ],
-                        'backupStorageUsageInBytesSetAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
-                        'createdAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
-                        'customerId' => [
-                            'type' => 'string',
-                        ],
-                        'customerMeta' => [
-                            'properties' => [
-                                'id' => [
-                                    'type' => 'string',
-                                ],
-                            ],
-                            'required' => [
-                                'id',
-                            ],
-                            'type' => 'object',
-                        ],
-                        'description' => [
-                            'type' => 'string',
-                        ],
-                        'disableReason' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.project.DisableReason',
-                        ],
-                        'disabledAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
-                        'enabled' => [
-                            'type' => 'boolean',
-                        ],
-                        'features' => [
-                            'deprecated' => true,
-                            'description' => 'Deprecated by \'supportedFeatures\'.',
-                            'items' => [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
-                            ],
-                            'type' => 'array',
-                        ],
-                        'id' => [
-                            'type' => 'string',
-                        ],
-                        'imageRefId' => [
-                            'type' => 'string',
-                        ],
-                        'isReady' => [
-                            'deprecated' => true,
-                            'description' => 'deprecated',
-                            'type' => 'boolean',
-                        ],
-                        'projectHostingId' => [
-                            'format' => 'uuid',
-                            'type' => 'string',
-                        ],
-                        'readiness' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus',
-                        ],
-                        'serverId' => [
-                            'type' => 'string',
-                        ],
-                        'shortId' => [
-                            'type' => 'string',
-                        ],
-                        'status' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
-                        ],
-                        'statusSetAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
-                        'supportedFeatures' => [
-                            'items' => [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectFeature',
-                            ],
-                            'type' => 'array',
-                        ],
-                        'webStorageUsageInBytes' => [
-                            'format' => 'int64',
-                            'type' => 'integer',
-                        ],
-                        'webStorageUsageInBytesSetAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
-                    ],
-                    'required' => [
-                        'id',
-                        'shortId',
-                        'description',
-                        'enabled',
-                        'customerMeta',
-                        'customerId',
-                        'createdAt',
-                        'isReady',
-                        'readiness',
-                        'status',
-                        'statusSetAt',
-                        'webStorageUsageInBytes',
-                        'webStorageUsageInBytesSetAt',
-                        'backupStorageUsageInBytes',
-                        'backupStorageUsageInBytesSetAt',
-                        'supportedFeatures',
-                    ],
-                    'type' => 'object',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectListItem',
                 ],
                 'type' => 'array',
             ],
@@ -142,14 +31,14 @@ class ListProjectsOKResponse implements ResponseContainer
     ];
 
     /**
-     * @var ListProjectsOKResponseBodyItem[]
+     * @var ProjectListItem[]
      */
     private array $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param ListProjectsOKResponseBodyItem[] $body
+     * @param ProjectListItem[] $body
      */
     public function __construct(array $body)
     {
@@ -157,7 +46,7 @@ class ListProjectsOKResponse implements ResponseContainer
     }
 
     /**
-     * @return ListProjectsOKResponseBodyItem[]
+     * @return ProjectListItem[]
      */
     public function getBody(): array
     {
@@ -165,7 +54,7 @@ class ListProjectsOKResponse implements ResponseContainer
     }
 
     /**
-     * @param ListProjectsOKResponseBodyItem[] $body
+     * @param ProjectListItem[] $body
      */
     public function withBody(array $body): self
     {
@@ -190,7 +79,7 @@ class ListProjectsOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $i): ListProjectsOKResponseBodyItem => ListProjectsOKResponseBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): ProjectListItem => ProjectListItem::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -205,7 +94,7 @@ class ListProjectsOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (ListProjectsOKResponseBodyItem $i) => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (ProjectListItem $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -236,7 +125,6 @@ class ListProjectsOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = array_map(fn (ListProjectsOKResponseBodyItem $i) => clone $i, $this->body);
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

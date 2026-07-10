@@ -7,4 +7,5 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExten
 enum ExtensionListExtensionsRequestSort: string
 {
     case name = 'name';
+    case pricingpriceInCents = 'pricing.priceInCents';
 }

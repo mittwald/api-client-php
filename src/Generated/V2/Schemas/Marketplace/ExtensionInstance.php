@@ -68,6 +68,10 @@ class ExtensionInstance
                 'default' => false,
                 'type' => 'boolean',
             ],
+            'extensionDeletionDeadline' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'extensionId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -88,6 +92,10 @@ class ExtensionInstance
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'nextScheduledWebhookExecution' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'pendingInstallation' => [
                 'default' => false,
                 'type' => 'boolean',
@@ -99,6 +107,10 @@ class ExtensionInstance
             'variantKey' => [
                 'example' => 'default',
                 'type' => 'string',
+            ],
+            'webhookExecutionHalted' => [
+                'default' => false,
+                'type' => 'boolean',
             ],
         ],
         'required' => [
@@ -113,6 +125,7 @@ class ExtensionInstance
             'extensionName',
             'contributorName',
             'chargeability',
+            'webhookExecutionHalted',
         ],
         'type' => 'object',
     ];
@@ -134,6 +147,8 @@ class ExtensionInstance
 
     private bool $disabled = false;
 
+    private ?DateTime $extensionDeletionDeadline = null;
+
     private string $extensionId;
 
     private string $extensionName;
@@ -147,11 +162,15 @@ class ExtensionInstance
 
     private string $id;
 
+    private ?DateTime $nextScheduledWebhookExecution = null;
+
     private bool $pendingInstallation = false;
 
     private bool $pendingRemoval = false;
 
     private ?string $variantKey = null;
+
+    private bool $webhookExecutionHalted = false;
 
     /**
      * @param string[] $consentedScopes
@@ -206,6 +225,11 @@ class ExtensionInstance
         return $this->disabled;
     }
 
+    public function getExtensionDeletionDeadline(): ?DateTime
+    {
+        return $this->extensionDeletionDeadline ?? null;
+    }
+
     public function getExtensionId(): string
     {
         return $this->extensionId;
@@ -234,6 +258,11 @@ class ExtensionInstance
         return $this->id;
     }
 
+    public function getNextScheduledWebhookExecution(): ?DateTime
+    {
+        return $this->nextScheduledWebhookExecution ?? null;
+    }
+
     public function getPendingInstallation(): bool
     {
         return $this->pendingInstallation;
@@ -247,6 +276,11 @@ class ExtensionInstance
     public function getVariantKey(): ?string
     {
         return $this->variantKey ?? null;
+    }
+
+    public function getWebhookExecutionHalted(): bool
+    {
+        return $this->webhookExecutionHalted;
     }
 
     public function withAggregateReference(ExtensionInstanceAggregateReference $aggregateReference): self
@@ -340,6 +374,22 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withExtensionDeletionDeadline(DateTime $extensionDeletionDeadline): self
+    {
+        $clone = clone $this;
+        $clone->extensionDeletionDeadline = $extensionDeletionDeadline;
+
+        return $clone;
+    }
+
+    public function withoutExtensionDeletionDeadline(): self
+    {
+        $clone = clone $this;
+        unset($clone->extensionDeletionDeadline);
+
+        return $clone;
+    }
+
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
@@ -423,6 +473,22 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withNextScheduledWebhookExecution(DateTime $nextScheduledWebhookExecution): self
+    {
+        $clone = clone $this;
+        $clone->nextScheduledWebhookExecution = $nextScheduledWebhookExecution;
+
+        return $clone;
+    }
+
+    public function withoutNextScheduledWebhookExecution(): self
+    {
+        $clone = clone $this;
+        unset($clone->nextScheduledWebhookExecution);
+
+        return $clone;
+    }
+
     public function withPendingInstallation(bool $pendingInstallation): self
     {
         $validator = new Validator();
@@ -473,6 +539,20 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withWebhookExecutionHalted(bool $webhookExecutionHalted): self
+    {
+        $validator = new Validator();
+        $validator->validate($webhookExecutionHalted, self::$internalValidationSchema['properties']['webhookExecutionHalted']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->webhookExecutionHalted = $webhookExecutionHalted;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -501,6 +581,10 @@ class ExtensionInstance
         if (isset($input->{'disabled'})) {
             $disabled = (bool)($input->{'disabled'});
         }
+        $extensionDeletionDeadline = null;
+        if (isset($input->{'extensionDeletionDeadline'})) {
+            $extensionDeletionDeadline = new DateTime($input->{'extensionDeletionDeadline'});
+        }
         $extensionId = $input->{'extensionId'};
         $extensionName = $input->{'extensionName'};
         $extensionSubTitle = null;
@@ -512,6 +596,10 @@ class ExtensionInstance
             $frontendFragments = (array)$input->{'frontendFragments'};
         }
         $id = $input->{'id'};
+        $nextScheduledWebhookExecution = null;
+        if (isset($input->{'nextScheduledWebhookExecution'})) {
+            $nextScheduledWebhookExecution = new DateTime($input->{'nextScheduledWebhookExecution'});
+        }
         $pendingInstallation = false;
         if (isset($input->{'pendingInstallation'})) {
             $pendingInstallation = (bool)($input->{'pendingInstallation'});
@@ -524,15 +612,22 @@ class ExtensionInstance
         if (isset($input->{'variantKey'})) {
             $variantKey = $input->{'variantKey'};
         }
+        $webhookExecutionHalted = false;
+        if (isset($input->{'webhookExecutionHalted'})) {
+            $webhookExecutionHalted = (bool)($input->{'webhookExecutionHalted'});
+        }
 
         $obj = new self($aggregateReference, $chargeability, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
         $obj->createdAt = $createdAt;
         $obj->disabled = $disabled;
+        $obj->extensionDeletionDeadline = $extensionDeletionDeadline;
         $obj->extensionSubTitle = $extensionSubTitle;
         $obj->frontendFragments = $frontendFragments;
+        $obj->nextScheduledWebhookExecution = $nextScheduledWebhookExecution;
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
         $obj->variantKey = $variantKey;
+        $obj->webhookExecutionHalted = $webhookExecutionHalted;
         return $obj;
     }
 
@@ -553,6 +648,9 @@ class ExtensionInstance
             $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         }
         $output['disabled'] = $this->disabled;
+        if (isset($this->extensionDeletionDeadline)) {
+            $output['extensionDeletionDeadline'] = ($this->extensionDeletionDeadline)->format(DateTime::ATOM);
+        }
         $output['extensionId'] = $this->extensionId;
         $output['extensionName'] = $this->extensionName;
         if (isset($this->extensionSubTitle)) {
@@ -562,11 +660,15 @@ class ExtensionInstance
             $output['frontendFragments'] = $this->frontendFragments;
         }
         $output['id'] = $this->id;
+        if (isset($this->nextScheduledWebhookExecution)) {
+            $output['nextScheduledWebhookExecution'] = ($this->nextScheduledWebhookExecution)->format(DateTime::ATOM);
+        }
         $output['pendingInstallation'] = $this->pendingInstallation;
         $output['pendingRemoval'] = $this->pendingRemoval;
         if (isset($this->variantKey)) {
             $output['variantKey'] = $this->variantKey;
         }
+        $output['webhookExecutionHalted'] = $this->webhookExecutionHalted;
 
         return $output;
     }
@@ -600,6 +702,12 @@ class ExtensionInstance
         $this->aggregateReference = clone $this->aggregateReference;
         if (isset($this->createdAt)) {
             $this->createdAt = clone $this->createdAt;
+        }
+        if (isset($this->extensionDeletionDeadline)) {
+            $this->extensionDeletionDeadline = clone $this->extensionDeletionDeadline;
+        }
+        if (isset($this->nextScheduledWebhookExecution)) {
+            $this->nextScheduledWebhookExecution = clone $this->nextScheduledWebhookExecution;
         }
     }
 }

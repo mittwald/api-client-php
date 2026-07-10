@@ -8,8 +8,8 @@ enum ServiceStatus: string
 {
     case running = 'running';
     case stopped = 'stopped';
-    case restarting = 'restarting';
     case error = 'error';
     case creating = 'creating';
     case starting = 'starting';
+    case stopping = 'stopping';
 }

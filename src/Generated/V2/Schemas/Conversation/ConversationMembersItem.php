@@ -31,20 +31,14 @@ class ConversationMembersItem
             'active' => [
                 'type' => 'boolean',
             ],
-            'atlasGroup' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Group',
-            ],
             'avatarRefId' => [
                 'type' => 'string',
             ],
             'clearName' => [
                 'type' => 'string',
             ],
-            'department' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Department',
-            ],
-            'group' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Group',
+            'isEmployee' => [
+                'type' => 'boolean',
             ],
             'userId' => [
                 'type' => 'string',
@@ -54,15 +48,11 @@ class ConversationMembersItem
 
     private bool $active;
 
-    private ?Group $atlasGroup = null;
-
     private ?string $avatarRefId = null;
 
     private ?string $clearName = null;
 
-    private ?Department $department = null;
-
-    private ?Group $group = null;
+    private ?bool $isEmployee = null;
 
     private string $userId;
 
@@ -77,11 +67,6 @@ class ConversationMembersItem
         return $this->active;
     }
 
-    public function getAtlasGroup(): ?Group
-    {
-        return $this->atlasGroup ?? null;
-    }
-
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
@@ -92,14 +77,9 @@ class ConversationMembersItem
         return $this->clearName ?? null;
     }
 
-    public function getDepartment(): ?Department
+    public function getIsEmployee(): ?bool
     {
-        return $this->department ?? null;
-    }
-
-    public function getGroup(): ?Group
-    {
-        return $this->group ?? null;
+        return $this->isEmployee ?? null;
     }
 
     public function getUserId(): string
@@ -117,22 +97,6 @@ class ConversationMembersItem
 
         $clone = clone $this;
         $clone->active = $active;
-
-        return $clone;
-    }
-
-    public function withAtlasGroup(Group $atlasGroup): self
-    {
-        $clone = clone $this;
-        $clone->atlasGroup = $atlasGroup;
-
-        return $clone;
-    }
-
-    public function withoutAtlasGroup(): self
-    {
-        $clone = clone $this;
-        unset($clone->atlasGroup);
 
         return $clone;
     }
@@ -181,34 +145,24 @@ class ConversationMembersItem
         return $clone;
     }
 
-    public function withDepartment(Department $department): self
+    public function withIsEmployee(bool $isEmployee): self
     {
+        $validator = new Validator();
+        $validator->validate($isEmployee, self::$internalValidationSchema['properties']['isEmployee']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->department = $department;
+        $clone->isEmployee = $isEmployee;
 
         return $clone;
     }
 
-    public function withoutDepartment(): self
+    public function withoutIsEmployee(): self
     {
         $clone = clone $this;
-        unset($clone->department);
-
-        return $clone;
-    }
-
-    public function withGroup(Group $group): self
-    {
-        $clone = clone $this;
-        $clone->group = $group;
-
-        return $clone;
-    }
-
-    public function withoutGroup(): self
-    {
-        $clone = clone $this;
-        unset($clone->group);
+        unset($clone->isEmployee);
 
         return $clone;
     }
@@ -243,10 +197,6 @@ class ConversationMembersItem
         }
 
         $active = (bool)($input->{'active'});
-        $atlasGroup = null;
-        if (isset($input->{'atlasGroup'})) {
-            $atlasGroup = Group::buildFromInput($input->{'atlasGroup'}, validate: $validate);
-        }
         $avatarRefId = null;
         if (isset($input->{'avatarRefId'})) {
             $avatarRefId = $input->{'avatarRefId'};
@@ -255,22 +205,16 @@ class ConversationMembersItem
         if (isset($input->{'clearName'})) {
             $clearName = $input->{'clearName'};
         }
-        $department = null;
-        if (isset($input->{'department'})) {
-            $department = Department::from($input->{'department'});
-        }
-        $group = null;
-        if (isset($input->{'group'})) {
-            $group = Group::buildFromInput($input->{'group'}, validate: $validate);
+        $isEmployee = null;
+        if (isset($input->{'isEmployee'})) {
+            $isEmployee = (bool)($input->{'isEmployee'});
         }
         $userId = $input->{'userId'};
 
         $obj = new self($active, $userId);
-        $obj->atlasGroup = $atlasGroup;
         $obj->avatarRefId = $avatarRefId;
         $obj->clearName = $clearName;
-        $obj->department = $department;
-        $obj->group = $group;
+        $obj->isEmployee = $isEmployee;
         return $obj;
     }
 
@@ -283,20 +227,14 @@ class ConversationMembersItem
     {
         $output = [];
         $output['active'] = $this->active;
-        if (isset($this->atlasGroup)) {
-            $output['atlasGroup'] = $this->atlasGroup->toJson();
-        }
         if (isset($this->avatarRefId)) {
             $output['avatarRefId'] = $this->avatarRefId;
         }
         if (isset($this->clearName)) {
             $output['clearName'] = $this->clearName;
         }
-        if (isset($this->department)) {
-            $output['department'] = $this->department->value;
-        }
-        if (isset($this->group)) {
-            $output['group'] = $this->group->toJson();
+        if (isset($this->isEmployee)) {
+            $output['isEmployee'] = $this->isEmployee;
         }
         $output['userId'] = $this->userId;
 

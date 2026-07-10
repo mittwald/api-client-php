@@ -33,7 +33,7 @@ class ListConversationsRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 100,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -41,7 +41,7 @@ class ListConversationsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'sort' => [
                 'type' => 'array',

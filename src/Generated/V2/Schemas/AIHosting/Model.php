@@ -30,11 +30,25 @@ class Model
             'docLink' => [
                 'type' => 'string',
             ],
+            'label' => [
+                'enum' => [
+                    'lts',
+                    'stable',
+                    'experimental',
+                    'legacy stable',
+                    'preview',
+                ],
+                'type' => 'string',
+            ],
             'name' => [
                 'type' => 'string',
             ],
             'termsOfServiceLink' => [
                 'type' => 'string',
+            ],
+            'tokenFactor' => [
+                'format' => 'float',
+                'type' => 'number',
             ],
         ],
         'required' => [
@@ -42,6 +56,7 @@ class Model
             'displayName',
             'docLink',
             'termsOfServiceLink',
+            'tokenFactor',
         ],
         'type' => 'object',
     ];
@@ -50,16 +65,21 @@ class Model
 
     private string $docLink;
 
+    private ?ModelLabel $label = null;
+
     private string $name;
 
     private string $termsOfServiceLink;
 
-    public function __construct(string $displayName, string $docLink, string $name, string $termsOfServiceLink)
+    private int|float $tokenFactor;
+
+    public function __construct(string $displayName, string $docLink, string $name, string $termsOfServiceLink, int|float $tokenFactor)
     {
         $this->displayName = $displayName;
         $this->docLink = $docLink;
         $this->name = $name;
         $this->termsOfServiceLink = $termsOfServiceLink;
+        $this->tokenFactor = $tokenFactor;
     }
 
     public function getDisplayName(): string
@@ -72,6 +92,11 @@ class Model
         return $this->docLink;
     }
 
+    public function getLabel(): ?ModelLabel
+    {
+        return $this->label ?? null;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -80,6 +105,11 @@ class Model
     public function getTermsOfServiceLink(): string
     {
         return $this->termsOfServiceLink;
+    }
+
+    public function getTokenFactor(): int|float
+    {
+        return $this->tokenFactor;
     }
 
     public function withDisplayName(string $displayName): self
@@ -106,6 +136,22 @@ class Model
 
         $clone = clone $this;
         $clone->docLink = $docLink;
+
+        return $clone;
+    }
+
+    public function withLabel(ModelLabel $label): self
+    {
+        $clone = clone $this;
+        $clone->label = $label;
+
+        return $clone;
+    }
+
+    public function withoutLabel(): self
+    {
+        $clone = clone $this;
+        unset($clone->label);
 
         return $clone;
     }
@@ -138,6 +184,20 @@ class Model
         return $clone;
     }
 
+    public function withTokenFactor(int|float $tokenFactor): self
+    {
+        $validator = new Validator();
+        $validator->validate($tokenFactor, self::$internalValidationSchema['properties']['tokenFactor']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->tokenFactor = $tokenFactor;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -155,11 +215,16 @@ class Model
 
         $displayName = $input->{'displayName'};
         $docLink = $input->{'docLink'};
+        $label = null;
+        if (isset($input->{'label'})) {
+            $label = ModelLabel::from($input->{'label'});
+        }
         $name = $input->{'name'};
         $termsOfServiceLink = $input->{'termsOfServiceLink'};
+        $tokenFactor = str_contains((string)($input->{'tokenFactor'}), '.') ? (float)($input->{'tokenFactor'}) : (int)($input->{'tokenFactor'});
 
-        $obj = new self($displayName, $docLink, $name, $termsOfServiceLink);
-
+        $obj = new self($displayName, $docLink, $name, $termsOfServiceLink, $tokenFactor);
+        $obj->label = $label;
         return $obj;
     }
 
@@ -173,8 +238,12 @@ class Model
         $output = [];
         $output['displayName'] = $this->displayName;
         $output['docLink'] = $this->docLink;
+        if (isset($this->label)) {
+            $output['label'] = ($this->label)->value;
+        }
         $output['name'] = $this->name;
         $output['termsOfServiceLink'] = $this->termsOfServiceLink;
+        $output['tokenFactor'] = $this->tokenFactor;
 
         return $output;
     }

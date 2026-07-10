@@ -88,6 +88,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExten
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesOKResponse;
@@ -407,15 +409,15 @@ interface MarketplaceClient
      */
     public function extensionCreateRetrievalKey(ExtensionCreateRetrievalKeyRequest $request): ExtensionCreateRetrievalKeyOKResponse;
     /**
-     * Delete an extension.
+     * Delete an Extension.
      *
-     * Remove the Extension. Make sure that there are no instances for this extension
+     * Start the deletion period of the Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The extension will be removed asynchronously
+     * @return EmptyResponse The Extension will be removed in 60 days. All ExtensionInstances will remain at least 30 Days.
      */
     public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
@@ -590,6 +592,16 @@ interface MarketplaceClient
      * @return EmptyResponse The Extension secret has been invalidated and cannot be used anymore.
      */
     public function extensionInvalidateExtensionSecret(ExtensionInvalidateExtensionSecretRequest $request): EmptyResponse;
+    /**
+     * List all Webhook Executions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-list-all-extension-instance-webhook-executions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionListAllExtensionInstanceWebhookExecutionsRequest $request An object representing the request for this operation
+     * @return ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse A list of webhook executions.
+     */
+    public function extensionListAllExtensionInstanceWebhookExecutions(ExtensionListAllExtensionInstanceWebhookExecutionsRequest $request): ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse;
     /**
      * List Contributors.
      *

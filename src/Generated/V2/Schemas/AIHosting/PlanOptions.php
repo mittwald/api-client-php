@@ -35,6 +35,10 @@ class PlanOptions
             'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
             ],
+            'modelTermsApprovalRequired' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
             'nextTokenReset' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -77,6 +81,7 @@ class PlanOptions
             'tokens',
             'rateLimit',
             'nextTokenReset',
+            'modelTermsApprovalRequired',
         ],
         'type' => 'object',
     ];
@@ -86,6 +91,8 @@ class PlanOptions
     private ?DateTime $deletedAt = null;
 
     private PlanUsage $keys;
+
+    private bool $modelTermsApprovalRequired = false;
 
     private DateTime $nextTokenReset;
 
@@ -120,6 +127,11 @@ class PlanOptions
     public function getKeys(): PlanUsage
     {
         return $this->keys;
+    }
+
+    public function getModelTermsApprovalRequired(): bool
+    {
+        return $this->modelTermsApprovalRequired;
     }
 
     public function getNextTokenReset(): DateTime
@@ -179,6 +191,20 @@ class PlanOptions
     {
         $clone = clone $this;
         $clone->keys = $keys;
+
+        return $clone;
+    }
+
+    public function withModelTermsApprovalRequired(bool $modelTermsApprovalRequired): self
+    {
+        $validator = new Validator();
+        $validator->validate($modelTermsApprovalRequired, self::$internalValidationSchema['properties']['modelTermsApprovalRequired']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->modelTermsApprovalRequired = $modelTermsApprovalRequired;
 
         return $clone;
     }
@@ -247,6 +273,10 @@ class PlanOptions
             $deletedAt = new DateTime($input->{'deletedAt'});
         }
         $keys = PlanUsage::buildFromInput($input->{'keys'}, validate: $validate);
+        $modelTermsApprovalRequired = false;
+        if (isset($input->{'modelTermsApprovalRequired'})) {
+            $modelTermsApprovalRequired = (bool)($input->{'modelTermsApprovalRequired'});
+        }
         $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         $rateLimit = RateLimit::buildFromInput($input->{'rateLimit'}, validate: $validate);
         $tokens = PlanUsageBig::buildFromInput($input->{'tokens'}, validate: $validate);
@@ -257,6 +287,7 @@ class PlanOptions
 
         $obj = new self($customerId, $keys, $nextTokenReset, $rateLimit, $tokens);
         $obj->deletedAt = $deletedAt;
+        $obj->modelTermsApprovalRequired = $modelTermsApprovalRequired;
         $obj->topUsages = $topUsages;
         return $obj;
     }
@@ -274,6 +305,7 @@ class PlanOptions
             $output['deletedAt'] = ($this->deletedAt)->format(DateTime::ATOM);
         }
         $output['keys'] = $this->keys->toJson();
+        $output['modelTermsApprovalRequired'] = $this->modelTermsApprovalRequired;
         $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         $output['rateLimit'] = $this->rateLimit->toJson();
         $output['tokens'] = $this->tokens->toJson();

@@ -28,7 +28,7 @@ class CreateProjectBackupRequest
                         'type' => 'string',
                     ],
                     'expirationTime' => [
-                        'description' => 'Time when to expire the Backup.',
+                        'description' => 'Time when to expire the Backup. Must be at least 7 days and no more than one year in the future.',
                         'format' => 'date-time',
                         'type' => 'string',
                     ],

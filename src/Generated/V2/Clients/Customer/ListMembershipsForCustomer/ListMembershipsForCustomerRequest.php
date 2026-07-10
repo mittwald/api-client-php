@@ -33,6 +33,9 @@ class ListMembershipsForCustomerRequest
             'role' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.membership.CustomerRoles',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'customerId',
@@ -48,6 +51,8 @@ class ListMembershipsForCustomerRequest
     private ?bool $hasExpiry = null;
 
     private ?CustomerRoles $role = null;
+
+    private ?string $searchTerm = null;
 
     private array $headers = [
 
@@ -81,6 +86,11 @@ class ListMembershipsForCustomerRequest
     public function getRole(): ?CustomerRoles
     {
         return $this->role ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function withCustomerId(string $customerId): self
@@ -179,6 +189,28 @@ class ListMembershipsForCustomerRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -211,12 +243,17 @@ class ListMembershipsForCustomerRequest
         if (isset($input->{'role'})) {
             $role = CustomerRoles::from($input->{'role'});
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
 
         $obj = new self($customerId);
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->hasExpiry = $hasExpiry;
         $obj->role = $role;
+        $obj->searchTerm = $searchTerm;
         return $obj;
     }
 
@@ -240,6 +277,9 @@ class ListMembershipsForCustomerRequest
         }
         if (isset($this->role)) {
             $output['role'] = $this->role->value;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
         }
 
         return $output;
@@ -313,6 +353,9 @@ class ListMembershipsForCustomerRequest
         }
         if (isset($mapped['role'])) {
             $query['role'] = $mapped['role'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
         }
         return [
             'query' => $query,

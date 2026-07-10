@@ -7,8 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
@@ -65,16 +65,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseReq
  */
 interface AppClient
 {
-    /**
-     * Trigger a runtime action belonging to an AppInstallation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-execute-action
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExecuteActionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The given action has been executed.
-     */
-    public function executeAction(ExecuteActionRequest $request): EmptyResponse;
     /**
      * Get an App.
      *
@@ -305,6 +295,19 @@ interface AppClient
      * @return EmptyResponse The database has been unlinked.
      */
     public function unlinkDatabase(UnlinkDatabaseRequest $request): EmptyResponse;
+    /**
+     * Trigger a runtime action belonging to an AppInstallation.
+     *
+     * This endpoint is deprecated and will be removed in a future version. No AppInstallation supports runtime actions, making this endpoint non-functional.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-installation-execute-action
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedAppInstallationExecuteActionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The given action has been executed.
+     */
+    public function deprecatedAppInstallationExecuteAction(DeprecatedAppInstallationExecuteActionRequest $request): EmptyResponse;
     /**
      * Create linkage between an AppInstallation and a MySql-Database.
      *

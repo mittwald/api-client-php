@@ -10,6 +10,14 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServicePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryCreatedResponse;
@@ -20,6 +28,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegis
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackForbiddenResponse;
@@ -35,6 +53,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegis
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeForbiddenResponse;
@@ -42,6 +67,24 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeI
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigForbiddenResponse;
@@ -81,6 +124,21 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackInternalS
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeForbiddenResponse;
@@ -126,6 +184,19 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStack
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesForbiddenResponse;
@@ -157,6 +228,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServ
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServicePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServicePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleForbiddenResponse;
@@ -197,24 +277,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackOKR
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsTooManyRequestsResponse;
 
 /**
  * Client for Container API
@@ -236,6 +298,35 @@ class ContainerClientImpl implements ContainerClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Call pull-image webhook
+     *
+     * Calls the pull-image webhook endpoint for a Service using a webhook token.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-call-pull-image-webhook-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CallPullImageWebhookForServiceRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function callPullImageWebhookForService(CallPullImageWebhookForServiceRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(CallPullImageWebhookForServiceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CallPullImageWebhookForServiceBadRequestResponse::fromResponse($httpResponse),
+            401 => CallPullImageWebhookForServiceUnauthorizedResponse::fromResponse($httpResponse),
+            404 => CallPullImageWebhookForServiceNotFoundResponse::fromResponse($httpResponse),
+            412 => CallPullImageWebhookForServicePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CallPullImageWebhookForServiceTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CallPullImageWebhookForServiceInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CallPullImageWebhookForServiceDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
@@ -263,6 +354,34 @@ class ContainerClientImpl implements ContainerClient
             429 => CreateRegistryTooManyRequestsResponse::fromResponse($httpResponse),
             500 => CreateRegistryInternalServerErrorResponse::fromResponse($httpResponse),
             default => CreateRegistryDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-create-stack
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateStackRequest $request An object representing the request for this operation
+     * @return CreateStackCreatedResponse Created
+     */
+    public function createStack(CreateStackRequest $request): CreateStackCreatedResponse
+    {
+        $httpRequest = new Request(CreateStackRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateStackCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateStackBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateStackForbiddenResponse::fromResponse($httpResponse),
+            404 => CreateStackNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateStackConflictResponse::fromResponse($httpResponse),
+            412 => CreateStackPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateStackTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CreateStackInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CreateStackDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -315,6 +434,32 @@ class ContainerClientImpl implements ContainerClient
             429 => DeleteRegistryTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DeleteRegistryInternalServerErrorResponse::fromResponse($httpResponse),
             default => DeleteRegistryDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Delete a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-delete-stack
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeleteStackRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function deleteStack(DeleteStackRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeleteStackRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeleteStackBadRequestResponse::fromResponse($httpResponse),
+            403 => DeleteStackForbiddenResponse::fromResponse($httpResponse),
+            404 => DeleteStackNotFoundResponse::fromResponse($httpResponse),
+            429 => DeleteStackTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeleteStackInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeleteStackDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -475,6 +620,58 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
+     * Get a Container Template by ID.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetTemplateRequest $request An object representing the request for this operation
+     * @return GetTemplateOKResponse OK
+     */
+    public function getTemplate(GetTemplateRequest $request): GetTemplateOKResponse
+    {
+        $httpRequest = new Request(GetTemplateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetTemplateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetTemplateBadRequestResponse::fromResponse($httpResponse),
+            404 => GetTemplateNotFoundResponse::fromResponse($httpResponse),
+            429 => GetTemplateTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetTemplateInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetTemplateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a Container Template icon.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-icon
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetTemplateIconRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getTemplateIcon(GetTemplateIconRequest $request): StringResponse
+    {
+        $httpRequest = new Request(GetTemplateIconRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StringResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetTemplateIconBadRequestResponse::fromResponse($httpResponse),
+            403 => GetTemplateIconForbiddenResponse::fromResponse($httpResponse),
+            404 => GetTemplateIconNotFoundResponse::fromResponse($httpResponse),
+            429 => GetTemplateIconTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetTemplateIconInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetTemplateIconServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetTemplateIconDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a Volume belonging to a Stack.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-volume
@@ -628,6 +825,55 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
+     * List Container Template statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
+     * @return ListTemplateStatisticsOKResponse OK
+     */
+    public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse
+    {
+        $httpRequest = new Request(ListTemplateStatisticsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListTemplateStatisticsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListTemplateStatisticsBadRequestResponse::fromResponse($httpResponse),
+            404 => ListTemplateStatisticsNotFoundResponse::fromResponse($httpResponse),
+            429 => ListTemplateStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListTemplateStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListTemplateStatisticsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Container Templates.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-templates
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListTemplatesRequest $request An object representing the request for this operation
+     * @return ListTemplatesOKResponse OK
+     */
+    public function listTemplates(ListTemplatesRequest $request): ListTemplatesOKResponse
+    {
+        $httpRequest = new Request(ListTemplatesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListTemplatesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListTemplatesBadRequestResponse::fromResponse($httpResponse),
+            429 => ListTemplatesTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListTemplatesInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListTemplatesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List Volumes belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-volumes
@@ -735,6 +981,38 @@ class ContainerClientImpl implements ContainerClient
             429 => RestartServiceTooManyRequestsResponse::fromResponse($httpResponse),
             500 => RestartServiceInternalServerErrorResponse::fromResponse($httpResponse),
             default => RestartServiceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create or rotate pull-image webhook token
+     *
+     * Creates or rotates the pull-image webhook token for a Service.
+     *
+     * The returned token is shown only once.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-rotate-pull-image-webhook-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RotatePullImageWebhookForServiceRequest $request An object representing the request for this operation
+     * @return RotatePullImageWebhookForServiceOKResponse OK
+     */
+    public function rotatePullImageWebhookForService(RotatePullImageWebhookForServiceRequest $request): RotatePullImageWebhookForServiceOKResponse
+    {
+        $httpRequest = new Request(RotatePullImageWebhookForServiceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return RotatePullImageWebhookForServiceOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RotatePullImageWebhookForServiceBadRequestResponse::fromResponse($httpResponse),
+            403 => RotatePullImageWebhookForServiceForbiddenResponse::fromResponse($httpResponse),
+            404 => RotatePullImageWebhookForServiceNotFoundResponse::fromResponse($httpResponse),
+            412 => RotatePullImageWebhookForServicePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => RotatePullImageWebhookForServiceTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => RotatePullImageWebhookForServiceInternalServerErrorResponse::fromResponse($httpResponse),
+            default => RotatePullImageWebhookForServiceDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -875,54 +1153,60 @@ class ContainerClientImpl implements ContainerClient
     /**
      * Validate a Registries' URI.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-validate-container-registry-uri
+     * Deprecated. Container registry URI validation is performed automatically during resource creation; this endpoint is no longer necessary. This endpoint will be removed in a future version.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-validate-container-registry-uri
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ValidateContainerRegistryUriRequest $request An object representing the request for this operation
-     * @return ValidateContainerRegistryUriOKResponse OK
+     * @param DeprecatedContainerValidateContainerRegistryUriRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContainerValidateContainerRegistryUriOKResponse OK
      */
-    public function validateContainerRegistryUri(ValidateContainerRegistryUriRequest $request): ValidateContainerRegistryUriOKResponse
+    public function deprecatedContainerValidateContainerRegistryUri(DeprecatedContainerValidateContainerRegistryUriRequest $request): DeprecatedContainerValidateContainerRegistryUriOKResponse
     {
-        $httpRequest = new Request(ValidateContainerRegistryUriRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedContainerValidateContainerRegistryUriRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ValidateContainerRegistryUriOKResponse::fromResponse($httpResponse);
+            return DeprecatedContainerValidateContainerRegistryUriOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ValidateContainerRegistryUriBadRequestResponse::fromResponse($httpResponse),
-            403 => ValidateContainerRegistryUriForbiddenResponse::fromResponse($httpResponse),
-            404 => ValidateContainerRegistryUriNotFoundResponse::fromResponse($httpResponse),
-            412 => ValidateContainerRegistryUriPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => ValidateContainerRegistryUriTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => ValidateContainerRegistryUriInternalServerErrorResponse::fromResponse($httpResponse),
-            default => ValidateContainerRegistryUriDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedContainerValidateContainerRegistryUriBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedContainerValidateContainerRegistryUriForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedContainerValidateContainerRegistryUriNotFoundResponse::fromResponse($httpResponse),
+            412 => DeprecatedContainerValidateContainerRegistryUriPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeprecatedContainerValidateContainerRegistryUriTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedContainerValidateContainerRegistryUriInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedContainerValidateContainerRegistryUriDefaultResponse::fromResponse($httpResponse),
         });
     }
 
     /**
      * Validate a Registries' credentials.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-validate-registry-credentials
+     * Deprecated. Registry credential validation is performed automatically on a scheduled basis in the backend. This endpoint will be removed in a future version.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-validate-registry-credentials
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ValidateRegistryCredentialsRequest $request An object representing the request for this operation
-     * @return ValidateRegistryCredentialsOKResponse OK
+     * @param DeprecatedContainerValidateRegistryCredentialsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContainerValidateRegistryCredentialsOKResponse OK
      */
-    public function validateRegistryCredentials(ValidateRegistryCredentialsRequest $request): ValidateRegistryCredentialsOKResponse
+    public function deprecatedContainerValidateRegistryCredentials(DeprecatedContainerValidateRegistryCredentialsRequest $request): DeprecatedContainerValidateRegistryCredentialsOKResponse
     {
-        $httpRequest = new Request(ValidateRegistryCredentialsRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedContainerValidateRegistryCredentialsRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ValidateRegistryCredentialsOKResponse::fromResponse($httpResponse);
+            return DeprecatedContainerValidateRegistryCredentialsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ValidateRegistryCredentialsBadRequestResponse::fromResponse($httpResponse),
-            403 => ValidateRegistryCredentialsForbiddenResponse::fromResponse($httpResponse),
-            404 => ValidateRegistryCredentialsNotFoundResponse::fromResponse($httpResponse),
-            412 => ValidateRegistryCredentialsPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => ValidateRegistryCredentialsTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => ValidateRegistryCredentialsInternalServerErrorResponse::fromResponse($httpResponse),
-            default => ValidateRegistryCredentialsDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedContainerValidateRegistryCredentialsBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedContainerValidateRegistryCredentialsForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedContainerValidateRegistryCredentialsNotFoundResponse::fromResponse($httpResponse),
+            412 => DeprecatedContainerValidateRegistryCredentialsPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeprecatedContainerValidateRegistryCredentialsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedContainerValidateRegistryCredentialsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedContainerValidateRegistryCredentialsDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

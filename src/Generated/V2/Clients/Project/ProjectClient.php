@@ -31,10 +31,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsOKResponse;
@@ -232,6 +236,16 @@ interface ProjectClient
      */
     public function getServer(GetServerRequest $request): GetServerOKResponse;
     /**
+     * List Projects belonging to a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-customer-projects
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCustomerProjectsRequest $request An object representing the request for this operation
+     * @return ListCustomerProjectsOKResponse OK
+     */
+    public function listCustomerProjects(ListCustomerProjectsRequest $request): ListCustomerProjectsOKResponse;
+    /**
      * List Invites belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
@@ -251,6 +265,16 @@ interface ProjectClient
      * @return ListMembershipsForProjectOKResponse OK
      */
     public function listMembershipsForProject(ListMembershipsForProjectRequest $request): ListMembershipsForProjectOKResponse;
+    /**
+     * Get the activities of a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-activities
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListProjectActivitiesRequest $request An object representing the request for this operation
+     * @return ListProjectActivitiesOKResponse List of all activities.
+     */
+    public function listProjectActivities(ListProjectActivitiesRequest $request): ListProjectActivitiesOKResponse;
     /**
      * List ProjectInvites belonging to the executing user.
      *

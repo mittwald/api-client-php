@@ -43,6 +43,9 @@ class Server
             'disabledReason' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.ServerDisableReason',
             ],
+            'groupId' => [
+                'type' => 'string',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -91,6 +94,7 @@ class Server
             'createdAt',
             'clusterName',
             'status',
+            'groupId',
         ],
         'type' => 'object',
     ];
@@ -104,6 +108,8 @@ class Server
     private string $description;
 
     private ?ServerDisableReason $disabledReason = null;
+
+    private string $groupId;
 
     private string $id;
 
@@ -128,12 +134,13 @@ class Server
 
     private string $storage;
 
-    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, DeprecatedServerReadinessStatus $readiness, string $shortId, ServerStatus $status, string $storage)
+    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $groupId, string $id, bool $isReady, MachineType $machineType, DeprecatedServerReadinessStatus $readiness, string $shortId, ServerStatus $status, string $storage)
     {
         $this->clusterName = $clusterName;
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
         $this->description = $description;
+        $this->groupId = $groupId;
         $this->id = $id;
         $this->isReady = $isReady;
         $this->machineType = $machineType;
@@ -166,6 +173,11 @@ class Server
     public function getDisabledReason(): ?ServerDisableReason
     {
         return $this->disabledReason ?? null;
+    }
+
+    public function getGroupId(): string
+    {
+        return $this->groupId;
     }
 
     public function getId(): string
@@ -278,6 +290,20 @@ class Server
     {
         $clone = clone $this;
         unset($clone->disabledReason);
+
+        return $clone;
+    }
+
+    public function withGroupId(string $groupId): self
+    {
+        $validator = new Validator();
+        $validator->validate($groupId, self::$internalValidationSchema['properties']['groupId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->groupId = $groupId;
 
         return $clone;
     }
@@ -432,6 +458,7 @@ class Server
         if (isset($input->{'disabledReason'})) {
             $disabledReason = ServerDisableReason::from($input->{'disabledReason'});
         }
+        $groupId = $input->{'groupId'};
         $id = $input->{'id'};
         $imageRefId = null;
         if (isset($input->{'imageRefId'})) {
@@ -448,7 +475,7 @@ class Server
         $status = ServerStatus::from($input->{'status'});
         $storage = $input->{'storage'};
 
-        $obj = new self($clusterName, $createdAt, $customerId, $description, $id, $isReady, $machineType, $readiness, $shortId, $status, $storage);
+        $obj = new self($clusterName, $createdAt, $customerId, $description, $groupId, $id, $isReady, $machineType, $readiness, $shortId, $status, $storage);
         $obj->disabledReason = $disabledReason;
         $obj->imageRefId = $imageRefId;
         $obj->statisticsBaseDomain = $statisticsBaseDomain;
@@ -470,6 +497,7 @@ class Server
         if (isset($this->disabledReason)) {
             $output['disabledReason'] = $this->disabledReason->value;
         }
+        $output['groupId'] = $this->groupId;
         $output['id'] = $this->id;
         if (isset($this->imageRefId)) {
             $output['imageRefId'] = $this->imageRefId;

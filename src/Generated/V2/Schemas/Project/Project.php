@@ -110,6 +110,9 @@ class Project
             'readiness' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus',
             ],
+            'serverGroupId' => [
+                'type' => 'string',
+            ],
             'serverId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -175,6 +178,7 @@ class Project
             'backupStorageUsageInBytes',
             'backupStorageUsageInBytesSetAt',
             'supportedFeatures',
+            'serverGroupId',
         ],
         'type' => 'object',
     ];
@@ -236,6 +240,8 @@ class Project
 
     private DeprecatedProjectReadinessStatus $readiness;
 
+    private string $serverGroupId;
+
     private ?string $serverId = null;
 
     private ?string $serverShortId = null;
@@ -263,7 +269,7 @@ class Project
      * @param string[] $directories
      * @param ProjectFeature[] $supportedFeatures
      */
-    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, array $supportedFeatures, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
+    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $serverGroupId, string $shortId, ProjectStatus $status, DateTime $statusSetAt, array $supportedFeatures, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
     {
         $this->backupStorageUsageInBytes = $backupStorageUsageInBytes;
         $this->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
@@ -275,6 +281,7 @@ class Project
         $this->id = $id;
         $this->isReady = $isReady;
         $this->readiness = $readiness;
+        $this->serverGroupId = $serverGroupId;
         $this->shortId = $shortId;
         $this->status = $status;
         $this->statusSetAt = $statusSetAt;
@@ -381,6 +388,11 @@ class Project
     public function getReadiness(): DeprecatedProjectReadinessStatus
     {
         return $this->readiness;
+    }
+
+    public function getServerGroupId(): string
+    {
+        return $this->serverGroupId;
     }
 
     public function getServerId(): ?string
@@ -726,6 +738,20 @@ class Project
         return $clone;
     }
 
+    public function withServerGroupId(string $serverGroupId): self
+    {
+        $validator = new Validator();
+        $validator->validate($serverGroupId, self::$internalValidationSchema['properties']['serverGroupId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->serverGroupId = $serverGroupId;
+
+        return $clone;
+    }
+
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -932,6 +958,7 @@ class Project
             $projectHostingId = $input->{'projectHostingId'};
         }
         $readiness = DeprecatedProjectReadinessStatus::from($input->{'readiness'});
+        $serverGroupId = $input->{'serverGroupId'};
         $serverId = null;
         if (isset($input->{'serverId'})) {
             $serverId = $input->{'serverId'};
@@ -959,7 +986,7 @@ class Project
         $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
         $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 
-        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $supportedFeatures, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
+        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $serverGroupId, $shortId, $status, $statusSetAt, $supportedFeatures, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->clusterId = $clusterId;
@@ -1021,6 +1048,7 @@ class Project
             $output['projectHostingId'] = $this->projectHostingId;
         }
         $output['readiness'] = $this->readiness->value;
+        $output['serverGroupId'] = $this->serverGroupId;
         if (isset($this->serverId)) {
             $output['serverId'] = $this->serverId;
         }

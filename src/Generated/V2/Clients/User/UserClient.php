@@ -17,8 +17,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetr
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetRequest;
@@ -32,6 +30,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenRe
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest;
@@ -74,6 +74,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\EditApiToken\EditApiTokenReques
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey\EditSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
@@ -163,6 +165,21 @@ interface UserClient
      * call /email/verify with the verification code sent with the mail.
      */
     public function deprecatedUserChangeEmail(DeprecatedUserChangeEmailRequest $request): EmptyResponse;
+    /**
+     * Check token for validity.
+     *
+     * Deprecated. Use `GET /users/self/sessions/current/status` instead,
+     * which returns status informationen of the current session.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-check-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserCheckTokenRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserCheckTokenOKResponse Your token is valid.
+     */
+    public function deprecatedUserCheckToken(DeprecatedUserCheckTokenRequest $request): DeprecatedUserCheckTokenOKResponse;
     /**
      * Confirm password reset. Replaced by `POST` `/v2/users/self/credentials/password/confirm-reset`.
      *
@@ -511,7 +528,7 @@ interface UserClient
      */
     public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicyOKResponse;
     /**
-     * Get a password policy.
+     * DEPRECAED. Use `GET` `/v2/password-policies/{passwordPolicy}` instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
      * @throws GuzzleException
@@ -582,16 +599,6 @@ interface UserClient
      * @return ChangePasswordOKResponse Your password has been changed.
      */
     public function changePassword(ChangePasswordRequest $request): ChangePasswordOKResponse;
-    /**
-     * Check token for validity.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-check-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CheckTokenRequest $request An object representing the request for this operation
-     * @return CheckTokenOKResponse Your token is valid.
-     */
-    public function checkToken(CheckTokenRequest $request): CheckTokenOKResponse;
     /**
      * Confirm Multi Factor Authentication.
      *
@@ -712,6 +719,16 @@ interface UserClient
      * @return GetApiTokenOKResponse The ApiToken.
      */
     public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse;
+    /**
+     * Check status of the current session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-current-session-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCurrentSessionStatusRequest $request An object representing the request for this operation
+     * @return GetCurrentSessionStatusOKResponse Status of the current session.
+     */
+    public function getCurrentSessionStatus(GetCurrentSessionStatusRequest $request): GetCurrentSessionStatusOKResponse;
     /**
      * Get your current multi factor auth status.
      *

@@ -23,12 +23,14 @@ class ReadableArticleMachineType
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'description' => 'Resources for hosting Articles.',
         'properties' => [
             'cpu' => [
                 'example' => '1',
                 'type' => 'string',
             ],
             'memory' => [
+                'description' => 'Memory in GiB',
                 'example' => '10',
                 'type' => 'string',
             ],
@@ -47,6 +49,9 @@ class ReadableArticleMachineType
 
     private string $cpu;
 
+    /**
+     * Memory in GiB
+     */
     private string $memory;
 
     private string $name;

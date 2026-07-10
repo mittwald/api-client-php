@@ -8,12 +8,20 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateStack\CreateStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetRegistry\GetRegistryOKResponse;
@@ -23,6 +31,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetService\GetServiceReque
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
@@ -35,21 +46,23 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksOKRes
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StopService\StopServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateRegistry\UpdateRegistryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateContainerRegistryUri\ValidateContainerRegistryUriRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredentials\ValidateRegistryCredentialsRequest;
 
 /**
  * Client for Container API
@@ -67,6 +80,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ValidateRegistryCredential
 interface ContainerClient
 {
     /**
+     * Call pull-image webhook
+     *
+     * Calls the pull-image webhook endpoint for a Service using a webhook token.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-call-pull-image-webhook-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CallPullImageWebhookForServiceRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function callPullImageWebhookForService(CallPullImageWebhookForServiceRequest $request): EmptyResponse;
+    /**
      * Create a Registry.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-create-registry
@@ -76,6 +101,16 @@ interface ContainerClient
      * @return CreateRegistryCreatedResponse Created
      */
     public function createRegistry(CreateRegistryRequest $request): CreateRegistryCreatedResponse;
+    /**
+     * Create a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-create-stack
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateStackRequest $request An object representing the request for this operation
+     * @return CreateStackCreatedResponse Created
+     */
+    public function createStack(CreateStackRequest $request): CreateStackCreatedResponse;
     /**
      * Declaratively create, update or delete Services or Volumes belonging to a Stack.
      *
@@ -96,6 +131,16 @@ interface ContainerClient
      * @return EmptyResponse NoContent
      */
     public function deleteRegistry(DeleteRegistryRequest $request): EmptyResponse;
+    /**
+     * Delete a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-delete-stack
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeleteStackRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function deleteStack(DeleteStackRequest $request): EmptyResponse;
     /**
      * Delete a Volume belonging to a Stack.
      *
@@ -157,6 +202,26 @@ interface ContainerClient
      */
     public function getStack(GetStackRequest $request): GetStackOKResponse;
     /**
+     * Get a Container Template by ID.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetTemplateRequest $request An object representing the request for this operation
+     * @return GetTemplateOKResponse OK
+     */
+    public function getTemplate(GetTemplateRequest $request): GetTemplateOKResponse;
+    /**
+     * Get a Container Template icon.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-icon
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetTemplateIconRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getTemplateIcon(GetTemplateIconRequest $request): StringResponse;
+    /**
      * Get a Volume belonging to a Stack.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-volume
@@ -217,6 +282,26 @@ interface ContainerClient
      */
     public function listStacks(ListStacksRequest $request): ListStacksOKResponse;
     /**
+     * List Container Template statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
+     * @return ListTemplateStatisticsOKResponse OK
+     */
+    public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse;
+    /**
+     * List Container Templates.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-templates
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListTemplatesRequest $request An object representing the request for this operation
+     * @return ListTemplatesOKResponse OK
+     */
+    public function listTemplates(ListTemplatesRequest $request): ListTemplatesOKResponse;
+    /**
      * List Volumes belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-volumes
@@ -261,6 +346,21 @@ interface ContainerClient
      * @return EmptyResponse NoContent
      */
     public function restartService(RestartServiceRequest $request): EmptyResponse;
+    /**
+     * Create or rotate pull-image webhook token
+     *
+     * Creates or rotates the pull-image webhook token for a Service.
+     *
+     * The returned token is shown only once.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-rotate-pull-image-webhook-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RotatePullImageWebhookForServiceRequest $request An object representing the request for this operation
+     * @return RotatePullImageWebhookForServiceOKResponse OK
+     */
+    public function rotatePullImageWebhookForService(RotatePullImageWebhookForServiceRequest $request): RotatePullImageWebhookForServiceOKResponse;
     /**
      * Set an update schedule for a Stack.
      *
@@ -314,21 +414,27 @@ interface ContainerClient
     /**
      * Validate a Registries' URI.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-validate-container-registry-uri
+     * Deprecated. Container registry URI validation is performed automatically during resource creation; this endpoint is no longer necessary. This endpoint will be removed in a future version.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-validate-container-registry-uri
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ValidateContainerRegistryUriRequest $request An object representing the request for this operation
-     * @return ValidateContainerRegistryUriOKResponse OK
+     * @param DeprecatedContainerValidateContainerRegistryUriRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContainerValidateContainerRegistryUriOKResponse OK
      */
-    public function validateContainerRegistryUri(ValidateContainerRegistryUriRequest $request): ValidateContainerRegistryUriOKResponse;
+    public function deprecatedContainerValidateContainerRegistryUri(DeprecatedContainerValidateContainerRegistryUriRequest $request): DeprecatedContainerValidateContainerRegistryUriOKResponse;
     /**
      * Validate a Registries' credentials.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-validate-registry-credentials
+     * Deprecated. Registry credential validation is performed automatically on a scheduled basis in the backend. This endpoint will be removed in a future version.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-validate-registry-credentials
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ValidateRegistryCredentialsRequest $request An object representing the request for this operation
-     * @return ValidateRegistryCredentialsOKResponse OK
+     * @param DeprecatedContainerValidateRegistryCredentialsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContainerValidateRegistryCredentialsOKResponse OK
      */
-    public function validateRegistryCredentials(ValidateRegistryCredentialsRequest $request): ValidateRegistryCredentialsOKResponse;
+    public function deprecatedContainerValidateRegistryCredentials(DeprecatedContainerValidateRegistryCredentialsRequest $request): DeprecatedContainerValidateRegistryCredentialsOKResponse;
 }

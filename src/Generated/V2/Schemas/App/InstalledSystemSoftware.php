@@ -27,12 +27,22 @@ class InstalledSystemSoftware
     private static array $internalValidationSchema = [
         'description' => 'InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.',
         'properties' => [
+            'externalVersion' => [
+                'type' => 'string',
+            ],
+            'name' => [
+                'type' => 'string',
+            ],
             'systemSoftwareId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
             'systemSoftwareVersion' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.VersionStatus',
+            ],
+            'updateAvailable' => [
+                'default' => false,
+                'type' => 'boolean',
             ],
             'updatePolicy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy',
@@ -42,21 +52,42 @@ class InstalledSystemSoftware
             'systemSoftwareId',
             'updatePolicy',
             'systemSoftwareVersion',
+            'name',
+            'externalVersion',
+            'updateAvailable',
         ],
         'type' => 'object',
     ];
+
+    private string $externalVersion;
+
+    private string $name;
 
     private string $systemSoftwareId;
 
     private VersionStatus $systemSoftwareVersion;
 
+    private bool $updateAvailable = false;
+
     private SystemSoftwareUpdatePolicy $updatePolicy;
 
-    public function __construct(string $systemSoftwareId, VersionStatus $systemSoftwareVersion, SystemSoftwareUpdatePolicy $updatePolicy)
+    public function __construct(string $externalVersion, string $name, string $systemSoftwareId, VersionStatus $systemSoftwareVersion, SystemSoftwareUpdatePolicy $updatePolicy)
     {
+        $this->externalVersion = $externalVersion;
+        $this->name = $name;
         $this->systemSoftwareId = $systemSoftwareId;
         $this->systemSoftwareVersion = $systemSoftwareVersion;
         $this->updatePolicy = $updatePolicy;
+    }
+
+    public function getExternalVersion(): string
+    {
+        return $this->externalVersion;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getSystemSoftwareId(): string
@@ -69,9 +100,42 @@ class InstalledSystemSoftware
         return $this->systemSoftwareVersion;
     }
 
+    public function getUpdateAvailable(): bool
+    {
+        return $this->updateAvailable;
+    }
+
     public function getUpdatePolicy(): SystemSoftwareUpdatePolicy
     {
         return $this->updatePolicy;
+    }
+
+    public function withExternalVersion(string $externalVersion): self
+    {
+        $validator = new Validator();
+        $validator->validate($externalVersion, self::$internalValidationSchema['properties']['externalVersion']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->externalVersion = $externalVersion;
+
+        return $clone;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
+
+        return $clone;
     }
 
     public function withSystemSoftwareId(string $systemSoftwareId): self
@@ -92,6 +156,20 @@ class InstalledSystemSoftware
     {
         $clone = clone $this;
         $clone->systemSoftwareVersion = $systemSoftwareVersion;
+
+        return $clone;
+    }
+
+    public function withUpdateAvailable(bool $updateAvailable): self
+    {
+        $validator = new Validator();
+        $validator->validate($updateAvailable, self::$internalValidationSchema['properties']['updateAvailable']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->updateAvailable = $updateAvailable;
 
         return $clone;
     }
@@ -119,12 +197,18 @@ class InstalledSystemSoftware
             static::validateInput($input);
         }
 
+        $externalVersion = $input->{'externalVersion'};
+        $name = $input->{'name'};
         $systemSoftwareId = $input->{'systemSoftwareId'};
         $systemSoftwareVersion = VersionStatus::buildFromInput($input->{'systemSoftwareVersion'}, validate: $validate);
+        $updateAvailable = false;
+        if (isset($input->{'updateAvailable'})) {
+            $updateAvailable = (bool)($input->{'updateAvailable'});
+        }
         $updatePolicy = SystemSoftwareUpdatePolicy::from($input->{'updatePolicy'});
 
-        $obj = new self($systemSoftwareId, $systemSoftwareVersion, $updatePolicy);
-
+        $obj = new self($externalVersion, $name, $systemSoftwareId, $systemSoftwareVersion, $updatePolicy);
+        $obj->updateAvailable = $updateAvailable;
         return $obj;
     }
 
@@ -136,8 +220,11 @@ class InstalledSystemSoftware
     public function toJson(): array
     {
         $output = [];
+        $output['externalVersion'] = $this->externalVersion;
+        $output['name'] = $this->name;
         $output['systemSoftwareId'] = $this->systemSoftwareId;
         $output['systemSoftwareVersion'] = $this->systemSoftwareVersion->toJson();
+        $output['updateAvailable'] = $this->updateAvailable;
         $output['updatePolicy'] = $this->updatePolicy->value;
 
         return $output;

@@ -30,6 +30,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxOK
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesOKResponse;
@@ -38,9 +40,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressRequest;
@@ -293,6 +298,16 @@ interface MailClient
      */
     public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse;
     /**
+     * Get a Mail RateLimit.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-rate-limit
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMailRateLimitRequest $request An object representing the request for this operation
+     * @return GetMailRateLimitOKResponse OK
+     */
+    public function getMailRateLimit(GetMailRateLimitRequest $request): GetMailRateLimitOKResponse;
+    /**
      * List backups belonging to a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-backups-for-mail-address
@@ -333,6 +348,16 @@ interface MailClient
      */
     public function listMailAddressesForUser(ListMailAddressesForUserRequest $request): ListMailAddressesForUserOKResponse;
     /**
+     * List Mail RateLimits.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-rate-limits
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailRateLimitsRequest $request An object representing the request for this operation
+     * @return ListMailRateLimitsOKResponse OK
+     */
+    public function listMailRateLimits(ListMailRateLimitsRequest $request): ListMailRateLimitsOKResponse;
+    /**
      * List mail settings of a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-project-mail-settings
@@ -352,6 +377,16 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function recoverMailAddressEmails(RecoverMailAddressEmailsRequest $request): EmptyResponse;
+    /**
+     * Request a rate limit change for a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-request-mail-address-rate-limit-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestMailAddressRateLimitChangeRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function requestMailAddressRateLimitChange(RequestMailAddressRateLimitChangeRequest $request): EmptyResponse;
     /**
      * Update the description of a DeliveryBox.
      *

@@ -32,6 +32,12 @@ class RequestAppinstallationRequest
                     'installationPath' => [
                         'type' => 'string',
                     ],
+                    'systemSoftware' => [
+                        'additionalProperties' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
+                        ],
+                        'type' => 'object',
+                    ],
                     'updatePolicy' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
                     ],

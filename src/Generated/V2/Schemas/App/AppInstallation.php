@@ -27,8 +27,14 @@ class AppInstallation
     private static array $internalValidationSchema = [
         'description' => 'An AppInstallation is a concrete manifestation of an App in a specific AppVersion.',
         'properties' => [
+            'appExternalVersion' => [
+                'type' => 'string',
+            ],
             'appId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'appName' => [
                 'type' => 'string',
             ],
             'appVersion' => [
@@ -52,6 +58,9 @@ class AppInstallation
             'disabled' => [
                 'default' => false,
                 'type' => 'boolean',
+            ],
+            'hostname' => [
+                'type' => 'string',
             ],
             'id' => [
                 'format' => 'uuid',
@@ -79,6 +88,23 @@ class AppInstallation
             'phase' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.Phase',
             ],
+            'ports' => [
+                'items' => [
+                    'properties' => [
+                        'name' => [
+                            'type' => 'string',
+                        ],
+                        'port' => [
+                            'type' => 'integer',
+                        ],
+                    ],
+                    'type' => 'object',
+                ],
+                'type' => 'array',
+            ],
+            'projectDescription' => [
+                'type' => 'string',
+            ],
             'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -99,6 +125,10 @@ class AppInstallation
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware',
                 ],
                 'type' => 'array',
+            ],
+            'updateAvailable' => [
+                'default' => false,
+                'type' => 'boolean',
             ],
             'updatePolicy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
@@ -125,11 +155,19 @@ class AppInstallation
             'updatePolicy',
             'linkedDatabases',
             'phase',
+            'appName',
+            'updateAvailable',
+            'appExternalVersion',
+            'projectDescription',
         ],
         'type' => 'object',
     ];
 
+    private string $appExternalVersion;
+
     private string $appId;
+
+    private string $appName;
 
     private VersionStatus $appVersion;
 
@@ -142,6 +180,8 @@ class AppInstallation
     private string $description;
 
     private bool $disabled = false;
+
+    private ?string $hostname = null;
 
     private string $id;
 
@@ -164,6 +204,13 @@ class AppInstallation
 
     private Phase $phase;
 
+    /**
+     * @var AppInstallationPortsItem[]|null
+     */
+    private ?array $ports = null;
+
+    private string $projectDescription;
+
     private string $projectId;
 
     private ?string $screenshotId = null;
@@ -177,6 +224,8 @@ class AppInstallation
      */
     private array $systemSoftware;
 
+    private bool $updateAvailable = false;
+
     private AppUpdatePolicy $updatePolicy;
 
     /**
@@ -189,9 +238,11 @@ class AppInstallation
      * @param InstalledSystemSoftware[] $systemSoftware
      * @param SavedUserInput[] $userInputs
      */
-    public function __construct(string $appId, VersionStatus $appVersion, DateTime $createdAt, string $description, string $id, string $installationPath, array $linkedDatabases, Phase $phase, string $projectId, string $shortId, array $systemSoftware, AppUpdatePolicy $updatePolicy, array $userInputs)
+    public function __construct(string $appExternalVersion, string $appId, string $appName, VersionStatus $appVersion, DateTime $createdAt, string $description, string $id, string $installationPath, array $linkedDatabases, Phase $phase, string $projectDescription, string $projectId, string $shortId, array $systemSoftware, AppUpdatePolicy $updatePolicy, array $userInputs)
     {
+        $this->appExternalVersion = $appExternalVersion;
         $this->appId = $appId;
+        $this->appName = $appName;
         $this->appVersion = $appVersion;
         $this->createdAt = $createdAt;
         $this->description = $description;
@@ -199,6 +250,7 @@ class AppInstallation
         $this->installationPath = $installationPath;
         $this->linkedDatabases = $linkedDatabases;
         $this->phase = $phase;
+        $this->projectDescription = $projectDescription;
         $this->projectId = $projectId;
         $this->shortId = $shortId;
         $this->systemSoftware = $systemSoftware;
@@ -206,9 +258,19 @@ class AppInstallation
         $this->userInputs = $userInputs;
     }
 
+    public function getAppExternalVersion(): string
+    {
+        return $this->appExternalVersion;
+    }
+
     public function getAppId(): string
     {
         return $this->appId;
+    }
+
+    public function getAppName(): string
+    {
+        return $this->appName;
     }
 
     public function getAppVersion(): VersionStatus
@@ -239,6 +301,11 @@ class AppInstallation
     public function getDisabled(): bool
     {
         return $this->disabled;
+    }
+
+    public function getHostname(): ?string
+    {
+        return $this->hostname ?? null;
     }
 
     public function getId(): string
@@ -277,6 +344,19 @@ class AppInstallation
         return $this->phase;
     }
 
+    /**
+     * @return AppInstallationPortsItem[]|null
+     */
+    public function getPorts(): ?array
+    {
+        return $this->ports ?? null;
+    }
+
+    public function getProjectDescription(): string
+    {
+        return $this->projectDescription;
+    }
+
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -305,6 +385,11 @@ class AppInstallation
         return $this->systemSoftware;
     }
 
+    public function getUpdateAvailable(): bool
+    {
+        return $this->updateAvailable;
+    }
+
     public function getUpdatePolicy(): AppUpdatePolicy
     {
         return $this->updatePolicy;
@@ -318,6 +403,20 @@ class AppInstallation
         return $this->userInputs;
     }
 
+    public function withAppExternalVersion(string $appExternalVersion): self
+    {
+        $validator = new Validator();
+        $validator->validate($appExternalVersion, self::$internalValidationSchema['properties']['appExternalVersion']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appExternalVersion = $appExternalVersion;
+
+        return $clone;
+    }
+
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -328,6 +427,20 @@ class AppInstallation
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withAppName(string $appName): self
+    {
+        $validator = new Validator();
+        $validator->validate($appName, self::$internalValidationSchema['properties']['appName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appName = $appName;
 
         return $clone;
     }
@@ -408,6 +521,28 @@ class AppInstallation
 
         $clone = clone $this;
         $clone->disabled = $disabled;
+
+        return $clone;
+    }
+
+    public function withHostname(string $hostname): self
+    {
+        $validator = new Validator();
+        $validator->validate($hostname, self::$internalValidationSchema['properties']['hostname']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hostname = $hostname;
+
+        return $clone;
+    }
+
+    public function withoutHostname(): self
+    {
+        $clone = clone $this;
+        unset($clone->hostname);
 
         return $clone;
     }
@@ -506,6 +641,39 @@ class AppInstallation
         return $clone;
     }
 
+    /**
+     * @param AppInstallationPortsItem[] $ports
+     */
+    public function withPorts(array $ports): self
+    {
+        $clone = clone $this;
+        $clone->ports = $ports;
+
+        return $clone;
+    }
+
+    public function withoutPorts(): self
+    {
+        $clone = clone $this;
+        unset($clone->ports);
+
+        return $clone;
+    }
+
+    public function withProjectDescription(string $projectDescription): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectDescription, self::$internalValidationSchema['properties']['projectDescription']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectDescription = $projectDescription;
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -589,6 +757,20 @@ class AppInstallation
         return $clone;
     }
 
+    public function withUpdateAvailable(bool $updateAvailable): self
+    {
+        $validator = new Validator();
+        $validator->validate($updateAvailable, self::$internalValidationSchema['properties']['updateAvailable']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->updateAvailable = $updateAvailable;
+
+        return $clone;
+    }
+
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -623,7 +805,9 @@ class AppInstallation
             static::validateInput($input);
         }
 
+        $appExternalVersion = $input->{'appExternalVersion'};
         $appId = $input->{'appId'};
+        $appName = $input->{'appName'};
         $appVersion = VersionStatus::buildFromInput($input->{'appVersion'}, validate: $validate);
         $createdAt = new DateTime($input->{'createdAt'});
         $customDocumentRoot = null;
@@ -639,6 +823,10 @@ class AppInstallation
         if (isset($input->{'disabled'})) {
             $disabled = (bool)($input->{'disabled'});
         }
+        $hostname = null;
+        if (isset($input->{'hostname'})) {
+            $hostname = $input->{'hostname'};
+        }
         $id = $input->{'id'};
         $installationPath = $input->{'installationPath'};
         $lastError = null;
@@ -651,6 +839,11 @@ class AppInstallation
             $lockedBy = (array)$input->{'lockedBy'};
         }
         $phase = Phase::from($input->{'phase'});
+        $ports = null;
+        if (isset($input->{'ports'})) {
+            $ports = array_map(fn (array|object $i): AppInstallationPortsItem => AppInstallationPortsItem::buildFromInput($i, validate: $validate), $input->{'ports'});
+        }
+        $projectDescription = $input->{'projectDescription'};
         $projectId = $input->{'projectId'};
         $screenshotId = null;
         if (isset($input->{'screenshotId'})) {
@@ -662,17 +855,24 @@ class AppInstallation
         }
         $shortId = $input->{'shortId'};
         $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+        $updateAvailable = false;
+        if (isset($input->{'updateAvailable'})) {
+            $updateAvailable = (bool)($input->{'updateAvailable'});
+        }
         $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
-        $obj = new self($appId, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
+        $obj = new self($appExternalVersion, $appId, $appName, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectDescription, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->deletionRequested = $deletionRequested;
         $obj->disabled = $disabled;
+        $obj->hostname = $hostname;
         $obj->lastError = $lastError;
         $obj->lockedBy = $lockedBy;
+        $obj->ports = $ports;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
+        $obj->updateAvailable = $updateAvailable;
         return $obj;
     }
 
@@ -684,7 +884,9 @@ class AppInstallation
     public function toJson(): array
     {
         $output = [];
+        $output['appExternalVersion'] = $this->appExternalVersion;
         $output['appId'] = $this->appId;
+        $output['appName'] = $this->appName;
         $output['appVersion'] = $this->appVersion->toJson();
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->customDocumentRoot)) {
@@ -693,6 +895,9 @@ class AppInstallation
         $output['deletionRequested'] = $this->deletionRequested;
         $output['description'] = $this->description;
         $output['disabled'] = $this->disabled;
+        if (isset($this->hostname)) {
+            $output['hostname'] = $this->hostname;
+        }
         $output['id'] = $this->id;
         $output['installationPath'] = $this->installationPath;
         if (isset($this->lastError)) {
@@ -703,6 +908,10 @@ class AppInstallation
             $output['lockedBy'] = $this->lockedBy;
         }
         $output['phase'] = $this->phase->value;
+        if (isset($this->ports)) {
+            $output['ports'] = array_map(fn (AppInstallationPortsItem $i) => $i->toJson(), $this->ports);
+        }
+        $output['projectDescription'] = $this->projectDescription;
         $output['projectId'] = $this->projectId;
         if (isset($this->screenshotId)) {
             $output['screenshotId'] = $this->screenshotId;
@@ -712,6 +921,7 @@ class AppInstallation
         }
         $output['shortId'] = $this->shortId;
         $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
+        $output['updateAvailable'] = $this->updateAvailable;
         $output['updatePolicy'] = $this->updatePolicy->value;
         $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
 
@@ -745,5 +955,8 @@ class AppInstallation
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        if (isset($this->ports)) {
+            $this->ports = array_map(fn (AppInstallationPortsItem $i) => clone $i, $this->ports);
+        }
     }
 }

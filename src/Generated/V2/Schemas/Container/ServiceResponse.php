@@ -55,6 +55,16 @@ class ServiceResponse
             'requiresRecreate' => [
                 'type' => 'boolean',
             ],
+            'restartPolicy' => [
+                'enum' => [
+                    'no',
+                    'always',
+                    'on-failure',
+                    'unless-stopped',
+                ],
+                'example' => 'always',
+                'type' => 'string',
+            ],
             'serviceName' => [
                 'example' => 'mysql-db',
                 'type' => 'string',
@@ -112,6 +122,8 @@ class ServiceResponse
     private string $projectId;
 
     private bool $requiresRecreate;
+
+    private ?ServiceResponseRestartPolicy $restartPolicy = null;
 
     private string $serviceName;
 
@@ -180,6 +192,11 @@ class ServiceResponse
     public function getRequiresRecreate(): bool
     {
         return $this->requiresRecreate;
+    }
+
+    public function getRestartPolicy(): ?ServiceResponseRestartPolicy
+    {
+        return $this->restartPolicy ?? null;
     }
 
     public function getServiceName(): string
@@ -317,6 +334,22 @@ class ServiceResponse
         return $clone;
     }
 
+    public function withRestartPolicy(ServiceResponseRestartPolicy $restartPolicy): self
+    {
+        $clone = clone $this;
+        $clone->restartPolicy = $restartPolicy;
+
+        return $clone;
+    }
+
+    public function withoutRestartPolicy(): self
+    {
+        $clone = clone $this;
+        unset($clone->restartPolicy);
+
+        return $clone;
+    }
+
     public function withServiceName(string $serviceName): self
     {
         $validator = new Validator();
@@ -404,6 +437,10 @@ class ServiceResponse
         $pendingState = ServiceState::buildFromInput($input->{'pendingState'}, validate: $validate);
         $projectId = $input->{'projectId'};
         $requiresRecreate = (bool)($input->{'requiresRecreate'});
+        $restartPolicy = null;
+        if (isset($input->{'restartPolicy'})) {
+            $restartPolicy = ServiceResponseRestartPolicy::from($input->{'restartPolicy'});
+        }
         $serviceName = $input->{'serviceName'};
         $shortId = $input->{'shortId'};
         $stackId = $input->{'stackId'};
@@ -413,6 +450,7 @@ class ServiceResponse
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
         $obj->deploy = $deploy;
         $obj->message = $message;
+        $obj->restartPolicy = $restartPolicy;
         return $obj;
     }
 
@@ -436,6 +474,9 @@ class ServiceResponse
         $output['pendingState'] = $this->pendingState->toJson();
         $output['projectId'] = $this->projectId;
         $output['requiresRecreate'] = $this->requiresRecreate;
+        if (isset($this->restartPolicy)) {
+            $output['restartPolicy'] = ($this->restartPolicy)->value;
+        }
         $output['serviceName'] = $this->serviceName;
         $output['shortId'] = $this->shortId;
         $output['stackId'] = $this->stackId;

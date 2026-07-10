@@ -31,9 +31,17 @@ class IngressIps
                 ],
                 'type' => 'array',
             ],
+            'v6' => [
+                'items' => [
+                    'format' => 'ipv6',
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
         ],
         'required' => [
             'v4',
+            'v6',
         ],
         'type' => 'object',
     ];
@@ -44,11 +52,18 @@ class IngressIps
     private array $v4;
 
     /**
-     * @param string[] $v4
+     * @var string[]
      */
-    public function __construct(array $v4)
+    private array $v6;
+
+    /**
+     * @param string[] $v4
+     * @param string[] $v6
+     */
+    public function __construct(array $v4, array $v6)
     {
         $this->v4 = $v4;
+        $this->v6 = $v6;
     }
 
     /**
@@ -57,6 +72,14 @@ class IngressIps
     public function getV4(): array
     {
         return $this->v4;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getV6(): array
+    {
+        return $this->v6;
     }
 
     /**
@@ -77,6 +100,23 @@ class IngressIps
     }
 
     /**
+     * @param string[] $v6
+     */
+    public function withV6(array $v6): self
+    {
+        $validator = new Validator();
+        $validator->validate($v6, self::$internalValidationSchema['properties']['v6']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->v6 = $v6;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -92,8 +132,9 @@ class IngressIps
         }
 
         $v4 = $input->{'v4'};
+        $v6 = $input->{'v6'};
 
-        $obj = new self($v4);
+        $obj = new self($v4, $v6);
 
         return $obj;
     }
@@ -107,6 +148,7 @@ class IngressIps
     {
         $output = [];
         $output['v4'] = $this->v4;
+        $output['v6'] = $this->v6;
 
         return $output;
     }

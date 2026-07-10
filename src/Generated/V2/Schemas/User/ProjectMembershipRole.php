@@ -9,4 +9,5 @@ enum ProjectMembershipRole: string
     case owner = 'owner';
     case emailadmin = 'emailadmin';
     case external = 'external';
+    case id = 'id';
 }

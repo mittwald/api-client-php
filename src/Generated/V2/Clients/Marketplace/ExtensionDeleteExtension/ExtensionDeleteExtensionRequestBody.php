@@ -15,7 +15,6 @@ class ExtensionDeleteExtensionRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'reason' => [
-                'example' => 'The deprecation phase of the extension has ended. The successor will now be the only usable version of this extension.',
                 'type' => 'string',
             ],
         ],

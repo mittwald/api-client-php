@@ -7,9 +7,12 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerCreateKey\CustomerCreateKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerCreateKey\CustomerCreateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerDeleteKey\CustomerDeleteKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysOKResponse;
@@ -23,12 +26,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsRequest
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDeleteKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKey\ProjectGetKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKey\ProjectGetKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKeys\ProjectGetKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKeys\ProjectGetKeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyRequest;
 
@@ -47,6 +53,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUp
  */
 interface AIHostingClient
 {
+    /**
+     * Accepts the model terms for a customer.
+     *
+     * Accept all model terms for a customer that are not already accepted. If there are no terms to accept, this endpoint will do nothing and return 204.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-accept-model-terms
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerAcceptModelTermsRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function customerAcceptModelTerms(CustomerAcceptModelTermsRequest $request): EmptyResponse;
     /**
      * Creates a new key.
      *
@@ -68,6 +86,16 @@ interface AIHostingClient
      * @return EmptyResponse OK
      */
     public function customerDeleteKey(CustomerDeleteKeyRequest $request): EmptyResponse;
+    /**
+     * Get a list of currently active models.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-detailed-models
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetDetailedModelsRequest $request An object representing the request for this operation
+     * @return CustomerGetDetailedModelsOKResponse List of currently active models.
+     */
+    public function customerGetDetailedModels(CustomerGetDetailedModelsRequest $request): CustomerGetDetailedModelsOKResponse;
     /**
      * Get a key of a customer.
      *
@@ -139,6 +167,16 @@ interface AIHostingClient
      */
     public function projectDeleteKey(ProjectDeleteKeyRequest $request): EmptyResponse;
     /**
+     * Get a list of currently active models.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-detailed-models
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectGetDetailedModelsRequest $request An object representing the request for this operation
+     * @return ProjectGetDetailedModelsOKResponse List of currently active models.
+     */
+    public function projectGetDetailedModels(ProjectGetDetailedModelsRequest $request): ProjectGetDetailedModelsOKResponse;
+    /**
      * Get a key of a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-key
@@ -168,6 +206,18 @@ interface AIHostingClient
      * @return ProjectGetUsageOKResponse The project usage and plan.
      */
     public function projectGetUsage(ProjectGetUsageRequest $request): ProjectGetUsageOKResponse;
+    /**
+     * Links a container with a project licence.
+     *
+     * Links a container with a project licence. This will emit a WebUiContainerLinkedEvent and update the licence with the container metadata.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-link-container
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectLinkContainerRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function projectLinkContainer(ProjectLinkContainerRequest $request): EmptyResponse;
     /**
      * Update a key for a project.
      *

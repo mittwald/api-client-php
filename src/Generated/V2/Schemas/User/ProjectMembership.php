@@ -29,6 +29,10 @@ class ProjectMembership
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'id' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'inherited' => [
                 'type' => 'boolean',
             ],
@@ -41,6 +45,7 @@ class ProjectMembership
                     'owner',
                     'emailadmin',
                     'external',
+                    'id',
                 ],
                 'type' => 'string',
             ],
@@ -54,6 +59,8 @@ class ProjectMembership
     ];
 
     private ?DateTime $expiresAt = null;
+
+    private ?string $id = null;
 
     private bool $inherited;
 
@@ -71,6 +78,11 @@ class ProjectMembership
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id ?? null;
     }
 
     public function getInherited(): bool
@@ -100,6 +112,28 @@ class ProjectMembership
     {
         $clone = clone $this;
         unset($clone->expiresAt);
+
+        return $clone;
+    }
+
+    public function withId(string $id): self
+    {
+        $validator = new Validator();
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withoutId(): self
+    {
+        $clone = clone $this;
+        unset($clone->id);
 
         return $clone;
     }
@@ -153,12 +187,17 @@ class ProjectMembership
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
+        $id = null;
+        if (isset($input->{'id'})) {
+            $id = $input->{'id'};
+        }
         $inherited = (bool)($input->{'inherited'});
         $memberSince = new DateTime($input->{'memberSince'});
         $role = ProjectMembershipRole::from($input->{'role'});
 
         $obj = new self($inherited, $memberSince, $role);
         $obj->expiresAt = $expiresAt;
+        $obj->id = $id;
         return $obj;
     }
 
@@ -172,6 +211,9 @@ class ProjectMembership
         $output = [];
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
+        }
+        if (isset($this->id)) {
+            $output['id'] = $this->id;
         }
         $output['inherited'] = $this->inherited;
         $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);

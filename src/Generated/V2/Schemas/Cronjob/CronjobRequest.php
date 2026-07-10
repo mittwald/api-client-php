@@ -29,11 +29,12 @@ class CronjobRequest
             ],
             'appId' => [
                 'deprecated' => true,
-                'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
+                'description' => 'DEPRECATED: Use \'target.AppInstallationTarget\' instead. This field will be removed in a future version.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
             'appInstallationId' => [
+                'description' => 'DEPRECATED: Use \'target.AppInstallationTarget\' instead. This field will be removed in a future version.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -45,6 +46,7 @@ class CronjobRequest
                 'type' => 'string',
             ],
             'destination' => [
+                'description' => 'DEPRECATED: Use \'target.AppInstallationTarget\' instead. This field will be removed in a future version.',
                 'oneOf' => [
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
@@ -59,12 +61,23 @@ class CronjobRequest
                 'type' => 'string',
             ],
             'failedExecutionAlertThreshold' => [
+                'maximum' => 80,
                 'minimum' => 1,
                 'type' => 'integer',
             ],
             'interval' => [
                 'example' => '*/5 * * * *',
                 'type' => 'string',
+            ],
+            'target' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget',
+                    ],
+                ],
             ],
             'timeZone' => [
                 'example' => 'Europe/Berlin',
@@ -77,9 +90,7 @@ class CronjobRequest
             ],
         ],
         'required' => [
-            'appId',
             'description',
-            'destination',
             'interval',
             'active',
             'timeout',
@@ -90,19 +101,25 @@ class CronjobRequest
     private bool $active;
 
     /**
-     * DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version.
+     * DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version.
      *
      * @deprecated
      */
-    private string $appId;
+    private ?string $appId = null;
 
+    /**
+     * DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version.
+     */
     private ?string $appInstallationId = null;
 
     private ?ConcurrencyPolicy $concurrencyPolicy = null;
 
     private string $description;
 
-    private CronjobCommand|CronjobUrl $destination;
+    /**
+     * DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version.
+     */
+    private CronjobCommand|CronjobUrl|null $destination = null;
 
     private ?string $email = null;
 
@@ -110,16 +127,16 @@ class CronjobRequest
 
     private string $interval;
 
+    private AppInstallationTarget|ServiceTarget|null $target = null;
+
     private ?string $timeZone = null;
 
     private int $timeout;
 
-    public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval, int $timeout)
+    public function __construct(bool $active, string $description, string $interval, int $timeout)
     {
         $this->active = $active;
-        $this->appId = $appId;
         $this->description = $description;
-        $this->destination = $destination;
         $this->interval = $interval;
         $this->timeout = $timeout;
     }
@@ -132,9 +149,9 @@ class CronjobRequest
     /**
      * @deprecated
      */
-    public function getAppId(): string
+    public function getAppId(): ?string
     {
-        return $this->appId;
+        return $this->appId ?? null;
     }
 
     public function getAppInstallationId(): ?string
@@ -152,7 +169,7 @@ class CronjobRequest
         return $this->description;
     }
 
-    public function getDestination(): CronjobCommand|CronjobUrl
+    public function getDestination(): CronjobCommand|CronjobUrl|null
     {
         return $this->destination;
     }
@@ -170,6 +187,11 @@ class CronjobRequest
     public function getInterval(): string
     {
         return $this->interval;
+    }
+
+    public function getTarget(): AppInstallationTarget|ServiceTarget|null
+    {
+        return $this->target;
     }
 
     public function getTimeZone(): ?string
@@ -209,6 +231,14 @@ class CronjobRequest
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withoutAppId(): self
+    {
+        $clone = clone $this;
+        unset($clone->appId);
 
         return $clone;
     }
@@ -273,6 +303,14 @@ class CronjobRequest
         return $clone;
     }
 
+    public function withoutDestination(): self
+    {
+        $clone = clone $this;
+        unset($clone->destination);
+
+        return $clone;
+    }
+
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -331,6 +369,22 @@ class CronjobRequest
         return $clone;
     }
 
+    public function withTarget(AppInstallationTarget|ServiceTarget $target): self
+    {
+        $clone = clone $this;
+        $clone->target = $target;
+
+        return $clone;
+    }
+
+    public function withoutTarget(): self
+    {
+        $clone = clone $this;
+        unset($clone->target);
+
+        return $clone;
+    }
+
     public function withTimeZone(string $timeZone): self
     {
         $validator = new Validator();
@@ -383,7 +437,10 @@ class CronjobRequest
         }
 
         $active = (bool)($input->{'active'});
-        $appId = $input->{'appId'};
+        $appId = null;
+        if (isset($input->{'appId'})) {
+            $appId = $input->{'appId'};
+        }
         $appInstallationId = null;
         if (isset($input->{'appInstallationId'})) {
             $appInstallationId = $input->{'appInstallationId'};
@@ -393,11 +450,14 @@ class CronjobRequest
             $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
         }
         $description = $input->{'description'};
-        $destination = match (true) {
-            CronjobUrl::validateInput($input->{'destination'}, true) => CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
-            CronjobCommand::validateInput($input->{'destination'}, true) => CronjobCommand::buildFromInput($input->{'destination'}, validate: $validate),
-            default => throw new InvalidArgumentException("could not build property 'destination' from JSON"),
-        };
+        $destination = null;
+        if (isset($input->{'destination'})) {
+            $destination = match (true) {
+                CronjobUrl::validateInput($input->{'destination'}, true) => CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
+                CronjobCommand::validateInput($input->{'destination'}, true) => CronjobCommand::buildFromInput($input->{'destination'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'destination' from JSON"),
+            };
+        }
         $email = null;
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
@@ -407,17 +467,28 @@ class CronjobRequest
             $failedExecutionAlertThreshold = (int)($input->{'failedExecutionAlertThreshold'});
         }
         $interval = $input->{'interval'};
+        $target = null;
+        if (isset($input->{'target'})) {
+            $target = match (true) {
+                AppInstallationTarget::validateInput($input->{'target'}, true) => AppInstallationTarget::buildFromInput($input->{'target'}, validate: $validate),
+                ServiceTarget::validateInput($input->{'target'}, true) => ServiceTarget::buildFromInput($input->{'target'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'target' from JSON"),
+            };
+        }
         $timeZone = null;
         if (isset($input->{'timeZone'})) {
             $timeZone = $input->{'timeZone'};
         }
         $timeout = (int)($input->{'timeout'});
 
-        $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
+        $obj = new self($active, $description, $interval, $timeout);
+        $obj->appId = $appId;
         $obj->appInstallationId = $appInstallationId;
         $obj->concurrencyPolicy = $concurrencyPolicy;
+        $obj->destination = $destination;
         $obj->email = $email;
         $obj->failedExecutionAlertThreshold = $failedExecutionAlertThreshold;
+        $obj->target = $target;
         $obj->timeZone = $timeZone;
         return $obj;
     }
@@ -431,7 +502,9 @@ class CronjobRequest
     {
         $output = [];
         $output['active'] = $this->active;
-        $output['appId'] = $this->appId;
+        if (isset($this->appId)) {
+            $output['appId'] = $this->appId;
+        }
         if (isset($this->appInstallationId)) {
             $output['appInstallationId'] = $this->appInstallationId;
         }
@@ -439,9 +512,11 @@ class CronjobRequest
             $output['concurrencyPolicy'] = $this->concurrencyPolicy->value;
         }
         $output['description'] = $this->description;
-        $output['destination'] = match (true) {
-            ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination->toJson(),
-        };
+        if (isset($this->destination)) {
+            $output['destination'] = match (true) {
+                ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination->toJson(),
+            };
+        }
         if (isset($this->email)) {
             $output['email'] = $this->email;
         }
@@ -449,6 +524,11 @@ class CronjobRequest
             $output['failedExecutionAlertThreshold'] = $this->failedExecutionAlertThreshold;
         }
         $output['interval'] = $this->interval;
+        if (isset($this->target)) {
+            $output['target'] = match (true) {
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ServiceTarget => $this->target->toJson(),
+            };
+        }
         if (isset($this->timeZone)) {
             $output['timeZone'] = $this->timeZone;
         }
@@ -483,8 +563,15 @@ class CronjobRequest
 
     public function __clone()
     {
-        $this->destination = match (true) {
-            ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination,
-        };
+        if (isset($this->destination)) {
+            $this->destination = match (true) {
+                ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination,
+            };
+        }
+        if (isset($this->target)) {
+            $this->target = match (true) {
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ServiceTarget => $this->target,
+            };
+        }
     }
 }
