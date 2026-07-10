@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUse
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallationSortOrder;
 
 class ListAppinstallationsForUserRequest
 {
@@ -27,9 +28,12 @@ class ListAppinstallationsForUserRequest
             'searchTerm' => [
                 'type' => 'string',
             ],
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.app.AppInstallationSortOrder',
+            ],
             'limit' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -37,7 +41,7 @@ class ListAppinstallationsForUserRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -51,6 +55,8 @@ class ListAppinstallationsForUserRequest
     private ?array $appIds = null;
 
     private ?string $searchTerm = null;
+
+    private ?AppInstallationSortOrder $sortOrder = null;
 
     private ?int $limit = null;
 
@@ -80,6 +86,11 @@ class ListAppinstallationsForUserRequest
     public function getSearchTerm(): ?string
     {
         return $this->searchTerm ?? null;
+    }
+
+    public function getSortOrder(): ?AppInstallationSortOrder
+    {
+        return $this->sortOrder ?? null;
     }
 
     public function getLimit(): ?int
@@ -140,6 +151,22 @@ class ListAppinstallationsForUserRequest
     {
         $clone = clone $this;
         unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withSortOrder(AppInstallationSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
 
         return $clone;
     }
@@ -225,6 +252,10 @@ class ListAppinstallationsForUserRequest
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = AppInstallationSortOrder::from($input->{'sortOrder'});
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -241,6 +272,7 @@ class ListAppinstallationsForUserRequest
         $obj = new self();
         $obj->appIds = $appIds;
         $obj->searchTerm = $searchTerm;
+        $obj->sortOrder = $sortOrder;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -260,6 +292,9 @@ class ListAppinstallationsForUserRequest
         }
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
         }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
@@ -333,6 +368,9 @@ class ListAppinstallationsForUserRequest
         }
         if (isset($mapped['searchTerm'])) {
             $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

@@ -54,6 +54,9 @@ class Key
             'name' => [
                 'type' => 'string',
             ],
+            'planId' => [
+                'type' => 'string',
+            ],
             'projectId' => [
                 'type' => 'string',
             ],
@@ -104,6 +107,8 @@ class Key
     private array $models;
 
     private string $name;
+
+    private ?string $planId = null;
 
     private ?string $projectId = null;
 
@@ -161,6 +166,11 @@ class Key
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPlanId(): ?string
+    {
+        return $this->planId ?? null;
     }
 
     public function getProjectId(): ?string
@@ -290,6 +300,28 @@ class Key
         return $clone;
     }
 
+    public function withPlanId(string $planId): self
+    {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planId = $planId;
+
+        return $clone;
+    }
+
+    public function withoutPlanId(): self
+    {
+        $clone = clone $this;
+        unset($clone->planId);
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -359,6 +391,10 @@ class Key
         $keyId = $input->{'keyId'};
         $models = $input->{'models'};
         $name = $input->{'name'};
+        $planId = null;
+        if (isset($input->{'planId'})) {
+            $planId = $input->{'planId'};
+        }
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
@@ -370,6 +406,7 @@ class Key
         $obj->containerMeta = $containerMeta;
         $obj->customerId = $customerId;
         $obj->isBlocked = $isBlocked;
+        $obj->planId = $planId;
         $obj->projectId = $projectId;
         return $obj;
     }
@@ -393,6 +430,9 @@ class Key
         $output['keyId'] = $this->keyId;
         $output['models'] = $this->models;
         $output['name'] = $this->name;
+        if (isset($this->planId)) {
+            $output['planId'] = $this->planId;
+        }
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }

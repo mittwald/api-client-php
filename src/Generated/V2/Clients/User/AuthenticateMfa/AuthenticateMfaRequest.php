@@ -17,6 +17,9 @@ class AuthenticateMfaRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'cookieOnly' => [
+                'type' => 'boolean',
+            ],
             'body' => [
                 'properties' => [
                     'email' => [
@@ -50,6 +53,8 @@ class AuthenticateMfaRequest
         ],
     ];
 
+    private ?bool $cookieOnly = null;
+
     private AuthenticateMfaRequestBody $body;
 
     private array $headers = [
@@ -61,9 +66,36 @@ class AuthenticateMfaRequest
         $this->body = $body;
     }
 
+    public function getCookieOnly(): ?bool
+    {
+        return $this->cookieOnly ?? null;
+    }
+
     public function getBody(): AuthenticateMfaRequestBody
     {
         return $this->body;
+    }
+
+    public function withCookieOnly(bool $cookieOnly): self
+    {
+        $validator = new Validator();
+        $validator->validate($cookieOnly, self::$internalValidationSchema['properties']['cookieOnly']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->cookieOnly = $cookieOnly;
+
+        return $clone;
+    }
+
+    public function withoutCookieOnly(): self
+    {
+        $clone = clone $this;
+        unset($clone->cookieOnly);
+
+        return $clone;
     }
 
     public function withBody(AuthenticateMfaRequestBody $body): self
@@ -89,10 +121,14 @@ class AuthenticateMfaRequest
             static::validateInput($input);
         }
 
+        $cookieOnly = null;
+        if (isset($input->{'cookieOnly'})) {
+            $cookieOnly = (bool)($input->{'cookieOnly'});
+        }
         $body = AuthenticateMfaRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
-
+        $obj->cookieOnly = $cookieOnly;
         return $obj;
     }
 
@@ -104,6 +140,9 @@ class AuthenticateMfaRequest
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->cookieOnly)) {
+            $output['cookieOnly'] = $this->cookieOnly;
+        }
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -166,6 +205,9 @@ class AuthenticateMfaRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['cookieOnly'])) {
+            $query['cookieOnly'] = $mapped['cookieOnly'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

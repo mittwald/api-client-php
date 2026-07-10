@@ -172,6 +172,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateR
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainForbiddenResponse;
@@ -234,6 +240,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\Ingre
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
@@ -247,6 +258,32 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsDefaultRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailNotFoundResponse;
@@ -1193,6 +1230,30 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Get a Contact-Verification.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-contact-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetContactVerificationRequest $request An object representing the request for this operation
+     * @return GetContactVerificationOKResponse OK
+     */
+    public function getContactVerification(GetContactVerificationRequest $request): GetContactVerificationOKResponse
+    {
+        $httpRequest = new Request(GetContactVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetContactVerificationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetContactVerificationBadRequestResponse::fromResponse($httpResponse),
+            404 => GetContactVerificationNotFoundResponse::fromResponse($httpResponse),
+            429 => GetContactVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetContactVerificationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain
@@ -1237,6 +1298,29 @@ class DomainClientImpl implements DomainClient
             404 => GetLatestScreenshotNotFoundResponse::fromResponse($httpResponse),
             429 => GetLatestScreenshotTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetLatestScreenshotDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Contact-Verifications belonging to the executing user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-contact-verifications
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListContactVerificationsRequest $request An object representing the request for this operation
+     * @return ListContactVerificationsOKResponse OK
+     */
+    public function listContactVerifications(ListContactVerificationsRequest $request): ListContactVerificationsOKResponse
+    {
+        $httpRequest = new Request(ListContactVerificationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListContactVerificationsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListContactVerificationsBadRequestResponse::fromResponse($httpResponse),
+            429 => ListContactVerificationsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ListContactVerificationsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1307,6 +1391,123 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ListTldsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListTldsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if a Domain-Migration from a pAccount into a Project is possible.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-check-migration-is-possible
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationCheckMigrationIsPossibleRequest $request An object representing the request for this operation
+     * @return MigrationCheckMigrationIsPossibleOKResponse OK
+     */
+    public function migrationCheckMigrationIsPossible(MigrationCheckMigrationIsPossibleRequest $request): MigrationCheckMigrationIsPossibleOKResponse
+    {
+        $httpRequest = new Request(MigrationCheckMigrationIsPossibleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationCheckMigrationIsPossibleOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationCheckMigrationIsPossibleBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationCheckMigrationIsPossibleTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationCheckMigrationIsPossibleDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Domain-Migrations belonging to a pAccount.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-list-migrations-by-p-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsByPAccountRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsByPAccountOKResponse OK
+     */
+    public function migrationListMigrationsByPAccount(MigrationListMigrationsByPAccountRequest $request): MigrationListMigrationsByPAccountOKResponse
+    {
+        $httpRequest = new Request(MigrationListMigrationsByPAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationListMigrationsByPAccountOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationListMigrationsByPAccountBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationListMigrationsByPAccountTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationListMigrationsByPAccountDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Domain-Migrations belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-list-migrations-by-project-id
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsByProjectIdRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsByProjectIdOKResponse OK
+     */
+    public function migrationListMigrationsByProjectId(MigrationListMigrationsByProjectIdRequest $request): MigrationListMigrationsByProjectIdOKResponse
+    {
+        $httpRequest = new Request(MigrationListMigrationsByProjectIdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationListMigrationsByProjectIdOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationListMigrationsByProjectIdBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationListMigrationsByProjectIdTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationListMigrationsByProjectIdDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Order a Domain-Migration from a pAccount into a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-order-domain-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationOrderDomainMigrationRequest $request An object representing the request for this operation
+     * @return MigrationOrderDomainMigrationCreatedResponse The ID of the created Domain-Migration.
+     */
+    public function migrationOrderDomainMigration(MigrationOrderDomainMigrationRequest $request): MigrationOrderDomainMigrationCreatedResponse
+    {
+        $httpRequest = new Request(MigrationOrderDomainMigrationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return MigrationOrderDomainMigrationCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationOrderDomainMigrationBadRequestResponse::fromResponse($httpResponse),
+            412 => MigrationOrderDomainMigrationPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => MigrationOrderDomainMigrationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationOrderDomainMigrationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Resends a Contact-Verification email.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-contact-verification-email
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ResendContactVerificationEmailRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function resendContactVerificationEmail(ResendContactVerificationEmailRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ResendContactVerificationEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ResendContactVerificationEmailBadRequestResponse::fromResponse($httpResponse),
+            412 => ResendContactVerificationEmailPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ResendContactVerificationEmailTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ResendContactVerificationEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
 

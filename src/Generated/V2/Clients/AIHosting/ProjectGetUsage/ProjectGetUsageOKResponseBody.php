@@ -19,6 +19,9 @@ class ProjectGetUsageOKResponseBody
             'keys' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
             ],
+            'modelTermsApprovalRequired' => [
+                'type' => 'boolean',
+            ],
             'nextTokenReset' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -30,25 +33,34 @@ class ProjectGetUsageOKResponseBody
         'required' => [
             'keys',
             'projectId',
+            'modelTermsApprovalRequired',
         ],
         'type' => 'object',
     ];
 
     private PlanUsage $keys;
 
+    private bool $modelTermsApprovalRequired;
+
     private ?DateTime $nextTokenReset = null;
 
     private string $projectId;
 
-    public function __construct(PlanUsage $keys, string $projectId)
+    public function __construct(PlanUsage $keys, bool $modelTermsApprovalRequired, string $projectId)
     {
         $this->keys = $keys;
+        $this->modelTermsApprovalRequired = $modelTermsApprovalRequired;
         $this->projectId = $projectId;
     }
 
     public function getKeys(): PlanUsage
     {
         return $this->keys;
+    }
+
+    public function getModelTermsApprovalRequired(): bool
+    {
+        return $this->modelTermsApprovalRequired;
     }
 
     public function getNextTokenReset(): ?DateTime
@@ -65,6 +77,20 @@ class ProjectGetUsageOKResponseBody
     {
         $clone = clone $this;
         $clone->keys = $keys;
+
+        return $clone;
+    }
+
+    public function withModelTermsApprovalRequired(bool $modelTermsApprovalRequired): self
+    {
+        $validator = new Validator();
+        $validator->validate($modelTermsApprovalRequired, self::$internalValidationSchema['properties']['modelTermsApprovalRequired']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->modelTermsApprovalRequired = $modelTermsApprovalRequired;
 
         return $clone;
     }
@@ -115,13 +141,14 @@ class ProjectGetUsageOKResponseBody
         }
 
         $keys = PlanUsage::buildFromInput($input->{'keys'}, validate: $validate);
+        $modelTermsApprovalRequired = (bool)($input->{'modelTermsApprovalRequired'});
         $nextTokenReset = null;
         if (isset($input->{'nextTokenReset'})) {
             $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         }
         $projectId = $input->{'projectId'};
 
-        $obj = new self($keys, $projectId);
+        $obj = new self($keys, $modelTermsApprovalRequired, $projectId);
         $obj->nextTokenReset = $nextTokenReset;
         return $obj;
     }
@@ -135,6 +162,7 @@ class ProjectGetUsageOKResponseBody
     {
         $output = [];
         $output['keys'] = $this->keys->toJson();
+        $output['modelTermsApprovalRequired'] = $this->modelTermsApprovalRequired;
         if (isset($this->nextTokenReset)) {
             $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         }

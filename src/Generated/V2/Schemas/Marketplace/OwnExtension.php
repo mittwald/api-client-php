@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Marketplace;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -41,6 +42,10 @@ class OwnExtension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
             ],
             'contributorId' => [
+                'type' => 'string',
+            ],
+            'deletionDeadline' => [
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'deprecation' => [
@@ -81,6 +86,9 @@ class OwnExtension
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'isDeletionScheduled' => [
+                'type' => 'boolean',
             ],
             'logoRefId' => [
                 'description' => 'This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.',
@@ -227,6 +235,8 @@ class OwnExtension
 
     private string $contributorId;
 
+    private ?DateTime $deletionDeadline = null;
+
     private ?ExtensionDeprecation $deprecation = null;
 
     private ?string $description = null;
@@ -257,6 +267,8 @@ class OwnExtension
     private bool $functional;
 
     private string $id;
+
+    private ?bool $isDeletionScheduled = null;
 
     /**
      * This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.
@@ -359,6 +371,11 @@ class OwnExtension
         return $this->contributorId;
     }
 
+    public function getDeletionDeadline(): ?DateTime
+    {
+        return $this->deletionDeadline ?? null;
+    }
+
     public function getDeprecation(): ?ExtensionDeprecation
     {
         return $this->deprecation ?? null;
@@ -415,6 +432,11 @@ class OwnExtension
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getIsDeletionScheduled(): ?bool
+    {
+        return $this->isDeletionScheduled ?? null;
     }
 
     public function getLogoRefId(): ?string
@@ -594,6 +616,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withDeletionDeadline(DateTime $deletionDeadline): self
+    {
+        $clone = clone $this;
+        $clone->deletionDeadline = $deletionDeadline;
+
+        return $clone;
+    }
+
+    public function withoutDeletionDeadline(): self
+    {
+        $clone = clone $this;
+        unset($clone->deletionDeadline);
+
+        return $clone;
+    }
+
     public function withDeprecation(ExtensionDeprecation $deprecation): self
     {
         $clone = clone $this;
@@ -761,6 +799,28 @@ class OwnExtension
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withIsDeletionScheduled(bool $isDeletionScheduled): self
+    {
+        $validator = new Validator();
+        $validator->validate($isDeletionScheduled, self::$internalValidationSchema['properties']['isDeletionScheduled']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isDeletionScheduled = $isDeletionScheduled;
+
+        return $clone;
+    }
+
+    public function withoutIsDeletionScheduled(): self
+    {
+        $clone = clone $this;
+        unset($clone->isDeletionScheduled);
 
         return $clone;
     }
@@ -1059,6 +1119,10 @@ class OwnExtension
             $context = Context::from($input->{'context'});
         }
         $contributorId = $input->{'contributorId'};
+        $deletionDeadline = null;
+        if (isset($input->{'deletionDeadline'})) {
+            $deletionDeadline = new DateTime($input->{'deletionDeadline'});
+        }
         $deprecation = null;
         if (isset($input->{'deprecation'})) {
             $deprecation = ExtensionDeprecation::buildFromInput($input->{'deprecation'}, validate: $validate);
@@ -1089,6 +1153,10 @@ class OwnExtension
         }
         $functional = (bool)($input->{'functional'});
         $id = $input->{'id'};
+        $isDeletionScheduled = null;
+        if (isset($input->{'isDeletionScheduled'})) {
+            $isDeletionScheduled = (bool)($input->{'isDeletionScheduled'});
+        }
         $logoRefId = null;
         if (isset($input->{'logoRefId'})) {
             $logoRefId = $input->{'logoRefId'};
@@ -1143,6 +1211,7 @@ class OwnExtension
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
+        $obj->deletionDeadline = $deletionDeadline;
         $obj->deprecation = $deprecation;
         $obj->description = $description;
         $obj->detailedDescriptions = $detailedDescriptions;
@@ -1150,6 +1219,7 @@ class OwnExtension
         $obj->externalFrontends = $externalFrontends;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
+        $obj->isDeletionScheduled = $isDeletionScheduled;
         $obj->logoRefId = $logoRefId;
         $obj->pricing = $pricing;
         $obj->pricingDetails = $pricingDetails;
@@ -1182,6 +1252,9 @@ class OwnExtension
             $output['context'] = $this->context->value;
         }
         $output['contributorId'] = $this->contributorId;
+        if (isset($this->deletionDeadline)) {
+            $output['deletionDeadline'] = ($this->deletionDeadline)->format(DateTime::ATOM);
+        }
         if (isset($this->deprecation)) {
             $output['deprecation'] = $this->deprecation->toJson();
         }
@@ -1205,6 +1278,9 @@ class OwnExtension
         }
         $output['functional'] = $this->functional;
         $output['id'] = $this->id;
+        if (isset($this->isDeletionScheduled)) {
+            $output['isDeletionScheduled'] = $this->isDeletionScheduled;
+        }
         if (isset($this->logoRefId)) {
             $output['logoRefId'] = $this->logoRefId;
         }
@@ -1273,6 +1349,9 @@ class OwnExtension
 
     public function __clone()
     {
+        if (isset($this->deletionDeadline)) {
+            $this->deletionDeadline = clone $this->deletionDeadline;
+        }
         if (isset($this->pricing)) {
             $this->pricing = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => $this->pricing,

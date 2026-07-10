@@ -103,6 +103,10 @@ The appropriate registry is matched by hostname.
                 ],
                 'type' => 'array',
             ],
+            'restartPolicy' => [
+                'example' => 'always',
+                'type' => 'string',
+            ],
             'volumes' => [
                 'description' => 'Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
 ',
@@ -177,6 +181,8 @@ The appropriate registry is matched by hostname.
      */
     private ?array $ports = null;
 
+    private ?string $restartPolicy = null;
+
     /**
      * Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
      *
@@ -244,6 +250,11 @@ The appropriate registry is matched by hostname.
     public function getPorts(): ?array
     {
         return $this->ports ?? null;
+    }
+
+    public function getRestartPolicy(): ?string
+    {
+        return $this->restartPolicy ?? null;
     }
 
     /**
@@ -432,6 +443,28 @@ The appropriate registry is matched by hostname.
         return $clone;
     }
 
+    public function withRestartPolicy(string $restartPolicy): self
+    {
+        $validator = new Validator();
+        $validator->validate($restartPolicy, self::$internalValidationSchema['properties']['restartPolicy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->restartPolicy = $restartPolicy;
+
+        return $clone;
+    }
+
+    public function withoutRestartPolicy(): self
+    {
+        $clone = clone $this;
+        unset($clone->restartPolicy);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $volumes
      */
@@ -501,6 +534,10 @@ The appropriate registry is matched by hostname.
         if (isset($input->{'ports'})) {
             $ports = $input->{'ports'};
         }
+        $restartPolicy = null;
+        if (isset($input->{'restartPolicy'})) {
+            $restartPolicy = $input->{'restartPolicy'};
+        }
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = $input->{'volumes'};
@@ -514,6 +551,7 @@ The appropriate registry is matched by hostname.
         $obj->environment = $environment;
         $obj->envs = $envs;
         $obj->ports = $ports;
+        $obj->restartPolicy = $restartPolicy;
         $obj->volumes = $volumes;
         return $obj;
     }
@@ -547,6 +585,9 @@ The appropriate registry is matched by hostname.
         $output['image'] = $this->image;
         if (isset($this->ports)) {
             $output['ports'] = $this->ports;
+        }
+        if (isset($this->restartPolicy)) {
+            $output['restartPolicy'] = $this->restartPolicy;
         }
         if (isset($this->volumes)) {
             $output['volumes'] = $this->volumes;

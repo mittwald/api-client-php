@@ -10,6 +10,7 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileInternalServerErrorResponse;
@@ -168,6 +169,7 @@ class FileClientImpl implements FileClient
             400 => CreateFileBadRequestResponse::fromResponse($httpResponse),
             401 => CreateFileUnauthorizedResponse::fromResponse($httpResponse),
             406 => CreateFileNotAcceptableResponse::fromResponse($httpResponse),
+            409 => CreateFileConflictResponse::fromResponse($httpResponse),
             422 => CreateFileUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => CreateFileTooManyRequestsResponse::fromResponse($httpResponse),
             500 => CreateFileInternalServerErrorResponse::fromResponse($httpResponse),

@@ -135,6 +135,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOK
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailRateLimit\GetMailRateLimitTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressForbiddenResponse;
@@ -170,6 +175,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMa
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddressesForUser\ListMailAddressesForUserTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailRateLimits\ListMailRateLimitsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsForbiddenResponse;
@@ -204,6 +213,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\Recove
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RequestMailAddressRateLimitChange\RequestMailAddressRateLimitChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionForbiddenResponse;
@@ -831,6 +848,29 @@ class MailClientImpl implements MailClient
     }
 
     /**
+     * Get a Mail RateLimit.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-rate-limit
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMailRateLimitRequest $request An object representing the request for this operation
+     * @return GetMailRateLimitOKResponse OK
+     */
+    public function getMailRateLimit(GetMailRateLimitRequest $request): GetMailRateLimitOKResponse
+    {
+        $httpRequest = new Request(GetMailRateLimitRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetMailRateLimitOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetMailRateLimitNotFoundResponse::fromResponse($httpResponse),
+            429 => GetMailRateLimitTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetMailRateLimitDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List backups belonging to a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-backups-for-mail-address
@@ -934,6 +974,28 @@ class MailClientImpl implements MailClient
             500 => ListMailAddressesForUserInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListMailAddressesForUserServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListMailAddressesForUserDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Mail RateLimits.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-rate-limits
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailRateLimitsRequest $request An object representing the request for this operation
+     * @return ListMailRateLimitsOKResponse OK
+     */
+    public function listMailRateLimits(ListMailRateLimitsRequest $request): ListMailRateLimitsOKResponse
+    {
+        $httpRequest = new Request(ListMailRateLimitsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListMailRateLimitsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListMailRateLimitsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ListMailRateLimitsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1082,6 +1144,33 @@ class MailClientImpl implements MailClient
             404 => RecoverMailAddressEmailsNotFoundResponse::fromResponse($httpResponse),
             429 => RecoverMailAddressEmailsTooManyRequestsResponse::fromResponse($httpResponse),
             default => RecoverMailAddressEmailsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Request a rate limit change for a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-request-mail-address-rate-limit-change
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestMailAddressRateLimitChangeRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function requestMailAddressRateLimitChange(RequestMailAddressRateLimitChangeRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(RequestMailAddressRateLimitChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RequestMailAddressRateLimitChangeBadRequestResponse::fromResponse($httpResponse),
+            403 => RequestMailAddressRateLimitChangeForbiddenResponse::fromResponse($httpResponse),
+            404 => RequestMailAddressRateLimitChangeNotFoundResponse::fromResponse($httpResponse),
+            429 => RequestMailAddressRateLimitChangeTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => RequestMailAddressRateLimitChangeInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => RequestMailAddressRateLimitChangeServiceUnavailableResponse::fromResponse($httpResponse),
+            default => RequestMailAddressRateLimitChangeDefaultResponse::fromResponse($httpResponse),
         });
     }
 

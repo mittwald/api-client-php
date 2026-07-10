@@ -42,6 +42,7 @@ class ReadableArticle
                 'type' => 'array',
             ],
             'balanceAddonKey' => [
+                'deprecated' => true,
                 'example' => 'inclusive_domains',
                 'type' => 'string',
             ],
@@ -56,23 +57,28 @@ class ReadableArticle
                 'type' => 'string',
             ],
             'forcedInvoicingPeriodInMonth' => [
+                'description' => 'If set, the Article will always be invoiced for the given months.',
                 'example' => 0,
                 'minimum' => 0,
                 'type' => 'number',
             ],
             'hasIndependentContractPeriod' => [
+                'description' => 'Article has a contract period which is not dependent on the Contract Base Item.',
                 'type' => 'boolean',
             ],
             'hideOnInvoice' => [
+                'description' => 'Free Article that is not showing on Invoices.',
                 'type' => 'boolean',
             ],
             'machineType' => [
+                'description' => 'Resources for hosting Articles.',
                 'properties' => [
                     'cpu' => [
                         'example' => '1',
                         'type' => 'string',
                     ],
                     'memory' => [
+                        'description' => 'Memory in GiB',
                         'example' => '10',
                         'type' => 'string',
                     ],
@@ -117,6 +123,7 @@ class ReadableArticle
                 'type' => 'array',
             ],
             'price' => [
+                'description' => 'Monthly price in Eurocent',
                 'example' => 1000,
                 'type' => 'number',
             ],
@@ -152,18 +159,33 @@ class ReadableArticle
      */
     private ?array $attributes = null;
 
+    /**
+     * @deprecated
+     */
     private ?string $balanceAddonKey = null;
 
     private int|float $contractDurationInMonth;
 
     private ?string $description = null;
 
+    /**
+     * If set, the Article will always be invoiced for the given months.
+     */
     private int|float|null $forcedInvoicingPeriodInMonth = null;
 
+    /**
+     * Article has a contract period which is not dependent on the Contract Base Item.
+     */
     private ?bool $hasIndependentContractPeriod = null;
 
+    /**
+     * Free Article that is not showing on Invoices.
+     */
     private ?bool $hideOnInvoice = null;
 
+    /**
+     * Resources for hosting Articles.
+     */
     private ?ReadableArticleMachineType $machineType = null;
 
     /**
@@ -183,6 +205,9 @@ class ReadableArticle
      */
     private ?array $possibleArticleChanges = null;
 
+    /**
+     * Monthly price in Eurocent
+     */
     private int|float|null $price = null;
 
     /**
@@ -222,6 +247,9 @@ class ReadableArticle
         return $this->attributes ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getBalanceAddonKey(): ?string
     {
         return $this->balanceAddonKey ?? null;
@@ -353,6 +381,9 @@ class ReadableArticle
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withBalanceAddonKey(string $balanceAddonKey): self
     {
         $validator = new Validator();

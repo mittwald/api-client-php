@@ -17,6 +17,9 @@ class RequestAppinstallationCopyRequestBody
             'description' => [
                 'type' => 'string',
             ],
+            'domain' => [
+                'type' => 'string',
+            ],
             'installationPath' => [
                 'type' => 'string',
             ],
@@ -33,6 +36,8 @@ class RequestAppinstallationCopyRequestBody
 
     private string $description;
 
+    private ?string $domain = null;
+
     private ?string $installationPath = null;
 
     private ?string $targetProjectId = null;
@@ -45,6 +50,11 @@ class RequestAppinstallationCopyRequestBody
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getDomain(): ?string
+    {
+        return $this->domain ?? null;
     }
 
     public function getInstallationPath(): ?string
@@ -67,6 +77,28 @@ class RequestAppinstallationCopyRequestBody
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withDomain(string $domain): self
+    {
+        $validator = new Validator();
+        $validator->validate($domain, self::$internalValidationSchema['properties']['domain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->domain = $domain;
+
+        return $clone;
+    }
+
+    public function withoutDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->domain);
 
         return $clone;
     }
@@ -131,6 +163,10 @@ class RequestAppinstallationCopyRequestBody
         }
 
         $description = $input->{'description'};
+        $domain = null;
+        if (isset($input->{'domain'})) {
+            $domain = $input->{'domain'};
+        }
         $installationPath = null;
         if (isset($input->{'installationPath'})) {
             $installationPath = $input->{'installationPath'};
@@ -141,6 +177,7 @@ class RequestAppinstallationCopyRequestBody
         }
 
         $obj = new self($description);
+        $obj->domain = $domain;
         $obj->installationPath = $installationPath;
         $obj->targetProjectId = $targetProjectId;
         return $obj;
@@ -155,6 +192,9 @@ class RequestAppinstallationCopyRequestBody
     {
         $output = [];
         $output['description'] = $this->description;
+        if (isset($this->domain)) {
+            $output['domain'] = $this->domain;
+        }
         if (isset($this->installationPath)) {
             $output['installationPath'] = $this->installationPath;
         }

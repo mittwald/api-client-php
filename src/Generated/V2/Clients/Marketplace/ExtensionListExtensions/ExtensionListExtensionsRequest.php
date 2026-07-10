@@ -27,10 +27,16 @@ class ExtensionListExtensionsRequest
             'includeDeprecated' => [
                 'type' => 'boolean',
             ],
+            'includeFree' => [
+                'type' => 'boolean',
+            ],
+            'includeChargeable' => [
+                'type' => 'boolean',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -38,12 +44,13 @@ class ExtensionListExtensionsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'sort' => [
                 'type' => 'string',
                 'enum' => [
                     'name',
+                    'pricing.priceInCents',
                 ],
                 'default' => 'name',
             ],
@@ -66,6 +73,10 @@ class ExtensionListExtensionsRequest
     private ?string $searchTerm = null;
 
     private ?bool $includeDeprecated = null;
+
+    private ?bool $includeFree = null;
+
+    private ?bool $includeChargeable = null;
 
     private int $limit = 1000;
 
@@ -101,6 +112,16 @@ class ExtensionListExtensionsRequest
     public function getIncludeDeprecated(): ?bool
     {
         return $this->includeDeprecated ?? null;
+    }
+
+    public function getIncludeFree(): ?bool
+    {
+        return $this->includeFree ?? null;
+    }
+
+    public function getIncludeChargeable(): ?bool
+    {
+        return $this->includeChargeable ?? null;
     }
 
     public function getLimit(): int
@@ -184,6 +205,50 @@ class ExtensionListExtensionsRequest
     {
         $clone = clone $this;
         unset($clone->includeDeprecated);
+
+        return $clone;
+    }
+
+    public function withIncludeFree(bool $includeFree): self
+    {
+        $validator = new Validator();
+        $validator->validate($includeFree, self::$internalValidationSchema['properties']['includeFree']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->includeFree = $includeFree;
+
+        return $clone;
+    }
+
+    public function withoutIncludeFree(): self
+    {
+        $clone = clone $this;
+        unset($clone->includeFree);
+
+        return $clone;
+    }
+
+    public function withIncludeChargeable(bool $includeChargeable): self
+    {
+        $validator = new Validator();
+        $validator->validate($includeChargeable, self::$internalValidationSchema['properties']['includeChargeable']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->includeChargeable = $includeChargeable;
+
+        return $clone;
+    }
+
+    public function withoutIncludeChargeable(): self
+    {
+        $clone = clone $this;
+        unset($clone->includeChargeable);
 
         return $clone;
     }
@@ -281,6 +346,14 @@ class ExtensionListExtensionsRequest
         if (isset($input->{'includeDeprecated'})) {
             $includeDeprecated = (bool)($input->{'includeDeprecated'});
         }
+        $includeFree = null;
+        if (isset($input->{'includeFree'})) {
+            $includeFree = (bool)($input->{'includeFree'});
+        }
+        $includeChargeable = null;
+        if (isset($input->{'includeChargeable'})) {
+            $includeChargeable = (bool)($input->{'includeChargeable'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -306,6 +379,8 @@ class ExtensionListExtensionsRequest
         $obj->context = $context;
         $obj->searchTerm = $searchTerm;
         $obj->includeDeprecated = $includeDeprecated;
+        $obj->includeFree = $includeFree;
+        $obj->includeChargeable = $includeChargeable;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -330,6 +405,12 @@ class ExtensionListExtensionsRequest
         }
         if (isset($this->includeDeprecated)) {
             $output['includeDeprecated'] = $this->includeDeprecated;
+        }
+        if (isset($this->includeFree)) {
+            $output['includeFree'] = $this->includeFree;
+        }
+        if (isset($this->includeChargeable)) {
+            $output['includeChargeable'] = $this->includeChargeable;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -406,6 +487,12 @@ class ExtensionListExtensionsRequest
         }
         if (isset($mapped['includeDeprecated'])) {
             $query['includeDeprecated'] = $mapped['includeDeprecated'];
+        }
+        if (isset($mapped['includeFree'])) {
+            $query['includeFree'] = $mapped['includeFree'];
+        }
+        if (isset($mapped['includeChargeable'])) {
+            $query['includeChargeable'] = $mapped['includeChargeable'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

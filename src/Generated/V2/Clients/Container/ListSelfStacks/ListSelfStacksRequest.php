@@ -17,10 +17,13 @@ class ListSelfStacksRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
+            'searchTerm' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -28,13 +31,15 @@ class ListSelfStacksRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
 
         ],
     ];
+
+    private ?string $searchTerm = null;
 
     private int $limit = 1000;
 
@@ -53,6 +58,11 @@ class ListSelfStacksRequest
     {
     }
 
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
@@ -66,6 +76,28 @@ class ListSelfStacksRequest
     public function getPage(): ?int
     {
         return $this->page ?? null;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
     }
 
     public function withLimit(int $limit): self
@@ -133,6 +165,10 @@ class ListSelfStacksRequest
             static::validateInput($input);
         }
 
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -147,6 +183,7 @@ class ListSelfStacksRequest
         }
 
         $obj = new self();
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -161,6 +198,9 @@ class ListSelfStacksRequest
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
@@ -226,6 +266,9 @@ class ListSelfStacksRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

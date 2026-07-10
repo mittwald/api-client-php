@@ -28,6 +28,46 @@ class ContributorListContractPartnersOfContributorRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
+            'sort' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'createdAt',
+                        'extensionId',
+                        'parentCustomerId',
+                        'contractPartner.company',
+                    ],
+                ],
+                'default' => [
+                    'createdAt',
+                ],
+            ],
+            'order' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'asc',
+                        'desc',
+                    ],
+                ],
+                'default' => [
+                    'asc',
+                ],
+            ],
         ],
         'required' => [
             'contributorId',
@@ -39,6 +79,26 @@ class ContributorListContractPartnersOfContributorRequest
     private ?string $extensionId = null;
 
     private ?string $extensionInstanceId = null;
+
+    private ?int $limit = null;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
+
+    /**
+     * @var string[]
+     */
+    private array $sort = [
+        'createdAt',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private array $order = [
+        'asc',
+    ];
 
     private array $headers = [
 
@@ -62,6 +122,37 @@ class ContributorListContractPartnersOfContributorRequest
     public function getExtensionInstanceId(): ?string
     {
         return $this->extensionInstanceId ?? null;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->limit ?? null;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSort(): array
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOrder(): array
+    {
+        return $this->order;
     }
 
     public function withContributorId(string $contributorId): self
@@ -122,6 +213,98 @@ class ContributorListContractPartnersOfContributorRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $sort
+     */
+    public function withSort(array $sort): self
+    {
+        $validator = new Validator();
+        $validator->validate($sort, self::$internalValidationSchema['properties']['sort']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $order
+     */
+    public function withOrder(array $order): self
+    {
+        $validator = new Validator();
+        $validator->validate($order, self::$internalValidationSchema['properties']['order']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -146,10 +329,39 @@ class ContributorListContractPartnersOfContributorRequest
         if (isset($input->{'extensionInstanceId'})) {
             $extensionInstanceId = $input->{'extensionInstanceId'};
         }
+        $limit = null;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
+        $sort = [
+                'createdAt',
+            ];
+        if (isset($input->{'sort'})) {
+            $sort = $input->{'sort'};
+        }
+        $order = [
+                'asc',
+            ];
+        if (isset($input->{'order'})) {
+            $order = $input->{'order'};
+        }
 
         $obj = new self($contributorId);
         $obj->extensionId = $extensionId;
         $obj->extensionInstanceId = $extensionInstanceId;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -168,6 +380,15 @@ class ContributorListContractPartnersOfContributorRequest
         if (isset($this->extensionInstanceId)) {
             $output['extensionInstanceId'] = $this->extensionInstanceId;
         }
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
+        $output['sort'] = $this->sort;
+        $output['order'] = $this->order;
 
         return $output;
     }
@@ -234,6 +455,21 @@ class ContributorListContractPartnersOfContributorRequest
         }
         if (isset($mapped['extensionInstanceId'])) {
             $query['extensionInstanceId'] = $mapped['extensionInstanceId'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

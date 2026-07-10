@@ -16,6 +16,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerific
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorCancelVerification\ContributorCancelVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeBadRequestResponse;
@@ -253,6 +254,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExten
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListAllExtensionInstanceWebhookExecutions\ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsRequest;
@@ -412,7 +417,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ContributorDeleteContributorNotFoundResponse::fromResponse($httpResponse),
-            412 => new EmptyResponse($httpResponse),
+            412 => ContributorDeleteContributorPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ContributorDeleteContributorTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorDeleteContributorDefaultResponse::fromResponse($httpResponse),
         });
@@ -993,15 +998,15 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Delete an extension.
+     * Delete an Extension.
      *
-     * Remove the Extension. Make sure that there are no instances for this extension
+     * Start the deletion period of the Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The extension will be removed asynchronously
+     * @return EmptyResponse The Extension will be removed in 60 days. All ExtensionInstances will remain at least 30 Days.
      */
     public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse
     {
@@ -1416,6 +1421,28 @@ class MarketplaceClientImpl implements MarketplaceClient
             412 => ExtensionInvalidateExtensionSecretPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionInvalidateExtensionSecretTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionInvalidateExtensionSecretDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List all Webhook Executions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-list-all-extension-instance-webhook-executions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionListAllExtensionInstanceWebhookExecutionsRequest $request An object representing the request for this operation
+     * @return ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse A list of webhook executions.
+     */
+    public function extensionListAllExtensionInstanceWebhookExecutions(ExtensionListAllExtensionInstanceWebhookExecutionsRequest $request): ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse
+    {
+        $httpRequest = new Request(ExtensionListAllExtensionInstanceWebhookExecutionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionListAllExtensionInstanceWebhookExecutionsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ExtensionListAllExtensionInstanceWebhookExecutionsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionListAllExtensionInstanceWebhookExecutionsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

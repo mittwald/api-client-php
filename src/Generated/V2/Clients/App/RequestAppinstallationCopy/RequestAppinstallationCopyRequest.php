@@ -26,6 +26,9 @@ class RequestAppinstallationCopyRequest
                     'description' => [
                         'type' => 'string',
                     ],
+                    'domain' => [
+                        'type' => 'string',
+                    ],
                     'installationPath' => [
                         'type' => 'string',
                     ],

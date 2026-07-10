@@ -34,15 +34,7 @@ class PatchAppinstallationRequest
                     ],
                     'systemSoftware' => [
                         'additionalProperties' => [
-                            'properties' => [
-                                'systemSoftwareVersion' => [
-                                    'type' => 'string',
-                                ],
-                                'updatePolicy' => [
-                                    '$ref' => '#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy',
-                                ],
-                            ],
-                            'type' => 'object',
+                            '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
                         ],
                         'type' => 'object',
                     ],

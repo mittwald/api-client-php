@@ -24,78 +24,26 @@ class MailsystemSettings
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'imapClusterId' => [
-                'type' => 'string',
-            ],
-            'mailDirectory' => [
-                'type' => 'string',
-            ],
             'rateLimitId' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'imapClusterId',
-            'mailDirectory',
             'rateLimitId',
         ],
         'type' => 'object',
     ];
 
-    private string $imapClusterId;
-
-    private string $mailDirectory;
-
     private string $rateLimitId;
 
-    public function __construct(string $imapClusterId, string $mailDirectory, string $rateLimitId)
+    public function __construct(string $rateLimitId)
     {
-        $this->imapClusterId = $imapClusterId;
-        $this->mailDirectory = $mailDirectory;
         $this->rateLimitId = $rateLimitId;
-    }
-
-    public function getImapClusterId(): string
-    {
-        return $this->imapClusterId;
-    }
-
-    public function getMailDirectory(): string
-    {
-        return $this->mailDirectory;
     }
 
     public function getRateLimitId(): string
     {
         return $this->rateLimitId;
-    }
-
-    public function withImapClusterId(string $imapClusterId): self
-    {
-        $validator = new Validator();
-        $validator->validate($imapClusterId, self::$internalValidationSchema['properties']['imapClusterId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->imapClusterId = $imapClusterId;
-
-        return $clone;
-    }
-
-    public function withMailDirectory(string $mailDirectory): self
-    {
-        $validator = new Validator();
-        $validator->validate($mailDirectory, self::$internalValidationSchema['properties']['mailDirectory']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->mailDirectory = $mailDirectory;
-
-        return $clone;
     }
 
     public function withRateLimitId(string $rateLimitId): self
@@ -127,11 +75,9 @@ class MailsystemSettings
             static::validateInput($input);
         }
 
-        $imapClusterId = $input->{'imapClusterId'};
-        $mailDirectory = $input->{'mailDirectory'};
         $rateLimitId = $input->{'rateLimitId'};
 
-        $obj = new self($imapClusterId, $mailDirectory, $rateLimitId);
+        $obj = new self($rateLimitId);
 
         return $obj;
     }
@@ -144,8 +90,6 @@ class MailsystemSettings
     public function toJson(): array
     {
         $output = [];
-        $output['imapClusterId'] = $this->imapClusterId;
-        $output['mailDirectory'] = $this->mailDirectory;
         $output['rateLimitId'] = $this->rateLimitId;
 
         return $output;

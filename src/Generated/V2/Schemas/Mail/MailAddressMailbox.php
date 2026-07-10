@@ -25,6 +25,9 @@ class MailAddressMailbox
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'mailsystemSettings' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.mail.MailsystemSettings',
+            ],
             'name' => [
                 'type' => 'string',
             ],
@@ -100,9 +103,12 @@ class MailAddressMailbox
             'spamProtection',
             'storageInBytes',
             'passwordUpdatedAt',
+            'mailsystemSettings',
         ],
         'type' => 'object',
     ];
+
+    private MailsystemSettings $mailsystemSettings;
 
     private string $name;
 
@@ -114,13 +120,19 @@ class MailAddressMailbox
 
     private MailAddressMailboxStorageInBytes $storageInBytes;
 
-    public function __construct(string $name, DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressMailboxSpamProtection $spamProtection, MailAddressMailboxStorageInBytes $storageInBytes)
+    public function __construct(MailsystemSettings $mailsystemSettings, string $name, DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressMailboxSpamProtection $spamProtection, MailAddressMailboxStorageInBytes $storageInBytes)
     {
+        $this->mailsystemSettings = $mailsystemSettings;
         $this->name = $name;
         $this->passwordUpdatedAt = $passwordUpdatedAt;
         $this->sendingEnabled = $sendingEnabled;
         $this->spamProtection = $spamProtection;
         $this->storageInBytes = $storageInBytes;
+    }
+
+    public function getMailsystemSettings(): MailsystemSettings
+    {
+        return $this->mailsystemSettings;
     }
 
     public function getName(): string
@@ -146,6 +158,14 @@ class MailAddressMailbox
     public function getStorageInBytes(): MailAddressMailboxStorageInBytes
     {
         return $this->storageInBytes;
+    }
+
+    public function withMailsystemSettings(MailsystemSettings $mailsystemSettings): self
+    {
+        $clone = clone $this;
+        $clone->mailsystemSettings = $mailsystemSettings;
+
+        return $clone;
     }
 
     public function withName(string $name): self
@@ -215,13 +235,14 @@ class MailAddressMailbox
             static::validateInput($input);
         }
 
+        $mailsystemSettings = MailsystemSettings::buildFromInput($input->{'mailsystemSettings'}, validate: $validate);
         $name = $input->{'name'};
         $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
         $sendingEnabled = (bool)($input->{'sendingEnabled'});
         $spamProtection = MailAddressMailboxSpamProtection::buildFromInput($input->{'spamProtection'}, validate: $validate);
         $storageInBytes = MailAddressMailboxStorageInBytes::buildFromInput($input->{'storageInBytes'}, validate: $validate);
 
-        $obj = new self($name, $passwordUpdatedAt, $sendingEnabled, $spamProtection, $storageInBytes);
+        $obj = new self($mailsystemSettings, $name, $passwordUpdatedAt, $sendingEnabled, $spamProtection, $storageInBytes);
 
         return $obj;
     }
@@ -234,6 +255,7 @@ class MailAddressMailbox
     public function toJson(): array
     {
         $output = [];
+        $output['mailsystemSettings'] = $this->mailsystemSettings->toJson();
         $output['name'] = $this->name;
         $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
         $output['sendingEnabled'] = $this->sendingEnabled;

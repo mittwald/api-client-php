@@ -33,10 +33,13 @@ class ListProjectBackupsRequest
             'runningRestoresOnly' => [
                 'type' => 'boolean',
             ],
+            'runningBackupsOnly' => [
+                'type' => 'boolean',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -44,7 +47,7 @@ class ListProjectBackupsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -61,6 +64,8 @@ class ListProjectBackupsRequest
     private ?BackupSortOrder $sortOrder = null;
 
     private ?bool $runningRestoresOnly = null;
+
+    private ?bool $runningBackupsOnly = null;
 
     private int $limit = 1000;
 
@@ -100,6 +105,11 @@ class ListProjectBackupsRequest
     public function getRunningRestoresOnly(): ?bool
     {
         return $this->runningRestoresOnly ?? null;
+    }
+
+    public function getRunningBackupsOnly(): ?bool
+    {
+        return $this->runningBackupsOnly ?? null;
     }
 
     public function getLimit(): int
@@ -213,6 +223,28 @@ class ListProjectBackupsRequest
         return $clone;
     }
 
+    public function withRunningBackupsOnly(bool $runningBackupsOnly): self
+    {
+        $validator = new Validator();
+        $validator->validate($runningBackupsOnly, self::$internalValidationSchema['properties']['runningBackupsOnly']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->runningBackupsOnly = $runningBackupsOnly;
+
+        return $clone;
+    }
+
+    public function withoutRunningBackupsOnly(): self
+    {
+        $clone = clone $this;
+        unset($clone->runningBackupsOnly);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -295,6 +327,10 @@ class ListProjectBackupsRequest
         if (isset($input->{'runningRestoresOnly'})) {
             $runningRestoresOnly = (bool)($input->{'runningRestoresOnly'});
         }
+        $runningBackupsOnly = null;
+        if (isset($input->{'runningBackupsOnly'})) {
+            $runningBackupsOnly = (bool)($input->{'runningBackupsOnly'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -313,6 +349,7 @@ class ListProjectBackupsRequest
         $obj->withExportsOnly = $withExportsOnly;
         $obj->sortOrder = $sortOrder;
         $obj->runningRestoresOnly = $runningRestoresOnly;
+        $obj->runningBackupsOnly = $runningBackupsOnly;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -339,6 +376,9 @@ class ListProjectBackupsRequest
         }
         if (isset($this->runningRestoresOnly)) {
             $output['runningRestoresOnly'] = $this->runningRestoresOnly;
+        }
+        if (isset($this->runningBackupsOnly)) {
+            $output['runningBackupsOnly'] = $this->runningBackupsOnly;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -417,6 +457,9 @@ class ListProjectBackupsRequest
         }
         if (isset($mapped['runningRestoresOnly'])) {
             $query['runningRestoresOnly'] = $mapped['runningRestoresOnly'];
+        }
+        if (isset($mapped['runningBackupsOnly'])) {
+            $query['runningBackupsOnly'] = $mapped['runningBackupsOnly'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

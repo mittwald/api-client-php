@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -33,6 +34,16 @@ class VersionStatus
             'desired' => [
                 'type' => 'string',
             ],
+            'lastChangeBy' => [
+                'type' => 'string',
+            ],
+            'lastChangedAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'previous' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'desired',
@@ -43,6 +54,12 @@ class VersionStatus
     private ?string $current = null;
 
     private string $desired;
+
+    private ?string $lastChangeBy = null;
+
+    private ?DateTime $lastChangedAt = null;
+
+    private ?string $previous = null;
 
     public function __construct(string $desired)
     {
@@ -57,6 +74,21 @@ class VersionStatus
     public function getDesired(): string
     {
         return $this->desired;
+    }
+
+    public function getLastChangeBy(): ?string
+    {
+        return $this->lastChangeBy ?? null;
+    }
+
+    public function getLastChangedAt(): ?DateTime
+    {
+        return $this->lastChangedAt ?? null;
+    }
+
+    public function getPrevious(): ?string
+    {
+        return $this->previous ?? null;
     }
 
     public function withCurrent(string $current): self
@@ -95,6 +127,66 @@ class VersionStatus
         return $clone;
     }
 
+    public function withLastChangeBy(string $lastChangeBy): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastChangeBy, self::$internalValidationSchema['properties']['lastChangeBy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastChangeBy = $lastChangeBy;
+
+        return $clone;
+    }
+
+    public function withoutLastChangeBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastChangeBy);
+
+        return $clone;
+    }
+
+    public function withLastChangedAt(DateTime $lastChangedAt): self
+    {
+        $clone = clone $this;
+        $clone->lastChangedAt = $lastChangedAt;
+
+        return $clone;
+    }
+
+    public function withoutLastChangedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastChangedAt);
+
+        return $clone;
+    }
+
+    public function withPrevious(string $previous): self
+    {
+        $validator = new Validator();
+        $validator->validate($previous, self::$internalValidationSchema['properties']['previous']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->previous = $previous;
+
+        return $clone;
+    }
+
+    public function withoutPrevious(): self
+    {
+        $clone = clone $this;
+        unset($clone->previous);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -115,9 +207,24 @@ class VersionStatus
             $current = $input->{'current'};
         }
         $desired = $input->{'desired'};
+        $lastChangeBy = null;
+        if (isset($input->{'lastChangeBy'})) {
+            $lastChangeBy = $input->{'lastChangeBy'};
+        }
+        $lastChangedAt = null;
+        if (isset($input->{'lastChangedAt'})) {
+            $lastChangedAt = new DateTime($input->{'lastChangedAt'});
+        }
+        $previous = null;
+        if (isset($input->{'previous'})) {
+            $previous = $input->{'previous'};
+        }
 
         $obj = new self($desired);
         $obj->current = $current;
+        $obj->lastChangeBy = $lastChangeBy;
+        $obj->lastChangedAt = $lastChangedAt;
+        $obj->previous = $previous;
         return $obj;
     }
 
@@ -133,6 +240,15 @@ class VersionStatus
             $output['current'] = $this->current;
         }
         $output['desired'] = $this->desired;
+        if (isset($this->lastChangeBy)) {
+            $output['lastChangeBy'] = $this->lastChangeBy;
+        }
+        if (isset($this->lastChangedAt)) {
+            $output['lastChangedAt'] = ($this->lastChangedAt)->format(DateTime::ATOM);
+        }
+        if (isset($this->previous)) {
+            $output['previous'] = $this->previous;
+        }
 
         return $output;
     }
@@ -163,5 +279,8 @@ class VersionStatus
 
     public function __clone()
     {
+        if (isset($this->lastChangedAt)) {
+            $this->lastChangedAt = clone $this->lastChangedAt;
+        }
     }
 }

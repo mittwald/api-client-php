@@ -10,4 +10,5 @@ enum InvoiceSettingsStatusType: string
     case returnDebitNoteWaitingForPayment = 'returnDebitNoteWaitingForPayment';
     case debtWrittenOff = 'debtWrittenOff';
     case bankrupt = 'bankrupt';
+    case notReachable = 'notReachable';
 }

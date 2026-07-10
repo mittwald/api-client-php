@@ -25,6 +25,7 @@ class ArticleAttributes
     private static array $internalValidationSchema = [
         'properties' => [
             'customerEditable' => [
+                'description' => 'Used if there are custom configurations needed for an Order like a Server name.',
                 'type' => 'boolean',
             ],
             'key' => [
@@ -33,6 +34,7 @@ class ArticleAttributes
                 'type' => 'string',
             ],
             'mergeType' => [
+                'description' => 'Used if Articles are ordered as a batch.',
                 'enum' => [
                     'add',
                     'set',
@@ -40,16 +42,19 @@ class ArticleAttributes
                 'type' => 'string',
             ],
             'readonly' => [
+                'description' => 'Used if not need for an Order.',
                 'type' => 'boolean',
             ],
             'required' => [
                 'type' => 'boolean',
             ],
             'unit' => [
+                'description' => 'Used if Articles are ordered as a batch.',
                 'example' => 'GHz',
                 'type' => 'string',
             ],
             'value' => [
+                'description' => 'Will be ignored if customerEditable is set.',
                 'example' => '4',
                 'type' => 'string',
             ],
@@ -60,18 +65,33 @@ class ArticleAttributes
         'type' => 'object',
     ];
 
+    /**
+     * Used if there are custom configurations needed for an Order like a Server name.
+     */
     private ?bool $customerEditable = null;
 
     private string $key;
 
+    /**
+     * Used if Articles are ordered as a batch.
+     */
     private ?ArticleAttributesMergeType $mergeType = null;
 
+    /**
+     * Used if not need for an Order.
+     */
     private ?bool $readonly = null;
 
     private ?bool $required = null;
 
+    /**
+     * Used if Articles are ordered as a batch.
+     */
     private ?string $unit = null;
 
+    /**
+     * Will be ignored if customerEditable is set.
+     */
     private ?string $value = null;
 
     public function __construct(string $key)

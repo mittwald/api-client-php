@@ -16,7 +16,7 @@ class ReplaceProjectBackupExpirationTimeRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'expirationTime' => [
-                'description' => 'Time when to expire the Backup.',
+                'description' => 'Time when to expire the Backup. Must be no more than one year in the future.',
                 'format' => 'date-time',
                 'type' => 'string',
             ],
@@ -25,7 +25,7 @@ class ReplaceProjectBackupExpirationTimeRequestBody
     ];
 
     /**
-     * Time when to expire the Backup.
+     * Time when to expire the Backup. Must be no more than one year in the future.
      */
     private ?DateTime $expirationTime = null;
 

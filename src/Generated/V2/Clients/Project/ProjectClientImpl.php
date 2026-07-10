@@ -89,6 +89,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerNotFoundR
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
@@ -99,6 +105,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectActivities\ListProjectActivitiesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesNotFoundResponse;
@@ -575,6 +588,30 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
+     * List Projects belonging to a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-customer-projects
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCustomerProjectsRequest $request An object representing the request for this operation
+     * @return ListCustomerProjectsOKResponse OK
+     */
+    public function listCustomerProjects(ListCustomerProjectsRequest $request): ListCustomerProjectsOKResponse
+    {
+        $httpRequest = new Request(ListCustomerProjectsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListCustomerProjectsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListCustomerProjectsBadRequestResponse::fromResponse($httpResponse),
+            403 => ListCustomerProjectsForbiddenResponse::fromResponse($httpResponse),
+            429 => ListCustomerProjectsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ListCustomerProjectsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List Invites belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
@@ -617,6 +654,31 @@ class ProjectClientImpl implements ProjectClient
             404 => ListMembershipsForProjectNotFoundResponse::fromResponse($httpResponse),
             429 => ListMembershipsForProjectTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListMembershipsForProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get the activities of a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-activities
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListProjectActivitiesRequest $request An object representing the request for this operation
+     * @return ListProjectActivitiesOKResponse List of all activities.
+     */
+    public function listProjectActivities(ListProjectActivitiesRequest $request): ListProjectActivitiesOKResponse
+    {
+        $httpRequest = new Request(ListProjectActivitiesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListProjectActivitiesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListProjectActivitiesBadRequestResponse::fromResponse($httpResponse),
+            403 => ListProjectActivitiesForbiddenResponse::fromResponse($httpResponse),
+            404 => ListProjectActivitiesNotFoundResponse::fromResponse($httpResponse),
+            429 => ListProjectActivitiesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ListProjectActivitiesDefaultResponse::fromResponse($httpResponse),
         });
     }
 

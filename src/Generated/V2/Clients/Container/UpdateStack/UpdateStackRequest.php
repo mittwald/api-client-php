@@ -26,17 +26,34 @@ class UpdateStackRequest
             ],
             'body' => [
                 'properties' => [
+                    'description' => [
+                        'example' => 'uptime kuma',
+                        'type' => 'string',
+                    ],
                     'services' => [
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceRequest',
                         ],
+                        'description' => 'A set of containers that should be started in this stack. The key is relevant for
+network connectivity between containers, because you can use it as DNS name to
+resolve this containers from other containers running in the same project (or from
+managed apps running in the same project).
+
+To **delete** an existing container from a stack using a `PUT` request, simply omit
+it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
+
+Keys must be strings of max 63 characters.
+',
                         'type' => 'object',
                     ],
                     'volumes' => [
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeRequest',
                         ],
-                        'description' => 'Volumes belonging to a Stack. Removing results in a detach, delete must be explicit.',
+                        'description' => 'A set of named volumes that should be created for this stack. Removing a volume
+from this set will not delete the volume (for safety), but only detach it from the
+stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
+',
                         'type' => 'object',
                     ],
                 ],

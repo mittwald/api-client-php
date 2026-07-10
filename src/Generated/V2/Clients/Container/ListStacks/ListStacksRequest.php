@@ -20,10 +20,13 @@ class ListStacksRequest
             'projectId' => [
                 'type' => 'string',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -31,7 +34,7 @@ class ListStacksRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -40,6 +43,8 @@ class ListStacksRequest
     ];
 
     private string $projectId;
+
+    private ?string $searchTerm = null;
 
     private int $limit = 1000;
 
@@ -59,6 +64,11 @@ class ListStacksRequest
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function getLimit(): int
@@ -86,6 +96,28 @@ class ListStacksRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
 
         return $clone;
     }
@@ -156,6 +188,10 @@ class ListStacksRequest
         }
 
         $projectId = $input->{'projectId'};
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -170,6 +206,7 @@ class ListStacksRequest
         }
 
         $obj = new self($projectId);
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -185,6 +222,9 @@ class ListStacksRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
@@ -251,6 +291,9 @@ class ListStacksRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

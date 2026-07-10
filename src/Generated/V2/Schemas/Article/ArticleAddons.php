@@ -25,19 +25,27 @@ class ArticleAddons
     private static array $internalValidationSchema = [
         'properties' => [
             'hidden' => [
+                'description' => 'Defines if the Addon should not be shown.',
                 'type' => 'boolean',
             ],
             'key' => [
+                'description' => 'Unique key of the Addon.',
+                'example' => 'Varnish',
                 'minLength' => 1,
                 'type' => 'string',
             ],
             'type' => [
+                'description' => 'The type/category of the addon.',
+                'example' => 'config',
                 'type' => 'string',
             ],
             'value' => [
+                'description' => 'Value of the Addon, e.g. configuration details, status, or modifier properties.',
+                'example' => 'noway',
                 'type' => 'string',
             ],
             'valueMergeType' => [
+                'description' => 'Used if Articles are ordered as a batch.',
                 'enum' => [
                     'add',
                     'set',
@@ -52,14 +60,29 @@ class ArticleAddons
         'type' => 'object',
     ];
 
+    /**
+     * Defines if the Addon should not be shown.
+     */
     private ?bool $hidden = null;
 
+    /**
+     * Unique key of the Addon.
+     */
     private string $key;
 
+    /**
+     * The type/category of the addon.
+     */
     private ?string $type = null;
 
+    /**
+     * Value of the Addon, e.g. configuration details, status, or modifier properties.
+     */
     private string $value;
 
+    /**
+     * Used if Articles are ordered as a batch.
+     */
     private ?ArticleAddonsValueMergeType $valueMergeType = null;
 
     public function __construct(string $key, string $value)

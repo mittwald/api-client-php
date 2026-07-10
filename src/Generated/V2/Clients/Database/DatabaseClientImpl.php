@@ -124,6 +124,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedis
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetNotFoundResponse;
@@ -646,6 +656,54 @@ class DatabaseClientImpl implements DatabaseClient
             404 => ListRedisVersionsNotFoundResponse::fromResponse($httpResponse),
             429 => ListRedisVersionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListRedisVersionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a MySqlDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-patch-mysql-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function patchMysqlDatabase(PatchMysqlDatabaseRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(PatchMysqlDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PatchMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => PatchMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
+            429 => PatchMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PatchMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a RedisDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-patch-redis-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchRedisDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function patchRedisDatabase(PatchRedisDatabaseRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(PatchRedisDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PatchRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => PatchRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
+            429 => PatchRedisDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PatchRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 

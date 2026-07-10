@@ -70,6 +70,29 @@ class ServiceRequestRelocationPayload
                 ],
                 'type' => 'object',
             ],
+            'email' => [
+                'properties' => [
+                    'emailInboxes' => [
+                        'items' => [
+                            'properties' => [
+                                'email' => [
+                                    'type' => 'string',
+                                ],
+                                'password' => [
+                                    'type' => 'string',
+                                ],
+                            ],
+                            'required' => [
+                                'email',
+                                'password',
+                            ],
+                            'type' => 'object',
+                        ],
+                        'type' => 'array',
+                    ],
+                ],
+                'type' => 'object',
+            ],
             'notes' => [
                 'type' => 'string',
             ],
@@ -78,7 +101,7 @@ class ServiceRequestRelocationPayload
                 'type' => 'string',
             ],
             'redirectusKey' => [
-                'type' => 'number',
+                'type' => 'integer',
             ],
             'source' => [
                 'properties' => [
@@ -169,11 +192,13 @@ class ServiceRequestRelocationPayload
 
     private ?ServiceRequestRelocationPayloadDomain $domain = null;
 
+    private ?ServiceRequestRelocationPayloadEmail $email = null;
+
     private ?string $notes = null;
 
     private ?DateTime $preferredRelocationDate = null;
 
-    private int|float $redirectusKey;
+    private int $redirectusKey;
 
     private ServiceRequestRelocationPayloadSource $source;
 
@@ -181,7 +206,7 @@ class ServiceRequestRelocationPayload
 
     private string $userId;
 
-    public function __construct(ServiceRequestRelocationPayloadContact $contact, int|float $redirectusKey, ServiceRequestRelocationPayloadSource $source, ServiceRequestRelocationPayloadTarget $target, string $userId)
+    public function __construct(ServiceRequestRelocationPayloadContact $contact, int $redirectusKey, ServiceRequestRelocationPayloadSource $source, ServiceRequestRelocationPayloadTarget $target, string $userId)
     {
         $this->contact = $contact;
         $this->redirectusKey = $redirectusKey;
@@ -200,6 +225,11 @@ class ServiceRequestRelocationPayload
         return $this->domain ?? null;
     }
 
+    public function getEmail(): ?ServiceRequestRelocationPayloadEmail
+    {
+        return $this->email ?? null;
+    }
+
     public function getNotes(): ?string
     {
         return $this->notes ?? null;
@@ -210,7 +240,7 @@ class ServiceRequestRelocationPayload
         return $this->preferredRelocationDate ?? null;
     }
 
-    public function getRedirectusKey(): int|float
+    public function getRedirectusKey(): int
     {
         return $this->redirectusKey;
     }
@@ -254,6 +284,22 @@ class ServiceRequestRelocationPayload
         return $clone;
     }
 
+    public function withEmail(ServiceRequestRelocationPayloadEmail $email): self
+    {
+        $clone = clone $this;
+        $clone->email = $email;
+
+        return $clone;
+    }
+
+    public function withoutEmail(): self
+    {
+        $clone = clone $this;
+        unset($clone->email);
+
+        return $clone;
+    }
+
     public function withNotes(string $notes): self
     {
         $validator = new Validator();
@@ -292,7 +338,7 @@ class ServiceRequestRelocationPayload
         return $clone;
     }
 
-    public function withRedirectusKey(int|float $redirectusKey): self
+    public function withRedirectusKey(int $redirectusKey): self
     {
         $validator = new Validator();
         $validator->validate($redirectusKey, self::$internalValidationSchema['properties']['redirectusKey']);
@@ -356,6 +402,10 @@ class ServiceRequestRelocationPayload
         if (isset($input->{'domain'})) {
             $domain = ServiceRequestRelocationPayloadDomain::buildFromInput($input->{'domain'}, validate: $validate);
         }
+        $email = null;
+        if (isset($input->{'email'})) {
+            $email = ServiceRequestRelocationPayloadEmail::buildFromInput($input->{'email'}, validate: $validate);
+        }
         $notes = null;
         if (isset($input->{'notes'})) {
             $notes = $input->{'notes'};
@@ -364,13 +414,14 @@ class ServiceRequestRelocationPayload
         if (isset($input->{'preferredRelocationDate'})) {
             $preferredRelocationDate = new DateTime($input->{'preferredRelocationDate'});
         }
-        $redirectusKey = str_contains((string)($input->{'redirectusKey'}), '.') ? (float)($input->{'redirectusKey'}) : (int)($input->{'redirectusKey'});
+        $redirectusKey = (int)($input->{'redirectusKey'});
         $source = ServiceRequestRelocationPayloadSource::buildFromInput($input->{'source'}, validate: $validate);
         $target = ServiceRequestRelocationPayloadTarget::buildFromInput($input->{'target'}, validate: $validate);
         $userId = $input->{'userId'};
 
         $obj = new self($contact, $redirectusKey, $source, $target, $userId);
         $obj->domain = $domain;
+        $obj->email = $email;
         $obj->notes = $notes;
         $obj->preferredRelocationDate = $preferredRelocationDate;
         return $obj;
@@ -387,6 +438,9 @@ class ServiceRequestRelocationPayload
         $output['contact'] = ($this->contact)->toJson();
         if (isset($this->domain)) {
             $output['domain'] = ($this->domain)->toJson();
+        }
+        if (isset($this->email)) {
+            $output['email'] = ($this->email)->toJson();
         }
         if (isset($this->notes)) {
             $output['notes'] = $this->notes;
@@ -431,6 +485,9 @@ class ServiceRequestRelocationPayload
         $this->contact = clone $this->contact;
         if (isset($this->domain)) {
             $this->domain = clone $this->domain;
+        }
+        if (isset($this->email)) {
+            $this->email = clone $this->email;
         }
         if (isset($this->preferredRelocationDate)) {
             $this->preferredRelocationDate = clone $this->preferredRelocationDate;

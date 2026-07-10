@@ -38,7 +38,7 @@ class ListMailAddressesRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -46,7 +46,7 @@ class ListMailAddressesRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'sort' => [
                 'type' => 'array',

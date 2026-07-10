@@ -22,7 +22,7 @@ class ExtensionListOwnExtensionsRequest
             ],
             'limit' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -30,7 +30,7 @@ class ExtensionListOwnExtensionsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [

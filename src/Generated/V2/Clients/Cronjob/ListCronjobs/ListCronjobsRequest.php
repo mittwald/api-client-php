@@ -20,13 +20,13 @@ class ListCronjobsRequest
             'projectId' => [
                 'type' => 'string',
             ],
-            'includeContainerCronjobs' => [
+            'includeServiceCronjobs' => [
                 'type' => 'boolean',
             ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -34,7 +34,7 @@ class ListCronjobsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -44,7 +44,7 @@ class ListCronjobsRequest
 
     private string $projectId;
 
-    private ?bool $includeContainerCronjobs = null;
+    private ?bool $includeServiceCronjobs = null;
 
     private int $limit = 1000;
 
@@ -66,9 +66,9 @@ class ListCronjobsRequest
         return $this->projectId;
     }
 
-    public function getIncludeContainerCronjobs(): ?bool
+    public function getIncludeServiceCronjobs(): ?bool
     {
-        return $this->includeContainerCronjobs ?? null;
+        return $this->includeServiceCronjobs ?? null;
     }
 
     public function getLimit(): int
@@ -100,24 +100,24 @@ class ListCronjobsRequest
         return $clone;
     }
 
-    public function withIncludeContainerCronjobs(bool $includeContainerCronjobs): self
+    public function withIncludeServiceCronjobs(bool $includeServiceCronjobs): self
     {
         $validator = new Validator();
-        $validator->validate($includeContainerCronjobs, self::$internalValidationSchema['properties']['includeContainerCronjobs']);
+        $validator->validate($includeServiceCronjobs, self::$internalValidationSchema['properties']['includeServiceCronjobs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->includeContainerCronjobs = $includeContainerCronjobs;
+        $clone->includeServiceCronjobs = $includeServiceCronjobs;
 
         return $clone;
     }
 
-    public function withoutIncludeContainerCronjobs(): self
+    public function withoutIncludeServiceCronjobs(): self
     {
         $clone = clone $this;
-        unset($clone->includeContainerCronjobs);
+        unset($clone->includeServiceCronjobs);
 
         return $clone;
     }
@@ -188,9 +188,9 @@ class ListCronjobsRequest
         }
 
         $projectId = $input->{'projectId'};
-        $includeContainerCronjobs = null;
-        if (isset($input->{'includeContainerCronjobs'})) {
-            $includeContainerCronjobs = (bool)($input->{'includeContainerCronjobs'});
+        $includeServiceCronjobs = null;
+        if (isset($input->{'includeServiceCronjobs'})) {
+            $includeServiceCronjobs = (bool)($input->{'includeServiceCronjobs'});
         }
         $limit = 1000;
         if (isset($input->{'limit'})) {
@@ -206,7 +206,7 @@ class ListCronjobsRequest
         }
 
         $obj = new self($projectId);
-        $obj->includeContainerCronjobs = $includeContainerCronjobs;
+        $obj->includeServiceCronjobs = $includeServiceCronjobs;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -222,8 +222,8 @@ class ListCronjobsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->includeContainerCronjobs)) {
-            $output['includeContainerCronjobs'] = $this->includeContainerCronjobs;
+        if (isset($this->includeServiceCronjobs)) {
+            $output['includeServiceCronjobs'] = $this->includeServiceCronjobs;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -291,8 +291,8 @@ class ListCronjobsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['includeContainerCronjobs'])) {
-            $query['includeContainerCronjobs'] = $mapped['includeContainerCronjobs'];
+        if (isset($mapped['includeServiceCronjobs'])) {
+            $query['includeServiceCronjobs'] = $mapped['includeServiceCronjobs'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

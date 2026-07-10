@@ -97,6 +97,9 @@ class MailAddress
             ],
             'mailbox' => [
                 'properties' => [
+                    'mailsystemSettings' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.mail.MailsystemSettings',
+                    ],
                     'name' => [
                         'type' => 'string',
                     ],
@@ -172,11 +175,24 @@ class MailAddress
                     'spamProtection',
                     'storageInBytes',
                     'passwordUpdatedAt',
+                    'mailsystemSettings',
                 ],
                 'type' => 'object',
             ],
             'projectId' => [
                 'type' => 'string',
+            ],
+            'rateLimitChangeRequest' => [
+                'properties' => [
+                    'rateLimitId' => [
+                        'description' => 'id of the rate limit requested',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'rateLimitId',
+                ],
+                'type' => 'object',
             ],
             'receivingDisabled' => [
                 'type' => 'boolean',
@@ -224,6 +240,8 @@ class MailAddress
     private ?MailAddressMailbox $mailbox = null;
 
     private string $projectId;
+
+    private ?MailAddressRateLimitChangeRequest $rateLimitChangeRequest = null;
 
     private bool $receivingDisabled;
 
@@ -298,6 +316,11 @@ class MailAddress
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getRateLimitChangeRequest(): ?MailAddressRateLimitChangeRequest
+    {
+        return $this->rateLimitChangeRequest ?? null;
     }
 
     public function getReceivingDisabled(): bool
@@ -443,6 +466,22 @@ class MailAddress
         return $clone;
     }
 
+    public function withRateLimitChangeRequest(MailAddressRateLimitChangeRequest $rateLimitChangeRequest): self
+    {
+        $clone = clone $this;
+        $clone->rateLimitChangeRequest = $rateLimitChangeRequest;
+
+        return $clone;
+    }
+
+    public function withoutRateLimitChangeRequest(): self
+    {
+        $clone = clone $this;
+        unset($clone->rateLimitChangeRequest);
+
+        return $clone;
+    }
+
     public function withReceivingDisabled(bool $receivingDisabled): self
     {
         $validator = new Validator();
@@ -493,11 +532,16 @@ class MailAddress
             $mailbox = MailAddressMailbox::buildFromInput($input->{'mailbox'}, validate: $validate);
         }
         $projectId = $input->{'projectId'};
+        $rateLimitChangeRequest = null;
+        if (isset($input->{'rateLimitChangeRequest'})) {
+            $rateLimitChangeRequest = MailAddressRateLimitChangeRequest::buildFromInput($input->{'rateLimitChangeRequest'}, validate: $validate);
+        }
         $receivingDisabled = (bool)($input->{'receivingDisabled'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($address, $archive, $autoResponder, $forwardAddresses, $id, $isArchived, $isBackupInProgress, $isCatchAll, $projectId, $receivingDisabled, $updatedAt);
         $obj->mailbox = $mailbox;
+        $obj->rateLimitChangeRequest = $rateLimitChangeRequest;
         return $obj;
     }
 
@@ -521,6 +565,9 @@ class MailAddress
             $output['mailbox'] = ($this->mailbox)->toJson();
         }
         $output['projectId'] = $this->projectId;
+        if (isset($this->rateLimitChangeRequest)) {
+            $output['rateLimitChangeRequest'] = ($this->rateLimitChangeRequest)->toJson();
+        }
         $output['receivingDisabled'] = $this->receivingDisabled;
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
@@ -557,6 +604,9 @@ class MailAddress
         $this->autoResponder = clone $this->autoResponder;
         if (isset($this->mailbox)) {
             $this->mailbox = clone $this->mailbox;
+        }
+        if (isset($this->rateLimitChangeRequest)) {
+            $this->rateLimitChangeRequest = clone $this->rateLimitChangeRequest;
         }
         $this->updatedAt = clone $this->updatedAt;
     }

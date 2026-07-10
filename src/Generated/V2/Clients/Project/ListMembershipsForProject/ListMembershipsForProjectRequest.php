@@ -39,6 +39,9 @@ class ListMembershipsForProjectRequest
             'hasMfa' => [
                 'type' => 'boolean',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'projectId',
@@ -58,6 +61,8 @@ class ListMembershipsForProjectRequest
     private ?ProjectRoles $role = null;
 
     private ?bool $hasMfa = null;
+
+    private ?string $searchTerm = null;
 
     private array $headers = [
 
@@ -101,6 +106,11 @@ class ListMembershipsForProjectRequest
     public function getHasMfa(): ?bool
     {
         return $this->hasMfa ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -243,6 +253,28 @@ class ListMembershipsForProjectRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -283,6 +315,10 @@ class ListMembershipsForProjectRequest
         if (isset($input->{'hasMfa'})) {
             $hasMfa = (bool)($input->{'hasMfa'});
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
 
         $obj = new self($projectId);
         $obj->limit = $limit;
@@ -291,6 +327,7 @@ class ListMembershipsForProjectRequest
         $obj->isInherited = $isInherited;
         $obj->role = $role;
         $obj->hasMfa = $hasMfa;
+        $obj->searchTerm = $searchTerm;
         return $obj;
     }
 
@@ -320,6 +357,9 @@ class ListMembershipsForProjectRequest
         }
         if (isset($this->hasMfa)) {
             $output['hasMfa'] = $this->hasMfa;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
         }
 
         return $output;
@@ -399,6 +439,9 @@ class ListMembershipsForProjectRequest
         }
         if (isset($mapped['hasMfa'])) {
             $query['hasMfa'] = $mapped['hasMfa'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
         }
         return [
             'query' => $query,

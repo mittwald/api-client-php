@@ -24,6 +24,14 @@ class ServiceRequest
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'required' => [
+            'conversationId',
+            'messageId',
+            'createdAt',
+            'type',
+            'messageContent',
+            'meta',
+        ],
         'properties' => [
             'conversationId' => [
                 'format' => 'uuid',
@@ -40,23 +48,9 @@ class ServiceRequest
                 'maxItems' => 0,
                 'type' => 'array',
             ],
-            'messageContent' => [
-                'enum' => [
-                    'relocation',
-                    'call',
-                ],
-                'type' => 'string',
-            ],
             'messageId' => [
                 'format' => 'uuid',
                 'type' => 'string',
-            ],
-            'meta' => [
-                'oneOf' => [
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ServiceRequestRelocationPayload',
-                    ],
-                ],
             ],
             'type' => [
                 'enum' => [
@@ -64,16 +58,25 @@ class ServiceRequest
                 ],
                 'type' => 'string',
             ],
+            'messageContent' => [
+                'enum' => [
+                    'relocation',
+                    'call',
+                    'mailSendLimitIncrease',
+                ],
+                'type' => 'string',
+            ],
+            'meta' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ServiceRequestRelocationPayload',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ServiceRequestMailSendLimitIncreasePayload',
+                    ],
+                ],
+            ],
         ],
-        'required' => [
-            'conversationId',
-            'messageId',
-            'messageContent',
-            'createdAt',
-            'type',
-            'meta',
-        ],
-        'type' => 'object',
     ];
 
     private string $conversationId;
@@ -85,22 +88,22 @@ class ServiceRequest
      */
     private ?array $files = null;
 
-    private ServiceRequestMessageContent $messageContent;
-
     private string $messageId;
-
-    private ServiceRequestRelocationPayload $meta;
 
     private ServiceRequestType $type;
 
-    public function __construct(string $conversationId, DateTime $createdAt, ServiceRequestMessageContent $messageContent, string $messageId, ServiceRequestRelocationPayload $meta, ServiceRequestType $type)
+    private ServiceRequestMessageContent $messageContent;
+
+    private ServiceRequestMailSendLimitIncreasePayload|ServiceRequestRelocationPayload $meta;
+
+    public function __construct(string $conversationId, DateTime $createdAt, string $messageId, ServiceRequestType $type, ServiceRequestMessageContent $messageContent, ServiceRequestMailSendLimitIncreasePayload|ServiceRequestRelocationPayload $meta)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
-        $this->messageContent = $messageContent;
         $this->messageId = $messageId;
-        $this->meta = $meta;
         $this->type = $type;
+        $this->messageContent = $messageContent;
+        $this->meta = $meta;
     }
 
     public function getConversationId(): string
@@ -121,24 +124,24 @@ class ServiceRequest
         return $this->files ?? null;
     }
 
-    public function getMessageContent(): ServiceRequestMessageContent
-    {
-        return $this->messageContent;
-    }
-
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    public function getMeta(): ServiceRequestRelocationPayload
-    {
-        return $this->meta;
-    }
-
     public function getType(): ServiceRequestType
     {
         return $this->type;
+    }
+
+    public function getMessageContent(): ServiceRequestMessageContent
+    {
+        return $this->messageContent;
+    }
+
+    public function getMeta(): ServiceRequestMailSendLimitIncreasePayload|ServiceRequestRelocationPayload
+    {
+        return $this->meta;
     }
 
     public function withConversationId(string $conversationId): self
@@ -182,14 +185,6 @@ class ServiceRequest
         return $clone;
     }
 
-    public function withMessageContent(ServiceRequestMessageContent $messageContent): self
-    {
-        $clone = clone $this;
-        $clone->messageContent = $messageContent;
-
-        return $clone;
-    }
-
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();
@@ -204,18 +199,26 @@ class ServiceRequest
         return $clone;
     }
 
-    public function withMeta(ServiceRequestRelocationPayload $meta): self
-    {
-        $clone = clone $this;
-        $clone->meta = $meta;
-
-        return $clone;
-    }
-
     public function withType(ServiceRequestType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
+
+        return $clone;
+    }
+
+    public function withMessageContent(ServiceRequestMessageContent $messageContent): self
+    {
+        $clone = clone $this;
+        $clone->messageContent = $messageContent;
+
+        return $clone;
+    }
+
+    public function withMeta(ServiceRequestMailSendLimitIncreasePayload|ServiceRequestRelocationPayload $meta): self
+    {
+        $clone = clone $this;
+        $clone->meta = $meta;
 
         return $clone;
     }
@@ -246,15 +249,16 @@ class ServiceRequest
                 DeletedFile::validateInput($i, true) => DeletedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $messageContent = ServiceRequestMessageContent::from($input->{'messageContent'});
         $messageId = $input->{'messageId'};
+        $type = ServiceRequestType::from($input->{'type'});
+        $messageContent = ServiceRequestMessageContent::from($input->{'messageContent'});
         $meta = match (true) {
             ServiceRequestRelocationPayload::validateInput($input->{'meta'}, true) => ServiceRequestRelocationPayload::buildFromInput($input->{'meta'}, validate: $validate),
+            ServiceRequestMailSendLimitIncreasePayload::validateInput($input->{'meta'}, true) => ServiceRequestMailSendLimitIncreasePayload::buildFromInput($input->{'meta'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'meta' from JSON"),
         };
-        $type = ServiceRequestType::from($input->{'type'});
 
-        $obj = new self($conversationId, $createdAt, $messageContent, $messageId, $meta, $type);
+        $obj = new self($conversationId, $createdAt, $messageId, $type, $messageContent, $meta);
         $obj->files = $files;
         return $obj;
     }
@@ -275,12 +279,12 @@ class ServiceRequest
                 ($i) instanceof RequestedFile, ($i) instanceof UploadedFile, ($i) instanceof DeletedFile => $i->toJson(),
             }, $this->files);
         }
-        $output['messageContent'] = ($this->messageContent)->value;
         $output['messageId'] = $this->messageId;
-        $output['meta'] = match (true) {
-            ($this->meta) instanceof ServiceRequestRelocationPayload => $this->meta->toJson(),
-        };
         $output['type'] = ($this->type)->value;
+        $output['messageContent'] = ($this->messageContent)->value;
+        $output['meta'] = match (true) {
+            ($this->meta) instanceof ServiceRequestRelocationPayload, ($this->meta) instanceof ServiceRequestMailSendLimitIncreasePayload => $this->meta->toJson(),
+        };
 
         return $output;
     }
@@ -313,7 +317,7 @@ class ServiceRequest
     {
         $this->createdAt = clone $this->createdAt;
         $this->meta = match (true) {
-            ($this->meta) instanceof ServiceRequestRelocationPayload => $this->meta,
+            ($this->meta) instanceof ServiceRequestRelocationPayload, ($this->meta) instanceof ServiceRequestMailSendLimitIncreasePayload => $this->meta,
         };
     }
 }

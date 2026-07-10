@@ -25,6 +25,9 @@ class ProjectGetUsageOKResponse implements ResponseContainer
                     'keys' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
                     ],
+                    'modelTermsApprovalRequired' => [
+                        'type' => 'boolean',
+                    ],
                     'nextTokenReset' => [
                         'format' => 'date-time',
                         'type' => 'string',
@@ -36,6 +39,7 @@ class ProjectGetUsageOKResponse implements ResponseContainer
                 'required' => [
                     'keys',
                     'projectId',
+                    'modelTermsApprovalRequired',
                 ],
                 'type' => 'object',
             ],

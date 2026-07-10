@@ -31,10 +31,14 @@ class IngressListIngressesRequest
             'appInstallationId' => [
                 'type' => 'string',
             ],
+            'containerId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -42,7 +46,7 @@ class IngressListIngressesRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -57,6 +61,8 @@ class IngressListIngressesRequest
     private ?string $hostnameSubstring = null;
 
     private ?string $appInstallationId = null;
+
+    private ?string $containerId = null;
 
     private int $limit = 10000;
 
@@ -93,6 +99,11 @@ class IngressListIngressesRequest
     public function getAppInstallationId(): ?string
     {
         return $this->appInstallationId ?? null;
+    }
+
+    public function getContainerId(): ?string
+    {
+        return $this->containerId ?? null;
     }
 
     public function getLimit(): int
@@ -198,6 +209,28 @@ class IngressListIngressesRequest
         return $clone;
     }
 
+    public function withContainerId(string $containerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($containerId, self::$internalValidationSchema['properties']['containerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->containerId = $containerId;
+
+        return $clone;
+    }
+
+    public function withoutContainerId(): self
+    {
+        $clone = clone $this;
+        unset($clone->containerId);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -279,6 +312,10 @@ class IngressListIngressesRequest
         if (isset($input->{'appInstallationId'})) {
             $appInstallationId = $input->{'appInstallationId'};
         }
+        $containerId = null;
+        if (isset($input->{'containerId'})) {
+            $containerId = $input->{'containerId'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -297,6 +334,7 @@ class IngressListIngressesRequest
         $obj->certificateId = $certificateId;
         $obj->hostnameSubstring = $hostnameSubstring;
         $obj->appInstallationId = $appInstallationId;
+        $obj->containerId = $containerId;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -322,6 +360,9 @@ class IngressListIngressesRequest
         }
         if (isset($this->appInstallationId)) {
             $output['appInstallationId'] = $this->appInstallationId;
+        }
+        if (isset($this->containerId)) {
+            $output['containerId'] = $this->containerId;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -399,6 +440,9 @@ class IngressListIngressesRequest
         }
         if (isset($mapped['appInstallationId'])) {
             $query['appInstallationId'] = $mapped['appInstallationId'];
+        }
+        if (isset($mapped['containerId'])) {
+            $query['containerId'] = $mapped['containerId'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

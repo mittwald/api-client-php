@@ -23,7 +23,7 @@ class ReplaceProjectBackupExpirationTimeRequest
             'body' => [
                 'properties' => [
                     'expirationTime' => [
-                        'description' => 'Time when to expire the Backup.',
+                        'description' => 'Time when to expire the Backup. Must be no more than one year in the future.',
                         'format' => 'date-time',
                         'type' => 'string',
                     ],

@@ -14,30 +14,63 @@ class UpdateStackRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'description' => [
+                'example' => 'uptime kuma',
+                'type' => 'string',
+            ],
             'services' => [
                 'additionalProperties' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceRequest',
                 ],
+                'description' => 'A set of containers that should be started in this stack. The key is relevant for
+network connectivity between containers, because you can use it as DNS name to
+resolve this containers from other containers running in the same project (or from
+managed apps running in the same project).
+
+To **delete** an existing container from a stack using a `PUT` request, simply omit
+it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
+
+Keys must be strings of max 63 characters.
+',
                 'type' => 'object',
             ],
             'volumes' => [
                 'additionalProperties' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeRequest',
                 ],
-                'description' => 'Volumes belonging to a Stack. Removing results in a detach, delete must be explicit.',
+                'description' => 'A set of named volumes that should be created for this stack. Removing a volume
+from this set will not delete the volume (for safety), but only detach it from the
+stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
+',
                 'type' => 'object',
             ],
         ],
         'type' => 'object',
     ];
 
+    private ?string $description = null;
+
     /**
+     * A set of containers that should be started in this stack. The key is relevant for
+     * network connectivity between containers, because you can use it as DNS name to
+     * resolve this containers from other containers running in the same project (or from
+     * managed apps running in the same project).
+     *
+     * To **delete** an existing container from a stack using a `PUT` request, simply omit
+     * it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
+     *
+     * Keys must be strings of max 63 characters.
+     *
+     *
      * @var mixed[]|null
      */
     private ?array $services = null;
 
     /**
-     * Volumes belonging to a Stack. Removing results in a detach, delete must be explicit.
+     * A set of named volumes that should be created for this stack. Removing a volume
+     * from this set will not delete the volume (for safety), but only detach it from the
+     * stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
+     *
      *
      * @var mixed[]|null
      */
@@ -48,6 +81,11 @@ class UpdateStackRequestBody
      */
     public function __construct()
     {
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description ?? null;
     }
 
     /**
@@ -64,6 +102,28 @@ class UpdateStackRequestBody
     public function getVolumes(): ?array
     {
         return $this->volumes ?? null;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
     }
 
     /**
@@ -131,6 +191,10 @@ class UpdateStackRequestBody
             static::validateInput($input);
         }
 
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $services = null;
         if (isset($input->{'services'})) {
             $services = (array)$input->{'services'};
@@ -141,6 +205,7 @@ class UpdateStackRequestBody
         }
 
         $obj = new self();
+        $obj->description = $description;
         $obj->services = $services;
         $obj->volumes = $volumes;
         return $obj;
@@ -154,6 +219,9 @@ class UpdateStackRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         if (isset($this->services)) {
             $output['services'] = $this->services;
         }

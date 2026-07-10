@@ -29,6 +29,9 @@ class ProjectCreateKeyRequest
                         'minLength' => 5,
                         'type' => 'string',
                     ],
+                    'planId' => [
+                        'type' => 'string',
+                    ],
                 ],
                 'required' => [
                     'name',

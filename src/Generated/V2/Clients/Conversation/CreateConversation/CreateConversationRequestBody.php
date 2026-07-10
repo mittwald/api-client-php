@@ -33,6 +33,10 @@ class CreateConversationRequestBody
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'messageContent' => [
+                'maxLength' => 8000,
+                'type' => 'string',
+            ],
             'notificationRoles' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',
@@ -55,6 +59,8 @@ class CreateConversationRequestBody
     private ?string $categoryId = null;
 
     private ?string $mainUserId = null;
+
+    private ?string $messageContent = null;
 
     /**
      * @var NotificationRole[]|null
@@ -82,6 +88,11 @@ class CreateConversationRequestBody
     public function getMainUserId(): ?string
     {
         return $this->mainUserId ?? null;
+    }
+
+    public function getMessageContent(): ?string
+    {
+        return $this->messageContent ?? null;
     }
 
     /**
@@ -147,6 +158,28 @@ class CreateConversationRequestBody
     {
         $clone = clone $this;
         unset($clone->mainUserId);
+
+        return $clone;
+    }
+
+    public function withMessageContent(string $messageContent): self
+    {
+        $validator = new Validator();
+        $validator->validate($messageContent, self::$internalValidationSchema['properties']['messageContent']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->messageContent = $messageContent;
+
+        return $clone;
+    }
+
+    public function withoutMessageContent(): self
+    {
+        $clone = clone $this;
+        unset($clone->messageContent);
 
         return $clone;
     }
@@ -247,6 +280,10 @@ class CreateConversationRequestBody
         if (isset($input->{'mainUserId'})) {
             $mainUserId = $input->{'mainUserId'};
         }
+        $messageContent = null;
+        if (isset($input->{'messageContent'})) {
+            $messageContent = $input->{'messageContent'};
+        }
         $notificationRoles = null;
         if (isset($input->{'notificationRoles'})) {
             $notificationRoles = array_map(fn (string $i): NotificationRole => NotificationRole::from($i), $input->{'notificationRoles'});
@@ -282,6 +319,7 @@ class CreateConversationRequestBody
         $obj = new self();
         $obj->categoryId = $categoryId;
         $obj->mainUserId = $mainUserId;
+        $obj->messageContent = $messageContent;
         $obj->notificationRoles = $notificationRoles;
         $obj->relatedTo = $relatedTo;
         $obj->sharedWith = $sharedWith;
@@ -302,6 +340,9 @@ class CreateConversationRequestBody
         }
         if (isset($this->mainUserId)) {
             $output['mainUserId'] = $this->mainUserId;
+        }
+        if (isset($this->messageContent)) {
+            $output['messageContent'] = $this->messageContent;
         }
         if (isset($this->notificationRoles)) {
             $output['notificationRoles'] = array_map(fn (NotificationRole $i): string => $i->value, $this->notificationRoles);

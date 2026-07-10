@@ -20,12 +20,12 @@ class UpdateProjectBackupScheduleRequestBody
                 'type' => 'string',
             ],
             'schedule' => [
-                'description' => 'Execution schedule in crontab notation. Note that the schedule of isSystemBackup true items must be daily once.',
+                'description' => 'Execution schedule in crontab notation. Note that the schedule of isSystemBackup true items must be daily once. For all other schedules the interval must not be more frequent than hourly.',
                 'example' => '5 4 * * *',
                 'type' => 'string',
             ],
             'ttl' => [
-                'description' => 'TTL of the ProjectBackupSchedule as time string.',
+                'description' => 'TTL of the BackupSchedule as a duration string. Must be at least 7d and no more than 365d.',
                 'example' => '7d',
                 'type' => 'string',
             ],
@@ -39,12 +39,12 @@ class UpdateProjectBackupScheduleRequestBody
     private ?string $description = null;
 
     /**
-     * Execution schedule in crontab notation. Note that the schedule of isSystemBackup true items must be daily once.
+     * Execution schedule in crontab notation. Note that the schedule of isSystemBackup true items must be daily once. For all other schedules the interval must not be more frequent than hourly.
      */
     private ?string $schedule = null;
 
     /**
-     * TTL of the ProjectBackupSchedule as time string.
+     * TTL of the BackupSchedule as a duration string. Must be at least 7d and no more than 365d.
      */
     private ?string $ttl = null;
 

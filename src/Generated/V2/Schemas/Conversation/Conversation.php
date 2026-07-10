@@ -24,6 +24,15 @@ class Conversation
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'required' => [
+            'conversationId',
+            'shortId',
+            'title',
+            'createdAt',
+            'status',
+            'visibility',
+            'mainUser',
+        ],
         'properties' => [
             'category' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Category',
@@ -36,30 +45,9 @@ class Conversation
                 'format' => 'date-time',
                 'type' => 'string',
             ],
-            'createdBy' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
-            ],
-            'lastMessage' => [
-                'properties' => [
-                    'createdAt' => [
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'createdBy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
-                    ],
-                ],
-                'required' => [
-                    'createdAt',
-                ],
-                'type' => 'object',
-            ],
             'lastMessageAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
-            ],
-            'lastMessageBy' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
             ],
             'mainUser' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
@@ -98,17 +86,28 @@ class Conversation
                 ],
                 'type' => 'string',
             ],
+            'createdBy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
+            ],
+            'lastMessage' => [
+                'properties' => [
+                    'createdAt' => [
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                    'createdBy' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
+                    ],
+                ],
+                'required' => [
+                    'createdAt',
+                ],
+                'type' => 'object',
+            ],
+            'lastMessageBy' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
+            ],
         ],
-        'required' => [
-            'conversationId',
-            'shortId',
-            'title',
-            'createdAt',
-            'status',
-            'visibility',
-            'mainUser',
-        ],
-        'type' => 'object',
     ];
 
     private ?Category $category = null;
@@ -117,13 +116,7 @@ class Conversation
 
     private DateTime $createdAt;
 
-    private ?User $createdBy = null;
-
-    private ?ConversationLastMessage $lastMessage = null;
-
     private ?DateTime $lastMessageAt = null;
-
-    private ?User $lastMessageBy = null;
 
     private User $mainUser;
 
@@ -148,6 +141,12 @@ class Conversation
     private string $title;
 
     private ConversationVisibility $visibility;
+
+    private ?User $createdBy = null;
+
+    private ?ConversationLastMessage $lastMessage = null;
+
+    private ?User $lastMessageBy = null;
 
     public function __construct(string $conversationId, DateTime $createdAt, User $mainUser, string $shortId, Status $status, string $title, ConversationVisibility $visibility)
     {
@@ -175,24 +174,9 @@ class Conversation
         return $this->createdAt;
     }
 
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy ?? null;
-    }
-
-    public function getLastMessage(): ?ConversationLastMessage
-    {
-        return $this->lastMessage ?? null;
-    }
-
     public function getLastMessageAt(): ?DateTime
     {
         return $this->lastMessageAt ?? null;
-    }
-
-    public function getLastMessageBy(): ?User
-    {
-        return $this->lastMessageBy ?? null;
     }
 
     public function getMainUser(): User
@@ -246,6 +230,21 @@ class Conversation
         return $this->visibility;
     }
 
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy ?? null;
+    }
+
+    public function getLastMessage(): ?ConversationLastMessage
+    {
+        return $this->lastMessage ?? null;
+    }
+
+    public function getLastMessageBy(): ?User
+    {
+        return $this->lastMessageBy ?? null;
+    }
+
     public function withCategory(Category $category): self
     {
         $clone = clone $this;
@@ -284,38 +283,6 @@ class Conversation
         return $clone;
     }
 
-    public function withCreatedBy(User $createdBy): self
-    {
-        $clone = clone $this;
-        $clone->createdBy = $createdBy;
-
-        return $clone;
-    }
-
-    public function withoutCreatedBy(): self
-    {
-        $clone = clone $this;
-        unset($clone->createdBy);
-
-        return $clone;
-    }
-
-    public function withLastMessage(ConversationLastMessage $lastMessage): self
-    {
-        $clone = clone $this;
-        $clone->lastMessage = $lastMessage;
-
-        return $clone;
-    }
-
-    public function withoutLastMessage(): self
-    {
-        $clone = clone $this;
-        unset($clone->lastMessage);
-
-        return $clone;
-    }
-
     public function withLastMessageAt(DateTime $lastMessageAt): self
     {
         $clone = clone $this;
@@ -328,22 +295,6 @@ class Conversation
     {
         $clone = clone $this;
         unset($clone->lastMessageAt);
-
-        return $clone;
-    }
-
-    public function withLastMessageBy(User $lastMessageBy): self
-    {
-        $clone = clone $this;
-        $clone->lastMessageBy = $lastMessageBy;
-
-        return $clone;
-    }
-
-    public function withoutLastMessageBy(): self
-    {
-        $clone = clone $this;
-        unset($clone->lastMessageBy);
 
         return $clone;
     }
@@ -470,6 +421,54 @@ class Conversation
         return $clone;
     }
 
+    public function withCreatedBy(User $createdBy): self
+    {
+        $clone = clone $this;
+        $clone->createdBy = $createdBy;
+
+        return $clone;
+    }
+
+    public function withoutCreatedBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->createdBy);
+
+        return $clone;
+    }
+
+    public function withLastMessage(ConversationLastMessage $lastMessage): self
+    {
+        $clone = clone $this;
+        $clone->lastMessage = $lastMessage;
+
+        return $clone;
+    }
+
+    public function withoutLastMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastMessage);
+
+        return $clone;
+    }
+
+    public function withLastMessageBy(User $lastMessageBy): self
+    {
+        $clone = clone $this;
+        $clone->lastMessageBy = $lastMessageBy;
+
+        return $clone;
+    }
+
+    public function withoutLastMessageBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastMessageBy);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -491,21 +490,9 @@ class Conversation
         }
         $conversationId = $input->{'conversationId'};
         $createdAt = new DateTime($input->{'createdAt'});
-        $createdBy = null;
-        if (isset($input->{'createdBy'})) {
-            $createdBy = User::buildFromInput($input->{'createdBy'}, validate: $validate);
-        }
-        $lastMessage = null;
-        if (isset($input->{'lastMessage'})) {
-            $lastMessage = ConversationLastMessage::buildFromInput($input->{'lastMessage'}, validate: $validate);
-        }
         $lastMessageAt = null;
         if (isset($input->{'lastMessageAt'})) {
             $lastMessageAt = new DateTime($input->{'lastMessageAt'});
-        }
-        $lastMessageBy = null;
-        if (isset($input->{'lastMessageBy'})) {
-            $lastMessageBy = User::buildFromInput($input->{'lastMessageBy'}, validate: $validate);
         }
         $mainUser = User::buildFromInput($input->{'mainUser'}, validate: $validate);
         $notificationRoles = null;
@@ -543,17 +530,29 @@ class Conversation
         $status = Status::from($input->{'status'});
         $title = $input->{'title'};
         $visibility = ConversationVisibility::from($input->{'visibility'});
+        $createdBy = null;
+        if (isset($input->{'createdBy'})) {
+            $createdBy = User::buildFromInput($input->{'createdBy'}, validate: $validate);
+        }
+        $lastMessage = null;
+        if (isset($input->{'lastMessage'})) {
+            $lastMessage = ConversationLastMessage::buildFromInput($input->{'lastMessage'}, validate: $validate);
+        }
+        $lastMessageBy = null;
+        if (isset($input->{'lastMessageBy'})) {
+            $lastMessageBy = User::buildFromInput($input->{'lastMessageBy'}, validate: $validate);
+        }
 
         $obj = new self($conversationId, $createdAt, $mainUser, $shortId, $status, $title, $visibility);
         $obj->category = $category;
-        $obj->createdBy = $createdBy;
-        $obj->lastMessage = $lastMessage;
         $obj->lastMessageAt = $lastMessageAt;
-        $obj->lastMessageBy = $lastMessageBy;
         $obj->notificationRoles = $notificationRoles;
         $obj->relatedTo = $relatedTo;
         $obj->relations = $relations;
         $obj->sharedWith = $sharedWith;
+        $obj->createdBy = $createdBy;
+        $obj->lastMessage = $lastMessage;
+        $obj->lastMessageBy = $lastMessageBy;
         return $obj;
     }
 
@@ -570,17 +569,8 @@ class Conversation
         }
         $output['conversationId'] = $this->conversationId;
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
-        if (isset($this->createdBy)) {
-            $output['createdBy'] = $this->createdBy->toJson();
-        }
-        if (isset($this->lastMessage)) {
-            $output['lastMessage'] = ($this->lastMessage)->toJson();
-        }
         if (isset($this->lastMessageAt)) {
             $output['lastMessageAt'] = ($this->lastMessageAt)->format(DateTime::ATOM);
-        }
-        if (isset($this->lastMessageBy)) {
-            $output['lastMessageBy'] = $this->lastMessageBy->toJson();
         }
         $output['mainUser'] = $this->mainUser->toJson();
         if (isset($this->notificationRoles)) {
@@ -605,6 +595,15 @@ class Conversation
         $output['status'] = $this->status->value;
         $output['title'] = $this->title;
         $output['visibility'] = ($this->visibility)->value;
+        if (isset($this->createdBy)) {
+            $output['createdBy'] = $this->createdBy->toJson();
+        }
+        if (isset($this->lastMessage)) {
+            $output['lastMessage'] = ($this->lastMessage)->toJson();
+        }
+        if (isset($this->lastMessageBy)) {
+            $output['lastMessageBy'] = $this->lastMessageBy->toJson();
+        }
 
         return $output;
     }
@@ -636,11 +635,11 @@ class Conversation
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
-        if (isset($this->lastMessage)) {
-            $this->lastMessage = clone $this->lastMessage;
-        }
         if (isset($this->lastMessageAt)) {
             $this->lastMessageAt = clone $this->lastMessageAt;
+        }
+        if (isset($this->lastMessage)) {
+            $this->lastMessage = clone $this->lastMessage;
         }
     }
 }

@@ -39,7 +39,6 @@ class AppInstallationPatchTarget
                 ],
             ],
         ],
-        'required' => null,
         'type' => 'object',
     ];
 

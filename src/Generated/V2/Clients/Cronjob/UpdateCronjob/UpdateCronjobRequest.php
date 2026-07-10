@@ -61,7 +61,7 @@ class UpdateCronjobRequest
                                 '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
                             ],
                             [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget',
+                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget',
                             ],
                         ],
                     ],

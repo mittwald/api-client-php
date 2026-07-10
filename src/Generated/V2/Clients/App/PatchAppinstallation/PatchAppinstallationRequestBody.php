@@ -28,15 +28,7 @@ class PatchAppinstallationRequestBody
             ],
             'systemSoftware' => [
                 'additionalProperties' => [
-                    'properties' => [
-                        'systemSoftwareVersion' => [
-                            'type' => 'string',
-                        ],
-                        'updatePolicy' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy',
-                        ],
-                    ],
-                    'type' => 'object',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
                 ],
                 'type' => 'object',
             ],
@@ -60,7 +52,7 @@ class PatchAppinstallationRequestBody
     private ?string $description = null;
 
     /**
-     * @var PatchAppinstallationRequestBodySystemSoftwareItem[]|null
+     * @var mixed[]|null
      */
     private ?array $systemSoftware = null;
 
@@ -94,7 +86,7 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @return PatchAppinstallationRequestBodySystemSoftwareItem[]|null
+     * @return mixed[]|null
      */
     public function getSystemSoftware(): ?array
     {
@@ -181,10 +173,16 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @param PatchAppinstallationRequestBodySystemSoftwareItem[] $systemSoftware
+     * @param mixed[] $systemSoftware
      */
     public function withSystemSoftware(array $systemSoftware): self
     {
+        $validator = new Validator();
+        $validator->validate($systemSoftware, self::$internalValidationSchema['properties']['systemSoftware']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->systemSoftware = $systemSoftware;
 
@@ -263,7 +261,7 @@ class PatchAppinstallationRequestBody
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = array_map(fn (array|object $i): PatchAppinstallationRequestBodySystemSoftwareItem => PatchAppinstallationRequestBodySystemSoftwareItem::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+            $systemSoftware = (array)$input->{'systemSoftware'};
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
@@ -302,7 +300,7 @@ class PatchAppinstallationRequestBody
             $output['description'] = $this->description;
         }
         if (isset($this->systemSoftware)) {
-            $output['systemSoftware'] = array_map(fn (PatchAppinstallationRequestBodySystemSoftwareItem $i) => $i->toJson(), $this->systemSoftware);
+            $output['systemSoftware'] = $this->systemSoftware;
         }
         if (isset($this->updatePolicy)) {
             $output['updatePolicy'] = $this->updatePolicy->value;
@@ -340,8 +338,5 @@ class PatchAppinstallationRequestBody
 
     public function __clone()
     {
-        if (isset($this->systemSoftware)) {
-            $this->systemSoftware = array_map(fn (PatchAppinstallationRequestBodySystemSoftwareItem $i) => clone $i, $this->systemSoftware);
-        }
     }
 }

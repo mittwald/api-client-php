@@ -26,6 +26,9 @@ class ListInvitesForCustomerRequest
             'skip' => [
                 'type' => 'integer',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'customerId',
@@ -37,6 +40,8 @@ class ListInvitesForCustomerRequest
     private ?int $limit = null;
 
     private ?int $skip = null;
+
+    private ?string $searchTerm = null;
 
     private array $headers = [
 
@@ -60,6 +65,11 @@ class ListInvitesForCustomerRequest
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function withCustomerId(string $customerId): self
@@ -120,6 +130,28 @@ class ListInvitesForCustomerRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -144,10 +176,15 @@ class ListInvitesForCustomerRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
 
         $obj = new self($customerId);
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->searchTerm = $searchTerm;
         return $obj;
     }
 
@@ -165,6 +202,9 @@ class ListInvitesForCustomerRequest
         }
         if (isset($this->skip)) {
             $output['skip'] = $this->skip;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
         }
 
         return $output;
@@ -232,6 +272,9 @@ class ListInvitesForCustomerRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
         }
         return [
             'query' => $query,

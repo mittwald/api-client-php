@@ -26,6 +26,12 @@ class RequestAppinstallationRequestBody
             'installationPath' => [
                 'type' => 'string',
             ],
+            'systemSoftware' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
+                ],
+                'type' => 'object',
+            ],
             'updatePolicy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
             ],
@@ -50,6 +56,11 @@ class RequestAppinstallationRequestBody
     private string $description;
 
     private ?string $installationPath = null;
+
+    /**
+     * @var mixed[]|null
+     */
+    private ?array $systemSoftware = null;
 
     private AppUpdatePolicy $updatePolicy;
 
@@ -82,6 +93,14 @@ class RequestAppinstallationRequestBody
     public function getInstallationPath(): ?string
     {
         return $this->installationPath ?? null;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public function getSystemSoftware(): ?array
+    {
+        return $this->systemSoftware ?? null;
     }
 
     public function getUpdatePolicy(): AppUpdatePolicy
@@ -147,6 +166,31 @@ class RequestAppinstallationRequestBody
         return $clone;
     }
 
+    /**
+     * @param mixed[] $systemSoftware
+     */
+    public function withSystemSoftware(array $systemSoftware): self
+    {
+        $validator = new Validator();
+        $validator->validate($systemSoftware, self::$internalValidationSchema['properties']['systemSoftware']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->systemSoftware = $systemSoftware;
+
+        return $clone;
+    }
+
+    public function withoutSystemSoftware(): self
+    {
+        $clone = clone $this;
+        unset($clone->systemSoftware);
+
+        return $clone;
+    }
+
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -187,11 +231,16 @@ class RequestAppinstallationRequestBody
         if (isset($input->{'installationPath'})) {
             $installationPath = $input->{'installationPath'};
         }
+        $systemSoftware = null;
+        if (isset($input->{'systemSoftware'})) {
+            $systemSoftware = (array)$input->{'systemSoftware'};
+        }
         $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appVersionId, $description, $updatePolicy, $userInputs);
         $obj->installationPath = $installationPath;
+        $obj->systemSoftware = $systemSoftware;
         return $obj;
     }
 
@@ -207,6 +256,9 @@ class RequestAppinstallationRequestBody
         $output['description'] = $this->description;
         if (isset($this->installationPath)) {
             $output['installationPath'] = $this->installationPath;
+        }
+        if (isset($this->systemSoftware)) {
+            $output['systemSoftware'] = $this->systemSoftware;
         }
         $output['updatePolicy'] = $this->updatePolicy->value;
         $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);

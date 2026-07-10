@@ -43,6 +43,7 @@ class InvoiceSettingsStatus
                     'returnDebitNoteWaitingForPayment',
                     'debtWrittenOff',
                     'bankrupt',
+                    'notReachable',
                 ],
                 'type' => 'string',
             ],

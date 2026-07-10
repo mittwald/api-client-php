@@ -59,6 +59,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZon
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetContactVerification\GetContactVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotOKResponse;
@@ -78,12 +80,23 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCert
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListContactVerifications\ListContactVerificationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByPAccount\MigrationListMigrationsByPAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationListMigrationsByProjectId\MigrationListMigrationsByProjectIdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\MigrationOrderDomainMigration\MigrationOrderDomainMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendContactVerificationEmail\ResendContactVerificationEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateRequest;
@@ -521,6 +534,16 @@ interface DomainClient
      */
     public function deleteDomain(DeleteDomainRequest $request): DeleteDomainOKResponse;
     /**
+     * Get a Contact-Verification.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-contact-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetContactVerificationRequest $request An object representing the request for this operation
+     * @return GetContactVerificationOKResponse OK
+     */
+    public function getContactVerification(GetContactVerificationRequest $request): GetContactVerificationOKResponse;
+    /**
      * Get a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain
@@ -540,6 +563,16 @@ interface DomainClient
      * @return GetLatestScreenshotOKResponse OK
      */
     public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshotOKResponse;
+    /**
+     * List Contact-Verifications belonging to the executing user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-contact-verifications
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListContactVerificationsRequest $request An object representing the request for this operation
+     * @return ListContactVerificationsOKResponse OK
+     */
+    public function listContactVerifications(ListContactVerificationsRequest $request): ListContactVerificationsOKResponse;
     /**
      * List Domains
      *
@@ -573,6 +606,56 @@ interface DomainClient
      * @param ListTldsRequest $request An object representing the request for this operation
      */
     public function listTlds(ListTldsRequest $request): ListTldsOKResponse;
+    /**
+     * Check if a Domain-Migration from a pAccount into a Project is possible.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-check-migration-is-possible
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationCheckMigrationIsPossibleRequest $request An object representing the request for this operation
+     * @return MigrationCheckMigrationIsPossibleOKResponse OK
+     */
+    public function migrationCheckMigrationIsPossible(MigrationCheckMigrationIsPossibleRequest $request): MigrationCheckMigrationIsPossibleOKResponse;
+    /**
+     * List Domain-Migrations belonging to a pAccount.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-list-migrations-by-p-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsByPAccountRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsByPAccountOKResponse OK
+     */
+    public function migrationListMigrationsByPAccount(MigrationListMigrationsByPAccountRequest $request): MigrationListMigrationsByPAccountOKResponse;
+    /**
+     * List Domain-Migrations belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-list-migrations-by-project-id
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsByProjectIdRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsByProjectIdOKResponse OK
+     */
+    public function migrationListMigrationsByProjectId(MigrationListMigrationsByProjectIdRequest $request): MigrationListMigrationsByProjectIdOKResponse;
+    /**
+     * Order a Domain-Migration from a pAccount into a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-migration-order-domain-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationOrderDomainMigrationRequest $request An object representing the request for this operation
+     * @return MigrationOrderDomainMigrationCreatedResponse The ID of the created Domain-Migration.
+     */
+    public function migrationOrderDomainMigration(MigrationOrderDomainMigrationRequest $request): MigrationOrderDomainMigrationCreatedResponse;
+    /**
+     * Resends a Contact-Verification email.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-contact-verification-email
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ResendContactVerificationEmailRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function resendContactVerificationEmail(ResendContactVerificationEmailRequest $request): EmptyResponse;
     /**
      * Resend a Domain email.
      *

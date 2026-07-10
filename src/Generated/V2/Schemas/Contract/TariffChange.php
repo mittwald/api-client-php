@@ -25,6 +25,9 @@ class TariffChange
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'isForced' => [
+                'type' => 'boolean',
+            ],
             'newArticles' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.contract.Article',
@@ -51,6 +54,8 @@ class TariffChange
         'type' => 'object',
     ];
 
+    private ?bool $isForced = null;
+
     /**
      * @var Article[]
      */
@@ -70,6 +75,11 @@ class TariffChange
         $this->newArticles = $newArticles;
         $this->scheduledAtDate = $scheduledAtDate;
         $this->targetDate = $targetDate;
+    }
+
+    public function getIsForced(): ?bool
+    {
+        return $this->isForced ?? null;
     }
 
     /**
@@ -93,6 +103,28 @@ class TariffChange
     public function getTargetDate(): DateTime
     {
         return $this->targetDate;
+    }
+
+    public function withIsForced(bool $isForced): self
+    {
+        $validator = new Validator();
+        $validator->validate($isForced, self::$internalValidationSchema['properties']['isForced']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isForced = $isForced;
+
+        return $clone;
+    }
+
+    public function withoutIsForced(): self
+    {
+        $clone = clone $this;
+        unset($clone->isForced);
+
+        return $clone;
     }
 
     /**
@@ -159,6 +191,10 @@ class TariffChange
             static::validateInput($input);
         }
 
+        $isForced = null;
+        if (isset($input->{'isForced'})) {
+            $isForced = (bool)($input->{'isForced'});
+        }
         $newArticles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
         $scheduledAtDate = new DateTime($input->{'scheduledAtDate'});
         $scheduledByUserId = null;
@@ -168,6 +204,7 @@ class TariffChange
         $targetDate = new DateTime($input->{'targetDate'});
 
         $obj = new self($newArticles, $scheduledAtDate, $targetDate);
+        $obj->isForced = $isForced;
         $obj->scheduledByUserId = $scheduledByUserId;
         return $obj;
     }
@@ -180,6 +217,9 @@ class TariffChange
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->isForced)) {
+            $output['isForced'] = $this->isForced;
+        }
         $output['newArticles'] = array_map(fn (Article $i): array => $i->toJson(), $this->newArticles);
         $output['scheduledAtDate'] = ($this->scheduledAtDate)->format(DateTime::ATOM);
         if (isset($this->scheduledByUserId)) {

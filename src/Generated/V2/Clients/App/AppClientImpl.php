@@ -9,16 +9,16 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
@@ -146,31 +146,6 @@ class AppClientImpl implements AppClient
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Trigger a runtime action belonging to an AppInstallation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-execute-action
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExecuteActionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The given action has been executed.
-     */
-    public function executeAction(ExecuteActionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ExecuteActionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExecuteActionBadRequestResponse::fromResponse($httpResponse),
-            404 => ExecuteActionNotFoundResponse::fromResponse($httpResponse),
-            412 => ExecuteActionPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => ExecuteActionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExecuteActionDefaultResponse::fromResponse($httpResponse),
-        });
     }
 
     /**
@@ -696,6 +671,34 @@ class AppClientImpl implements AppClient
             404 => UnlinkDatabaseNotFoundResponse::fromResponse($httpResponse),
             429 => UnlinkDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => UnlinkDatabaseDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Trigger a runtime action belonging to an AppInstallation.
+     *
+     * This endpoint is deprecated and will be removed in a future version. No AppInstallation supports runtime actions, making this endpoint non-functional.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-installation-execute-action
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedAppInstallationExecuteActionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The given action has been executed.
+     */
+    public function deprecatedAppInstallationExecuteAction(DeprecatedAppInstallationExecuteActionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedAppInstallationExecuteActionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedAppInstallationExecuteActionBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedAppInstallationExecuteActionNotFoundResponse::fromResponse($httpResponse),
+            412 => DeprecatedAppInstallationExecuteActionPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeprecatedAppInstallationExecuteActionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedAppInstallationExecuteActionDefaultResponse::fromResponse($httpResponse),
         });
     }
 

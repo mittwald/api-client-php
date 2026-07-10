@@ -20,7 +20,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
@@ -40,10 +39,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordDe
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaOKResponse;
@@ -77,14 +72,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCheckToken\DeprecatedUserCheckTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest;
@@ -224,6 +223,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenNotFound
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetCurrentSessionStatus\GetCurrentSessionStatusTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
@@ -342,6 +345,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvat
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesBadRequestResponse;
@@ -434,6 +438,33 @@ class UserClientImpl implements UserClient
             400 => DeprecatedUserChangeEmailBadRequestResponse::fromResponse($httpResponse),
             429 => DeprecatedUserChangeEmailTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedUserChangeEmailDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check token for validity.
+     *
+     * Deprecated. Use `GET /users/self/sessions/current/status` instead,
+     * which returns status informationen of the current session.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-check-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserCheckTokenRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserCheckTokenOKResponse Your token is valid.
+     */
+    public function deprecatedUserCheckToken(DeprecatedUserCheckTokenRequest $request): DeprecatedUserCheckTokenOKResponse
+    {
+        $httpRequest = new Request(DeprecatedUserCheckTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedUserCheckTokenOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserCheckTokenTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedUserCheckTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1162,7 +1193,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Get a password policy.
+     * DEPRECAED. Use `GET` `/v2/password-policies/{passwordPolicy}` instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
      * @throws GuzzleException
@@ -1226,8 +1257,8 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
-            400 => UntypedResponse::fromResponse($httpResponse),
-            401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
+            204 => new EmptyResponse($httpResponse),
+            400, 401 => UntypedResponse::fromResponse($httpResponse),
             429 => AuthenticateTooManyRequestsResponse::fromResponse($httpResponse),
             default => AuthenticateDefaultResponse::fromResponse($httpResponse),
         });
@@ -1250,6 +1281,7 @@ class UserClientImpl implements UserClient
             return AuthenticateMfaOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
             400 => AuthenticateMfaBadRequestResponse::fromResponse($httpResponse),
             408 => UntypedResponse::fromResponse($httpResponse),
             429 => AuthenticateMfaTooManyRequestsResponse::fromResponse($httpResponse),
@@ -1325,28 +1357,6 @@ class UserClientImpl implements UserClient
             400 => ChangePasswordBadRequestResponse::fromResponse($httpResponse),
             429 => ChangePasswordTooManyRequestsResponse::fromResponse($httpResponse),
             default => ChangePasswordDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Check token for validity.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-check-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CheckTokenRequest $request An object representing the request for this operation
-     * @return CheckTokenOKResponse Your token is valid.
-     */
-    public function checkToken(CheckTokenRequest $request): CheckTokenOKResponse
-    {
-        $httpRequest = new Request(CheckTokenRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return CheckTokenOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => CheckTokenTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CheckTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1530,7 +1540,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             202 => UntypedResponse::fromResponse($httpResponse),
             400 => DeleteUserBadRequestResponse::fromResponse($httpResponse),
-            409 => DeleteUserConflictResponse::fromResponse($httpResponse),
+            412 => DeleteUserPreconditionFailedResponse::fromResponse($httpResponse),
             429 => DeleteUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeleteUserDefaultResponse::fromResponse($httpResponse),
         });
@@ -1625,6 +1635,28 @@ class UserClientImpl implements UserClient
             404 => GetApiTokenNotFoundResponse::fromResponse($httpResponse),
             429 => GetApiTokenTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetApiTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check status of the current session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-current-session-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCurrentSessionStatusRequest $request An object representing the request for this operation
+     * @return GetCurrentSessionStatusOKResponse Status of the current session.
+     */
+    public function getCurrentSessionStatus(GetCurrentSessionStatusRequest $request): GetCurrentSessionStatusOKResponse
+    {
+        $httpRequest = new Request(GetCurrentSessionStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetCurrentSessionStatusOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetCurrentSessionStatusTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetCurrentSessionStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -2183,6 +2215,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ResendVerificationEmailBadRequestResponse::fromResponse($httpResponse),
+            412 => ResendVerificationEmailPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ResendVerificationEmailTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResendVerificationEmailDefaultResponse::fromResponse($httpResponse),
         });

@@ -61,6 +61,7 @@ class CronjobRequest
                 'type' => 'string',
             ],
             'failedExecutionAlertThreshold' => [
+                'maximum' => 80,
                 'minimum' => 1,
                 'type' => 'integer',
             ],
@@ -74,7 +75,7 @@ class CronjobRequest
                         '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget',
                     ],
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget',
                     ],
                 ],
             ],
@@ -126,7 +127,7 @@ class CronjobRequest
 
     private string $interval;
 
-    private AppInstallationTarget|ContainerTarget|null $target = null;
+    private AppInstallationTarget|ServiceTarget|null $target = null;
 
     private ?string $timeZone = null;
 
@@ -188,7 +189,7 @@ class CronjobRequest
         return $this->interval;
     }
 
-    public function getTarget(): AppInstallationTarget|ContainerTarget|null
+    public function getTarget(): AppInstallationTarget|ServiceTarget|null
     {
         return $this->target;
     }
@@ -368,7 +369,7 @@ class CronjobRequest
         return $clone;
     }
 
-    public function withTarget(AppInstallationTarget|ContainerTarget $target): self
+    public function withTarget(AppInstallationTarget|ServiceTarget $target): self
     {
         $clone = clone $this;
         $clone->target = $target;
@@ -470,7 +471,7 @@ class CronjobRequest
         if (isset($input->{'target'})) {
             $target = match (true) {
                 AppInstallationTarget::validateInput($input->{'target'}, true) => AppInstallationTarget::buildFromInput($input->{'target'}, validate: $validate),
-                ContainerTarget::validateInput($input->{'target'}, true) => ContainerTarget::buildFromInput($input->{'target'}, validate: $validate),
+                ServiceTarget::validateInput($input->{'target'}, true) => ServiceTarget::buildFromInput($input->{'target'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'target' from JSON"),
             };
         }
@@ -525,7 +526,7 @@ class CronjobRequest
         $output['interval'] = $this->interval;
         if (isset($this->target)) {
             $output['target'] = match (true) {
-                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target->toJson(),
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ServiceTarget => $this->target->toJson(),
             };
         }
         if (isset($this->timeZone)) {
@@ -569,7 +570,7 @@ class CronjobRequest
         }
         if (isset($this->target)) {
             $this->target = match (true) {
-                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ContainerTarget => $this->target,
+                ($this->target) instanceof AppInstallationTarget, ($this->target) instanceof ServiceTarget => $this->target,
             };
         }
     }

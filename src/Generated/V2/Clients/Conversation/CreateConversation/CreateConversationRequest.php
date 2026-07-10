@@ -26,6 +26,10 @@ class CreateConversationRequest
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'messageContent' => [
+                        'maxLength' => 8000,
+                        'type' => 'string',
+                    ],
                     'notificationRoles' => [
                         'items' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',

@@ -8,4 +8,5 @@ enum ServiceRequestMessageContent: string
 {
     case relocation = 'relocation';
     case call = 'call';
+    case mailSendLimitIncrease = 'mailSendLimitIncrease';
 }

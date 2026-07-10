@@ -34,6 +34,8 @@ managed apps running in the same project).
 
 To **delete** an existing container from a stack using a `PUT` request, simply omit
 it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
+
+Keys must be strings of max 63 characters.
 ',
                         'type' => 'object',
                     ],

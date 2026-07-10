@@ -9,6 +9,12 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerAcceptModelTerms\CustomerAcceptModelTermsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerCreateKey\CustomerCreateKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerCreateKey\CustomerCreateKeyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerCreateKey\CustomerCreateKeyCreatedResponse;
@@ -26,6 +32,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerDeleteKey\Customer
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerDeleteKey\CustomerDeleteKeyPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerDeleteKey\CustomerDeleteKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerDeleteKey\CustomerDeleteKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetDetailedModels\CustomerGetDetailedModelsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyForbiddenResponse;
@@ -40,6 +53,20 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGe
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageForbiddenResponse;
@@ -56,6 +83,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\Customer
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsForbiddenResponse;
@@ -80,6 +113,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDe
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDeleteKeyPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDeleteKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDeleteKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetDetailedModels\ProjectGetDetailedModelsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKey\ProjectGetKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKey\ProjectGetKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKey\ProjectGetKeyForbiddenResponse;
@@ -101,6 +141,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGet
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyDefaultResponse;
@@ -131,6 +178,33 @@ class AIHostingClientImpl implements AIHostingClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Accepts the model terms for a customer.
+     *
+     * Accept all model terms for a customer that are not already accepted. If there are no terms to accept, this endpoint will do nothing and return 204.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-accept-model-terms
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerAcceptModelTermsRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function customerAcceptModelTerms(CustomerAcceptModelTermsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(CustomerAcceptModelTermsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerAcceptModelTermsBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerAcceptModelTermsForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerAcceptModelTermsNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerAcceptModelTermsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerAcceptModelTermsDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
@@ -189,6 +263,31 @@ class AIHostingClientImpl implements AIHostingClient
     }
 
     /**
+     * Get a list of currently active models.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-detailed-models
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetDetailedModelsRequest $request An object representing the request for this operation
+     * @return CustomerGetDetailedModelsOKResponse List of currently active models.
+     */
+    public function customerGetDetailedModels(CustomerGetDetailedModelsRequest $request): CustomerGetDetailedModelsOKResponse
+    {
+        $httpRequest = new Request(CustomerGetDetailedModelsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerGetDetailedModelsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerGetDetailedModelsBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerGetDetailedModelsForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerGetDetailedModelsNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerGetDetailedModelsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerGetDetailedModelsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a key of a customer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-key
@@ -239,7 +338,57 @@ class AIHostingClientImpl implements AIHostingClient
     }
 
     /**
-     * Get ai hosting plan and usages of a customer.
+     * Get ai hosting plan and usages of a customer by planId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plan
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetPlanRequest $request An object representing the request for this operation
+     * @return CustomerGetPlanOKResponse The customer usage and plan.
+     */
+    public function customerGetPlan(CustomerGetPlanRequest $request): CustomerGetPlanOKResponse
+    {
+        $httpRequest = new Request(CustomerGetPlanRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerGetPlanOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerGetPlanBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerGetPlanForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerGetPlanNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerGetPlanTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerGetPlanDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all ai hosting plans of a customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plans
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetPlansRequest $request An object representing the request for this operation
+     * @return CustomerGetPlansOKResponse The list of plans with their current usage.
+     */
+    public function customerGetPlans(CustomerGetPlansRequest $request): CustomerGetPlansOKResponse
+    {
+        $httpRequest = new Request(CustomerGetPlansRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerGetPlansOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerGetPlansBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerGetPlansForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerGetPlansNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerGetPlansTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerGetPlansDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get ai hosting plan and usages of a customer. Deprecated: use /ai-hostings/{planId} instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-usage
      * @throws GuzzleException
@@ -286,6 +435,31 @@ class AIHostingClientImpl implements AIHostingClient
             412 => CustomerUpdateKeyPreconditionFailedResponse::fromResponse($httpResponse),
             429 => CustomerUpdateKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => CustomerUpdateKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Renames an AI hosting plan.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-update-plan
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerUpdatePlanRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function customerUpdatePlan(CustomerUpdatePlanRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(CustomerUpdatePlanRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerUpdatePlanBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerUpdatePlanForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerUpdatePlanNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerUpdatePlanTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerUpdatePlanDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -370,6 +544,31 @@ class AIHostingClientImpl implements AIHostingClient
     }
 
     /**
+     * Get a list of currently active models.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-detailed-models
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectGetDetailedModelsRequest $request An object representing the request for this operation
+     * @return ProjectGetDetailedModelsOKResponse List of currently active models.
+     */
+    public function projectGetDetailedModels(ProjectGetDetailedModelsRequest $request): ProjectGetDetailedModelsOKResponse
+    {
+        $httpRequest = new Request(ProjectGetDetailedModelsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ProjectGetDetailedModelsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ProjectGetDetailedModelsBadRequestResponse::fromResponse($httpResponse),
+            403 => ProjectGetDetailedModelsForbiddenResponse::fromResponse($httpResponse),
+            404 => ProjectGetDetailedModelsNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectGetDetailedModelsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ProjectGetDetailedModelsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a key of a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-get-key
@@ -441,6 +640,34 @@ class AIHostingClientImpl implements AIHostingClient
             404 => ProjectGetUsageNotFoundResponse::fromResponse($httpResponse),
             429 => ProjectGetUsageTooManyRequestsResponse::fromResponse($httpResponse),
             default => ProjectGetUsageDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Links a container with a project licence.
+     *
+     * Links a container with a project licence. This will emit a WebUiContainerLinkedEvent and update the licence with the container metadata.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-link-container
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectLinkContainerRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function projectLinkContainer(ProjectLinkContainerRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ProjectLinkContainerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ProjectLinkContainerBadRequestResponse::fromResponse($httpResponse),
+            403 => ProjectLinkContainerForbiddenResponse::fromResponse($httpResponse),
+            404 => ProjectLinkContainerNotFoundResponse::fromResponse($httpResponse),
+            412 => ProjectLinkContainerPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ProjectLinkContainerTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ProjectLinkContainerDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -54,8 +54,6 @@ interface MiscClient
     /**
      * Check if an address exists.
      *
-     * Only the DACH region is currently supported.
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-address
      * @throws GuzzleException
      * @throws UnexpectedResponseException

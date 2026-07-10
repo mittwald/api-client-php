@@ -40,6 +40,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedi
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
@@ -262,6 +264,26 @@ interface DatabaseClient
      * @return ListRedisVersionsOKResponse OK
      */
     public function listRedisVersions(ListRedisVersionsRequest $request): ListRedisVersionsOKResponse;
+    /**
+     * Update a MySqlDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-patch-mysql-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function patchMysqlDatabase(PatchMysqlDatabaseRequest $request): EmptyResponse;
+    /**
+     * Update a RedisDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-patch-redis-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchRedisDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function patchRedisDatabase(PatchRedisDatabaseRequest $request): EmptyResponse;
     /**
      * Update a MySQLDatabase's default character settings.
      *

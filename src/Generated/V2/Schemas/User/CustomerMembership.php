@@ -29,6 +29,10 @@ class CustomerMembership
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'id' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'memberSince' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -45,18 +49,22 @@ class CustomerMembership
         'required' => [
             'role',
             'memberSince',
+            'id',
         ],
         'type' => 'object',
     ];
 
     private ?DateTime $expiresAt = null;
 
+    private string $id;
+
     private DateTime $memberSince;
 
     private CustomerMembershipRole $role;
 
-    public function __construct(DateTime $memberSince, CustomerMembershipRole $role)
+    public function __construct(string $id, DateTime $memberSince, CustomerMembershipRole $role)
     {
+        $this->id = $id;
         $this->memberSince = $memberSince;
         $this->role = $role;
     }
@@ -64,6 +72,11 @@ class CustomerMembership
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getMemberSince(): DateTime
@@ -88,6 +101,20 @@ class CustomerMembership
     {
         $clone = clone $this;
         unset($clone->expiresAt);
+
+        return $clone;
+    }
+
+    public function withId(string $id): self
+    {
+        $validator = new Validator();
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->id = $id;
 
         return $clone;
     }
@@ -127,10 +154,11 @@ class CustomerMembership
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
+        $id = $input->{'id'};
         $memberSince = new DateTime($input->{'memberSince'});
         $role = CustomerMembershipRole::from($input->{'role'});
 
-        $obj = new self($memberSince, $role);
+        $obj = new self($id, $memberSince, $role);
         $obj->expiresAt = $expiresAt;
         return $obj;
     }
@@ -146,6 +174,7 @@ class CustomerMembership
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
+        $output['id'] = $this->id;
         $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         $output['role'] = ($this->role)->value;
 

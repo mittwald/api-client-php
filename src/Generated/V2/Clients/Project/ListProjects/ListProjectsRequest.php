@@ -31,7 +31,7 @@ class ListProjectsRequest
             'limit' => [
                 'type' => 'integer',
                 'default' => 10000,
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
@@ -39,7 +39,7 @@ class ListProjectsRequest
             ],
             'page' => [
                 'type' => 'integer',
-                'minimum' => 1,
+                'minimum' => 0,
             ],
             'sort' => [
                 'type' => 'string',
