@@ -9,7 +9,7 @@ use JsonSchema\Validator;
 
 class CustomerUpdatePlanRequest
 {
-    public const method = 'patch';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -28,9 +28,6 @@ class CustomerUpdatePlanRequest
                     'name' => [
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'name',
                 ],
                 'type' => 'object',
             ],

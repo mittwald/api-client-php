@@ -18,22 +18,21 @@ class CustomerUpdatePlanRequestBody
                 'type' => 'string',
             ],
         ],
-        'required' => [
-            'name',
-        ],
         'type' => 'object',
     ];
 
-    private string $name;
+    private ?string $name = null;
 
-    public function __construct(string $name)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->name = $name;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? null;
     }
 
     public function withName(string $name): self
@@ -46,6 +45,14 @@ class CustomerUpdatePlanRequestBody
 
         $clone = clone $this;
         $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withoutName(): self
+    {
+        $clone = clone $this;
+        unset($clone->name);
 
         return $clone;
     }
@@ -65,10 +72,13 @@ class CustomerUpdatePlanRequestBody
             static::validateInput($input);
         }
 
-        $name = $input->{'name'};
+        $name = null;
+        if (isset($input->{'name'})) {
+            $name = $input->{'name'};
+        }
 
-        $obj = new self($name);
-
+        $obj = new self();
+        $obj->name = $name;
         return $obj;
     }
 
@@ -80,7 +90,9 @@ class CustomerUpdatePlanRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['name'] = $this->name;
+        if (isset($this->name)) {
+            $output['name'] = $this->name;
+        }
 
         return $output;
     }

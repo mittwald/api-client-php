@@ -25,11 +25,11 @@ class AddComponentTemplateConfigUserInputsItem
     private static array $internalValidationSchema = [
         'properties' => [
             'name' => [
-                'example' => 'MYSQL_DATABASE',
+                'example' => 'HOST',
                 'type' => 'string',
             ],
             'value' => [
-                'example' => 'app',
+                'example' => 'kuma.example.org',
                 'type' => 'string',
             ],
         ],

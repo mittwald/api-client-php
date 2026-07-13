@@ -39,6 +39,9 @@ class PlanOptions
                 'default' => false,
                 'type' => 'boolean',
             ],
+            'name' => [
+                'type' => 'string',
+            ],
             'nextTokenReset' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -97,6 +100,8 @@ class PlanOptions
 
     private bool $modelTermsApprovalRequired = false;
 
+    private ?string $name = null;
+
     private DateTime $nextTokenReset;
 
     private ?string $planId = null;
@@ -137,6 +142,11 @@ class PlanOptions
     public function getModelTermsApprovalRequired(): bool
     {
         return $this->modelTermsApprovalRequired;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name ?? null;
     }
 
     public function getNextTokenReset(): DateTime
@@ -215,6 +225,28 @@ class PlanOptions
 
         $clone = clone $this;
         $clone->modelTermsApprovalRequired = $modelTermsApprovalRequired;
+
+        return $clone;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withoutName(): self
+    {
+        $clone = clone $this;
+        unset($clone->name);
 
         return $clone;
     }
@@ -309,6 +341,10 @@ class PlanOptions
         if (isset($input->{'modelTermsApprovalRequired'})) {
             $modelTermsApprovalRequired = (bool)($input->{'modelTermsApprovalRequired'});
         }
+        $name = null;
+        if (isset($input->{'name'})) {
+            $name = $input->{'name'};
+        }
         $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         $planId = null;
         if (isset($input->{'planId'})) {
@@ -324,6 +360,7 @@ class PlanOptions
         $obj = new self($customerId, $keys, $nextTokenReset, $rateLimit, $tokens);
         $obj->deletedAt = $deletedAt;
         $obj->modelTermsApprovalRequired = $modelTermsApprovalRequired;
+        $obj->name = $name;
         $obj->planId = $planId;
         $obj->topUsages = $topUsages;
         return $obj;
@@ -343,6 +380,9 @@ class PlanOptions
         }
         $output['keys'] = $this->keys->toJson();
         $output['modelTermsApprovalRequired'] = $this->modelTermsApprovalRequired;
+        if (isset($this->name)) {
+            $output['name'] = $this->name;
+        }
         $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         if (isset($this->planId)) {
             $output['planId'] = $this->planId;

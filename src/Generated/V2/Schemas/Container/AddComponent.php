@@ -27,7 +27,7 @@ class AddComponent
             'templateConfig' => [
                 'properties' => [
                     'templateId' => [
-                        'example' => 'mysql',
+                        'example' => 'uptime-kuma',
                         'type' => 'string',
                     ],
                     'userInputs' => [
@@ -35,11 +35,11 @@ class AddComponent
                         'items' => [
                             'properties' => [
                                 'name' => [
-                                    'example' => 'MYSQL_DATABASE',
+                                    'example' => 'HOST',
                                     'type' => 'string',
                                 ],
                                 'value' => [
-                                    'example' => 'app',
+                                    'example' => 'kuma.example.org',
                                     'type' => 'string',
                                 ],
                             ],

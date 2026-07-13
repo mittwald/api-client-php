@@ -22,6 +22,9 @@ class ProjectGetUsageOKResponseBody
             'modelTermsApprovalRequired' => [
                 'type' => 'boolean',
             ],
+            'name' => [
+                'type' => 'string',
+            ],
             'nextTokenReset' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -42,6 +45,8 @@ class ProjectGetUsageOKResponseBody
 
     private bool $modelTermsApprovalRequired;
 
+    private ?string $name = null;
+
     private ?DateTime $nextTokenReset = null;
 
     private string $projectId;
@@ -61,6 +66,11 @@ class ProjectGetUsageOKResponseBody
     public function getModelTermsApprovalRequired(): bool
     {
         return $this->modelTermsApprovalRequired;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name ?? null;
     }
 
     public function getNextTokenReset(): ?DateTime
@@ -91,6 +101,28 @@ class ProjectGetUsageOKResponseBody
 
         $clone = clone $this;
         $clone->modelTermsApprovalRequired = $modelTermsApprovalRequired;
+
+        return $clone;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withoutName(): self
+    {
+        $clone = clone $this;
+        unset($clone->name);
 
         return $clone;
     }
@@ -142,6 +174,10 @@ class ProjectGetUsageOKResponseBody
 
         $keys = PlanUsage::buildFromInput($input->{'keys'}, validate: $validate);
         $modelTermsApprovalRequired = (bool)($input->{'modelTermsApprovalRequired'});
+        $name = null;
+        if (isset($input->{'name'})) {
+            $name = $input->{'name'};
+        }
         $nextTokenReset = null;
         if (isset($input->{'nextTokenReset'})) {
             $nextTokenReset = new DateTime($input->{'nextTokenReset'});
@@ -149,6 +185,7 @@ class ProjectGetUsageOKResponseBody
         $projectId = $input->{'projectId'};
 
         $obj = new self($keys, $modelTermsApprovalRequired, $projectId);
+        $obj->name = $name;
         $obj->nextTokenReset = $nextTokenReset;
         return $obj;
     }
@@ -163,6 +200,9 @@ class ProjectGetUsageOKResponseBody
         $output = [];
         $output['keys'] = $this->keys->toJson();
         $output['modelTermsApprovalRequired'] = $this->modelTermsApprovalRequired;
+        if (isset($this->name)) {
+            $output['name'] = $this->name;
+        }
         if (isset($this->nextTokenReset)) {
             $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         }
