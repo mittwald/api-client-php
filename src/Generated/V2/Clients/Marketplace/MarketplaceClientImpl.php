@@ -212,6 +212,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\Ex
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceRequest;
@@ -1255,6 +1256,7 @@ class MarketplaceClientImpl implements MarketplaceClient
             return ExtensionGetExtensionInstanceOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ExtensionGetExtensionInstanceForbiddenResponse::fromResponse($httpResponse),
             404 => ExtensionGetExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionGetExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionInstanceDefaultResponse::fromResponse($httpResponse),
