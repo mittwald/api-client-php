@@ -28,16 +28,20 @@ class DnsMxRecordSetManaged
                 'properties' => [
                     'after' => [
                         'properties' => [
-                            'fqdn' => [
-                                'type' => 'string',
-                            ],
-                            'priority' => [
-                                'type' => 'string',
+                            'mx' => [
+                                'properties' => [
+                                    'managed' => [
+                                        'type' => 'boolean',
+                                    ],
+                                ],
+                                'required' => [
+                                    'managed',
+                                ],
+                                'type' => 'object',
                             ],
                         ],
                         'required' => [
-                            'fqdn',
-                            'priority',
+                            'mx',
                         ],
                         'type' => 'object',
                     ],

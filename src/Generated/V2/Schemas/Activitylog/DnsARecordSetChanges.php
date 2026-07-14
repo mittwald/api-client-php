@@ -39,6 +39,10 @@ class DnsARecordSetChanges
                         'type' => 'array',
                     ],
                 ],
+                'required' => [
+                    'aRecords',
+                    'aaaaRecords',
+                ],
                 'type' => 'object',
             ],
             'before' => [
@@ -55,6 +59,10 @@ class DnsARecordSetChanges
                         ],
                         'type' => 'array',
                     ],
+                ],
+                'required' => [
+                    'aRecords',
+                    'aaaaRecords',
                 ],
                 'type' => 'object',
             ],

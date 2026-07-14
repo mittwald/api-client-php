@@ -8,7 +8,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryRequest;
@@ -49,8 +48,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStack
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStackVolumes\ListStackVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceRequest;
@@ -80,16 +77,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackReq
  */
 interface ContainerClient
 {
-    /**
-     * Add a component to a Stack.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-add-component
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param AddComponentRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function addComponent(AddComponentRequest $request): EmptyResponse;
     /**
      * Call pull-image webhook
      *
@@ -292,16 +279,6 @@ interface ContainerClient
      * @return ListStacksOKResponse OK
      */
     public function listStacks(ListStacksRequest $request): ListStacksOKResponse;
-    /**
-     * List Container Template statistics.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
-     * @return ListTemplateStatisticsOKResponse OK
-     */
-    public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse;
     /**
      * List Container Templates.
      *

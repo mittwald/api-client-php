@@ -24,64 +24,40 @@ class DnsMxRecordSetManagedChangesAfter
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'fqdn' => [
-                'type' => 'string',
-            ],
-            'priority' => [
-                'type' => 'string',
+            'mx' => [
+                'properties' => [
+                    'managed' => [
+                        'type' => 'boolean',
+                    ],
+                ],
+                'required' => [
+                    'managed',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'fqdn',
-            'priority',
+            'mx',
         ],
         'type' => 'object',
     ];
 
-    private string $fqdn;
+    private DnsMxRecordSetManagedChangesAfterMx $mx;
 
-    private string $priority;
-
-    public function __construct(string $fqdn, string $priority)
+    public function __construct(DnsMxRecordSetManagedChangesAfterMx $mx)
     {
-        $this->fqdn = $fqdn;
-        $this->priority = $priority;
+        $this->mx = $mx;
     }
 
-    public function getFqdn(): string
+    public function getMx(): DnsMxRecordSetManagedChangesAfterMx
     {
-        return $this->fqdn;
+        return $this->mx;
     }
 
-    public function getPriority(): string
+    public function withMx(DnsMxRecordSetManagedChangesAfterMx $mx): self
     {
-        return $this->priority;
-    }
-
-    public function withFqdn(string $fqdn): self
-    {
-        $validator = new Validator();
-        $validator->validate($fqdn, self::$internalValidationSchema['properties']['fqdn']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->fqdn = $fqdn;
-
-        return $clone;
-    }
-
-    public function withPriority(string $priority): self
-    {
-        $validator = new Validator();
-        $validator->validate($priority, self::$internalValidationSchema['properties']['priority']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->priority = $priority;
+        $clone->mx = $mx;
 
         return $clone;
     }
@@ -101,10 +77,9 @@ class DnsMxRecordSetManagedChangesAfter
             static::validateInput($input);
         }
 
-        $fqdn = $input->{'fqdn'};
-        $priority = $input->{'priority'};
+        $mx = DnsMxRecordSetManagedChangesAfterMx::buildFromInput($input->{'mx'}, validate: $validate);
 
-        $obj = new self($fqdn, $priority);
+        $obj = new self($mx);
 
         return $obj;
     }
@@ -117,8 +92,7 @@ class DnsMxRecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['fqdn'] = $this->fqdn;
-        $output['priority'] = $this->priority;
+        $output['mx'] = ($this->mx)->toJson();
 
         return $output;
     }
@@ -149,5 +123,6 @@ class DnsMxRecordSetManagedChangesAfter
 
     public function __clone()
     {
+        $this->mx = clone $this->mx;
     }
 }

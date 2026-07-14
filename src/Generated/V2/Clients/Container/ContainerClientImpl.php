@@ -10,15 +10,6 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentConflictResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentPreconditionFailedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\AddComponent\AddComponentTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceInternalServerErrorResponse;
@@ -199,13 +190,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplate
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplates\ListTemplatesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics\ListTemplateStatisticsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesForbiddenResponse;
@@ -307,34 +291,6 @@ class ContainerClientImpl implements ContainerClient
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Add a component to a Stack.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-add-component
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param AddComponentRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function addComponent(AddComponentRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(AddComponentRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => AddComponentBadRequestResponse::fromResponse($httpResponse),
-            403 => AddComponentForbiddenResponse::fromResponse($httpResponse),
-            404 => AddComponentNotFoundResponse::fromResponse($httpResponse),
-            409 => AddComponentConflictResponse::fromResponse($httpResponse),
-            412 => AddComponentPreconditionFailedResponse::fromResponse($httpResponse),
-            429 => AddComponentTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => AddComponentInternalServerErrorResponse::fromResponse($httpResponse),
-            default => AddComponentDefaultResponse::fromResponse($httpResponse),
-        });
     }
 
     /**
@@ -858,31 +814,6 @@ class ContainerClientImpl implements ContainerClient
             429 => ListStacksTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListStacksInternalServerErrorResponse::fromResponse($httpResponse),
             default => ListStacksDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List Container Template statistics.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
-     * @return ListTemplateStatisticsOKResponse OK
-     */
-    public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse
-    {
-        $httpRequest = new Request(ListTemplateStatisticsRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListTemplateStatisticsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListTemplateStatisticsBadRequestResponse::fromResponse($httpResponse),
-            404 => ListTemplateStatisticsNotFoundResponse::fromResponse($httpResponse),
-            429 => ListTemplateStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => ListTemplateStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
-            default => ListTemplateStatisticsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

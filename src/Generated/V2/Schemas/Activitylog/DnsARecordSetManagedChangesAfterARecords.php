@@ -17,47 +17,45 @@ use JsonSchema\Validator;
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class DnsARecordSetManagedChangesAfter
+class DnsARecordSetManagedChangesAfterARecords
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'aRecords' => [
-                'properties' => [
-                    'managedByIngressId' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'managedByIngressId',
-                ],
-                'type' => 'object',
+            'managedByIngressId' => [
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'aRecords',
+            'managedByIngressId',
         ],
         'type' => 'object',
     ];
 
-    private DnsARecordSetManagedChangesAfterARecords $aRecords;
+    private string $managedByIngressId;
 
-    public function __construct(DnsARecordSetManagedChangesAfterARecords $aRecords)
+    public function __construct(string $managedByIngressId)
     {
-        $this->aRecords = $aRecords;
+        $this->managedByIngressId = $managedByIngressId;
     }
 
-    public function getARecords(): DnsARecordSetManagedChangesAfterARecords
+    public function getManagedByIngressId(): string
     {
-        return $this->aRecords;
+        return $this->managedByIngressId;
     }
 
-    public function withARecords(DnsARecordSetManagedChangesAfterARecords $aRecords): self
+    public function withManagedByIngressId(string $managedByIngressId): self
     {
+        $validator = new Validator();
+        $validator->validate($managedByIngressId, self::$internalValidationSchema['properties']['managedByIngressId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->aRecords = $aRecords;
+        $clone->managedByIngressId = $managedByIngressId;
 
         return $clone;
     }
@@ -67,19 +65,19 @@ class DnsARecordSetManagedChangesAfter
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DnsARecordSetManagedChangesAfter Created instance
+     * @return DnsARecordSetManagedChangesAfterARecords Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DnsARecordSetManagedChangesAfter
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsARecordSetManagedChangesAfterARecords
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $aRecords = DnsARecordSetManagedChangesAfterARecords::buildFromInput($input->{'aRecords'}, validate: $validate);
+        $managedByIngressId = $input->{'managedByIngressId'};
 
-        $obj = new self($aRecords);
+        $obj = new self($managedByIngressId);
 
         return $obj;
     }
@@ -92,7 +90,7 @@ class DnsARecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['aRecords'] = ($this->aRecords)->toJson();
+        $output['managedByIngressId'] = $this->managedByIngressId;
 
         return $output;
     }
@@ -123,6 +121,5 @@ class DnsARecordSetManagedChangesAfter
 
     public function __clone()
     {
-        $this->aRecords = clone $this->aRecords;
     }
 }

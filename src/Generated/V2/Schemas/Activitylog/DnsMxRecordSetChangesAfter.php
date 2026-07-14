@@ -24,93 +24,47 @@ class DnsMxRecordSetChangesAfter
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'fqdn' => [
+            'mx' => [
                 'items' => [
-                    'type' => 'string',
-                ],
-                'type' => 'array',
-            ],
-            'priority' => [
-                'items' => [
-                    'nullable' => true,
-                    'type' => 'number',
+                    'type' => 'object',
                 ],
                 'type' => 'array',
             ],
         ],
         'required' => [
-            'fqdn',
-            'priority',
+            'mx',
         ],
         'type' => 'object',
     ];
 
     /**
-     * @var string[]
+     * @var DnsMxRecordSetChangesAfterMxItem[]
      */
-    private array $fqdn;
+    private array $mx;
 
     /**
-     * @var float[]
+     * @param DnsMxRecordSetChangesAfterMxItem[] $mx
      */
-    private array $priority;
-
-    /**
-     * @param string[] $fqdn
-     * @param float[] $priority
-     */
-    public function __construct(array $fqdn, array $priority)
+    public function __construct(array $mx)
     {
-        $this->fqdn = $fqdn;
-        $this->priority = $priority;
+        $this->mx = $mx;
     }
 
     /**
-     * @return string[]
+     * @return DnsMxRecordSetChangesAfterMxItem[]
      */
-    public function getFqdn(): array
+    public function getMx(): array
     {
-        return $this->fqdn;
+        return $this->mx;
     }
 
     /**
-     * @return float[]
+     * @param DnsMxRecordSetChangesAfterMxItem[] $mx
      */
-    public function getPriority(): array
+    public function withMx(array $mx): self
     {
-        return $this->priority;
-    }
-
-    /**
-     * @param string[] $fqdn
-     */
-    public function withFqdn(array $fqdn): self
-    {
-        $validator = new Validator();
-        $validator->validate($fqdn, self::$internalValidationSchema['properties']['fqdn']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->fqdn = $fqdn;
-
-        return $clone;
-    }
-
-    /**
-     * @param float[] $priority
-     */
-    public function withPriority(array $priority): self
-    {
-        $validator = new Validator();
-        $validator->validate($priority, self::$internalValidationSchema['properties']['priority']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->priority = $priority;
+        $clone->mx = $mx;
 
         return $clone;
     }
@@ -130,10 +84,9 @@ class DnsMxRecordSetChangesAfter
             static::validateInput($input);
         }
 
-        $fqdn = $input->{'fqdn'};
-        $priority = $input->{'priority'};
+        $mx = array_map(fn (array|object $i): DnsMxRecordSetChangesAfterMxItem => DnsMxRecordSetChangesAfterMxItem::buildFromInput($i, validate: $validate), $input->{'mx'});
 
-        $obj = new self($fqdn, $priority);
+        $obj = new self($mx);
 
         return $obj;
     }
@@ -146,8 +99,7 @@ class DnsMxRecordSetChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['fqdn'] = $this->fqdn;
-        $output['priority'] = $this->priority;
+        $output['mx'] = array_map(fn (DnsMxRecordSetChangesAfterMxItem $i) => $i->toJson(), $this->mx);
 
         return $output;
     }
@@ -178,5 +130,6 @@ class DnsMxRecordSetChangesAfter
 
     public function __clone()
     {
+        $this->mx = array_map(fn (DnsMxRecordSetChangesAfterMxItem $i) => clone $i, $this->mx);
     }
 }
