@@ -25,15 +25,7 @@ class DnsARecordSetManagedChangesAfter
     private static array $internalValidationSchema = [
         'properties' => [
             'aRecords' => [
-                'properties' => [
-                    'managedByIngressId' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'managedByIngressId',
-                ],
-                'type' => 'object',
+                'type' => 'string',
             ],
         ],
         'required' => [
@@ -42,20 +34,26 @@ class DnsARecordSetManagedChangesAfter
         'type' => 'object',
     ];
 
-    private DnsARecordSetManagedChangesAfterARecords $aRecords;
+    private string $aRecords;
 
-    public function __construct(DnsARecordSetManagedChangesAfterARecords $aRecords)
+    public function __construct(string $aRecords)
     {
         $this->aRecords = $aRecords;
     }
 
-    public function getARecords(): DnsARecordSetManagedChangesAfterARecords
+    public function getARecords(): string
     {
         return $this->aRecords;
     }
 
-    public function withARecords(DnsARecordSetManagedChangesAfterARecords $aRecords): self
+    public function withARecords(string $aRecords): self
     {
+        $validator = new Validator();
+        $validator->validate($aRecords, self::$internalValidationSchema['properties']['aRecords']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->aRecords = $aRecords;
 
@@ -77,7 +75,7 @@ class DnsARecordSetManagedChangesAfter
             static::validateInput($input);
         }
 
-        $aRecords = DnsARecordSetManagedChangesAfterARecords::buildFromInput($input->{'aRecords'}, validate: $validate);
+        $aRecords = $input->{'aRecords'};
 
         $obj = new self($aRecords);
 
@@ -92,7 +90,7 @@ class DnsARecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['aRecords'] = ($this->aRecords)->toJson();
+        $output['aRecords'] = $this->aRecords;
 
         return $output;
     }
@@ -123,6 +121,5 @@ class DnsARecordSetManagedChangesAfter
 
     public function __clone()
     {
-        $this->aRecords = clone $this->aRecords;
     }
 }

@@ -25,15 +25,7 @@ class DnsMxRecordSetManagedChangesAfter
     private static array $internalValidationSchema = [
         'properties' => [
             'mx' => [
-                'properties' => [
-                    'managed' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'managed',
-                ],
-                'type' => 'object',
+                'type' => 'string',
             ],
         ],
         'required' => [
@@ -42,20 +34,26 @@ class DnsMxRecordSetManagedChangesAfter
         'type' => 'object',
     ];
 
-    private DnsMxRecordSetManagedChangesAfterMx $mx;
+    private string $mx;
 
-    public function __construct(DnsMxRecordSetManagedChangesAfterMx $mx)
+    public function __construct(string $mx)
     {
         $this->mx = $mx;
     }
 
-    public function getMx(): DnsMxRecordSetManagedChangesAfterMx
+    public function getMx(): string
     {
         return $this->mx;
     }
 
-    public function withMx(DnsMxRecordSetManagedChangesAfterMx $mx): self
+    public function withMx(string $mx): self
     {
+        $validator = new Validator();
+        $validator->validate($mx, self::$internalValidationSchema['properties']['mx']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->mx = $mx;
 
@@ -77,7 +75,7 @@ class DnsMxRecordSetManagedChangesAfter
             static::validateInput($input);
         }
 
-        $mx = DnsMxRecordSetManagedChangesAfterMx::buildFromInput($input->{'mx'}, validate: $validate);
+        $mx = $input->{'mx'};
 
         $obj = new self($mx);
 
@@ -92,7 +90,7 @@ class DnsMxRecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['mx'] = ($this->mx)->toJson();
+        $output['mx'] = $this->mx;
 
         return $output;
     }
@@ -123,6 +121,5 @@ class DnsMxRecordSetManagedChangesAfter
 
     public function __clone()
     {
-        $this->mx = clone $this->mx;
     }
 }

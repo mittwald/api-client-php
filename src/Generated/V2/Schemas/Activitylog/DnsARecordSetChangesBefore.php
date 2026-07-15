@@ -37,47 +37,40 @@ class DnsARecordSetChangesBefore
                 'type' => 'array',
             ],
         ],
-        'required' => [
-            'aRecords',
-            'aaaaRecords',
-        ],
         'type' => 'object',
     ];
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    private array $aRecords;
+    private ?array $aRecords = null;
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    private array $aaaaRecords;
+    private ?array $aaaaRecords = null;
 
     /**
-     * @param string[] $aRecords
-     * @param string[] $aaaaRecords
+     *
      */
-    public function __construct(array $aRecords, array $aaaaRecords)
+    public function __construct()
     {
-        $this->aRecords = $aRecords;
-        $this->aaaaRecords = $aaaaRecords;
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getARecords(): array
+    public function getARecords(): ?array
     {
-        return $this->aRecords;
+        return $this->aRecords ?? null;
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getAaaaRecords(): array
+    public function getAaaaRecords(): ?array
     {
-        return $this->aaaaRecords;
+        return $this->aaaaRecords ?? null;
     }
 
     /**
@@ -93,6 +86,14 @@ class DnsARecordSetChangesBefore
 
         $clone = clone $this;
         $clone->aRecords = $aRecords;
+
+        return $clone;
+    }
+
+    public function withoutARecords(): self
+    {
+        $clone = clone $this;
+        unset($clone->aRecords);
 
         return $clone;
     }
@@ -114,6 +115,14 @@ class DnsARecordSetChangesBefore
         return $clone;
     }
 
+    public function withoutAaaaRecords(): self
+    {
+        $clone = clone $this;
+        unset($clone->aaaaRecords);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -129,11 +138,18 @@ class DnsARecordSetChangesBefore
             static::validateInput($input);
         }
 
-        $aRecords = $input->{'aRecords'};
-        $aaaaRecords = $input->{'aaaaRecords'};
+        $aRecords = null;
+        if (isset($input->{'aRecords'})) {
+            $aRecords = $input->{'aRecords'};
+        }
+        $aaaaRecords = null;
+        if (isset($input->{'aaaaRecords'})) {
+            $aaaaRecords = $input->{'aaaaRecords'};
+        }
 
-        $obj = new self($aRecords, $aaaaRecords);
-
+        $obj = new self();
+        $obj->aRecords = $aRecords;
+        $obj->aaaaRecords = $aaaaRecords;
         return $obj;
     }
 
@@ -145,8 +161,12 @@ class DnsARecordSetChangesBefore
     public function toJson(): array
     {
         $output = [];
-        $output['aRecords'] = $this->aRecords;
-        $output['aaaaRecords'] = $this->aaaaRecords;
+        if (isset($this->aRecords)) {
+            $output['aRecords'] = $this->aRecords;
+        }
+        if (isset($this->aaaaRecords)) {
+            $output['aaaaRecords'] = $this->aaaaRecords;
+        }
 
         return $output;
     }
