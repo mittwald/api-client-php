@@ -117,6 +117,12 @@ class OwnExtension
                     'context' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
                     ],
+                    'purgeScopes' => [
+                        'type' => 'boolean',
+                    ],
+                    'purgeWebhookUrls' => [
+                        'type' => 'boolean',
+                    ],
                     'scopes' => [
                         'items' => [
                             'type' => 'string',

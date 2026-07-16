@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetTemplateIconNotFoundResponse implements ResponseContainer
+class DeprecatedContainerGetTemplateIconForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -54,10 +54,10 @@ class GetTemplateIconNotFoundResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetTemplateIconNotFoundResponse Created instance
+     * @return DeprecatedContainerGetTemplateIconForbiddenResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateIconNotFoundResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContainerGetTemplateIconForbiddenResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

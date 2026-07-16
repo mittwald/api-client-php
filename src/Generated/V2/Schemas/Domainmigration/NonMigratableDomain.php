@@ -39,6 +39,12 @@ class NonMigratableDomain
                 ],
                 'type' => 'boolean',
             ],
+            'ownerContactIssues' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.domainmigration.OwnerContactIssue',
+                ],
+                'type' => 'array',
+            ],
             'warnings' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.domainmigration.DomainMigrationWarning',
@@ -50,6 +56,7 @@ class NonMigratableDomain
             'hostname',
             'migratable',
             'issues',
+            'ownerContactIssues',
         ],
         'type' => 'object',
     ];
@@ -64,18 +71,25 @@ class NonMigratableDomain
     private bool $migratable;
 
     /**
+     * @var OwnerContactIssue[]
+     */
+    private array $ownerContactIssues;
+
+    /**
      * @var DomainMigrationWarning[]|null
      */
     private ?array $warnings = null;
 
     /**
      * @param DomainNotMigratableReason[] $issues
+     * @param OwnerContactIssue[] $ownerContactIssues
      */
-    public function __construct(string $hostname, array $issues, bool $migratable)
+    public function __construct(string $hostname, array $issues, bool $migratable, array $ownerContactIssues)
     {
         $this->hostname = $hostname;
         $this->issues = $issues;
         $this->migratable = $migratable;
+        $this->ownerContactIssues = $ownerContactIssues;
     }
 
     public function getHostname(): string
@@ -94,6 +108,14 @@ class NonMigratableDomain
     public function getMigratable(): bool
     {
         return $this->migratable;
+    }
+
+    /**
+     * @return OwnerContactIssue[]
+     */
+    public function getOwnerContactIssues(): array
+    {
+        return $this->ownerContactIssues;
     }
 
     /**
@@ -144,6 +166,17 @@ class NonMigratableDomain
     }
 
     /**
+     * @param OwnerContactIssue[] $ownerContactIssues
+     */
+    public function withOwnerContactIssues(array $ownerContactIssues): self
+    {
+        $clone = clone $this;
+        $clone->ownerContactIssues = $ownerContactIssues;
+
+        return $clone;
+    }
+
+    /**
      * @param DomainMigrationWarning[] $warnings
      */
     public function withWarnings(array $warnings): self
@@ -180,12 +213,13 @@ class NonMigratableDomain
         $hostname = $input->{'hostname'};
         $issues = array_map(fn (string $i): DomainNotMigratableReason => DomainNotMigratableReason::from($i), $input->{'issues'});
         $migratable = (bool)($input->{'migratable'});
+        $ownerContactIssues = array_map(fn (array|object $i): OwnerContactIssue => OwnerContactIssue::buildFromInput($i, validate: $validate), $input->{'ownerContactIssues'});
         $warnings = null;
         if (isset($input->{'warnings'})) {
             $warnings = array_map(fn (array|object $i): DomainMigrationWarning => DomainMigrationWarning::buildFromInput($i, validate: $validate), $input->{'warnings'});
         }
 
-        $obj = new self($hostname, $issues, $migratable);
+        $obj = new self($hostname, $issues, $migratable, $ownerContactIssues);
         $obj->warnings = $warnings;
         return $obj;
     }
@@ -201,6 +235,7 @@ class NonMigratableDomain
         $output['hostname'] = $this->hostname;
         $output['issues'] = array_map(fn (DomainNotMigratableReason $i): string => $i->value, $this->issues);
         $output['migratable'] = $this->migratable;
+        $output['ownerContactIssues'] = array_map(fn (OwnerContactIssue $i): array => $i->toJson(), $this->ownerContactIssues);
         if (isset($this->warnings)) {
             $output['warnings'] = array_map(fn (DomainMigrationWarning $i): array => $i->toJson(), $this->warnings);
         }

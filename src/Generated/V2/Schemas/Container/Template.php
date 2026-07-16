@@ -142,6 +142,28 @@ class Template
             'repository' => [
                 'type' => 'string',
             ],
+            'screenshots' => [
+                'items' => [
+                    'properties' => [
+                        'bg' => [
+                            'type' => 'string',
+                        ],
+                        'screenshot' => [
+                            'type' => 'string',
+                        ],
+                        'text' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+                        ],
+                    ],
+                    'required' => [
+                        'bg',
+                        'screenshot',
+                        'text',
+                    ],
+                    'type' => 'object',
+                ],
+                'type' => 'array',
+            ],
             'supportLink' => [
                 'type' => 'string',
             ],
@@ -230,6 +252,11 @@ class Template
     private TemplateTranslatedString $name;
 
     private ?string $repository = null;
+
+    /**
+     * @var TemplateScreenshotsItem[]|null
+     */
+    private ?array $screenshots = null;
 
     private ?string $supportLink = null;
 
@@ -322,6 +349,14 @@ class Template
     public function getRepository(): ?string
     {
         return $this->repository ?? null;
+    }
+
+    /**
+     * @return TemplateScreenshotsItem[]|null
+     */
+    public function getScreenshots(): ?array
+    {
+        return $this->screenshots ?? null;
     }
 
     public function getSupportLink(): ?string
@@ -514,6 +549,25 @@ class Template
         return $clone;
     }
 
+    /**
+     * @param TemplateScreenshotsItem[] $screenshots
+     */
+    public function withScreenshots(array $screenshots): self
+    {
+        $clone = clone $this;
+        $clone->screenshots = $screenshots;
+
+        return $clone;
+    }
+
+    public function withoutScreenshots(): self
+    {
+        $clone = clone $this;
+        unset($clone->screenshots);
+
+        return $clone;
+    }
+
     public function withSupportLink(string $supportLink): self
     {
         $validator = new Validator();
@@ -637,6 +691,10 @@ class Template
         if (isset($input->{'repository'})) {
             $repository = $input->{'repository'};
         }
+        $screenshots = null;
+        if (isset($input->{'screenshots'})) {
+            $screenshots = array_map(fn (array|object $i): TemplateScreenshotsItem => TemplateScreenshotsItem::buildFromInput($i, validate: $validate), $input->{'screenshots'});
+        }
         $supportLink = null;
         if (isset($input->{'supportLink'})) {
             $supportLink = $input->{'supportLink'};
@@ -657,6 +715,7 @@ class Template
         $obj->help = $help;
         $obj->license = $license;
         $obj->repository = $repository;
+        $obj->screenshots = $screenshots;
         $obj->supportLink = $supportLink;
         $obj->userInputs = $userInputs;
         $obj->website = $website;
@@ -689,6 +748,9 @@ class Template
         $output['name'] = $this->name->toJson();
         if (isset($this->repository)) {
             $output['repository'] = $this->repository;
+        }
+        if (isset($this->screenshots)) {
+            $output['screenshots'] = array_map(fn (TemplateScreenshotsItem $i) => $i->toJson(), $this->screenshots);
         }
         if (isset($this->supportLink)) {
             $output['supportLink'] = $this->supportLink;
@@ -739,6 +801,9 @@ class Template
         }
         if (isset($this->license)) {
             $this->license = clone $this->license;
+        }
+        if (isset($this->screenshots)) {
+            $this->screenshots = array_map(fn (TemplateScreenshotsItem $i) => clone $i, $this->screenshots);
         }
         if (isset($this->userInputs)) {
             $this->userInputs = array_map(fn (TemplateUserInputsItem $i) => clone $i, $this->userInputs);

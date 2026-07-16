@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListTemplateStatistics;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetTemplateIconRequest
+class ListTemplateStatisticsRequest
 {
     public const method = 'get';
 
@@ -20,26 +20,38 @@ class GetTemplateIconRequest
             'templateId' => [
                 'type' => 'string',
             ],
+            'category' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
-            'templateId',
+
         ],
     ];
 
-    private string $templateId;
+    private ?string $templateId = null;
+
+    private ?string $category = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $templateId)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->templateId = $templateId;
     }
 
-    public function getTemplateId(): string
+    public function getTemplateId(): ?string
     {
-        return $this->templateId;
+        return $this->templateId ?? null;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category ?? null;
     }
 
     public function withTemplateId(string $templateId): self
@@ -56,25 +68,63 @@ class GetTemplateIconRequest
         return $clone;
     }
 
+    public function withoutTemplateId(): self
+    {
+        $clone = clone $this;
+        unset($clone->templateId);
+
+        return $clone;
+    }
+
+    public function withCategory(string $category): self
+    {
+        $validator = new Validator();
+        $validator->validate($category, self::$internalValidationSchema['properties']['category']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->category = $category;
+
+        return $clone;
+    }
+
+    public function withoutCategory(): self
+    {
+        $clone = clone $this;
+        unset($clone->category);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetTemplateIconRequest Created instance
+     * @return ListTemplateStatisticsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateIconRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListTemplateStatisticsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $templateId = $input->{'templateId'};
+        $templateId = null;
+        if (isset($input->{'templateId'})) {
+            $templateId = $input->{'templateId'};
+        }
+        $category = null;
+        if (isset($input->{'category'})) {
+            $category = $input->{'category'};
+        }
 
-        $obj = new self($templateId);
-
+        $obj = new self();
+        $obj->templateId = $templateId;
+        $obj->category = $category;
         return $obj;
     }
 
@@ -86,7 +136,12 @@ class GetTemplateIconRequest
     public function toJson(): array
     {
         $output = [];
-        $output['templateId'] = $this->templateId;
+        if (isset($this->templateId)) {
+            $output['templateId'] = $this->templateId;
+        }
+        if (isset($this->category)) {
+            $output['category'] = $this->category;
+        }
 
         return $output;
     }
@@ -131,8 +186,7 @@ class GetTemplateIconRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $templateId = urlencode($mapped['templateId']);
-        return '/v2/container-templates/' . $templateId . '/icon';
+        return '/v2/container-template-statistics';
     }
 
     /**
@@ -148,6 +202,12 @@ class GetTemplateIconRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['templateId'])) {
+            $query['templateId'] = $mapped['templateId'];
+        }
+        if (isset($mapped['category'])) {
+            $query['category'] = $mapped['category'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
