@@ -15,4 +15,5 @@ enum DomainNotMigratableReason: string
     case insufficientState = 'insufficientState';
     case contractDateOutOfRange = 'contractDateOutOfRange';
     case invalidDomainName = 'invalidDomainName';
+    case ownerContactInvalid = 'ownerContactInvalid';
 }

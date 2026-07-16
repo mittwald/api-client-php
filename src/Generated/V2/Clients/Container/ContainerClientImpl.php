@@ -67,6 +67,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeI
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriForbiddenResponse;
@@ -131,14 +139,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateNot
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeForbiddenResponse;
@@ -645,29 +653,29 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Get a Container Template icon.
+     * Get a Container Template asset.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-icon
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-asset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetTemplateIconRequest $request An object representing the request for this operation
+     * @param GetTemplateAssetRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
-    public function getTemplateIcon(GetTemplateIconRequest $request): StringResponse
+    public function getTemplateAsset(GetTemplateAssetRequest $request): StringResponse
     {
-        $httpRequest = new Request(GetTemplateIconRequest::method, $request->buildUrl());
+        $httpRequest = new Request(GetTemplateAssetRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetTemplateIconBadRequestResponse::fromResponse($httpResponse),
-            403 => GetTemplateIconForbiddenResponse::fromResponse($httpResponse),
-            404 => GetTemplateIconNotFoundResponse::fromResponse($httpResponse),
-            429 => GetTemplateIconTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => GetTemplateIconInternalServerErrorResponse::fromResponse($httpResponse),
-            503 => GetTemplateIconServiceUnavailableResponse::fromResponse($httpResponse),
-            default => GetTemplateIconDefaultResponse::fromResponse($httpResponse),
+            400 => GetTemplateAssetBadRequestResponse::fromResponse($httpResponse),
+            403 => GetTemplateAssetForbiddenResponse::fromResponse($httpResponse),
+            404 => GetTemplateAssetNotFoundResponse::fromResponse($httpResponse),
+            429 => GetTemplateAssetTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetTemplateAssetInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetTemplateAssetServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetTemplateAssetDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -827,10 +835,13 @@ class ContainerClientImpl implements ContainerClient
     /**
      * List Container Template statistics.
      *
+     * Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
+     * @deprecated
      * @return ListTemplateStatisticsOKResponse OK
      */
     public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse
@@ -1147,6 +1158,36 @@ class ContainerClientImpl implements ContainerClient
             429 => UpdateStackTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateStackInternalServerErrorResponse::fromResponse($httpResponse),
             default => UpdateStackDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a Container Template icon.
+     *
+     * Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-get-template-icon
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContainerGetTemplateIconRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return StringResponse OK
+     */
+    public function deprecatedContainerGetTemplateIcon(DeprecatedContainerGetTemplateIconRequest $request): StringResponse
+    {
+        $httpRequest = new Request(DeprecatedContainerGetTemplateIconRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StringResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedContainerGetTemplateIconBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedContainerGetTemplateIconForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedContainerGetTemplateIconNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedContainerGetTemplateIconTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedContainerGetTemplateIconInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => DeprecatedContainerGetTemplateIconServiceUnavailableResponse::fromResponse($httpResponse),
+            default => DeprecatedContainerGetTemplateIconDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -27,15 +27,7 @@ class DnsMxRecordSetManagedChanges
             'after' => [
                 'properties' => [
                     'mx' => [
-                        'properties' => [
-                            'managed' => [
-                                'type' => 'boolean',
-                            ],
-                        ],
-                        'required' => [
-                            'managed',
-                        ],
-                        'type' => 'object',
+                        'type' => 'string',
                     ],
                 ],
                 'required' => [

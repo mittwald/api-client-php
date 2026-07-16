@@ -41,10 +41,6 @@ class DnsARecordSet
                                 'type' => 'array',
                             ],
                         ],
-                        'required' => [
-                            'aRecords',
-                            'aaaaRecords',
-                        ],
                         'type' => 'object',
                     ],
                     'before' => [
@@ -61,10 +57,6 @@ class DnsARecordSet
                                 ],
                                 'type' => 'array',
                             ],
-                        ],
-                        'required' => [
-                            'aRecords',
-                            'aaaaRecords',
                         ],
                         'type' => 'object',
                     ],

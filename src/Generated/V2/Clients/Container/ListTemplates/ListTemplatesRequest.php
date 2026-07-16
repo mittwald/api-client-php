@@ -30,6 +30,13 @@ class ListTemplatesRequest
                 ],
                 'type' => 'string',
             ],
+            'sortOrder' => [
+                'enum' => [
+                    'trend30days',
+                    'trendAll',
+                ],
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -54,6 +61,8 @@ class ListTemplatesRequest
     private ?string $searchTerm = null;
 
     private ?ListTemplatesRequestType $type = null;
+
+    private ?ListTemplatesRequestSortOrder $sortOrder = null;
 
     private int $limit = 1000;
 
@@ -85,6 +94,11 @@ class ListTemplatesRequest
     public function getType(): ?ListTemplatesRequestType
     {
         return $this->type ?? null;
+    }
+
+    public function getSortOrder(): ?ListTemplatesRequestSortOrder
+    {
+        return $this->sortOrder ?? null;
     }
 
     public function getLimit(): int
@@ -158,6 +172,22 @@ class ListTemplatesRequest
     {
         $clone = clone $this;
         unset($clone->type);
+
+        return $clone;
+    }
+
+    public function withSortOrder(ListTemplatesRequestSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
 
         return $clone;
     }
@@ -239,6 +269,10 @@ class ListTemplatesRequest
         if (isset($input->{'type'})) {
             $type = ListTemplatesRequestType::from($input->{'type'});
         }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = ListTemplatesRequestSortOrder::from($input->{'sortOrder'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -256,6 +290,7 @@ class ListTemplatesRequest
         $obj->category = $category;
         $obj->searchTerm = $searchTerm;
         $obj->type = $type;
+        $obj->sortOrder = $sortOrder;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -278,6 +313,9 @@ class ListTemplatesRequest
         }
         if (isset($this->type)) {
             $output['type'] = ($this->type)->value;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = ($this->sortOrder)->value;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -352,6 +390,9 @@ class ListTemplatesRequest
         }
         if (isset($mapped['type'])) {
             $query['type'] = $mapped['type'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

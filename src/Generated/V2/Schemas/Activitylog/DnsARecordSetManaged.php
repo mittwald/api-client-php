@@ -29,15 +29,7 @@ class DnsARecordSetManaged
                     'after' => [
                         'properties' => [
                             'aRecords' => [
-                                'properties' => [
-                                    'managedByIngressId' => [
-                                        'type' => 'string',
-                                    ],
-                                ],
-                                'required' => [
-                                    'managedByIngressId',
-                                ],
-                                'type' => 'object',
+                                'type' => 'string',
                             ],
                         ],
                         'required' => [

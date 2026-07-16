@@ -18,6 +18,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackR
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsOKResponse;
@@ -33,7 +34,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKRespons
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateIcon\GetTemplateIconRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
@@ -212,15 +213,15 @@ interface ContainerClient
      */
     public function getTemplate(GetTemplateRequest $request): GetTemplateOKResponse;
     /**
-     * Get a Container Template icon.
+     * Get a Container Template asset.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-icon
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-asset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetTemplateIconRequest $request An object representing the request for this operation
+     * @param GetTemplateAssetRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
-    public function getTemplateIcon(GetTemplateIconRequest $request): StringResponse;
+    public function getTemplateAsset(GetTemplateAssetRequest $request): StringResponse;
     /**
      * Get a Volume belonging to a Stack.
      *
@@ -284,10 +285,13 @@ interface ContainerClient
     /**
      * List Container Template statistics.
      *
+     * Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListTemplateStatisticsRequest $request An object representing the request for this operation
+     * @deprecated
      * @return ListTemplateStatisticsOKResponse OK
      */
     public function listTemplateStatistics(ListTemplateStatisticsRequest $request): ListTemplateStatisticsOKResponse;
@@ -411,6 +415,19 @@ interface ContainerClient
      * @return UpdateStackOKResponse OK
      */
     public function updateStack(UpdateStackRequest $request): UpdateStackOKResponse;
+    /**
+     * Get a Container Template icon.
+     *
+     * Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-get-template-icon
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContainerGetTemplateIconRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return StringResponse OK
+     */
+    public function deprecatedContainerGetTemplateIcon(DeprecatedContainerGetTemplateIconRequest $request): StringResponse;
     /**
      * Validate a Registries' URI.
      *
