@@ -28,6 +28,12 @@ class OwnExtensionRequestedChanges
             'context' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
             ],
+            'purgeScopes' => [
+                'type' => 'boolean',
+            ],
+            'purgeWebhookUrls' => [
+                'type' => 'boolean',
+            ],
             'scopes' => [
                 'items' => [
                     'type' => 'string',
@@ -54,6 +60,10 @@ class OwnExtensionRequestedChanges
 
     private ?Context $context = null;
 
+    private ?bool $purgeScopes = null;
+
+    private ?bool $purgeWebhookUrls = null;
+
     /**
      * @var string[]|null
      */
@@ -71,6 +81,16 @@ class OwnExtensionRequestedChanges
     public function getContext(): ?Context
     {
         return $this->context ?? null;
+    }
+
+    public function getPurgeScopes(): ?bool
+    {
+        return $this->purgeScopes ?? null;
+    }
+
+    public function getPurgeWebhookUrls(): ?bool
+    {
+        return $this->purgeWebhookUrls ?? null;
     }
 
     /**
@@ -98,6 +118,50 @@ class OwnExtensionRequestedChanges
     {
         $clone = clone $this;
         unset($clone->context);
+
+        return $clone;
+    }
+
+    public function withPurgeScopes(bool $purgeScopes): self
+    {
+        $validator = new Validator();
+        $validator->validate($purgeScopes, self::$internalValidationSchema['properties']['purgeScopes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->purgeScopes = $purgeScopes;
+
+        return $clone;
+    }
+
+    public function withoutPurgeScopes(): self
+    {
+        $clone = clone $this;
+        unset($clone->purgeScopes);
+
+        return $clone;
+    }
+
+    public function withPurgeWebhookUrls(bool $purgeWebhookUrls): self
+    {
+        $validator = new Validator();
+        $validator->validate($purgeWebhookUrls, self::$internalValidationSchema['properties']['purgeWebhookUrls']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->purgeWebhookUrls = $purgeWebhookUrls;
+
+        return $clone;
+    }
+
+    public function withoutPurgeWebhookUrls(): self
+    {
+        $clone = clone $this;
+        unset($clone->purgeWebhookUrls);
 
         return $clone;
     }
@@ -162,6 +226,14 @@ class OwnExtensionRequestedChanges
         if (isset($input->{'context'})) {
             $context = Context::from($input->{'context'});
         }
+        $purgeScopes = null;
+        if (isset($input->{'purgeScopes'})) {
+            $purgeScopes = (bool)($input->{'purgeScopes'});
+        }
+        $purgeWebhookUrls = null;
+        if (isset($input->{'purgeWebhookUrls'})) {
+            $purgeWebhookUrls = (bool)($input->{'purgeWebhookUrls'});
+        }
         $scopes = null;
         if (isset($input->{'scopes'})) {
             $scopes = $input->{'scopes'};
@@ -177,6 +249,8 @@ class OwnExtensionRequestedChanges
 
         $obj = new self();
         $obj->context = $context;
+        $obj->purgeScopes = $purgeScopes;
+        $obj->purgeWebhookUrls = $purgeWebhookUrls;
         $obj->scopes = $scopes;
         $obj->webhookUrls = $webhookUrls;
         return $obj;
@@ -192,6 +266,12 @@ class OwnExtensionRequestedChanges
         $output = [];
         if (isset($this->context)) {
             $output['context'] = $this->context->value;
+        }
+        if (isset($this->purgeScopes)) {
+            $output['purgeScopes'] = $this->purgeScopes;
+        }
+        if (isset($this->purgeWebhookUrls)) {
+            $output['purgeWebhookUrls'] = $this->purgeWebhookUrls;
         }
         if (isset($this->scopes)) {
             $output['scopes'] = $this->scopes;
