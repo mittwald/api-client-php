@@ -9,7 +9,7 @@ use JsonSchema\Validator;
 
 class UpdateMysqlUserRequest
 {
-    public const method = 'put';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -38,11 +38,11 @@ class UpdateMysqlUserRequest
                     'externalAccess' => [
                         'type' => 'boolean',
                     ],
+                    'password' => [
+                        'type' => 'string',
+                    ],
                 ],
-                'required' => [
-                    'description',
-                    'accessLevel',
-                ],
+                'type' => 'object',
             ],
         ],
         'required' => [

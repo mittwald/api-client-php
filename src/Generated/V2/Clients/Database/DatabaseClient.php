@@ -42,12 +42,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedis
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchMysqlDatabase\PatchMysqlDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest;
 
 /**
  * Client for Database API
@@ -285,26 +280,6 @@ interface DatabaseClient
      */
     public function patchRedisDatabase(PatchRedisDatabaseRequest $request): EmptyResponse;
     /**
-     * Update a MySQLDatabase's default character settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-default-charset
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse;
-    /**
-     * Update a MySQLDatabase's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse;
-    /**
      * Update a MySQLUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
@@ -314,34 +289,4 @@ interface DatabaseClient
      * @return EmptyResponse NoContent
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse;
-    /**
-     * Update a MySQLUser's password.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user-password
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse;
-    /**
-     * Update a RedisDatabase's configuration.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-configuration
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse;
-    /**
-     * Update a RedisDatabase's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse;
 }

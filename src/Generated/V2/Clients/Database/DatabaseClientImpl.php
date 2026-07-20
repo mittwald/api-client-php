@@ -134,36 +134,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRed
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionTooManyRequestsResponse;
 
 /**
  * Client for Database API
@@ -708,54 +683,6 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * Update a MySQLDatabase's default character settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-default-charset
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlDatabaseDefaultCharsetBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDefaultCharsetNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a MySQLDatabase's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Update a MySQLUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
@@ -776,78 +703,6 @@ class DatabaseClientImpl implements DatabaseClient
             404 => UpdateMysqlUserNotFoundResponse::fromResponse($httpResponse),
             429 => UpdateMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a MySQLUser's password.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user-password
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlUserPasswordBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlUserPasswordNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlUserPasswordTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a RedisDatabase's configuration.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-configuration
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateRedisDatabaseConfigurationBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseConfigurationNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseConfigurationTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a RedisDatabase's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateRedisDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

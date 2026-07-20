@@ -30,25 +30,28 @@ class UpdateMysqlUserRequestBody
             'externalAccess' => [
                 'type' => 'boolean',
             ],
+            'password' => [
+                'type' => 'string',
+            ],
         ],
-        'required' => [
-            'description',
-            'accessLevel',
-        ],
+        'type' => 'object',
     ];
 
     private ?string $accessIpMask = null;
 
-    private UpdateMysqlUserRequestBodyAccessLevel $accessLevel;
+    private ?UpdateMysqlUserRequestBodyAccessLevel $accessLevel = null;
 
-    private string $description;
+    private ?string $description = null;
 
     private ?bool $externalAccess = null;
 
-    public function __construct(UpdateMysqlUserRequestBodyAccessLevel $accessLevel, string $description)
+    private ?string $password = null;
+
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->accessLevel = $accessLevel;
-        $this->description = $description;
     }
 
     public function getAccessIpMask(): ?string
@@ -56,19 +59,24 @@ class UpdateMysqlUserRequestBody
         return $this->accessIpMask ?? null;
     }
 
-    public function getAccessLevel(): UpdateMysqlUserRequestBodyAccessLevel
+    public function getAccessLevel(): ?UpdateMysqlUserRequestBodyAccessLevel
     {
-        return $this->accessLevel;
+        return $this->accessLevel ?? null;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
     public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password ?? null;
     }
 
     public function withAccessIpMask(string $accessIpMask): self
@@ -101,6 +109,14 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
+    public function withoutAccessLevel(): self
+    {
+        $clone = clone $this;
+        unset($clone->accessLevel);
+
+        return $clone;
+    }
+
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -111,6 +127,14 @@ class UpdateMysqlUserRequestBody
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
 
         return $clone;
     }
@@ -137,6 +161,28 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
+    public function withPassword(string $password): self
+    {
+        $validator = new Validator();
+        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->password = $password;
+
+        return $clone;
+    }
+
+    public function withoutPassword(): self
+    {
+        $clone = clone $this;
+        unset($clone->password);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -156,16 +202,29 @@ class UpdateMysqlUserRequestBody
         if (isset($input->{'accessIpMask'})) {
             $accessIpMask = $input->{'accessIpMask'};
         }
-        $accessLevel = UpdateMysqlUserRequestBodyAccessLevel::from($input->{'accessLevel'});
-        $description = $input->{'description'};
+        $accessLevel = null;
+        if (isset($input->{'accessLevel'})) {
+            $accessLevel = UpdateMysqlUserRequestBodyAccessLevel::from($input->{'accessLevel'});
+        }
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $externalAccess = null;
         if (isset($input->{'externalAccess'})) {
             $externalAccess = (bool)($input->{'externalAccess'});
         }
+        $password = null;
+        if (isset($input->{'password'})) {
+            $password = $input->{'password'};
+        }
 
-        $obj = new self($accessLevel, $description);
+        $obj = new self();
         $obj->accessIpMask = $accessIpMask;
+        $obj->accessLevel = $accessLevel;
+        $obj->description = $description;
         $obj->externalAccess = $externalAccess;
+        $obj->password = $password;
         return $obj;
     }
 
@@ -180,10 +239,17 @@ class UpdateMysqlUserRequestBody
         if (isset($this->accessIpMask)) {
             $output['accessIpMask'] = $this->accessIpMask;
         }
-        $output['accessLevel'] = ($this->accessLevel)->value;
-        $output['description'] = $this->description;
+        if (isset($this->accessLevel)) {
+            $output['accessLevel'] = ($this->accessLevel)->value;
+        }
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         if (isset($this->externalAccess)) {
             $output['externalAccess'] = $this->externalAccess;
+        }
+        if (isset($this->password)) {
+            $output['password'] = $this->password;
         }
 
         return $output;
