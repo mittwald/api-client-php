@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlUserRequest
+class DeprecatedDatabaseReplaceMysqlUserRequest
 {
-    public const method = 'patch';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -38,11 +38,11 @@ class UpdateMysqlUserRequest
                     'externalAccess' => [
                         'type' => 'boolean',
                     ],
-                    'password' => [
-                        'type' => 'string',
-                    ],
                 ],
-                'type' => 'object',
+                'required' => [
+                    'description',
+                    'accessLevel',
+                ],
             ],
         ],
         'required' => [
@@ -53,13 +53,13 @@ class UpdateMysqlUserRequest
 
     private string $mysqlUserId;
 
-    private UpdateMysqlUserRequestBody $body;
+    private DeprecatedDatabaseReplaceMysqlUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mysqlUserId, UpdateMysqlUserRequestBody $body)
+    public function __construct(string $mysqlUserId, DeprecatedDatabaseReplaceMysqlUserRequestBody $body)
     {
         $this->mysqlUserId = $mysqlUserId;
         $this->body = $body;
@@ -70,7 +70,7 @@ class UpdateMysqlUserRequest
         return $this->mysqlUserId;
     }
 
-    public function getBody(): UpdateMysqlUserRequestBody
+    public function getBody(): DeprecatedDatabaseReplaceMysqlUserRequestBody
     {
         return $this->body;
     }
@@ -89,7 +89,7 @@ class UpdateMysqlUserRequest
         return $clone;
     }
 
-    public function withBody(UpdateMysqlUserRequestBody $body): self
+    public function withBody(DeprecatedDatabaseReplaceMysqlUserRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -102,10 +102,10 @@ class UpdateMysqlUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlUserRequest Created instance
+     * @return DeprecatedDatabaseReplaceMysqlUserRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDatabaseReplaceMysqlUserRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -113,7 +113,7 @@ class UpdateMysqlUserRequest
         }
 
         $mysqlUserId = $input->{'mysqlUserId'};
-        $body = UpdateMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedDatabaseReplaceMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($mysqlUserId, $body);
 

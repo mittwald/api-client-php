@@ -52,6 +52,36 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteR
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserNotFoundResponse;
@@ -134,36 +164,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRed
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\PatchRedisDatabase\PatchRedisDatabaseTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionTooManyRequestsResponse;
 
 /**
  * Client for Database API
@@ -708,54 +713,6 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * Update a MySQLDatabase's default character settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-default-charset
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlDatabaseDefaultCharsetBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDefaultCharsetNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a MySQLDatabase's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Update a MySQLUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
@@ -780,74 +737,164 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * Update a MySQLUser's password.
+     * Update a MySQLUser.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user-password
+     * Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-replace-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
+     * @param DeprecatedDatabaseReplaceMysqlUserRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse
+    public function deprecatedDatabaseReplaceMysqlUser(DeprecatedDatabaseReplaceMysqlUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedDatabaseReplaceMysqlUserRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlUserPasswordBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlUserPasswordNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlUserPasswordTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedDatabaseReplaceMysqlUserBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseReplaceMysqlUserNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseReplaceMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseReplaceMysqlUserDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a MySQLDatabase's default character settings.
+     *
+     * Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-database-default-charset
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlDatabaseDefaultCharset(DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a MySQLDatabase's description.
+     *
+     * Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-database-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlDatabaseDescription(DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDatabaseUpdateMysqlDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseUpdateMysqlDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseUpdateMysqlDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseUpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a MySQLUser's password.
+     *
+     * Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-user-password
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlUserPasswordRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlUserPassword(DeprecatedDatabaseUpdateMysqlUserPasswordRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedDatabaseUpdateMysqlUserPasswordRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDatabaseUpdateMysqlUserPasswordBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseUpdateMysqlUserPasswordNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseUpdateMysqlUserPasswordTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseUpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
         });
     }
 
     /**
      * Update a RedisDatabase's configuration.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-configuration
+     * Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-redis-database-configuration
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
+     * @param DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse
+    public function deprecatedDatabaseUpdateRedisDatabaseConfiguration(DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateRedisDatabaseConfigurationBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseConfigurationNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseConfigurationTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedDatabaseUpdateRedisDatabaseConfigurationBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseUpdateRedisDatabaseConfigurationNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseUpdateRedisDatabaseConfigurationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseUpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
     /**
      * Update a RedisDatabase's description.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-description
+     * Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-redis-database-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @param DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse NoContent
      */
-    public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse
+    public function deprecatedDatabaseUpdateRedisDatabaseDescription(DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateRedisDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedDatabaseUpdateRedisDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDatabaseUpdateRedisDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDatabaseUpdateRedisDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDatabaseUpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

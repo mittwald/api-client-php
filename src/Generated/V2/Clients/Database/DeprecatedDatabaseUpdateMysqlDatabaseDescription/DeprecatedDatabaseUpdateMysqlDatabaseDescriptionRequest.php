@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlUserRequest
+class DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest
 {
     public const method = 'patch';
 
@@ -17,79 +17,65 @@ class UpdateMysqlUserRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'mysqlUserId' => [
+            'mysqlDatabaseId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'accessIpMask' => [
-                        'type' => 'string',
-                    ],
-                    'accessLevel' => [
-                        'enum' => [
-                            'full',
-                            'readonly',
-                        ],
-                        'type' => 'string',
-                    ],
                     'description' => [
                         'type' => 'string',
                     ],
-                    'externalAccess' => [
-                        'type' => 'boolean',
-                    ],
-                    'password' => [
-                        'type' => 'string',
-                    ],
                 ],
-                'type' => 'object',
+                'required' => [
+                    'description',
+                ],
             ],
         ],
         'required' => [
-            'mysqlUserId',
+            'mysqlDatabaseId',
             'body',
         ],
     ];
 
-    private string $mysqlUserId;
+    private string $mysqlDatabaseId;
 
-    private UpdateMysqlUserRequestBody $body;
+    private DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mysqlUserId, UpdateMysqlUserRequestBody $body)
+    public function __construct(string $mysqlDatabaseId, DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequestBody $body)
     {
-        $this->mysqlUserId = $mysqlUserId;
+        $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
-    public function getMysqlUserId(): string
+    public function getMysqlDatabaseId(): string
     {
-        return $this->mysqlUserId;
+        return $this->mysqlDatabaseId;
     }
 
-    public function getBody(): UpdateMysqlUserRequestBody
+    public function getBody(): DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequestBody
     {
         return $this->body;
     }
 
-    public function withMysqlUserId(string $mysqlUserId): self
+    public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($mysqlUserId, self::$internalValidationSchema['properties']['mysqlUserId']);
+        $validator->validate($mysqlDatabaseId, self::$internalValidationSchema['properties']['mysqlDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->mysqlUserId = $mysqlUserId;
+        $clone->mysqlDatabaseId = $mysqlDatabaseId;
 
         return $clone;
     }
 
-    public function withBody(UpdateMysqlUserRequestBody $body): self
+    public function withBody(DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -102,20 +88,20 @@ class UpdateMysqlUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlUserRequest Created instance
+     * @return DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $mysqlUserId = $input->{'mysqlUserId'};
-        $body = UpdateMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
+        $body = DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($mysqlUserId, $body);
+        $obj = new self($mysqlDatabaseId, $body);
 
         return $obj;
     }
@@ -128,7 +114,7 @@ class UpdateMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['mysqlUserId'] = $this->mysqlUserId;
+        $output['mysqlDatabaseId'] = $this->mysqlDatabaseId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -175,8 +161,8 @@ class UpdateMysqlUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $mysqlUserId = urlencode($mapped['mysqlUserId']);
-        return '/v2/mysql-users/' . $mysqlUserId;
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/description';
     }
 
     /**

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlUserRequest
+class DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest
 {
     public const method = 'patch';
 
@@ -17,79 +17,65 @@ class UpdateMysqlUserRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'mysqlUserId' => [
+            'redisDatabaseId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'accessIpMask' => [
-                        'type' => 'string',
-                    ],
-                    'accessLevel' => [
-                        'enum' => [
-                            'full',
-                            'readonly',
-                        ],
-                        'type' => 'string',
-                    ],
                     'description' => [
                         'type' => 'string',
                     ],
-                    'externalAccess' => [
-                        'type' => 'boolean',
-                    ],
-                    'password' => [
-                        'type' => 'string',
-                    ],
                 ],
-                'type' => 'object',
+                'required' => [
+                    'description',
+                ],
             ],
         ],
         'required' => [
-            'mysqlUserId',
+            'redisDatabaseId',
             'body',
         ],
     ];
 
-    private string $mysqlUserId;
+    private string $redisDatabaseId;
 
-    private UpdateMysqlUserRequestBody $body;
+    private DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mysqlUserId, UpdateMysqlUserRequestBody $body)
+    public function __construct(string $redisDatabaseId, DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequestBody $body)
     {
-        $this->mysqlUserId = $mysqlUserId;
+        $this->redisDatabaseId = $redisDatabaseId;
         $this->body = $body;
     }
 
-    public function getMysqlUserId(): string
+    public function getRedisDatabaseId(): string
     {
-        return $this->mysqlUserId;
+        return $this->redisDatabaseId;
     }
 
-    public function getBody(): UpdateMysqlUserRequestBody
+    public function getBody(): DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequestBody
     {
         return $this->body;
     }
 
-    public function withMysqlUserId(string $mysqlUserId): self
+    public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($mysqlUserId, self::$internalValidationSchema['properties']['mysqlUserId']);
+        $validator->validate($redisDatabaseId, self::$internalValidationSchema['properties']['redisDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->mysqlUserId = $mysqlUserId;
+        $clone->redisDatabaseId = $redisDatabaseId;
 
         return $clone;
     }
 
-    public function withBody(UpdateMysqlUserRequestBody $body): self
+    public function withBody(DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -102,20 +88,20 @@ class UpdateMysqlUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlUserRequest Created instance
+     * @return DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $mysqlUserId = $input->{'mysqlUserId'};
-        $body = UpdateMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $redisDatabaseId = $input->{'redisDatabaseId'};
+        $body = DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($mysqlUserId, $body);
+        $obj = new self($redisDatabaseId, $body);
 
         return $obj;
     }
@@ -128,7 +114,7 @@ class UpdateMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['mysqlUserId'] = $this->mysqlUserId;
+        $output['redisDatabaseId'] = $this->redisDatabaseId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -175,8 +161,8 @@ class UpdateMysqlUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $mysqlUserId = urlencode($mapped['mysqlUserId']);
-        return '/v2/mysql-users/' . $mysqlUserId;
+        $redisDatabaseId = urlencode($mapped['redisDatabaseId']);
+        return '/v2/redis-databases/' . $redisDatabaseId . '/description';
     }
 
     /**

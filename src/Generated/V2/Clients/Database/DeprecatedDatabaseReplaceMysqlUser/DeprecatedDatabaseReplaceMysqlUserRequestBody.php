@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlUserRequestBody
+class DeprecatedDatabaseReplaceMysqlUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -30,28 +30,25 @@ class UpdateMysqlUserRequestBody
             'externalAccess' => [
                 'type' => 'boolean',
             ],
-            'password' => [
-                'type' => 'string',
-            ],
         ],
-        'type' => 'object',
+        'required' => [
+            'description',
+            'accessLevel',
+        ],
     ];
 
     private ?string $accessIpMask = null;
 
-    private ?UpdateMysqlUserRequestBodyAccessLevel $accessLevel = null;
+    private DeprecatedDatabaseReplaceMysqlUserRequestBodyAccessLevel $accessLevel;
 
-    private ?string $description = null;
+    private string $description;
 
     private ?bool $externalAccess = null;
 
-    private ?string $password = null;
-
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(DeprecatedDatabaseReplaceMysqlUserRequestBodyAccessLevel $accessLevel, string $description)
     {
+        $this->accessLevel = $accessLevel;
+        $this->description = $description;
     }
 
     public function getAccessIpMask(): ?string
@@ -59,24 +56,19 @@ class UpdateMysqlUserRequestBody
         return $this->accessIpMask ?? null;
     }
 
-    public function getAccessLevel(): ?UpdateMysqlUserRequestBodyAccessLevel
+    public function getAccessLevel(): DeprecatedDatabaseReplaceMysqlUserRequestBodyAccessLevel
     {
-        return $this->accessLevel ?? null;
+        return $this->accessLevel;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
-        return $this->description ?? null;
+        return $this->description;
     }
 
     public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password ?? null;
     }
 
     public function withAccessIpMask(string $accessIpMask): self
@@ -101,18 +93,10 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    public function withAccessLevel(UpdateMysqlUserRequestBodyAccessLevel $accessLevel): self
+    public function withAccessLevel(DeprecatedDatabaseReplaceMysqlUserRequestBodyAccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
-
-        return $clone;
-    }
-
-    public function withoutAccessLevel(): self
-    {
-        $clone = clone $this;
-        unset($clone->accessLevel);
 
         return $clone;
     }
@@ -127,14 +111,6 @@ class UpdateMysqlUserRequestBody
 
         $clone = clone $this;
         $clone->description = $description;
-
-        return $clone;
-    }
-
-    public function withoutDescription(): self
-    {
-        $clone = clone $this;
-        unset($clone->description);
 
         return $clone;
     }
@@ -161,37 +137,15 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    public function withPassword(string $password): self
-    {
-        $validator = new Validator();
-        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->password = $password;
-
-        return $clone;
-    }
-
-    public function withoutPassword(): self
-    {
-        $clone = clone $this;
-        unset($clone->password);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlUserRequestBody Created instance
+     * @return DeprecatedDatabaseReplaceMysqlUserRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDatabaseReplaceMysqlUserRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -202,29 +156,16 @@ class UpdateMysqlUserRequestBody
         if (isset($input->{'accessIpMask'})) {
             $accessIpMask = $input->{'accessIpMask'};
         }
-        $accessLevel = null;
-        if (isset($input->{'accessLevel'})) {
-            $accessLevel = UpdateMysqlUserRequestBodyAccessLevel::from($input->{'accessLevel'});
-        }
-        $description = null;
-        if (isset($input->{'description'})) {
-            $description = $input->{'description'};
-        }
+        $accessLevel = DeprecatedDatabaseReplaceMysqlUserRequestBodyAccessLevel::from($input->{'accessLevel'});
+        $description = $input->{'description'};
         $externalAccess = null;
         if (isset($input->{'externalAccess'})) {
             $externalAccess = (bool)($input->{'externalAccess'});
         }
-        $password = null;
-        if (isset($input->{'password'})) {
-            $password = $input->{'password'};
-        }
 
-        $obj = new self();
+        $obj = new self($accessLevel, $description);
         $obj->accessIpMask = $accessIpMask;
-        $obj->accessLevel = $accessLevel;
-        $obj->description = $description;
         $obj->externalAccess = $externalAccess;
-        $obj->password = $password;
         return $obj;
     }
 
@@ -239,17 +180,10 @@ class UpdateMysqlUserRequestBody
         if (isset($this->accessIpMask)) {
             $output['accessIpMask'] = $this->accessIpMask;
         }
-        if (isset($this->accessLevel)) {
-            $output['accessLevel'] = ($this->accessLevel)->value;
-        }
-        if (isset($this->description)) {
-            $output['description'] = $this->description;
-        }
+        $output['accessLevel'] = ($this->accessLevel)->value;
+        $output['description'] = $this->description;
         if (isset($this->externalAccess)) {
             $output['externalAccess'] = $this->externalAccess;
-        }
-        if (isset($this->password)) {
-            $output['password'] = $this->password;
         }
 
         return $output;
