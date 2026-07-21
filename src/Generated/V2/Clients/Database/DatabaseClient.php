@@ -18,6 +18,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateR
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseReplaceMysqlUser\DeprecatedDatabaseReplaceMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharset\DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlDatabaseDescription\DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateMysqlUserPassword\DeprecatedDatabaseUpdateMysqlUserPasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseConfiguration\DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeprecatedDatabaseUpdateRedisDatabaseDescription\DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseOKResponse;
@@ -289,4 +295,82 @@ interface DatabaseClient
      * @return EmptyResponse NoContent
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse;
+    /**
+     * Update a MySQLUser.
+     *
+     * Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-replace-mysql-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseReplaceMysqlUserRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseReplaceMysqlUser(DeprecatedDatabaseReplaceMysqlUserRequest $request): EmptyResponse;
+    /**
+     * Update a MySQLDatabase's default character settings.
+     *
+     * Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-database-default-charset
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlDatabaseDefaultCharset(DeprecatedDatabaseUpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse;
+    /**
+     * Update a MySQLDatabase's description.
+     *
+     * Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-database-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlDatabaseDescription(DeprecatedDatabaseUpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse;
+    /**
+     * Update a MySQLUser's password.
+     *
+     * Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-mysql-user-password
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateMysqlUserPasswordRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateMysqlUserPassword(DeprecatedDatabaseUpdateMysqlUserPasswordRequest $request): EmptyResponse;
+    /**
+     * Update a RedisDatabase's configuration.
+     *
+     * Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-redis-database-configuration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateRedisDatabaseConfiguration(DeprecatedDatabaseUpdateRedisDatabaseConfigurationRequest $request): EmptyResponse;
+    /**
+     * Update a RedisDatabase's description.
+     *
+     * Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/deprecated-database-update-redis-database-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedDatabaseUpdateRedisDatabaseDescription(DeprecatedDatabaseUpdateRedisDatabaseDescriptionRequest $request): EmptyResponse;
 }
