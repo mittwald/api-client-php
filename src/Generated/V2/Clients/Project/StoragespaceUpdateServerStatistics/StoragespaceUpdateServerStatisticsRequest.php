@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListProjectInvitesRequest
+class StoragespaceUpdateServerStatisticsRequest
 {
-    public const method = 'get';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,103 +17,68 @@ class ListProjectInvitesRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'type' => 'integer',
-                'default' => 1000,
-                'minimum' => 0,
+            'serverId' => [
+                'type' => 'string',
             ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 0,
+            'body' => [
+                'properties' => [
+                    'notificationThresholdInBytes' => [
+                        'example' => 10000,
+                        'format' => 'int64',
+                        'nullable' => true,
+                        'type' => 'integer',
+                    ],
+                ],
             ],
         ],
         'required' => [
-
+            'serverId',
+            'body',
         ],
     ];
 
-    private int $limit = 1000;
+    private string $serverId;
 
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private StoragespaceUpdateServerStatisticsRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $serverId, StoragespaceUpdateServerStatisticsRequestBody $body)
     {
+        $this->serverId = $serverId;
+        $this->body = $body;
     }
 
-    public function getLimit(): int
+    public function getServerId(): string
     {
-        return $this->limit;
+        return $this->serverId;
     }
 
-    public function getSkip(): int
+    public function getBody(): StoragespaceUpdateServerStatisticsRequestBody
     {
-        return $this->skip;
+        return $this->body;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withLimit(int $limit): self
+    public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        $validator->validate($serverId, self::$internalValidationSchema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
+        $clone->serverId = $serverId;
 
         return $clone;
     }
 
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
+    public function withBody(StoragespaceUpdateServerStatisticsRequestBody $body): self
     {
         $clone = clone $this;
-        unset($clone->page);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -123,33 +88,21 @@ class ListProjectInvitesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListProjectInvitesRequest Created instance
+     * @return StoragespaceUpdateServerStatisticsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListProjectInvitesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceUpdateServerStatisticsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $limit = 1000;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $serverId = $input->{'serverId'};
+        $body = StoragespaceUpdateServerStatisticsRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self();
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($serverId, $body);
+
         return $obj;
     }
 
@@ -161,11 +114,8 @@ class ListProjectInvitesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['limit'] = $this->limit;
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['serverId'] = $this->serverId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -196,6 +146,7 @@ class ListProjectInvitesRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -210,7 +161,8 @@ class ListProjectInvitesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/project-invites';
+        $serverId = urlencode($mapped['serverId']);
+        return '/v2/servers/' . $serverId . '/storage-space-statistics';
     }
 
     /**
@@ -226,18 +178,10 @@ class ListProjectInvitesRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

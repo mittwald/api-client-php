@@ -170,6 +170,13 @@ class Template
             'tagline' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
             ],
+            'type' => [
+                'enum' => [
+                    'component',
+                    'standalone',
+                ],
+                'type' => 'string',
+            ],
             'userInputs' => [
                 'items' => [
                     'properties' => [
@@ -210,6 +217,7 @@ class Template
         ],
         'required' => [
             'id',
+            'type',
             'manifestVersion',
             'version',
             'name',
@@ -262,6 +270,8 @@ class Template
 
     private TemplateTranslatedString $tagline;
 
+    private TemplateType $type;
+
     /**
      * @var TemplateUserInputsItem[]|null
      */
@@ -277,7 +287,7 @@ class Template
     /**
      * @param string[] $categories
      */
-    public function __construct(array $categories, TemplateTranslatedString $description, string $developer, string $iconUrl, string $id, string $manifestVersion, TemplateTranslatedString $name, TemplateTranslatedString $tagline, string $version)
+    public function __construct(array $categories, TemplateTranslatedString $description, string $developer, string $iconUrl, string $id, string $manifestVersion, TemplateTranslatedString $name, TemplateTranslatedString $tagline, TemplateType $type, string $version)
     {
         $this->categories = $categories;
         $this->description = $description;
@@ -287,6 +297,7 @@ class Template
         $this->manifestVersion = $manifestVersion;
         $this->name = $name;
         $this->tagline = $tagline;
+        $this->type = $type;
         $this->version = $version;
     }
 
@@ -367,6 +378,11 @@ class Template
     public function getTagline(): TemplateTranslatedString
     {
         return $this->tagline;
+    }
+
+    public function getType(): TemplateType
+    {
+        return $this->type;
     }
 
     /**
@@ -598,6 +614,14 @@ class Template
         return $clone;
     }
 
+    public function withType(TemplateType $type): self
+    {
+        $clone = clone $this;
+        $clone->type = $type;
+
+        return $clone;
+    }
+
     /**
      * @param TemplateUserInputsItem[] $userInputs
      */
@@ -700,6 +724,7 @@ class Template
             $supportLink = $input->{'supportLink'};
         }
         $tagline = TemplateTranslatedString::buildFromInput($input->{'tagline'}, validate: $validate);
+        $type = TemplateType::from($input->{'type'});
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
             $userInputs = array_map(fn (array|object $i): TemplateUserInputsItem => TemplateUserInputsItem::buildFromInput($i, validate: $validate), $input->{'userInputs'});
@@ -710,7 +735,7 @@ class Template
             $website = $input->{'website'};
         }
 
-        $obj = new self($categories, $description, $developer, $iconUrl, $id, $manifestVersion, $name, $tagline, $version);
+        $obj = new self($categories, $description, $developer, $iconUrl, $id, $manifestVersion, $name, $tagline, $type, $version);
         $obj->domains = $domains;
         $obj->help = $help;
         $obj->license = $license;
@@ -756,6 +781,7 @@ class Template
             $output['supportLink'] = $this->supportLink;
         }
         $output['tagline'] = $this->tagline->toJson();
+        $output['type'] = ($this->type)->value;
         if (isset($this->userInputs)) {
             $output['userInputs'] = array_map(fn (TemplateUserInputsItem $i) => $i->toJson(), $this->userInputs);
         }

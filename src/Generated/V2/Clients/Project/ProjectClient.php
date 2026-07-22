@@ -58,8 +58,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatist
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
 
 /**
@@ -345,6 +349,16 @@ interface ProjectClient
      */
     public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse;
     /**
+     * Update a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateProjectRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateProject(UpdateProjectRequest $request): EmptyResponse;
+    /**
      * Update a Project's description.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
@@ -363,6 +377,16 @@ interface ProjectClient
      * @param UpdateProjectMembershipRequest $request An object representing the request for this operation
      */
     public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse;
+    /**
+     * Update a Server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateServerRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateServer(UpdateServerRequest $request): EmptyResponse;
     /**
      * Update a Servers's description.
      *
@@ -413,4 +437,24 @@ interface ProjectClient
      * @return EmptyResponse NoContent
      */
     public function storagespaceReplaceServerNotificationThreshold(StoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse;
+    /**
+     * Update a Project's storage space statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-update-project-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceUpdateProjectStatisticsRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceUpdateProjectStatistics(StoragespaceUpdateProjectStatisticsRequest $request): EmptyResponse;
+    /**
+     * Update a Server's storage space statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-update-server-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceUpdateServerStatisticsRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceUpdateServerStatistics(StoragespaceUpdateServerStatisticsRequest $request): EmptyResponse;
 }

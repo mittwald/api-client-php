@@ -18,16 +18,6 @@ class ListProjectMembershipsRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'type' => 'integer',
-            ],
-            'skip' => [
-                'type' => 'integer',
-            ],
-            'page' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
             'hasExpiry' => [
                 'type' => 'boolean',
             ],
@@ -37,23 +27,36 @@ class ListProjectMembershipsRequest
             'role' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.membership.ProjectRoles',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
         ],
         'required' => [
 
         ],
     ];
 
-    private ?int $limit = null;
-
-    private ?int $skip = null;
-
-    private ?int $page = null;
-
     private ?bool $hasExpiry = null;
 
     private ?bool $isInherited = null;
 
     private ?ProjectRoles $role = null;
+
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -64,21 +67,6 @@ class ListProjectMembershipsRequest
      */
     public function __construct()
     {
-    }
-
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
     }
 
     public function getHasExpiry(): ?bool
@@ -96,70 +84,19 @@ class ListProjectMembershipsRequest
         return $this->role ?? null;
     }
 
-    public function withLimit(int $limit): self
+    public function getLimit(): int
     {
-        $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
+        return $this->limit;
     }
 
-    public function withoutLimit(): self
+    public function getSkip(): int
     {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
+        return $this->skip;
     }
 
-    public function withSkip(int $skip): self
+    public function getPage(): ?int
     {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
-
-        return $clone;
+        return $this->page ?? null;
     }
 
     public function withHasExpiry(bool $hasExpiry): self
@@ -222,6 +159,56 @@ class ListProjectMembershipsRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -237,18 +224,6 @@ class ListProjectMembershipsRequest
             static::validateInput($input);
         }
 
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
         $hasExpiry = null;
         if (isset($input->{'hasExpiry'})) {
             $hasExpiry = (bool)($input->{'hasExpiry'});
@@ -261,14 +236,26 @@ class ListProjectMembershipsRequest
         if (isset($input->{'role'})) {
             $role = ProjectRoles::from($input->{'role'});
         }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self();
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
         $obj->hasExpiry = $hasExpiry;
         $obj->isInherited = $isInherited;
         $obj->role = $role;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -280,15 +267,6 @@ class ListProjectMembershipsRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
         if (isset($this->hasExpiry)) {
             $output['hasExpiry'] = $this->hasExpiry;
         }
@@ -297,6 +275,11 @@ class ListProjectMembershipsRequest
         }
         if (isset($this->role)) {
             $output['role'] = $this->role->value;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -358,15 +341,6 @@ class ListProjectMembershipsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         if (isset($mapped['hasExpiry'])) {
             $query['hasExpiry'] = $mapped['hasExpiry'];
         }
@@ -375,6 +349,15 @@ class ListProjectMembershipsRequest
         }
         if (isset($mapped['role'])) {
             $query['role'] = $mapped['role'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

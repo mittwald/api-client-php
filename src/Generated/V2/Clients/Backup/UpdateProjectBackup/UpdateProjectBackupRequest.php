@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListProjectInvitesRequest
+class UpdateProjectBackupRequest
 {
-    public const method = 'get';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,103 +17,73 @@ class ListProjectInvitesRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'type' => 'integer',
-                'default' => 1000,
-                'minimum' => 0,
+            'projectBackupId' => [
+                'type' => 'string',
             ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 0,
+            'body' => [
+                'properties' => [
+                    'description' => [
+                        'description' => 'Description of the ProjectBackup.',
+                        'example' => 'I\'m a ProjectBackup',
+                        'type' => 'string',
+                    ],
+                    'expirationTime' => [
+                        'description' => 'Time when to expire the Backup. Must be no more than one year in the future.',
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-
+            'projectBackupId',
+            'body',
         ],
     ];
 
-    private int $limit = 1000;
+    private string $projectBackupId;
 
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private UpdateProjectBackupRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $projectBackupId, UpdateProjectBackupRequestBody $body)
     {
+        $this->projectBackupId = $projectBackupId;
+        $this->body = $body;
     }
 
-    public function getLimit(): int
+    public function getProjectBackupId(): string
     {
-        return $this->limit;
+        return $this->projectBackupId;
     }
 
-    public function getSkip(): int
+    public function getBody(): UpdateProjectBackupRequestBody
     {
-        return $this->skip;
+        return $this->body;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withLimit(int $limit): self
+    public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
+        $clone->projectBackupId = $projectBackupId;
 
         return $clone;
     }
 
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
+    public function withBody(UpdateProjectBackupRequestBody $body): self
     {
         $clone = clone $this;
-        unset($clone->page);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -123,33 +93,21 @@ class ListProjectInvitesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListProjectInvitesRequest Created instance
+     * @return UpdateProjectBackupRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListProjectInvitesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $limit = 1000;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $projectBackupId = $input->{'projectBackupId'};
+        $body = UpdateProjectBackupRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self();
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($projectBackupId, $body);
+
         return $obj;
     }
 
@@ -161,11 +119,8 @@ class ListProjectInvitesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['limit'] = $this->limit;
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['projectBackupId'] = $this->projectBackupId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -196,6 +151,7 @@ class ListProjectInvitesRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -210,7 +166,8 @@ class ListProjectInvitesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/project-invites';
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId;
     }
 
     /**
@@ -226,18 +183,10 @@ class ListProjectInvitesRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -177,6 +177,21 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNot
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionForbiddenResponse;
@@ -185,6 +200,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\Upd
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionForbiddenResponse;
@@ -848,6 +868,30 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
+     * Update a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateProjectRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateProject(UpdateProjectRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateProjectBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateProjectForbiddenResponse::fromResponse($httpResponse),
+            429 => UpdateProjectTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UpdateProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Update a Project's description.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
@@ -889,6 +933,30 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => UpdateProjectMembershipTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateProjectMembershipDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateServerRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateServer(UpdateServerRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateServerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateServerBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateServerForbiddenResponse::fromResponse($httpResponse),
+            429 => UpdateServerTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UpdateServerDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1013,6 +1081,54 @@ class ProjectClientImpl implements ProjectClient
             429 => StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
             500 => StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
             default => StoragespaceReplaceServerNotificationThresholdDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Project's storage space statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-update-project-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceUpdateProjectStatisticsRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceUpdateProjectStatistics(StoragespaceUpdateProjectStatisticsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(StoragespaceUpdateProjectStatisticsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => StoragespaceUpdateProjectStatisticsForbiddenResponse::fromResponse($httpResponse),
+            429 => StoragespaceUpdateProjectStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceUpdateProjectStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceUpdateProjectStatisticsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Server's storage space statistics.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-update-server-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceUpdateServerStatisticsRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceUpdateServerStatistics(StoragespaceUpdateServerStatisticsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(StoragespaceUpdateServerStatisticsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => StoragespaceUpdateServerStatisticsForbiddenResponse::fromResponse($httpResponse),
+            429 => StoragespaceUpdateServerStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceUpdateServerStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceUpdateServerStatisticsDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

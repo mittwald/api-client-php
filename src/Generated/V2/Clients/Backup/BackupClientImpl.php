@@ -96,6 +96,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePa
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionForbiddenResponse;
@@ -496,6 +502,31 @@ class BackupClientImpl implements BackupClient
             404 => RequestProjectBackupRestorePathDeprecatedNotFoundResponse::fromResponse($httpResponse),
             429 => RequestProjectBackupRestorePathDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             default => RequestProjectBackupRestorePathDeprecatedDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateProjectBackupRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateProjectBackup(UpdateProjectBackupRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateProjectBackupRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateProjectBackupBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateProjectBackupForbiddenResponse::fromResponse($httpResponse),
+            404 => UpdateProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdateProjectBackupTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UpdateProjectBackupDefaultResponse::fromResponse($httpResponse),
         });
     }
 
