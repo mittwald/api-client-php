@@ -10,6 +10,15 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceInternalServerErrorResponse;
@@ -306,6 +315,34 @@ class ContainerClientImpl implements ContainerClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Add a template component to a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-add-template-component
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AddTemplateComponentRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function addTemplateComponent(AddTemplateComponentRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(AddTemplateComponentRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => AddTemplateComponentBadRequestResponse::fromResponse($httpResponse),
+            403 => AddTemplateComponentForbiddenResponse::fromResponse($httpResponse),
+            404 => AddTemplateComponentNotFoundResponse::fromResponse($httpResponse),
+            409 => AddTemplateComponentConflictResponse::fromResponse($httpResponse),
+            412 => AddTemplateComponentPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => AddTemplateComponentTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => AddTemplateComponentInternalServerErrorResponse::fromResponse($httpResponse),
+            default => AddTemplateComponentDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**

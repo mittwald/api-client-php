@@ -22,18 +22,6 @@ class ListExecutionsRequest
             'cronjobId' => [
                 'type' => 'string',
             ],
-            'limit' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
-            'skip' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
-            'page' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
             'since' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -52,6 +40,19 @@ class ListExecutionsRequest
             'sortOrder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobExecutionSortOrder',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
         ],
         'required' => [
             'cronjobId',
@@ -59,12 +60,6 @@ class ListExecutionsRequest
     ];
 
     private string $cronjobId;
-
-    private ?int $limit = null;
-
-    private ?int $skip = null;
-
-    private ?int $page = null;
 
     private ?DateTime $since = null;
 
@@ -75,6 +70,12 @@ class ListExecutionsRequest
     private ?bool $triggeredByUser = null;
 
     private ?CronjobExecutionSortOrder $sortOrder = null;
+
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -88,21 +89,6 @@ class ListExecutionsRequest
     public function getCronjobId(): string
     {
         return $this->cronjobId;
-    }
-
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
     }
 
     public function getSince(): ?DateTime
@@ -130,6 +116,21 @@ class ListExecutionsRequest
         return $this->sortOrder ?? null;
     }
 
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
@@ -140,72 +141,6 @@ class ListExecutionsRequest
 
         $clone = clone $this;
         $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    public function withLimit(int $limit): self
-    {
-        $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
 
         return $clone;
     }
@@ -302,6 +237,56 @@ class ListExecutionsRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -318,18 +303,6 @@ class ListExecutionsRequest
         }
 
         $cronjobId = $input->{'cronjobId'};
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
         $since = null;
         if (isset($input->{'since'})) {
             $since = new DateTime($input->{'since'});
@@ -350,16 +323,28 @@ class ListExecutionsRequest
         if (isset($input->{'sortOrder'})) {
             $sortOrder = CronjobExecutionSortOrder::from($input->{'sortOrder'});
         }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($cronjobId);
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
         $obj->since = $since;
         $obj->until = $until;
         $obj->status = $status;
         $obj->triggeredByUser = $triggeredByUser;
         $obj->sortOrder = $sortOrder;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -372,15 +357,6 @@ class ListExecutionsRequest
     {
         $output = [];
         $output['cronjobId'] = $this->cronjobId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
         if (isset($this->since)) {
             $output['since'] = ($this->since)->format(DateTime::ATOM);
         }
@@ -395,6 +371,11 @@ class ListExecutionsRequest
         }
         if (isset($this->sortOrder)) {
             $output['sortOrder'] = $this->sortOrder->value;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -463,15 +444,6 @@ class ListExecutionsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         if (isset($mapped['since'])) {
             $query['since'] = $mapped['since'];
         }
@@ -486,6 +458,15 @@ class ListExecutionsRequest
         }
         if (isset($mapped['sortOrder'])) {
             $query['sortOrder'] = $mapped['sortOrder'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

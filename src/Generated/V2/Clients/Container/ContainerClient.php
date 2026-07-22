@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\AddTemplateComponent\AddTemplateComponentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CallPullImageWebhookForService\CallPullImageWebhookForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\CreateRegistry\CreateRegistryRequest;
@@ -80,6 +81,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack\UpdateStackReq
  */
 interface ContainerClient
 {
+    /**
+     * Add a template component to a Stack.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-add-template-component
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AddTemplateComponentRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function addTemplateComponent(AddTemplateComponentRequest $request): EmptyResponse;
     /**
      * Call pull-image webhook
      *

@@ -30,6 +30,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore\RequestProjectBackupRestoreRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestorePathDeprecated\RequestProjectBackupRestorePathDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest;
 
@@ -202,6 +203,16 @@ interface BackupClient
      * @return EmptyResponse NoContent
      */
     public function requestProjectBackupRestorePathDeprecated(RequestProjectBackupRestorePathDeprecatedRequest $request): EmptyResponse;
+    /**
+     * Update a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateProjectBackupRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function updateProjectBackup(UpdateProjectBackupRequest $request): EmptyResponse;
     /**
      * Change the description of a ProjectBackup.
      *
