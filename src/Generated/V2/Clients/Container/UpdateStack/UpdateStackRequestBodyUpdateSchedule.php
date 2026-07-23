@@ -2,91 +2,92 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CustomerUpdatePlanTooManyRequestsResponseBody
+class UpdateStackRequestBodyUpdateSchedule
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
+        'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
+',
+        'nullable' => true,
         'properties' => [
-            'message' => [
+            'cron' => [
+                'example' => '* * * * *',
                 'type' => 'string',
-                'example' => 'too many requests',
             ],
-            'type' => [
+            'timezone' => [
+                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                'example' => 'Europe/Berlin',
                 'type' => 'string',
-                'example' => 'RateLimitError',
             ],
         ],
+        'required' => [
+            'cron',
+        ],
+        'type' => 'object',
     ];
 
-    private ?string $message = null;
-
-    private ?string $type = null;
+    private string $cron;
 
     /**
-     *
+     * Valid timezones can be retrieved via GET /v2/time-zones
      */
-    public function __construct()
+    private ?string $timezone = null;
+
+    public function __construct(string $cron)
     {
+        $this->cron = $cron;
     }
 
-    public function getMessage(): ?string
+    public function getCron(): string
     {
-        return $this->message ?? null;
+        return $this->cron;
     }
 
-    public function getType(): ?string
+    public function getTimezone(): ?string
     {
-        return $this->type ?? null;
+        return $this->timezone ?? null;
     }
 
-    public function withMessage(string $message): self
+    public function withCron(string $cron): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
+        $validator->validate($cron, self::$internalValidationSchema['properties']['cron']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->message = $message;
+        $clone->cron = $cron;
 
         return $clone;
     }
 
-    public function withoutMessage(): self
-    {
-        $clone = clone $this;
-        unset($clone->message);
-
-        return $clone;
-    }
-
-    public function withType(string $type): self
+    public function withTimezone(string $timezone): self
     {
         $validator = new Validator();
-        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
+        $validator->validate($timezone, self::$internalValidationSchema['properties']['timezone']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->type = $type;
+        $clone->timezone = $timezone;
 
         return $clone;
     }
 
-    public function withoutType(): self
+    public function withoutTimezone(): self
     {
         $clone = clone $this;
-        unset($clone->type);
+        unset($clone->timezone);
 
         return $clone;
     }
@@ -96,28 +97,24 @@ class CustomerUpdatePlanTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CustomerUpdatePlanTooManyRequestsResponseBody Created instance
+     * @return UpdateStackRequestBodyUpdateSchedule Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CustomerUpdatePlanTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateStackRequestBodyUpdateSchedule
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $message = null;
-        if (isset($input->{'message'})) {
-            $message = $input->{'message'};
-        }
-        $type = null;
-        if (isset($input->{'type'})) {
-            $type = $input->{'type'};
+        $cron = $input->{'cron'};
+        $timezone = null;
+        if (isset($input->{'timezone'})) {
+            $timezone = $input->{'timezone'};
         }
 
-        $obj = new self();
-        $obj->message = $message;
-        $obj->type = $type;
+        $obj = new self($cron);
+        $obj->timezone = $timezone;
         return $obj;
     }
 
@@ -129,11 +126,9 @@ class CustomerUpdatePlanTooManyRequestsResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->message)) {
-            $output['message'] = $this->message;
-        }
-        if (isset($this->type)) {
-            $output['type'] = $this->type;
+        $output['cron'] = $this->cron;
+        if (isset($this->timezone)) {
+            $output['timezone'] = $this->timezone;
         }
 
         return $output;

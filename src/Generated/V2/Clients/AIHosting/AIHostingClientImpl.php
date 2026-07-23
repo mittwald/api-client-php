@@ -53,20 +53,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGe
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageForbiddenResponse;
@@ -83,12 +69,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\Customer
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsForbiddenResponse;
@@ -338,57 +318,7 @@ class AIHostingClientImpl implements AIHostingClient
     }
 
     /**
-     * Get ai hosting plan and usages of a customer by planId.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plan
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CustomerGetPlanRequest $request An object representing the request for this operation
-     * @return CustomerGetPlanOKResponse The customer usage and plan.
-     */
-    public function customerGetPlan(CustomerGetPlanRequest $request): CustomerGetPlanOKResponse
-    {
-        $httpRequest = new Request(CustomerGetPlanRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return CustomerGetPlanOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CustomerGetPlanBadRequestResponse::fromResponse($httpResponse),
-            403 => CustomerGetPlanForbiddenResponse::fromResponse($httpResponse),
-            404 => CustomerGetPlanNotFoundResponse::fromResponse($httpResponse),
-            429 => CustomerGetPlanTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CustomerGetPlanDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get all ai hosting plans of a customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plans
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CustomerGetPlansRequest $request An object representing the request for this operation
-     * @return CustomerGetPlansOKResponse The list of plans with their current usage.
-     */
-    public function customerGetPlans(CustomerGetPlansRequest $request): CustomerGetPlansOKResponse
-    {
-        $httpRequest = new Request(CustomerGetPlansRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return CustomerGetPlansOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CustomerGetPlansBadRequestResponse::fromResponse($httpResponse),
-            403 => CustomerGetPlansForbiddenResponse::fromResponse($httpResponse),
-            404 => CustomerGetPlansNotFoundResponse::fromResponse($httpResponse),
-            429 => CustomerGetPlansTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CustomerGetPlansDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get ai hosting plan and usages of a customer. Deprecated: use /ai-hostings/{planId} instead.
+     * Get ai hosting plan and usages of a customer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-usage
      * @throws GuzzleException
@@ -435,31 +365,6 @@ class AIHostingClientImpl implements AIHostingClient
             412 => CustomerUpdateKeyPreconditionFailedResponse::fromResponse($httpResponse),
             429 => CustomerUpdateKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => CustomerUpdateKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Renames an AI hosting plan.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-update-plan
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CustomerUpdatePlanRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
-     */
-    public function customerUpdatePlan(CustomerUpdatePlanRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(CustomerUpdatePlanRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CustomerUpdatePlanBadRequestResponse::fromResponse($httpResponse),
-            403 => CustomerUpdatePlanForbiddenResponse::fromResponse($httpResponse),
-            404 => CustomerUpdatePlanNotFoundResponse::fromResponse($httpResponse),
-            429 => CustomerUpdatePlanTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CustomerUpdatePlanDefaultResponse::fromResponse($httpResponse),
         });
     }
 

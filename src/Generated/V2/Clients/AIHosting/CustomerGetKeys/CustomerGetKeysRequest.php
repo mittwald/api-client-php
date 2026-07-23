@@ -20,9 +20,6 @@ class CustomerGetKeysRequest
             'customerId' => [
                 'type' => 'string',
             ],
-            'planId' => [
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'customerId',
@@ -30,8 +27,6 @@ class CustomerGetKeysRequest
     ];
 
     private string $customerId;
-
-    private ?string $planId = null;
 
     private array $headers = [
 
@@ -47,11 +42,6 @@ class CustomerGetKeysRequest
         return $this->customerId;
     }
 
-    public function getPlanId(): ?string
-    {
-        return $this->planId ?? null;
-    }
-
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -62,28 +52,6 @@ class CustomerGetKeysRequest
 
         $clone = clone $this;
         $clone->customerId = $customerId;
-
-        return $clone;
-    }
-
-    public function withPlanId(string $planId): self
-    {
-        $validator = new Validator();
-        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->planId = $planId;
-
-        return $clone;
-    }
-
-    public function withoutPlanId(): self
-    {
-        $clone = clone $this;
-        unset($clone->planId);
 
         return $clone;
     }
@@ -104,13 +72,9 @@ class CustomerGetKeysRequest
         }
 
         $customerId = $input->{'customerId'};
-        $planId = null;
-        if (isset($input->{'planId'})) {
-            $planId = $input->{'planId'};
-        }
 
         $obj = new self($customerId);
-        $obj->planId = $planId;
+
         return $obj;
     }
 
@@ -123,9 +87,6 @@ class CustomerGetKeysRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
-        if (isset($this->planId)) {
-            $output['planId'] = $this->planId;
-        }
 
         return $output;
     }
@@ -187,9 +148,6 @@ class CustomerGetKeysRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['planId'])) {
-            $query['planId'] = $mapped['planId'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

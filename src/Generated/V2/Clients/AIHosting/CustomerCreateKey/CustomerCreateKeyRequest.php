@@ -29,9 +29,6 @@ class CustomerCreateKeyRequest
                         'minLength' => 5,
                         'type' => 'string',
                     ],
-                    'planId' => [
-                        'type' => 'string',
-                    ],
                     'projectId' => [
                         'type' => 'string',
                     ],

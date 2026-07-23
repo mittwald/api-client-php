@@ -28,9 +28,6 @@ class ProjectGetUsageOKResponse implements ResponseContainer
                     'modelTermsApprovalRequired' => [
                         'type' => 'boolean',
                     ],
-                    'name' => [
-                        'type' => 'string',
-                    ],
                     'nextTokenReset' => [
                         'format' => 'date-time',
                         'type' => 'string',

@@ -21,9 +21,6 @@ class CustomerCreateKeyRequestBody
                 'minLength' => 5,
                 'type' => 'string',
             ],
-            'planId' => [
-                'type' => 'string',
-            ],
             'projectId' => [
                 'type' => 'string',
             ],
@@ -37,8 +34,6 @@ class CustomerCreateKeyRequestBody
     private ?bool $createWebuiContainer = null;
 
     private string $name;
-
-    private ?string $planId = null;
 
     private ?string $projectId = null;
 
@@ -55,11 +50,6 @@ class CustomerCreateKeyRequestBody
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPlanId(): ?string
-    {
-        return $this->planId ?? null;
     }
 
     public function getProjectId(): ?string
@@ -99,28 +89,6 @@ class CustomerCreateKeyRequestBody
 
         $clone = clone $this;
         $clone->name = $name;
-
-        return $clone;
-    }
-
-    public function withPlanId(string $planId): self
-    {
-        $validator = new Validator();
-        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->planId = $planId;
-
-        return $clone;
-    }
-
-    public function withoutPlanId(): self
-    {
-        $clone = clone $this;
-        unset($clone->planId);
 
         return $clone;
     }
@@ -167,10 +135,6 @@ class CustomerCreateKeyRequestBody
             $createWebuiContainer = (bool)($input->{'createWebuiContainer'});
         }
         $name = $input->{'name'};
-        $planId = null;
-        if (isset($input->{'planId'})) {
-            $planId = $input->{'planId'};
-        }
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
@@ -178,7 +142,6 @@ class CustomerCreateKeyRequestBody
 
         $obj = new self($name);
         $obj->createWebuiContainer = $createWebuiContainer;
-        $obj->planId = $planId;
         $obj->projectId = $projectId;
         return $obj;
     }
@@ -195,9 +158,6 @@ class CustomerCreateKeyRequestBody
             $output['createWebuiContainer'] = $this->createWebuiContainer;
         }
         $output['name'] = $this->name;
-        if (isset($this->planId)) {
-            $output['planId'] = $this->planId;
-        }
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }

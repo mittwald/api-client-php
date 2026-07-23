@@ -20,9 +20,6 @@ class ProjectGetKeysRequest
             'projectId' => [
                 'type' => 'string',
             ],
-            'planId' => [
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'projectId',
@@ -30,8 +27,6 @@ class ProjectGetKeysRequest
     ];
 
     private string $projectId;
-
-    private ?string $planId = null;
 
     private array $headers = [
 
@@ -47,11 +42,6 @@ class ProjectGetKeysRequest
         return $this->projectId;
     }
 
-    public function getPlanId(): ?string
-    {
-        return $this->planId ?? null;
-    }
-
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -62,28 +52,6 @@ class ProjectGetKeysRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    public function withPlanId(string $planId): self
-    {
-        $validator = new Validator();
-        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->planId = $planId;
-
-        return $clone;
-    }
-
-    public function withoutPlanId(): self
-    {
-        $clone = clone $this;
-        unset($clone->planId);
 
         return $clone;
     }
@@ -104,13 +72,9 @@ class ProjectGetKeysRequest
         }
 
         $projectId = $input->{'projectId'};
-        $planId = null;
-        if (isset($input->{'planId'})) {
-            $planId = $input->{'planId'};
-        }
 
         $obj = new self($projectId);
-        $obj->planId = $planId;
+
         return $obj;
     }
 
@@ -123,9 +87,6 @@ class ProjectGetKeysRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->planId)) {
-            $output['planId'] = $this->planId;
-        }
 
         return $output;
     }
@@ -187,9 +148,6 @@ class ProjectGetKeysRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['planId'])) {
-            $query['planId'] = $mapped['planId'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

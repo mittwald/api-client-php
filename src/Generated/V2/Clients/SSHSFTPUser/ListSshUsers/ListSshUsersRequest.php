@@ -22,9 +22,16 @@ class ListSshUsersRequest
             ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -34,9 +41,11 @@ class ListSshUsersRequest
 
     private string $projectId;
 
-    private ?int $limit = null;
+    private int $limit = 1000;
 
-    private ?int $skip = null;
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -52,14 +61,19 @@ class ListSshUsersRequest
         return $this->projectId;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -90,14 +104,6 @@ class ListSshUsersRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -112,10 +118,24 @@ class ListSshUsersRequest
         return $clone;
     }
 
-    public function withoutSkip(): self
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
     {
         $clone = clone $this;
-        unset($clone->skip);
+        unset($clone->page);
 
         return $clone;
     }
@@ -136,18 +156,23 @@ class ListSshUsersRequest
         }
 
         $projectId = $input->{'projectId'};
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
         }
 
         $obj = new self($projectId);
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -160,11 +185,10 @@ class ListSshUsersRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -232,6 +256,9 @@ class ListSshUsersRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

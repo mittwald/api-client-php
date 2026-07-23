@@ -126,6 +126,8 @@ interface ContainerClient
     /**
      * Declaratively create, update or delete Services or Volumes belonging to a Stack.
      *
+     * Note that this endpoint only declares the `services` and `volumes` of a Stack. Scalar Stack properties like `description` and `updateSchedule` are not part of this declaration and remain unchanged; use `PATCH /v2/stacks/{stackId}` to manage them. Including them in the declarative `PUT` (omitting a property then resets it) is planned for the next API version (v3).
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-declare-stack
      * @throws GuzzleException
      * @throws UnexpectedResponseException
