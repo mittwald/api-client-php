@@ -34,6 +34,27 @@ Keys must be strings of max 63 characters.
 ',
                 'type' => 'object',
             ],
+            'updateSchedule' => [
+                'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
+',
+                'nullable' => true,
+                'properties' => [
+                    'cron' => [
+                        'example' => '* * * * *',
+                        'type' => 'string',
+                    ],
+                    'timezone' => [
+                        'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                        'example' => 'Europe/Berlin',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'cron',
+                ],
+                'type' => 'object',
+            ],
             'volumes' => [
                 'additionalProperties' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeRequest',
@@ -67,6 +88,13 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     private ?array $services = null;
 
     /**
+     * Schedule for automatic image updates of this stack. Set to `null` to remove the
+     * schedule; omit the property to leave it unchanged.
+     *
+     */
+    private ?UpdateStackRequestBodyUpdateSchedule $updateSchedule = null;
+
+    /**
      * A set of named volumes that should be created for this stack. Removing a volume
      * from this set will not delete the volume (for safety), but only detach it from the
      * stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
@@ -94,6 +122,11 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     public function getServices(): ?array
     {
         return $this->services ?? null;
+    }
+
+    public function getUpdateSchedule(): ?UpdateStackRequestBodyUpdateSchedule
+    {
+        return $this->updateSchedule ?? null;
     }
 
     /**
@@ -151,6 +184,22 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $clone;
     }
 
+    public function withUpdateSchedule(UpdateStackRequestBodyUpdateSchedule $updateSchedule): self
+    {
+        $clone = clone $this;
+        $clone->updateSchedule = $updateSchedule;
+
+        return $clone;
+    }
+
+    public function withoutUpdateSchedule(): self
+    {
+        $clone = clone $this;
+        unset($clone->updateSchedule);
+
+        return $clone;
+    }
+
     /**
      * @param mixed[] $volumes
      */
@@ -199,6 +248,10 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         if (isset($input->{'services'})) {
             $services = (array)$input->{'services'};
         }
+        $updateSchedule = null;
+        if (isset($input->{'updateSchedule'})) {
+            $updateSchedule = UpdateStackRequestBodyUpdateSchedule::buildFromInput($input->{'updateSchedule'}, validate: $validate);
+        }
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = (array)$input->{'volumes'};
@@ -207,6 +260,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         $obj = new self();
         $obj->description = $description;
         $obj->services = $services;
+        $obj->updateSchedule = $updateSchedule;
         $obj->volumes = $volumes;
         return $obj;
     }
@@ -224,6 +278,9 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         }
         if (isset($this->services)) {
             $output['services'] = $this->services;
+        }
+        if (isset($this->updateSchedule)) {
+            $output['updateSchedule'] = ($this->updateSchedule)->toJson();
         }
         if (isset($this->volumes)) {
             $output['volumes'] = $this->volumes;
@@ -258,5 +315,8 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
 
     public function __clone()
     {
+        if (isset($this->updateSchedule)) {
+            $this->updateSchedule = clone $this->updateSchedule;
+        }
     }
 }

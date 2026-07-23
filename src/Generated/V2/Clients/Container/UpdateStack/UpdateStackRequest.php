@@ -46,6 +46,27 @@ Keys must be strings of max 63 characters.
 ',
                         'type' => 'object',
                     ],
+                    'updateSchedule' => [
+                        'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
+',
+                        'nullable' => true,
+                        'properties' => [
+                            'cron' => [
+                                'example' => '* * * * *',
+                                'type' => 'string',
+                            ],
+                            'timezone' => [
+                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                                'example' => 'Europe/Berlin',
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'cron',
+                        ],
+                        'type' => 'object',
+                    ],
                     'volumes' => [
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeRequest',
