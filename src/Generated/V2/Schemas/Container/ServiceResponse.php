@@ -86,6 +86,10 @@ class ServiceResponse
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'templateId' => [
+                'description' => 'ID of the template used to create this service, if one was used.',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -138,6 +142,11 @@ class ServiceResponse
     private ServiceStatus $status;
 
     private DateTime $statusSetAt;
+
+    /**
+     * ID of the template used to create this service, if one was used.
+     */
+    private ?string $templateId = null;
 
     public function __construct(ServiceState $deployedState, string $description, string $id, ServiceState $pendingState, string $projectId, bool $requiresRecreate, string $serviceName, string $shortId, string $stackId, ServiceStatus $status, DateTime $statusSetAt)
     {
@@ -222,6 +231,11 @@ class ServiceResponse
     public function getStatusSetAt(): DateTime
     {
         return $this->statusSetAt;
+    }
+
+    public function getTemplateId(): ?string
+    {
+        return $this->templateId ?? null;
     }
 
     public function withDeploy(Deploy $deploy): self
@@ -408,6 +422,28 @@ class ServiceResponse
         return $clone;
     }
 
+    public function withTemplateId(string $templateId): self
+    {
+        $validator = new Validator();
+        $validator->validate($templateId, self::$internalValidationSchema['properties']['templateId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->templateId = $templateId;
+
+        return $clone;
+    }
+
+    public function withoutTemplateId(): self
+    {
+        $clone = clone $this;
+        unset($clone->templateId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -446,11 +482,16 @@ class ServiceResponse
         $stackId = $input->{'stackId'};
         $status = ServiceStatus::from($input->{'status'});
         $statusSetAt = new DateTime($input->{'statusSetAt'});
+        $templateId = null;
+        if (isset($input->{'templateId'})) {
+            $templateId = $input->{'templateId'};
+        }
 
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
         $obj->deploy = $deploy;
         $obj->message = $message;
         $obj->restartPolicy = $restartPolicy;
+        $obj->templateId = $templateId;
         return $obj;
     }
 
@@ -482,6 +523,9 @@ class ServiceResponse
         $output['stackId'] = $this->stackId;
         $output['status'] = $this->status->value;
         $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
+        if (isset($this->templateId)) {
+            $output['templateId'] = $this->templateId;
+        }
 
         return $output;
     }

@@ -17,10 +17,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGet
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKey\CustomerGetKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetKeys\CustomerGetKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan\CustomerGetPlanRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyCreatedResponse;
@@ -117,7 +122,27 @@ interface AIHostingClient
      */
     public function customerGetKeys(CustomerGetKeysRequest $request): CustomerGetKeysOKResponse;
     /**
-     * Get ai hosting plan and usages of a customer.
+     * Get ai hosting plan and usages of a customer by planId.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plan
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetPlanRequest $request An object representing the request for this operation
+     * @return CustomerGetPlanOKResponse The customer usage and plan.
+     */
+    public function customerGetPlan(CustomerGetPlanRequest $request): CustomerGetPlanOKResponse;
+    /**
+     * Get all ai hosting plans of a customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-plans
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetPlansRequest $request An object representing the request for this operation
+     * @return CustomerGetPlansOKResponse The list of plans with their current usage.
+     */
+    public function customerGetPlans(CustomerGetPlansRequest $request): CustomerGetPlansOKResponse;
+    /**
+     * Get ai hosting plan and usages of a customer. Deprecated: use /ai-hostings/{planId} instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-get-usage
      * @throws GuzzleException
@@ -135,6 +160,16 @@ interface AIHostingClient
      * @param CustomerUpdateKeyRequest $request An object representing the request for this operation
      */
     public function customerUpdateKey(CustomerUpdateKeyRequest $request): CustomerUpdateKeyOKResponse;
+    /**
+     * Renames an AI hosting plan.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-update-plan
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerUpdatePlanRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function customerUpdatePlan(CustomerUpdatePlanRequest $request): EmptyResponse;
     /**
      * Get a list of currently active models.
      *

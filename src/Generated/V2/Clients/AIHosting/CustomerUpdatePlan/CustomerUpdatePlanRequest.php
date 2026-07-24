@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKeys;
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ProjectGetKeysRequest
+class CustomerUpdatePlanRequest
 {
-    public const method = 'get';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,51 +17,70 @@ class ProjectGetKeysRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'customerId' => [
                 'type' => 'string',
             ],
             'planId' => [
                 'type' => 'string',
             ],
+            'body' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'type' => 'object',
+            ],
         ],
         'required' => [
-            'projectId',
+            'customerId',
+            'planId',
+            'body',
         ],
     ];
 
-    private string $projectId;
+    private string $customerId;
 
-    private ?string $planId = null;
+    private string $planId;
+
+    private CustomerUpdatePlanRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $customerId, string $planId, CustomerUpdatePlanRequestBody $body)
     {
-        $this->projectId = $projectId;
+        $this->customerId = $customerId;
+        $this->planId = $planId;
+        $this->body = $body;
     }
 
-    public function getProjectId(): string
+    public function getCustomerId(): string
     {
-        return $this->projectId;
+        return $this->customerId;
     }
 
-    public function getPlanId(): ?string
+    public function getPlanId(): string
     {
-        return $this->planId ?? null;
+        return $this->planId;
     }
 
-    public function withProjectId(string $projectId): self
+    public function getBody(): CustomerUpdatePlanRequestBody
+    {
+        return $this->body;
+    }
+
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
@@ -80,10 +99,10 @@ class ProjectGetKeysRequest
         return $clone;
     }
 
-    public function withoutPlanId(): self
+    public function withBody(CustomerUpdatePlanRequestBody $body): self
     {
         $clone = clone $this;
-        unset($clone->planId);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -93,24 +112,22 @@ class ProjectGetKeysRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ProjectGetKeysRequest Created instance
+     * @return CustomerUpdatePlanRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ProjectGetKeysRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerUpdatePlanRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $planId = null;
-        if (isset($input->{'planId'})) {
-            $planId = $input->{'planId'};
-        }
+        $customerId = $input->{'customerId'};
+        $planId = $input->{'planId'};
+        $body = CustomerUpdatePlanRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectId);
-        $obj->planId = $planId;
+        $obj = new self($customerId, $planId, $body);
+
         return $obj;
     }
 
@@ -122,10 +139,9 @@ class ProjectGetKeysRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->planId)) {
-            $output['planId'] = $this->planId;
-        }
+        $output['customerId'] = $this->customerId;
+        $output['planId'] = $this->planId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -156,6 +172,7 @@ class ProjectGetKeysRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -170,8 +187,9 @@ class ProjectGetKeysRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/ai-hosting-keys';
+        $customerId = urlencode($mapped['customerId']);
+        $planId = urlencode($mapped['planId']);
+        return '/v2/customers/' . $customerId . '/ai-hostings/' . $planId;
     }
 
     /**
@@ -187,12 +205,10 @@ class ProjectGetKeysRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['planId'])) {
-            $query['planId'] = $mapped['planId'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage;
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ProjectGetUsageOKResponse implements ResponseContainer
+class CustomerGetPlanTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,49 +21,36 @@ class ProjectGetUsageOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'keys' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
-                    ],
-                    'modelTermsApprovalRequired' => [
-                        'type' => 'boolean',
-                    ],
-                    'name' => [
-                        'type' => 'string',
-                    ],
-                    'nextTokenReset' => [
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'projectId' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'keys',
-                    'projectId',
-                    'modelTermsApprovalRequired',
-                ],
                 'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private ProjectGetUsageOKResponseBody $body;
+    private CustomerGetPlanTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ProjectGetUsageOKResponseBody $body)
+    public function __construct(CustomerGetPlanTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ProjectGetUsageOKResponseBody
+    public function getBody(): CustomerGetPlanTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(ProjectGetUsageOKResponseBody $body): self
+    public function withBody(CustomerGetPlanTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -76,17 +63,17 @@ class ProjectGetUsageOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ProjectGetUsageOKResponse Created instance
+     * @return CustomerGetPlanTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ProjectGetUsageOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerGetPlanTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ProjectGetUsageOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CustomerGetPlanTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

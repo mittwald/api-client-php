@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetKeys;
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ProjectGetKeysRequest
+class CustomerGetPlansRequest
 {
     public const method = 'get';
 
@@ -17,73 +17,73 @@ class ProjectGetKeysRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'customerId' => [
                 'type' => 'string',
             ],
-            'planId' => [
-                'type' => 'string',
+            'topUsageCount' => [
+                'type' => 'integer',
             ],
         ],
         'required' => [
-            'projectId',
+            'customerId',
         ],
     ];
 
-    private string $projectId;
+    private string $customerId;
 
-    private ?string $planId = null;
+    private ?int $topUsageCount = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $customerId)
     {
-        $this->projectId = $projectId;
+        $this->customerId = $customerId;
     }
 
-    public function getProjectId(): string
+    public function getCustomerId(): string
     {
-        return $this->projectId;
+        return $this->customerId;
     }
 
-    public function getPlanId(): ?string
+    public function getTopUsageCount(): ?int
     {
-        return $this->planId ?? null;
+        return $this->topUsageCount ?? null;
     }
 
-    public function withProjectId(string $projectId): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
-    public function withPlanId(string $planId): self
+    public function withTopUsageCount(int $topUsageCount): self
     {
         $validator = new Validator();
-        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        $validator->validate($topUsageCount, self::$internalValidationSchema['properties']['topUsageCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->planId = $planId;
+        $clone->topUsageCount = $topUsageCount;
 
         return $clone;
     }
 
-    public function withoutPlanId(): self
+    public function withoutTopUsageCount(): self
     {
         $clone = clone $this;
-        unset($clone->planId);
+        unset($clone->topUsageCount);
 
         return $clone;
     }
@@ -93,24 +93,24 @@ class ProjectGetKeysRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ProjectGetKeysRequest Created instance
+     * @return CustomerGetPlansRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ProjectGetKeysRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerGetPlansRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $planId = null;
-        if (isset($input->{'planId'})) {
-            $planId = $input->{'planId'};
+        $customerId = $input->{'customerId'};
+        $topUsageCount = null;
+        if (isset($input->{'topUsageCount'})) {
+            $topUsageCount = (int)($input->{'topUsageCount'});
         }
 
-        $obj = new self($projectId);
-        $obj->planId = $planId;
+        $obj = new self($customerId);
+        $obj->topUsageCount = $topUsageCount;
         return $obj;
     }
 
@@ -122,9 +122,9 @@ class ProjectGetKeysRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->planId)) {
-            $output['planId'] = $this->planId;
+        $output['customerId'] = $this->customerId;
+        if (isset($this->topUsageCount)) {
+            $output['topUsageCount'] = $this->topUsageCount;
         }
 
         return $output;
@@ -170,8 +170,8 @@ class ProjectGetKeysRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/ai-hosting-keys';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/ai-hostings';
     }
 
     /**
@@ -187,8 +187,8 @@ class ProjectGetKeysRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['planId'])) {
-            $query['planId'] = $mapped['planId'];
+        if (isset($mapped['topUsageCount'])) {
+            $query['topUsageCount'] = $mapped['topUsageCount'];
         }
         return [
             'query' => $query,
