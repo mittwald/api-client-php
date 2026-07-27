@@ -42,7 +42,7 @@ class ListExecutionsRequest
             ],
             'limit' => [
                 'type' => 'integer',
-                'default' => 1000,
+                'default' => 10000,
                 'minimum' => 0,
             ],
             'skip' => [
@@ -71,7 +71,7 @@ class ListExecutionsRequest
 
     private ?CronjobExecutionSortOrder $sortOrder = null;
 
-    private int $limit = 1000;
+    private int $limit = 10000;
 
     private int $skip = 0;
 
@@ -323,7 +323,7 @@ class ListExecutionsRequest
         if (isset($input->{'sortOrder'})) {
             $sortOrder = CronjobExecutionSortOrder::from($input->{'sortOrder'});
         }
-        $limit = 1000;
+        $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
