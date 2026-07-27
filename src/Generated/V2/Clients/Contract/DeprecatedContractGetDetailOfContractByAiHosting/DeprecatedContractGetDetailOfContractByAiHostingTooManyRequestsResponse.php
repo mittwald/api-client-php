@@ -2,65 +2,58 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Psr\Http\Message\ResponseInterface;
 
-class SetStackUpdateScheduleRequestBody
+class DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'updateSchedule' => [
-                'nullable' => true,
-                'properties' => [
-                    'cron' => [
-                        'example' => '* * * * *',
-                        'type' => 'string',
-                    ],
-                    'timezone' => [
-                        'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
-                        'example' => 'Europe/Berlin',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'cron',
-                ],
+            'body' => [
                 'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private ?SetStackUpdateScheduleRequestBodyUpdateSchedule $updateSchedule = null;
+    private DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponseBody $body;
 
-    /**
-     *
-     */
-    public function __construct()
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponseBody $body)
     {
+        $this->body = $body;
     }
 
-    public function getUpdateSchedule(): ?SetStackUpdateScheduleRequestBodyUpdateSchedule
+    public function getBody(): DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponseBody
     {
-        return $this->updateSchedule ?? null;
+        return $this->body;
     }
 
-    public function withUpdateSchedule(SetStackUpdateScheduleRequestBodyUpdateSchedule $updateSchedule): self
+    public function withBody(DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
-        $clone->updateSchedule = $updateSchedule;
-
-        return $clone;
-    }
-
-    public function withoutUpdateSchedule(): self
-    {
-        $clone = clone $this;
-        unset($clone->updateSchedule);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -70,23 +63,20 @@ class SetStackUpdateScheduleRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return SetStackUpdateScheduleRequestBody Created instance
+     * @return DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $updateSchedule = null;
-        if (isset($input->{'updateSchedule'})) {
-            $updateSchedule = SetStackUpdateScheduleRequestBodyUpdateSchedule::buildFromInput($input->{'updateSchedule'}, validate: $validate);
-        }
+        $body = DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self();
-        $obj->updateSchedule = $updateSchedule;
+        $obj = new self($body);
+
         return $obj;
     }
 
@@ -98,9 +88,7 @@ class SetStackUpdateScheduleRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->updateSchedule)) {
-            $output['updateSchedule'] = ($this->updateSchedule)->toJson();
-        }
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -131,8 +119,19 @@ class SetStackUpdateScheduleRequestBody
 
     public function __clone()
     {
-        if (isset($this->updateSchedule)) {
-            $this->updateSchedule = clone $this->updateSchedule;
-        }
+        $this->body = clone $this->body;
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

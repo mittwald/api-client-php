@@ -59,7 +59,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateSe
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RotatePullImageWebhookForService\RotatePullImageWebhookForServiceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule\SetStackUpdateScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StopService\StopServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateRegistry\UpdateRegistryRequest;
@@ -378,16 +377,6 @@ interface ContainerClient
      * @return RotatePullImageWebhookForServiceOKResponse OK
      */
     public function rotatePullImageWebhookForService(RotatePullImageWebhookForServiceRequest $request): RotatePullImageWebhookForServiceOKResponse;
-    /**
-     * Set an update schedule for a Stack.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-set-stack-update-schedule
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param SetStackUpdateScheduleRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function setStackUpdateSchedule(SetStackUpdateScheduleRequest $request): EmptyResponse;
     /**
      * Start a stopped Service.
      *

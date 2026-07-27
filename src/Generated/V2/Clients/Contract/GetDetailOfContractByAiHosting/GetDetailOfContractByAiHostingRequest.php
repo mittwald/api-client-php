@@ -20,26 +20,39 @@ class GetDetailOfContractByAiHostingRequest
             'customerId' => [
                 'type' => 'string',
             ],
+            'aiHostingId' => [
+                'example' => 'f600db16-d006-41a6-9ec9-baf8b24ed02c',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'customerId',
+            'aiHostingId',
         ],
     ];
 
     private string $customerId;
 
+    private string $aiHostingId;
+
     private array $headers = [
 
     ];
 
-    public function __construct(string $customerId)
+    public function __construct(string $customerId, string $aiHostingId)
     {
         $this->customerId = $customerId;
+        $this->aiHostingId = $aiHostingId;
     }
 
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    public function getAiHostingId(): string
+    {
+        return $this->aiHostingId;
     }
 
     public function withCustomerId(string $customerId): self
@@ -52,6 +65,20 @@ class GetDetailOfContractByAiHostingRequest
 
         $clone = clone $this;
         $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withAiHostingId(string $aiHostingId): self
+    {
+        $validator = new Validator();
+        $validator->validate($aiHostingId, self::$internalValidationSchema['properties']['aiHostingId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->aiHostingId = $aiHostingId;
 
         return $clone;
     }
@@ -72,8 +99,9 @@ class GetDetailOfContractByAiHostingRequest
         }
 
         $customerId = $input->{'customerId'};
+        $aiHostingId = $input->{'aiHostingId'};
 
-        $obj = new self($customerId);
+        $obj = new self($customerId, $aiHostingId);
 
         return $obj;
     }
@@ -87,6 +115,7 @@ class GetDetailOfContractByAiHostingRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
+        $output['aiHostingId'] = $this->aiHostingId;
 
         return $output;
     }
@@ -132,7 +161,8 @@ class GetDetailOfContractByAiHostingRequest
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
-        return '/v2/customers/' . $customerId . '/ai-hosting/contract';
+        $aiHostingId = urlencode($mapped['aiHostingId']);
+        return '/v2/customers/' . $customerId . '/ai-hostings/' . $aiHostingId . '/contract';
     }
 
     /**

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Mittwald\ApiClient\Generated\V2\Schemas\Contract\Contract;
 use Psr\Http\Message\ResponseInterface;
 
-class SetStackUpdateScheduleInternalServerErrorResponse implements ResponseContainer
+class DeprecatedContractGetDetailOfContractByAiHostingOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class SetStackUpdateScheduleInternalServerErrorResponse implements ResponseConta
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                '$ref' => '#/components/schemas/de.mittwald.v1.contract.Contract',
             ],
         ],
     ];
 
-    private Error $body;
+    private Contract $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(Contract $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): Contract
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(Contract $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class SetStackUpdateScheduleInternalServerErrorResponse implements ResponseConta
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return SetStackUpdateScheduleInternalServerErrorResponse Created instance
+     * @return DeprecatedContractGetDetailOfContractByAiHostingOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleInternalServerErrorResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContractGetDetailOfContractByAiHostingOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Contract::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

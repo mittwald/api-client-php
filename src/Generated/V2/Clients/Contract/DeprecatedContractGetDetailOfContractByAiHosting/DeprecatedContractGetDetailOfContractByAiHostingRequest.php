@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\SetStackUpdateSchedule;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class SetStackUpdateScheduleRequest
+class DeprecatedContractGetDetailOfContractByAiHostingRequest
 {
-    public const method = 'put';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,81 +17,41 @@ class SetStackUpdateScheduleRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'stackId' => [
-                'format' => 'uuid',
+            'customerId' => [
                 'type' => 'string',
-            ],
-            'body' => [
-                'properties' => [
-                    'updateSchedule' => [
-                        'nullable' => true,
-                        'properties' => [
-                            'cron' => [
-                                'example' => '* * * * *',
-                                'type' => 'string',
-                            ],
-                            'timezone' => [
-                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
-                                'example' => 'Europe/Berlin',
-                                'type' => 'string',
-                            ],
-                        ],
-                        'required' => [
-                            'cron',
-                        ],
-                        'type' => 'object',
-                    ],
-                ],
             ],
         ],
         'required' => [
-            'stackId',
-            'body',
+            'customerId',
         ],
     ];
 
-    private string $stackId;
-
-    private SetStackUpdateScheduleRequestBody $body;
+    private string $customerId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $stackId, SetStackUpdateScheduleRequestBody $body)
+    public function __construct(string $customerId)
     {
-        $this->stackId = $stackId;
-        $this->body = $body;
+        $this->customerId = $customerId;
     }
 
-    public function getStackId(): string
+    public function getCustomerId(): string
     {
-        return $this->stackId;
+        return $this->customerId;
     }
 
-    public function getBody(): SetStackUpdateScheduleRequestBody
-    {
-        return $this->body;
-    }
-
-    public function withStackId(string $stackId): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->stackId = $stackId;
-
-        return $clone;
-    }
-
-    public function withBody(SetStackUpdateScheduleRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
@@ -101,20 +61,19 @@ class SetStackUpdateScheduleRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return SetStackUpdateScheduleRequest Created instance
+     * @return DeprecatedContractGetDetailOfContractByAiHostingRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): SetStackUpdateScheduleRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContractGetDetailOfContractByAiHostingRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $stackId = $input->{'stackId'};
-        $body = SetStackUpdateScheduleRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
 
-        $obj = new self($stackId, $body);
+        $obj = new self($customerId);
 
         return $obj;
     }
@@ -127,8 +86,7 @@ class SetStackUpdateScheduleRequest
     public function toJson(): array
     {
         $output = [];
-        $output['stackId'] = $this->stackId;
-        $output['body'] = ($this->body)->toJson();
+        $output['customerId'] = $this->customerId;
 
         return $output;
     }
@@ -159,7 +117,6 @@ class SetStackUpdateScheduleRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -174,8 +131,8 @@ class SetStackUpdateScheduleRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $stackId = urlencode($mapped['stackId']);
-        return '/v2/stacks/' . $stackId . '/update-schedule';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/ai-hosting/contract';
     }
 
     /**
@@ -194,7 +151,6 @@ class SetStackUpdateScheduleRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 
