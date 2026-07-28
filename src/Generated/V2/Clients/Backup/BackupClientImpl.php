@@ -42,6 +42,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\D
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupReplaceProjectBackupExpirationTime\DeprecatedBackupReplaceProjectBackupExpirationTimeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription\DeprecatedBackupUpdateProjectBackupDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupNotFoundResponse;
@@ -78,12 +90,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\ReplaceProjectBackupExpirationTime\ReplaceProjectBackupExpirationTimeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore\RequestProjectBackupRestoreBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore\RequestProjectBackupRestoreDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\RequestProjectBackupRestore\RequestProjectBackupRestoreForbiddenResponse;
@@ -102,12 +108,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdatePro
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackup\UpdateProjectBackupTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleNotFoundResponse;
@@ -426,31 +426,6 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * Update a Backup's expiration time.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-replace-project-backup-expiration-time
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ReplaceProjectBackupExpirationTimeRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function replaceProjectBackupExpirationTime(ReplaceProjectBackupExpirationTimeRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ReplaceProjectBackupExpirationTimeRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ReplaceProjectBackupExpirationTimeBadRequestResponse::fromResponse($httpResponse),
-            403 => ReplaceProjectBackupExpirationTimeForbiddenResponse::fromResponse($httpResponse),
-            404 => ReplaceProjectBackupExpirationTimeNotFoundResponse::fromResponse($httpResponse),
-            429 => ReplaceProjectBackupExpirationTimeTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ReplaceProjectBackupExpirationTimeDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Restore a ProjectBackup.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-request-project-backup-restore
@@ -531,31 +506,6 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * Change the description of a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateProjectBackupDescription(UpdateProjectBackupDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateProjectBackupDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateProjectBackupDescriptionBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateProjectBackupDescriptionForbiddenResponse::fromResponse($httpResponse),
-            404 => UpdateProjectBackupDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateProjectBackupDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateProjectBackupDescriptionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Update a ProjectBackupSchedule.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-schedule
@@ -577,6 +527,62 @@ class BackupClientImpl implements BackupClient
             412 => UpdateProjectBackupSchedulePreconditionFailedResponse::fromResponse($httpResponse),
             429 => UpdateProjectBackupScheduleTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Backup's expiration time.
+     *
+     * Deprecated by `PATCH /v2/project-backups/{projectBackupId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/deprecated-backup-replace-project-backup-expiration-time
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedBackupReplaceProjectBackupExpirationTimeRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedBackupReplaceProjectBackupExpirationTime(DeprecatedBackupReplaceProjectBackupExpirationTimeRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedBackupReplaceProjectBackupExpirationTimeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedBackupReplaceProjectBackupExpirationTimeBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedBackupReplaceProjectBackupExpirationTimeForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedBackupReplaceProjectBackupExpirationTimeNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedBackupReplaceProjectBackupExpirationTimeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedBackupReplaceProjectBackupExpirationTimeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Change the description of a ProjectBackup.
+     *
+     * Deprecated by `PATCH /v2/project-backups/{projectBackupId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/deprecated-backup-update-project-backup-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedBackupUpdateProjectBackupDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedBackupUpdateProjectBackupDescription(DeprecatedBackupUpdateProjectBackupDescriptionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedBackupUpdateProjectBackupDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedBackupUpdateProjectBackupDescriptionBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedBackupUpdateProjectBackupDescriptionForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedBackupUpdateProjectBackupDescriptionNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedBackupUpdateProjectBackupDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedBackupUpdateProjectBackupDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

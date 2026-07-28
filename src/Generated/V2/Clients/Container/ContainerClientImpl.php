@@ -84,6 +84,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemp
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateSchedulePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriForbiddenResponse;
@@ -1192,6 +1200,36 @@ class ContainerClientImpl implements ContainerClient
             500 => DeprecatedContainerGetTemplateIconInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeprecatedContainerGetTemplateIconServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeprecatedContainerGetTemplateIconDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Set an update schedule for a Stack.
+     *
+     * Deprecated by `PATCH /v2/stacks/{stackId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-set-stack-update-schedule
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContainerSetStackUpdateScheduleRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedContainerSetStackUpdateSchedule(DeprecatedContainerSetStackUpdateScheduleRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedContainerSetStackUpdateScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedContainerSetStackUpdateScheduleBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedContainerSetStackUpdateScheduleForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedContainerSetStackUpdateScheduleNotFoundResponse::fromResponse($httpResponse),
+            412 => DeprecatedContainerSetStackUpdateSchedulePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeprecatedContainerSetStackUpdateScheduleTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedContainerSetStackUpdateScheduleInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedContainerSetStackUpdateScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
 

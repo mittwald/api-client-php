@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class PatchAppinstallationRequest
+class DeprecatedStoragespaceReplaceServerNotificationThresholdRequest
 {
-    public const method = 'patch';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +17,65 @@ class PatchAppinstallationRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'appInstallationId' => [
+            'serverId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'appVersionId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                    'customDocumentRoot' => [
-                        'type' => 'string',
-                    ],
-                    'databases' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase',
-                        ],
-                        'description' => 'Desired changes to the databases linked to this AppInstallation, keyed by
-database ID. Databases omitted from this object remain unchanged.
-',
-                        'type' => 'object',
-                    ],
-                    'description' => [
-                        'type' => 'string',
-                    ],
-                    'systemSoftware' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'updatePolicy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
-                    ],
-                    'userInputs' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.SavedUserInput',
-                        ],
-                        'type' => 'array',
+                    'notificationThresholdInBytes' => [
+                        'example' => 10000,
+                        'format' => 'int64',
+                        'nullable' => true,
+                        'type' => 'integer',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'appInstallationId',
+            'serverId',
             'body',
         ],
     ];
 
-    private string $appInstallationId;
+    private string $serverId;
 
-    private PatchAppinstallationRequestBody $body;
+    private DeprecatedStoragespaceReplaceServerNotificationThresholdRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $appInstallationId, PatchAppinstallationRequestBody $body)
+    public function __construct(string $serverId, DeprecatedStoragespaceReplaceServerNotificationThresholdRequestBody $body)
     {
-        $this->appInstallationId = $appInstallationId;
+        $this->serverId = $serverId;
         $this->body = $body;
     }
 
-    public function getAppInstallationId(): string
+    public function getServerId(): string
     {
-        return $this->appInstallationId;
+        return $this->serverId;
     }
 
-    public function getBody(): PatchAppinstallationRequestBody
+    public function getBody(): DeprecatedStoragespaceReplaceServerNotificationThresholdRequestBody
     {
         return $this->body;
     }
 
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        $validator->validate($serverId, self::$internalValidationSchema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->serverId = $serverId;
 
         return $clone;
     }
 
-    public function withBody(PatchAppinstallationRequestBody $body): self
+    public function withBody(DeprecatedStoragespaceReplaceServerNotificationThresholdRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -117,20 +88,20 @@ database ID. Databases omitted from this object remain unchanged.
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return PatchAppinstallationRequest Created instance
+     * @return DeprecatedStoragespaceReplaceServerNotificationThresholdRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedStoragespaceReplaceServerNotificationThresholdRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
-        $body = PatchAppinstallationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $serverId = $input->{'serverId'};
+        $body = DeprecatedStoragespaceReplaceServerNotificationThresholdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId, $body);
+        $obj = new self($serverId, $body);
 
         return $obj;
     }
@@ -143,7 +114,7 @@ database ID. Databases omitted from this object remain unchanged.
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
+        $output['serverId'] = $this->serverId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -190,8 +161,8 @@ database ID. Databases omitted from this object remain unchanged.
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId;
+        $serverId = urlencode($mapped['serverId']);
+        return '/v2/servers/' . $serverId . '/storage-space-notification-threshold';
     }
 
     /**

@@ -57,6 +57,26 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteSer
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
@@ -167,16 +187,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatist
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsInternalServerErrorResponse;
@@ -192,11 +202,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectD
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipTooManyRequestsResponse;
@@ -205,11 +210,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerDef
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionTooManyRequestsResponse;
 
 /**
  * Client for Project API
@@ -254,6 +254,114 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => DeprecatedProjectLeaveProjectTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedProjectLeaveProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Project's description.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-update-project-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectUpdateProjectDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedProjectUpdateProjectDescription(DeprecatedProjectUpdateProjectDescriptionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedProjectUpdateProjectDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedProjectUpdateProjectDescriptionBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedProjectUpdateProjectDescriptionForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedProjectUpdateProjectDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedProjectUpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Servers's description.
+     *
+     * Deprecated by `PATCH /v2/servers/{serverId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-update-server-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectUpdateServerDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedProjectUpdateServerDescription(DeprecatedProjectUpdateServerDescriptionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedProjectUpdateServerDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedProjectUpdateServerDescriptionBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedProjectUpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedProjectUpdateServerDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedProjectUpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Project's storage space notification threshold.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-storagespace-replace-project-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedStoragespaceReplaceProjectNotificationThreshold(DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DeprecatedStoragespaceReplaceProjectNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedStoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedStoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedStoragespaceReplaceProjectNotificationThresholdDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Server's storage space notification threshold.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-storagespace-replace-server-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedStoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedStoragespaceReplaceServerNotificationThreshold(DeprecatedStoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedStoragespaceReplaceServerNotificationThresholdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DeprecatedStoragespaceReplaceServerNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedStoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedStoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedStoragespaceReplaceServerNotificationThresholdDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -892,30 +1000,6 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
-     * Update a Project's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateProjectDescriptionBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateProjectDescriptionForbiddenResponse::fromResponse($httpResponse),
-            429 => UpdateProjectDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Update a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-membership
@@ -957,30 +1041,6 @@ class ProjectClientImpl implements ProjectClient
             403 => UpdateServerForbiddenResponse::fromResponse($httpResponse),
             429 => UpdateServerTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateServerDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a Servers's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateServerDescriptionBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
-            429 => UpdateServerDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1033,54 +1093,6 @@ class ProjectClientImpl implements ProjectClient
             429 => StoragespaceGetServerStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => StoragespaceGetServerStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
             default => StoragespaceGetServerStatisticsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a Project's storage space notification threshold.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-project-notification-threshold
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param StoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function storagespaceReplaceProjectNotificationThreshold(StoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(StoragespaceReplaceProjectNotificationThresholdRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => StoragespaceReplaceProjectNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
-            429 => StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => StoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
-            default => StoragespaceReplaceProjectNotificationThresholdDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a Server's storage space notification threshold.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param StoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function storagespaceReplaceServerNotificationThreshold(StoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(StoragespaceReplaceServerNotificationThresholdRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => StoragespaceReplaceServerNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
-            429 => StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
-            default => StoragespaceReplaceServerNotificationThresholdDefaultResponse::fromResponse($httpResponse),
         });
     }
 

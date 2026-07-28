@@ -20,6 +20,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegis
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateRegistryCredentials\DeprecatedContainerValidateRegistryCredentialsOKResponse;
@@ -430,6 +431,19 @@ interface ContainerClient
      * @return StringResponse OK
      */
     public function deprecatedContainerGetTemplateIcon(DeprecatedContainerGetTemplateIconRequest $request): StringResponse;
+    /**
+     * Set an update schedule for a Stack.
+     *
+     * Deprecated by `PATCH /v2/stacks/{stackId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-set-stack-update-schedule
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContainerSetStackUpdateScheduleRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedContainerSetStackUpdateSchedule(DeprecatedContainerSetStackUpdateScheduleRequest $request): EmptyResponse;
     /**
      * Validate a Registries' URI.
      *

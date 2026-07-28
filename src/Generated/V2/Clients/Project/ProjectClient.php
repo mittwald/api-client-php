@@ -19,6 +19,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeletePr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceServerNotificationThreshold\DeprecatedStoragespaceReplaceServerNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
@@ -56,15 +60,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatis
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateProjectStatistics\StoragespaceUpdateProjectStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceUpdateServerStatistics\StoragespaceUpdateServerStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
 
 /**
  * Client for Project API
@@ -93,6 +93,58 @@ interface ProjectClient
      * @deprecated
      */
     public function deprecatedProjectLeaveProject(DeprecatedProjectLeaveProjectRequest $request): EmptyResponse;
+    /**
+     * Update a Project's description.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-update-project-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectUpdateProjectDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedProjectUpdateProjectDescription(DeprecatedProjectUpdateProjectDescriptionRequest $request): EmptyResponse;
+    /**
+     * Update a Servers's description.
+     *
+     * Deprecated by `PATCH /v2/servers/{serverId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-update-server-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectUpdateServerDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedProjectUpdateServerDescription(DeprecatedProjectUpdateServerDescriptionRequest $request): EmptyResponse;
+    /**
+     * Update a Project's storage space notification threshold.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-storagespace-replace-project-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedStoragespaceReplaceProjectNotificationThreshold(DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse;
+    /**
+     * Update a Server's storage space notification threshold.
+     *
+     * Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-storagespace-replace-server-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedStoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse NoContent
+     */
+    public function deprecatedStoragespaceReplaceServerNotificationThreshold(DeprecatedStoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse;
     /**
      * Accept a ProjectInvite.
      *
@@ -359,16 +411,6 @@ interface ProjectClient
      */
     public function updateProject(UpdateProjectRequest $request): EmptyResponse;
     /**
-     * Update a Project's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse;
-    /**
      * Update a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-membership
@@ -387,16 +429,6 @@ interface ProjectClient
      * @return EmptyResponse NoContent
      */
     public function updateServer(UpdateServerRequest $request): EmptyResponse;
-    /**
-     * Update a Servers's description.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server-description
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse;
     /**
      * Get storage space Statistics belonging to a Project.
      *
@@ -417,26 +449,6 @@ interface ProjectClient
      * @return StoragespaceGetServerStatisticsOKResponse OK
      */
     public function storagespaceGetServerStatistics(StoragespaceGetServerStatisticsRequest $request): StoragespaceGetServerStatisticsOKResponse;
-    /**
-     * Update a Project's storage space notification threshold.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-project-notification-threshold
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param StoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function storagespaceReplaceProjectNotificationThreshold(StoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse;
-    /**
-     * Update a Server's storage space notification threshold.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param StoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function storagespaceReplaceServerNotificationThreshold(StoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse;
     /**
      * Update a Project's storage space statistics.
      *

@@ -87,6 +87,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversio
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
@@ -504,6 +505,7 @@ class AppClientImpl implements AppClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PatchAppinstallationBadRequestResponse::fromResponse($httpResponse),
             404 => PatchAppinstallationNotFoundResponse::fromResponse($httpResponse),
             429 => PatchAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => PatchAppinstallationDefaultResponse::fromResponse($httpResponse),

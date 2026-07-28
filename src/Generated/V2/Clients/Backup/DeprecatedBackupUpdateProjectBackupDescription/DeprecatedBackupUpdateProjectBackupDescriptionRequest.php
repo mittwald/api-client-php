@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\DeprecatedBackupUpdateProjectBackupDescription;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class PatchAppinstallationRequest
+class DeprecatedBackupUpdateProjectBackupDescriptionRequest
 {
     public const method = 'patch';
 
@@ -17,94 +17,65 @@ class PatchAppinstallationRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'appInstallationId' => [
+            'projectBackupId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'appVersionId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                    'customDocumentRoot' => [
-                        'type' => 'string',
-                    ],
-                    'databases' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase',
-                        ],
-                        'description' => 'Desired changes to the databases linked to this AppInstallation, keyed by
-database ID. Databases omitted from this object remain unchanged.
-',
-                        'type' => 'object',
-                    ],
                     'description' => [
+                        'description' => 'Description of the ProjectBackup.',
+                        'example' => 'I\'m a ProjectBackup',
                         'type' => 'string',
-                    ],
-                    'systemSoftware' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'updatePolicy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
-                    ],
-                    'userInputs' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.SavedUserInput',
-                        ],
-                        'type' => 'array',
                     ],
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
-            'appInstallationId',
+            'projectBackupId',
             'body',
         ],
     ];
 
-    private string $appInstallationId;
+    private string $projectBackupId;
 
-    private PatchAppinstallationRequestBody $body;
+    private DeprecatedBackupUpdateProjectBackupDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $appInstallationId, PatchAppinstallationRequestBody $body)
+    public function __construct(string $projectBackupId, DeprecatedBackupUpdateProjectBackupDescriptionRequestBody $body)
     {
-        $this->appInstallationId = $appInstallationId;
+        $this->projectBackupId = $projectBackupId;
         $this->body = $body;
     }
 
-    public function getAppInstallationId(): string
+    public function getProjectBackupId(): string
     {
-        return $this->appInstallationId;
+        return $this->projectBackupId;
     }
 
-    public function getBody(): PatchAppinstallationRequestBody
+    public function getBody(): DeprecatedBackupUpdateProjectBackupDescriptionRequestBody
     {
         return $this->body;
     }
 
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        $validator->validate($projectBackupId, self::$internalValidationSchema['properties']['projectBackupId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->projectBackupId = $projectBackupId;
 
         return $clone;
     }
 
-    public function withBody(PatchAppinstallationRequestBody $body): self
+    public function withBody(DeprecatedBackupUpdateProjectBackupDescriptionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -117,20 +88,20 @@ database ID. Databases omitted from this object remain unchanged.
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return PatchAppinstallationRequest Created instance
+     * @return DeprecatedBackupUpdateProjectBackupDescriptionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedBackupUpdateProjectBackupDescriptionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
-        $body = PatchAppinstallationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $projectBackupId = $input->{'projectBackupId'};
+        $body = DeprecatedBackupUpdateProjectBackupDescriptionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId, $body);
+        $obj = new self($projectBackupId, $body);
 
         return $obj;
     }
@@ -143,7 +114,7 @@ database ID. Databases omitted from this object remain unchanged.
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
+        $output['projectBackupId'] = $this->projectBackupId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -190,8 +161,8 @@ database ID. Databases omitted from this object remain unchanged.
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId;
+        $projectBackupId = urlencode($mapped['projectBackupId']);
+        return '/v2/project-backups/' . $projectBackupId . '/description';
     }
 
     /**

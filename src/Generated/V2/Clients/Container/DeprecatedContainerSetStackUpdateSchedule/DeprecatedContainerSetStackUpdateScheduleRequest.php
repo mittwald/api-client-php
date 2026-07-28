@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class PatchAppinstallationRequest
+class DeprecatedContainerSetStackUpdateScheduleRequest
 {
-    public const method = 'patch';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +17,78 @@ class PatchAppinstallationRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'appInstallationId' => [
+            'stackId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'appVersionId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                    'customDocumentRoot' => [
-                        'type' => 'string',
-                    ],
-                    'databases' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase',
+                    'updateSchedule' => [
+                        'nullable' => true,
+                        'properties' => [
+                            'cron' => [
+                                'example' => '* * * * *',
+                                'type' => 'string',
+                            ],
+                            'timezone' => [
+                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                                'example' => 'Europe/Berlin',
+                                'type' => 'string',
+                            ],
                         ],
-                        'description' => 'Desired changes to the databases linked to this AppInstallation, keyed by
-database ID. Databases omitted from this object remain unchanged.
-',
-                        'type' => 'object',
-                    ],
-                    'description' => [
-                        'type' => 'string',
-                    ],
-                    'systemSoftware' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware',
+                        'required' => [
+                            'cron',
                         ],
                         'type' => 'object',
-                    ],
-                    'updatePolicy' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy',
-                    ],
-                    'userInputs' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.app.SavedUserInput',
-                        ],
-                        'type' => 'array',
                     ],
                 ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'appInstallationId',
+            'stackId',
             'body',
         ],
     ];
 
-    private string $appInstallationId;
+    private string $stackId;
 
-    private PatchAppinstallationRequestBody $body;
+    private DeprecatedContainerSetStackUpdateScheduleRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $appInstallationId, PatchAppinstallationRequestBody $body)
+    public function __construct(string $stackId, DeprecatedContainerSetStackUpdateScheduleRequestBody $body)
     {
-        $this->appInstallationId = $appInstallationId;
+        $this->stackId = $stackId;
         $this->body = $body;
     }
 
-    public function getAppInstallationId(): string
+    public function getStackId(): string
     {
-        return $this->appInstallationId;
+        return $this->stackId;
     }
 
-    public function getBody(): PatchAppinstallationRequestBody
+    public function getBody(): DeprecatedContainerSetStackUpdateScheduleRequestBody
     {
         return $this->body;
     }
 
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->stackId = $stackId;
 
         return $clone;
     }
 
-    public function withBody(PatchAppinstallationRequestBody $body): self
+    public function withBody(DeprecatedContainerSetStackUpdateScheduleRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -117,20 +101,20 @@ database ID. Databases omitted from this object remain unchanged.
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return PatchAppinstallationRequest Created instance
+     * @return DeprecatedContainerSetStackUpdateScheduleRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContainerSetStackUpdateScheduleRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
-        $body = PatchAppinstallationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $stackId = $input->{'stackId'};
+        $body = DeprecatedContainerSetStackUpdateScheduleRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId, $body);
+        $obj = new self($stackId, $body);
 
         return $obj;
     }
@@ -143,7 +127,7 @@ database ID. Databases omitted from this object remain unchanged.
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
+        $output['stackId'] = $this->stackId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -190,8 +174,8 @@ database ID. Databases omitted from this object remain unchanged.
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId;
+        $stackId = urlencode($mapped['stackId']);
+        return '/v2/stacks/' . $stackId . '/update-schedule';
     }
 
     /**
