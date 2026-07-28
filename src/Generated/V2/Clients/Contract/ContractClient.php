@@ -13,6 +13,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse;
@@ -141,7 +143,7 @@ interface ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given AI Hosting.
      */
     public function getDetailOfContractByAiHosting(GetDetailOfContractByAiHostingRequest $request): GetDetailOfContractByAiHostingOKResponse;
     /**
@@ -253,6 +255,19 @@ interface ContractClient
      * @return TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
      */
     public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse;
+    /**
+     * Return the AI Hosting Contract for the given Customer.
+     *
+     * This route is deprecated. Use `GET /v2/customers/{customerId}/ai-hostings/{aiHostingId}/contract` instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-contract-get-detail-of-contract-by-ai-hosting
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContractGetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContractGetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     */
+    public function deprecatedContractGetDetailOfContractByAiHosting(DeprecatedContractGetDetailOfContractByAiHostingRequest $request): DeprecatedContractGetDetailOfContractByAiHostingOKResponse;
     /**
      * Return the next TerminationDate for the ContractItem with the given ID.
      *

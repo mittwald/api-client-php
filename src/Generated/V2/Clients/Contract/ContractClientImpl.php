@@ -28,6 +28,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\C
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetDetailOfContractByAiHosting\DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemNotFoundResponse;
@@ -341,7 +347,7 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     * @return GetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given AI Hosting.
      */
     public function getDetailOfContractByAiHosting(GetDetailOfContractByAiHostingRequest $request): GetDetailOfContractByAiHostingOKResponse
     {
@@ -618,6 +624,33 @@ class ContractClientImpl implements ContractClient
             404 => TerminateContractItemNotFoundResponse::fromResponse($httpResponse),
             429 => TerminateContractItemTooManyRequestsResponse::fromResponse($httpResponse),
             default => TerminateContractItemDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the AI Hosting Contract for the given Customer.
+     *
+     * This route is deprecated. Use `GET /v2/customers/{customerId}/ai-hostings/{aiHostingId}/contract` instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-contract-get-detail-of-contract-by-ai-hosting
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContractGetDetailOfContractByAiHostingRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContractGetDetailOfContractByAiHostingOKResponse Return the AI Hosting Contract for the given Customer.
+     */
+    public function deprecatedContractGetDetailOfContractByAiHosting(DeprecatedContractGetDetailOfContractByAiHostingRequest $request): DeprecatedContractGetDetailOfContractByAiHostingOKResponse
+    {
+        $httpRequest = new Request(DeprecatedContractGetDetailOfContractByAiHostingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedContractGetDetailOfContractByAiHostingOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedContractGetDetailOfContractByAiHostingBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedContractGetDetailOfContractByAiHostingNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedContractGetDetailOfContractByAiHostingTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedContractGetDetailOfContractByAiHostingDefaultResponse::fromResponse($httpResponse),
         });
     }
 

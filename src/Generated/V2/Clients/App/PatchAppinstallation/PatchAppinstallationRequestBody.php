@@ -23,6 +23,15 @@ class PatchAppinstallationRequestBody
             'customDocumentRoot' => [
                 'type' => 'string',
             ],
+            'databases' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase',
+                ],
+                'description' => 'Desired changes to the databases linked to this AppInstallation, keyed by
+database ID. Databases omitted from this object remain unchanged.
+',
+                'type' => 'object',
+            ],
             'description' => [
                 'type' => 'string',
             ],
@@ -48,6 +57,15 @@ class PatchAppinstallationRequestBody
     private ?string $appVersionId = null;
 
     private ?string $customDocumentRoot = null;
+
+    /**
+     * Desired changes to the databases linked to this AppInstallation, keyed by
+     * database ID. Databases omitted from this object remain unchanged.
+     *
+     *
+     * @var mixed[]|null
+     */
+    private ?array $databases = null;
 
     private ?string $description = null;
 
@@ -78,6 +96,14 @@ class PatchAppinstallationRequestBody
     public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public function getDatabases(): ?array
+    {
+        return $this->databases ?? null;
     }
 
     public function getDescription(): ?string
@@ -146,6 +172,31 @@ class PatchAppinstallationRequestBody
     {
         $clone = clone $this;
         unset($clone->customDocumentRoot);
+
+        return $clone;
+    }
+
+    /**
+     * @param mixed[] $databases
+     */
+    public function withDatabases(array $databases): self
+    {
+        $validator = new Validator();
+        $validator->validate($databases, self::$internalValidationSchema['properties']['databases']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->databases = $databases;
+
+        return $clone;
+    }
+
+    public function withoutDatabases(): self
+    {
+        $clone = clone $this;
+        unset($clone->databases);
 
         return $clone;
     }
@@ -255,6 +306,10 @@ class PatchAppinstallationRequestBody
         if (isset($input->{'customDocumentRoot'})) {
             $customDocumentRoot = $input->{'customDocumentRoot'};
         }
+        $databases = null;
+        if (isset($input->{'databases'})) {
+            $databases = (array)$input->{'databases'};
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -275,6 +330,7 @@ class PatchAppinstallationRequestBody
         $obj = new self();
         $obj->appVersionId = $appVersionId;
         $obj->customDocumentRoot = $customDocumentRoot;
+        $obj->databases = $databases;
         $obj->description = $description;
         $obj->systemSoftware = $systemSoftware;
         $obj->updatePolicy = $updatePolicy;
@@ -295,6 +351,9 @@ class PatchAppinstallationRequestBody
         }
         if (isset($this->customDocumentRoot)) {
             $output['customDocumentRoot'] = $this->customDocumentRoot;
+        }
+        if (isset($this->databases)) {
+            $output['databases'] = $this->databases;
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;

@@ -29,6 +29,15 @@ class PatchAppinstallationRequest
                     'customDocumentRoot' => [
                         'type' => 'string',
                     ],
+                    'databases' => [
+                        'additionalProperties' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase',
+                        ],
+                        'description' => 'Desired changes to the databases linked to this AppInstallation, keyed by
+database ID. Databases omitted from this object remain unchanged.
+',
+                        'type' => 'object',
+                    ],
                     'description' => [
                         'type' => 'string',
                     ],
