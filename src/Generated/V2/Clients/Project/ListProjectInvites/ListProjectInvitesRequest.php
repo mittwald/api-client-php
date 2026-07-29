@@ -19,13 +19,16 @@ class ListProjectInvitesRequest
         'properties' => [
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -33,9 +36,9 @@ class ListProjectInvitesRequest
         ],
     ];
 
-    private ?int $limit = null;
+    private int $limit = 1000;
 
-    private ?int $skip = null;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -50,14 +53,14 @@ class ListProjectInvitesRequest
     {
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function getPage(): ?int
@@ -79,14 +82,6 @@ class ListProjectInvitesRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -97,14 +92,6 @@ class ListProjectInvitesRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -146,11 +133,11 @@ class ListProjectInvitesRequest
             static::validateInput($input);
         }
 
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -174,12 +161,8 @@ class ListProjectInvitesRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobAppIdDeprecatedRequest
+class DeprecatedAppReplaceDatabaseRequest
 {
     public const method = 'patch';
 
@@ -17,73 +17,81 @@ class UpdateCronjobAppIdDeprecatedRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'appInstallationId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'appId' => [
-                        'deprecated' => true,
-                        'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
+                    'databaseUserIds' => [
+                        'additionalProperties' => [
+                            'type' => 'string',
+                        ],
+                        'description' => 'The IDs of the users of the database you want the old database to be replaced with.',
+                        'type' => 'object',
+                    ],
+                    'newDatabaseId' => [
+                        'description' => 'The ID of the database you want the old database to be replaced with.',
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
-                    'appInstallationId' => [
+                    'oldDatabaseId' => [
+                        'description' => 'The ID of the database you want to be replaced.',
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
                 ],
                 'required' => [
-                    'appId',
+                    'oldDatabaseId',
+                    'newDatabaseId',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
-            'cronjobId',
+            'appInstallationId',
             'body',
         ],
     ];
 
-    private string $cronjobId;
+    private string $appInstallationId;
 
-    private UpdateCronjobAppIdDeprecatedRequestBody $body;
+    private DeprecatedAppReplaceDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, UpdateCronjobAppIdDeprecatedRequestBody $body)
+    public function __construct(string $appInstallationId, DeprecatedAppReplaceDatabaseRequestBody $body)
     {
-        $this->cronjobId = $cronjobId;
+        $this->appInstallationId = $appInstallationId;
         $this->body = $body;
     }
 
-    public function getCronjobId(): string
+    public function getAppInstallationId(): string
     {
-        return $this->cronjobId;
+        return $this->appInstallationId;
     }
 
-    public function getBody(): UpdateCronjobAppIdDeprecatedRequestBody
+    public function getBody(): DeprecatedAppReplaceDatabaseRequestBody
     {
         return $this->body;
     }
 
-    public function withCronjobId(string $cronjobId): self
+    public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
+        $clone->appInstallationId = $appInstallationId;
 
         return $clone;
     }
 
-    public function withBody(UpdateCronjobAppIdDeprecatedRequestBody $body): self
+    public function withBody(DeprecatedAppReplaceDatabaseRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -96,20 +104,20 @@ class UpdateCronjobAppIdDeprecatedRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdDeprecatedRequest Created instance
+     * @return DeprecatedAppReplaceDatabaseRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdDeprecatedRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedAppReplaceDatabaseRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $body = UpdateCronjobAppIdDeprecatedRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $appInstallationId = $input->{'appInstallationId'};
+        $body = DeprecatedAppReplaceDatabaseRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($cronjobId, $body);
+        $obj = new self($appInstallationId, $body);
 
         return $obj;
     }
@@ -122,7 +130,7 @@ class UpdateCronjobAppIdDeprecatedRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
+        $output['appInstallationId'] = $this->appInstallationId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -169,8 +177,8 @@ class UpdateCronjobAppIdDeprecatedRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId . '/app-installation-id';
+        $appInstallationId = urlencode($mapped['appInstallationId']);
+        return '/v2/app-installations/' . $appInstallationId . '/database/replace';
     }
 
     /**

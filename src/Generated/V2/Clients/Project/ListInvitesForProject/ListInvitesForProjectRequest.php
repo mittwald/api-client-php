@@ -20,14 +20,21 @@ class ListInvitesForProjectRequest
             'projectId' => [
                 'type' => 'string',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
             ],
-            'searchTerm' => [
-                'type' => 'string',
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
             ],
         ],
         'required' => [
@@ -37,11 +44,13 @@ class ListInvitesForProjectRequest
 
     private string $projectId;
 
-    private ?int $limit = null;
-
-    private ?int $skip = null;
-
     private ?string $searchTerm = null;
+
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -57,19 +66,24 @@ class ListInvitesForProjectRequest
         return $this->projectId;
     }
 
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
-    }
-
     public function getSearchTerm(): ?string
     {
         return $this->searchTerm ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -82,50 +96,6 @@ class ListInvitesForProjectRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    public function withLimit(int $limit): self
-    {
-        $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -152,6 +122,56 @@ class ListInvitesForProjectRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -168,23 +188,28 @@ class ListInvitesForProjectRequest
         }
 
         $projectId = $input->{'projectId'};
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
         $searchTerm = null;
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($projectId);
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
-        $obj->searchTerm = $searchTerm;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -197,14 +222,13 @@ class ListInvitesForProjectRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -267,14 +291,17 @@ class ListInvitesForProjectRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
         }
-        if (isset($mapped['searchTerm'])) {
-            $query['searchTerm'] = $mapped['searchTerm'];
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

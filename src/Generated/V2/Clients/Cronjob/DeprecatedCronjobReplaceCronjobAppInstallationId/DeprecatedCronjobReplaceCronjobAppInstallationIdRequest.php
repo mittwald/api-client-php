@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ReplaceCronjobAppInstallationIdRequest
+class DeprecatedCronjobReplaceCronjobAppInstallationIdRequest
 {
     public const method = 'put';
 
@@ -41,13 +41,13 @@ class ReplaceCronjobAppInstallationIdRequest
 
     private string $cronjobId;
 
-    private ReplaceCronjobAppInstallationIdRequestBody $body;
+    private DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $cronjobId, ReplaceCronjobAppInstallationIdRequestBody $body)
+    public function __construct(string $cronjobId, DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody $body)
     {
         $this->cronjobId = $cronjobId;
         $this->body = $body;
@@ -58,7 +58,7 @@ class ReplaceCronjobAppInstallationIdRequest
         return $this->cronjobId;
     }
 
-    public function getBody(): ReplaceCronjobAppInstallationIdRequestBody
+    public function getBody(): DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody
     {
         return $this->body;
     }
@@ -77,7 +77,7 @@ class ReplaceCronjobAppInstallationIdRequest
         return $clone;
     }
 
-    public function withBody(ReplaceCronjobAppInstallationIdRequestBody $body): self
+    public function withBody(DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -90,10 +90,10 @@ class ReplaceCronjobAppInstallationIdRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceCronjobAppInstallationIdRequest Created instance
+     * @return DeprecatedCronjobReplaceCronjobAppInstallationIdRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceCronjobAppInstallationIdRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobReplaceCronjobAppInstallationIdRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -101,7 +101,7 @@ class ReplaceCronjobAppInstallationIdRequest
         }
 
         $cronjobId = $input->{'cronjobId'};
-        $body = ReplaceCronjobAppInstallationIdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($cronjobId, $body);
 

@@ -9,6 +9,7 @@ use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
@@ -39,7 +40,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListS
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyCreatedResponse;
@@ -138,10 +138,13 @@ interface AppClient
     /**
      * Create linkage between an AppInstallation and a MySQLDatabase.
      *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-link-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param LinkDatabaseRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse The database has been linked.
      */
     public function linkDatabase(LinkDatabaseRequest $request): EmptyResponse;
@@ -226,16 +229,6 @@ interface AppClient
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
     /**
-     * Replace a MySQL Database with another MySQL Database.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-replace-database
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ReplaceDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse The database has been linked.
-     */
-    public function replaceDatabase(ReplaceDatabaseRequest $request): EmptyResponse;
-    /**
      * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
@@ -268,10 +261,13 @@ interface AppClient
     /**
      * Create linkage between an AppInstallation and DatabaseUsers.
      *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-set-database-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param SetDatabaseUsersRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse The database users have been set.
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse;
@@ -321,4 +317,17 @@ interface AppClient
      * @return EmptyResponse The database has been linked.
      */
     public function deprecatedAppLinkDatabase(DeprecatedAppLinkDatabaseRequest $request): EmptyResponse;
+    /**
+     * Replace a MySQL Database with another MySQL Database.
+     *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-replace-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedAppReplaceDatabaseRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The database has been linked.
+     */
+    public function deprecatedAppReplaceDatabase(DeprecatedAppReplaceDatabaseRequest $request): EmptyResponse;
 }

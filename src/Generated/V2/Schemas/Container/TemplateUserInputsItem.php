@@ -36,6 +36,20 @@ class TemplateUserInputsItem
             'name' => [
                 'type' => 'string',
             ],
+            'positionMeta' => [
+                'properties' => [
+                    'index' => [
+                        'type' => 'integer',
+                    ],
+                    'section' => [
+                        'type' => 'string',
+                    ],
+                    'step' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'type' => 'object',
+            ],
             'required' => [
                 'type' => 'boolean',
             ],
@@ -57,6 +71,8 @@ class TemplateUserInputsItem
     private ?TemplateTranslatedString $label = null;
 
     private string $name;
+
+    private ?TemplateUserInputsItemPositionMeta $positionMeta = null;
 
     private bool $required;
 
@@ -86,6 +102,11 @@ class TemplateUserInputsItem
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPositionMeta(): ?TemplateUserInputsItemPositionMeta
+    {
+        return $this->positionMeta ?? null;
     }
 
     public function getRequired(): bool
@@ -172,6 +193,22 @@ class TemplateUserInputsItem
         return $clone;
     }
 
+    public function withPositionMeta(TemplateUserInputsItemPositionMeta $positionMeta): self
+    {
+        $clone = clone $this;
+        $clone->positionMeta = $positionMeta;
+
+        return $clone;
+    }
+
+    public function withoutPositionMeta(): self
+    {
+        $clone = clone $this;
+        unset($clone->positionMeta);
+
+        return $clone;
+    }
+
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
@@ -236,6 +273,10 @@ class TemplateUserInputsItem
             $label = TemplateTranslatedString::buildFromInput($input->{'label'}, validate: $validate);
         }
         $name = $input->{'name'};
+        $positionMeta = null;
+        if (isset($input->{'positionMeta'})) {
+            $positionMeta = TemplateUserInputsItemPositionMeta::buildFromInput($input->{'positionMeta'}, validate: $validate);
+        }
         $required = (bool)($input->{'required'});
         $validationSchema = null;
         if (isset($input->{'validationSchema'})) {
@@ -246,6 +287,7 @@ class TemplateUserInputsItem
         $obj->dataSource = $dataSource;
         $obj->defaultValue = $defaultValue;
         $obj->label = $label;
+        $obj->positionMeta = $positionMeta;
         $obj->validationSchema = $validationSchema;
         return $obj;
     }
@@ -268,6 +310,9 @@ class TemplateUserInputsItem
             $output['label'] = $this->label->toJson();
         }
         $output['name'] = $this->name;
+        if (isset($this->positionMeta)) {
+            $output['positionMeta'] = ($this->positionMeta)->toJson();
+        }
         $output['required'] = $this->required;
         if (isset($this->validationSchema)) {
             $output['validationSchema'] = $this->validationSchema;
@@ -302,5 +347,8 @@ class TemplateUserInputsItem
 
     public function __clone()
     {
+        if (isset($this->positionMeta)) {
+            $this->positionMeta = clone $this->positionMeta;
+        }
     }
 }

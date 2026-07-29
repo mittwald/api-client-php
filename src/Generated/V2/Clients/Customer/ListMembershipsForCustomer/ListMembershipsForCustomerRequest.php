@@ -21,12 +21,6 @@ class ListMembershipsForCustomerRequest
             'customerId' => [
                 'type' => 'string',
             ],
-            'limit' => [
-                'type' => 'integer',
-            ],
-            'skip' => [
-                'type' => 'integer',
-            ],
             'hasExpiry' => [
                 'type' => 'boolean',
             ],
@@ -36,6 +30,19 @@ class ListMembershipsForCustomerRequest
             'searchTerm' => [
                 'type' => 'string',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 0,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
         ],
         'required' => [
             'customerId',
@@ -44,15 +51,17 @@ class ListMembershipsForCustomerRequest
 
     private string $customerId;
 
-    private ?int $limit = null;
-
-    private ?int $skip = null;
-
     private ?bool $hasExpiry = null;
 
     private ?CustomerRoles $role = null;
 
     private ?string $searchTerm = null;
+
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -66,16 +75,6 @@ class ListMembershipsForCustomerRequest
     public function getCustomerId(): string
     {
         return $this->customerId;
-    }
-
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
     }
 
     public function getHasExpiry(): ?bool
@@ -93,6 +92,21 @@ class ListMembershipsForCustomerRequest
         return $this->searchTerm ?? null;
     }
 
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -103,50 +117,6 @@ class ListMembershipsForCustomerRequest
 
         $clone = clone $this;
         $clone->customerId = $customerId;
-
-        return $clone;
-    }
-
-    public function withLimit(int $limit): self
-    {
-        $validator = new Validator();
-        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -211,6 +181,56 @@ class ListMembershipsForCustomerRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -227,14 +247,6 @@ class ListMembershipsForCustomerRequest
         }
 
         $customerId = $input->{'customerId'};
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
         $hasExpiry = null;
         if (isset($input->{'hasExpiry'})) {
             $hasExpiry = (bool)($input->{'hasExpiry'});
@@ -247,13 +259,26 @@ class ListMembershipsForCustomerRequest
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($customerId);
-        $obj->limit = $limit;
-        $obj->skip = $skip;
         $obj->hasExpiry = $hasExpiry;
         $obj->role = $role;
         $obj->searchTerm = $searchTerm;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -266,12 +291,6 @@ class ListMembershipsForCustomerRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
         if (isset($this->hasExpiry)) {
             $output['hasExpiry'] = $this->hasExpiry;
         }
@@ -280,6 +299,11 @@ class ListMembershipsForCustomerRequest
         }
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -342,12 +366,6 @@ class ListMembershipsForCustomerRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
         if (isset($mapped['hasExpiry'])) {
             $query['hasExpiry'] = $mapped['hasExpiry'];
         }
@@ -356,6 +374,15 @@ class ListMembershipsForCustomerRequest
         }
         if (isset($mapped['searchTerm'])) {
             $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
