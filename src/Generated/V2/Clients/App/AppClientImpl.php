@@ -19,6 +19,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
@@ -92,11 +97,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppins
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
@@ -313,10 +313,13 @@ class AppClientImpl implements AppClient
     /**
      * Create linkage between an AppInstallation and a MySQLDatabase.
      *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-link-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param LinkDatabaseRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse The database has been linked.
      */
     public function linkDatabase(LinkDatabaseRequest $request): EmptyResponse
@@ -513,30 +516,6 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Replace a MySQL Database with another MySQL Database.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-replace-database
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ReplaceDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse The database has been linked.
-     */
-    public function replaceDatabase(ReplaceDatabaseRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ReplaceDatabaseRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ReplaceDatabaseBadRequestResponse::fromResponse($httpResponse),
-            404 => ReplaceDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => ReplaceDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ReplaceDatabaseDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
@@ -609,10 +588,13 @@ class AppClientImpl implements AppClient
     /**
      * Create linkage between an AppInstallation and DatabaseUsers.
      *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-set-database-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param SetDatabaseUsersRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse The database users have been set.
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse
@@ -727,6 +709,33 @@ class AppClientImpl implements AppClient
             404 => DeprecatedAppLinkDatabaseNotFoundResponse::fromResponse($httpResponse),
             429 => DeprecatedAppLinkDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedAppLinkDatabaseDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Replace a MySQL Database with another MySQL Database.
+     *
+     * Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-replace-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedAppReplaceDatabaseRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The database has been linked.
+     */
+    public function deprecatedAppReplaceDatabase(DeprecatedAppReplaceDatabaseRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedAppReplaceDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedAppReplaceDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedAppReplaceDatabaseNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedAppReplaceDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedAppReplaceDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

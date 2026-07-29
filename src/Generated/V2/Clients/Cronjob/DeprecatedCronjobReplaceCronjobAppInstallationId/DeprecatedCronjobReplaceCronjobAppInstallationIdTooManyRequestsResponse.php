@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ReplaceDatabaseTooManyRequestsResponse implements ResponseContainer
+class DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class ReplaceDatabaseTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private ReplaceDatabaseTooManyRequestsResponseBody $body;
+    private DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ReplaceDatabaseTooManyRequestsResponseBody $body)
+    public function __construct(DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ReplaceDatabaseTooManyRequestsResponseBody
+    public function getBody(): DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(ReplaceDatabaseTooManyRequestsResponseBody $body): self
+    public function withBody(DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class ReplaceDatabaseTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceDatabaseTooManyRequestsResponse Created instance
+     * @return DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceDatabaseTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ReplaceDatabaseTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedCronjobReplaceCronjobAppInstallationIdTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

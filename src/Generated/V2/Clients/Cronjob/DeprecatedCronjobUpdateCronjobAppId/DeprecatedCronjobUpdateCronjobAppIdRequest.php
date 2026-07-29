@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronjobAppId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ReplaceDatabaseRequest
+class DeprecatedCronjobUpdateCronjobAppIdRequest
 {
     public const method = 'patch';
 
@@ -17,81 +17,73 @@ class ReplaceDatabaseRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'appInstallationId' => [
+            'cronjobId' => [
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
-                    'databaseUserIds' => [
-                        'additionalProperties' => [
-                            'type' => 'string',
-                        ],
-                        'description' => 'The IDs of the users of the database you want the old database to be replaced with.',
-                        'type' => 'object',
-                    ],
-                    'newDatabaseId' => [
-                        'description' => 'The ID of the database you want the old database to be replaced with.',
+                    'appId' => [
+                        'deprecated' => true,
+                        'description' => 'DEPRECATED: Use \'appInstallationId\' instead. This field will be removed in a future version.',
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
-                    'oldDatabaseId' => [
-                        'description' => 'The ID of the database you want to be replaced.',
+                    'appInstallationId' => [
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
                 ],
                 'required' => [
-                    'oldDatabaseId',
-                    'newDatabaseId',
+                    'appId',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
-            'appInstallationId',
+            'cronjobId',
             'body',
         ],
     ];
 
-    private string $appInstallationId;
+    private string $cronjobId;
 
-    private ReplaceDatabaseRequestBody $body;
+    private DeprecatedCronjobUpdateCronjobAppIdRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $appInstallationId, ReplaceDatabaseRequestBody $body)
+    public function __construct(string $cronjobId, DeprecatedCronjobUpdateCronjobAppIdRequestBody $body)
     {
-        $this->appInstallationId = $appInstallationId;
+        $this->cronjobId = $cronjobId;
         $this->body = $body;
     }
 
-    public function getAppInstallationId(): string
+    public function getCronjobId(): string
     {
-        return $this->appInstallationId;
+        return $this->cronjobId;
     }
 
-    public function getBody(): ReplaceDatabaseRequestBody
+    public function getBody(): DeprecatedCronjobUpdateCronjobAppIdRequestBody
     {
         return $this->body;
     }
 
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->cronjobId = $cronjobId;
 
         return $clone;
     }
 
-    public function withBody(ReplaceDatabaseRequestBody $body): self
+    public function withBody(DeprecatedCronjobUpdateCronjobAppIdRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -104,20 +96,20 @@ class ReplaceDatabaseRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceDatabaseRequest Created instance
+     * @return DeprecatedCronjobUpdateCronjobAppIdRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceDatabaseRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobUpdateCronjobAppIdRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
-        $body = ReplaceDatabaseRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $cronjobId = $input->{'cronjobId'};
+        $body = DeprecatedCronjobUpdateCronjobAppIdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId, $body);
+        $obj = new self($cronjobId, $body);
 
         return $obj;
     }
@@ -130,7 +122,7 @@ class ReplaceDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
+        $output['cronjobId'] = $this->cronjobId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -177,8 +169,8 @@ class ReplaceDatabaseRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId . '/database/replace';
+        $cronjobId = urlencode($mapped['cronjobId']);
+        return '/v2/cronjobs/' . $cronjobId . '/app-installation-id';
     }
 
     /**

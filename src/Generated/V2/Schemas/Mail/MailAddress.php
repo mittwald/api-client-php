@@ -179,6 +179,11 @@ class MailAddress
                 ],
                 'type' => 'object',
             ],
+            'originalAddress' => [
+                'description' => 'For archived mail addresses, the address the mailbox had right before it was archived.',
+                'format' => 'idn-email',
+                'type' => 'string',
+            ],
             'projectId' => [
                 'type' => 'string',
             ],
@@ -238,6 +243,11 @@ class MailAddress
     private bool $isCatchAll;
 
     private ?MailAddressMailbox $mailbox = null;
+
+    /**
+     * For archived mail addresses, the address the mailbox had right before it was archived.
+     */
+    private ?string $originalAddress = null;
 
     private string $projectId;
 
@@ -311,6 +321,11 @@ class MailAddress
     public function getMailbox(): ?MailAddressMailbox
     {
         return $this->mailbox ?? null;
+    }
+
+    public function getOriginalAddress(): ?string
+    {
+        return $this->originalAddress ?? null;
     }
 
     public function getProjectId(): string
@@ -452,6 +467,28 @@ class MailAddress
         return $clone;
     }
 
+    public function withOriginalAddress(string $originalAddress): self
+    {
+        $validator = new Validator();
+        $validator->validate($originalAddress, self::$internalValidationSchema['properties']['originalAddress']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->originalAddress = $originalAddress;
+
+        return $clone;
+    }
+
+    public function withoutOriginalAddress(): self
+    {
+        $clone = clone $this;
+        unset($clone->originalAddress);
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -531,6 +568,10 @@ class MailAddress
         if (isset($input->{'mailbox'})) {
             $mailbox = MailAddressMailbox::buildFromInput($input->{'mailbox'}, validate: $validate);
         }
+        $originalAddress = null;
+        if (isset($input->{'originalAddress'})) {
+            $originalAddress = $input->{'originalAddress'};
+        }
         $projectId = $input->{'projectId'};
         $rateLimitChangeRequest = null;
         if (isset($input->{'rateLimitChangeRequest'})) {
@@ -541,6 +582,7 @@ class MailAddress
 
         $obj = new self($address, $archive, $autoResponder, $forwardAddresses, $id, $isArchived, $isBackupInProgress, $isCatchAll, $projectId, $receivingDisabled, $updatedAt);
         $obj->mailbox = $mailbox;
+        $obj->originalAddress = $originalAddress;
         $obj->rateLimitChangeRequest = $rateLimitChangeRequest;
         return $obj;
     }
@@ -563,6 +605,9 @@ class MailAddress
         $output['isCatchAll'] = $this->isCatchAll;
         if (isset($this->mailbox)) {
             $output['mailbox'] = ($this->mailbox)->toJson();
+        }
+        if (isset($this->originalAddress)) {
+            $output['originalAddress'] = $this->originalAddress;
         }
         $output['projectId'] = $this->projectId;
         if (isset($this->rateLimitChangeRequest)) {

@@ -2,49 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
-use Psr\Http\Message\ResponseInterface;
 
-class ReplaceCronjobAppInstallationIdPreconditionFailedResponse implements ResponseContainer
+class DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            'appInstallationId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
+        'required' => [
+            'appInstallationId',
+        ],
+        'type' => 'object',
     ];
 
-    private Error $body;
+    private string $appInstallationId;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(Error $body)
+    public function __construct(string $appInstallationId)
     {
-        $this->body = $body;
+        $this->appInstallationId = $appInstallationId;
     }
 
-    public function getBody(): Error
+    public function getAppInstallationId(): string
     {
-        return $this->body;
+        return $this->appInstallationId;
     }
 
-    public function withBody(Error $body): self
+    public function withAppInstallationId(string $appInstallationId): self
     {
+        $validator = new Validator();
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->appInstallationId = $appInstallationId;
 
         return $clone;
     }
@@ -54,19 +56,19 @@ class ReplaceCronjobAppInstallationIdPreconditionFailedResponse implements Respo
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceCronjobAppInstallationIdPreconditionFailedResponse Created instance
+     * @return DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceCronjobAppInstallationIdPreconditionFailedResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobReplaceCronjobAppInstallationIdRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $appInstallationId = $input->{'appInstallationId'};
 
-        $obj = new self($body);
+        $obj = new self($appInstallationId);
 
         return $obj;
     }
@@ -79,7 +81,7 @@ class ReplaceCronjobAppInstallationIdPreconditionFailedResponse implements Respo
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['appInstallationId'] = $this->appInstallationId;
 
         return $output;
     }
@@ -110,18 +112,5 @@ class ReplaceCronjobAppInstallationIdPreconditionFailedResponse implements Respo
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

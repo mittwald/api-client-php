@@ -192,6 +192,20 @@ class Template
                         'name' => [
                             'type' => 'string',
                         ],
+                        'positionMeta' => [
+                            'properties' => [
+                                'index' => [
+                                    'type' => 'integer',
+                                ],
+                                'section' => [
+                                    'type' => 'string',
+                                ],
+                                'step' => [
+                                    'type' => 'string',
+                                ],
+                            ],
+                            'type' => 'object',
+                        ],
                         'required' => [
                             'type' => 'boolean',
                         ],

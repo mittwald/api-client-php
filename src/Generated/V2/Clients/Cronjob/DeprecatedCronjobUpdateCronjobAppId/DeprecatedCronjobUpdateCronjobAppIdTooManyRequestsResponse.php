@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppIdDeprecated;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronjobAppId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateCronjobAppIdDeprecatedPreconditionFailedResponse implements ResponseContainer
+class DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +21,36 @@ class UpdateCronjobAppIdDeprecatedPreconditionFailedResponse implements Response
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private Error $body;
+    private DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(Error $body)
+    public function __construct(DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getBody(): DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(Error $body): self
+    public function withBody(DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +63,17 @@ class UpdateCronjobAppIdDeprecatedPreconditionFailedResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdDeprecatedPreconditionFailedResponse Created instance
+     * @return DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdDeprecatedPreconditionFailedResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +88,7 @@ class UpdateCronjobAppIdDeprecatedPreconditionFailedResponse implements Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +119,7 @@ class UpdateCronjobAppIdDeprecatedPreconditionFailedResponse implements Response
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

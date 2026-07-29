@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ReplaceCronjobAppInstallationId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobReplaceCronjobAppInstallationId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class ReplaceCronjobAppInstallationIdTooManyRequestsResponse implements ResponseContainer
+class DeprecatedCronjobReplaceCronjobAppInstallationIdBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,36 +22,26 @@ class ReplaceCronjobAppInstallationIdTooManyRequestsResponse implements Response
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
-                'properties' => [
-                    'message' => [
-                        'type' => 'string',
-                        'example' => 'too many requests',
-                    ],
-                    'type' => [
-                        'type' => 'string',
-                        'example' => 'RateLimitError',
-                    ],
-                ],
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
-    private ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
-    public function withBody(ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +54,17 @@ class ReplaceCronjobAppInstallationIdTooManyRequestsResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceCronjobAppInstallationIdTooManyRequestsResponse Created instance
+     * @return DeprecatedCronjobReplaceCronjobAppInstallationIdBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceCronjobAppInstallationIdTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobReplaceCronjobAppInstallationIdBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ReplaceCronjobAppInstallationIdTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -88,7 +79,7 @@ class ReplaceCronjobAppInstallationIdTooManyRequestsResponse implements Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -119,7 +110,6 @@ class ReplaceCronjobAppInstallationIdTooManyRequestsResponse implements Response
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

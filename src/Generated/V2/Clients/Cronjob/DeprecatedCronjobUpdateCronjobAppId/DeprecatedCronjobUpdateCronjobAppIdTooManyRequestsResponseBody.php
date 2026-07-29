@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronjobAppId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ReplaceDatabaseTooManyRequestsResponseBody
+class DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class ReplaceDatabaseTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ReplaceDatabaseTooManyRequestsResponseBody Created instance
+     * @return DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ReplaceDatabaseTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
