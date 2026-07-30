@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExtensionDeprecation;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExternalComponent;
+use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\FrontendFragment;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\SubTitle;
 use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\SupportMeta;
 
@@ -106,7 +107,7 @@ class ExtensionPatchExtensionRequestBody
     private ?array $externalFrontends = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, FrontendFragment>|null
      */
     private ?array $frontendFragments = null;
 
@@ -167,7 +168,7 @@ class ExtensionPatchExtensionRequestBody
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, FrontendFragment>|null
      */
     public function getFrontendFragments(): ?array
     {
@@ -309,16 +310,10 @@ class ExtensionPatchExtensionRequestBody
     }
 
     /**
-     * @param mixed[] $frontendFragments
+     * @param array<string, FrontendFragment> $frontendFragments
      */
     public function withFrontendFragments(array $frontendFragments): self
     {
-        $validator = new Validator();
-        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->frontendFragments = $frontendFragments;
 
@@ -490,7 +485,7 @@ class ExtensionPatchExtensionRequestBody
         }
         $frontendFragments = null;
         if (isset($input->{'frontendFragments'})) {
-            $frontendFragments = (array)$input->{'frontendFragments'};
+            $frontendFragments = array_map(fn (array|object $v) => FrontendFragment::buildFromInput($v, validate: $validate), (array)$input->{'frontendFragments'});
         }
         $name = null;
         if (isset($input->{'name'})) {
@@ -557,7 +552,7 @@ class ExtensionPatchExtensionRequestBody
             $output['externalFrontends'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontends);
         }
         if (isset($this->frontendFragments)) {
-            $output['frontendFragments'] = $this->frontendFragments;
+            $output['frontendFragments'] = array_map(fn (FrontendFragment $v) => $v->toJson(), $this->frontendFragments);
         }
         if (isset($this->name)) {
             $output['name'] = $this->name;

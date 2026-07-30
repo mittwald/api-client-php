@@ -7,6 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\DesiredSystemSoftware;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\PatchLinkedDatabase;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput;
 
 class PatchAppinstallationRequestBody
@@ -63,14 +65,14 @@ database ID. Databases omitted from this object remain unchanged.
      * database ID. Databases omitted from this object remain unchanged.
      *
      *
-     * @var mixed[]|null
+     * @var array<string, PatchLinkedDatabase>|null
      */
     private ?array $databases = null;
 
     private ?string $description = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, DesiredSystemSoftware>|null
      */
     private ?array $systemSoftware = null;
 
@@ -99,7 +101,7 @@ database ID. Databases omitted from this object remain unchanged.
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, PatchLinkedDatabase>|null
      */
     public function getDatabases(): ?array
     {
@@ -112,7 +114,7 @@ database ID. Databases omitted from this object remain unchanged.
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, DesiredSystemSoftware>|null
      */
     public function getSystemSoftware(): ?array
     {
@@ -177,16 +179,10 @@ database ID. Databases omitted from this object remain unchanged.
     }
 
     /**
-     * @param mixed[] $databases
+     * @param array<string, PatchLinkedDatabase> $databases
      */
     public function withDatabases(array $databases): self
     {
-        $validator = new Validator();
-        $validator->validate($databases, self::$internalValidationSchema['properties']['databases']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->databases = $databases;
 
@@ -224,16 +220,10 @@ database ID. Databases omitted from this object remain unchanged.
     }
 
     /**
-     * @param mixed[] $systemSoftware
+     * @param array<string, DesiredSystemSoftware> $systemSoftware
      */
     public function withSystemSoftware(array $systemSoftware): self
     {
-        $validator = new Validator();
-        $validator->validate($systemSoftware, self::$internalValidationSchema['properties']['systemSoftware']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->systemSoftware = $systemSoftware;
 
@@ -308,7 +298,7 @@ database ID. Databases omitted from this object remain unchanged.
         }
         $databases = null;
         if (isset($input->{'databases'})) {
-            $databases = (array)$input->{'databases'};
+            $databases = array_map(fn (array|object $v) => PatchLinkedDatabase::buildFromInput($v, validate: $validate), (array)$input->{'databases'});
         }
         $description = null;
         if (isset($input->{'description'})) {
@@ -316,7 +306,7 @@ database ID. Databases omitted from this object remain unchanged.
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = (array)$input->{'systemSoftware'};
+            $systemSoftware = array_map(fn (array|object $v) => DesiredSystemSoftware::buildFromInput($v, validate: $validate), (array)$input->{'systemSoftware'});
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
@@ -353,13 +343,13 @@ database ID. Databases omitted from this object remain unchanged.
             $output['customDocumentRoot'] = $this->customDocumentRoot;
         }
         if (isset($this->databases)) {
-            $output['databases'] = $this->databases;
+            $output['databases'] = array_map(fn (PatchLinkedDatabase $v) => $v->toJson(), $this->databases);
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
         if (isset($this->systemSoftware)) {
-            $output['systemSoftware'] = $this->systemSoftware;
+            $output['systemSoftware'] = array_map(fn (DesiredSystemSoftware $v) => $v->toJson(), $this->systemSoftware);
         }
         if (isset($this->updatePolicy)) {
             $output['updatePolicy'] = $this->updatePolicy->value;
