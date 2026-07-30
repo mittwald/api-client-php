@@ -31,6 +31,20 @@ class DnsCnameRecordSet
                             'cname' => [
                                 'type' => 'string',
                             ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                         ],
                         'required' => [
                             'cname',
@@ -41,6 +55,20 @@ class DnsCnameRecordSet
                         'properties' => [
                             'cname' => [
                                 'type' => 'string',
+                            ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
                             ],
                         ],
                         'required' => [

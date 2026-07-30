@@ -198,7 +198,7 @@ class AppInstallation
     private array $linkedDatabases;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, LockPurpose>|null
      */
     private ?array $lockedBy = null;
 
@@ -332,7 +332,7 @@ class AppInstallation
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, LockPurpose>|null
      */
     public function getLockedBy(): ?array
     {
@@ -609,16 +609,10 @@ class AppInstallation
     }
 
     /**
-     * @param mixed[] $lockedBy
+     * @param array<string, LockPurpose> $lockedBy
      */
     public function withLockedBy(array $lockedBy): self
     {
-        $validator = new Validator();
-        $validator->validate($lockedBy, self::$internalValidationSchema['properties']['lockedBy']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->lockedBy = $lockedBy;
 
@@ -836,7 +830,7 @@ class AppInstallation
         $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
         $lockedBy = null;
         if (isset($input->{'lockedBy'})) {
-            $lockedBy = (array)$input->{'lockedBy'};
+            $lockedBy = array_map(fn (string $v) => LockPurpose::from($v), (array)$input->{'lockedBy'});
         }
         $phase = Phase::from($input->{'phase'});
         $ports = null;
@@ -905,7 +899,7 @@ class AppInstallation
         }
         $output['linkedDatabases'] = array_map(fn (LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
         if (isset($this->lockedBy)) {
-            $output['lockedBy'] = $this->lockedBy;
+            $output['lockedBy'] = array_map(fn (LockPurpose $v) => $v->value, $this->lockedBy);
         }
         $output['phase'] = $this->phase->value;
         if (isset($this->ports)) {

@@ -29,6 +29,9 @@ class DnsARecordSetManaged
                     'after' => [
                         'properties' => [
                             'aRecords' => [
+                                'enum' => [
+                                    'managed',
+                                ],
                                 'type' => 'string',
                             ],
                         ],
@@ -38,6 +41,18 @@ class DnsARecordSetManaged
                         'type' => 'object',
                     ],
                     'before' => [
+                        'properties' => [
+                            'aRecords' => [
+                                'items' => [
+                                    'type' => 'string',
+                                ],
+                                'nullable' => true,
+                                'type' => 'array',
+                            ],
+                        ],
+                        'required' => [
+                            'aRecords',
+                        ],
                         'type' => 'object',
                     ],
                 ],

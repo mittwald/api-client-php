@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\DesiredSystemSoftware;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput;
 
 class RequestAppinstallationRequestBody
@@ -58,7 +59,7 @@ class RequestAppinstallationRequestBody
     private ?string $installationPath = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, DesiredSystemSoftware>|null
      */
     private ?array $systemSoftware = null;
 
@@ -96,7 +97,7 @@ class RequestAppinstallationRequestBody
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, DesiredSystemSoftware>|null
      */
     public function getSystemSoftware(): ?array
     {
@@ -167,16 +168,10 @@ class RequestAppinstallationRequestBody
     }
 
     /**
-     * @param mixed[] $systemSoftware
+     * @param array<string, DesiredSystemSoftware> $systemSoftware
      */
     public function withSystemSoftware(array $systemSoftware): self
     {
-        $validator = new Validator();
-        $validator->validate($systemSoftware, self::$internalValidationSchema['properties']['systemSoftware']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->systemSoftware = $systemSoftware;
 
@@ -233,7 +228,7 @@ class RequestAppinstallationRequestBody
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = (array)$input->{'systemSoftware'};
+            $systemSoftware = array_map(fn (array|object $v) => DesiredSystemSoftware::buildFromInput($v, validate: $validate), (array)$input->{'systemSoftware'});
         }
         $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
@@ -258,7 +253,7 @@ class RequestAppinstallationRequestBody
             $output['installationPath'] = $this->installationPath;
         }
         if (isset($this->systemSoftware)) {
-            $output['systemSoftware'] = $this->systemSoftware;
+            $output['systemSoftware'] = array_map(fn (DesiredSystemSoftware $v) => $v->toJson(), $this->systemSoftware);
         }
         $output['updatePolicy'] = $this->updatePolicy->value;
         $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);

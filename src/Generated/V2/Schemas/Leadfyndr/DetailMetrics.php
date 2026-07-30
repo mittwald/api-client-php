@@ -41,7 +41,7 @@ class DetailMetrics
     ];
 
     /**
-     * @var mixed[]|null
+     * @var array<string, Metric>|null
      */
     private ?array $additionalMetrics = null;
 
@@ -53,7 +53,7 @@ class DetailMetrics
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, Metric>|null
      */
     public function getAdditionalMetrics(): ?array
     {
@@ -66,16 +66,10 @@ class DetailMetrics
     }
 
     /**
-     * @param mixed[] $additionalMetrics
+     * @param array<string, Metric> $additionalMetrics
      */
     public function withAdditionalMetrics(array $additionalMetrics): self
     {
-        $validator = new Validator();
-        $validator->validate($additionalMetrics, self::$internalValidationSchema['properties']['additionalMetrics']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->additionalMetrics = $additionalMetrics;
 
@@ -115,7 +109,7 @@ class DetailMetrics
 
         $additionalMetrics = null;
         if (isset($input->{'additionalMetrics'})) {
-            $additionalMetrics = (array)$input->{'additionalMetrics'};
+            $additionalMetrics = array_map(fn (array|object $v) => Metric::buildFromInput($v, validate: $validate), (array)$input->{'additionalMetrics'});
         }
         $basic = BasicMetrics::buildFromInput($input->{'basic'}, validate: $validate);
 
@@ -133,7 +127,7 @@ class DetailMetrics
     {
         $output = [];
         if (isset($this->additionalMetrics)) {
-            $output['additionalMetrics'] = $this->additionalMetrics;
+            $output['additionalMetrics'] = array_map(fn (Metric $v) => $v->toJson(), $this->additionalMetrics);
         }
         $output['basic'] = $this->basic->toJson();
 

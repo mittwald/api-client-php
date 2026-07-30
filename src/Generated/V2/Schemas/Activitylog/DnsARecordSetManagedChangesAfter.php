@@ -25,6 +25,9 @@ class DnsARecordSetManagedChangesAfter
     private static array $internalValidationSchema = [
         'properties' => [
             'aRecords' => [
+                'enum' => [
+                    'managed',
+                ],
                 'type' => 'string',
             ],
         ],
@@ -34,26 +37,20 @@ class DnsARecordSetManagedChangesAfter
         'type' => 'object',
     ];
 
-    private string $aRecords;
+    private DnsARecordSetManagedChangesAfterARecords $aRecords;
 
-    public function __construct(string $aRecords)
+    public function __construct(DnsARecordSetManagedChangesAfterARecords $aRecords)
     {
         $this->aRecords = $aRecords;
     }
 
-    public function getARecords(): string
+    public function getARecords(): DnsARecordSetManagedChangesAfterARecords
     {
         return $this->aRecords;
     }
 
-    public function withARecords(string $aRecords): self
+    public function withARecords(DnsARecordSetManagedChangesAfterARecords $aRecords): self
     {
-        $validator = new Validator();
-        $validator->validate($aRecords, self::$internalValidationSchema['properties']['aRecords']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->aRecords = $aRecords;
 
@@ -75,7 +72,7 @@ class DnsARecordSetManagedChangesAfter
             static::validateInput($input);
         }
 
-        $aRecords = $input->{'aRecords'};
+        $aRecords = DnsARecordSetManagedChangesAfterARecords::from($input->{'aRecords'});
 
         $obj = new self($aRecords);
 
@@ -90,7 +87,7 @@ class DnsARecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['aRecords'] = $this->aRecords;
+        $output['aRecords'] = ($this->aRecords)->value;
 
         return $output;
     }

@@ -6,6 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Container\ServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Schemas\Container\VolumeRequest;
 
 class UpdateStackRequestBody
 {
@@ -83,7 +85,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
      * Keys must be strings of max 63 characters.
      *
      *
-     * @var mixed[]|null
+     * @var array<string, ServiceRequest>|null
      */
     private ?array $services = null;
 
@@ -100,7 +102,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
      * stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
      *
      *
-     * @var mixed[]|null
+     * @var array<string, VolumeRequest>|null
      */
     private ?array $volumes = null;
 
@@ -117,7 +119,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, ServiceRequest>|null
      */
     public function getServices(): ?array
     {
@@ -130,7 +132,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, VolumeRequest>|null
      */
     public function getVolumes(): ?array
     {
@@ -160,16 +162,10 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     }
 
     /**
-     * @param mixed[] $services
+     * @param array<string, ServiceRequest> $services
      */
     public function withServices(array $services): self
     {
-        $validator = new Validator();
-        $validator->validate($services, self::$internalValidationSchema['properties']['services']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->services = $services;
 
@@ -201,16 +197,10 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     }
 
     /**
-     * @param mixed[] $volumes
+     * @param array<string, VolumeRequest> $volumes
      */
     public function withVolumes(array $volumes): self
     {
-        $validator = new Validator();
-        $validator->validate($volumes, self::$internalValidationSchema['properties']['volumes']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->volumes = $volumes;
 
@@ -246,7 +236,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         }
         $services = null;
         if (isset($input->{'services'})) {
-            $services = (array)$input->{'services'};
+            $services = array_map(fn (array|object $v) => ServiceRequest::buildFromInput($v, validate: $validate), (array)$input->{'services'});
         }
         $updateSchedule = null;
         if (isset($input->{'updateSchedule'})) {
@@ -254,7 +244,7 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         }
         $volumes = null;
         if (isset($input->{'volumes'})) {
-            $volumes = (array)$input->{'volumes'};
+            $volumes = array_map(fn (array|object $v) => VolumeRequest::buildFromInput($v, validate: $validate), (array)$input->{'volumes'});
         }
 
         $obj = new self();
@@ -277,13 +267,13 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
             $output['description'] = $this->description;
         }
         if (isset($this->services)) {
-            $output['services'] = $this->services;
+            $output['services'] = array_map(fn (ServiceRequest $v) => $v->toJson(), $this->services);
         }
         if (isset($this->updateSchedule)) {
             $output['updateSchedule'] = ($this->updateSchedule)->toJson();
         }
         if (isset($this->volumes)) {
-            $output['volumes'] = $this->volumes;
+            $output['volumes'] = array_map(fn (VolumeRequest $v) => $v->toJson(), $this->volumes);
         }
 
         return $output;

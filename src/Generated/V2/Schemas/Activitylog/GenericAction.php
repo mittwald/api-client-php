@@ -65,13 +65,13 @@ class GenericAction
     private string $name;
 
     /**
-     * @var mixed[]
+     * @var array<string, ParameterProperty>
      */
     private array $parameters;
 
     /**
      * @param GenericActionChangesItem[] $changes
-     * @param mixed[] $parameters
+     * @param array<string, ParameterProperty> $parameters
      */
     public function __construct(array $changes, string $name, array $parameters)
     {
@@ -94,7 +94,7 @@ class GenericAction
     }
 
     /**
-     * @return mixed[]
+     * @return array<string, ParameterProperty>
      */
     public function getParameters(): array
     {
@@ -127,16 +127,10 @@ class GenericAction
     }
 
     /**
-     * @param mixed[] $parameters
+     * @param array<string, ParameterProperty> $parameters
      */
     public function withParameters(array $parameters): self
     {
-        $validator = new Validator();
-        $validator->validate($parameters, self::$internalValidationSchema['properties']['parameters']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->parameters = $parameters;
 
@@ -160,7 +154,7 @@ class GenericAction
 
         $changes = array_map(fn (array|object $i): GenericActionChangesItem => GenericActionChangesItem::buildFromInput($i, validate: $validate), $input->{'changes'});
         $name = $input->{'name'};
-        $parameters = (array)$input->{'parameters'};
+        $parameters = array_map(fn (array|object $v) => ParameterProperty::buildFromInput($v, validate: $validate), (array)$input->{'parameters'});
 
         $obj = new self($changes, $name, $parameters);
 
@@ -177,7 +171,7 @@ class GenericAction
         $output = [];
         $output['changes'] = array_map(fn (GenericActionChangesItem $i) => $i->toJson(), $this->changes);
         $output['name'] = $this->name;
-        $output['parameters'] = $this->parameters;
+        $output['parameters'] = array_map(fn (ParameterProperty $v) => $v->toJson(), $this->parameters);
 
         return $output;
     }

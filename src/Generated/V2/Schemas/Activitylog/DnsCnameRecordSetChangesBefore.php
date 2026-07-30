@@ -27,6 +27,20 @@ class DnsCnameRecordSetChangesBefore
             'cname' => [
                 'type' => 'string',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'cname',
@@ -36,6 +50,8 @@ class DnsCnameRecordSetChangesBefore
 
     private string $cname;
 
+    private DnsCnameRecordSetChangesBeforeTtlAlternative2|int|null $ttl = null;
+
     public function __construct(string $cname)
     {
         $this->cname = $cname;
@@ -44,6 +60,11 @@ class DnsCnameRecordSetChangesBefore
     public function getCname(): string
     {
         return $this->cname;
+    }
+
+    public function getTtl(): DnsCnameRecordSetChangesBeforeTtlAlternative2|int|null
+    {
+        return $this->ttl;
     }
 
     public function withCname(string $cname): self
@@ -56,6 +77,22 @@ class DnsCnameRecordSetChangesBefore
 
         $clone = clone $this;
         $clone->cname = $cname;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsCnameRecordSetChangesBeforeTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -76,9 +113,17 @@ class DnsCnameRecordSetChangesBefore
         }
 
         $cname = $input->{'cname'};
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsCnameRecordSetChangesBeforeTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsCnameRecordSetChangesBeforeTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($cname);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -91,6 +136,12 @@ class DnsCnameRecordSetChangesBefore
     {
         $output = [];
         $output['cname'] = $this->cname;
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsCnameRecordSetChangesBeforeTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -121,5 +172,10 @@ class DnsCnameRecordSetChangesBefore
 
     public function __clone()
     {
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsCnameRecordSetChangesBeforeTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

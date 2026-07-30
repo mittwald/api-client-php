@@ -30,6 +30,20 @@ class DnsCaaRecordSetChangesAfter
                 ],
                 'type' => 'array',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'caa',
@@ -41,6 +55,8 @@ class DnsCaaRecordSetChangesAfter
      * @var DnsCaaRecordSetChangesAfterCaaItem[]
      */
     private array $caa;
+
+    private DnsCaaRecordSetChangesAfterTtlAlternative2|int|null $ttl = null;
 
     /**
      * @param DnsCaaRecordSetChangesAfterCaaItem[] $caa
@@ -58,6 +74,11 @@ class DnsCaaRecordSetChangesAfter
         return $this->caa;
     }
 
+    public function getTtl(): DnsCaaRecordSetChangesAfterTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     /**
      * @param DnsCaaRecordSetChangesAfterCaaItem[] $caa
      */
@@ -65,6 +86,22 @@ class DnsCaaRecordSetChangesAfter
     {
         $clone = clone $this;
         $clone->caa = $caa;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsCaaRecordSetChangesAfterTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -85,9 +122,17 @@ class DnsCaaRecordSetChangesAfter
         }
 
         $caa = array_map(fn (array|object $i): DnsCaaRecordSetChangesAfterCaaItem => DnsCaaRecordSetChangesAfterCaaItem::buildFromInput($i, validate: $validate), $input->{'caa'});
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsCaaRecordSetChangesAfterTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsCaaRecordSetChangesAfterTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($caa);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -100,6 +145,12 @@ class DnsCaaRecordSetChangesAfter
     {
         $output = [];
         $output['caa'] = array_map(fn (DnsCaaRecordSetChangesAfterCaaItem $i) => $i->toJson(), $this->caa);
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsCaaRecordSetChangesAfterTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -131,5 +182,10 @@ class DnsCaaRecordSetChangesAfter
     public function __clone()
     {
         $this->caa = array_map(fn (DnsCaaRecordSetChangesAfterCaaItem $i) => clone $i, $this->caa);
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsCaaRecordSetChangesAfterTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

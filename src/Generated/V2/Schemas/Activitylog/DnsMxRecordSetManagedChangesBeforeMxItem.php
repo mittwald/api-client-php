@@ -17,57 +17,20 @@ use JsonSchema\Validator;
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class DnsMxRecordSetManagedChangesBefore
+class DnsMxRecordSetManagedChangesBeforeMxItem
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'properties' => [
-            'mx' => [
-                'items' => [
-                    'type' => 'object',
-                ],
-                'nullable' => true,
-                'type' => 'array',
-            ],
-        ],
-        'required' => [
-            'mx',
-        ],
         'type' => 'object',
     ];
 
     /**
-     * @var DnsMxRecordSetManagedChangesBeforeMxItem[]
+     *
      */
-    private array $mx;
-
-    /**
-     * @param DnsMxRecordSetManagedChangesBeforeMxItem[] $mx
-     */
-    public function __construct(array $mx)
+    public function __construct()
     {
-        $this->mx = $mx;
-    }
-
-    /**
-     * @return DnsMxRecordSetManagedChangesBeforeMxItem[]
-     */
-    public function getMx(): array
-    {
-        return $this->mx;
-    }
-
-    /**
-     * @param DnsMxRecordSetManagedChangesBeforeMxItem[] $mx
-     */
-    public function withMx(array $mx): self
-    {
-        $clone = clone $this;
-        $clone->mx = $mx;
-
-        return $clone;
     }
 
     /**
@@ -75,19 +38,19 @@ class DnsMxRecordSetManagedChangesBefore
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DnsMxRecordSetManagedChangesBefore Created instance
+     * @return DnsMxRecordSetManagedChangesBeforeMxItem Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DnsMxRecordSetManagedChangesBefore
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsMxRecordSetManagedChangesBeforeMxItem
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $mx = array_map(fn (array|object $i): DnsMxRecordSetManagedChangesBeforeMxItem => DnsMxRecordSetManagedChangesBeforeMxItem::buildFromInput($i, validate: $validate), $input->{'mx'});
 
-        $obj = new self($mx);
+
+        $obj = new self();
 
         return $obj;
     }
@@ -100,7 +63,7 @@ class DnsMxRecordSetManagedChangesBefore
     public function toJson(): array
     {
         $output = [];
-        $output['mx'] = array_map(fn (DnsMxRecordSetManagedChangesBeforeMxItem $i) => $i->toJson(), $this->mx);
+
 
         return $output;
     }
@@ -131,6 +94,5 @@ class DnsMxRecordSetManagedChangesBefore
 
     public function __clone()
     {
-        $this->mx = array_map(fn (DnsMxRecordSetManagedChangesBeforeMxItem $i) => clone $i, $this->mx);
     }
 }

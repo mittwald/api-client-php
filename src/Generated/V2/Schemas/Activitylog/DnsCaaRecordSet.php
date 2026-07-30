@@ -34,6 +34,20 @@ class DnsCaaRecordSet
                                 ],
                                 'type' => 'array',
                             ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                         ],
                         'required' => [
                             'caa',
@@ -47,6 +61,20 @@ class DnsCaaRecordSet
                                     'type' => 'object',
                                 ],
                                 'type' => 'array',
+                            ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
                             ],
                         ],
                         'required' => [

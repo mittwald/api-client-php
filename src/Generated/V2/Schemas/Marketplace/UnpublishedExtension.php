@@ -218,7 +218,7 @@ class UnpublishedExtension
     private ?array $frontendComponents = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, FrontendFragment>|null
      */
     private ?array $frontendFragments = null;
 
@@ -357,7 +357,7 @@ class UnpublishedExtension
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, FrontendFragment>|null
      */
     public function getFrontendFragments(): ?array
     {
@@ -615,16 +615,10 @@ class UnpublishedExtension
     }
 
     /**
-     * @param mixed[] $frontendFragments
+     * @param array<string, FrontendFragment> $frontendFragments
      */
     public function withFrontendFragments(array $frontendFragments): self
     {
-        $validator = new Validator();
-        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->frontendFragments = $frontendFragments;
 
@@ -899,7 +893,7 @@ class UnpublishedExtension
         }
         $frontendFragments = null;
         if (isset($input->{'frontendFragments'})) {
-            $frontendFragments = (array)$input->{'frontendFragments'};
+            $frontendFragments = array_map(fn (array|object $v) => FrontendFragment::buildFromInput($v, validate: $validate), (array)$input->{'frontendFragments'});
         }
         $id = $input->{'id'};
         $isDeletionScheduled = null;
@@ -989,7 +983,7 @@ class UnpublishedExtension
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
         }
         if (isset($this->frontendFragments)) {
-            $output['frontendFragments'] = $this->frontendFragments;
+            $output['frontendFragments'] = array_map(fn (FrontendFragment $v) => $v->toJson(), $this->frontendFragments);
         }
         $output['id'] = $this->id;
         if (isset($this->isDeletionScheduled)) {

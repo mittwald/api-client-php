@@ -36,6 +36,20 @@ class DnsARecordSetChangesBefore
                 ],
                 'type' => 'array',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'type' => 'object',
     ];
@@ -49,6 +63,8 @@ class DnsARecordSetChangesBefore
      * @var string[]|null
      */
     private ?array $aaaaRecords = null;
+
+    private DnsARecordSetChangesBeforeTtlAlternative2|int|null $ttl = null;
 
     /**
      *
@@ -71,6 +87,11 @@ class DnsARecordSetChangesBefore
     public function getAaaaRecords(): ?array
     {
         return $this->aaaaRecords ?? null;
+    }
+
+    public function getTtl(): DnsARecordSetChangesBeforeTtlAlternative2|int|null
+    {
+        return $this->ttl;
     }
 
     /**
@@ -123,6 +144,22 @@ class DnsARecordSetChangesBefore
         return $clone;
     }
 
+    public function withTtl(DnsARecordSetChangesBeforeTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -146,10 +183,19 @@ class DnsARecordSetChangesBefore
         if (isset($input->{'aaaaRecords'})) {
             $aaaaRecords = $input->{'aaaaRecords'};
         }
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsARecordSetChangesBeforeTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsARecordSetChangesBeforeTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self();
         $obj->aRecords = $aRecords;
         $obj->aaaaRecords = $aaaaRecords;
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -166,6 +212,12 @@ class DnsARecordSetChangesBefore
         }
         if (isset($this->aaaaRecords)) {
             $output['aaaaRecords'] = $this->aaaaRecords;
+        }
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsARecordSetChangesBeforeTtlAlternative2 => ($this->ttl)->value,
+            };
         }
 
         return $output;
@@ -197,5 +249,10 @@ class DnsARecordSetChangesBefore
 
     public function __clone()
     {
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsARecordSetChangesBeforeTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

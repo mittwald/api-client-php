@@ -29,6 +29,20 @@ class DnsCnameRecordSetChanges
                     'cname' => [
                         'type' => 'string',
                     ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                 ],
                 'required' => [
                     'cname',
@@ -39,6 +53,20 @@ class DnsCnameRecordSetChanges
                 'properties' => [
                     'cname' => [
                         'type' => 'string',
+                    ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
                     ],
                 ],
                 'required' => [

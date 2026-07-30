@@ -38,6 +38,20 @@ class DnsARecordSetChanges
                         ],
                         'type' => 'array',
                     ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                 ],
                 'type' => 'object',
             ],
@@ -54,6 +68,20 @@ class DnsARecordSetChanges
                             'type' => 'string',
                         ],
                         'type' => 'array',
+                    ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
                     ],
                 ],
                 'type' => 'object',

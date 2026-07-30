@@ -110,7 +110,7 @@ class User
     private ?string $avatarRef = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, CustomerMembership>|null
      */
     private ?array $customerMemberships = null;
 
@@ -135,7 +135,7 @@ class User
     private ?string $phoneNumber = null;
 
     /**
-     * @var mixed[]|null
+     * @var array<string, ProjectMembership>|null
      */
     private ?array $projectMemberships = null;
 
@@ -155,7 +155,7 @@ class User
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, CustomerMembership>|null
      */
     public function getCustomerMemberships(): ?array
     {
@@ -198,7 +198,7 @@ class User
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, ProjectMembership>|null
      */
     public function getProjectMemberships(): ?array
     {
@@ -238,16 +238,10 @@ class User
     }
 
     /**
-     * @param mixed[] $customerMemberships
+     * @param array<string, CustomerMembership> $customerMemberships
      */
     public function withCustomerMemberships(array $customerMemberships): self
     {
-        $validator = new Validator();
-        $validator->validate($customerMemberships, self::$internalValidationSchema['properties']['customerMemberships']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->customerMemberships = $customerMemberships;
 
@@ -385,16 +379,10 @@ class User
     }
 
     /**
-     * @param mixed[] $projectMemberships
+     * @param array<string, ProjectMembership> $projectMemberships
      */
     public function withProjectMemberships(array $projectMemberships): self
     {
-        $validator = new Validator();
-        $validator->validate($projectMemberships, self::$internalValidationSchema['properties']['projectMemberships']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->projectMemberships = $projectMemberships;
 
@@ -460,7 +448,7 @@ class User
         }
         $customerMemberships = null;
         if (isset($input->{'customerMemberships'})) {
-            $customerMemberships = (array)$input->{'customerMemberships'};
+            $customerMemberships = array_map(fn (array|object $v) => CustomerMembership::buildFromInput($v, validate: $validate), (array)$input->{'customerMemberships'});
         }
         $email = null;
         if (isset($input->{'email'})) {
@@ -489,7 +477,7 @@ class User
         }
         $projectMemberships = null;
         if (isset($input->{'projectMemberships'})) {
-            $projectMemberships = (array)$input->{'projectMemberships'};
+            $projectMemberships = array_map(fn (array|object $v) => ProjectMembership::buildFromInput($v, validate: $validate), (array)$input->{'projectMemberships'});
         }
         $registeredAt = null;
         if (isset($input->{'registeredAt'})) {
@@ -523,7 +511,7 @@ class User
             $output['avatarRef'] = $this->avatarRef;
         }
         if (isset($this->customerMemberships)) {
-            $output['customerMemberships'] = $this->customerMemberships;
+            $output['customerMemberships'] = array_map(fn (CustomerMembership $v) => $v->toJson(), $this->customerMemberships);
         }
         if (isset($this->email)) {
             $output['email'] = $this->email;
@@ -545,7 +533,7 @@ class User
             $output['phoneNumber'] = $this->phoneNumber;
         }
         if (isset($this->projectMemberships)) {
-            $output['projectMemberships'] = $this->projectMemberships;
+            $output['projectMemberships'] = array_map(fn (ProjectMembership $v) => $v->toJson(), $this->projectMemberships);
         }
         if (isset($this->registeredAt)) {
             $output['registeredAt'] = ($this->registeredAt)->format(DateTime::ATOM);
