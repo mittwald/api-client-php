@@ -83,6 +83,7 @@ class PlanOptions
         ],
         'required' => [
             'customerId',
+            'name',
             'keys',
             'tokens',
             'rateLimit',
@@ -100,7 +101,7 @@ class PlanOptions
 
     private bool $modelTermsApprovalRequired = false;
 
-    private ?string $name = null;
+    private string $name;
 
     private DateTime $nextTokenReset;
 
@@ -115,10 +116,11 @@ class PlanOptions
      */
     private ?array $topUsages = null;
 
-    public function __construct(string $customerId, PlanUsage $keys, DateTime $nextTokenReset, RateLimit $rateLimit, PlanUsageBig $tokens)
+    public function __construct(string $customerId, PlanUsage $keys, string $name, DateTime $nextTokenReset, RateLimit $rateLimit, PlanUsageBig $tokens)
     {
         $this->customerId = $customerId;
         $this->keys = $keys;
+        $this->name = $name;
         $this->nextTokenReset = $nextTokenReset;
         $this->rateLimit = $rateLimit;
         $this->tokens = $tokens;
@@ -144,9 +146,9 @@ class PlanOptions
         return $this->modelTermsApprovalRequired;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
-        return $this->name ?? null;
+        return $this->name;
     }
 
     public function getNextTokenReset(): DateTime
@@ -243,14 +245,6 @@ class PlanOptions
         return $clone;
     }
 
-    public function withoutName(): self
-    {
-        $clone = clone $this;
-        unset($clone->name);
-
-        return $clone;
-    }
-
     public function withNextTokenReset(DateTime $nextTokenReset): self
     {
         $clone = clone $this;
@@ -341,10 +335,7 @@ class PlanOptions
         if (isset($input->{'modelTermsApprovalRequired'})) {
             $modelTermsApprovalRequired = (bool)($input->{'modelTermsApprovalRequired'});
         }
-        $name = null;
-        if (isset($input->{'name'})) {
-            $name = $input->{'name'};
-        }
+        $name = $input->{'name'};
         $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         $planId = null;
         if (isset($input->{'planId'})) {
@@ -357,10 +348,9 @@ class PlanOptions
             $topUsages = array_map(fn (array|object $i): PlanOptionsTopUsagesItem => PlanOptionsTopUsagesItem::buildFromInput($i, validate: $validate), $input->{'topUsages'});
         }
 
-        $obj = new self($customerId, $keys, $nextTokenReset, $rateLimit, $tokens);
+        $obj = new self($customerId, $keys, $name, $nextTokenReset, $rateLimit, $tokens);
         $obj->deletedAt = $deletedAt;
         $obj->modelTermsApprovalRequired = $modelTermsApprovalRequired;
-        $obj->name = $name;
         $obj->planId = $planId;
         $obj->topUsages = $topUsages;
         return $obj;
@@ -380,9 +370,7 @@ class PlanOptions
         }
         $output['keys'] = $this->keys->toJson();
         $output['modelTermsApprovalRequired'] = $this->modelTermsApprovalRequired;
-        if (isset($this->name)) {
-            $output['name'] = $this->name;
-        }
+        $output['name'] = $this->name;
         $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         if (isset($this->planId)) {
             $output['planId'] = $this->planId;
