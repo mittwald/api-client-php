@@ -32,6 +32,7 @@ class GetFileWithNameRequest
                 ],
                 'example' => 'application/octet-stream',
                 'type' => 'string',
+                'x-go-type' => 'FileGetFileParamsAccept',
             ],
             'content-disposition' => [
                 'default' => 'inline',
@@ -41,6 +42,7 @@ class GetFileWithNameRequest
                 ],
                 'example' => 'inline',
                 'type' => 'string',
+                'x-go-type' => 'FileGetFileParamsContentDisposition',
             ],
             'token' => [
                 'example' => 'jwt',
