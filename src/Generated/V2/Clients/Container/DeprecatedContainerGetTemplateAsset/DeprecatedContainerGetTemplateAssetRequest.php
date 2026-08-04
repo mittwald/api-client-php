@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateAsset;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetTemplateAssetRequest
+class DeprecatedContainerGetTemplateAssetRequest
 {
     public const method = 'get';
 
@@ -87,10 +87,10 @@ class GetTemplateAssetRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetTemplateAssetRequest Created instance
+     * @return DeprecatedContainerGetTemplateAssetRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateAssetRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedContainerGetTemplateAssetRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
