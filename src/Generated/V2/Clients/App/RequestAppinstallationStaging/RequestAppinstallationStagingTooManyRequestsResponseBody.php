@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetTemplateAssetTooManyRequestsResponseBody
+class RequestAppinstallationStagingTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class GetTemplateAssetTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetTemplateAssetTooManyRequestsResponseBody Created instance
+     * @return RequestAppinstallationStagingTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateAssetTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationStagingTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

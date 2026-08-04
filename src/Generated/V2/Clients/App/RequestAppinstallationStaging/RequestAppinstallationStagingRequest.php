@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetTemplateAssetRequest
+class RequestAppinstallationStagingRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,67 +17,80 @@ class GetTemplateAssetRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'templateId' => [
+            'appInstallationId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
-            'assetPath' => [
-                'type' => 'string',
+            'body' => [
+                'properties' => [
+                    'description' => [
+                        'type' => 'string',
+                    ],
+                    'domain' => [
+                        'type' => 'string',
+                    ],
+                    'installationPath' => [
+                        'type' => 'string',
+                    ],
+                    'targetProjectId' => [
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'description',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'templateId',
-            'assetPath',
+            'appInstallationId',
+            'body',
         ],
     ];
 
-    private string $templateId;
+    private string $appInstallationId;
 
-    private string $assetPath;
+    private RequestAppinstallationStagingRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $templateId, string $assetPath)
+    public function __construct(string $appInstallationId, RequestAppinstallationStagingRequestBody $body)
     {
-        $this->templateId = $templateId;
-        $this->assetPath = $assetPath;
+        $this->appInstallationId = $appInstallationId;
+        $this->body = $body;
     }
 
-    public function getTemplateId(): string
+    public function getAppInstallationId(): string
     {
-        return $this->templateId;
+        return $this->appInstallationId;
     }
 
-    public function getAssetPath(): string
+    public function getBody(): RequestAppinstallationStagingRequestBody
     {
-        return $this->assetPath;
+        return $this->body;
     }
 
-    public function withTemplateId(string $templateId): self
+    public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($templateId, self::$internalValidationSchema['properties']['templateId']);
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->templateId = $templateId;
+        $clone->appInstallationId = $appInstallationId;
 
         return $clone;
     }
 
-    public function withAssetPath(string $assetPath): self
+    public function withBody(RequestAppinstallationStagingRequestBody $body): self
     {
-        $validator = new Validator();
-        $validator->validate($assetPath, self::$internalValidationSchema['properties']['assetPath']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->assetPath = $assetPath;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -87,20 +100,20 @@ class GetTemplateAssetRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetTemplateAssetRequest Created instance
+     * @return RequestAppinstallationStagingRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateAssetRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationStagingRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $templateId = $input->{'templateId'};
-        $assetPath = $input->{'assetPath'};
+        $appInstallationId = $input->{'appInstallationId'};
+        $body = RequestAppinstallationStagingRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($templateId, $assetPath);
+        $obj = new self($appInstallationId, $body);
 
         return $obj;
     }
@@ -113,8 +126,8 @@ class GetTemplateAssetRequest
     public function toJson(): array
     {
         $output = [];
-        $output['templateId'] = $this->templateId;
-        $output['assetPath'] = $this->assetPath;
+        $output['appInstallationId'] = $this->appInstallationId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -145,6 +158,7 @@ class GetTemplateAssetRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -159,9 +173,8 @@ class GetTemplateAssetRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $templateId = urlencode($mapped['templateId']);
-        $assetPath = urlencode($mapped['assetPath']);
-        return '/v2/container-templates/' . $templateId . '/assets/' . $assetPath;
+        $appInstallationId = urlencode($mapped['appInstallationId']);
+        return '/v2/app-installations/' . $appInstallationId . '/actions/staging';
     }
 
     /**
@@ -180,6 +193,7 @@ class GetTemplateAssetRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 
