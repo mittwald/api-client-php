@@ -23,14 +23,57 @@ class DnsARecordSetManagedChangesBefore
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'properties' => [
+            'aRecords' => [
+                'items' => [
+                    'type' => 'string',
+                ],
+                'nullable' => true,
+                'type' => 'array',
+            ],
+        ],
+        'required' => [
+            'aRecords',
+        ],
         'type' => 'object',
     ];
 
     /**
-     *
+     * @var string[]
      */
-    public function __construct()
+    private array $aRecords;
+
+    /**
+     * @param string[] $aRecords
+     */
+    public function __construct(array $aRecords)
     {
+        $this->aRecords = $aRecords;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getARecords(): array
+    {
+        return $this->aRecords;
+    }
+
+    /**
+     * @param string[] $aRecords
+     */
+    public function withARecords(array $aRecords): self
+    {
+        $validator = new Validator();
+        $validator->validate($aRecords, self::$internalValidationSchema['properties']['aRecords']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->aRecords = $aRecords;
+
+        return $clone;
     }
 
     /**
@@ -48,9 +91,9 @@ class DnsARecordSetManagedChangesBefore
             static::validateInput($input);
         }
 
+        $aRecords = $input->{'aRecords'};
 
-
-        $obj = new self();
+        $obj = new self($aRecords);
 
         return $obj;
     }
@@ -63,7 +106,7 @@ class DnsARecordSetManagedChangesBefore
     public function toJson(): array
     {
         $output = [];
-
+        $output['aRecords'] = $this->aRecords;
 
         return $output;
     }

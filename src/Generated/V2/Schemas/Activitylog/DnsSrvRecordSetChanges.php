@@ -32,6 +32,20 @@ class DnsSrvRecordSetChanges
                         ],
                         'type' => 'array',
                     ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                 ],
                 'required' => [
                     'srv',
@@ -45,6 +59,20 @@ class DnsSrvRecordSetChanges
                             'type' => 'object',
                         ],
                         'type' => 'array',
+                    ],
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
                     ],
                 ],
                 'required' => [

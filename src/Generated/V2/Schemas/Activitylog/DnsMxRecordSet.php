@@ -34,6 +34,20 @@ class DnsMxRecordSet
                                 ],
                                 'type' => 'array',
                             ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                         ],
                         'required' => [
                             'mx',
@@ -47,6 +61,20 @@ class DnsMxRecordSet
                                     'type' => 'object',
                                 ],
                                 'type' => 'array',
+                            ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
                             ],
                         ],
                         'required' => [

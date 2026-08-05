@@ -28,6 +28,20 @@ class DnsTxtRecordSet
                 'properties' => [
                     'after' => [
                         'properties' => [
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                             'txt' => [
                                 'items' => [
                                     'type' => 'string',
@@ -42,6 +56,20 @@ class DnsTxtRecordSet
                     ],
                     'before' => [
                         'properties' => [
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                             'txt' => [
                                 'items' => [
                                     'type' => 'string',

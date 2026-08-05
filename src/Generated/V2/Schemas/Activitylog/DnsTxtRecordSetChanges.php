@@ -26,6 +26,20 @@ class DnsTxtRecordSetChanges
         'properties' => [
             'after' => [
                 'properties' => [
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                     'txt' => [
                         'items' => [
                             'type' => 'string',
@@ -40,6 +54,20 @@ class DnsTxtRecordSetChanges
             ],
             'before' => [
                 'properties' => [
+                    'ttl' => [
+                        'nullable' => true,
+                        'oneOf' => [
+                            [
+                                'type' => 'integer',
+                            ],
+                            [
+                                'enum' => [
+                                    'auto',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                     'txt' => [
                         'items' => [
                             'type' => 'string',

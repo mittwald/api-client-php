@@ -30,6 +30,20 @@ class DnsMxRecordSetChangesAfter
                 ],
                 'type' => 'array',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'mx',
@@ -41,6 +55,8 @@ class DnsMxRecordSetChangesAfter
      * @var DnsMxRecordSetChangesAfterMxItem[]
      */
     private array $mx;
+
+    private DnsMxRecordSetChangesAfterTtlAlternative2|int|null $ttl = null;
 
     /**
      * @param DnsMxRecordSetChangesAfterMxItem[] $mx
@@ -58,6 +74,11 @@ class DnsMxRecordSetChangesAfter
         return $this->mx;
     }
 
+    public function getTtl(): DnsMxRecordSetChangesAfterTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     /**
      * @param DnsMxRecordSetChangesAfterMxItem[] $mx
      */
@@ -65,6 +86,22 @@ class DnsMxRecordSetChangesAfter
     {
         $clone = clone $this;
         $clone->mx = $mx;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsMxRecordSetChangesAfterTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -85,9 +122,17 @@ class DnsMxRecordSetChangesAfter
         }
 
         $mx = array_map(fn (array|object $i): DnsMxRecordSetChangesAfterMxItem => DnsMxRecordSetChangesAfterMxItem::buildFromInput($i, validate: $validate), $input->{'mx'});
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsMxRecordSetChangesAfterTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsMxRecordSetChangesAfterTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($mx);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -100,6 +145,12 @@ class DnsMxRecordSetChangesAfter
     {
         $output = [];
         $output['mx'] = array_map(fn (DnsMxRecordSetChangesAfterMxItem $i) => $i->toJson(), $this->mx);
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsMxRecordSetChangesAfterTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -131,5 +182,10 @@ class DnsMxRecordSetChangesAfter
     public function __clone()
     {
         $this->mx = array_map(fn (DnsMxRecordSetChangesAfterMxItem $i) => clone $i, $this->mx);
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsMxRecordSetChangesAfterTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

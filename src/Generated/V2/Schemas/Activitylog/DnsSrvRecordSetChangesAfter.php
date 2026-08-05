@@ -30,6 +30,20 @@ class DnsSrvRecordSetChangesAfter
                 ],
                 'type' => 'array',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'srv',
@@ -41,6 +55,8 @@ class DnsSrvRecordSetChangesAfter
      * @var DnsSrvRecordSetChangesAfterSrvItem[]
      */
     private array $srv;
+
+    private DnsSrvRecordSetChangesAfterTtlAlternative2|int|null $ttl = null;
 
     /**
      * @param DnsSrvRecordSetChangesAfterSrvItem[] $srv
@@ -58,6 +74,11 @@ class DnsSrvRecordSetChangesAfter
         return $this->srv;
     }
 
+    public function getTtl(): DnsSrvRecordSetChangesAfterTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     /**
      * @param DnsSrvRecordSetChangesAfterSrvItem[] $srv
      */
@@ -65,6 +86,22 @@ class DnsSrvRecordSetChangesAfter
     {
         $clone = clone $this;
         $clone->srv = $srv;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsSrvRecordSetChangesAfterTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -85,9 +122,17 @@ class DnsSrvRecordSetChangesAfter
         }
 
         $srv = array_map(fn (array|object $i): DnsSrvRecordSetChangesAfterSrvItem => DnsSrvRecordSetChangesAfterSrvItem::buildFromInput($i, validate: $validate), $input->{'srv'});
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsSrvRecordSetChangesAfterTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsSrvRecordSetChangesAfterTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($srv);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -100,6 +145,12 @@ class DnsSrvRecordSetChangesAfter
     {
         $output = [];
         $output['srv'] = array_map(fn (DnsSrvRecordSetChangesAfterSrvItem $i) => $i->toJson(), $this->srv);
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsSrvRecordSetChangesAfterTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -131,5 +182,10 @@ class DnsSrvRecordSetChangesAfter
     public function __clone()
     {
         $this->srv = array_map(fn (DnsSrvRecordSetChangesAfterSrvItem $i) => clone $i, $this->srv);
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsSrvRecordSetChangesAfterTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

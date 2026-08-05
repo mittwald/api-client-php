@@ -25,33 +25,66 @@ class AppInstallationDatabaseLinkedChangesBefore
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'database' => [
+            'name' => [
                 'nullable' => true,
-                'type' => 'object',
+                'type' => 'string',
+            ],
+            'purpose' => [
+                'nullable' => true,
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'database',
+            'name',
+            'purpose',
         ],
         'type' => 'object',
     ];
 
-    private AppInstallationDatabaseLinkedChangesBeforeDatabase $database;
+    private string $name;
 
-    public function __construct(AppInstallationDatabaseLinkedChangesBeforeDatabase $database)
+    private string $purpose;
+
+    public function __construct(string $name, string $purpose)
     {
-        $this->database = $database;
+        $this->name = $name;
+        $this->purpose = $purpose;
     }
 
-    public function getDatabase(): AppInstallationDatabaseLinkedChangesBeforeDatabase
+    public function getName(): string
     {
-        return $this->database;
+        return $this->name;
     }
 
-    public function withDatabase(AppInstallationDatabaseLinkedChangesBeforeDatabase $database): self
+    public function getPurpose(): string
     {
+        return $this->purpose;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->database = $database;
+        $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withPurpose(string $purpose): self
+    {
+        $validator = new Validator();
+        $validator->validate($purpose, self::$internalValidationSchema['properties']['purpose']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->purpose = $purpose;
 
         return $clone;
     }
@@ -71,9 +104,10 @@ class AppInstallationDatabaseLinkedChangesBefore
             static::validateInput($input);
         }
 
-        $database = AppInstallationDatabaseLinkedChangesBeforeDatabase::buildFromInput($input->{'database'}, validate: $validate);
+        $name = $input->{'name'};
+        $purpose = $input->{'purpose'};
 
-        $obj = new self($database);
+        $obj = new self($name, $purpose);
 
         return $obj;
     }
@@ -86,7 +120,8 @@ class AppInstallationDatabaseLinkedChangesBefore
     public function toJson(): array
     {
         $output = [];
-        $output['database'] = ($this->database)->toJson();
+        $output['name'] = $this->name;
+        $output['purpose'] = $this->purpose;
 
         return $output;
     }
@@ -117,6 +152,5 @@ class AppInstallationDatabaseLinkedChangesBefore
 
     public function __clone()
     {
-        $this->database = clone $this->database;
     }
 }

@@ -25,32 +25,64 @@ class AppInstallationDatabaseLinkedChangesAfter
      */
     private static array $internalValidationSchema = [
         'properties' => [
-            'database' => [
-                'type' => 'object',
+            'name' => [
+                'type' => 'string',
+            ],
+            'purpose' => [
+                'enum' => [
+                    'unspecified',
+                    'primary',
+                    'cache',
+                    'custom',
+                ],
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'database',
+            'name',
+            'purpose',
         ],
         'type' => 'object',
     ];
 
-    private AppInstallationDatabaseLinkedChangesAfterDatabase $database;
+    private string $name;
 
-    public function __construct(AppInstallationDatabaseLinkedChangesAfterDatabase $database)
+    private AppInstallationDatabaseLinkedChangesAfterPurpose $purpose;
+
+    public function __construct(string $name, AppInstallationDatabaseLinkedChangesAfterPurpose $purpose)
     {
-        $this->database = $database;
+        $this->name = $name;
+        $this->purpose = $purpose;
     }
 
-    public function getDatabase(): AppInstallationDatabaseLinkedChangesAfterDatabase
+    public function getName(): string
     {
-        return $this->database;
+        return $this->name;
     }
 
-    public function withDatabase(AppInstallationDatabaseLinkedChangesAfterDatabase $database): self
+    public function getPurpose(): AppInstallationDatabaseLinkedChangesAfterPurpose
+    {
+        return $this->purpose;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withPurpose(AppInstallationDatabaseLinkedChangesAfterPurpose $purpose): self
     {
         $clone = clone $this;
-        $clone->database = $database;
+        $clone->purpose = $purpose;
 
         return $clone;
     }
@@ -70,9 +102,10 @@ class AppInstallationDatabaseLinkedChangesAfter
             static::validateInput($input);
         }
 
-        $database = AppInstallationDatabaseLinkedChangesAfterDatabase::buildFromInput($input->{'database'}, validate: $validate);
+        $name = $input->{'name'};
+        $purpose = AppInstallationDatabaseLinkedChangesAfterPurpose::from($input->{'purpose'});
 
-        $obj = new self($database);
+        $obj = new self($name, $purpose);
 
         return $obj;
     }
@@ -85,7 +118,8 @@ class AppInstallationDatabaseLinkedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['database'] = ($this->database)->toJson();
+        $output['name'] = $this->name;
+        $output['purpose'] = ($this->purpose)->value;
 
         return $output;
     }
@@ -116,6 +150,5 @@ class AppInstallationDatabaseLinkedChangesAfter
 
     public function __clone()
     {
-        $this->database = clone $this->database;
     }
 }

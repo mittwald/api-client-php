@@ -24,6 +24,20 @@ class DnsTxtRecordSetChangesBefore
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
             'txt' => [
                 'items' => [
                     'type' => 'string',
@@ -36,6 +50,8 @@ class DnsTxtRecordSetChangesBefore
         ],
         'type' => 'object',
     ];
+
+    private DnsTxtRecordSetChangesBeforeTtlAlternative2|int|null $ttl = null;
 
     /**
      * @var string[]
@@ -50,12 +66,33 @@ class DnsTxtRecordSetChangesBefore
         $this->txt = $txt;
     }
 
+    public function getTtl(): DnsTxtRecordSetChangesBeforeTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     /**
      * @return string[]
      */
     public function getTxt(): array
     {
         return $this->txt;
+    }
+
+    public function withTtl(DnsTxtRecordSetChangesBeforeTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
+
+        return $clone;
     }
 
     /**
@@ -90,10 +127,18 @@ class DnsTxtRecordSetChangesBefore
             static::validateInput($input);
         }
 
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsTxtRecordSetChangesBeforeTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsTxtRecordSetChangesBeforeTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
         $txt = $input->{'txt'};
 
         $obj = new self($txt);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -105,6 +150,12 @@ class DnsTxtRecordSetChangesBefore
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsTxtRecordSetChangesBeforeTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
         $output['txt'] = $this->txt;
 
         return $output;
@@ -136,5 +187,10 @@ class DnsTxtRecordSetChangesBefore
 
     public function __clone()
     {
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsTxtRecordSetChangesBeforeTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

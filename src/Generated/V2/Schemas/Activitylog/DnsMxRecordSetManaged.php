@@ -29,6 +29,9 @@ class DnsMxRecordSetManaged
                     'after' => [
                         'properties' => [
                             'mx' => [
+                                'enum' => [
+                                    'managed',
+                                ],
                                 'type' => 'string',
                             ],
                         ],
@@ -38,6 +41,18 @@ class DnsMxRecordSetManaged
                         'type' => 'object',
                     ],
                     'before' => [
+                        'properties' => [
+                            'mx' => [
+                                'items' => [
+                                    'type' => 'object',
+                                ],
+                                'nullable' => true,
+                                'type' => 'array',
+                            ],
+                        ],
+                        'required' => [
+                            'mx',
+                        ],
                         'type' => 'object',
                     ],
                 ],

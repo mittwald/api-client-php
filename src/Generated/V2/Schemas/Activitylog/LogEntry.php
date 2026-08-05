@@ -73,6 +73,9 @@ class LogEntry
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.DatabaseDescriptionSet',
                     ],
                     [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.DatabaseVersionSet',
+                    ],
+                    [
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserCreated',
                     ],
                     [
@@ -92,6 +95,9 @@ class LogEntry
                     ],
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDescriptionSet',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.AppInstallationFailed',
                     ],
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDeleted',
@@ -155,7 +161,7 @@ class LogEntry
         'type' => 'object',
     ];
 
-    private AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action;
+    private AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action;
 
     private AggregateReference $aggregate;
 
@@ -168,14 +174,14 @@ class LogEntry
 
     private ?LogEntryUser $user = null;
 
-    public function __construct(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action, AggregateReference $aggregate, DateTime $dateTime)
+    public function __construct(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action, AggregateReference $aggregate, DateTime $dateTime)
     {
         $this->action = $action;
         $this->aggregate = $aggregate;
         $this->dateTime = $dateTime;
     }
 
-    public function getAction(): AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction
+    public function getAction(): AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction
     {
         return $this->action;
     }
@@ -200,7 +206,7 @@ class LogEntry
         return $this->user ?? null;
     }
 
-    public function withAction(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action): self
+    public function withAction(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action): self
     {
         $clone = clone $this;
         $clone->action = $action;
@@ -287,6 +293,7 @@ class LogEntry
             DatabaseCreated::validateInput($input->{'action'}, true) => DatabaseCreated::buildFromInput($input->{'action'}, validate: $validate),
             DatabaseDeleted::validateInput($input->{'action'}, true) => DatabaseDeleted::buildFromInput($input->{'action'}, validate: $validate),
             DatabaseDescriptionSet::validateInput($input->{'action'}, true) => DatabaseDescriptionSet::buildFromInput($input->{'action'}, validate: $validate),
+            DatabaseVersionSet::validateInput($input->{'action'}, true) => DatabaseVersionSet::buildFromInput($input->{'action'}, validate: $validate),
             DatabaseMysqlUserCreated::validateInput($input->{'action'}, true) => DatabaseMysqlUserCreated::buildFromInput($input->{'action'}, validate: $validate),
             DatabaseMysqlUserUpdated::validateInput($input->{'action'}, true) => DatabaseMysqlUserUpdated::buildFromInput($input->{'action'}, validate: $validate),
             DatabaseMysqlUserPasswordSet::validateInput($input->{'action'}, true) => DatabaseMysqlUserPasswordSet::buildFromInput($input->{'action'}, validate: $validate),
@@ -294,6 +301,7 @@ class LogEntry
             AppInstallationRequested::validateInput($input->{'action'}, true) => AppInstallationRequested::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationCopyRequested::validateInput($input->{'action'}, true) => AppInstallationCopyRequested::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDescriptionSet::validateInput($input->{'action'}, true) => AppInstallationDescriptionSet::buildFromInput($input->{'action'}, validate: $validate),
+            AppInstallationFailed::validateInput($input->{'action'}, true) => AppInstallationFailed::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDeleted::validateInput($input->{'action'}, true) => AppInstallationDeleted::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDatabaseLinked::validateInput($input->{'action'}, true) => AppInstallationDatabaseLinked::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDatabaseUnlinked::validateInput($input->{'action'}, true) => AppInstallationDatabaseUnlinked::buildFromInput($input->{'action'}, validate: $validate),
@@ -329,7 +337,7 @@ class LogEntry
     {
         $output = [];
         $output['action'] = match (true) {
-            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action->toJson(),
+            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action->toJson(),
         };
         $output['aggregate'] = $this->aggregate->toJson();
         $output['dateTime'] = ($this->dateTime)->format(DateTime::ATOM);
@@ -370,7 +378,7 @@ class LogEntry
     public function __clone()
     {
         $this->action = match (true) {
-            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action,
+            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action,
         };
         $this->dateTime = clone $this->dateTime;
         if (isset($this->impersonator)) {

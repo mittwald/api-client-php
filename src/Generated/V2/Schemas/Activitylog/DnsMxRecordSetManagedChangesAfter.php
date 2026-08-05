@@ -25,6 +25,9 @@ class DnsMxRecordSetManagedChangesAfter
     private static array $internalValidationSchema = [
         'properties' => [
             'mx' => [
+                'enum' => [
+                    'managed',
+                ],
                 'type' => 'string',
             ],
         ],
@@ -34,26 +37,20 @@ class DnsMxRecordSetManagedChangesAfter
         'type' => 'object',
     ];
 
-    private string $mx;
+    private DnsMxRecordSetManagedChangesAfterMx $mx;
 
-    public function __construct(string $mx)
+    public function __construct(DnsMxRecordSetManagedChangesAfterMx $mx)
     {
         $this->mx = $mx;
     }
 
-    public function getMx(): string
+    public function getMx(): DnsMxRecordSetManagedChangesAfterMx
     {
         return $this->mx;
     }
 
-    public function withMx(string $mx): self
+    public function withMx(DnsMxRecordSetManagedChangesAfterMx $mx): self
     {
-        $validator = new Validator();
-        $validator->validate($mx, self::$internalValidationSchema['properties']['mx']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->mx = $mx;
 
@@ -75,7 +72,7 @@ class DnsMxRecordSetManagedChangesAfter
             static::validateInput($input);
         }
 
-        $mx = $input->{'mx'};
+        $mx = DnsMxRecordSetManagedChangesAfterMx::from($input->{'mx'});
 
         $obj = new self($mx);
 
@@ -90,7 +87,7 @@ class DnsMxRecordSetManagedChangesAfter
     public function toJson(): array
     {
         $output = [];
-        $output['mx'] = $this->mx;
+        $output['mx'] = ($this->mx)->value;
 
         return $output;
     }

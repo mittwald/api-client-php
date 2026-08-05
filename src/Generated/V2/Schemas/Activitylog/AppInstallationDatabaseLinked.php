@@ -29,24 +29,39 @@ class AppInstallationDatabaseLinked
                 'properties' => [
                     'after' => [
                         'properties' => [
-                            'database' => [
-                                'type' => 'object',
+                            'name' => [
+                                'type' => 'string',
+                            ],
+                            'purpose' => [
+                                'enum' => [
+                                    'unspecified',
+                                    'primary',
+                                    'cache',
+                                    'custom',
+                                ],
+                                'type' => 'string',
                             ],
                         ],
                         'required' => [
-                            'database',
+                            'name',
+                            'purpose',
                         ],
                         'type' => 'object',
                     ],
                     'before' => [
                         'properties' => [
-                            'database' => [
+                            'name' => [
                                 'nullable' => true,
-                                'type' => 'object',
+                                'type' => 'string',
+                            ],
+                            'purpose' => [
+                                'nullable' => true,
+                                'type' => 'string',
                             ],
                         ],
                         'required' => [
-                            'database',
+                            'name',
+                            'purpose',
                         ],
                         'type' => 'object',
                     ],
