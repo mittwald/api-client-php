@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class RequestAppinstallationStagingTooManyRequestsResponse implements ResponseContainer
+class GetTemplateAssetTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class RequestAppinstallationStagingTooManyRequestsResponse implements ResponseCo
         ],
     ];
 
-    private RequestAppinstallationStagingTooManyRequestsResponseBody $body;
+    private GetTemplateAssetTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(RequestAppinstallationStagingTooManyRequestsResponseBody $body)
+    public function __construct(GetTemplateAssetTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): RequestAppinstallationStagingTooManyRequestsResponseBody
+    public function getBody(): GetTemplateAssetTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(RequestAppinstallationStagingTooManyRequestsResponseBody $body): self
+    public function withBody(GetTemplateAssetTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class RequestAppinstallationStagingTooManyRequestsResponse implements ResponseCo
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestAppinstallationStagingTooManyRequestsResponse Created instance
+     * @return GetTemplateAssetTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationStagingTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetTemplateAssetTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = RequestAppinstallationStagingTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = GetTemplateAssetTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

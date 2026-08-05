@@ -7,11 +7,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\App\DeleteAppinstallationStaging\DeleteAppinstallationStagingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppInstallationExecuteAction\DeprecatedAppInstallationExecuteActionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
@@ -42,13 +40,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListS
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersRequest;
@@ -70,26 +65,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseReq
  */
 interface AppClient
 {
-    /**
-     * Delete a staging AppInstallation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-delete-appinstallation-staging
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteAppinstallationStagingRequest $request An object representing the request for this operation
-     * @return EmptyResponse The staging AppInstallation is going to be deleted.
-     */
-    public function deleteAppinstallationStaging(DeleteAppinstallationStagingRequest $request): EmptyResponse;
-    /**
-     * Detach a staging AppInstallation from its source.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-detach-appinstallation-staging
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DetachAppinstallationStagingRequest $request An object representing the request for this operation
-     * @return EmptyResponse The staging AppInstallation detachment has been requested.
-     */
-    public function detachAppinstallationStaging(DetachAppinstallationStagingRequest $request): EmptyResponse;
     /**
      * Get an App.
      *
@@ -254,16 +229,6 @@ interface AppClient
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
     /**
-     * Promote a staging AppInstallation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-promote-appinstallation-staging
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param PromoteAppinstallationStagingRequest $request An object representing the request for this operation
-     * @return EmptyResponse The staging AppInstallation promotion has been requested.
-     */
-    public function promoteAppinstallationStaging(PromoteAppinstallationStagingRequest $request): EmptyResponse;
-    /**
      * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
@@ -283,16 +248,6 @@ interface AppClient
      * @return RequestAppinstallationCopyCreatedResponse The AppInstallation copy has been requested.
      */
     public function requestAppinstallationCopy(RequestAppinstallationCopyRequest $request): RequestAppinstallationCopyCreatedResponse;
-    /**
-     * Request a staging for an AppInstallation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-staging
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param RequestAppinstallationStagingRequest $request An object representing the request for this operation
-     * @return RequestAppinstallationStagingCreatedResponse The AppInstallation staging has been requested.
-     */
-    public function requestAppinstallationStaging(RequestAppinstallationStagingRequest $request): RequestAppinstallationStagingCreatedResponse;
     /**
      * Get runtime status belonging to an AppInstallation.
      *

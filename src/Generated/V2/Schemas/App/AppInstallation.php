@@ -120,9 +120,6 @@ class AppInstallation
                 'example' => 'a-XXXXXX',
                 'type' => 'string',
             ],
-            'staging' => [
-                'type' => 'boolean',
-            ],
             'systemSoftware' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware',
@@ -221,8 +218,6 @@ class AppInstallation
     private ?string $screenshotRef = null;
 
     private string $shortId;
-
-    private ?bool $staging = null;
 
     /**
      * @var InstalledSystemSoftware[]
@@ -380,11 +375,6 @@ class AppInstallation
     public function getShortId(): string
     {
         return $this->shortId;
-    }
-
-    public function getStaging(): ?bool
-    {
-        return $this->staging ?? null;
     }
 
     /**
@@ -750,28 +740,6 @@ class AppInstallation
         return $clone;
     }
 
-    public function withStaging(bool $staging): self
-    {
-        $validator = new Validator();
-        $validator->validate($staging, self::$internalValidationSchema['properties']['staging']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->staging = $staging;
-
-        return $clone;
-    }
-
-    public function withoutStaging(): self
-    {
-        $clone = clone $this;
-        unset($clone->staging);
-
-        return $clone;
-    }
-
     /**
      * @param InstalledSystemSoftware[] $systemSoftware
      */
@@ -880,10 +848,6 @@ class AppInstallation
             $screenshotRef = $input->{'screenshotRef'};
         }
         $shortId = $input->{'shortId'};
-        $staging = null;
-        if (isset($input->{'staging'})) {
-            $staging = (bool)($input->{'staging'});
-        }
         $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
         $updateAvailable = false;
         if (isset($input->{'updateAvailable'})) {
@@ -902,7 +866,6 @@ class AppInstallation
         $obj->ports = $ports;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
-        $obj->staging = $staging;
         $obj->updateAvailable = $updateAvailable;
         return $obj;
     }
@@ -951,9 +914,6 @@ class AppInstallation
             $output['screenshotRef'] = $this->screenshotRef;
         }
         $output['shortId'] = $this->shortId;
-        if (isset($this->staging)) {
-            $output['staging'] = $this->staging;
-        }
         $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
         $output['updateAvailable'] = $this->updateAvailable;
         $output['updatePolicy'] = $this->updatePolicy->value;
