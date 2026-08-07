@@ -18,6 +18,8 @@ $ composer require mittwald/api-client
 
 ## Usage
 
+### Initialization
+
 Import the client:
 
 ```php
@@ -35,6 +37,27 @@ different types of authentication:
 
 Have a look at our [API introduction][api-getting-started] for more information
 on how to obtain an API token and how to get started with the API.
+
+### Accessing mittwald AI endpoints
+
+To access the mittwald AI endpoints, you need to install the `openai-php/client` package as a dependency in your project. You can do this using Composer:
+
+```bash
+composer require openai-php/client
+```
+
+When this package is installed, you can use the `Mittwald\ApiClient\AI\ClientFactory` class to create a preconfigured OpenAI client. You can instantiate the client either directly with a mittwald AI API token (CAUTION: this is a different token than your regular mStudio API token) or by passing an already authenticated mittwald API client.
+
+```php
+$factory = new \Mittwald\ApiClient\AI\ClientFactory($mstudioClient);
+
+$client = $factory->build("sk-....");
+
+// Alternative:
+// Neither $customerId nor $keyId are sensitive information, so you can
+// (for example) obtain them from the environment variables.
+$client = $factory->buildClientForCustomer($customerId, $keyId);
+```
 
 ## Example
 
