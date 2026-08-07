@@ -32,10 +32,6 @@ class AIHostingOrder
                 'example' => 2000000,
                 'type' => 'integer',
             ],
-            'name' => [
-                'example' => 'Managed AI Hosting',
-                'type' => 'string',
-            ],
             'requestsPerMinute' => [
                 'example' => 120,
                 'type' => 'integer',
@@ -56,8 +52,6 @@ class AIHostingOrder
 
     private int $monthlyTokens;
 
-    private ?string $name = null;
-
     private int $requestsPerMinute;
 
     private ?bool $useFreeTrial = null;
@@ -77,11 +71,6 @@ class AIHostingOrder
     public function getMonthlyTokens(): int
     {
         return $this->monthlyTokens;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name ?? null;
     }
 
     public function getRequestsPerMinute(): int
@@ -118,28 +107,6 @@ class AIHostingOrder
 
         $clone = clone $this;
         $clone->monthlyTokens = $monthlyTokens;
-
-        return $clone;
-    }
-
-    public function withName(string $name): self
-    {
-        $validator = new Validator();
-        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->name = $name;
-
-        return $clone;
-    }
-
-    public function withoutName(): self
-    {
-        $clone = clone $this;
-        unset($clone->name);
 
         return $clone;
     }
@@ -197,10 +164,6 @@ class AIHostingOrder
 
         $customerId = $input->{'customerId'};
         $monthlyTokens = (int)($input->{'monthlyTokens'});
-        $name = null;
-        if (isset($input->{'name'})) {
-            $name = $input->{'name'};
-        }
         $requestsPerMinute = (int)($input->{'requestsPerMinute'});
         $useFreeTrial = null;
         if (isset($input->{'useFreeTrial'})) {
@@ -208,7 +171,6 @@ class AIHostingOrder
         }
 
         $obj = new self($customerId, $monthlyTokens, $requestsPerMinute);
-        $obj->name = $name;
         $obj->useFreeTrial = $useFreeTrial;
         return $obj;
     }
@@ -223,9 +185,6 @@ class AIHostingOrder
         $output = [];
         $output['customerId'] = $this->customerId;
         $output['monthlyTokens'] = $this->monthlyTokens;
-        if (isset($this->name)) {
-            $output['name'] = $this->name;
-        }
         $output['requestsPerMinute'] = $this->requestsPerMinute;
         if (isset($this->useFreeTrial)) {
             $output['useFreeTrial'] = $this->useFreeTrial;

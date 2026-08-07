@@ -31,6 +31,20 @@ class DnsMxRecordSetManagedChangesBefore
                 'nullable' => true,
                 'type' => 'array',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'mx',
@@ -42,6 +56,8 @@ class DnsMxRecordSetManagedChangesBefore
      * @var DnsMxRecordSetManagedChangesBeforeMxItem[]
      */
     private array $mx;
+
+    private DnsMxRecordSetManagedChangesBeforeTtlAlternative2|int|null $ttl = null;
 
     /**
      * @param DnsMxRecordSetManagedChangesBeforeMxItem[] $mx
@@ -59,6 +75,11 @@ class DnsMxRecordSetManagedChangesBefore
         return $this->mx;
     }
 
+    public function getTtl(): DnsMxRecordSetManagedChangesBeforeTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     /**
      * @param DnsMxRecordSetManagedChangesBeforeMxItem[] $mx
      */
@@ -66,6 +87,22 @@ class DnsMxRecordSetManagedChangesBefore
     {
         $clone = clone $this;
         $clone->mx = $mx;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsMxRecordSetManagedChangesBeforeTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -86,9 +123,17 @@ class DnsMxRecordSetManagedChangesBefore
         }
 
         $mx = array_map(fn (array|object $i): DnsMxRecordSetManagedChangesBeforeMxItem => DnsMxRecordSetManagedChangesBeforeMxItem::buildFromInput($i, validate: $validate), $input->{'mx'});
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsMxRecordSetManagedChangesBeforeTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsMxRecordSetManagedChangesBeforeTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($mx);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -101,6 +146,12 @@ class DnsMxRecordSetManagedChangesBefore
     {
         $output = [];
         $output['mx'] = array_map(fn (DnsMxRecordSetManagedChangesBeforeMxItem $i) => $i->toJson(), $this->mx);
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsMxRecordSetManagedChangesBeforeTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -132,5 +183,10 @@ class DnsMxRecordSetManagedChangesBefore
     public function __clone()
     {
         $this->mx = array_map(fn (DnsMxRecordSetManagedChangesBeforeMxItem $i) => clone $i, $this->mx);
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsMxRecordSetManagedChangesBeforeTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }
