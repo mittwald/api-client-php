@@ -19,7 +19,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\DeclareStack\DeclareStackR
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteRegistry\DeleteRegistryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteStack\DeleteStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeleteVolume\DeleteVolumeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateAsset\DeprecatedContainerGetTemplateAssetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerGetTemplateIcon\DeprecatedContainerGetTemplateIconRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerSetStackUpdateSchedule\DeprecatedContainerSetStackUpdateScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\DeprecatedContainerValidateContainerRegistryUri\DeprecatedContainerValidateContainerRegistryUriOKResponse;
@@ -409,22 +408,9 @@ interface ContainerClient
      */
     public function updateStack(UpdateStackRequest $request): UpdateStackOKResponse;
     /**
-     * Get a Container Template asset.
-     *
-     * Deprecated. Use the direct asset URLs returned in the Template's `iconUrl` and `screenshots` fields instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-get-template-asset
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedContainerGetTemplateAssetRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return StringResponse OK
-     */
-    public function deprecatedContainerGetTemplateAsset(DeprecatedContainerGetTemplateAssetRequest $request): StringResponse;
-    /**
      * Get a Container Template icon.
      *
-     * Deprecated. Use the direct URL returned in the Template's `iconUrl` field instead.
+     * Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/deprecated-container-get-template-icon
      * @throws GuzzleException
