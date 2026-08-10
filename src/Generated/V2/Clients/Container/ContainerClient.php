@@ -36,6 +36,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKRespons
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
@@ -224,6 +225,16 @@ interface ContainerClient
      * @return GetTemplateOKResponse OK
      */
     public function getTemplate(GetTemplateRequest $request): GetTemplateOKResponse;
+    /**
+     * Get a Container Template asset.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-template-asset
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetTemplateAssetRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getTemplateAsset(GetTemplateAssetRequest $request): StringResponse;
     /**
      * Get a Volume belonging to a Stack.
      *
