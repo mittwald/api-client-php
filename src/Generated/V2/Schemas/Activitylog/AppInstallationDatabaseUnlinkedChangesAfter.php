@@ -29,36 +29,23 @@ class AppInstallationDatabaseUnlinkedChangesAfter
                 'nullable' => true,
                 'type' => 'string',
             ],
-            'purpose' => [
-                'nullable' => true,
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'name',
-            'purpose',
         ],
         'type' => 'object',
     ];
 
     private string $name;
 
-    private string $purpose;
-
-    public function __construct(string $name, string $purpose)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->purpose = $purpose;
     }
 
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPurpose(): string
-    {
-        return $this->purpose;
     }
 
     public function withName(string $name): self
@@ -71,20 +58,6 @@ class AppInstallationDatabaseUnlinkedChangesAfter
 
         $clone = clone $this;
         $clone->name = $name;
-
-        return $clone;
-    }
-
-    public function withPurpose(string $purpose): self
-    {
-        $validator = new Validator();
-        $validator->validate($purpose, self::$internalValidationSchema['properties']['purpose']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->purpose = $purpose;
 
         return $clone;
     }
@@ -105,9 +78,8 @@ class AppInstallationDatabaseUnlinkedChangesAfter
         }
 
         $name = $input->{'name'};
-        $purpose = $input->{'purpose'};
 
-        $obj = new self($name, $purpose);
+        $obj = new self($name);
 
         return $obj;
     }
@@ -121,7 +93,6 @@ class AppInstallationDatabaseUnlinkedChangesAfter
     {
         $output = [];
         $output['name'] = $this->name;
-        $output['purpose'] = $this->purpose;
 
         return $output;
     }

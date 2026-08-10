@@ -47,6 +47,10 @@ class FileMeta
                 'example' => 'me.jpeg',
                 'type' => 'string',
             ],
+            'shortId' => [
+                'example' => 'file-123456',
+                'type' => 'string',
+            ],
             'sizeInBytes' => [
                 'example' => 300,
                 'format' => 'int64',
@@ -67,6 +71,7 @@ class FileMeta
             'friendlyUrl',
             'sizeInBytes',
             'mimeType',
+            'shortId',
         ],
         'type' => 'object',
     ];
@@ -86,6 +91,8 @@ class FileMeta
 
     private string $name;
 
+    private string $shortId;
+
     private int $sizeInBytes;
 
     /**
@@ -95,13 +102,14 @@ class FileMeta
      */
     private string $type;
 
-    public function __construct(string $friendlyURL, string $friendlyUrl, string $id, string $mimeType, string $name, int $sizeInBytes, string $type)
+    public function __construct(string $friendlyURL, string $friendlyUrl, string $id, string $mimeType, string $name, string $shortId, int $sizeInBytes, string $type)
     {
         $this->friendlyURL = $friendlyURL;
         $this->friendlyUrl = $friendlyUrl;
         $this->id = $id;
         $this->mimeType = $mimeType;
         $this->name = $name;
+        $this->shortId = $shortId;
         $this->sizeInBytes = $sizeInBytes;
         $this->type = $type;
     }
@@ -124,6 +132,11 @@ class FileMeta
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getShortId(): string
+    {
+        return $this->shortId;
     }
 
     public function getSizeInBytes(): int
@@ -195,6 +208,20 @@ class FileMeta
         return $clone;
     }
 
+    public function withShortId(string $shortId): self
+    {
+        $validator = new Validator();
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->shortId = $shortId;
+
+        return $clone;
+    }
+
     public function withSizeInBytes(int $sizeInBytes): self
     {
         $validator = new Validator();
@@ -246,10 +273,11 @@ class FileMeta
         $id = $input->{'id'};
         $mimeType = $input->{'mimeType'};
         $name = $input->{'name'};
+        $shortId = $input->{'shortId'};
         $sizeInBytes = (int)($input->{'sizeInBytes'});
         $type = $input->{'type'};
 
-        $obj = new self($friendlyURL, $friendlyUrl, $id, $mimeType, $name, $sizeInBytes, $type);
+        $obj = new self($friendlyURL, $friendlyUrl, $id, $mimeType, $name, $shortId, $sizeInBytes, $type);
 
         return $obj;
     }
@@ -267,6 +295,7 @@ class FileMeta
         $output['id'] = $this->id;
         $output['mimeType'] = $this->mimeType;
         $output['name'] = $this->name;
+        $output['shortId'] = $this->shortId;
         $output['sizeInBytes'] = $this->sizeInBytes;
         $output['type'] = $this->type;
 

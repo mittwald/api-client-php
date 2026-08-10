@@ -33,14 +33,9 @@ class AppInstallationDatabaseUnlinked
                                 'nullable' => true,
                                 'type' => 'string',
                             ],
-                            'purpose' => [
-                                'nullable' => true,
-                                'type' => 'string',
-                            ],
                         ],
                         'required' => [
                             'name',
-                            'purpose',
                         ],
                         'type' => 'object',
                     ],
@@ -49,19 +44,9 @@ class AppInstallationDatabaseUnlinked
                             'name' => [
                                 'type' => 'string',
                             ],
-                            'purpose' => [
-                                'enum' => [
-                                    'unspecified',
-                                    'primary',
-                                    'cache',
-                                    'custom',
-                                ],
-                                'type' => 'string',
-                            ],
                         ],
                         'required' => [
                             'name',
-                            'purpose',
                         ],
                         'type' => 'object',
                     ],
