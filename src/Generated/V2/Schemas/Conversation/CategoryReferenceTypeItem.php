@@ -11,4 +11,5 @@ enum CategoryReferenceTypeItem: string
     case project = 'project';
     case organisation = 'organisation';
     case extensionInstance = 'extensionInstance';
+    case unknown = '__unknown__';
 }

@@ -30,19 +30,9 @@ class AppInstallationDatabaseLinkedChanges
                     'name' => [
                         'type' => 'string',
                     ],
-                    'purpose' => [
-                        'enum' => [
-                            'unspecified',
-                            'primary',
-                            'cache',
-                            'custom',
-                        ],
-                        'type' => 'string',
-                    ],
                 ],
                 'required' => [
                     'name',
-                    'purpose',
                 ],
                 'type' => 'object',
             ],
@@ -52,14 +42,9 @@ class AppInstallationDatabaseLinkedChanges
                         'nullable' => true,
                         'type' => 'string',
                     ],
-                    'purpose' => [
-                        'nullable' => true,
-                        'type' => 'string',
-                    ],
                 ],
                 'required' => [
                     'name',
-                    'purpose',
                 ],
                 'type' => 'object',
             ],

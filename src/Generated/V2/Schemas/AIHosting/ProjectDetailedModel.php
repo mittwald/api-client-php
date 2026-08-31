@@ -428,7 +428,7 @@ class ProjectDetailedModel
             $replacesModelName = $input->{'replacesModelName'};
         }
         $replacesModelNames = $input->{'replacesModelNames'};
-        $status = DetailedModelStatus::from($input->{'status'});
+        $status = (DetailedModelStatus::tryFrom($input->{'status'}) ?? DetailedModelStatus::unknown);
         $termsOfServiceLink = $input->{'termsOfServiceLink'};
         $tokenFactor = str_contains((string)($input->{'tokenFactor'}), '.') ? (float)($input->{'tokenFactor'}) : (int)($input->{'tokenFactor'});
 

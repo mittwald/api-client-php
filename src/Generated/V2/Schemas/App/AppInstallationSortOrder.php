@@ -10,4 +10,5 @@ enum AppInstallationSortOrder: string
     case oldestFirst = 'oldestFirst';
     case sortByPhpVersionAsc = 'sortByPhpVersionAsc';
     case sortByPhpVersionDesc = 'sortByPhpVersionDesc';
+    case unknown = '__unknown__';
 }

@@ -48,6 +48,16 @@ class NotificationsListNotificationsRequest
                 ],
                 'type' => 'array',
             ],
+            'referenceId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'referenceDomain' => [
+                'type' => 'string',
+            ],
+            'referenceAggregate' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 500,
@@ -83,6 +93,12 @@ class NotificationsListNotificationsRequest
      * @var string[]|null
      */
     private ?array $typeNot = null;
+
+    private ?string $referenceId = null;
+
+    private ?string $referenceDomain = null;
+
+    private ?string $referenceAggregate = null;
 
     private int $limit = 500;
 
@@ -128,6 +144,21 @@ class NotificationsListNotificationsRequest
     public function getTypeNot(): ?array
     {
         return $this->typeNot ?? null;
+    }
+
+    public function getReferenceId(): ?string
+    {
+        return $this->referenceId ?? null;
+    }
+
+    public function getReferenceDomain(): ?string
+    {
+        return $this->referenceDomain ?? null;
+    }
+
+    public function getReferenceAggregate(): ?string
+    {
+        return $this->referenceAggregate ?? null;
     }
 
     public function getLimit(): int
@@ -236,6 +267,72 @@ class NotificationsListNotificationsRequest
         return $clone;
     }
 
+    public function withReferenceId(string $referenceId): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceId, self::$internalValidationSchema['properties']['referenceId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceId = $referenceId;
+
+        return $clone;
+    }
+
+    public function withoutReferenceId(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceId);
+
+        return $clone;
+    }
+
+    public function withReferenceDomain(string $referenceDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceDomain, self::$internalValidationSchema['properties']['referenceDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceDomain = $referenceDomain;
+
+        return $clone;
+    }
+
+    public function withoutReferenceDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceDomain);
+
+        return $clone;
+    }
+
+    public function withReferenceAggregate(string $referenceAggregate): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceAggregate, self::$internalValidationSchema['properties']['referenceAggregate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceAggregate = $referenceAggregate;
+
+        return $clone;
+    }
+
+    public function withoutReferenceAggregate(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceAggregate);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -317,6 +414,18 @@ class NotificationsListNotificationsRequest
         if (isset($input->{'type-not'})) {
             $typeNot = $input->{'type-not'};
         }
+        $referenceId = null;
+        if (isset($input->{'referenceId'})) {
+            $referenceId = $input->{'referenceId'};
+        }
+        $referenceDomain = null;
+        if (isset($input->{'referenceDomain'})) {
+            $referenceDomain = $input->{'referenceDomain'};
+        }
+        $referenceAggregate = null;
+        if (isset($input->{'referenceAggregate'})) {
+            $referenceAggregate = $input->{'referenceAggregate'};
+        }
         $limit = 500;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -335,6 +444,9 @@ class NotificationsListNotificationsRequest
         $obj->severity = $severity;
         $obj->type = $type;
         $obj->typeNot = $typeNot;
+        $obj->referenceId = $referenceId;
+        $obj->referenceDomain = $referenceDomain;
+        $obj->referenceAggregate = $referenceAggregate;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -360,6 +472,15 @@ class NotificationsListNotificationsRequest
         }
         if (isset($this->typeNot)) {
             $output['type-not'] = $this->typeNot;
+        }
+        if (isset($this->referenceId)) {
+            $output['referenceId'] = $this->referenceId;
+        }
+        if (isset($this->referenceDomain)) {
+            $output['referenceDomain'] = $this->referenceDomain;
+        }
+        if (isset($this->referenceAggregate)) {
+            $output['referenceAggregate'] = $this->referenceAggregate;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -437,6 +558,15 @@ class NotificationsListNotificationsRequest
         }
         if (isset($mapped['type-not'])) {
             $query['type-not'] = $mapped['type-not'];
+        }
+        if (isset($mapped['referenceId'])) {
+            $query['referenceId'] = $mapped['referenceId'];
+        }
+        if (isset($mapped['referenceDomain'])) {
+            $query['referenceDomain'] = $mapped['referenceDomain'];
+        }
+        if (isset($mapped['referenceAggregate'])) {
+            $query['referenceAggregate'] = $mapped['referenceAggregate'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

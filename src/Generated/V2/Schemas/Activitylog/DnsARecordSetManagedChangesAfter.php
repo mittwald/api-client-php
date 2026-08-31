@@ -30,6 +30,20 @@ class DnsARecordSetManagedChangesAfter
                 ],
                 'type' => 'string',
             ],
+            'ttl' => [
+                'nullable' => true,
+                'oneOf' => [
+                    [
+                        'type' => 'integer',
+                    ],
+                    [
+                        'enum' => [
+                            'auto',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'aRecords',
@@ -38,6 +52,8 @@ class DnsARecordSetManagedChangesAfter
     ];
 
     private DnsARecordSetManagedChangesAfterARecords $aRecords;
+
+    private DnsARecordSetManagedChangesAfterTtlAlternative2|int|null $ttl = null;
 
     public function __construct(DnsARecordSetManagedChangesAfterARecords $aRecords)
     {
@@ -49,10 +65,31 @@ class DnsARecordSetManagedChangesAfter
         return $this->aRecords;
     }
 
+    public function getTtl(): DnsARecordSetManagedChangesAfterTtlAlternative2|int|null
+    {
+        return $this->ttl;
+    }
+
     public function withARecords(DnsARecordSetManagedChangesAfterARecords $aRecords): self
     {
         $clone = clone $this;
         $clone->aRecords = $aRecords;
+
+        return $clone;
+    }
+
+    public function withTtl(DnsARecordSetManagedChangesAfterTtlAlternative2|int $ttl): self
+    {
+        $clone = clone $this;
+        $clone->ttl = $ttl;
+
+        return $clone;
+    }
+
+    public function withoutTtl(): self
+    {
+        $clone = clone $this;
+        unset($clone->ttl);
 
         return $clone;
     }
@@ -73,9 +110,17 @@ class DnsARecordSetManagedChangesAfter
         }
 
         $aRecords = DnsARecordSetManagedChangesAfterARecords::from($input->{'aRecords'});
+        $ttl = null;
+        if (isset($input->{'ttl'})) {
+            $ttl = match (true) {
+                is_int($input->{'ttl'}) => $input->{'ttl'},
+                DnsARecordSetManagedChangesAfterTtlAlternative2::tryFrom($input->{'ttl'}) !== null => DnsARecordSetManagedChangesAfterTtlAlternative2::from($input->{'ttl'}),
+                default => throw new InvalidArgumentException("could not build property 'ttl' from JSON"),
+            };
+        }
 
         $obj = new self($aRecords);
-
+        $obj->ttl = $ttl;
         return $obj;
     }
 
@@ -88,6 +133,12 @@ class DnsARecordSetManagedChangesAfter
     {
         $output = [];
         $output['aRecords'] = ($this->aRecords)->value;
+        if (isset($this->ttl)) {
+            $output['ttl'] = match (true) {
+                is_int($this->ttl) => $this->ttl,
+                $this->ttl instanceof DnsARecordSetManagedChangesAfterTtlAlternative2 => ($this->ttl)->value,
+            };
+        }
 
         return $output;
     }
@@ -118,5 +169,10 @@ class DnsARecordSetManagedChangesAfter
 
     public function __clone()
     {
+        if (isset($this->ttl)) {
+            $this->ttl = match (true) {
+                is_int($this->ttl), $this->ttl instanceof DnsARecordSetManagedChangesAfterTtlAlternative2 => $this->ttl,
+            };
+        }
     }
 }

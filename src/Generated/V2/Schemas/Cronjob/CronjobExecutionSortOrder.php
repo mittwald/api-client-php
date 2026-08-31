@@ -10,4 +10,5 @@ enum CronjobExecutionSortOrder: string
     case newestFirst = 'newestFirst';
     case slowestFirst = 'slowestFirst';
     case fastestFirst = 'fastestFirst';
+    case unknown = '__unknown__';
 }

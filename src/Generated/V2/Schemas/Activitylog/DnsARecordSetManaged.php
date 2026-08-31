@@ -34,6 +34,20 @@ class DnsARecordSetManaged
                                 ],
                                 'type' => 'string',
                             ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                         ],
                         'required' => [
                             'aRecords',
@@ -48,6 +62,20 @@ class DnsARecordSetManaged
                                 ],
                                 'nullable' => true,
                                 'type' => 'array',
+                            ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
                             ],
                         ],
                         'required' => [

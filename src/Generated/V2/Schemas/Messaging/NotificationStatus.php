@@ -8,4 +8,5 @@ enum NotificationStatus: string
 {
     case read = 'read';
     case unread = 'unread';
+    case unknown = '__unknown__';
 }

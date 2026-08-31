@@ -205,7 +205,7 @@ class InstalledSystemSoftware
         if (isset($input->{'updateAvailable'})) {
             $updateAvailable = (bool)($input->{'updateAvailable'});
         }
-        $updatePolicy = SystemSoftwareUpdatePolicy::from($input->{'updatePolicy'});
+        $updatePolicy = (SystemSoftwareUpdatePolicy::tryFrom($input->{'updatePolicy'}) ?? SystemSoftwareUpdatePolicy::unknown);
 
         $obj = new self($externalVersion, $name, $systemSoftwareId, $systemSoftwareVersion, $updatePolicy);
         $obj->updateAvailable = $updateAvailable;

@@ -45,12 +45,22 @@ class Contact
                 'example' => 'Lovelace',
                 'type' => 'string',
             ],
+            'leitwegId' => [
+                'description' => 'German electronic invoicing routing ID (XRechnung). Only allowed for public authorities and requires a company.',
+                'maxLength' => 46,
+                'type' => 'string',
+            ],
             'phoneNumbers' => [
                 'items' => [
                     'example' => '+49 123 4567890',
                     'type' => 'string',
                 ],
                 'type' => 'array',
+            ],
+            'purchaseOrderReference' => [
+                'description' => 'Purchase order reference the customer wants to see on their invoices.',
+                'maxLength' => 200,
+                'type' => 'string',
             ],
             'salutation' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.commons.Salutation',
@@ -81,9 +91,19 @@ class Contact
     private ?string $lastName = null;
 
     /**
+     * German electronic invoicing routing ID (XRechnung). Only allowed for public authorities and requires a company.
+     */
+    private ?string $leitwegId = null;
+
+    /**
      * @var string[]|null
      */
     private ?array $phoneNumbers = null;
+
+    /**
+     * Purchase order reference the customer wants to see on their invoices.
+     */
+    private ?string $purchaseOrderReference = null;
 
     private Salutation $salutation;
 
@@ -122,12 +142,22 @@ class Contact
         return $this->lastName ?? null;
     }
 
+    public function getLeitwegId(): ?string
+    {
+        return $this->leitwegId ?? null;
+    }
+
     /**
      * @return string[]|null
      */
     public function getPhoneNumbers(): ?array
     {
         return $this->phoneNumbers ?? null;
+    }
+
+    public function getPurchaseOrderReference(): ?string
+    {
+        return $this->purchaseOrderReference ?? null;
     }
 
     public function getSalutation(): Salutation
@@ -241,6 +271,28 @@ class Contact
         return $clone;
     }
 
+    public function withLeitwegId(string $leitwegId): self
+    {
+        $validator = new Validator();
+        $validator->validate($leitwegId, self::$internalValidationSchema['properties']['leitwegId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->leitwegId = $leitwegId;
+
+        return $clone;
+    }
+
+    public function withoutLeitwegId(): self
+    {
+        $clone = clone $this;
+        unset($clone->leitwegId);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $phoneNumbers
      */
@@ -262,6 +314,28 @@ class Contact
     {
         $clone = clone $this;
         unset($clone->phoneNumbers);
+
+        return $clone;
+    }
+
+    public function withPurchaseOrderReference(string $purchaseOrderReference): self
+    {
+        $validator = new Validator();
+        $validator->validate($purchaseOrderReference, self::$internalValidationSchema['properties']['purchaseOrderReference']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->purchaseOrderReference = $purchaseOrderReference;
+
+        return $clone;
+    }
+
+    public function withoutPurchaseOrderReference(): self
+    {
+        $clone = clone $this;
+        unset($clone->purchaseOrderReference);
 
         return $clone;
     }
@@ -350,11 +424,19 @@ class Contact
         if (isset($input->{'lastName'})) {
             $lastName = $input->{'lastName'};
         }
+        $leitwegId = null;
+        if (isset($input->{'leitwegId'})) {
+            $leitwegId = $input->{'leitwegId'};
+        }
         $phoneNumbers = null;
         if (isset($input->{'phoneNumbers'})) {
             $phoneNumbers = $input->{'phoneNumbers'};
         }
-        $salutation = Salutation::from($input->{'salutation'});
+        $purchaseOrderReference = null;
+        if (isset($input->{'purchaseOrderReference'})) {
+            $purchaseOrderReference = $input->{'purchaseOrderReference'};
+        }
+        $salutation = (Salutation::tryFrom($input->{'salutation'}) ?? Salutation::unknown);
         $title = null;
         if (isset($input->{'title'})) {
             $title = $input->{'title'};
@@ -369,7 +451,9 @@ class Contact
         $obj->emailAddress = $emailAddress;
         $obj->firstName = $firstName;
         $obj->lastName = $lastName;
+        $obj->leitwegId = $leitwegId;
         $obj->phoneNumbers = $phoneNumbers;
+        $obj->purchaseOrderReference = $purchaseOrderReference;
         $obj->title = $title;
         $obj->useFormalTerm = $useFormalTerm;
         return $obj;
@@ -396,8 +480,14 @@ class Contact
         if (isset($this->lastName)) {
             $output['lastName'] = $this->lastName;
         }
+        if (isset($this->leitwegId)) {
+            $output['leitwegId'] = $this->leitwegId;
+        }
         if (isset($this->phoneNumbers)) {
             $output['phoneNumbers'] = $this->phoneNumbers;
+        }
+        if (isset($this->purchaseOrderReference)) {
+            $output['purchaseOrderReference'] = $this->purchaseOrderReference;
         }
         $output['salutation'] = $this->salutation->value;
         if (isset($this->title)) {

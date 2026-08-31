@@ -10,4 +10,5 @@ enum VolumeSortOrder: string
     case nameDesc = 'nameDesc';
     case storageAsc = 'storageAsc';
     case storageDesc = 'storageDesc';
+    case unknown = '__unknown__';
 }

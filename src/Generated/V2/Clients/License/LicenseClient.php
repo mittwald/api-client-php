@@ -50,7 +50,7 @@ interface LicenseClient
      */
     public function listLicensesForProject(ListLicensesForProjectRequest $request): ListLicensesForProjectOKResponse;
     /**
-     * rotate a License's key, i.e. revoke the old and generate a new one.
+     * Rotate a License's key, i.e. revoke the old and generate a new one.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/License/operation/license-rotate-license-key
      * @throws GuzzleException

@@ -133,7 +133,7 @@ class DNSCertStatus
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $status = ProjectCertificateStatus::from($input->{'status'});
+        $status = (ProjectCertificateStatus::tryFrom($input->{'status'}) ?? ProjectCertificateStatus::unknown);
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {
             $updatedAt = new DateTime($input->{'updatedAt'});

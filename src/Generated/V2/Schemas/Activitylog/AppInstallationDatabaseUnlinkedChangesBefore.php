@@ -28,41 +28,23 @@ class AppInstallationDatabaseUnlinkedChangesBefore
             'name' => [
                 'type' => 'string',
             ],
-            'purpose' => [
-                'enum' => [
-                    'unspecified',
-                    'primary',
-                    'cache',
-                    'custom',
-                ],
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'name',
-            'purpose',
         ],
         'type' => 'object',
     ];
 
     private string $name;
 
-    private AppInstallationDatabaseUnlinkedChangesBeforePurpose $purpose;
-
-    public function __construct(string $name, AppInstallationDatabaseUnlinkedChangesBeforePurpose $purpose)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->purpose = $purpose;
     }
 
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPurpose(): AppInstallationDatabaseUnlinkedChangesBeforePurpose
-    {
-        return $this->purpose;
     }
 
     public function withName(string $name): self
@@ -75,14 +57,6 @@ class AppInstallationDatabaseUnlinkedChangesBefore
 
         $clone = clone $this;
         $clone->name = $name;
-
-        return $clone;
-    }
-
-    public function withPurpose(AppInstallationDatabaseUnlinkedChangesBeforePurpose $purpose): self
-    {
-        $clone = clone $this;
-        $clone->purpose = $purpose;
 
         return $clone;
     }
@@ -103,9 +77,8 @@ class AppInstallationDatabaseUnlinkedChangesBefore
         }
 
         $name = $input->{'name'};
-        $purpose = AppInstallationDatabaseUnlinkedChangesBeforePurpose::from($input->{'purpose'});
 
-        $obj = new self($name, $purpose);
+        $obj = new self($name);
 
         return $obj;
     }
@@ -119,7 +92,6 @@ class AppInstallationDatabaseUnlinkedChangesBefore
     {
         $output = [];
         $output['name'] = $this->name;
-        $output['purpose'] = ($this->purpose)->value;
 
         return $output;
     }

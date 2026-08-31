@@ -9,4 +9,5 @@ enum AppUpdatePolicy: string
     case none = 'none';
     case patchLevel = 'patchLevel';
     case all = 'all';
+    case unknown = '__unknown__';
 }

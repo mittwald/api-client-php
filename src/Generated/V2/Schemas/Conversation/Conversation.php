@@ -497,7 +497,7 @@ class Conversation
         $mainUser = User::buildFromInput($input->{'mainUser'}, validate: $validate);
         $notificationRoles = null;
         if (isset($input->{'notificationRoles'})) {
-            $notificationRoles = array_map(fn (string $i): NotificationRole => NotificationRole::from($i), $input->{'notificationRoles'});
+            $notificationRoles = array_map(fn (string $i): NotificationRole => (NotificationRole::tryFrom($i) ?? NotificationRole::unknown), $input->{'notificationRoles'});
         }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
@@ -527,7 +527,7 @@ class Conversation
             };
         }
         $shortId = $input->{'shortId'};
-        $status = Status::from($input->{'status'});
+        $status = (Status::tryFrom($input->{'status'}) ?? Status::unknown);
         $title = $input->{'title'};
         $visibility = ConversationVisibility::from($input->{'visibility'});
         $createdBy = null;

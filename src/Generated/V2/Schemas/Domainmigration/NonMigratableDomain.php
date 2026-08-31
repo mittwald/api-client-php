@@ -211,7 +211,7 @@ class NonMigratableDomain
         }
 
         $hostname = $input->{'hostname'};
-        $issues = array_map(fn (string $i): DomainNotMigratableReason => DomainNotMigratableReason::from($i), $input->{'issues'});
+        $issues = array_map(fn (string $i): DomainNotMigratableReason => (DomainNotMigratableReason::tryFrom($i) ?? DomainNotMigratableReason::unknown), $input->{'issues'});
         $migratable = (bool)($input->{'migratable'});
         $ownerContactIssues = array_map(fn (array|object $i): OwnerContactIssue => OwnerContactIssue::buildFromInput($i, validate: $validate), $input->{'ownerContactIssues'});
         $warnings = null;

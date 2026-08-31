@@ -623,7 +623,7 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
-     * Get a ProjectMembership
+     * Get a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-membership
      * @throws GuzzleException

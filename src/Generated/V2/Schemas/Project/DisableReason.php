@@ -10,4 +10,5 @@ enum DisableReason: string
     case illegalContent = 'illegalContent';
     case maliciousConduct = 'maliciousConduct';
     case suspended = 'suspended';
+    case unknown = '__unknown__';
 }

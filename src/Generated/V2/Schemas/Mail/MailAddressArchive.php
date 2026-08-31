@@ -25,16 +25,16 @@ class MailAddressArchive
     private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
-                'description' => 'shows if the mail-archive is enabled',
+                'description' => 'Shows if the mail-archive is enabled.',
                 'type' => 'boolean',
             ],
             'quota' => [
-                'description' => 'maximum available mail-archive storage in bytes',
+                'description' => 'Maximum available mail-archive storage in bytes.',
                 'format' => 'int64',
                 'type' => 'integer',
             ],
             'usedBytes' => [
-                'description' => 'current mail-archive usage in bytes',
+                'description' => 'Current mail-archive usage in bytes.',
                 'format' => 'int64',
                 'type' => 'integer',
             ],
@@ -48,17 +48,17 @@ class MailAddressArchive
     ];
 
     /**
-     * shows if the mail-archive is enabled
+     * Shows if the mail-archive is enabled.
      */
     private bool $active;
 
     /**
-     * maximum available mail-archive storage in bytes
+     * Maximum available mail-archive storage in bytes.
      */
     private int $quota;
 
     /**
-     * current mail-archive usage in bytes
+     * Current mail-archive usage in bytes.
      */
     private int $usedBytes;
 

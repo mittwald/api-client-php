@@ -11,4 +11,5 @@ enum ExtensionInstanceWebhookExecutionState: string
     case halted = 'halted';
     case failed = 'failed';
     case successful = 'successful';
+    case unknown = '__unknown__';
 }

@@ -44,6 +44,10 @@ class OwnExtension
             'contributorId' => [
                 'type' => 'string',
             ],
+            'createdAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'deletionDeadline' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -110,6 +114,11 @@ class OwnExtension
             ],
             'published' => [
                 'type' => 'boolean',
+            ],
+            'publishedAt' => [
+                'description' => 'Date of the first publishing.',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'requestedChanges' => [
                 'additionalProperties' => false,
@@ -241,6 +250,8 @@ class OwnExtension
 
     private string $contributorId;
 
+    private ?DateTime $createdAt = null;
+
     private ?DateTime $deletionDeadline = null;
 
     private ?ExtensionDeprecation $deprecation = null;
@@ -291,6 +302,11 @@ class OwnExtension
     private ?PricePlanDetails $pricingDetails = null;
 
     private bool $published;
+
+    /**
+     * Date of the first publishing.
+     */
+    private ?DateTime $publishedAt = null;
 
     private ?OwnExtensionRequestedChanges $requestedChanges = null;
 
@@ -375,6 +391,11 @@ class OwnExtension
     public function getContributorId(): string
     {
         return $this->contributorId;
+    }
+
+    public function getCreatedAt(): ?DateTime
+    {
+        return $this->createdAt ?? null;
     }
 
     public function getDeletionDeadline(): ?DateTime
@@ -471,6 +492,11 @@ class OwnExtension
     public function getPublished(): bool
     {
         return $this->published;
+    }
+
+    public function getPublishedAt(): ?DateTime
+    {
+        return $this->publishedAt ?? null;
     }
 
     public function getRequestedChanges(): ?OwnExtensionRequestedChanges
@@ -618,6 +644,22 @@ class OwnExtension
 
         $clone = clone $this;
         $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withCreatedAt(DateTime $createdAt): self
+    {
+        $clone = clone $this;
+        $clone->createdAt = $createdAt;
+
+        return $clone;
+    }
+
+    public function withoutCreatedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->createdAt);
 
         return $clone;
     }
@@ -910,6 +952,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withPublishedAt(DateTime $publishedAt): self
+    {
+        $clone = clone $this;
+        $clone->publishedAt = $publishedAt;
+
+        return $clone;
+    }
+
+    public function withoutPublishedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->publishedAt);
+
+        return $clone;
+    }
+
     public function withRequestedChanges(OwnExtensionRequestedChanges $requestedChanges): self
     {
         $clone = clone $this;
@@ -1116,9 +1174,13 @@ class OwnExtension
         }
         $context = null;
         if (isset($input->{'context'})) {
-            $context = Context::from($input->{'context'});
+            $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
         }
         $contributorId = $input->{'contributorId'};
+        $createdAt = null;
+        if (isset($input->{'createdAt'})) {
+            $createdAt = new DateTime($input->{'createdAt'});
+        }
         $deletionDeadline = null;
         if (isset($input->{'deletionDeadline'})) {
             $deletionDeadline = new DateTime($input->{'deletionDeadline'});
@@ -1174,6 +1236,10 @@ class OwnExtension
             $pricingDetails = PricePlanDetails::buildFromInput($input->{'pricingDetails'}, validate: $validate);
         }
         $published = (bool)($input->{'published'});
+        $publishedAt = null;
+        if (isset($input->{'publishedAt'})) {
+            $publishedAt = new DateTime($input->{'publishedAt'});
+        }
         $requestedChanges = null;
         if (isset($input->{'requestedChanges'})) {
             $requestedChanges = OwnExtensionRequestedChanges::buildFromInput($input->{'requestedChanges'}, validate: $validate);
@@ -1211,6 +1277,7 @@ class OwnExtension
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
+        $obj->createdAt = $createdAt;
         $obj->deletionDeadline = $deletionDeadline;
         $obj->deprecation = $deprecation;
         $obj->description = $description;
@@ -1223,6 +1290,7 @@ class OwnExtension
         $obj->logoRefId = $logoRefId;
         $obj->pricing = $pricing;
         $obj->pricingDetails = $pricingDetails;
+        $obj->publishedAt = $publishedAt;
         $obj->requestedChanges = $requestedChanges;
         $obj->scopes = $scopes;
         $obj->state = $state;
@@ -1252,6 +1320,9 @@ class OwnExtension
             $output['context'] = $this->context->value;
         }
         $output['contributorId'] = $this->contributorId;
+        if (isset($this->createdAt)) {
+            $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
+        }
         if (isset($this->deletionDeadline)) {
             $output['deletionDeadline'] = ($this->deletionDeadline)->format(DateTime::ATOM);
         }
@@ -1294,6 +1365,9 @@ class OwnExtension
             $output['pricingDetails'] = $this->pricingDetails->toJson();
         }
         $output['published'] = $this->published;
+        if (isset($this->publishedAt)) {
+            $output['publishedAt'] = ($this->publishedAt)->format(DateTime::ATOM);
+        }
         if (isset($this->requestedChanges)) {
             $output['requestedChanges'] = ($this->requestedChanges)->toJson();
         }
@@ -1349,6 +1423,9 @@ class OwnExtension
 
     public function __clone()
     {
+        if (isset($this->createdAt)) {
+            $this->createdAt = clone $this->createdAt;
+        }
         if (isset($this->deletionDeadline)) {
             $this->deletionDeadline = clone $this->deletionDeadline;
         }
@@ -1356,6 +1433,9 @@ class OwnExtension
             $this->pricing = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => $this->pricing,
             };
+        }
+        if (isset($this->publishedAt)) {
+            $this->publishedAt = clone $this->publishedAt;
         }
         if (isset($this->requestedChanges)) {
             $this->requestedChanges = clone $this->requestedChanges;

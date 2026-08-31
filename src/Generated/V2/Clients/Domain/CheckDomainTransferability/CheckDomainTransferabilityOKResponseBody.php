@@ -22,6 +22,9 @@ class CheckDomainTransferabilityOKResponseBody
                     'domainDoesNotExist' => [
                         'type' => 'boolean',
                     ],
+                    'inRedemptionPeriod' => [
+                        'type' => 'boolean',
+                    ],
                     'transferLock' => [
                         'type' => 'boolean',
                     ],
@@ -34,6 +37,7 @@ class CheckDomainTransferabilityOKResponseBody
                     'wrongAuthCode',
                     'transferLock',
                     'domainAgeTooSmall',
+                    'inRedemptionPeriod',
                 ],
                 'type' => 'object',
             ],

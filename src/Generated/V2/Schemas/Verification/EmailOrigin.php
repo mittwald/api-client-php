@@ -9,4 +9,5 @@ enum EmailOrigin: string
     case ISMITTWALD = 'IS_MITTWALD';
     case ISNOTMITTWALD = 'IS_NOT_MITTWALD';
     case COULDBEMITTWALD = 'COULD_BE_MITTWALD';
+    case unknown = '__unknown__';
 }

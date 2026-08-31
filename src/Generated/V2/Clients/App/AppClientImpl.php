@@ -24,6 +24,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\Dep
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppReplaceDatabase\DeprecatedAppReplaceDatabaseTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DetachAppinstallationStaging\DetachAppinstallationStagingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
@@ -34,6 +39,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstall
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionOKResponse;
@@ -97,6 +107,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppins
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PromoteAppinstallationStaging\PromoteAppinstallationStagingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
@@ -108,6 +123,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\Reque
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationStaging\RequestAppinstallationStagingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusOKResponse;
@@ -150,6 +170,30 @@ class AppClientImpl implements AppClient
     }
 
     /**
+     * Detach a staging AppInstallation from its source.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-detach-appinstallation-staging
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DetachAppinstallationStagingRequest $request An object representing the request for this operation
+     * @return EmptyResponse The staging AppInstallation detachment has been requested.
+     */
+    public function detachAppinstallationStaging(DetachAppinstallationStagingRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DetachAppinstallationStagingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DetachAppinstallationStagingNotFoundResponse::fromResponse($httpResponse),
+            412 => DetachAppinstallationStagingPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DetachAppinstallationStagingTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DetachAppinstallationStagingDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get an App.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-app
@@ -169,6 +213,29 @@ class AppClientImpl implements AppClient
             404 => GetAppNotFoundResponse::fromResponse($httpResponse),
             429 => GetAppTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get the installed `SystemSoftware' for a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-app-installation-system-software
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetAppInstallationSystemSoftwareRequest $request An object representing the request for this operation
+     * @return GetAppInstallationSystemSoftwareOKResponse The list of installed 'SystemSoftware'.
+     */
+    public function getAppInstallationSystemSoftware(GetAppInstallationSystemSoftwareRequest $request): GetAppInstallationSystemSoftwareOKResponse
+    {
+        $httpRequest = new Request(GetAppInstallationSystemSoftwareRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetAppInstallationSystemSoftwareOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetAppInstallationSystemSoftwareNotFoundResponse::fromResponse($httpResponse),
+            429 => GetAppInstallationSystemSoftwareTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetAppInstallationSystemSoftwareDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -221,10 +288,13 @@ class AppClientImpl implements AppClient
     /**
      * Get the installed `SystemSoftware' for a specific `AppInstallation`.
      *
+     * Deprecated by `GET /v2/app-installations/{appInstallationId}/system-software`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-installed-systemsoftware-for-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetInstalledSystemsoftwareForAppinstallationRequest $request An object representing the request for this operation
+     * @deprecated
      * @return GetInstalledSystemsoftwareForAppinstallationOKResponse The list of installed 'SystemSoftware'.
      */
     public function getInstalledSystemsoftwareForAppinstallation(GetInstalledSystemsoftwareForAppinstallationRequest $request): GetInstalledSystemsoftwareForAppinstallationOKResponse
@@ -516,6 +586,30 @@ class AppClientImpl implements AppClient
     }
 
     /**
+     * Promote a staging AppInstallation.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-promote-appinstallation-staging
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PromoteAppinstallationStagingRequest $request An object representing the request for this operation
+     * @return EmptyResponse The staging AppInstallation promotion has been requested.
+     */
+    public function promoteAppinstallationStaging(PromoteAppinstallationStagingRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(PromoteAppinstallationStagingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => PromoteAppinstallationStagingNotFoundResponse::fromResponse($httpResponse),
+            412 => PromoteAppinstallationStagingPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => PromoteAppinstallationStagingTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PromoteAppinstallationStagingDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
@@ -559,6 +653,29 @@ class AppClientImpl implements AppClient
             404 => RequestAppinstallationCopyNotFoundResponse::fromResponse($httpResponse),
             429 => RequestAppinstallationCopyTooManyRequestsResponse::fromResponse($httpResponse),
             default => RequestAppinstallationCopyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Request a staging for an AppInstallation.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-staging
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestAppinstallationStagingRequest $request An object representing the request for this operation
+     * @return RequestAppinstallationStagingCreatedResponse The AppInstallation staging has been requested.
+     */
+    public function requestAppinstallationStaging(RequestAppinstallationStagingRequest $request): RequestAppinstallationStagingCreatedResponse
+    {
+        $httpRequest = new Request(RequestAppinstallationStagingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return RequestAppinstallationStagingCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => RequestAppinstallationStagingNotFoundResponse::fromResponse($httpResponse),
+            429 => RequestAppinstallationStagingTooManyRequestsResponse::fromResponse($httpResponse),
+            default => RequestAppinstallationStagingDefaultResponse::fromResponse($httpResponse),
         });
     }
 

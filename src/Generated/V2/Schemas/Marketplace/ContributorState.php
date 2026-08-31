@@ -8,4 +8,5 @@ enum ContributorState: string
 {
     case enabled = 'enabled';
     case disabled = 'disabled';
+    case unknown = '__unknown__';
 }

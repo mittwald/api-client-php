@@ -10,4 +10,5 @@ enum WebhookKind: string
     case extensioninstanceupdated = 'extension-instance-updated';
     case extensioninstancesecretrotated = 'extension-instance-secret-rotated';
     case extensioninstanceremovedfromcontext = 'extension-instance-removed-from-context';
+    case unknown = '__unknown__';
 }

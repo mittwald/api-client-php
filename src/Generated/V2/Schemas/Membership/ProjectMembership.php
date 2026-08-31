@@ -473,7 +473,7 @@ class ProjectMembership
         }
         $mfa = (bool)($input->{'mfa'});
         $projectId = $input->{'projectId'};
-        $role = ProjectRoles::from($input->{'role'});
+        $role = (ProjectRoles::tryFrom($input->{'role'}) ?? ProjectRoles::unknown);
         $userId = $input->{'userId'};
 
         $obj = new self($email, $firstName, $id, $inherited, $lastName, $mfa, $projectId, $role, $userId);

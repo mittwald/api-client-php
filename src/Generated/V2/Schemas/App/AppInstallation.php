@@ -120,6 +120,13 @@ class AppInstallation
                 'example' => 'a-XXXXXX',
                 'type' => 'string',
             ],
+            'sourceAppInstallationId' => [
+                'description' => 'The source AppInstallation ID for a staging AppInstallation.',
+                'type' => 'string',
+            ],
+            'staging' => [
+                'type' => 'boolean',
+            ],
             'systemSoftware' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware',
@@ -218,6 +225,13 @@ class AppInstallation
     private ?string $screenshotRef = null;
 
     private string $shortId;
+
+    /**
+     * The source AppInstallation ID for a staging AppInstallation.
+     */
+    private ?string $sourceAppInstallationId = null;
+
+    private ?bool $staging = null;
 
     /**
      * @var InstalledSystemSoftware[]
@@ -375,6 +389,16 @@ class AppInstallation
     public function getShortId(): string
     {
         return $this->shortId;
+    }
+
+    public function getSourceAppInstallationId(): ?string
+    {
+        return $this->sourceAppInstallationId ?? null;
+    }
+
+    public function getStaging(): ?bool
+    {
+        return $this->staging ?? null;
     }
 
     /**
@@ -740,6 +764,50 @@ class AppInstallation
         return $clone;
     }
 
+    public function withSourceAppInstallationId(string $sourceAppInstallationId): self
+    {
+        $validator = new Validator();
+        $validator->validate($sourceAppInstallationId, self::$internalValidationSchema['properties']['sourceAppInstallationId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sourceAppInstallationId = $sourceAppInstallationId;
+
+        return $clone;
+    }
+
+    public function withoutSourceAppInstallationId(): self
+    {
+        $clone = clone $this;
+        unset($clone->sourceAppInstallationId);
+
+        return $clone;
+    }
+
+    public function withStaging(bool $staging): self
+    {
+        $validator = new Validator();
+        $validator->validate($staging, self::$internalValidationSchema['properties']['staging']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->staging = $staging;
+
+        return $clone;
+    }
+
+    public function withoutStaging(): self
+    {
+        $clone = clone $this;
+        unset($clone->staging);
+
+        return $clone;
+    }
+
     /**
      * @param InstalledSystemSoftware[] $systemSoftware
      */
@@ -830,9 +898,9 @@ class AppInstallation
         $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
         $lockedBy = null;
         if (isset($input->{'lockedBy'})) {
-            $lockedBy = array_map(fn (string $v) => LockPurpose::from($v), (array)$input->{'lockedBy'});
+            $lockedBy = array_map(fn (string $v) => (LockPurpose::tryFrom($v) ?? LockPurpose::unknown), (array)$input->{'lockedBy'});
         }
-        $phase = Phase::from($input->{'phase'});
+        $phase = (Phase::tryFrom($input->{'phase'}) ?? Phase::unknown);
         $ports = null;
         if (isset($input->{'ports'})) {
             $ports = array_map(fn (array|object $i): AppInstallationPortsItem => AppInstallationPortsItem::buildFromInput($i, validate: $validate), $input->{'ports'});
@@ -848,12 +916,20 @@ class AppInstallation
             $screenshotRef = $input->{'screenshotRef'};
         }
         $shortId = $input->{'shortId'};
+        $sourceAppInstallationId = null;
+        if (isset($input->{'sourceAppInstallationId'})) {
+            $sourceAppInstallationId = $input->{'sourceAppInstallationId'};
+        }
+        $staging = null;
+        if (isset($input->{'staging'})) {
+            $staging = (bool)($input->{'staging'});
+        }
         $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
         $updateAvailable = false;
         if (isset($input->{'updateAvailable'})) {
             $updateAvailable = (bool)($input->{'updateAvailable'});
         }
-        $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
+        $updatePolicy = (AppUpdatePolicy::tryFrom($input->{'updatePolicy'}) ?? AppUpdatePolicy::unknown);
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appExternalVersion, $appId, $appName, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectDescription, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
@@ -866,6 +942,8 @@ class AppInstallation
         $obj->ports = $ports;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
+        $obj->sourceAppInstallationId = $sourceAppInstallationId;
+        $obj->staging = $staging;
         $obj->updateAvailable = $updateAvailable;
         return $obj;
     }
@@ -914,6 +992,12 @@ class AppInstallation
             $output['screenshotRef'] = $this->screenshotRef;
         }
         $output['shortId'] = $this->shortId;
+        if (isset($this->sourceAppInstallationId)) {
+            $output['sourceAppInstallationId'] = $this->sourceAppInstallationId;
+        }
+        if (isset($this->staging)) {
+            $output['staging'] = $this->staging;
+        }
         $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
         $output['updateAvailable'] = $this->updateAvailable;
         $output['updatePolicy'] = $this->updatePolicy->value;

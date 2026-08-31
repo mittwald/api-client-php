@@ -12,4 +12,5 @@ enum ProjectStatus: string
     case migratingVolume = 'migratingVolume';
     case error = 'error';
     case disabled = 'disabled';
+    case unknown = '__unknown__';
 }

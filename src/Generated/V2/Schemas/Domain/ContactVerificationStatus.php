@@ -10,4 +10,5 @@ enum ContactVerificationStatus: string
     case pending = 'pending';
     case completed = 'completed';
     case failed = 'failed';
+    case unknown = '__unknown__';
 }

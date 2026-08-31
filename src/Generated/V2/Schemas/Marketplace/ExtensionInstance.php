@@ -96,6 +96,9 @@ class ExtensionInstance
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'parentCustomerId' => [
+                'type' => 'string',
+            ],
             'pendingInstallation' => [
                 'default' => false,
                 'type' => 'boolean',
@@ -103,6 +106,10 @@ class ExtensionInstance
             'pendingRemoval' => [
                 'default' => false,
                 'type' => 'boolean',
+            ],
+            'scopeChangeAcceptanceDeadline' => [
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'variantKey' => [
                 'example' => 'default',
@@ -126,6 +133,7 @@ class ExtensionInstance
             'contributorName',
             'chargeability',
             'webhookExecutionHalted',
+            'parentCustomerId',
         ],
         'type' => 'object',
     ];
@@ -164,9 +172,13 @@ class ExtensionInstance
 
     private ?DateTime $nextScheduledWebhookExecution = null;
 
+    private string $parentCustomerId;
+
     private bool $pendingInstallation = false;
 
     private bool $pendingRemoval = false;
+
+    private ?DateTime $scopeChangeAcceptanceDeadline = null;
 
     private ?string $variantKey = null;
 
@@ -175,7 +187,7 @@ class ExtensionInstance
     /**
      * @param string[] $consentedScopes
      */
-    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, ExtensionInstanceChargeability $chargeability, array $consentedScopes, string $contributorId, string $contributorName, string $extensionId, string $extensionName, string $id)
+    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, ExtensionInstanceChargeability $chargeability, array $consentedScopes, string $contributorId, string $contributorName, string $extensionId, string $extensionName, string $id, string $parentCustomerId)
     {
         $this->aggregateReference = $aggregateReference;
         $this->chargeability = $chargeability;
@@ -185,6 +197,7 @@ class ExtensionInstance
         $this->extensionId = $extensionId;
         $this->extensionName = $extensionName;
         $this->id = $id;
+        $this->parentCustomerId = $parentCustomerId;
     }
 
     public function getAggregateReference(): ExtensionInstanceAggregateReference
@@ -263,6 +276,11 @@ class ExtensionInstance
         return $this->nextScheduledWebhookExecution ?? null;
     }
 
+    public function getParentCustomerId(): string
+    {
+        return $this->parentCustomerId;
+    }
+
     public function getPendingInstallation(): bool
     {
         return $this->pendingInstallation;
@@ -271,6 +289,11 @@ class ExtensionInstance
     public function getPendingRemoval(): bool
     {
         return $this->pendingRemoval;
+    }
+
+    public function getScopeChangeAcceptanceDeadline(): ?DateTime
+    {
+        return $this->scopeChangeAcceptanceDeadline ?? null;
     }
 
     public function getVariantKey(): ?string
@@ -483,6 +506,20 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withParentCustomerId(string $parentCustomerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($parentCustomerId, self::$internalValidationSchema['properties']['parentCustomerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->parentCustomerId = $parentCustomerId;
+
+        return $clone;
+    }
+
     public function withPendingInstallation(bool $pendingInstallation): self
     {
         $validator = new Validator();
@@ -507,6 +544,22 @@ class ExtensionInstance
 
         $clone = clone $this;
         $clone->pendingRemoval = $pendingRemoval;
+
+        return $clone;
+    }
+
+    public function withScopeChangeAcceptanceDeadline(DateTime $scopeChangeAcceptanceDeadline): self
+    {
+        $clone = clone $this;
+        $clone->scopeChangeAcceptanceDeadline = $scopeChangeAcceptanceDeadline;
+
+        return $clone;
+    }
+
+    public function withoutScopeChangeAcceptanceDeadline(): self
+    {
+        $clone = clone $this;
+        unset($clone->scopeChangeAcceptanceDeadline);
 
         return $clone;
     }
@@ -594,6 +647,7 @@ class ExtensionInstance
         if (isset($input->{'nextScheduledWebhookExecution'})) {
             $nextScheduledWebhookExecution = new DateTime($input->{'nextScheduledWebhookExecution'});
         }
+        $parentCustomerId = $input->{'parentCustomerId'};
         $pendingInstallation = false;
         if (isset($input->{'pendingInstallation'})) {
             $pendingInstallation = (bool)($input->{'pendingInstallation'});
@@ -601,6 +655,10 @@ class ExtensionInstance
         $pendingRemoval = false;
         if (isset($input->{'pendingRemoval'})) {
             $pendingRemoval = (bool)($input->{'pendingRemoval'});
+        }
+        $scopeChangeAcceptanceDeadline = null;
+        if (isset($input->{'scopeChangeAcceptanceDeadline'})) {
+            $scopeChangeAcceptanceDeadline = new DateTime($input->{'scopeChangeAcceptanceDeadline'});
         }
         $variantKey = null;
         if (isset($input->{'variantKey'})) {
@@ -611,7 +669,7 @@ class ExtensionInstance
             $webhookExecutionHalted = (bool)($input->{'webhookExecutionHalted'});
         }
 
-        $obj = new self($aggregateReference, $chargeability, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
+        $obj = new self($aggregateReference, $chargeability, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id, $parentCustomerId);
         $obj->createdAt = $createdAt;
         $obj->disabled = $disabled;
         $obj->extensionDeletionDeadline = $extensionDeletionDeadline;
@@ -620,6 +678,7 @@ class ExtensionInstance
         $obj->nextScheduledWebhookExecution = $nextScheduledWebhookExecution;
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
+        $obj->scopeChangeAcceptanceDeadline = $scopeChangeAcceptanceDeadline;
         $obj->variantKey = $variantKey;
         $obj->webhookExecutionHalted = $webhookExecutionHalted;
         return $obj;
@@ -657,8 +716,12 @@ class ExtensionInstance
         if (isset($this->nextScheduledWebhookExecution)) {
             $output['nextScheduledWebhookExecution'] = ($this->nextScheduledWebhookExecution)->format(DateTime::ATOM);
         }
+        $output['parentCustomerId'] = $this->parentCustomerId;
         $output['pendingInstallation'] = $this->pendingInstallation;
         $output['pendingRemoval'] = $this->pendingRemoval;
+        if (isset($this->scopeChangeAcceptanceDeadline)) {
+            $output['scopeChangeAcceptanceDeadline'] = ($this->scopeChangeAcceptanceDeadline)->format(DateTime::ATOM);
+        }
         if (isset($this->variantKey)) {
             $output['variantKey'] = $this->variantKey;
         }
@@ -702,6 +765,9 @@ class ExtensionInstance
         }
         if (isset($this->nextScheduledWebhookExecution)) {
             $this->nextScheduledWebhookExecution = clone $this->nextScheduledWebhookExecution;
+        }
+        if (isset($this->scopeChangeAcceptanceDeadline)) {
+            $this->scopeChangeAcceptanceDeadline = clone $this->scopeChangeAcceptanceDeadline;
         }
     }
 }

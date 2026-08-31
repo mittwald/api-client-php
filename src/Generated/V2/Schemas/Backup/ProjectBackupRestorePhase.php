@@ -8,4 +8,5 @@ enum ProjectBackupRestorePhase: string
 {
     case running = 'running';
     case completed = 'completed';
+    case unknown = '__unknown__';
 }

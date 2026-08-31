@@ -14,4 +14,5 @@ enum DNSRecordType: string
     case SRV = 'SRV';
     case CAA = 'CAA';
     case NS = 'NS';
+    case unknown = '__unknown__';
 }

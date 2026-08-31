@@ -17,4 +17,5 @@ enum ProcessType: string
     case OWNERCHANGE = 'OWNER_CHANGE';
     case DECLAREREQUESTED = 'DECLARE_REQUESTED';
     case CONTACTVERIFICATION = 'CONTACT_VERIFICATION';
+    case unknown = '__unknown__';
 }

@@ -238,8 +238,8 @@ class Process
             $error = $input->{'error'};
         }
         $lastUpdate = new DateTime($input->{'lastUpdate'});
-        $processType = ProcessType::from($input->{'processType'});
-        $state = ProcessState::from($input->{'state'});
+        $processType = (ProcessType::tryFrom($input->{'processType'}) ?? ProcessType::unknown);
+        $state = (ProcessState::tryFrom($input->{'state'}) ?? ProcessState::unknown);
         $status = null;
         if (isset($input->{'status'})) {
             $status = $input->{'status'};

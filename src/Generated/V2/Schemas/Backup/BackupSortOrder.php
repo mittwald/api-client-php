@@ -8,4 +8,5 @@ enum BackupSortOrder: string
 {
     case oldestFirst = 'oldestFirst';
     case newestFirst = 'newestFirst';
+    case unknown = '__unknown__';
 }

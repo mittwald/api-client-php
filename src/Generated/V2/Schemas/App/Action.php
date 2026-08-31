@@ -9,4 +9,5 @@ enum Action: string
     case start = 'start';
     case stop = 'stop';
     case restart = 'restart';
+    case unknown = '__unknown__';
 }

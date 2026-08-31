@@ -70,7 +70,6 @@ class CustomerInvite
             'customerId',
             'mailAddress',
             'role',
-            'accepted',
             'information',
             'customerName',
         ],
@@ -335,7 +334,7 @@ class CustomerInvite
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $role = CustomerRoles::from($input->{'role'});
+        $role = (CustomerRoles::tryFrom($input->{'role'}) ?? CustomerRoles::unknown);
 
         $obj = new self($customerId, $customerName, $id, $information, $mailAddress, $role);
         $obj->avatarRefId = $avatarRefId;

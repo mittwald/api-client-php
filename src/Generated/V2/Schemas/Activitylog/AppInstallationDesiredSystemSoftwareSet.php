@@ -56,6 +56,9 @@ class AppInstallationDesiredSystemSoftwareSet
             ],
             'parameters' => [
                 'properties' => [
+                    'appInstallation' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
+                    ],
                     'software' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
                     ],
@@ -64,6 +67,7 @@ class AppInstallationDesiredSystemSoftwareSet
                     ],
                 ],
                 'required' => [
+                    'appInstallation',
                     'software',
                     'version',
                 ],

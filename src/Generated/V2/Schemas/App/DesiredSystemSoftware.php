@@ -116,7 +116,7 @@ class DesiredSystemSoftware
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
-            $updatePolicy = SystemSoftwareUpdatePolicy::from($input->{'updatePolicy'});
+            $updatePolicy = (SystemSoftwareUpdatePolicy::tryFrom($input->{'updatePolicy'}) ?? SystemSoftwareUpdatePolicy::unknown);
         }
 
         $obj = new self();

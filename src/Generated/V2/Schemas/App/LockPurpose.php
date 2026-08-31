@@ -8,4 +8,5 @@ enum LockPurpose: string
 {
     case unspecified = 'unspecified';
     case copy = 'copy';
+    case unknown = '__unknown__';
 }

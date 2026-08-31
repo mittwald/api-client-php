@@ -136,7 +136,7 @@ class Category
 
         $categoryId = $input->{'categoryId'};
         $name = $input->{'name'};
-        $referenceType = array_map(fn (string $item): CategoryReferenceTypeItem => CategoryReferenceTypeItem::from($item), $input->{'referenceType'});
+        $referenceType = array_map(fn (string $item): CategoryReferenceTypeItem => (CategoryReferenceTypeItem::tryFrom($item) ?? CategoryReferenceTypeItem::unknown), $input->{'referenceType'});
 
         $obj = new self($categoryId, $name, $referenceType);
 

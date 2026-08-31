@@ -442,7 +442,7 @@ class CustomerMembership
             $memberSince = new DateTime($input->{'memberSince'});
         }
         $mfa = (bool)($input->{'mfa'});
-        $role = CustomerRoles::from($input->{'role'});
+        $role = (CustomerRoles::tryFrom($input->{'role'}) ?? CustomerRoles::unknown);
         $userId = $input->{'userId'};
 
         $obj = new self($customerId, $email, $firstName, $id, $lastName, $mfa, $role, $userId);

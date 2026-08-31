@@ -136,7 +136,7 @@ class StatisticsCategory
             static::validateInput($input);
         }
 
-        $kind = StatisticsCategoryKind::from($input->{'kind'});
+        $kind = (StatisticsCategoryKind::tryFrom($input->{'kind'}) ?? StatisticsCategoryKind::unknown);
         $resources = null;
         if (isset($input->{'resources'})) {
             $resources = array_map(fn (array|object $i): StatisticsResource => StatisticsResource::buildFromInput($i, validate: $validate), $input->{'resources'});

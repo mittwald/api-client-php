@@ -25,7 +25,7 @@ class ExtensionStatistics
     private static array $internalValidationSchema = [
         'properties' => [
             'amountOfInstances' => [
-                'description' => 'The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.',
+                'description' => 'The amount of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.',
                 'example' => 42,
                 'minimum' => 0,
                 'type' => 'integer',
@@ -35,7 +35,7 @@ class ExtensionStatistics
     ];
 
     /**
-     * The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.
+     * The amount of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.
      */
     private ?int $amountOfInstances = null;
 

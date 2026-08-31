@@ -16,4 +16,5 @@ enum DomainNotMigratableReason: string
     case contractDateOutOfRange = 'contractDateOutOfRange';
     case invalidDomainName = 'invalidDomainName';
     case ownerContactInvalid = 'ownerContactInvalid';
+    case unknown = '__unknown__';
 }

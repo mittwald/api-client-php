@@ -461,7 +461,7 @@ but its password can be updated.
         $mainUser = (bool)($input->{'mainUser'});
         $name = $input->{'name'};
         $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
-        $status = DatabaseUserStatus::from($input->{'status'});
+        $status = (DatabaseUserStatus::tryFrom($input->{'status'}) ?? DatabaseUserStatus::unknown);
         $statusSetAt = new DateTime($input->{'statusSetAt'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 

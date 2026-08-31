@@ -113,6 +113,11 @@ class UnpublishedExtension
                 ],
                 'type' => 'boolean',
             ],
+            'publishedAt' => [
+                'description' => 'Date of the first publishing.',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'scopes' => [
                 'items' => [
                     'type' => 'string',
@@ -244,6 +249,11 @@ class UnpublishedExtension
      * Whether the extension has been published by the contributor.
      */
     private ?bool $published = null;
+
+    /**
+     * Date of the first publishing.
+     */
+    private ?DateTime $publishedAt = null;
 
     /**
      * @var string[]
@@ -400,6 +410,11 @@ class UnpublishedExtension
     public function getPublished(): ?bool
     {
         return $this->published ?? null;
+    }
+
+    public function getPublishedAt(): ?DateTime
+    {
+        return $this->publishedAt ?? null;
     }
 
     /**
@@ -762,6 +777,22 @@ class UnpublishedExtension
         return $clone;
     }
 
+    public function withPublishedAt(DateTime $publishedAt): self
+    {
+        $clone = clone $this;
+        $clone->publishedAt = $publishedAt;
+
+        return $clone;
+    }
+
+    public function withoutPublishedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->publishedAt);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $scopes
      */
@@ -864,7 +895,7 @@ class UnpublishedExtension
 
         $assets = array_map(fn (array|object $i): ExtensionAsset => ExtensionAsset::buildFromInput($i, validate: $validate), $input->{'assets'});
         $blocked = (bool)($input->{'blocked'});
-        $context = Context::from($input->{'context'});
+        $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
         $contributorId = $input->{'contributorId'};
         $deletionDeadline = null;
         if (isset($input->{'deletionDeadline'})) {
@@ -920,6 +951,10 @@ class UnpublishedExtension
         if (isset($input->{'published'})) {
             $published = (bool)($input->{'published'});
         }
+        $publishedAt = null;
+        if (isset($input->{'publishedAt'})) {
+            $publishedAt = new DateTime($input->{'publishedAt'});
+        }
         $scopes = $input->{'scopes'};
         $state = UnpublishedExtensionState::from($input->{'state'});
         $statistics = ExtensionStatistics::buildFromInput($input->{'statistics'}, validate: $validate);
@@ -946,6 +981,7 @@ class UnpublishedExtension
         $obj->pricing = $pricing;
         $obj->pricingDetails = $pricingDetails;
         $obj->published = $published;
+        $obj->publishedAt = $publishedAt;
         $obj->subTitle = $subTitle;
         $obj->support = $support;
         return $obj;
@@ -1004,6 +1040,9 @@ class UnpublishedExtension
         if (isset($this->published)) {
             $output['published'] = $this->published;
         }
+        if (isset($this->publishedAt)) {
+            $output['publishedAt'] = ($this->publishedAt)->format(DateTime::ATOM);
+        }
         $output['scopes'] = $this->scopes;
         $output['state'] = ($this->state)->value;
         $output['statistics'] = $this->statistics->toJson();
@@ -1051,6 +1090,9 @@ class UnpublishedExtension
             $this->pricing = match (true) {
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => $this->pricing,
             };
+        }
+        if (isset($this->publishedAt)) {
+            $this->publishedAt = clone $this->publishedAt;
         }
         if (isset($this->support)) {
             $this->support = clone $this->support;

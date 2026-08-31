@@ -224,7 +224,7 @@ class OwnExtensionRequestedChanges
 
         $context = null;
         if (isset($input->{'context'})) {
-            $context = Context::from($input->{'context'});
+            $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
         }
         $purgeScopes = null;
         if (isset($input->{'purgeScopes'})) {

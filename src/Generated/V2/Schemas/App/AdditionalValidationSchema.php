@@ -112,7 +112,7 @@ class AdditionalValidationSchema
 
         $kind = null;
         if (isset($input->{'kind'})) {
-            $kind = AdditionalValidationSchemaKind::from($input->{'kind'});
+            $kind = (AdditionalValidationSchemaKind::tryFrom($input->{'kind'}) ?? AdditionalValidationSchemaKind::unknown);
         }
         $schema = null;
         if (isset($input->{'schema'})) {

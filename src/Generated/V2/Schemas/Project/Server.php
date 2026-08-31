@@ -456,7 +456,7 @@ class Server
         $description = $input->{'description'};
         $disabledReason = null;
         if (isset($input->{'disabledReason'})) {
-            $disabledReason = ServerDisableReason::from($input->{'disabledReason'});
+            $disabledReason = (ServerDisableReason::tryFrom($input->{'disabledReason'}) ?? ServerDisableReason::unknown);
         }
         $groupId = $input->{'groupId'};
         $id = $input->{'id'};
@@ -466,13 +466,13 @@ class Server
         }
         $isReady = (bool)($input->{'isReady'});
         $machineType = MachineType::buildFromInput($input->{'machineType'}, validate: $validate);
-        $readiness = DeprecatedServerReadinessStatus::from($input->{'readiness'});
+        $readiness = (DeprecatedServerReadinessStatus::tryFrom($input->{'readiness'}) ?? DeprecatedServerReadinessStatus::unknown);
         $shortId = $input->{'shortId'};
         $statisticsBaseDomain = null;
         if (isset($input->{'statisticsBaseDomain'})) {
             $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
         }
-        $status = ServerStatus::from($input->{'status'});
+        $status = (ServerStatus::tryFrom($input->{'status'}) ?? ServerStatus::unknown);
         $storage = $input->{'storage'};
 
         $obj = new self($clusterName, $createdAt, $customerId, $description, $groupId, $id, $isReady, $machineType, $readiness, $shortId, $status, $storage);

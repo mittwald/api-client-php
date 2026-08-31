@@ -253,7 +253,7 @@ interface ProjectClient
      */
     public function getProjectInvite(GetProjectInviteRequest $request): GetProjectInviteOKResponse;
     /**
-     * Get a ProjectMembership
+     * Get a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-membership
      * @throws GuzzleException

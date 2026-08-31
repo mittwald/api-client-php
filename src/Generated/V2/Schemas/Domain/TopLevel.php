@@ -188,7 +188,7 @@ class TopLevel
         $rgpDays = (int)($input->{'rgpDays'});
         $tld = $input->{'tld'};
         $transferAuthCodeRequired = (bool)($input->{'transferAuthCodeRequired'});
-        $transferAuthentication = TransferAuthentication::from($input->{'transferAuthentication'});
+        $transferAuthentication = (TransferAuthentication::tryFrom($input->{'transferAuthentication'}) ?? TransferAuthentication::unknown);
 
         $obj = new self($irtp, $rgpDays, $tld, $transferAuthCodeRequired, $transferAuthentication);
 

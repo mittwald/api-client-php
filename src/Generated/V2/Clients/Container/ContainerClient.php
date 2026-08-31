@@ -39,6 +39,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateReq
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplateAsset\GetTemplateAssetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListSelfStacks\ListSelfStacksOKResponse;
@@ -92,7 +94,7 @@ interface ContainerClient
      */
     public function addTemplateComponent(AddTemplateComponentRequest $request): EmptyResponse;
     /**
-     * Call pull-image webhook
+     * Call a Service pull-image webhook.
      *
      * Calls the pull-image webhook endpoint for a Service using a webhook token.
      *
@@ -246,6 +248,16 @@ interface ContainerClient
      */
     public function getVolume(GetVolumeRequest $request): GetVolumeOKResponse;
     /**
+     * List Services the executing user has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-accessible-services
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListAccessibleServicesRequest $request An object representing the request for this operation
+     * @return ListAccessibleServicesOKResponse OK
+     */
+    public function listAccessibleServices(ListAccessibleServicesRequest $request): ListAccessibleServicesOKResponse;
+    /**
      * List Registries belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-registries
@@ -298,7 +310,7 @@ interface ContainerClient
     /**
      * List Container Template statistics.
      *
-     * Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+     * Deprecated. Container Statistics are no longer available. This endpoint will be removed in a future version.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
      * @throws GuzzleException
@@ -329,7 +341,7 @@ interface ContainerClient
      */
     public function listVolumes(ListVolumesRequest $request): ListVolumesOKResponse;
     /**
-     * Pull image and recreate
+     * Pull a Service image and recreate.
      *
      * Pulls the latest image for this container and recreates it.
      *
@@ -364,7 +376,7 @@ interface ContainerClient
      */
     public function restartService(RestartServiceRequest $request): EmptyResponse;
     /**
-     * Create or rotate pull-image webhook token
+     * Create or rotate a Service pull-image webhook token.
      *
      * Creates or rotates the pull-image webhook token for a Service.
      *

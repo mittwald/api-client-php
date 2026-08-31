@@ -12,4 +12,5 @@ enum Phase: string
     case ready = 'ready';
     case disabled = 'disabled';
     case reconfiguring = 'reconfiguring';
+    case unknown = '__unknown__';
 }

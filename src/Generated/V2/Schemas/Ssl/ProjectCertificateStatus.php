@@ -11,4 +11,5 @@ enum ProjectCertificateStatus: string
     case cnameError = 'cnameError';
     case error = 'error';
     case unspecified = 'unspecified';
+    case unknown = '__unknown__';
 }

@@ -34,6 +34,12 @@ class ExtensionListExtensionInstancesRequest
             'anchor' => [
                 'type' => 'string',
             ],
+            'hasAcceptedAllScopes' => [
+                'type' => 'boolean',
+            ],
+            'parentCustomerId' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 0,
@@ -89,6 +95,10 @@ class ExtensionListExtensionInstancesRequest
 
     private ?string $anchor = null;
 
+    private ?bool $hasAcceptedAllScopes = null;
+
+    private ?string $parentCustomerId = null;
+
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -143,6 +153,16 @@ class ExtensionListExtensionInstancesRequest
     public function getAnchor(): ?string
     {
         return $this->anchor ?? null;
+    }
+
+    public function getHasAcceptedAllScopes(): ?bool
+    {
+        return $this->hasAcceptedAllScopes ?? null;
+    }
+
+    public function getParentCustomerId(): ?string
+    {
+        return $this->parentCustomerId ?? null;
     }
 
     public function getLimit(): ?int
@@ -280,6 +300,50 @@ class ExtensionListExtensionInstancesRequest
         return $clone;
     }
 
+    public function withHasAcceptedAllScopes(bool $hasAcceptedAllScopes): self
+    {
+        $validator = new Validator();
+        $validator->validate($hasAcceptedAllScopes, self::$internalValidationSchema['properties']['hasAcceptedAllScopes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->hasAcceptedAllScopes = $hasAcceptedAllScopes;
+
+        return $clone;
+    }
+
+    public function withoutHasAcceptedAllScopes(): self
+    {
+        $clone = clone $this;
+        unset($clone->hasAcceptedAllScopes);
+
+        return $clone;
+    }
+
+    public function withParentCustomerId(string $parentCustomerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($parentCustomerId, self::$internalValidationSchema['properties']['parentCustomerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->parentCustomerId = $parentCustomerId;
+
+        return $clone;
+    }
+
+    public function withoutParentCustomerId(): self
+    {
+        $clone = clone $this;
+        unset($clone->parentCustomerId);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -407,6 +471,14 @@ class ExtensionListExtensionInstancesRequest
         if (isset($input->{'anchor'})) {
             $anchor = $input->{'anchor'};
         }
+        $hasAcceptedAllScopes = null;
+        if (isset($input->{'hasAcceptedAllScopes'})) {
+            $hasAcceptedAllScopes = (bool)($input->{'hasAcceptedAllScopes'});
+        }
+        $parentCustomerId = null;
+        if (isset($input->{'parentCustomerId'})) {
+            $parentCustomerId = $input->{'parentCustomerId'};
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -438,6 +510,8 @@ class ExtensionListExtensionInstancesRequest
         $obj->extensionId = $extensionId;
         $obj->searchTerm = $searchTerm;
         $obj->anchor = $anchor;
+        $obj->hasAcceptedAllScopes = $hasAcceptedAllScopes;
+        $obj->parentCustomerId = $parentCustomerId;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -468,6 +542,12 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($this->anchor)) {
             $output['anchor'] = $this->anchor;
+        }
+        if (isset($this->hasAcceptedAllScopes)) {
+            $output['hasAcceptedAllScopes'] = $this->hasAcceptedAllScopes;
+        }
+        if (isset($this->parentCustomerId)) {
+            $output['parentCustomerId'] = $this->parentCustomerId;
         }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
@@ -552,6 +632,12 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($mapped['anchor'])) {
             $query['anchor'] = $mapped['anchor'];
+        }
+        if (isset($mapped['hasAcceptedAllScopes'])) {
+            $query['hasAcceptedAllScopes'] = $mapped['hasAcceptedAllScopes'];
+        }
+        if (isset($mapped['parentCustomerId'])) {
+            $query['parentCustomerId'] = $mapped['parentCustomerId'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

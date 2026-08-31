@@ -142,7 +142,7 @@ class Person
         $lastName = $input->{'lastName'};
         $title = null;
         if (isset($input->{'title'})) {
-            $title = Salutation::from($input->{'title'});
+            $title = (Salutation::tryFrom($input->{'title'}) ?? Salutation::unknown);
         }
 
         $obj = new self($firstName, $lastName);

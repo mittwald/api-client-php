@@ -10,4 +10,5 @@ enum UserInputDataType: string
     case number = 'number';
     case boolean = 'boolean';
     case select = 'select';
+    case unknown = '__unknown__';
 }

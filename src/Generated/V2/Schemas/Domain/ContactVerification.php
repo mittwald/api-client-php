@@ -127,7 +127,7 @@ class ContactVerification
         }
 
         $id = $input->{'id'};
-        $status = ContactVerificationStatus::from($input->{'status'});
+        $status = (ContactVerificationStatus::tryFrom($input->{'status'}) ?? ContactVerificationStatus::unknown);
         $typeData = match (true) {
             ContactVerificationAddressData::validateInput($input->{'typeData'}, true) => ContactVerificationAddressData::buildFromInput($input->{'typeData'}, validate: $validate),
             ContactVerificationEmailData::validateInput($input->{'typeData'}, true) => ContactVerificationEmailData::buildFromInput($input->{'typeData'}, validate: $validate),

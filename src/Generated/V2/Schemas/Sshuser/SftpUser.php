@@ -411,7 +411,7 @@ class SftpUser
             static::validateInput($input);
         }
 
-        $accessLevel = AccessLevel::from($input->{'accessLevel'});
+        $accessLevel = (AccessLevel::tryFrom($input->{'accessLevel'}) ?? AccessLevel::unknown);
         $active = null;
         if (isset($input->{'active'})) {
             $active = (bool)($input->{'active'});

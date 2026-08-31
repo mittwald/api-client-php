@@ -8,4 +8,5 @@ enum StatisticsKind: string
 {
     case server = 'server';
     case project = 'project';
+    case unknown = '__unknown__';
 }

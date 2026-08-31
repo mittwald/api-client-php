@@ -34,6 +34,20 @@ class DnsMxRecordSetManaged
                                 ],
                                 'type' => 'string',
                             ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
                         ],
                         'required' => [
                             'mx',
@@ -48,6 +62,20 @@ class DnsMxRecordSetManaged
                                 ],
                                 'nullable' => true,
                                 'type' => 'array',
+                            ],
+                            'ttl' => [
+                                'nullable' => true,
+                                'oneOf' => [
+                                    [
+                                        'type' => 'integer',
+                                    ],
+                                    [
+                                        'enum' => [
+                                            'auto',
+                                        ],
+                                        'type' => 'string',
+                                    ],
+                                ],
                             ],
                         ],
                         'required' => [

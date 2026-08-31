@@ -9,4 +9,5 @@ enum Salutation: string
     case mr = 'mr';
     case ms = 'ms';
     case other = 'other';
+    case unknown = '__unknown__';
 }

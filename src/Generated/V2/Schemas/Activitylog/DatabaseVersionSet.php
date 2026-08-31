@@ -55,6 +55,7 @@ class DatabaseVersionSet
             'name' => [
                 'enum' => [
                     'database.mysql-version-set',
+                    'database.redis-version-set',
                 ],
                 'type' => 'string',
             ],

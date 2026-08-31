@@ -119,7 +119,7 @@ class ExtensionChangeContextOKResponseBody
         }
 
         $cleaningUpInstances = (bool)($input->{'cleaningUpInstances'});
-        $currentContext = Context::from($input->{'currentContext'});
+        $currentContext = (Context::tryFrom($input->{'currentContext'}) ?? Context::unknown);
         $id = $input->{'id'};
 
         $obj = new self($cleaningUpInstances, $currentContext, $id);

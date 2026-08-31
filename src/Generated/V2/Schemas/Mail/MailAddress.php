@@ -32,16 +32,16 @@ class MailAddress
             'archive' => [
                 'properties' => [
                     'active' => [
-                        'description' => 'shows if the mail-archive is enabled',
+                        'description' => 'Shows if the mail-archive is enabled.',
                         'type' => 'boolean',
                     ],
                     'quota' => [
-                        'description' => 'maximum available mail-archive storage in bytes',
+                        'description' => 'Maximum available mail-archive storage in bytes.',
                         'format' => 'int64',
                         'type' => 'integer',
                     ],
                     'usedBytes' => [
-                        'description' => 'current mail-archive usage in bytes',
+                        'description' => 'Current mail-archive usage in bytes.',
                         'format' => 'int64',
                         'type' => 'integer',
                     ],
@@ -190,7 +190,7 @@ class MailAddress
             'rateLimitChangeRequest' => [
                 'properties' => [
                     'rateLimitId' => [
-                        'description' => 'id of the rate limit requested',
+                        'description' => 'ID of the rate limit requested.',
                         'type' => 'string',
                     ],
                 ],

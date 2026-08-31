@@ -10,4 +10,5 @@ enum DomainMigrationWarningReason: string
     case subdomainInvalidDnsName = 'subdomainInvalidDnsName';
     case subdomainNsRecordsOverridden = 'subdomainNsRecordsOverridden';
     case registrantPhoneNeedsEpp = 'registrantPhoneNeedsEpp';
+    case unknown = '__unknown__';
 }

@@ -11,4 +11,5 @@ enum OrderStatus: string
     case REJECTED = 'REJECTED';
     case ABORTED = 'ABORTED';
     case EXECUTED = 'EXECUTED';
+    case unknown = '__unknown__';
 }

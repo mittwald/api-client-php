@@ -267,7 +267,7 @@ class ExtensionInstanceWebhookExecution
         if (isset($input->{'nextScheduledExecution'})) {
             $nextScheduledExecution = new DateTime($input->{'nextScheduledExecution'});
         }
-        $state = ExtensionInstanceWebhookExecutionState::from($input->{'state'});
+        $state = (ExtensionInstanceWebhookExecutionState::tryFrom($input->{'state'}) ?? ExtensionInstanceWebhookExecutionState::unknown);
 
         $obj = new self($attempts, $contributorId, $extensionId, $extensionInstanceId, $id, $kind, $state);
         $obj->nextScheduledExecution = $nextScheduledExecution;

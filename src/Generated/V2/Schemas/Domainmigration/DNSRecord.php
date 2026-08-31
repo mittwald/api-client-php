@@ -160,7 +160,7 @@ class DNSRecord
             $name = $input->{'name'};
         }
         $ttl = (int)($input->{'ttl'});
-        $type = DNSRecordType::from($input->{'type'});
+        $type = (DNSRecordType::tryFrom($input->{'type'}) ?? DNSRecordType::unknown);
         $value = $input->{'value'};
 
         $obj = new self($ttl, $type, $value);

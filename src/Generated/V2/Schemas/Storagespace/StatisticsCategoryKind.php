@@ -12,4 +12,5 @@ enum StatisticsCategoryKind: string
     case mysqlDatabase = 'mysqlDatabase';
     case redisDatabase = 'redisDatabase';
     case containerVolume = 'containerVolume';
+    case unknown = '__unknown__';
 }

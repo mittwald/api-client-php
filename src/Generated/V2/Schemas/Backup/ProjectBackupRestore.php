@@ -141,7 +141,7 @@ class ProjectBackupRestore
         if (isset($input->{'pathRestore'})) {
             $pathRestore = ProjectBackupRestorePath::buildFromInput($input->{'pathRestore'}, validate: $validate);
         }
-        $phase = ProjectBackupRestorePhase::from($input->{'phase'});
+        $phase = (ProjectBackupRestorePhase::tryFrom($input->{'phase'}) ?? ProjectBackupRestorePhase::unknown);
 
         $obj = new self($phase);
         $obj->databaseRestores = $databaseRestores;

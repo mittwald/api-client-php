@@ -269,7 +269,7 @@ class License
                 default => throw new InvalidArgumentException("could not build property 'keyReference' from JSON"),
             };
         }
-        $kind = Kind::from($input->{'kind'});
+        $kind = (Kind::tryFrom($input->{'kind'}) ?? Kind::unknown);
         $meta = Meta::buildFromInput($input->{'meta'}, validate: $validate);
         $reference = Reference::buildFromInput($input->{'reference'}, validate: $validate);
         $volume = null;

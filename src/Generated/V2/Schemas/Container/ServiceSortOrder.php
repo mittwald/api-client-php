@@ -8,4 +8,5 @@ enum ServiceSortOrder: string
 {
     case descriptionAsc = 'descriptionAsc';
     case descriptionDesc = 'descriptionDesc';
+    case unknown = '__unknown__';
 }

@@ -7,4 +7,5 @@ namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 enum AdditionalValidationSchemaKind: string
 {
     case passwordrule = 'password-rule';
+    case unknown = '__unknown__';
 }

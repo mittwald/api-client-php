@@ -9,4 +9,5 @@ enum DeprecatedServerReadinessStatus: string
     case creating = 'creating';
     case ready = 'ready';
     case unready = 'unready';
+    case unknown = '__unknown__';
 }

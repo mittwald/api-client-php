@@ -25,6 +25,9 @@ class AppInstallationDesiredSystemSoftwareSetParameters
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'appInstallation' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
+            ],
             'software' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
             ],
@@ -33,20 +36,29 @@ class AppInstallationDesiredSystemSoftwareSetParameters
             ],
         ],
         'required' => [
+            'appInstallation',
             'software',
             'version',
         ],
         'type' => 'object',
     ];
 
+    private ParameterProperty $appInstallation;
+
     private ParameterProperty $software;
 
     private ParameterProperty $version;
 
-    public function __construct(ParameterProperty $software, ParameterProperty $version)
+    public function __construct(ParameterProperty $appInstallation, ParameterProperty $software, ParameterProperty $version)
     {
+        $this->appInstallation = $appInstallation;
         $this->software = $software;
         $this->version = $version;
+    }
+
+    public function getAppInstallation(): ParameterProperty
+    {
+        return $this->appInstallation;
     }
 
     public function getSoftware(): ParameterProperty
@@ -57,6 +69,14 @@ class AppInstallationDesiredSystemSoftwareSetParameters
     public function getVersion(): ParameterProperty
     {
         return $this->version;
+    }
+
+    public function withAppInstallation(ParameterProperty $appInstallation): self
+    {
+        $clone = clone $this;
+        $clone->appInstallation = $appInstallation;
+
+        return $clone;
     }
 
     public function withSoftware(ParameterProperty $software): self
@@ -90,10 +110,11 @@ class AppInstallationDesiredSystemSoftwareSetParameters
             static::validateInput($input);
         }
 
+        $appInstallation = ParameterProperty::buildFromInput($input->{'appInstallation'}, validate: $validate);
         $software = ParameterProperty::buildFromInput($input->{'software'}, validate: $validate);
         $version = ParameterProperty::buildFromInput($input->{'version'}, validate: $validate);
 
-        $obj = new self($software, $version);
+        $obj = new self($appInstallation, $software, $version);
 
         return $obj;
     }
@@ -106,6 +127,7 @@ class AppInstallationDesiredSystemSoftwareSetParameters
     public function toJson(): array
     {
         $output = [];
+        $output['appInstallation'] = $this->appInstallation->toJson();
         $output['software'] = $this->software->toJson();
         $output['version'] = $this->version->toJson();
 

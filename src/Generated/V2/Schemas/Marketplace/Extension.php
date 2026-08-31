@@ -118,6 +118,11 @@ class Extension
                 ],
                 'type' => 'boolean',
             ],
+            'publishedAt' => [
+                'description' => 'Date of the first publishing.',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'scopes' => [
                 'items' => [
                     'type' => 'string',
@@ -172,6 +177,7 @@ class Extension
             'contributorId',
             'state',
             'published',
+            'publishedAt',
             'name',
             'subTitle',
             'description',
@@ -263,6 +269,11 @@ class Extension
     private bool $published;
 
     /**
+     * Date of the first publishing.
+     */
+    private DateTime $publishedAt;
+
+    /**
      * @var string[]
      */
     private array $scopes;
@@ -290,7 +301,7 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, DateTime $createdAt, string $description, bool $disabled, string $id, string $logoRefId, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, ExtensionSupport $support, array $tags)
+    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, DateTime $createdAt, string $description, bool $disabled, string $id, string $logoRefId, string $name, bool $published, DateTime $publishedAt, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, ExtensionSupport $support, array $tags)
     {
         $this->assets = $assets;
         $this->blocked = $blocked;
@@ -303,6 +314,7 @@ class Extension
         $this->logoRefId = $logoRefId;
         $this->name = $name;
         $this->published = $published;
+        $this->publishedAt = $publishedAt;
         $this->scopes = $scopes;
         $this->state = $state;
         $this->statistics = $statistics;
@@ -431,6 +443,11 @@ class Extension
     public function getPublished(): bool
     {
         return $this->published;
+    }
+
+    public function getPublishedAt(): DateTime
+    {
+        return $this->publishedAt;
     }
 
     /**
@@ -780,6 +797,14 @@ class Extension
         return $clone;
     }
 
+    public function withPublishedAt(DateTime $publishedAt): self
+    {
+        $clone = clone $this;
+        $clone->publishedAt = $publishedAt;
+
+        return $clone;
+    }
+
     /**
      * @param string[] $scopes
      */
@@ -866,7 +891,7 @@ class Extension
 
         $assets = array_map(fn (array|object $i): ExtensionAsset => ExtensionAsset::buildFromInput($i, validate: $validate), $input->{'assets'});
         $blocked = (bool)($input->{'blocked'});
-        $context = Context::from($input->{'context'});
+        $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
         $contributorId = $input->{'contributorId'};
         $createdAt = new DateTime($input->{'createdAt'});
         $deletionDeadline = null;
@@ -914,6 +939,7 @@ class Extension
             $pricingDetails = PricePlanDetails::buildFromInput($input->{'pricingDetails'}, validate: $validate);
         }
         $published = (bool)($input->{'published'});
+        $publishedAt = new DateTime($input->{'publishedAt'});
         $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
         $statistics = ExtensionStatistics::buildFromInput($input->{'statistics'}, validate: $validate);
@@ -921,7 +947,7 @@ class Extension
         $support = ExtensionSupport::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($assets, $blocked, $context, $contributorId, $createdAt, $description, $disabled, $id, $logoRefId, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
+        $obj = new self($assets, $blocked, $context, $contributorId, $createdAt, $description, $disabled, $id, $logoRefId, $name, $published, $publishedAt, $scopes, $state, $statistics, $subTitle, $support, $tags);
         $obj->deletionDeadline = $deletionDeadline;
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
@@ -982,6 +1008,7 @@ class Extension
             $output['pricingDetails'] = $this->pricingDetails->toJson();
         }
         $output['published'] = $this->published;
+        $output['publishedAt'] = ($this->publishedAt)->format(DateTime::ATOM);
         $output['scopes'] = $this->scopes;
         $output['state'] = ($this->state)->value;
         $output['statistics'] = $this->statistics->toJson();
@@ -1027,6 +1054,7 @@ class Extension
                 array_reduce(array_map(fn ($item): bool => ($item) instanceof MonthlyPricePlanStrategyItem, $this->pricing), fn ($carry, $item): bool => $carry && $item, true) => $this->pricing,
             };
         }
+        $this->publishedAt = clone $this->publishedAt;
         $this->support = clone $this->support;
     }
 }

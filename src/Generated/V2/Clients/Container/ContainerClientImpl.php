@@ -173,6 +173,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeOKRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetVolume\GetVolumeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ListAccessibleServices\ListAccessibleServicesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListRegistries\ListRegistriesForbiddenResponse;
@@ -346,7 +353,7 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Call pull-image webhook
+     * Call a Service pull-image webhook.
      *
      * Calls the pull-image webhook endpoint for a Service using a webhook token.
      *
@@ -708,6 +715,7 @@ class ContainerClientImpl implements ContainerClient
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            304 => new EmptyResponse($httpResponse),
             400 => GetTemplateAssetBadRequestResponse::fromResponse($httpResponse),
             403 => GetTemplateAssetForbiddenResponse::fromResponse($httpResponse),
             404 => GetTemplateAssetNotFoundResponse::fromResponse($httpResponse),
@@ -742,6 +750,31 @@ class ContainerClientImpl implements ContainerClient
             429 => GetVolumeTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetVolumeInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetVolumeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Services the executing user has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-accessible-services
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListAccessibleServicesRequest $request An object representing the request for this operation
+     * @return ListAccessibleServicesOKResponse OK
+     */
+    public function listAccessibleServices(ListAccessibleServicesRequest $request): ListAccessibleServicesOKResponse
+    {
+        $httpRequest = new Request(ListAccessibleServicesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListAccessibleServicesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListAccessibleServicesBadRequestResponse::fromResponse($httpResponse),
+            403 => ListAccessibleServicesForbiddenResponse::fromResponse($httpResponse),
+            429 => ListAccessibleServicesTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListAccessibleServicesInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListAccessibleServicesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -874,7 +907,7 @@ class ContainerClientImpl implements ContainerClient
     /**
      * List Container Template statistics.
      *
-     * Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+     * Deprecated. Container Statistics are no longer available. This endpoint will be removed in a future version.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-template-statistics
      * @throws GuzzleException
@@ -949,7 +982,7 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Pull image and recreate
+     * Pull a Service image and recreate.
      *
      * Pulls the latest image for this container and recreates it.
      *
@@ -1035,7 +1068,7 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Create or rotate pull-image webhook token
+     * Create or rotate a Service pull-image webhook token.
      *
      * Creates or rotates the pull-image webhook token for a Service.
      *
@@ -1193,6 +1226,7 @@ class ContainerClientImpl implements ContainerClient
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            304 => new EmptyResponse($httpResponse),
             400 => DeprecatedContainerGetTemplateIconBadRequestResponse::fromResponse($httpResponse),
             403 => DeprecatedContainerGetTemplateIconForbiddenResponse::fromResponse($httpResponse),
             404 => DeprecatedContainerGetTemplateIconNotFoundResponse::fromResponse($httpResponse),

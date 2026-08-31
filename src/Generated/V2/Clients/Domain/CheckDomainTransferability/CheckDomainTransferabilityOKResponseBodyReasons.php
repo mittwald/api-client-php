@@ -20,6 +20,9 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'domainDoesNotExist' => [
                 'type' => 'boolean',
             ],
+            'inRedemptionPeriod' => [
+                'type' => 'boolean',
+            ],
             'transferLock' => [
                 'type' => 'boolean',
             ],
@@ -32,6 +35,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'wrongAuthCode',
             'transferLock',
             'domainAgeTooSmall',
+            'inRedemptionPeriod',
         ],
         'type' => 'object',
     ];
@@ -40,14 +44,17 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
     private bool $domainDoesNotExist;
 
+    private bool $inRedemptionPeriod;
+
     private bool $transferLock;
 
     private bool $wrongAuthCode;
 
-    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $transferLock, bool $wrongAuthCode)
+    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $inRedemptionPeriod, bool $transferLock, bool $wrongAuthCode)
     {
         $this->domainAgeTooSmall = $domainAgeTooSmall;
         $this->domainDoesNotExist = $domainDoesNotExist;
+        $this->inRedemptionPeriod = $inRedemptionPeriod;
         $this->transferLock = $transferLock;
         $this->wrongAuthCode = $wrongAuthCode;
     }
@@ -60,6 +67,11 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function getDomainDoesNotExist(): bool
     {
         return $this->domainDoesNotExist;
+    }
+
+    public function getInRedemptionPeriod(): bool
+    {
+        return $this->inRedemptionPeriod;
     }
 
     public function getTransferLock(): bool
@@ -96,6 +108,20 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
         $clone = clone $this;
         $clone->domainDoesNotExist = $domainDoesNotExist;
+
+        return $clone;
+    }
+
+    public function withInRedemptionPeriod(bool $inRedemptionPeriod): self
+    {
+        $validator = new Validator();
+        $validator->validate($inRedemptionPeriod, self::$internalValidationSchema['properties']['inRedemptionPeriod']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->inRedemptionPeriod = $inRedemptionPeriod;
 
         return $clone;
     }
@@ -145,10 +171,11 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
         $domainAgeTooSmall = (bool)($input->{'domainAgeTooSmall'});
         $domainDoesNotExist = (bool)($input->{'domainDoesNotExist'});
+        $inRedemptionPeriod = (bool)($input->{'inRedemptionPeriod'});
         $transferLock = (bool)($input->{'transferLock'});
         $wrongAuthCode = (bool)($input->{'wrongAuthCode'});
 
-        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $transferLock, $wrongAuthCode);
+        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $inRedemptionPeriod, $transferLock, $wrongAuthCode);
 
         return $obj;
     }
@@ -163,6 +190,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         $output = [];
         $output['domainAgeTooSmall'] = $this->domainAgeTooSmall;
         $output['domainDoesNotExist'] = $this->domainDoesNotExist;
+        $output['inRedemptionPeriod'] = $this->inRedemptionPeriod;
         $output['transferLock'] = $this->transferLock;
         $output['wrongAuthCode'] = $this->wrongAuthCode;
 

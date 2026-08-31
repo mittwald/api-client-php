@@ -9,4 +9,5 @@ enum ConcurrencyPolicy: string
     case allow = 'allow';
     case forbid = 'forbid';
     case replace = 'replace';
+    case unknown = '__unknown__';
 }

@@ -677,7 +677,7 @@ class OwnContributor
         if (isset($input->{'phone'})) {
             $phone = $input->{'phone'};
         }
-        $state = ContributorState::from($input->{'state'});
+        $state = (ContributorState::tryFrom($input->{'state'}) ?? ContributorState::unknown);
         $supportInformation = OwnContributorSupportInformation::buildFromInput($input->{'supportInformation'}, validate: $validate);
         $url = null;
         if (isset($input->{'url'})) {

@@ -25,6 +25,7 @@ class MailAddressBackup
     private static array $internalValidationSchema = [
         'properties' => [
             'name' => [
+                'description' => 'Name of the backup; an eight-digit date in YYYYMMDD format. Use it as the backupId path parameter to recover emails from this backup.',
                 'type' => 'string',
             ],
         ],
@@ -34,6 +35,9 @@ class MailAddressBackup
         'type' => 'object',
     ];
 
+    /**
+     * Name of the backup; an eight-digit date in YYYYMMDD format. Use it as the backupId path parameter to recover emails from this backup.
+     */
     private string $name;
 
     public function __construct(string $name)

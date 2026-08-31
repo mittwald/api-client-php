@@ -10,4 +10,5 @@ enum UserInputFormat: string
     case password = 'password';
     case url = 'url';
     case uri = 'uri';
+    case unknown = '__unknown__';
 }

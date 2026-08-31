@@ -9,4 +9,5 @@ enum ProcessState: string
     case UNSPECIFIED = 'UNSPECIFIED';
     case REQUESTED = 'REQUESTED';
     case FAILED = 'FAILED';
+    case unknown = '__unknown__';
 }

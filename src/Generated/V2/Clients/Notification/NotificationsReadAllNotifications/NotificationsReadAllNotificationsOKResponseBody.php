@@ -91,7 +91,7 @@ class NotificationsReadAllNotificationsOKResponseBody
             static::validateInput($input);
         }
 
-        $status = NotificationStatus::from($input->{'status'});
+        $status = (NotificationStatus::tryFrom($input->{'status'}) ?? NotificationStatus::unknown);
         $updatedCount = (int)($input->{'updatedCount'});
 
         $obj = new self($status, $updatedCount);

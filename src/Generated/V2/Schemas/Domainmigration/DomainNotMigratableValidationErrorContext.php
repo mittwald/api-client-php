@@ -100,7 +100,7 @@ class DomainNotMigratableValidationErrorContext
             static::validateInput($input);
         }
 
-        $reason = DomainNotMigratableReason::from($input->{'reason'});
+        $reason = (DomainNotMigratableReason::tryFrom($input->{'reason'}) ?? DomainNotMigratableReason::unknown);
 
         $obj = new self($reason);
 

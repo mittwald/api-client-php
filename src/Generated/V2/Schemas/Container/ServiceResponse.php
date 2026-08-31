@@ -480,7 +480,7 @@ class ServiceResponse
         $serviceName = $input->{'serviceName'};
         $shortId = $input->{'shortId'};
         $stackId = $input->{'stackId'};
-        $status = ServiceStatus::from($input->{'status'});
+        $status = (ServiceStatus::tryFrom($input->{'status'}) ?? ServiceStatus::unknown);
         $statusSetAt = new DateTime($input->{'statusSetAt'});
         $templateId = null;
         if (isset($input->{'templateId'})) {

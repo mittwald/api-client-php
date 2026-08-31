@@ -7,4 +7,5 @@ namespace Mittwald\ApiClient\Generated\V2\Schemas\License;
 enum Kind: string
 {
     case typo3elts = 'typo3-elts';
+    case unknown = '__unknown__';
 }

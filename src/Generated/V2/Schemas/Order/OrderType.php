@@ -8,4 +8,5 @@ enum OrderType: string
 {
     case NEWORDER = 'NEW_ORDER';
     case CONTRACTCHANGE = 'CONTRACT_CHANGE';
+    case unknown = '__unknown__';
 }

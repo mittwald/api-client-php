@@ -10,4 +10,5 @@ enum TransferAuthentication: string
     case code = 'code';
     case email = 'email';
     case push = 'push';
+    case unknown = '__unknown__';
 }

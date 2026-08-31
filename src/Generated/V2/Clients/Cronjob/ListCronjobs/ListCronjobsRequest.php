@@ -23,6 +23,9 @@ class ListCronjobsRequest
             'includeServiceCronjobs' => [
                 'type' => 'boolean',
             ],
+            'stackId' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -45,6 +48,8 @@ class ListCronjobsRequest
     private string $projectId;
 
     private ?bool $includeServiceCronjobs = null;
+
+    private ?string $stackId = null;
 
     private int $limit = 1000;
 
@@ -69,6 +74,11 @@ class ListCronjobsRequest
     public function getIncludeServiceCronjobs(): ?bool
     {
         return $this->includeServiceCronjobs ?? null;
+    }
+
+    public function getStackId(): ?string
+    {
+        return $this->stackId ?? null;
     }
 
     public function getLimit(): int
@@ -118,6 +128,28 @@ class ListCronjobsRequest
     {
         $clone = clone $this;
         unset($clone->includeServiceCronjobs);
+
+        return $clone;
+    }
+
+    public function withStackId(string $stackId): self
+    {
+        $validator = new Validator();
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->stackId = $stackId;
+
+        return $clone;
+    }
+
+    public function withoutStackId(): self
+    {
+        $clone = clone $this;
+        unset($clone->stackId);
 
         return $clone;
     }
@@ -192,6 +224,10 @@ class ListCronjobsRequest
         if (isset($input->{'includeServiceCronjobs'})) {
             $includeServiceCronjobs = (bool)($input->{'includeServiceCronjobs'});
         }
+        $stackId = null;
+        if (isset($input->{'stackId'})) {
+            $stackId = $input->{'stackId'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -207,6 +243,7 @@ class ListCronjobsRequest
 
         $obj = new self($projectId);
         $obj->includeServiceCronjobs = $includeServiceCronjobs;
+        $obj->stackId = $stackId;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -224,6 +261,9 @@ class ListCronjobsRequest
         $output['projectId'] = $this->projectId;
         if (isset($this->includeServiceCronjobs)) {
             $output['includeServiceCronjobs'] = $this->includeServiceCronjobs;
+        }
+        if (isset($this->stackId)) {
+            $output['stackId'] = $this->stackId;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -293,6 +333,9 @@ class ListCronjobsRequest
         $query = [];
         if (isset($mapped['includeServiceCronjobs'])) {
             $query['includeServiceCronjobs'] = $mapped['includeServiceCronjobs'];
+        }
+        if (isset($mapped['stackId'])) {
+            $query['stackId'] = $mapped['stackId'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

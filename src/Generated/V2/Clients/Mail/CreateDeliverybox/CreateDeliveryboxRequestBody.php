@@ -18,6 +18,7 @@ class CreateDeliveryboxRequestBody
                 'type' => 'string',
             ],
             'password' => [
+                'description' => 'Password of the Deliverybox. Write-only: it is never returned by any route.',
                 'type' => 'string',
             ],
         ],
@@ -30,6 +31,9 @@ class CreateDeliveryboxRequestBody
 
     private string $description;
 
+    /**
+     * Password of the Deliverybox. Write-only: it is never returned by any route.
+     */
     private string $password;
 
     public function __construct(string $description, string $password)

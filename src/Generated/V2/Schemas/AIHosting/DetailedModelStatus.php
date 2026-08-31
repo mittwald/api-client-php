@@ -9,4 +9,5 @@ enum DetailedModelStatus: string
     case active = 'active';
     case needApproval = 'needApproval';
     case deprecated = 'deprecated';
+    case unknown = '__unknown__';
 }

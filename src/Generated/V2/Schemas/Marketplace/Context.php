@@ -8,4 +8,5 @@ enum Context: string
 {
     case project = 'project';
     case customer = 'customer';
+    case unknown = '__unknown__';
 }

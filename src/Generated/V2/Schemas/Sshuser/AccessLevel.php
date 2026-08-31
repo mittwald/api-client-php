@@ -9,4 +9,5 @@ enum AccessLevel: string
     case full = 'full';
     case read = 'read';
     case unspecified = 'unspecified';
+    case unknown = '__unknown__';
 }

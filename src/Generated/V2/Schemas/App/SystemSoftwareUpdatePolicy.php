@@ -10,4 +10,5 @@ enum SystemSoftwareUpdatePolicy: string
     case inheritedFromApp = 'inheritedFromApp';
     case patchLevel = 'patchLevel';
     case all = 'all';
+    case unknown = '__unknown__';
 }

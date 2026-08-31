@@ -12,4 +12,5 @@ enum NotificationRole: string
     case projectowner = 'project_owner';
     case projectemailadmin = 'project_emailadmin';
     case projectexternal = 'project_external';
+    case unknown = '__unknown__';
 }

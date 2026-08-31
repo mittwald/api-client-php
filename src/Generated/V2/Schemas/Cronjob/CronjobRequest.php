@@ -447,7 +447,7 @@ class CronjobRequest
         }
         $concurrencyPolicy = null;
         if (isset($input->{'concurrencyPolicy'})) {
-            $concurrencyPolicy = ConcurrencyPolicy::from($input->{'concurrencyPolicy'});
+            $concurrencyPolicy = (ConcurrencyPolicy::tryFrom($input->{'concurrencyPolicy'}) ?? ConcurrencyPolicy::unknown);
         }
         $description = $input->{'description'};
         $destination = null;

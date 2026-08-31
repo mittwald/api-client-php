@@ -9,4 +9,5 @@ enum ContactVerificationType: string
     case name = 'name';
     case address = 'address';
     case email = 'email';
+    case unknown = '__unknown__';
 }

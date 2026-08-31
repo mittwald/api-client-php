@@ -328,16 +328,16 @@ class UserInput
         if (isset($input->{'dataSource'})) {
             $dataSource = $input->{'dataSource'};
         }
-        $dataType = UserInputDataType::from($input->{'dataType'});
+        $dataType = (UserInputDataType::tryFrom($input->{'dataType'}) ?? UserInputDataType::unknown);
         $defaultValue = null;
         if (isset($input->{'defaultValue'})) {
             $defaultValue = $input->{'defaultValue'};
         }
         $format = null;
         if (isset($input->{'format'})) {
-            $format = UserInputFormat::from($input->{'format'});
+            $format = (UserInputFormat::tryFrom($input->{'format'}) ?? UserInputFormat::unknown);
         }
-        $lifecycleConstraint = AppInstallationLifecycle::from($input->{'lifecycleConstraint'});
+        $lifecycleConstraint = (AppInstallationLifecycle::tryFrom($input->{'lifecycleConstraint'}) ?? AppInstallationLifecycle::unknown);
         $name = $input->{'name'};
         $positionMeta = null;
         if (isset($input->{'positionMeta'})) {

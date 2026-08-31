@@ -8,4 +8,5 @@ enum AuthType: string
 {
     case password = 'password';
     case publicKey = 'publicKey';
+    case unknown = '__unknown__';
 }

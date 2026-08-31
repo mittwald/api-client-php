@@ -11,4 +11,5 @@ enum DatabaseUserStatus: string
     case error = 'error';
     case terminating = 'terminating';
     case disabled = 'disabled';
+    case unknown = '__unknown__';
 }

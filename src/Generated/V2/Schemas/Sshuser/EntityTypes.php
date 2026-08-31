@@ -8,4 +8,5 @@ enum EntityTypes: string
 {
     case ssh = 'ssh';
     case sftp = 'sftp';
+    case unknown = '__unknown__';
 }

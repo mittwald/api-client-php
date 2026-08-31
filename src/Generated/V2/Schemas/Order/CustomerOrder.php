@@ -393,9 +393,9 @@ class CustomerOrder
         if (isset($input->{'profile'})) {
             $profile = Profile::buildFromInput($input->{'profile'}, validate: $validate);
         }
-        $status = OrderStatus::from($input->{'status'});
+        $status = (OrderStatus::tryFrom($input->{'status'}) ?? OrderStatus::unknown);
         $summary = OrderSummary::buildFromInput($input->{'summary'}, validate: $validate);
-        $type = OrderType::from($input->{'type'});
+        $type = (OrderType::tryFrom($input->{'type'}) ?? OrderType::unknown);
 
         $obj = new self($customerId, $invoicingPeriod, $items, $orderId, $orderNumber, $status, $summary, $type);
         $obj->contractChangeContractId = $contractChangeContractId;

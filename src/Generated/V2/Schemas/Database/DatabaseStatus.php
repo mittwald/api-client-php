@@ -11,4 +11,5 @@ enum DatabaseStatus: string
     case migrating = 'migrating';
     case importing = 'importing';
     case error = 'error';
+    case unknown = '__unknown__';
 }

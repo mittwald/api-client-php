@@ -748,7 +748,7 @@ class ProjectListItem
         $description = $input->{'description'};
         $disableReason = null;
         if (isset($input->{'disableReason'})) {
-            $disableReason = DisableReason::from($input->{'disableReason'});
+            $disableReason = (DisableReason::tryFrom($input->{'disableReason'}) ?? DisableReason::unknown);
         }
         $disabledAt = null;
         if (isset($input->{'disabledAt'})) {
@@ -757,7 +757,7 @@ class ProjectListItem
         $enabled = (bool)($input->{'enabled'});
         $features = null;
         if (isset($input->{'features'})) {
-            $features = array_map(fn (string $i): ProjectFeature => ProjectFeature::from($i), $input->{'features'});
+            $features = array_map(fn (string $i): ProjectFeature => (ProjectFeature::tryFrom($i) ?? ProjectFeature::unknown), $input->{'features'});
         }
         $id = $input->{'id'};
         $imageRefId = null;
@@ -769,7 +769,7 @@ class ProjectListItem
         if (isset($input->{'projectHostingId'})) {
             $projectHostingId = $input->{'projectHostingId'};
         }
-        $readiness = DeprecatedProjectReadinessStatus::from($input->{'readiness'});
+        $readiness = (DeprecatedProjectReadinessStatus::tryFrom($input->{'readiness'}) ?? DeprecatedProjectReadinessStatus::unknown);
         $serverGroupId = $input->{'serverGroupId'};
         $serverId = null;
         if (isset($input->{'serverId'})) {
@@ -780,9 +780,9 @@ class ProjectListItem
             $serverShortId = $input->{'serverShortId'};
         }
         $shortId = $input->{'shortId'};
-        $status = ProjectStatus::from($input->{'status'});
+        $status = (ProjectStatus::tryFrom($input->{'status'}) ?? ProjectStatus::unknown);
         $statusSetAt = new DateTime($input->{'statusSetAt'});
-        $supportedFeatures = array_map(fn (string $i): ProjectFeature => ProjectFeature::from($i), $input->{'supportedFeatures'});
+        $supportedFeatures = array_map(fn (string $i): ProjectFeature => (ProjectFeature::tryFrom($i) ?? ProjectFeature::unknown), $input->{'supportedFeatures'});
         $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
         $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 

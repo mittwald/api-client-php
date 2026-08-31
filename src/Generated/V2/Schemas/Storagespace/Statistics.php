@@ -297,7 +297,7 @@ class Statistics
             $description = $input->{'description'};
         }
         $id = $input->{'id'};
-        $kind = StatisticsKind::from($input->{'kind'});
+        $kind = (StatisticsKind::tryFrom($input->{'kind'}) ?? StatisticsKind::unknown);
         $meta = StatisticsMeta::buildFromInput($input->{'meta'}, validate: $validate);
         $name = $input->{'name'};
         $notificationThresholdInBytes = null;

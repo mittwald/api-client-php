@@ -11,4 +11,5 @@ enum Status: string
     case answered = 'answered';
     case inProgress = 'inProgress';
     case waiting = 'waiting';
+    case unknown = '__unknown__';
 }

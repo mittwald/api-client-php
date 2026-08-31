@@ -181,7 +181,7 @@ class App
 
         $actionCapabilities = null;
         if (isset($input->{'actionCapabilities'})) {
-            $actionCapabilities = array_map(fn (string $item): Action => Action::from($item), $input->{'actionCapabilities'});
+            $actionCapabilities = array_map(fn (string $item): Action => (Action::tryFrom($item) ?? Action::unknown), $input->{'actionCapabilities'});
         }
         $id = $input->{'id'};
         $name = $input->{'name'};

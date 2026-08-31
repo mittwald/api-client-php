@@ -1031,14 +1031,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
+     * @return EmptyResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
      */
-    public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): UntypedResponse
+    public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): EmptyResponse
     {
         $httpRequest = new Request(ExtensionDeleteExtensionInstanceRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             412 => ExtensionDeleteExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
@@ -1054,14 +1054,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDisableExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function extensionDisableExtensionInstance(ExtensionDisableExtensionInstanceRequest $request): UntypedResponse
+    public function extensionDisableExtensionInstance(ExtensionDisableExtensionInstanceRequest $request): EmptyResponse
     {
         $httpRequest = new Request(ExtensionDisableExtensionInstanceRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionDisableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
@@ -1100,14 +1100,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionEnableExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function extensionEnableExtensionInstance(ExtensionEnableExtensionInstanceRequest $request): UntypedResponse
+    public function extensionEnableExtensionInstance(ExtensionEnableExtensionInstanceRequest $request): EmptyResponse
     {
         $httpRequest = new Request(ExtensionEnableExtensionInstanceRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionEnableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),

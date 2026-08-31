@@ -51,6 +51,7 @@ class ExtensionListExtensionsRequest
                 'enum' => [
                     'name',
                     'pricing.priceInCents',
+                    'relevance',
                 ],
                 'default' => 'name',
             ],

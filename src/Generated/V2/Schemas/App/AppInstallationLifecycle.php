@@ -9,4 +9,5 @@ enum AppInstallationLifecycle: string
     case installation = 'installation';
     case update = 'update';
     case reconfigure = 'reconfigure';
+    case unknown = '__unknown__';
 }

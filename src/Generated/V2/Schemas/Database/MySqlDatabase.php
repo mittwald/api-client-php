@@ -564,7 +564,7 @@ Note that you still need a database user with `externalAccess` enabled to connec
         }
         $name = $input->{'name'};
         $projectId = $input->{'projectId'};
-        $status = DatabaseStatus::from($input->{'status'});
+        $status = (DatabaseStatus::tryFrom($input->{'status'}) ?? DatabaseStatus::unknown);
         $statusSetAt = new DateTime($input->{'statusSetAt'});
         $storageUsageInBytes = (int)($input->{'storageUsageInBytes'});
         $storageUsageInBytesSetAt = new DateTime($input->{'storageUsageInBytesSetAt'});

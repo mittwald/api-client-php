@@ -8,4 +8,5 @@ enum ExtensionListExtensionsRequestSort: string
 {
     case name = 'name';
     case pricingpriceInCents = 'pricing.priceInCents';
+    case relevance = 'relevance';
 }

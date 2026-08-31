@@ -9,4 +9,5 @@ enum Registrar: string
     case INTERNETX = 'INTERNETX';
     case DENIC = 'DENIC';
     case HEXONET = 'HEXONET';
+    case unknown = '__unknown__';
 }

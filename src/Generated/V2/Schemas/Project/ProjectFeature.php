@@ -8,5 +8,7 @@ enum ProjectFeature: string
 {
     case redis = 'redis';
     case node = 'node';
+    case runtimeApps = 'runtimeApps';
     case container = 'container';
+    case unknown = '__unknown__';
 }

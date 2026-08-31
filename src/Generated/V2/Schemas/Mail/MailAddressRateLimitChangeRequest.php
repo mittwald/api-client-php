@@ -25,7 +25,7 @@ class MailAddressRateLimitChangeRequest
     private static array $internalValidationSchema = [
         'properties' => [
             'rateLimitId' => [
-                'description' => 'id of the rate limit requested',
+                'description' => 'ID of the rate limit requested.',
                 'type' => 'string',
             ],
         ],
@@ -36,7 +36,7 @@ class MailAddressRateLimitChangeRequest
     ];
 
     /**
-     * id of the rate limit requested
+     * ID of the rate limit requested.
      */
     private string $rateLimitId;
 

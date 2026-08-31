@@ -338,7 +338,7 @@ class Contact
         if (isset($input->{'title'})) {
             $title = $input->{'title'};
         }
-        $salutation = Salutation::from($input->{'salutation'});
+        $salutation = (Salutation::tryFrom($input->{'salutation'}) ?? Salutation::unknown);
         $company = null;
         if (isset($input->{'company'})) {
             $company = $input->{'company'};

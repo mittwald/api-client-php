@@ -185,7 +185,7 @@ class ProjectBackupRestorePathDeprecated
             $clearTargetPath = (bool)($input->{'clearTargetPath'});
         }
         $determinedTargetPath = $input->{'determinedTargetPath'};
-        $phase = ProjectBackupRestorePhase::from($input->{'phase'});
+        $phase = (ProjectBackupRestorePhase::tryFrom($input->{'phase'}) ?? ProjectBackupRestorePhase::unknown);
         $sourcePath = $input->{'sourcePath'};
         $targetPath = null;
         if (isset($input->{'targetPath'})) {

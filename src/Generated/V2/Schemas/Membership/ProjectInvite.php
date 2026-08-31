@@ -70,7 +70,6 @@ class ProjectInvite
             'projectId',
             'mailAddress',
             'role',
-            'accepted',
             'information',
             'projectDescription',
         ],
@@ -335,7 +334,7 @@ class ProjectInvite
         }
         $projectDescription = $input->{'projectDescription'};
         $projectId = $input->{'projectId'};
-        $role = ProjectRoles::from($input->{'role'});
+        $role = (ProjectRoles::tryFrom($input->{'role'}) ?? ProjectRoles::unknown);
 
         $obj = new self($id, $information, $mailAddress, $projectDescription, $projectId, $role);
         $obj->avatarRefId = $avatarRefId;

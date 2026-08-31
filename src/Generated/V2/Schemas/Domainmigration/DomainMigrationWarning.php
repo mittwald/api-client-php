@@ -102,7 +102,7 @@ class DomainMigrationWarning
             static::validateInput($input);
         }
 
-        $reason = DomainMigrationWarningReason::from($input->{'reason'});
+        $reason = (DomainMigrationWarningReason::tryFrom($input->{'reason'}) ?? DomainMigrationWarningReason::unknown);
         $subject = $input->{'subject'};
 
         $obj = new self($reason, $subject);

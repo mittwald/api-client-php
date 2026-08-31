@@ -26,6 +26,7 @@ class CreateDeliveryboxRequest
                         'type' => 'string',
                     ],
                     'password' => [
+                        'description' => 'Password of the Deliverybox. Write-only: it is never returned by any route.',
                         'type' => 'string',
                     ],
                 ],

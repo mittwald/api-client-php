@@ -60,6 +60,7 @@ class Customer
                         'hasActiveContracts',
                         'hasActiveExtensionSubscriptions',
                         'isActiveContributor',
+                        'hasOrdersInProgress',
                     ],
                     'type' => 'string',
                 ],
@@ -697,11 +698,11 @@ class Customer
         }
         $executingUserRoles = null;
         if (isset($input->{'executingUserRoles'})) {
-            $executingUserRoles = array_map(fn (string $i): Role => Role::from($i), $input->{'executingUserRoles'});
+            $executingUserRoles = array_map(fn (string $i): Role => (Role::tryFrom($i) ?? Role::unknown), $input->{'executingUserRoles'});
         }
         $flags = null;
         if (isset($input->{'flags'})) {
-            $flags = array_map(fn (string $i): CustomerFlag => CustomerFlag::from($i), $input->{'flags'});
+            $flags = array_map(fn (string $i): CustomerFlag => (CustomerFlag::tryFrom($i) ?? CustomerFlag::unknown), $input->{'flags'});
         }
         $isAllowedToPlaceOrders = null;
         if (isset($input->{'isAllowedToPlaceOrders'})) {

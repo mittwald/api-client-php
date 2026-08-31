@@ -70,7 +70,7 @@ class EmailDetectPhishingMailResponse
             static::validateInput($input);
         }
 
-        $result = EmailOrigin::from($input->{'result'});
+        $result = (EmailOrigin::tryFrom($input->{'result'}) ?? EmailOrigin::unknown);
 
         $obj = new self($result);
 

@@ -10,4 +10,5 @@ enum CustomerRoles: string
     case owner = 'owner';
     case member = 'member';
     case accountant = 'accountant';
+    case unknown = '__unknown__';
 }

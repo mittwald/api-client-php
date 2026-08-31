@@ -60,7 +60,7 @@ class NotificationsReadAllNotificationsDeprecatedOKResponseBody
             static::validateInput($input);
         }
 
-        $status = NotificationStatus::from($input->{'status'});
+        $status = (NotificationStatus::tryFrom($input->{'status'}) ?? NotificationStatus::unknown);
 
         $obj = new self($status);
 

@@ -8,4 +8,5 @@ enum CustomerFlag: string
 {
     case agency = 'agency';
     case employee = 'employee';
+    case unknown = '__unknown__';
 }

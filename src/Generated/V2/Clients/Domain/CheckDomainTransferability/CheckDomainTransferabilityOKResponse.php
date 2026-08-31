@@ -30,6 +30,9 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
                             'domainDoesNotExist' => [
                                 'type' => 'boolean',
                             ],
+                            'inRedemptionPeriod' => [
+                                'type' => 'boolean',
+                            ],
                             'transferLock' => [
                                 'type' => 'boolean',
                             ],
@@ -42,6 +45,7 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
                             'wrongAuthCode',
                             'transferLock',
                             'domainAgeTooSmall',
+                            'inRedemptionPeriod',
                         ],
                         'type' => 'object',
                     ],
