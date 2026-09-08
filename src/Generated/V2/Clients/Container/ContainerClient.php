@@ -32,6 +32,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetRegistry\GetRegistryReq
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetService\GetServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetService\GetServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetTemplate\GetTemplateOKResponse;
@@ -207,6 +209,16 @@ interface ContainerClient
      * @return StringResponse OK
      */
     public function getServiceLogs(GetServiceLogsRequest $request): StringResponse;
+    /**
+     * Get an analysis of the logs belonging to a Service.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-service-logs-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServiceLogsAnalysisRequest $request An object representing the request for this operation
+     * @return GetServiceLogsAnalysisOKResponse OK
+     */
+    public function getServiceLogsAnalysis(GetServiceLogsAnalysisRequest $request): GetServiceLogsAnalysisOKResponse;
     /**
      * Get a Stack.
      *

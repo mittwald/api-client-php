@@ -31,7 +31,7 @@ class ReadableArticle
                 'type' => 'array',
             ],
             'articleId' => [
-                'example' => 'WH25-0001',
+                'example' => 'WH25-0007',
                 'minLength' => 3,
                 'type' => 'string',
             ],
@@ -53,7 +53,7 @@ class ReadableArticle
                 'type' => 'number',
             ],
             'description' => [
-                'example' => 'proSpace without dedicated resources',
+                'example' => 'Configure your perfect hosting',
                 'type' => 'string',
             ],
             'forcedInvoicingPeriodInMonth' => [
@@ -101,7 +101,7 @@ class ReadableArticle
                 'type' => 'array',
             ],
             'name' => [
-                'example' => 'proSpace lite',
+                'example' => 'Webhosting',
                 'minLength' => 3,
                 'type' => 'string',
             ],
@@ -124,7 +124,7 @@ class ReadableArticle
             ],
             'price' => [
                 'description' => 'Monthly price in Eurocent',
-                'example' => 1000,
+                'example' => 1300,
                 'type' => 'number',
             ],
             'tags' => [

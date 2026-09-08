@@ -28,6 +28,7 @@ class ProjectBackupRestoreRequest
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabaseRequest',
                 ],
+                'minItems' => 1,
                 'type' => 'array',
             ],
             'pathRestore' => [

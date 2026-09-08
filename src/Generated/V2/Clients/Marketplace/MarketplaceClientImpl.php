@@ -316,7 +316,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpl
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadDefaultResponse;
@@ -1710,14 +1709,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
+     * @return EmptyResponse The verification has been requested.
      */
-    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse
+    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): EmptyResponse
     {
         $httpRequest = new Request(ExtensionRequestExtensionVerificationRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
-            return ExtensionRequestExtensionVerificationNoContentResponse::fromResponse($httpResponse);
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionRequestExtensionVerificationBadRequestResponse::fromResponse($httpResponse),

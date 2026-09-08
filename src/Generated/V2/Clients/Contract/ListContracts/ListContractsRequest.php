@@ -20,6 +20,15 @@ class ListContractsRequest
             'customerId' => [
                 'type' => 'string',
             ],
+            'search' => [
+                'type' => 'string',
+            ],
+            'baseArticleNames' => [
+                'items' => [
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -33,6 +42,22 @@ class ListContractsRequest
                 'type' => 'integer',
                 'minimum' => 0,
             ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'description',
+                    'contractNumber',
+                ],
+                'default' => 'contractNumber',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'desc',
+            ],
         ],
         'required' => [
             'customerId',
@@ -41,11 +66,22 @@ class ListContractsRequest
 
     private string $customerId;
 
+    private ?string $search = null;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $baseArticleNames = null;
+
     private int $limit = 1000;
 
     private int $skip = 0;
 
     private ?int $page = null;
+
+    private ListContractsRequestSort $sort = ListContractsRequestSort::contractNumber;
+
+    private ListContractsRequestOrder $order = ListContractsRequestOrder::desc;
 
     private array $headers = [
 
@@ -59,6 +95,19 @@ class ListContractsRequest
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    public function getSearch(): ?string
+    {
+        return $this->search ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getBaseArticleNames(): ?array
+    {
+        return $this->baseArticleNames ?? null;
     }
 
     public function getLimit(): int
@@ -76,6 +125,16 @@ class ListContractsRequest
         return $this->page ?? null;
     }
 
+    public function getSort(): ListContractsRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): ListContractsRequestOrder
+    {
+        return $this->order;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -86,6 +145,53 @@ class ListContractsRequest
 
         $clone = clone $this;
         $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withSearch(string $search): self
+    {
+        $validator = new Validator();
+        $validator->validate($search, self::$internalValidationSchema['properties']['search']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->search = $search;
+
+        return $clone;
+    }
+
+    public function withoutSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->search);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $baseArticleNames
+     */
+    public function withBaseArticleNames(array $baseArticleNames): self
+    {
+        $validator = new Validator();
+        $validator->validate($baseArticleNames, self::$internalValidationSchema['properties']['baseArticleNames']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->baseArticleNames = $baseArticleNames;
+
+        return $clone;
+    }
+
+    public function withoutBaseArticleNames(): self
+    {
+        $clone = clone $this;
+        unset($clone->baseArticleNames);
 
         return $clone;
     }
@@ -140,6 +246,22 @@ class ListContractsRequest
         return $clone;
     }
 
+    public function withSort(ListContractsRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(ListContractsRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -156,6 +278,14 @@ class ListContractsRequest
         }
 
         $customerId = $input->{'customerId'};
+        $search = null;
+        if (isset($input->{'search'})) {
+            $search = $input->{'search'};
+        }
+        $baseArticleNames = null;
+        if (isset($input->{'baseArticleNames'})) {
+            $baseArticleNames = $input->{'baseArticleNames'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -168,11 +298,23 @@ class ListContractsRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = ListContractsRequestSort::contractNumber;
+        if (isset($input->{'sort'})) {
+            $sort = ListContractsRequestSort::from($input->{'sort'});
+        }
+        $order = ListContractsRequestOrder::desc;
+        if (isset($input->{'order'})) {
+            $order = ListContractsRequestOrder::from($input->{'order'});
+        }
 
         $obj = new self($customerId);
+        $obj->search = $search;
+        $obj->baseArticleNames = $baseArticleNames;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -185,11 +327,19 @@ class ListContractsRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
+        if (isset($this->search)) {
+            $output['search'] = $this->search;
+        }
+        if (isset($this->baseArticleNames)) {
+            $output['baseArticleNames'] = $this->baseArticleNames;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -251,6 +401,12 @@ class ListContractsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['search'])) {
+            $query['search'] = $mapped['search'];
+        }
+        if (isset($mapped['baseArticleNames'])) {
+            $query['baseArticleNames'] = $mapped['baseArticleNames'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -259,6 +415,12 @@ class ListContractsRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

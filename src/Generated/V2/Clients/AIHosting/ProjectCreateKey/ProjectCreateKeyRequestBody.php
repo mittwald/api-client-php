@@ -21,9 +21,14 @@ class ProjectCreateKeyRequestBody
                 'minLength' => 5,
                 'type' => 'string',
             ],
+            'planId' => [
+                'minLength' => 1,
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'name',
+            'planId',
         ],
         'type' => 'object',
     ];
@@ -32,9 +37,12 @@ class ProjectCreateKeyRequestBody
 
     private string $name;
 
-    public function __construct(string $name)
+    private string $planId;
+
+    public function __construct(string $name, string $planId)
     {
         $this->name = $name;
+        $this->planId = $planId;
     }
 
     public function getCreateWebuiContainer(): ?bool
@@ -45,6 +53,11 @@ class ProjectCreateKeyRequestBody
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPlanId(): string
+    {
+        return $this->planId;
     }
 
     public function withCreateWebuiContainer(bool $createWebuiContainer): self
@@ -83,6 +96,20 @@ class ProjectCreateKeyRequestBody
         return $clone;
     }
 
+    public function withPlanId(string $planId): self
+    {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planId = $planId;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -103,8 +130,9 @@ class ProjectCreateKeyRequestBody
             $createWebuiContainer = (bool)($input->{'createWebuiContainer'});
         }
         $name = $input->{'name'};
+        $planId = $input->{'planId'};
 
-        $obj = new self($name);
+        $obj = new self($name, $planId);
         $obj->createWebuiContainer = $createWebuiContainer;
         return $obj;
     }
@@ -121,6 +149,7 @@ class ProjectCreateKeyRequestBody
             $output['createWebuiContainer'] = $this->createWebuiContainer;
         }
         $output['name'] = $this->name;
+        $output['planId'] = $this->planId;
 
         return $output;
     }

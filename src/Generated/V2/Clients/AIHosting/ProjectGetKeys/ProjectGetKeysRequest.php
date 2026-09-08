@@ -20,6 +20,22 @@ class ProjectGetKeysRequest
             'projectId' => [
                 'type' => 'string',
             ],
+            'planId' => [
+                'type' => 'string',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 200,
+                'minimum' => 0,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 0,
+            ],
         ],
         'required' => [
             'projectId',
@@ -27,6 +43,14 @@ class ProjectGetKeysRequest
     ];
 
     private string $projectId;
+
+    private ?string $planId = null;
+
+    private int $limit = 200;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -42,6 +66,26 @@ class ProjectGetKeysRequest
         return $this->projectId;
     }
 
+    public function getPlanId(): ?string
+    {
+        return $this->planId ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -52,6 +96,78 @@ class ProjectGetKeysRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withPlanId(string $planId): self
+    {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planId = $planId;
+
+        return $clone;
+    }
+
+    public function withoutPlanId(): self
+    {
+        $clone = clone $this;
+        unset($clone->planId);
+
+        return $clone;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
 
         return $clone;
     }
@@ -72,9 +188,28 @@ class ProjectGetKeysRequest
         }
 
         $projectId = $input->{'projectId'};
+        $planId = null;
+        if (isset($input->{'planId'})) {
+            $planId = $input->{'planId'};
+        }
+        $limit = 200;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($projectId);
-
+        $obj->planId = $planId;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -87,6 +222,14 @@ class ProjectGetKeysRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->planId)) {
+            $output['planId'] = $this->planId;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
 
         return $output;
     }
@@ -148,6 +291,18 @@ class ProjectGetKeysRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['planId'])) {
+            $query['planId'] = $mapped['planId'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class RequestAvatarUploadInternalServerErrorResponse implements ResponseContainer
+class SetCustomerReferralSourceDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,26 +22,26 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private RequestAvatarUploadInternalServerErrorResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(RequestAvatarUploadInternalServerErrorResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): RequestAvatarUploadInternalServerErrorResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(RequestAvatarUploadInternalServerErrorResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -53,17 +54,17 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestAvatarUploadInternalServerErrorResponse Created instance
+     * @return SetCustomerReferralSourceDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestAvatarUploadInternalServerErrorResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): SetCustomerReferralSourceDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = RequestAvatarUploadInternalServerErrorResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -78,7 +79,7 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -109,7 +110,6 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

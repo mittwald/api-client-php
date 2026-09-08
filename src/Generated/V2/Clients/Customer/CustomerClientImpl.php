@@ -130,7 +130,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarRe
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadTooManyRequestsResponse;
@@ -139,6 +139,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\Re
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerNotFoundResponse;
@@ -684,7 +691,7 @@ class CustomerClientImpl implements CustomerClient
             400 => RequestAvatarUploadBadRequestResponse::fromResponse($httpResponse),
             401 => RequestAvatarUploadUnauthorizedResponse::fromResponse($httpResponse),
             429 => RequestAvatarUploadTooManyRequestsResponse::fromResponse($httpResponse),
-            500 => RequestAvatarUploadInternalServerErrorResponse::fromResponse($httpResponse),
+            default => RequestAvatarUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -707,6 +714,30 @@ class CustomerClientImpl implements CustomerClient
             403 => ResendCustomerInviteMailForbiddenResponse::fromResponse($httpResponse),
             429 => ResendCustomerInviteMailTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResendCustomerInviteMailDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Set how the customer became aware of mittwald.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-set-customer-referral-source
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SetCustomerReferralSourceRequest $request An object representing the request for this operation
+     */
+    public function setCustomerReferralSource(SetCustomerReferralSourceRequest $request): SetCustomerReferralSourceOKResponse
+    {
+        $httpRequest = new Request(SetCustomerReferralSourceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SetCustomerReferralSourceOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SetCustomerReferralSourceBadRequestResponse::fromResponse($httpResponse),
+            403 => SetCustomerReferralSourceForbiddenResponse::fromResponse($httpResponse),
+            404 => SetCustomerReferralSourceNotFoundResponse::fromResponse($httpResponse),
+            429 => SetCustomerReferralSourceTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SetCustomerReferralSourceDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -40,6 +40,10 @@ class AppInstallation
             'appVersion' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.VersionStatus',
             ],
+            'autoUpdatesActivated' => [
+                'description' => 'Whether automatic updates are activated.',
+                'type' => 'boolean',
+            ],
             'createdAt' => [
                 'example' => '2024-09-20T22:57:32.000Z',
                 'format' => 'date-time',
@@ -178,6 +182,11 @@ class AppInstallation
 
     private VersionStatus $appVersion;
 
+    /**
+     * Whether automatic updates are activated.
+     */
+    private ?bool $autoUpdatesActivated = null;
+
     private DateTime $createdAt;
 
     private ?string $customDocumentRoot = null;
@@ -290,6 +299,11 @@ class AppInstallation
     public function getAppVersion(): VersionStatus
     {
         return $this->appVersion;
+    }
+
+    public function getAutoUpdatesActivated(): ?bool
+    {
+        return $this->autoUpdatesActivated ?? null;
     }
 
     public function getCreatedAt(): DateTime
@@ -473,6 +487,28 @@ class AppInstallation
     {
         $clone = clone $this;
         $clone->appVersion = $appVersion;
+
+        return $clone;
+    }
+
+    public function withAutoUpdatesActivated(bool $autoUpdatesActivated): self
+    {
+        $validator = new Validator();
+        $validator->validate($autoUpdatesActivated, self::$internalValidationSchema['properties']['autoUpdatesActivated']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->autoUpdatesActivated = $autoUpdatesActivated;
+
+        return $clone;
+    }
+
+    public function withoutAutoUpdatesActivated(): self
+    {
+        $clone = clone $this;
+        unset($clone->autoUpdatesActivated);
 
         return $clone;
     }
@@ -871,6 +907,10 @@ class AppInstallation
         $appId = $input->{'appId'};
         $appName = $input->{'appName'};
         $appVersion = VersionStatus::buildFromInput($input->{'appVersion'}, validate: $validate);
+        $autoUpdatesActivated = null;
+        if (isset($input->{'autoUpdatesActivated'})) {
+            $autoUpdatesActivated = (bool)($input->{'autoUpdatesActivated'});
+        }
         $createdAt = new DateTime($input->{'createdAt'});
         $customDocumentRoot = null;
         if (isset($input->{'customDocumentRoot'})) {
@@ -933,6 +973,7 @@ class AppInstallation
         $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appExternalVersion, $appId, $appName, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectDescription, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
+        $obj->autoUpdatesActivated = $autoUpdatesActivated;
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->deletionRequested = $deletionRequested;
         $obj->disabled = $disabled;
@@ -960,6 +1001,9 @@ class AppInstallation
         $output['appId'] = $this->appId;
         $output['appName'] = $this->appName;
         $output['appVersion'] = $this->appVersion->toJson();
+        if (isset($this->autoUpdatesActivated)) {
+            $output['autoUpdatesActivated'] = $this->autoUpdatesActivated;
+        }
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->customDocumentRoot)) {
             $output['customDocumentRoot'] = $this->customDocumentRoot;

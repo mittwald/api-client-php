@@ -25,7 +25,7 @@ class InternalProjectHostingOrder
     private static array $internalValidationSchema = [
         'properties' => [
             'articleId' => [
-                'example' => 'PS23-PLUS-0001',
+                'example' => 'WH25-0007',
                 'type' => 'string',
             ],
             'customerId' => [

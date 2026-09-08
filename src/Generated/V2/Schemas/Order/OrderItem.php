@@ -31,15 +31,15 @@ class OrderItem
                 'type' => 'array',
             ],
             'articleId' => [
-                'example' => 'PS23-PLUS-0004',
+                'example' => 'WH25-0007',
                 'type' => 'string',
             ],
             'articleName' => [
-                'example' => 'proSpace',
+                'example' => 'Webhosting',
                 'type' => 'string',
             ],
             'articleTemplateName' => [
-                'example' => 'Pro-Space-Hosting',
+                'example' => 'Webhosting',
                 'type' => 'string',
             ],
             'attributeConfiguration' => [
@@ -60,7 +60,7 @@ class OrderItem
                 'type' => 'string',
             ],
             'price' => [
-                'example' => 1000,
+                'example' => 1300,
                 'type' => 'number',
             ],
             'reference' => [

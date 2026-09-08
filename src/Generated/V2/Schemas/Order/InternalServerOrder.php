@@ -25,7 +25,7 @@ class InternalServerOrder
     private static array $internalValidationSchema = [
         'properties' => [
             'articleId' => [
-                'example' => 'MT22-0001',
+                'example' => 'VS25-0031',
                 'type' => 'string',
             ],
             'customerId' => [

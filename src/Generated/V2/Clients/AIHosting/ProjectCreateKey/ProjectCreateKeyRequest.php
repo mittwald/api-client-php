@@ -29,9 +29,14 @@ class ProjectCreateKeyRequest
                         'minLength' => 5,
                         'type' => 'string',
                     ],
+                    'planId' => [
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
                 ],
                 'required' => [
                     'name',
+                    'planId',
                 ],
                 'type' => 'object',
             ],

@@ -30,6 +30,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\Get
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentRequestedRangeNotSatisfiableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetFileContent\GetFileContentTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\GetJwt\GetJwtBadGatewayResponse;
@@ -139,8 +140,10 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            206 => StringResponse::fromResponse($httpResponse),
             403 => GetFileContentForbiddenResponse::fromResponse($httpResponse),
             404 => GetFileContentNotFoundResponse::fromResponse($httpResponse),
+            416 => GetFileContentRequestedRangeNotSatisfiableResponse::fromResponse($httpResponse),
             429 => GetFileContentTooManyRequestsResponse::fromResponse($httpResponse),
             502 => GetFileContentBadGatewayResponse::fromResponse($httpResponse),
             503 => GetFileContentServiceUnavailableResponse::fromResponse($httpResponse),

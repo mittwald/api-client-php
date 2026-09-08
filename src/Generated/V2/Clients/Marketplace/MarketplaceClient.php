@@ -110,7 +110,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\Ext
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
@@ -719,9 +718,9 @@ interface MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
+     * @return EmptyResponse The verification has been requested.
      */
-    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse;
+    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): EmptyResponse;
     /**
      * Add a logo to an extension.
      *

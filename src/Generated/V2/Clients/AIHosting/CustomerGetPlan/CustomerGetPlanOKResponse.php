@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification;
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlan;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\AIHosting\CustomerPlan;
 use Psr\Http\Message\ResponseInterface;
 
-class ExtensionRequestExtensionVerificationNoContentResponse implements ResponseContainer
+class CustomerGetPlanOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,26 +22,26 @@ class ExtensionRequestExtensionVerificationNoContentResponse implements Response
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.CustomerPlan',
             ],
         ],
     ];
 
-    private ExtensionRequestExtensionVerificationNoContentResponseBody $body;
+    private CustomerPlan $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ExtensionRequestExtensionVerificationNoContentResponseBody $body)
+    public function __construct(CustomerPlan $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ExtensionRequestExtensionVerificationNoContentResponseBody
+    public function getBody(): CustomerPlan
     {
         return $this->body;
     }
 
-    public function withBody(ExtensionRequestExtensionVerificationNoContentResponseBody $body): self
+    public function withBody(CustomerPlan $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -53,17 +54,17 @@ class ExtensionRequestExtensionVerificationNoContentResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionRequestExtensionVerificationNoContentResponse Created instance
+     * @return CustomerGetPlanOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRequestExtensionVerificationNoContentResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerGetPlanOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ExtensionRequestExtensionVerificationNoContentResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CustomerPlan::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -78,7 +79,7 @@ class ExtensionRequestExtensionVerificationNoContentResponse implements Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -109,7 +110,6 @@ class ExtensionRequestExtensionVerificationNoContentResponse implements Response
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

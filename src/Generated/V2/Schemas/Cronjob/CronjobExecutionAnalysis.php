@@ -25,28 +25,67 @@ class CronjobExecutionAnalysis
     private static array $internalValidationSchema = [
         'properties' => [
             'message' => [
-                'example' => 'Überprüfe die URL im Cronjob-Konfigurationsformular und korrigiere sie gegebenenfalls. Stelle sicher, dass die Domain gültig ist und DNS-Einträge korrekt konfiguriert wurden. Falls die URL falsch ist, aktualisiere sie mit der richtigen Adresse.',
+                'deprecated' => true,
+                'description' => 'Deprecated: contains summary and recommendation combined. Use the separate fields instead.',
+                'example' => 'The cronjob could not reach the configured URL because the domain could not be resolved.
+
+Check the URL in the cronjob configuration and correct it if necessary.',
+                'type' => 'string',
+            ],
+            'recommendation' => [
+                'example' => 'Check the URL in the cronjob configuration and correct it if necessary. Make sure the domain is valid and its DNS records are configured correctly.',
+                'type' => 'string',
+            ],
+            'summary' => [
+                'example' => 'The cronjob could not reach the configured URL because the domain could not be resolved.',
                 'type' => 'string',
             ],
         ],
         'required' => [
+            'summary',
             'message',
         ],
         'type' => 'object',
     ];
 
+    /**
+     * Deprecated: contains summary and recommendation combined. Use the separate fields instead.
+     *
+     * @deprecated
+     */
     private string $message;
 
-    public function __construct(string $message)
+    private ?string $recommendation = null;
+
+    private string $summary;
+
+    public function __construct(string $message, string $summary)
     {
         $this->message = $message;
+        $this->summary = $summary;
     }
 
+    /**
+     * @deprecated
+     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
+    public function getRecommendation(): ?string
+    {
+        return $this->recommendation ?? null;
+    }
+
+    public function getSummary(): string
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -57,6 +96,42 @@ class CronjobExecutionAnalysis
 
         $clone = clone $this;
         $clone->message = $message;
+
+        return $clone;
+    }
+
+    public function withRecommendation(string $recommendation): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommendation, self::$internalValidationSchema['properties']['recommendation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommendation = $recommendation;
+
+        return $clone;
+    }
+
+    public function withoutRecommendation(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommendation);
+
+        return $clone;
+    }
+
+    public function withSummary(string $summary): self
+    {
+        $validator = new Validator();
+        $validator->validate($summary, self::$internalValidationSchema['properties']['summary']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->summary = $summary;
 
         return $clone;
     }
@@ -77,9 +152,14 @@ class CronjobExecutionAnalysis
         }
 
         $message = $input->{'message'};
+        $recommendation = null;
+        if (isset($input->{'recommendation'})) {
+            $recommendation = $input->{'recommendation'};
+        }
+        $summary = $input->{'summary'};
 
-        $obj = new self($message);
-
+        $obj = new self($message, $summary);
+        $obj->recommendation = $recommendation;
         return $obj;
     }
 
@@ -92,6 +172,10 @@ class CronjobExecutionAnalysis
     {
         $output = [];
         $output['message'] = $this->message;
+        if (isset($this->recommendation)) {
+            $output['recommendation'] = $this->recommendation;
+        }
+        $output['summary'] = $this->summary;
 
         return $output;
     }

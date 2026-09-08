@@ -28,6 +28,8 @@ class Key
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.ContainerMeta',
             ],
             'customerId' => [
+                'deprecated' => true,
+                'description' => 'This Field is deprecated. Use the profileId field instead.',
                 'type' => 'string',
             ],
             'isBlocked' => [
@@ -54,6 +56,12 @@ class Key
             'name' => [
                 'type' => 'string',
             ],
+            'planId' => [
+                'type' => 'string',
+            ],
+            'profileId' => [
+                'type' => 'string',
+            ],
             'projectId' => [
                 'type' => 'string',
             ],
@@ -66,6 +74,8 @@ class Key
         ],
         'required' => [
             'keyId',
+            'profileId',
+            'planId',
             'key',
             'models',
             'name',
@@ -78,6 +88,11 @@ class Key
 
     private ?ContainerMeta $containerMeta = null;
 
+    /**
+     * This Field is deprecated. Use the profileId field instead.
+     *
+     * @deprecated
+     */
     private ?string $customerId = null;
 
     /**
@@ -105,6 +120,10 @@ class Key
 
     private string $name;
 
+    private string $planId;
+
+    private string $profileId;
+
     private ?string $projectId = null;
 
     private RateLimit $rateLimit;
@@ -114,12 +133,14 @@ class Key
     /**
      * @param string[] $models
      */
-    public function __construct(string $key, string $keyId, array $models, string $name, RateLimit $rateLimit, TokenUsage $tokenUsage)
+    public function __construct(string $key, string $keyId, array $models, string $name, string $planId, string $profileId, RateLimit $rateLimit, TokenUsage $tokenUsage)
     {
         $this->key = $key;
         $this->keyId = $keyId;
         $this->models = $models;
         $this->name = $name;
+        $this->planId = $planId;
+        $this->profileId = $profileId;
         $this->rateLimit = $rateLimit;
         $this->tokenUsage = $tokenUsage;
     }
@@ -129,6 +150,9 @@ class Key
         return $this->containerMeta ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
@@ -163,6 +187,16 @@ class Key
         return $this->name;
     }
 
+    public function getPlanId(): string
+    {
+        return $this->planId;
+    }
+
+    public function getProfileId(): string
+    {
+        return $this->profileId;
+    }
+
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
@@ -194,6 +228,9 @@ class Key
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -290,6 +327,34 @@ class Key
         return $clone;
     }
 
+    public function withPlanId(string $planId): self
+    {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planId = $planId;
+
+        return $clone;
+    }
+
+    public function withProfileId(string $profileId): self
+    {
+        $validator = new Validator();
+        $validator->validate($profileId, self::$internalValidationSchema['properties']['profileId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->profileId = $profileId;
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -359,6 +424,8 @@ class Key
         $keyId = $input->{'keyId'};
         $models = $input->{'models'};
         $name = $input->{'name'};
+        $planId = $input->{'planId'};
+        $profileId = $input->{'profileId'};
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
@@ -366,7 +433,7 @@ class Key
         $rateLimit = RateLimit::buildFromInput($input->{'rateLimit'}, validate: $validate);
         $tokenUsage = TokenUsage::buildFromInput($input->{'tokenUsage'}, validate: $validate);
 
-        $obj = new self($key, $keyId, $models, $name, $rateLimit, $tokenUsage);
+        $obj = new self($key, $keyId, $models, $name, $planId, $profileId, $rateLimit, $tokenUsage);
         $obj->containerMeta = $containerMeta;
         $obj->customerId = $customerId;
         $obj->isBlocked = $isBlocked;
@@ -393,6 +460,8 @@ class Key
         $output['keyId'] = $this->keyId;
         $output['models'] = $this->models;
         $output['name'] = $this->name;
+        $output['planId'] = $this->planId;
+        $output['profileId'] = $this->profileId;
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }

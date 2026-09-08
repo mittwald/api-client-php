@@ -25,11 +25,11 @@ class ReadableChangeArticleOptionsInfo
     private static array $internalValidationSchema = [
         'properties' => [
             'articleName' => [
-                'example' => 'proSpace lite',
+                'example' => 'Webhosting',
                 'type' => 'string',
             ],
             'articleTemplateName' => [
-                'example' => 'proSpace',
+                'example' => 'Webhosting',
                 'type' => 'string',
             ],
             'fromArticleTemplate' => [

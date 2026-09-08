@@ -29,12 +29,17 @@ class CustomerCreateKeyRequest
                         'minLength' => 5,
                         'type' => 'string',
                     ],
+                    'planId' => [
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
                     'projectId' => [
                         'type' => 'string',
                     ],
                 ],
                 'required' => [
                     'name',
+                    'planId',
                 ],
                 'type' => 'object',
             ],

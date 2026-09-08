@@ -48,6 +48,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarRe
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\SetCustomerReferralSource\SetCustomerReferralSourceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipRequest;
@@ -289,6 +291,15 @@ interface CustomerClient
      * @param ResendCustomerInviteMailRequest $request An object representing the request for this operation
      */
     public function resendCustomerInviteMail(ResendCustomerInviteMailRequest $request): EmptyResponse;
+    /**
+     * Set how the customer became aware of mittwald.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-set-customer-referral-source
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SetCustomerReferralSourceRequest $request An object representing the request for this operation
+     */
+    public function setCustomerReferralSource(SetCustomerReferralSourceRequest $request): SetCustomerReferralSourceOKResponse;
     /**
      * Update a customer profile.
      *

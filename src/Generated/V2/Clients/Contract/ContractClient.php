@@ -259,6 +259,8 @@ interface ContractClient
      * Return the AI Hosting Contract for the given Customer.
      *
      * This route is deprecated. Use `GET /v2/customers/{customerId}/ai-hostings/{aiHostingId}/contract` instead.
+     * A customer can own several AI hostings; this route answers with the contract of the oldest one.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-contract-get-detail-of-contract-by-ai-hosting
      * @throws GuzzleException

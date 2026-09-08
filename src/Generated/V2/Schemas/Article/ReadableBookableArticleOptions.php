@@ -25,18 +25,18 @@ class ReadableBookableArticleOptions
     private static array $internalValidationSchema = [
         'properties' => [
             'articleId' => [
-                'example' => 'WH25-0001',
+                'example' => 'WH25-0007',
                 'minLength' => 1,
                 'type' => 'string',
             ],
             'info' => [
                 'properties' => [
                     'articleName' => [
-                        'example' => 'proSpace lite',
+                        'example' => 'Webhosting',
                         'type' => 'string',
                     ],
                     'articleTemplateName' => [
-                        'example' => 'proSpace',
+                        'example' => 'Webhosting',
                         'type' => 'string',
                     ],
                     'fromArticleTemplate' => [

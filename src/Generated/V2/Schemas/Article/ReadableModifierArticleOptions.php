@@ -31,11 +31,11 @@ class ReadableModifierArticleOptions
             'info' => [
                 'properties' => [
                     'articleName' => [
-                        'example' => 'proSpace lite',
+                        'example' => 'Webhosting Speicherplatz',
                         'type' => 'string',
                     ],
                     'articleTemplateName' => [
-                        'example' => 'proSpace',
+                        'example' => 'Speicher für Hosting aller Art',
                         'type' => 'string',
                     ],
                     'fromArticleTemplate' => [

@@ -15,6 +15,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionOKResponse;
@@ -111,6 +113,18 @@ interface AppClient
      * @return GetAppinstallationOKResponse The AppInstallation.
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse;
+    /**
+     * Get an analysis of the error of an AppInstallation.
+     *
+     * Analyzes the last error of the AppInstallation. Only available while the AppInstallation has an error; returns a failed precondition otherwise.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appinstallation-error-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetAppinstallationErrorAnalysisRequest $request An object representing the request for this operation
+     * @return GetAppinstallationErrorAnalysisOKResponse The analysis of the AppInstallation error.
+     */
+    public function getAppinstallationErrorAnalysis(GetAppinstallationErrorAnalysisRequest $request): GetAppinstallationErrorAnalysisOKResponse;
     /**
      * Get an AppVersion.
      *

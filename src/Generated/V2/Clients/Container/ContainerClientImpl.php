@@ -140,8 +140,17 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceL
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsRequestedRangeNotSatisfiableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogs\GetServiceLogsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetServiceLogsAnalysis\GetServiceLogsAnalysisTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetStack\GetStackForbiddenResponse;
@@ -639,12 +648,40 @@ class ContainerClientImpl implements ContainerClient
             return StringResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            206 => StringResponse::fromResponse($httpResponse),
             403 => GetServiceLogsForbiddenResponse::fromResponse($httpResponse),
             404 => GetServiceLogsNotFoundResponse::fromResponse($httpResponse),
+            416 => GetServiceLogsRequestedRangeNotSatisfiableResponse::fromResponse($httpResponse),
             429 => GetServiceLogsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetServiceLogsInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetServiceLogsServiceUnavailableResponse::fromResponse($httpResponse),
             default => GetServiceLogsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get an analysis of the logs belonging to a Service.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-service-logs-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServiceLogsAnalysisRequest $request An object representing the request for this operation
+     * @return GetServiceLogsAnalysisOKResponse OK
+     */
+    public function getServiceLogsAnalysis(GetServiceLogsAnalysisRequest $request): GetServiceLogsAnalysisOKResponse
+    {
+        $httpRequest = new Request(GetServiceLogsAnalysisRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetServiceLogsAnalysisOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetServiceLogsAnalysisBadRequestResponse::fromResponse($httpResponse),
+            403 => GetServiceLogsAnalysisForbiddenResponse::fromResponse($httpResponse),
+            404 => GetServiceLogsAnalysisNotFoundResponse::fromResponse($httpResponse),
+            429 => GetServiceLogsAnalysisTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetServiceLogsAnalysisInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetServiceLogsAnalysisDefaultResponse::fromResponse($httpResponse),
         });
     }
 

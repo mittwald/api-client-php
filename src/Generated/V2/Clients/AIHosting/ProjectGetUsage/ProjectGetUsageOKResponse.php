@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\AIHosting\ProjectPlan;
 use Psr\Http\Message\ResponseInterface;
 
 class ProjectGetUsageOKResponse implements ResponseContainer
@@ -21,46 +22,26 @@ class ProjectGetUsageOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'keys' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsage',
-                    ],
-                    'modelTermsApprovalRequired' => [
-                        'type' => 'boolean',
-                    ],
-                    'nextTokenReset' => [
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'projectId' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'keys',
-                    'projectId',
-                    'modelTermsApprovalRequired',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.ProjectPlan',
             ],
         ],
     ];
 
-    private ProjectGetUsageOKResponseBody $body;
+    private ProjectPlan $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ProjectGetUsageOKResponseBody $body)
+    public function __construct(ProjectPlan $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ProjectGetUsageOKResponseBody
+    public function getBody(): ProjectPlan
     {
         return $this->body;
     }
 
-    public function withBody(ProjectGetUsageOKResponseBody $body): self
+    public function withBody(ProjectPlan $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -83,7 +64,7 @@ class ProjectGetUsageOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = ProjectGetUsageOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ProjectPlan::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -98,7 +79,7 @@ class ProjectGetUsageOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -129,7 +110,6 @@ class ProjectGetUsageOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

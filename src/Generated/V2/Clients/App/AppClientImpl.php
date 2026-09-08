@@ -39,6 +39,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstall
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallationErrorAnalysis\GetAppinstallationErrorAnalysisTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppInstallationSystemSoftware\GetAppInstallationSystemSoftwareOKResponse;
@@ -182,7 +188,7 @@ class AppClientImpl implements AppClient
     {
         $httpRequest = new Request(DetachAppinstallationStagingRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -259,6 +265,32 @@ class AppClientImpl implements AppClient
             404 => GetAppinstallationNotFoundResponse::fromResponse($httpResponse),
             429 => GetAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppinstallationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get an analysis of the error of an AppInstallation.
+     *
+     * Analyzes the last error of the AppInstallation. Only available while the AppInstallation has an error; returns a failed precondition otherwise.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appinstallation-error-analysis
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetAppinstallationErrorAnalysisRequest $request An object representing the request for this operation
+     * @return GetAppinstallationErrorAnalysisOKResponse The analysis of the AppInstallation error.
+     */
+    public function getAppinstallationErrorAnalysis(GetAppinstallationErrorAnalysisRequest $request): GetAppinstallationErrorAnalysisOKResponse
+    {
+        $httpRequest = new Request(GetAppinstallationErrorAnalysisRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetAppinstallationErrorAnalysisOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetAppinstallationErrorAnalysisBadRequestResponse::fromResponse($httpResponse),
+            404 => GetAppinstallationErrorAnalysisNotFoundResponse::fromResponse($httpResponse),
+            429 => GetAppinstallationErrorAnalysisTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetAppinstallationErrorAnalysisDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -598,7 +630,7 @@ class AppClientImpl implements AppClient
     {
         $httpRequest = new Request(PromoteAppinstallationStagingRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {

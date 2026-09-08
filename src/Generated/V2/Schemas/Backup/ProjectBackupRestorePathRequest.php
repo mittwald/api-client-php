@@ -37,6 +37,7 @@ class ProjectBackupRestorePathRequest
                 'items' => [
                     'type' => 'string',
                 ],
+                'minItems' => 1,
                 'type' => 'array',
             ],
             'targetRestorePath' => [
