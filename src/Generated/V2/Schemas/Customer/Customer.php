@@ -119,6 +119,7 @@ class Customer
                     'valid',
                     'invalid',
                     'pending',
+                    'unsupported',
                     'unspecified',
                 ],
                 'type' => 'string',

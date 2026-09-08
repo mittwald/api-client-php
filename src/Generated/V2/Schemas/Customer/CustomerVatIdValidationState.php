@@ -9,5 +9,6 @@ enum CustomerVatIdValidationState: string
     case valid = 'valid';
     case invalid = 'invalid';
     case pending = 'pending';
+    case unsupported = 'unsupported';
     case unspecified = 'unspecified';
 }
