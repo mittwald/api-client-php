@@ -29,6 +29,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\Customer
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectDeleteKey\ProjectDeleteKeyRequest;
@@ -198,6 +202,26 @@ interface AIHostingClient
      * @return GetModelsOKResponse List of currently active models.
      */
     public function getModels(GetModelsRequest $request): GetModelsOKResponse;
+    /**
+     * List the contract months of an ai hosting plan.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-plan-get-billing-periods
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PlanGetBillingPeriodsRequest $request An object representing the request for this operation
+     * @return PlanGetBillingPeriodsOKResponse The plan's billing periods, oldest first.
+     */
+    public function planGetBillingPeriods(PlanGetBillingPeriodsRequest $request): PlanGetBillingPeriodsOKResponse;
+    /**
+     * Get aggregated token usage statistics for an ai hosting plan of a customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-plan-get-usage-stats
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PlanGetUsageStatsRequest $request An object representing the request for this operation
+     * @return PlanGetUsageStatsOKResponse Aggregated token usage statistics for the ai hosting plan.
+     */
+    public function planGetUsageStats(PlanGetUsageStatsRequest $request): PlanGetUsageStatsOKResponse;
     /**
      * Creates a new key for a project.
      *

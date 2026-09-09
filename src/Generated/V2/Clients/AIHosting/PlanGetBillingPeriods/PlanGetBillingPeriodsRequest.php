@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateMysqlUserRequest
+class PlanGetBillingPeriodsRequest
 {
-    public const method = 'patch';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,83 +17,68 @@ class UpdateMysqlUserRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'mysqlUserId' => [
+            'customerId' => [
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'accessIpMask' => [
-                        'description' => 'This field currently has no effect.',
-                        'type' => 'string',
-                    ],
-                    'accessLevel' => [
-                        'enum' => [
-                            'full',
-                            'readonly',
-                        ],
-                        'type' => 'string',
-                    ],
-                    'description' => [
-                        'type' => 'string',
-                    ],
-                    'externalAccess' => [
-                        'type' => 'boolean',
-                    ],
-                    'password' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+            'planId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'mysqlUserId',
-            'body',
+            'customerId',
+            'planId',
         ],
     ];
 
-    private string $mysqlUserId;
+    private string $customerId;
 
-    private UpdateMysqlUserRequestBody $body;
+    private string $planId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $mysqlUserId, UpdateMysqlUserRequestBody $body)
+    public function __construct(string $customerId, string $planId)
     {
-        $this->mysqlUserId = $mysqlUserId;
-        $this->body = $body;
+        $this->customerId = $customerId;
+        $this->planId = $planId;
     }
 
-    public function getMysqlUserId(): string
+    public function getCustomerId(): string
     {
-        return $this->mysqlUserId;
+        return $this->customerId;
     }
 
-    public function getBody(): UpdateMysqlUserRequestBody
+    public function getPlanId(): string
     {
-        return $this->body;
+        return $this->planId;
     }
 
-    public function withMysqlUserId(string $mysqlUserId): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($mysqlUserId, self::$internalValidationSchema['properties']['mysqlUserId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->mysqlUserId = $mysqlUserId;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
-    public function withBody(UpdateMysqlUserRequestBody $body): self
+    public function withPlanId(string $planId): self
     {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->planId = $planId;
 
         return $clone;
     }
@@ -103,20 +88,20 @@ class UpdateMysqlUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateMysqlUserRequest Created instance
+     * @return PlanGetBillingPeriodsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): PlanGetBillingPeriodsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $mysqlUserId = $input->{'mysqlUserId'};
-        $body = UpdateMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
+        $planId = $input->{'planId'};
 
-        $obj = new self($mysqlUserId, $body);
+        $obj = new self($customerId, $planId);
 
         return $obj;
     }
@@ -129,8 +114,8 @@ class UpdateMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['mysqlUserId'] = $this->mysqlUserId;
-        $output['body'] = ($this->body)->toJson();
+        $output['customerId'] = $this->customerId;
+        $output['planId'] = $this->planId;
 
         return $output;
     }
@@ -161,7 +146,6 @@ class UpdateMysqlUserRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -176,8 +160,9 @@ class UpdateMysqlUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $mysqlUserId = urlencode($mapped['mysqlUserId']);
-        return '/v2/mysql-users/' . $mysqlUserId;
+        $customerId = urlencode($mapped['customerId']);
+        $planId = urlencode($mapped['planId']);
+        return '/v2/customers/' . $customerId . '/ai-hostings/' . $planId . '/billing-periods';
     }
 
     /**
@@ -196,7 +181,6 @@ class UpdateMysqlUserRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

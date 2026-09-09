@@ -102,6 +102,20 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsNotFoun
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\GetModels\GetModelsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetBillingPeriods\PlanGetBillingPeriodsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats\PlanGetUsageStatsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectCreateKey\ProjectCreateKeyCreatedResponse;
@@ -533,6 +547,56 @@ class AIHostingClientImpl implements AIHostingClient
             404 => GetModelsNotFoundResponse::fromResponse($httpResponse),
             429 => GetModelsTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetModelsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List the contract months of an ai hosting plan.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-plan-get-billing-periods
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PlanGetBillingPeriodsRequest $request An object representing the request for this operation
+     * @return PlanGetBillingPeriodsOKResponse The plan's billing periods, oldest first.
+     */
+    public function planGetBillingPeriods(PlanGetBillingPeriodsRequest $request): PlanGetBillingPeriodsOKResponse
+    {
+        $httpRequest = new Request(PlanGetBillingPeriodsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PlanGetBillingPeriodsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PlanGetBillingPeriodsBadRequestResponse::fromResponse($httpResponse),
+            403 => PlanGetBillingPeriodsForbiddenResponse::fromResponse($httpResponse),
+            404 => PlanGetBillingPeriodsNotFoundResponse::fromResponse($httpResponse),
+            429 => PlanGetBillingPeriodsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PlanGetBillingPeriodsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get aggregated token usage statistics for an ai hosting plan of a customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-plan-get-usage-stats
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PlanGetUsageStatsRequest $request An object representing the request for this operation
+     * @return PlanGetUsageStatsOKResponse Aggregated token usage statistics for the ai hosting plan.
+     */
+    public function planGetUsageStats(PlanGetUsageStatsRequest $request): PlanGetUsageStatsOKResponse
+    {
+        $httpRequest = new Request(PlanGetUsageStatsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PlanGetUsageStatsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PlanGetUsageStatsBadRequestResponse::fromResponse($httpResponse),
+            403 => PlanGetUsageStatsForbiddenResponse::fromResponse($httpResponse),
+            404 => PlanGetUsageStatsNotFoundResponse::fromResponse($httpResponse),
+            429 => PlanGetUsageStatsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PlanGetUsageStatsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

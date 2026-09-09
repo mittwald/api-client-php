@@ -15,6 +15,7 @@ class UpdateMysqlUserRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
+                'description' => 'This field currently has no effect.',
                 'type' => 'string',
             ],
             'accessLevel' => [
@@ -37,6 +38,9 @@ class UpdateMysqlUserRequestBody
         'type' => 'object',
     ];
 
+    /**
+     * This field currently has no effect.
+     */
     private ?string $accessIpMask = null;
 
     private ?UpdateMysqlUserRequestBodyAccessLevel $accessLevel = null;

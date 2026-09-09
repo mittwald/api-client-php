@@ -25,7 +25,7 @@ class CreateMySqlUser
     private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
-                'description' => 'An IP range (in CIDR notation) for which access should be allowed.',
+                'description' => 'An IP range (in CIDR notation) for which access should be allowed. This field currently has no effect.',
                 'example' => '203.0.113.123/32',
                 'type' => 'string',
             ],
@@ -67,7 +67,7 @@ To find out how to connect to your database from external sources, refer to the 
     ];
 
     /**
-     * An IP range (in CIDR notation) for which access should be allowed.
+     * An IP range (in CIDR notation) for which access should be allowed. This field currently has no effect.
      */
     private ?string $accessIpMask = null;
 

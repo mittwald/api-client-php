@@ -25,6 +25,7 @@ class CreateMySqlUserWithDatabase
     private static array $internalValidationSchema = [
         'properties' => [
             'accessIpMask' => [
+                'description' => 'This field currently has no effect.',
                 'type' => 'string',
             ],
             'accessLevel' => [
@@ -56,6 +57,9 @@ To find out how to connect to your database from external sources, refer to the 
         'type' => 'object',
     ];
 
+    /**
+     * This field currently has no effect.
+     */
     private ?string $accessIpMask = null;
 
     /**

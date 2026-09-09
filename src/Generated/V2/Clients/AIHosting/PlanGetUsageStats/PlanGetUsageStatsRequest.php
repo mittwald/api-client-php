@@ -1,0 +1,300 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting\PlanGetUsageStats;
+
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
+class PlanGetUsageStatsRequest
+{
+    public const method = 'get';
+
+    /**
+     * Schema used to validate input for creating instances of this class
+     */
+    private static array $internalValidationSchema = [
+        'type' => 'object',
+        'properties' => [
+            'customerId' => [
+                'type' => 'string',
+            ],
+            'planId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'startDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'endDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'keyId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+        ],
+        'required' => [
+            'customerId',
+            'planId',
+            'startDate',
+            'endDate',
+        ],
+    ];
+
+    private string $customerId;
+
+    private string $planId;
+
+    private DateTime $startDate;
+
+    private DateTime $endDate;
+
+    private ?string $keyId = null;
+
+    private array $headers = [
+
+    ];
+
+    public function __construct(string $customerId, string $planId, DateTime $startDate, DateTime $endDate)
+    {
+        $this->customerId = $customerId;
+        $this->planId = $planId;
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+    public function getCustomerId(): string
+    {
+        return $this->customerId;
+    }
+
+    public function getPlanId(): string
+    {
+        return $this->planId;
+    }
+
+    public function getStartDate(): DateTime
+    {
+        return $this->startDate;
+    }
+
+    public function getEndDate(): DateTime
+    {
+        return $this->endDate;
+    }
+
+    public function getKeyId(): ?string
+    {
+        return $this->keyId ?? null;
+    }
+
+    public function withCustomerId(string $customerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withPlanId(string $planId): self
+    {
+        $validator = new Validator();
+        $validator->validate($planId, self::$internalValidationSchema['properties']['planId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->planId = $planId;
+
+        return $clone;
+    }
+
+    public function withStartDate(DateTime $startDate): self
+    {
+        $clone = clone $this;
+        $clone->startDate = $startDate;
+
+        return $clone;
+    }
+
+    public function withEndDate(DateTime $endDate): self
+    {
+        $clone = clone $this;
+        $clone->endDate = $endDate;
+
+        return $clone;
+    }
+
+    public function withKeyId(string $keyId): self
+    {
+        $validator = new Validator();
+        $validator->validate($keyId, self::$internalValidationSchema['properties']['keyId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->keyId = $keyId;
+
+        return $clone;
+    }
+
+    public function withoutKeyId(): self
+    {
+        $clone = clone $this;
+        unset($clone->keyId);
+
+        return $clone;
+    }
+
+    /**
+     * Builds a new instance from an input array
+     *
+     * @param array|object $input Input data
+     * @param bool $validate Set this to false to skip validation; use at own risk
+     * @return PlanGetUsageStatsRequest Created instance
+     * @throws InvalidArgumentException
+     */
+    public static function buildFromInput(array|object $input, bool $validate = true): PlanGetUsageStatsRequest
+    {
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
+        if ($validate) {
+            static::validateInput($input);
+        }
+
+        $customerId = $input->{'customerId'};
+        $planId = $input->{'planId'};
+        $startDate = new DateTime($input->{'startDate'});
+        $endDate = new DateTime($input->{'endDate'});
+        $keyId = null;
+        if (isset($input->{'keyId'})) {
+            $keyId = $input->{'keyId'};
+        }
+
+        $obj = new self($customerId, $planId, $startDate, $endDate);
+        $obj->keyId = $keyId;
+        return $obj;
+    }
+
+    /**
+     * Converts this object back to a simple array that can be JSON-serialized
+     *
+     * @return array Converted array
+     */
+    public function toJson(): array
+    {
+        $output = [];
+        $output['customerId'] = $this->customerId;
+        $output['planId'] = $this->planId;
+        $output['startDate'] = ($this->startDate)->format(DateTime::ATOM);
+        $output['endDate'] = ($this->endDate)->format(DateTime::ATOM);
+        if (isset($this->keyId)) {
+            $output['keyId'] = $this->keyId;
+        }
+
+        return $output;
+    }
+
+    /**
+     * Validates an input array
+     *
+     * @param array|object $input Input data
+     * @param bool $return Return instead of throwing errors
+     * @return bool Validation result
+     * @throws InvalidArgumentException
+     */
+    public static function validateInput(array|object $input, bool $return = false): bool
+    {
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
+        $validator->validate($input, self::$internalValidationSchema);
+
+        if (!$validator->isValid() && !$return) {
+            $errors = array_map(function (array $e): string {
+                return $e["property"] . ": " . $e["message"];
+            }, $validator->getErrors());
+            throw new InvalidArgumentException(join(", ", $errors));
+        }
+
+        return $validator->isValid();
+    }
+
+    public function __clone()
+    {
+        $this->startDate = clone $this->startDate;
+        $this->endDate = clone $this->endDate;
+    }
+
+    /**
+     * Builds the URL for this request
+     *
+     * This method is used internally by the client to build the URL for this request.
+     * You should not need to call this method directly.
+     *
+     * @internal
+     * @return string The URL for this request
+     */
+    public function buildUrl(): string
+    {
+        $mapped = $this->toJson();
+        $customerId = urlencode($mapped['customerId']);
+        $planId = urlencode($mapped['planId']);
+        return '/v2/customers/' . $customerId . '/ai-hostings/' . $planId . '/usage';
+    }
+
+    /**
+     * Builds the request options for this request
+     *
+     * This method is used internally by the client to build the Guzzle request options
+     * for this request. You should not need to call this method directly.
+     *
+     * @internal
+     * @return array The Guzzle request options for this request
+     */
+    public function buildRequestOptions(): array
+    {
+        $mapped = $this->toJson();
+        $query = [];
+        if (isset($mapped['startDate'])) {
+            $query['startDate'] = $mapped['startDate'];
+        }
+        if (isset($mapped['endDate'])) {
+            $query['endDate'] = $mapped['endDate'];
+        }
+        if (isset($mapped['keyId'])) {
+            $query['keyId'] = $mapped['keyId'];
+        }
+        return [
+            'query' => $query,
+            'headers' => $this->headers,
+        ];
+    }
+
+    /**
+     * Adds a header to this request
+     *
+     * You can use this method to add custom HTTP headers to the request.
+     *
+     * @param string $name The name of the header to add
+     * @param string|array $value The value of the header to add
+     * @return self A clone of this request with the header added
+     */
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
+    }
+}
