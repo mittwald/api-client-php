@@ -20,7 +20,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaRequest;
@@ -1282,8 +1281,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => AuthenticateMfaBadRequestResponse::fromResponse($httpResponse),
-            408 => UntypedResponse::fromResponse($httpResponse),
+            400, 408 => UntypedResponse::fromResponse($httpResponse),
             429 => AuthenticateMfaTooManyRequestsResponse::fromResponse($httpResponse),
             default => AuthenticateMfaDefaultResponse::fromResponse($httpResponse),
         });
