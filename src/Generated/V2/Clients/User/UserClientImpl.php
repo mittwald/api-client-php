@@ -254,6 +254,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionNotFoundRe
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
@@ -352,6 +356,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecover
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightUsage\SpotlightUsageDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightUsage\SpotlightUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightUsage\SpotlightUsageTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestRequest;
@@ -1794,6 +1804,28 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Submitted feedback of the given user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-spotlight-info
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetSpotlightInfoRequest $request An object representing the request for this operation
+     * @return GetSpotlightInfoOKResponse Feedback submitted by the user.
+     */
+    public function getSpotlightInfo(GetSpotlightInfoRequest $request): GetSpotlightInfoOKResponse
+    {
+        $httpRequest = new Request(GetSpotlightInfoRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetSpotlightInfoOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetSpotlightInfoTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetSpotlightInfoDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a specific stored ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
@@ -2239,6 +2271,50 @@ class UserClientImpl implements UserClient
             400 => ResetRecoverycodesBadRequestResponse::fromResponse($httpResponse),
             429 => ResetRecoverycodesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResetRecoverycodesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Submit your spotlight usage.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-spotlight-feedback
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SpotlightFeedbackRequest $request An object representing the request for this operation
+     * @return EmptyResponse Feedback successfully submitted.
+     */
+    public function spotlightFeedback(SpotlightFeedbackRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SpotlightFeedbackRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => SpotlightFeedbackTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SpotlightFeedbackDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Submit your usage of the spotlight.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-spotlight-usage
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SpotlightUsageRequest $request An object representing the request for this operation
+     * @return EmptyResponse Usage recorded successfully
+     */
+    public function spotlightUsage(SpotlightUsageRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SpotlightUsageRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => SpotlightUsageTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SpotlightUsageDefaultResponse::fromResponse($httpResponse),
         });
     }
 

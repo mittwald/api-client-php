@@ -17,6 +17,8 @@ class UpdateStackRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'description' => [
+                'deprecated' => true,
+                'description' => 'Deprecated by \'x-description\' (which takes precedence). This field will be removed in a future version.',
                 'example' => 'uptime kuma',
                 'type' => 'string',
             ],
@@ -37,8 +39,9 @@ Keys must be strings of max 63 characters.
                 'type' => 'object',
             ],
             'updateSchedule' => [
-                'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
-schedule; omit the property to leave it unchanged.
+                'deprecated' => true,
+                'description' => 'Deprecated by \'x-update-schedule\' (which takes precedence). This field will be
+removed in a future version.
 ',
                 'nullable' => true,
                 'properties' => [
@@ -67,10 +70,41 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
 ',
                 'type' => 'object',
             ],
+            'x-description' => [
+                'description' => 'Description of the stack.',
+                'example' => 'uptime kuma',
+                'type' => 'string',
+            ],
+            'x-update-schedule' => [
+                'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
+',
+                'nullable' => true,
+                'properties' => [
+                    'cron' => [
+                        'example' => '* * * * *',
+                        'type' => 'string',
+                    ],
+                    'timezone' => [
+                        'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                        'example' => 'Europe/Berlin',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'cron',
+                ],
+                'type' => 'object',
+            ],
         ],
         'type' => 'object',
     ];
 
+    /**
+     * Deprecated by 'x-description' (which takes precedence). This field will be removed in a future version.
+     *
+     * @deprecated
+     */
     private ?string $description = null;
 
     /**
@@ -90,9 +124,11 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     private ?array $services = null;
 
     /**
-     * Schedule for automatic image updates of this stack. Set to `null` to remove the
-     * schedule; omit the property to leave it unchanged.
+     * Deprecated by 'x-update-schedule' (which takes precedence). This field will be
+     * removed in a future version.
      *
+     *
+     * @deprecated
      */
     private ?UpdateStackRequestBodyUpdateSchedule $updateSchedule = null;
 
@@ -107,12 +143,27 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     private ?array $volumes = null;
 
     /**
+     * Description of the stack.
+     */
+    private ?string $xDescription = null;
+
+    /**
+     * Schedule for automatic image updates of this stack. Set to `null` to remove the
+     * schedule; omit the property to leave it unchanged.
+     *
+     */
+    private ?UpdateStackRequestBodyXUpdateSchedule $xUpdateSchedule = null;
+
+    /**
      *
      */
     public function __construct()
     {
     }
 
+    /**
+     * @deprecated
+     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -126,6 +177,9 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $this->services ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getUpdateSchedule(): ?UpdateStackRequestBodyUpdateSchedule
     {
         return $this->updateSchedule ?? null;
@@ -139,6 +193,19 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $this->volumes ?? null;
     }
 
+    public function getXDescription(): ?string
+    {
+        return $this->xDescription ?? null;
+    }
+
+    public function getXUpdateSchedule(): ?UpdateStackRequestBodyXUpdateSchedule
+    {
+        return $this->xUpdateSchedule ?? null;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -180,6 +247,9 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withUpdateSchedule(UpdateStackRequestBodyUpdateSchedule $updateSchedule): self
     {
         $clone = clone $this;
@@ -215,6 +285,44 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         return $clone;
     }
 
+    public function withXDescription(string $xDescription): self
+    {
+        $validator = new Validator();
+        $validator->validate($xDescription, self::$internalValidationSchema['properties']['x-description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->xDescription = $xDescription;
+
+        return $clone;
+    }
+
+    public function withoutXDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->xDescription);
+
+        return $clone;
+    }
+
+    public function withXUpdateSchedule(UpdateStackRequestBodyXUpdateSchedule $xUpdateSchedule): self
+    {
+        $clone = clone $this;
+        $clone->xUpdateSchedule = $xUpdateSchedule;
+
+        return $clone;
+    }
+
+    public function withoutXUpdateSchedule(): self
+    {
+        $clone = clone $this;
+        unset($clone->xUpdateSchedule);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -246,12 +354,22 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         if (isset($input->{'volumes'})) {
             $volumes = array_map(fn (array|object $v) => VolumeRequest::buildFromInput($v, validate: $validate), (array)$input->{'volumes'});
         }
+        $xDescription = null;
+        if (isset($input->{'x-description'})) {
+            $xDescription = $input->{'x-description'};
+        }
+        $xUpdateSchedule = null;
+        if (isset($input->{'x-update-schedule'})) {
+            $xUpdateSchedule = UpdateStackRequestBodyXUpdateSchedule::buildFromInput($input->{'x-update-schedule'}, validate: $validate);
+        }
 
         $obj = new self();
         $obj->description = $description;
         $obj->services = $services;
         $obj->updateSchedule = $updateSchedule;
         $obj->volumes = $volumes;
+        $obj->xDescription = $xDescription;
+        $obj->xUpdateSchedule = $xUpdateSchedule;
         return $obj;
     }
 
@@ -274,6 +392,12 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
         }
         if (isset($this->volumes)) {
             $output['volumes'] = array_map(fn (VolumeRequest $v) => $v->toJson(), $this->volumes);
+        }
+        if (isset($this->xDescription)) {
+            $output['x-description'] = $this->xDescription;
+        }
+        if (isset($this->xUpdateSchedule)) {
+            $output['x-update-schedule'] = ($this->xUpdateSchedule)->toJson();
         }
 
         return $output;
@@ -307,6 +431,9 @@ stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}`
     {
         if (isset($this->updateSchedule)) {
             $this->updateSchedule = clone $this->updateSchedule;
+        }
+        if (isset($this->xUpdateSchedule)) {
+            $this->xUpdateSchedule = clone $this->xUpdateSchedule;
         }
     }
 }

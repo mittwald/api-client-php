@@ -37,6 +37,9 @@ class ExtensionListExtensionInstancesRequest
             'hasAcceptedAllScopes' => [
                 'type' => 'boolean',
             ],
+            'contract.interactionRequired' => [
+                'type' => 'boolean',
+            ],
             'parentCustomerId' => [
                 'type' => 'string',
             ],
@@ -60,6 +63,8 @@ class ExtensionListExtensionInstancesRequest
                         'createdAt',
                         'extensionId',
                         'extensionName',
+                        'unacceptedScopeChanges',
+                        'contract.interactionRequired',
                     ],
                 ],
                 'default' => [
@@ -96,6 +101,8 @@ class ExtensionListExtensionInstancesRequest
     private ?string $anchor = null;
 
     private ?bool $hasAcceptedAllScopes = null;
+
+    private ?bool $contractInteractionRequired = null;
 
     private ?string $parentCustomerId = null;
 
@@ -158,6 +165,11 @@ class ExtensionListExtensionInstancesRequest
     public function getHasAcceptedAllScopes(): ?bool
     {
         return $this->hasAcceptedAllScopes ?? null;
+    }
+
+    public function getContractInteractionRequired(): ?bool
+    {
+        return $this->contractInteractionRequired ?? null;
     }
 
     public function getParentCustomerId(): ?string
@@ -322,6 +334,28 @@ class ExtensionListExtensionInstancesRequest
         return $clone;
     }
 
+    public function withContractInteractionRequired(bool $contractInteractionRequired): self
+    {
+        $validator = new Validator();
+        $validator->validate($contractInteractionRequired, self::$internalValidationSchema['properties']['contract.interactionRequired']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contractInteractionRequired = $contractInteractionRequired;
+
+        return $clone;
+    }
+
+    public function withoutContractInteractionRequired(): self
+    {
+        $clone = clone $this;
+        unset($clone->contractInteractionRequired);
+
+        return $clone;
+    }
+
     public function withParentCustomerId(string $parentCustomerId): self
     {
         $validator = new Validator();
@@ -475,6 +509,10 @@ class ExtensionListExtensionInstancesRequest
         if (isset($input->{'hasAcceptedAllScopes'})) {
             $hasAcceptedAllScopes = (bool)($input->{'hasAcceptedAllScopes'});
         }
+        $contractInteractionRequired = null;
+        if (isset($input->{'contract.interactionRequired'})) {
+            $contractInteractionRequired = (bool)($input->{'contract.interactionRequired'});
+        }
         $parentCustomerId = null;
         if (isset($input->{'parentCustomerId'})) {
             $parentCustomerId = $input->{'parentCustomerId'};
@@ -511,6 +549,7 @@ class ExtensionListExtensionInstancesRequest
         $obj->searchTerm = $searchTerm;
         $obj->anchor = $anchor;
         $obj->hasAcceptedAllScopes = $hasAcceptedAllScopes;
+        $obj->contractInteractionRequired = $contractInteractionRequired;
         $obj->parentCustomerId = $parentCustomerId;
         $obj->limit = $limit;
         $obj->skip = $skip;
@@ -545,6 +584,9 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($this->hasAcceptedAllScopes)) {
             $output['hasAcceptedAllScopes'] = $this->hasAcceptedAllScopes;
+        }
+        if (isset($this->contractInteractionRequired)) {
+            $output['contract.interactionRequired'] = $this->contractInteractionRequired;
         }
         if (isset($this->parentCustomerId)) {
             $output['parentCustomerId'] = $this->parentCustomerId;
@@ -635,6 +677,9 @@ class ExtensionListExtensionInstancesRequest
         }
         if (isset($mapped['hasAcceptedAllScopes'])) {
             $query['hasAcceptedAllScopes'] = $mapped['hasAcceptedAllScopes'];
+        }
+        if (isset($mapped['contract.interactionRequired'])) {
+            $query['contract.interactionRequired'] = $mapped['contract.interactionRequired'];
         }
         if (isset($mapped['parentCustomerId'])) {
             $query['parentCustomerId'] = $mapped['parentCustomerId'];

@@ -7,15 +7,14 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Container\UpdateStack;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateStackRequestBodyUpdateSchedule
+class UpdateStackRequestBodyXUpdateSchedule
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
-        'deprecated' => true,
-        'description' => 'Deprecated by \'x-update-schedule\' (which takes precedence). This field will be
-removed in a future version.
+        'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
 ',
         'nullable' => true,
         'properties' => [
@@ -98,10 +97,10 @@ removed in a future version.
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateStackRequestBodyUpdateSchedule Created instance
+     * @return UpdateStackRequestBodyXUpdateSchedule Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateStackRequestBodyUpdateSchedule
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateStackRequestBodyXUpdateSchedule
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

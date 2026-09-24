@@ -88,6 +88,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKRe
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSpotlightInfo\GetSpotlightInfoRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserOKResponse;
@@ -126,6 +128,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvat
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightUsage\SpotlightUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateAllSessions\TerminateAllSessionsRequest;
@@ -789,6 +793,16 @@ interface UserClient
      */
     public function getSession(GetSessionRequest $request): GetSessionOKResponse;
     /**
+     * Submitted feedback of the given user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-spotlight-info
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetSpotlightInfoRequest $request An object representing the request for this operation
+     * @return GetSpotlightInfoOKResponse Feedback submitted by the user.
+     */
+    public function getSpotlightInfo(GetSpotlightInfoRequest $request): GetSpotlightInfoOKResponse;
+    /**
      * Get a specific stored ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
@@ -990,6 +1004,26 @@ interface UserClient
      * @return ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
      */
     public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse;
+    /**
+     * Submit your spotlight usage.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-spotlight-feedback
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SpotlightFeedbackRequest $request An object representing the request for this operation
+     * @return EmptyResponse Feedback successfully submitted.
+     */
+    public function spotlightFeedback(SpotlightFeedbackRequest $request): EmptyResponse;
+    /**
+     * Submit your usage of the spotlight.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-spotlight-usage
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SpotlightUsageRequest $request An object representing the request for this operation
+     * @return EmptyResponse Usage recorded successfully
+     */
+    public function spotlightUsage(SpotlightUsageRequest $request): EmptyResponse;
     /**
      * Request a support code.
      *

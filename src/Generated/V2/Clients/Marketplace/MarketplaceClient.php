@@ -18,6 +18,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesOKResponse;
@@ -113,6 +115,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpl
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionResumeWebhookExecutionForExtensionInstance\ExtensionResumeWebhookExecutionForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionVariantChange\ExtensionScheduleExtensionVariantChangeCreatedResponse;
@@ -203,6 +206,16 @@ interface MarketplaceClient
      * @return ContributorGetLoginLinkOKResponse The generated link to the Stripe dashboard
      */
     public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse;
+    /**
+     * Get a specific OAuth2 client.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-oauth-client
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetOauthClientRequest $request An object representing the request for this operation
+     * @return ContributorGetOauthClientOKResponse Get a specific OAuth client.
+     */
+    public function contributorGetOauthClient(ContributorGetOauthClientRequest $request): ContributorGetOauthClientOKResponse;
     /**
      * List ContractPartners of the contributor.
      *
@@ -731,6 +744,16 @@ interface MarketplaceClient
      * @return ExtensionRequestLogoUploadOKResponse The Upload of a logo for the extension has been requested.
      */
     public function extensionRequestLogoUpload(ExtensionRequestLogoUploadRequest $request): ExtensionRequestLogoUploadOKResponse;
+    /**
+     * Resume the webhook execution of an ExtensionInstance.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-resume-webhook-execution-for-extension-instance
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionResumeWebhookExecutionForExtensionInstanceRequest $request An object representing the request for this operation
+     * @return EmptyResponse Webhook execution has been resumed.
+     */
+    public function extensionResumeWebhookExecutionForExtensionInstance(ExtensionResumeWebhookExecutionForExtensionInstanceRequest $request): EmptyResponse;
     /**
      * Schedule an Extension Instance Termination for the next possible date.
      *

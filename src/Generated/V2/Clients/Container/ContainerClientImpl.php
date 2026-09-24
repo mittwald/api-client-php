@@ -449,7 +449,7 @@ class ContainerClientImpl implements ContainerClient
     /**
      * Declaratively create, update or delete Services or Volumes belonging to a Stack.
      *
-     * Note that this endpoint only declares the `services` and `volumes` of a Stack. Scalar Stack properties like `description` and `updateSchedule` are not part of this declaration and remain unchanged; use `PATCH /v2/stacks/{stackId}` to manage them. Including them in the declarative `PUT` (omitting a property then resets it) is planned for the next API version (v3).
+     * Note that this endpoint only declares the `services` and `volumes` of a Stack. Stack-level properties like `x-description` and `x-update-schedule` (formerly `description` and `updateSchedule`) are deliberately not part of this declaration: in a declarative `PUT`, omitting a property resets it, so adding these properties to this endpoint now would make existing requests — which do not send them — clear those values. They therefore remain unchanged by this endpoint; use `PATCH /v2/stacks/{stackId}` to manage them. Including them in the declarative `PUT` is planned for the next API version (v3).
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-declare-stack
      * @throws GuzzleException

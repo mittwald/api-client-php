@@ -27,6 +27,8 @@ class UpdateStackRequest
             'body' => [
                 'properties' => [
                     'description' => [
+                        'deprecated' => true,
+                        'description' => 'Deprecated by \'x-description\' (which takes precedence). This field will be removed in a future version.',
                         'example' => 'uptime kuma',
                         'type' => 'string',
                     ],
@@ -47,8 +49,9 @@ Keys must be strings of max 63 characters.
                         'type' => 'object',
                     ],
                     'updateSchedule' => [
-                        'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
-schedule; omit the property to leave it unchanged.
+                        'deprecated' => true,
+                        'description' => 'Deprecated by \'x-update-schedule\' (which takes precedence). This field will be
+removed in a future version.
 ',
                         'nullable' => true,
                         'properties' => [
@@ -75,6 +78,32 @@ schedule; omit the property to leave it unchanged.
 from this set will not delete the volume (for safety), but only detach it from the
 stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
 ',
+                        'type' => 'object',
+                    ],
+                    'x-description' => [
+                        'description' => 'Description of the stack.',
+                        'example' => 'uptime kuma',
+                        'type' => 'string',
+                    ],
+                    'x-update-schedule' => [
+                        'description' => 'Schedule for automatic image updates of this stack. Set to `null` to remove the
+schedule; omit the property to leave it unchanged.
+',
+                        'nullable' => true,
+                        'properties' => [
+                            'cron' => [
+                                'example' => '* * * * *',
+                                'type' => 'string',
+                            ],
+                            'timezone' => [
+                                'description' => 'Valid timezones can be retrieved via GET /v2/time-zones',
+                                'example' => 'Europe/Berlin',
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'cron',
+                        ],
                         'type' => 'object',
                     ],
                 ],

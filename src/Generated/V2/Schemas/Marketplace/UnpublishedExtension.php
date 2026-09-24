@@ -172,7 +172,6 @@ class UnpublishedExtension
             'state',
             'name',
             'tags',
-            'context',
             'scopes',
             'disabled',
             'blocked',
@@ -194,7 +193,7 @@ class UnpublishedExtension
      */
     private bool $blocked;
 
-    private Context $context;
+    private ?Context $context = null;
 
     private string $contributorId;
 
@@ -283,11 +282,10 @@ class UnpublishedExtension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, bool $disabled, string $id, string $name, array $scopes, UnpublishedExtensionState $state, ExtensionStatistics $statistics, array $tags)
+    public function __construct(array $assets, bool $blocked, string $contributorId, bool $disabled, string $id, string $name, array $scopes, UnpublishedExtensionState $state, ExtensionStatistics $statistics, array $tags)
     {
         $this->assets = $assets;
         $this->blocked = $blocked;
-        $this->context = $context;
         $this->contributorId = $contributorId;
         $this->disabled = $disabled;
         $this->id = $id;
@@ -314,9 +312,9 @@ class UnpublishedExtension
         return $this->blocked;
     }
 
-    public function getContext(): Context
+    public function getContext(): ?Context
     {
-        return $this->context;
+        return $this->context ?? null;
     }
 
     public function getContributorId(): string
@@ -488,6 +486,14 @@ class UnpublishedExtension
     {
         $clone = clone $this;
         $clone->context = $context;
+
+        return $clone;
+    }
+
+    public function withoutContext(): self
+    {
+        $clone = clone $this;
+        unset($clone->context);
 
         return $clone;
     }
@@ -895,7 +901,10 @@ class UnpublishedExtension
 
         $assets = array_map(fn (array|object $i): ExtensionAsset => ExtensionAsset::buildFromInput($i, validate: $validate), $input->{'assets'});
         $blocked = (bool)($input->{'blocked'});
-        $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
+        $context = null;
+        if (isset($input->{'context'})) {
+            $context = (Context::tryFrom($input->{'context'}) ?? Context::unknown);
+        }
         $contributorId = $input->{'contributorId'};
         $deletionDeadline = null;
         if (isset($input->{'deletionDeadline'})) {
@@ -968,7 +977,8 @@ class UnpublishedExtension
         }
         $tags = $input->{'tags'};
 
-        $obj = new self($assets, $blocked, $context, $contributorId, $disabled, $id, $name, $scopes, $state, $statistics, $tags);
+        $obj = new self($assets, $blocked, $contributorId, $disabled, $id, $name, $scopes, $state, $statistics, $tags);
+        $obj->context = $context;
         $obj->deletionDeadline = $deletionDeadline;
         $obj->deprecation = $deprecation;
         $obj->description = $description;
@@ -997,7 +1007,9 @@ class UnpublishedExtension
         $output = [];
         $output['assets'] = array_map(fn (ExtensionAsset $i): array => $i->toJson(), $this->assets);
         $output['blocked'] = $this->blocked;
-        $output['context'] = $this->context->value;
+        if (isset($this->context)) {
+            $output['context'] = $this->context->value;
+        }
         $output['contributorId'] = $this->contributorId;
         if (isset($this->deletionDeadline)) {
             $output['deletionDeadline'] = ($this->deletionDeadline)->format(DateTime::ATOM);

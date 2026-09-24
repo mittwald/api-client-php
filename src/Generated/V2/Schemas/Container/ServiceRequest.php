@@ -39,6 +39,8 @@ class ServiceRequest
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.Deploy',
             ],
             'description' => [
+                'deprecated' => true,
+                'description' => 'Deprecated by \'x-description\' (which takes precedence). This field will be removed in a future version.',
                 'example' => 'MySQL DB',
                 'type' => 'string',
             ],
@@ -103,7 +105,15 @@ The appropriate registry is matched by hostname.
                 ],
                 'type' => 'array',
             ],
+            'restart' => [
+                'description' => 'Restart policy for the container, matching the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` (optionally `on-failure:<max-retries>`) or `unless-stopped`.
+',
+                'example' => 'always',
+                'type' => 'string',
+            ],
             'restartPolicy' => [
+                'deprecated' => true,
+                'description' => 'Deprecated by \'restart\' (which takes precedence). This field will be removed in a future version.',
                 'example' => 'always',
                 'type' => 'string',
             ],
@@ -119,6 +129,11 @@ The appropriate registry is matched by hostname.
                 ],
                 'type' => 'array',
             ],
+            'x-description' => [
+                'description' => 'Human-readable description of this container.',
+                'example' => 'MySQL DB',
+                'type' => 'string',
+            ],
         ],
         'type' => 'object',
     ];
@@ -133,6 +148,11 @@ The appropriate registry is matched by hostname.
 
     private ?Deploy $deploy = null;
 
+    /**
+     * Deprecated by 'x-description' (which takes precedence). This field will be removed in a future version.
+     *
+     * @deprecated
+     */
     private ?string $description = null;
 
     /**
@@ -178,6 +198,17 @@ The appropriate registry is matched by hostname.
      */
     private ?array $ports = null;
 
+    /**
+     * Restart policy for the container, matching the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` (optionally `on-failure:<max-retries>`) or `unless-stopped`.
+     *
+     */
+    private ?string $restart = null;
+
+    /**
+     * Deprecated by 'restart' (which takes precedence). This field will be removed in a future version.
+     *
+     * @deprecated
+     */
     private ?string $restartPolicy = null;
 
     /**
@@ -187,6 +218,11 @@ The appropriate registry is matched by hostname.
      * @var string[]|null
      */
     private ?array $volumes = null;
+
+    /**
+     * Human-readable description of this container.
+     */
+    private ?string $xDescription = null;
 
     /**
      *
@@ -208,6 +244,9 @@ The appropriate registry is matched by hostname.
         return $this->deploy ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -251,6 +290,14 @@ The appropriate registry is matched by hostname.
         return $this->ports ?? null;
     }
 
+    public function getRestart(): ?string
+    {
+        return $this->restart ?? null;
+    }
+
+    /**
+     * @deprecated
+     */
     public function getRestartPolicy(): ?string
     {
         return $this->restartPolicy ?? null;
@@ -262,6 +309,11 @@ The appropriate registry is matched by hostname.
     public function getVolumes(): ?array
     {
         return $this->volumes ?? null;
+    }
+
+    public function getXDescription(): ?string
+    {
+        return $this->xDescription ?? null;
     }
 
     /**
@@ -305,6 +357,9 @@ The appropriate registry is matched by hostname.
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -450,6 +505,31 @@ The appropriate registry is matched by hostname.
         return $clone;
     }
 
+    public function withRestart(string $restart): self
+    {
+        $validator = new Validator();
+        $validator->validate($restart, self::$internalValidationSchema['properties']['restart']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->restart = $restart;
+
+        return $clone;
+    }
+
+    public function withoutRestart(): self
+    {
+        $clone = clone $this;
+        unset($clone->restart);
+
+        return $clone;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withRestartPolicy(string $restartPolicy): self
     {
         $validator = new Validator();
@@ -493,6 +573,28 @@ The appropriate registry is matched by hostname.
     {
         $clone = clone $this;
         unset($clone->volumes);
+
+        return $clone;
+    }
+
+    public function withXDescription(string $xDescription): self
+    {
+        $validator = new Validator();
+        $validator->validate($xDescription, self::$internalValidationSchema['properties']['x-description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->xDescription = $xDescription;
+
+        return $clone;
+    }
+
+    public function withoutXDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->xDescription);
 
         return $clone;
     }
@@ -544,6 +646,10 @@ The appropriate registry is matched by hostname.
         if (isset($input->{'ports'})) {
             $ports = $input->{'ports'};
         }
+        $restart = null;
+        if (isset($input->{'restart'})) {
+            $restart = $input->{'restart'};
+        }
         $restartPolicy = null;
         if (isset($input->{'restartPolicy'})) {
             $restartPolicy = $input->{'restartPolicy'};
@@ -551,6 +657,10 @@ The appropriate registry is matched by hostname.
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = $input->{'volumes'};
+        }
+        $xDescription = null;
+        if (isset($input->{'x-description'})) {
+            $xDescription = $input->{'x-description'};
         }
 
         $obj = new self();
@@ -562,8 +672,10 @@ The appropriate registry is matched by hostname.
         $obj->envs = $envs;
         $obj->image = $image;
         $obj->ports = $ports;
+        $obj->restart = $restart;
         $obj->restartPolicy = $restartPolicy;
         $obj->volumes = $volumes;
+        $obj->xDescription = $xDescription;
         return $obj;
     }
 
@@ -599,11 +711,17 @@ The appropriate registry is matched by hostname.
         if (isset($this->ports)) {
             $output['ports'] = $this->ports;
         }
+        if (isset($this->restart)) {
+            $output['restart'] = $this->restart;
+        }
         if (isset($this->restartPolicy)) {
             $output['restartPolicy'] = $this->restartPolicy;
         }
         if (isset($this->volumes)) {
             $output['volumes'] = $this->volumes;
+        }
+        if (isset($this->xDescription)) {
+            $output['x-description'] = $this->xDescription;
         }
 
         return $output;

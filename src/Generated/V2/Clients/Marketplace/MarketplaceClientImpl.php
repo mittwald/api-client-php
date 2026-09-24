@@ -43,6 +43,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetOauthClient\ContributorGetOauthClientTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorRequest;
@@ -323,6 +327,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUplo
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionResumeWebhookExecutionForExtensionInstance\ExtensionResumeWebhookExecutionForExtensionInstanceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionResumeWebhookExecutionForExtensionInstance\ExtensionResumeWebhookExecutionForExtensionInstanceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionResumeWebhookExecutionForExtensionInstance\ExtensionResumeWebhookExecutionForExtensionInstanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionResumeWebhookExecutionForExtensionInstance\ExtensionResumeWebhookExecutionForExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationDefaultResponse;
@@ -520,6 +528,28 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ContributorGetLoginLinkNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorGetLoginLinkTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorGetLoginLinkDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a specific OAuth2 client.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-oauth-client
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetOauthClientRequest $request An object representing the request for this operation
+     * @return ContributorGetOauthClientOKResponse Get a specific OAuth client.
+     */
+    public function contributorGetOauthClient(ContributorGetOauthClientRequest $request): ContributorGetOauthClientOKResponse
+    {
+        $httpRequest = new Request(ContributorGetOauthClientRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorGetOauthClientOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ContributorGetOauthClientTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorGetOauthClientDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1745,6 +1775,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionRequestLogoUploadNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionRequestLogoUploadTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRequestLogoUploadDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Resume the webhook execution of an ExtensionInstance.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-resume-webhook-execution-for-extension-instance
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionResumeWebhookExecutionForExtensionInstanceRequest $request An object representing the request for this operation
+     * @return EmptyResponse Webhook execution has been resumed.
+     */
+    public function extensionResumeWebhookExecutionForExtensionInstance(ExtensionResumeWebhookExecutionForExtensionInstanceRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ExtensionResumeWebhookExecutionForExtensionInstanceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionResumeWebhookExecutionForExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
+            429 => ExtensionResumeWebhookExecutionForExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionResumeWebhookExecutionForExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
 
