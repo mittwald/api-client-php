@@ -10,3 +10,7 @@ parameters:
     path: src/Generated/V2/Schemas/Marketplace/*.php
   - identifier: instanceof.alwaysTrue
     path: src/Generated
+  # justinrainbow/json-schema 5.x has incorrect doc-comments on the Factory constructor
+  - identifier: argument.type
+    path: src/Validator/Validator.php
+    reportUnmatched: false
