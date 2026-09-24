@@ -18,7 +18,7 @@ class Validator extends \JsonSchema\Validator
     public function __construct()
     {
         $schemaStorage = new SchemaStorage();
-        $factory = new Factory($schemaStorage); // @phpstan-ignore argument.type (doc-comments are incorrect)
+        $factory = new Factory($schemaStorage);
 
         parent::__construct($factory);
     }
