@@ -356,6 +356,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecover
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange\SearchedLeakedPasswordsByRangeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange\SearchedLeakedPasswordsByRangeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange\SearchedLeakedPasswordsByRangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange\SearchedLeakedPasswordsByRangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackTooManyRequestsResponse;
@@ -2271,6 +2275,29 @@ class UserClientImpl implements UserClient
             400 => ResetRecoverycodesBadRequestResponse::fromResponse($httpResponse),
             429 => ResetRecoverycodesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResetRecoverycodesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if a password is leaked.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-searched-leaked-passwords-by-range
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SearchedLeakedPasswordsByRangeRequest $request An object representing the request for this operation
+     * @return UntypedResponse All password hashes beginning with the searched prefix are returned alongside prevalence counts.
+     */
+    public function searchedLeakedPasswordsByRange(SearchedLeakedPasswordsByRangeRequest $request): UntypedResponse
+    {
+        $httpRequest = new Request(SearchedLeakedPasswordsByRangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UntypedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SearchedLeakedPasswordsByRangeBadRequestResponse::fromResponse($httpResponse),
+            429 => SearchedLeakedPasswordsByRangeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SearchedLeakedPasswordsByRangeDefaultResponse::fromResponse($httpResponse),
         });
     }
 

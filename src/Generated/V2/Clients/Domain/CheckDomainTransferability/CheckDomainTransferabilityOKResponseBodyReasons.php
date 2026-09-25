@@ -20,6 +20,10 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'domainDoesNotExist' => [
                 'type' => 'boolean',
             ],
+            'enabledIngressInOtherProject' => [
+                'description' => 'An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project.',
+                'type' => 'boolean',
+            ],
             'inRedemptionPeriod' => [
                 'type' => 'boolean',
             ],
@@ -36,6 +40,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'transferLock',
             'domainAgeTooSmall',
             'inRedemptionPeriod',
+            'enabledIngressInOtherProject',
         ],
         'type' => 'object',
     ];
@@ -44,16 +49,22 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
     private bool $domainDoesNotExist;
 
+    /**
+     * An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project.
+     */
+    private bool $enabledIngressInOtherProject;
+
     private bool $inRedemptionPeriod;
 
     private bool $transferLock;
 
     private bool $wrongAuthCode;
 
-    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $inRedemptionPeriod, bool $transferLock, bool $wrongAuthCode)
+    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $enabledIngressInOtherProject, bool $inRedemptionPeriod, bool $transferLock, bool $wrongAuthCode)
     {
         $this->domainAgeTooSmall = $domainAgeTooSmall;
         $this->domainDoesNotExist = $domainDoesNotExist;
+        $this->enabledIngressInOtherProject = $enabledIngressInOtherProject;
         $this->inRedemptionPeriod = $inRedemptionPeriod;
         $this->transferLock = $transferLock;
         $this->wrongAuthCode = $wrongAuthCode;
@@ -67,6 +78,11 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function getDomainDoesNotExist(): bool
     {
         return $this->domainDoesNotExist;
+    }
+
+    public function getEnabledIngressInOtherProject(): bool
+    {
+        return $this->enabledIngressInOtherProject;
     }
 
     public function getInRedemptionPeriod(): bool
@@ -108,6 +124,20 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
         $clone = clone $this;
         $clone->domainDoesNotExist = $domainDoesNotExist;
+
+        return $clone;
+    }
+
+    public function withEnabledIngressInOtherProject(bool $enabledIngressInOtherProject): self
+    {
+        $validator = new Validator();
+        $validator->validate($enabledIngressInOtherProject, self::$internalValidationSchema['properties']['enabledIngressInOtherProject']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->enabledIngressInOtherProject = $enabledIngressInOtherProject;
 
         return $clone;
     }
@@ -171,11 +201,12 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
         $domainAgeTooSmall = (bool)($input->{'domainAgeTooSmall'});
         $domainDoesNotExist = (bool)($input->{'domainDoesNotExist'});
+        $enabledIngressInOtherProject = (bool)($input->{'enabledIngressInOtherProject'});
         $inRedemptionPeriod = (bool)($input->{'inRedemptionPeriod'});
         $transferLock = (bool)($input->{'transferLock'});
         $wrongAuthCode = (bool)($input->{'wrongAuthCode'});
 
-        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $inRedemptionPeriod, $transferLock, $wrongAuthCode);
+        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $enabledIngressInOtherProject, $inRedemptionPeriod, $transferLock, $wrongAuthCode);
 
         return $obj;
     }
@@ -190,6 +221,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         $output = [];
         $output['domainAgeTooSmall'] = $this->domainAgeTooSmall;
         $output['domainDoesNotExist'] = $this->domainDoesNotExist;
+        $output['enabledIngressInOtherProject'] = $this->enabledIngressInOtherProject;
         $output['inRedemptionPeriod'] = $this->inRedemptionPeriod;
         $output['transferLock'] = $this->transferLock;
         $output['wrongAuthCode'] = $this->wrongAuthCode;

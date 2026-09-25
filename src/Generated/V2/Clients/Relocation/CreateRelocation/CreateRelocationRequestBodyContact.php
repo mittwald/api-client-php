@@ -28,7 +28,6 @@ class CreateRelocationRequestBodyContact
                 'type' => 'string',
             ],
             'phoneNumber' => [
-                'pattern' => '|^\\+([0-9]{2,3}|1)-[0-9]{2,5}-[0-9]+$',
                 'type' => 'string',
             ],
         ],

@@ -22,6 +22,10 @@ class CheckDomainTransferabilityOKResponseBody
                     'domainDoesNotExist' => [
                         'type' => 'boolean',
                     ],
+                    'enabledIngressInOtherProject' => [
+                        'description' => 'An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project.',
+                        'type' => 'boolean',
+                    ],
                     'inRedemptionPeriod' => [
                         'type' => 'boolean',
                     ],
@@ -38,6 +42,7 @@ class CheckDomainTransferabilityOKResponseBody
                     'transferLock',
                     'domainAgeTooSmall',
                     'inRedemptionPeriod',
+                    'enabledIngressInOtherProject',
                 ],
                 'type' => 'object',
             ],

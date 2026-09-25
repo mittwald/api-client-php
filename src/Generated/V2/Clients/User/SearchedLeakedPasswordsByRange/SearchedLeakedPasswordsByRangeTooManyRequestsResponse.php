@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class CheckDomainTransferabilityOKResponse implements ResponseContainer
+class SearchedLeakedPasswordsByRangeTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,67 +21,36 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'reasons' => [
-                        'properties' => [
-                            'domainAgeTooSmall' => [
-                                'type' => 'boolean',
-                            ],
-                            'domainDoesNotExist' => [
-                                'type' => 'boolean',
-                            ],
-                            'enabledIngressInOtherProject' => [
-                                'description' => 'An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project.',
-                                'type' => 'boolean',
-                            ],
-                            'inRedemptionPeriod' => [
-                                'type' => 'boolean',
-                            ],
-                            'transferLock' => [
-                                'type' => 'boolean',
-                            ],
-                            'wrongAuthCode' => [
-                                'type' => 'boolean',
-                            ],
-                        ],
-                        'required' => [
-                            'domainDoesNotExist',
-                            'wrongAuthCode',
-                            'transferLock',
-                            'domainAgeTooSmall',
-                            'inRedemptionPeriod',
-                            'enabledIngressInOtherProject',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'transferable' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'transferable',
-                    'reasons',
-                ],
                 'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private CheckDomainTransferabilityOKResponseBody $body;
+    private SearchedLeakedPasswordsByRangeTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(CheckDomainTransferabilityOKResponseBody $body)
+    public function __construct(SearchedLeakedPasswordsByRangeTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): CheckDomainTransferabilityOKResponseBody
+    public function getBody(): SearchedLeakedPasswordsByRangeTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(CheckDomainTransferabilityOKResponseBody $body): self
+    public function withBody(SearchedLeakedPasswordsByRangeTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -94,17 +63,17 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CheckDomainTransferabilityOKResponse Created instance
+     * @return SearchedLeakedPasswordsByRangeTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainTransferabilityOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): SearchedLeakedPasswordsByRangeTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CheckDomainTransferabilityOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = SearchedLeakedPasswordsByRangeTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

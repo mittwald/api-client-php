@@ -21,6 +21,11 @@ class CheckDomainTransferabilityRequestBody
                 'format' => 'naked-domain',
                 'type' => 'string',
             ],
+            'projectId' => [
+                'description' => 'Target project of the transfer. If given, the domain is reported as not transferable (reason enabledIngressInOtherProject) when an enabled ingress for it already exists in another project.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'domain',
@@ -30,6 +35,11 @@ class CheckDomainTransferabilityRequestBody
     private ?string $authCode = null;
 
     private string $domain;
+
+    /**
+     * Target project of the transfer. If given, the domain is reported as not transferable (reason enabledIngressInOtherProject) when an enabled ingress for it already exists in another project.
+     */
+    private ?string $projectId = null;
 
     public function __construct(string $domain)
     {
@@ -44,6 +54,11 @@ class CheckDomainTransferabilityRequestBody
     public function getDomain(): string
     {
         return $this->domain;
+    }
+
+    public function getProjectId(): ?string
+    {
+        return $this->projectId ?? null;
     }
 
     public function withAuthCode(string $authCode): self
@@ -82,6 +97,28 @@ class CheckDomainTransferabilityRequestBody
         return $clone;
     }
 
+    public function withProjectId(string $projectId): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withoutProjectId(): self
+    {
+        $clone = clone $this;
+        unset($clone->projectId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -102,9 +139,14 @@ class CheckDomainTransferabilityRequestBody
             $authCode = $input->{'authCode'};
         }
         $domain = $input->{'domain'};
+        $projectId = null;
+        if (isset($input->{'projectId'})) {
+            $projectId = $input->{'projectId'};
+        }
 
         $obj = new self($domain);
         $obj->authCode = $authCode;
+        $obj->projectId = $projectId;
         return $obj;
     }
 
@@ -120,6 +162,9 @@ class CheckDomainTransferabilityRequestBody
             $output['authCode'] = $this->authCode;
         }
         $output['domain'] = $this->domain;
+        if (isset($this->projectId)) {
+            $output['projectId'] = $this->projectId;
+        }
 
         return $output;
     }

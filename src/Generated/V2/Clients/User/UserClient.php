@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
@@ -128,6 +129,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvat
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange\SearchedLeakedPasswordsByRangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightFeedback\SpotlightFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SpotlightUsage\SpotlightUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestOKResponse;
@@ -1004,6 +1006,16 @@ interface UserClient
      * @return ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
      */
     public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse;
+    /**
+     * Check if a password is leaked.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-searched-leaked-passwords-by-range
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SearchedLeakedPasswordsByRangeRequest $request An object representing the request for this operation
+     * @return UntypedResponse All password hashes beginning with the searched prefix are returned alongside prevalence counts.
+     */
+    public function searchedLeakedPasswordsByRange(SearchedLeakedPasswordsByRangeRequest $request): UntypedResponse;
     /**
      * Submit your spotlight usage.
      *

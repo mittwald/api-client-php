@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\SearchedLeakedPasswordsByRange;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CheckDomainTransferabilityRequest
+class SearchedLeakedPasswordsByRangeRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,51 +17,43 @@ class CheckDomainTransferabilityRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'authCode' => [
-                        'type' => 'string',
-                    ],
-                    'domain' => [
-                        'format' => 'naked-domain',
-                        'type' => 'string',
-                    ],
-                    'projectId' => [
-                        'description' => 'Target project of the transfer. If given, the domain is reported as not transferable (reason enabledIngressInOtherProject) when an enabled ingress for it already exists in another project.',
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'domain',
-                ],
+            'passwordHashPrefix' => [
+                'example' => '0018A',
+                'maxLength' => 5,
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'passwordHashPrefix',
         ],
     ];
 
-    private CheckDomainTransferabilityRequestBody $body;
+    private string $passwordHashPrefix;
 
     private array $headers = [
 
     ];
 
-    public function __construct(CheckDomainTransferabilityRequestBody $body)
+    public function __construct(string $passwordHashPrefix)
     {
-        $this->body = $body;
+        $this->passwordHashPrefix = $passwordHashPrefix;
     }
 
-    public function getBody(): CheckDomainTransferabilityRequestBody
+    public function getPasswordHashPrefix(): string
     {
-        return $this->body;
+        return $this->passwordHashPrefix;
     }
 
-    public function withBody(CheckDomainTransferabilityRequestBody $body): self
+    public function withPasswordHashPrefix(string $passwordHashPrefix): self
     {
+        $validator = new Validator();
+        $validator->validate($passwordHashPrefix, self::$internalValidationSchema['properties']['passwordHashPrefix']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->passwordHashPrefix = $passwordHashPrefix;
 
         return $clone;
     }
@@ -71,19 +63,19 @@ class CheckDomainTransferabilityRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CheckDomainTransferabilityRequest Created instance
+     * @return SearchedLeakedPasswordsByRangeRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainTransferabilityRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): SearchedLeakedPasswordsByRangeRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CheckDomainTransferabilityRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $passwordHashPrefix = $input->{'passwordHashPrefix'};
 
-        $obj = new self($body);
+        $obj = new self($passwordHashPrefix);
 
         return $obj;
     }
@@ -96,7 +88,7 @@ class CheckDomainTransferabilityRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['passwordHashPrefix'] = $this->passwordHashPrefix;
 
         return $output;
     }
@@ -127,7 +119,6 @@ class CheckDomainTransferabilityRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -142,7 +133,8 @@ class CheckDomainTransferabilityRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/domain-transferable';
+        $passwordHashPrefix = urlencode($mapped['passwordHashPrefix']);
+        return '/v2/leaked-passwords/' . $passwordHashPrefix;
     }
 
     /**
@@ -161,7 +153,6 @@ class CheckDomainTransferabilityRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 
