@@ -683,7 +683,9 @@ class UserClientImpl implements UserClient
      * @throws UnexpectedResponseException
      * @param DeprecatedUserInitPasswordResetRequest $request An object representing the request for this operation
      * @deprecated
-     * @return EmptyResponse The password reset process has been initialized and an email with confirmation code has been sent.
+     * @return EmptyResponse The password reset process has been initialized. The email with the confirmation code is
+     * sent asynchronously, so a successful response does not guarantee that it has been
+     * delivered yet.
      */
     public function deprecatedUserInitPasswordReset(DeprecatedUserInitPasswordResetRequest $request): EmptyResponse
     {
@@ -1906,7 +1908,9 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InitPasswordResetRequest $request An object representing the request for this operation
-     * @return InitPasswordResetCreatedResponse The password reset process has been initialized and an email with confirmation code has been sent.
+     * @return InitPasswordResetCreatedResponse The password reset process has been initialized. The email with the confirmation code is
+     * sent asynchronously, so a successful response does not guarantee that it has been
+     * delivered yet.
      */
     public function initPasswordReset(InitPasswordResetRequest $request): InitPasswordResetCreatedResponse
     {

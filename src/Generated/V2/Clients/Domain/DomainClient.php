@@ -50,10 +50,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\Deprecat
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateProjectDnsZone\DnsCreateProjectDnsZoneCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateProjectDnsZone\DnsCreateProjectDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZoneFileImport\DnsGetDnsZoneFileImportOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZoneFileImport\DnsGetDnsZoneFileImportRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZoneFileImports\DnsListDnsZoneFileImportsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZoneFileImports\DnsListDnsZoneFileImportsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedOKResponse;
@@ -379,15 +387,42 @@ interface DomainClient
      */
     public function deprecatedIngressTls(DeprecatedIngressTlsRequest $request): DeprecatedIngressTlsOKResponse;
     /**
-     * Create a DNSZone.
+     * Create a DNSZone (deprecated).
+     *
+     * This operation is deprecated. Use POST v2/projects/{projectId}/dns-zones instead, which creates the zone for a domain (root or subzone) and guards root zones behind a verified ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DnsCreateDnsZoneRequest $request An object representing the request for this operation
+     * @deprecated
      * @return DnsCreateDnsZoneCreatedResponse The ID of the created DNSZone.
      */
     public function dnsCreateDnsZone(DnsCreateDnsZoneRequest $request): DnsCreateDnsZoneCreatedResponse;
+    /**
+     * Import a DNS zone file into a Project, or preview it with dry-run.
+     *
+     * Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dryRun=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts the import and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run preview) and retry, since a half-imported zone file would leave DNS in a confusing half-state. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone-file-import
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsCreateDnsZoneFileImportRequest $request An object representing the request for this operation
+     * @return DnsCreateDnsZoneFileImportOKResponse The import plan (zones + conflicts); on a real import also the created job id.
+     */
+    public function dnsCreateDnsZoneFileImport(DnsCreateDnsZoneFileImportRequest $request): DnsCreateDnsZoneFileImportOKResponse;
+    /**
+     * Create a DNSZone for a verified Ingress in a Project.
+     *
+     * Creates a DNSZone for a verified Ingress in a Project. The service resolves whether the domain is a root zone or a subzone and creates it accordingly. This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-project-dns-zone
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsCreateProjectDnsZoneRequest $request An object representing the request for this operation
+     * @return DnsCreateProjectDnsZoneCreatedResponse The ID of the created DNSZone.
+     */
+    public function dnsCreateProjectDnsZone(DnsCreateProjectDnsZoneRequest $request): DnsCreateProjectDnsZoneCreatedResponse;
     /**
      * Delete a DNSZone.
      *
@@ -409,6 +444,16 @@ interface DomainClient
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse;
     /**
+     * Get the status of a DNS zone-file import job.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-dns-zone-file-import
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsGetDnsZoneFileImportRequest $request An object representing the request for this operation
+     * @return DnsGetDnsZoneFileImportOKResponse The import job status.
+     */
+    public function dnsGetDnsZoneFileImport(DnsGetDnsZoneFileImportRequest $request): DnsGetDnsZoneFileImportOKResponse;
+    /**
      * Get a zone file for a DNSZone.
      *
      * Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
@@ -420,6 +465,18 @@ interface DomainClient
      * @return StringResponse Returns the zone file as plain text.
      */
     public function dnsGetZoneFile(DnsGetZoneFileRequest $request): StringResponse;
+    /**
+     * List DNS zone-file import jobs belonging to a Project.
+     *
+     * Returns the DNS zone-file import jobs of the Project, newest state per job (status plus the imported/skipped zones). Sorted by creation date, newest first, by default; paginated. Project-scoped and authorized on the Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-list-dns-zone-file-imports
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsListDnsZoneFileImportsRequest $request An object representing the request for this operation
+     * @return DnsListDnsZoneFileImportsOKResponse A list of DNS zone-file import jobs, sorted by creation timestamp (newest first) unless specified otherwise.
+     */
+    public function dnsListDnsZoneFileImports(DnsListDnsZoneFileImportsRequest $request): DnsListDnsZoneFileImportsOKResponse;
     /**
      * List DNSZones belonging to a Project.
      *

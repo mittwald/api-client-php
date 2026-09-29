@@ -29,6 +29,9 @@ class App
             'actionCapabilities' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.ActionCapabilities',
             ],
+            'description' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.app.TranslatedString',
+            ],
             'id' => [
                 'type' => 'string',
             ],
@@ -55,6 +58,8 @@ class App
      */
     private ?array $actionCapabilities = null;
 
+    private ?TranslatedString $description = null;
+
     private string $id;
 
     private string $name;
@@ -80,6 +85,11 @@ class App
     public function getActionCapabilities(): ?array
     {
         return $this->actionCapabilities ?? null;
+    }
+
+    public function getDescription(): ?TranslatedString
+    {
+        return $this->description ?? null;
     }
 
     public function getId(): string
@@ -115,6 +125,22 @@ class App
     {
         $clone = clone $this;
         unset($clone->actionCapabilities);
+
+        return $clone;
+    }
+
+    public function withDescription(TranslatedString $description): self
+    {
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
 
         return $clone;
     }
@@ -183,12 +209,17 @@ class App
         if (isset($input->{'actionCapabilities'})) {
             $actionCapabilities = array_map(fn (string $item): Action => (Action::tryFrom($item) ?? Action::unknown), $input->{'actionCapabilities'});
         }
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = TranslatedString::buildFromInput($input->{'description'}, validate: $validate);
+        }
         $id = $input->{'id'};
         $name = $input->{'name'};
         $tags = $input->{'tags'};
 
         $obj = new self($id, $name, $tags);
         $obj->actionCapabilities = $actionCapabilities;
+        $obj->description = $description;
         return $obj;
     }
 
@@ -202,6 +233,9 @@ class App
         $output = [];
         if (isset($this->actionCapabilities)) {
             $output['actionCapabilities'] = array_map(fn ($item): string => $item->value, $this->actionCapabilities);
+        }
+        if (isset($this->description)) {
+            $output['description'] = $this->description->toJson();
         }
         $output['id'] = $this->id;
         $output['name'] = $this->name;

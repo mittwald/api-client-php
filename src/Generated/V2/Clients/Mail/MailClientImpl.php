@@ -1033,6 +1033,8 @@ class MailClientImpl implements MailClient
     /**
      * Request a rate limit change for a MailAddress.
      *
+     * Creates a rate limit change request that has to be approved. If the new rate limit is a plain reduction of the current one, it is applied immediately instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-request-mail-address-rate-limit-change
      * @throws GuzzleException
      * @throws UnexpectedResponseException
