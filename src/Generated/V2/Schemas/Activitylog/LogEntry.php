@@ -121,6 +121,48 @@ class LogEntry
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDesiredSystemSoftwareDeleted',
                     ],
                     [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobCreated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobDescriptionUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobIntervalUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobTimeZoneUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobTargetUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobCommandUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobServiceReferenceUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobTimeoutUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobConcurrencyPolicyUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobAlertThresholdUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobNotificationEmailUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobActiveUpdated',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobDeleted',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.CronjobExecution',
+                    ],
+                    [
                         '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.GenericAction',
                     ],
                 ],
@@ -164,7 +206,7 @@ class LogEntry
         'type' => 'object',
     ];
 
-    private AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action;
+    private AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|CronjobActiveUpdated|CronjobAlertThresholdUpdated|CronjobCommandUpdated|CronjobConcurrencyPolicyUpdated|CronjobCreated|CronjobDeleted|CronjobDescriptionUpdated|CronjobExecution|CronjobIntervalUpdated|CronjobNotificationEmailUpdated|CronjobServiceReferenceUpdated|CronjobTargetUpdated|CronjobTimeZoneUpdated|CronjobTimeoutUpdated|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action;
 
     private AggregateReference $aggregate;
 
@@ -177,14 +219,14 @@ class LogEntry
 
     private ?LogEntryUser $user = null;
 
-    public function __construct(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action, AggregateReference $aggregate, DateTime $dateTime)
+    public function __construct(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|CronjobActiveUpdated|CronjobAlertThresholdUpdated|CronjobCommandUpdated|CronjobConcurrencyPolicyUpdated|CronjobCreated|CronjobDeleted|CronjobDescriptionUpdated|CronjobExecution|CronjobIntervalUpdated|CronjobNotificationEmailUpdated|CronjobServiceReferenceUpdated|CronjobTargetUpdated|CronjobTimeZoneUpdated|CronjobTimeoutUpdated|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action, AggregateReference $aggregate, DateTime $dateTime)
     {
         $this->action = $action;
         $this->aggregate = $aggregate;
         $this->dateTime = $dateTime;
     }
 
-    public function getAction(): AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction
+    public function getAction(): AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|CronjobActiveUpdated|CronjobAlertThresholdUpdated|CronjobCommandUpdated|CronjobConcurrencyPolicyUpdated|CronjobCreated|CronjobDeleted|CronjobDescriptionUpdated|CronjobExecution|CronjobIntervalUpdated|CronjobNotificationEmailUpdated|CronjobServiceReferenceUpdated|CronjobTargetUpdated|CronjobTimeZoneUpdated|CronjobTimeoutUpdated|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction
     {
         return $this->action;
     }
@@ -209,7 +251,7 @@ class LogEntry
         return $this->user ?? null;
     }
 
-    public function withAction(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action): self
+    public function withAction(AppInstallationAppVersionSet|AppInstallationCopyRequested|AppInstallationDatabaseLinked|AppInstallationDatabaseUnlinked|AppInstallationDeleted|AppInstallationDescriptionSet|AppInstallationDesiredSystemSoftwareDeleted|AppInstallationDesiredSystemSoftwareSet|AppInstallationFailed|AppInstallationMainDatabaseChanged|AppInstallationRequested|CronjobActiveUpdated|CronjobAlertThresholdUpdated|CronjobCommandUpdated|CronjobConcurrencyPolicyUpdated|CronjobCreated|CronjobDeleted|CronjobDescriptionUpdated|CronjobExecution|CronjobIntervalUpdated|CronjobNotificationEmailUpdated|CronjobServiceReferenceUpdated|CronjobTargetUpdated|CronjobTimeZoneUpdated|CronjobTimeoutUpdated|DatabaseCreated|DatabaseDeleted|DatabaseDescriptionSet|DatabaseMysqlUserCreated|DatabaseMysqlUserDeleted|DatabaseMysqlUserPasswordSet|DatabaseMysqlUserUpdated|DatabaseVersionSet|DnsARecordSet|DnsARecordSetManaged|DnsCaaRecordSet|DnsCnameRecordSet|DnsDomainDeleted|DnsIngressDeleted|DnsMxRecordSet|DnsMxRecordSetManaged|DnsSrvRecordSet|DnsTxtRecordSet|DnsZoneCreated|DnsZoneDeleted|GenericAction $action): self
     {
         $clone = clone $this;
         $clone->action = $action;
@@ -312,6 +354,20 @@ class LogEntry
             AppInstallationAppVersionSet::validateInput($input->{'action'}, true) => AppInstallationAppVersionSet::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDesiredSystemSoftwareSet::validateInput($input->{'action'}, true) => AppInstallationDesiredSystemSoftwareSet::buildFromInput($input->{'action'}, validate: $validate),
             AppInstallationDesiredSystemSoftwareDeleted::validateInput($input->{'action'}, true) => AppInstallationDesiredSystemSoftwareDeleted::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobCreated::validateInput($input->{'action'}, true) => CronjobCreated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobDescriptionUpdated::validateInput($input->{'action'}, true) => CronjobDescriptionUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobIntervalUpdated::validateInput($input->{'action'}, true) => CronjobIntervalUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobTimeZoneUpdated::validateInput($input->{'action'}, true) => CronjobTimeZoneUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobTargetUpdated::validateInput($input->{'action'}, true) => CronjobTargetUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobCommandUpdated::validateInput($input->{'action'}, true) => CronjobCommandUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobServiceReferenceUpdated::validateInput($input->{'action'}, true) => CronjobServiceReferenceUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobTimeoutUpdated::validateInput($input->{'action'}, true) => CronjobTimeoutUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobConcurrencyPolicyUpdated::validateInput($input->{'action'}, true) => CronjobConcurrencyPolicyUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobAlertThresholdUpdated::validateInput($input->{'action'}, true) => CronjobAlertThresholdUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobNotificationEmailUpdated::validateInput($input->{'action'}, true) => CronjobNotificationEmailUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobActiveUpdated::validateInput($input->{'action'}, true) => CronjobActiveUpdated::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobDeleted::validateInput($input->{'action'}, true) => CronjobDeleted::buildFromInput($input->{'action'}, validate: $validate),
+            CronjobExecution::validateInput($input->{'action'}, true) => CronjobExecution::buildFromInput($input->{'action'}, validate: $validate),
             GenericAction::validateInput($input->{'action'}, true) => GenericAction::buildFromInput($input->{'action'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'action' from JSON"),
         };
@@ -341,7 +397,7 @@ class LogEntry
     {
         $output = [];
         $output['action'] = match (true) {
-            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action->toJson(),
+            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof CronjobCreated, ($this->action) instanceof CronjobDescriptionUpdated, ($this->action) instanceof CronjobIntervalUpdated, ($this->action) instanceof CronjobTimeZoneUpdated, ($this->action) instanceof CronjobTargetUpdated, ($this->action) instanceof CronjobCommandUpdated, ($this->action) instanceof CronjobServiceReferenceUpdated, ($this->action) instanceof CronjobTimeoutUpdated, ($this->action) instanceof CronjobConcurrencyPolicyUpdated, ($this->action) instanceof CronjobAlertThresholdUpdated, ($this->action) instanceof CronjobNotificationEmailUpdated, ($this->action) instanceof CronjobActiveUpdated, ($this->action) instanceof CronjobDeleted, ($this->action) instanceof CronjobExecution, ($this->action) instanceof GenericAction => $this->action->toJson(),
         };
         $output['aggregate'] = $this->aggregate->toJson();
         $output['dateTime'] = ($this->dateTime)->format(DateTime::ATOM);
@@ -382,7 +438,7 @@ class LogEntry
     public function __clone()
     {
         $this->action = match (true) {
-            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof GenericAction => $this->action,
+            ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof CronjobCreated, ($this->action) instanceof CronjobDescriptionUpdated, ($this->action) instanceof CronjobIntervalUpdated, ($this->action) instanceof CronjobTimeZoneUpdated, ($this->action) instanceof CronjobTargetUpdated, ($this->action) instanceof CronjobCommandUpdated, ($this->action) instanceof CronjobServiceReferenceUpdated, ($this->action) instanceof CronjobTimeoutUpdated, ($this->action) instanceof CronjobConcurrencyPolicyUpdated, ($this->action) instanceof CronjobAlertThresholdUpdated, ($this->action) instanceof CronjobNotificationEmailUpdated, ($this->action) instanceof CronjobActiveUpdated, ($this->action) instanceof CronjobDeleted, ($this->action) instanceof CronjobExecution, ($this->action) instanceof GenericAction => $this->action,
         };
         $this->dateTime = clone $this->dateTime;
         if (isset($this->impersonator)) {
