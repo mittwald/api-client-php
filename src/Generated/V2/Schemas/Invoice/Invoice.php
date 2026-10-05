@@ -129,6 +129,11 @@ class Invoice
                 'example' => 'DE123456789',
                 'type' => 'string',
             ],
+            'xRechnungId' => [
+                'description' => 'The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -192,6 +197,11 @@ class Invoice
     private int|float $totalNet;
 
     private ?string $vatId = null;
+
+    /**
+     * The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy.
+     */
+    private ?string $xRechnungId = null;
 
     /**
      * @param InvoiceGroupsItem[] $groups
@@ -304,6 +314,11 @@ class Invoice
     public function getVatId(): ?string
     {
         return $this->vatId ?? null;
+    }
+
+    public function getXRechnungId(): ?string
+    {
+        return $this->xRechnungId ?? null;
     }
 
     public function withAmountPaid(int|float $amountPaid): self
@@ -559,6 +574,28 @@ class Invoice
         return $clone;
     }
 
+    public function withXRechnungId(string $xRechnungId): self
+    {
+        $validator = new Validator();
+        $validator->validate($xRechnungId, self::$internalValidationSchema['properties']['xRechnungId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->xRechnungId = $xRechnungId;
+
+        return $clone;
+    }
+
+    public function withoutXRechnungId(): self
+    {
+        $clone = clone $this;
+        unset($clone->xRechnungId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -611,6 +648,10 @@ class Invoice
         if (isset($input->{'vatId'})) {
             $vatId = $input->{'vatId'};
         }
+        $xRechnungId = null;
+        if (isset($input->{'xRechnungId'})) {
+            $xRechnungId = $input->{'xRechnungId'};
+        }
 
         $obj = new self($amountPaid, $currency, $customerId, $date, $groups, $id, $invoiceNumber, $invoiceType, $pdfId, $recipient, $status, $totalGross, $totalNet);
         $obj->cancellation = $cancellation;
@@ -618,6 +659,7 @@ class Invoice
         $obj->paymentSettings = $paymentSettings;
         $obj->reissuedBy = $reissuedBy;
         $obj->vatId = $vatId;
+        $obj->xRechnungId = $xRechnungId;
         return $obj;
     }
 
@@ -659,6 +701,9 @@ class Invoice
         $output['totalNet'] = $this->totalNet;
         if (isset($this->vatId)) {
             $output['vatId'] = $this->vatId;
+        }
+        if (isset($this->xRechnungId)) {
+            $output['xRechnungId'] = $this->xRechnungId;
         }
 
         return $output;

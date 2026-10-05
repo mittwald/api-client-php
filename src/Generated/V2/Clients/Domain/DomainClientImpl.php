@@ -144,6 +144,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDns
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZoneFileImport\DnsCreateDnsZoneFileImportOKResponse;
@@ -925,7 +926,7 @@ class DomainClientImpl implements DomainClient
     /**
      * Import a DNS zone file into a Project, or preview it with dry-run.
      *
-     * Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dryRun=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts the import and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run preview) and retry, since a half-imported zone file would leave DNS in a confusing half-state. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
+     * Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dryRun=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts the import and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run preview) and retry, since a half-imported zone file would leave DNS in a confusing half-state. An identical import still running for the project is rejected with 409. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone-file-import
      * @throws GuzzleException
@@ -943,6 +944,7 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DnsCreateDnsZoneFileImportBadRequestResponse::fromResponse($httpResponse),
             404 => DnsCreateDnsZoneFileImportNotFoundResponse::fromResponse($httpResponse),
+            409 => DnsCreateDnsZoneFileImportConflictResponse::fromResponse($httpResponse),
             412 => DnsCreateDnsZoneFileImportPreconditionFailedResponse::fromResponse($httpResponse),
             429 => DnsCreateDnsZoneFileImportTooManyRequestsResponse::fromResponse($httpResponse),
             default => DnsCreateDnsZoneFileImportDefaultResponse::fromResponse($httpResponse),

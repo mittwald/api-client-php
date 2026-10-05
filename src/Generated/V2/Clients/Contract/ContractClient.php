@@ -314,7 +314,7 @@ interface ContractClient
      */
     public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettingsOKResponse;
     /**
-     * Request an Access Token for the Invoice file.
+     * Request an Access Token for a file of the Invoice.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-file-access-token
      * @throws GuzzleException

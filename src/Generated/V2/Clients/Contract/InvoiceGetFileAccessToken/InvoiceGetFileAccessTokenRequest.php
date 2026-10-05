@@ -23,6 +23,14 @@ class InvoiceGetFileAccessTokenRequest
             'invoiceId' => [
                 'type' => 'string',
             ],
+            'fileType' => [
+                'default' => 'PDF',
+                'enum' => [
+                    'PDF',
+                    'XRECHNUNG',
+                ],
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'customerId',
@@ -33,6 +41,8 @@ class InvoiceGetFileAccessTokenRequest
     private string $customerId;
 
     private string $invoiceId;
+
+    private InvoiceGetFileAccessTokenRequestFileType $fileType = InvoiceGetFileAccessTokenRequestFileType::PDF;
 
     private array $headers = [
 
@@ -52,6 +62,11 @@ class InvoiceGetFileAccessTokenRequest
     public function getInvoiceId(): string
     {
         return $this->invoiceId;
+    }
+
+    public function getFileType(): InvoiceGetFileAccessTokenRequestFileType
+    {
+        return $this->fileType;
     }
 
     public function withCustomerId(string $customerId): self
@@ -82,6 +97,14 @@ class InvoiceGetFileAccessTokenRequest
         return $clone;
     }
 
+    public function withFileType(InvoiceGetFileAccessTokenRequestFileType $fileType): self
+    {
+        $clone = clone $this;
+        $clone->fileType = $fileType;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -99,9 +122,13 @@ class InvoiceGetFileAccessTokenRequest
 
         $customerId = $input->{'customerId'};
         $invoiceId = $input->{'invoiceId'};
+        $fileType = InvoiceGetFileAccessTokenRequestFileType::PDF;
+        if (isset($input->{'fileType'})) {
+            $fileType = InvoiceGetFileAccessTokenRequestFileType::from($input->{'fileType'});
+        }
 
         $obj = new self($customerId, $invoiceId);
-
+        $obj->fileType = $fileType;
         return $obj;
     }
 
@@ -115,6 +142,7 @@ class InvoiceGetFileAccessTokenRequest
         $output = [];
         $output['customerId'] = $this->customerId;
         $output['invoiceId'] = $this->invoiceId;
+        $output['fileType'] = ($this->fileType)->value;
 
         return $output;
     }
@@ -177,6 +205,9 @@ class InvoiceGetFileAccessTokenRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['fileType'])) {
+            $query['fileType'] = $mapped['fileType'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

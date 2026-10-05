@@ -45,6 +45,11 @@ class Cancellation
                 'example' => 'Kulanz',
                 'type' => 'string',
             ],
+            'xRechnungId' => [
+                'description' => 'The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'pdfId',
@@ -64,6 +69,11 @@ class Cancellation
     private string $pdfId;
 
     private ?string $reason = null;
+
+    /**
+     * The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy.
+     */
+    private ?string $xRechnungId = null;
 
     public function __construct(string $cancellationId, DateTime $cancelledAt, string $correctionNumber, string $pdfId)
     {
@@ -96,6 +106,11 @@ class Cancellation
     public function getReason(): ?string
     {
         return $this->reason ?? null;
+    }
+
+    public function getXRechnungId(): ?string
+    {
+        return $this->xRechnungId ?? null;
     }
 
     public function withCancellationId(string $cancellationId): self
@@ -170,6 +185,28 @@ class Cancellation
         return $clone;
     }
 
+    public function withXRechnungId(string $xRechnungId): self
+    {
+        $validator = new Validator();
+        $validator->validate($xRechnungId, self::$internalValidationSchema['properties']['xRechnungId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->xRechnungId = $xRechnungId;
+
+        return $clone;
+    }
+
+    public function withoutXRechnungId(): self
+    {
+        $clone = clone $this;
+        unset($clone->xRechnungId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -193,9 +230,14 @@ class Cancellation
         if (isset($input->{'reason'})) {
             $reason = $input->{'reason'};
         }
+        $xRechnungId = null;
+        if (isset($input->{'xRechnungId'})) {
+            $xRechnungId = $input->{'xRechnungId'};
+        }
 
         $obj = new self($cancellationId, $cancelledAt, $correctionNumber, $pdfId);
         $obj->reason = $reason;
+        $obj->xRechnungId = $xRechnungId;
         return $obj;
     }
 
@@ -213,6 +255,9 @@ class Cancellation
         $output['pdfId'] = $this->pdfId;
         if (isset($this->reason)) {
             $output['reason'] = $this->reason;
+        }
+        if (isset($this->xRechnungId)) {
+            $output['xRechnungId'] = $this->xRechnungId;
         }
 
         return $output;
