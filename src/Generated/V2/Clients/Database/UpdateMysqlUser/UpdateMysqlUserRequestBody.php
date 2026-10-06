@@ -32,6 +32,8 @@ class UpdateMysqlUserRequestBody
                 'type' => 'boolean',
             ],
             'password' => [
+                'description' => 'The password must have a minimum of 8 characters and contain at least one uppercase letter, one lowercase letter, one digit and one special character of `#!~%^*_+-=?{}()<>|.,;$:/`. Other characters are not allowed. The password must not start with any of `-`, `_` or `;`.
+',
                 'type' => 'string',
             ],
         ],
@@ -49,6 +51,10 @@ class UpdateMysqlUserRequestBody
 
     private ?bool $externalAccess = null;
 
+    /**
+     * The password must have a minimum of 8 characters and contain at least one uppercase letter, one lowercase letter, one digit and one special character of `#!~%^*_+-=?{}()<>|.,;$:/`. Other characters are not allowed. The password must not start with any of `-`, `_` or `;`.
+     *
+     */
     private ?string $password = null;
 
     /**
