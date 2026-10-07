@@ -40,6 +40,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNot
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationRequest;
@@ -249,6 +250,7 @@ class NotificationClientImpl implements NotificationClient
             return NotificationsReadNotificationOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => NotificationsReadNotificationForbiddenResponse::fromResponse($httpResponse),
             404 => NotificationsReadNotificationNotFoundResponse::fromResponse($httpResponse),
             429 => NotificationsReadNotificationTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsReadNotificationDefaultResponse::fromResponse($httpResponse),
