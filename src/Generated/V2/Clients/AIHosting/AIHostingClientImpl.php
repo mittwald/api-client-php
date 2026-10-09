@@ -80,6 +80,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerG
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyDefaultResponse;
@@ -182,6 +189,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\Proje
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyDefaultResponse;
@@ -471,6 +485,33 @@ class AIHostingClientImpl implements AIHostingClient
             404 => CustomerGetUsageNotFoundResponse::fromResponse($httpResponse),
             429 => CustomerGetUsageTooManyRequestsResponse::fromResponse($httpResponse),
             default => CustomerGetUsageDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Rotates a customer's key.
+     *
+     * Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-rotate-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerRotateKeyRequest $request An object representing the request for this operation
+     * @return CustomerRotateKeyOKResponse The key with its new secret.
+     */
+    public function customerRotateKey(CustomerRotateKeyRequest $request): CustomerRotateKeyOKResponse
+    {
+        $httpRequest = new Request(CustomerRotateKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerRotateKeyOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerRotateKeyBadRequestResponse::fromResponse($httpResponse),
+            403 => CustomerRotateKeyForbiddenResponse::fromResponse($httpResponse),
+            404 => CustomerRotateKeyNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerRotateKeyTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerRotateKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -833,6 +874,33 @@ class AIHostingClientImpl implements AIHostingClient
             412 => ProjectLinkContainerPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ProjectLinkContainerTooManyRequestsResponse::fromResponse($httpResponse),
             default => ProjectLinkContainerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Rotates a project's key.
+     *
+     * Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-rotate-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectRotateKeyRequest $request An object representing the request for this operation
+     * @return ProjectRotateKeyOKResponse The key with its new secret.
+     */
+    public function projectRotateKey(ProjectRotateKeyRequest $request): ProjectRotateKeyOKResponse
+    {
+        $httpRequest = new Request(ProjectRotateKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ProjectRotateKeyOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ProjectRotateKeyBadRequestResponse::fromResponse($httpResponse),
+            403 => ProjectRotateKeyForbiddenResponse::fromResponse($httpResponse),
+            404 => ProjectRotateKeyNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectRotateKeyTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ProjectRotateKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 

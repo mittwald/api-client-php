@@ -24,6 +24,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerG
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetPlans\CustomerGetPlansRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerGetUsage\CustomerGetUsageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerRotateKey\CustomerRotateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdateKey\CustomerUpdateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\CustomerUpdatePlan\CustomerUpdatePlanRequest;
@@ -49,6 +51,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetPlans\ProjectGet
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectGetUsage\ProjectGetUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectLinkContainer\ProjectLinkContainerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyRequest;
 
@@ -173,6 +177,18 @@ interface AIHostingClient
      * @return CustomerGetUsageOKResponse The customer usage and plan.
      */
     public function customerGetUsage(CustomerGetUsageRequest $request): CustomerGetUsageOKResponse;
+    /**
+     * Rotates a customer's key.
+     *
+     * Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-customer-rotate-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerRotateKeyRequest $request An object representing the request for this operation
+     * @return CustomerRotateKeyOKResponse The key with its new secret.
+     */
+    public function customerRotateKey(CustomerRotateKeyRequest $request): CustomerRotateKeyOKResponse;
     /**
      * Update a key for a customer.
      *
@@ -318,6 +334,18 @@ interface AIHostingClient
      * @return EmptyResponse OK
      */
     public function projectLinkContainer(ProjectLinkContainerRequest $request): EmptyResponse;
+    /**
+     * Rotates a project's key.
+     *
+     * Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-project-rotate-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ProjectRotateKeyRequest $request An object representing the request for this operation
+     * @return ProjectRotateKeyOKResponse The key with its new secret.
+     */
+    public function projectRotateKey(ProjectRotateKeyRequest $request): ProjectRotateKeyOKResponse;
     /**
      * Update a key for a project.
      *
