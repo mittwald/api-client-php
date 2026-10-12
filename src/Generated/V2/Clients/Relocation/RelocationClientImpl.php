@@ -9,10 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationRequest;
@@ -37,27 +33,6 @@ class RelocationClientImpl implements RelocationClient
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Register a tariff change for a legacy tariff.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Relocation/operation/relocation-create-legacy-tariff-change
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateLegacyTariffChangeRequest $request An object representing the request for this operation
-     */
-    public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChangeCreatedResponse
-    {
-        $httpRequest = new Request(CreateLegacyTariffChangeRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateLegacyTariffChangeCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => CreateLegacyTariffChangeTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CreateLegacyTariffChangeDefaultResponse::fromResponse($httpResponse),
-        });
     }
 
     /**
