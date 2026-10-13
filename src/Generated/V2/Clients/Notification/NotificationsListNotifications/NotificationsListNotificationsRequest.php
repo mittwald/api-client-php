@@ -71,6 +71,22 @@ class NotificationsListNotificationsRequest
                 'type' => 'integer',
                 'minimum' => 0,
             ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'createdAt',
+                    'severity',
+                ],
+                'default' => 'createdAt',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'desc',
+            ],
         ],
         'required' => [
 
@@ -105,6 +121,10 @@ class NotificationsListNotificationsRequest
     private int $skip = 0;
 
     private ?int $page = null;
+
+    private NotificationsListNotificationsRequestSort $sort = NotificationsListNotificationsRequestSort::createdAt;
+
+    private NotificationsListNotificationsRequestOrder $order = NotificationsListNotificationsRequestOrder::desc;
 
     private array $headers = [
 
@@ -174,6 +194,16 @@ class NotificationsListNotificationsRequest
     public function getPage(): ?int
     {
         return $this->page ?? null;
+    }
+
+    public function getSort(): NotificationsListNotificationsRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): NotificationsListNotificationsRequestOrder
+    {
+        return $this->order;
     }
 
     public function withStatus(NotificationsListNotificationsRequestStatus $status): self
@@ -383,6 +413,22 @@ class NotificationsListNotificationsRequest
         return $clone;
     }
 
+    public function withSort(NotificationsListNotificationsRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(NotificationsListNotificationsRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -438,6 +484,14 @@ class NotificationsListNotificationsRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = NotificationsListNotificationsRequestSort::createdAt;
+        if (isset($input->{'sort'})) {
+            $sort = NotificationsListNotificationsRequestSort::from($input->{'sort'});
+        }
+        $order = NotificationsListNotificationsRequestOrder::desc;
+        if (isset($input->{'order'})) {
+            $order = NotificationsListNotificationsRequestOrder::from($input->{'order'});
+        }
 
         $obj = new self();
         $obj->status = $status;
@@ -450,6 +504,8 @@ class NotificationsListNotificationsRequest
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -487,6 +543,8 @@ class NotificationsListNotificationsRequest
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -576,6 +634,12 @@ class NotificationsListNotificationsRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

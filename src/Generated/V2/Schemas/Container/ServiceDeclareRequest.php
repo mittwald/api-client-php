@@ -95,7 +95,7 @@ The appropriate registry is matched by hostname.
                 'type' => 'string',
             ],
             'ports' => [
-                'description' => 'Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+                'description' => 'Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
 ',
                 'example' => [
                     '3306/tcp',
@@ -103,6 +103,7 @@ The appropriate registry is matched by hostname.
                 'items' => [
                     'type' => 'string',
                 ],
+                'maxItems' => 200,
                 'type' => 'array',
             ],
             'restart' => [
@@ -194,7 +195,7 @@ The appropriate registry is matched by hostname.
     private string $image;
 
     /**
-     * Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+     * Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
      *
      *
      * @var string[]|null

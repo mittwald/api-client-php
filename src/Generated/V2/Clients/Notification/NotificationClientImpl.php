@@ -21,10 +21,20 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsAdjustNotificationMessageTypeSettings\NotificationsAdjustNotificationMessageTypeSettingsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsAdjustNotificationMessageTypeSettings\NotificationsAdjustNotificationMessageTypeSettingsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsAdjustNotificationMessageTypeSettings\NotificationsAdjustNotificationMessageTypeSettingsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsAdjustNotificationMessageTypeSettings\NotificationsAdjustNotificationMessageTypeSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsAdjustNotificationMessageTypeSettings\NotificationsAdjustNotificationMessageTypeSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsGetNotificationSettings\NotificationsGetNotificationSettingsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsGetNotificationSettings\NotificationsGetNotificationSettingsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsGetNotificationSettings\NotificationsGetNotificationSettingsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsGetNotificationSettings\NotificationsGetNotificationSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsGetNotificationSettings\NotificationsGetNotificationSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsRequest;
@@ -34,17 +44,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNot
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusTooManyRequestsResponse;
 
 /**
  * Client for Notification API
@@ -135,6 +140,30 @@ class NotificationClientImpl implements NotificationClient
     }
 
     /**
+     * Adjust notification settings for message type.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-adjust-notification-message-type-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsAdjustNotificationMessageTypeSettingsRequest $request An object representing the request for this operation
+     * @return EmptyResponse No content
+     */
+    public function notificationsAdjustNotificationMessageTypeSettings(NotificationsAdjustNotificationMessageTypeSettingsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(NotificationsAdjustNotificationMessageTypeSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => NotificationsAdjustNotificationMessageTypeSettingsBadRequestResponse::fromResponse($httpResponse),
+            404 => NotificationsAdjustNotificationMessageTypeSettingsNotFoundResponse::fromResponse($httpResponse),
+            429 => NotificationsAdjustNotificationMessageTypeSettingsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => NotificationsAdjustNotificationMessageTypeSettingsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get the counts for unread notifications of the user.
      *
      * The user is determined by the access token used.
@@ -161,7 +190,35 @@ class NotificationClientImpl implements NotificationClient
     }
 
     /**
+     * Get notification settings for a user.
+     *
+     * Settings are provided for each message type: Channels for each message type can be active and editable.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-get-notification-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsGetNotificationSettingsRequest $request An object representing the request for this operation
+     * @return NotificationsGetNotificationSettingsOKResponse Channel settings per message type
+     */
+    public function notificationsGetNotificationSettings(NotificationsGetNotificationSettingsRequest $request): NotificationsGetNotificationSettingsOKResponse
+    {
+        $httpRequest = new Request(NotificationsGetNotificationSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return NotificationsGetNotificationSettingsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => NotificationsGetNotificationSettingsForbiddenResponse::fromResponse($httpResponse),
+            429 => NotificationsGetNotificationSettingsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => NotificationsGetNotificationSettingsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List all unread notifications.
+     *
+     * Sorted by creation date, descending, unless a different sort is requested.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-list-notifications
      * @throws GuzzleException
@@ -208,52 +265,26 @@ class NotificationClientImpl implements NotificationClient
     }
 
     /**
-     * Mark all notifications as read (deprecated).
+     * Update a notification's read status.
      *
-     * Deprecated route. Please use /v2/notifications/actions/read-all instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications-deprecated
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-update-notification-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsReadAllNotificationsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return NotificationsReadAllNotificationsDeprecatedOKResponse OK
+     * @param NotificationsUpdateNotificationStatusRequest $request An object representing the request for this operation
+     * @return NotificationsUpdateNotificationStatusOKResponse OK
      */
-    public function notificationsReadAllNotificationsDeprecated(NotificationsReadAllNotificationsDeprecatedRequest $request): NotificationsReadAllNotificationsDeprecatedOKResponse
+    public function notificationsUpdateNotificationStatus(NotificationsUpdateNotificationStatusRequest $request): NotificationsUpdateNotificationStatusOKResponse
     {
-        $httpRequest = new Request(NotificationsReadAllNotificationsDeprecatedRequest::method, $request->buildUrl());
+        $httpRequest = new Request(NotificationsUpdateNotificationStatusRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return NotificationsReadAllNotificationsDeprecatedOKResponse::fromResponse($httpResponse);
+            return NotificationsUpdateNotificationStatusOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => NotificationsReadAllNotificationsDeprecatedForbiddenResponse::fromResponse($httpResponse),
-            429 => NotificationsReadAllNotificationsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => NotificationsReadAllNotificationsDeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Mark notification as read.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-notification
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param NotificationsReadNotificationRequest $request An object representing the request for this operation
-     * @return NotificationsReadNotificationOKResponse OK
-     */
-    public function notificationsReadNotification(NotificationsReadNotificationRequest $request): NotificationsReadNotificationOKResponse
-    {
-        $httpRequest = new Request(NotificationsReadNotificationRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return NotificationsReadNotificationOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => NotificationsReadNotificationForbiddenResponse::fromResponse($httpResponse),
-            404 => NotificationsReadNotificationNotFoundResponse::fromResponse($httpResponse),
-            429 => NotificationsReadNotificationTooManyRequestsResponse::fromResponse($httpResponse),
-            default => NotificationsReadNotificationDefaultResponse::fromResponse($httpResponse),
+            403 => NotificationsUpdateNotificationStatusForbiddenResponse::fromResponse($httpResponse),
+            404 => NotificationsUpdateNotificationStatusNotFoundResponse::fromResponse($httpResponse),
+            429 => NotificationsUpdateNotificationStatusTooManyRequestsResponse::fromResponse($httpResponse),
+            default => NotificationsUpdateNotificationStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

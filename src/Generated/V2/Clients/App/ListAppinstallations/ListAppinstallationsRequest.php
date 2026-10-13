@@ -34,6 +34,12 @@ class ListAppinstallationsRequest
             'sortOrder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.AppInstallationSortOrder',
             ],
+            'autoUpdatesActivated' => [
+                'type' => 'boolean',
+            ],
+            'autoUpdatesSupported' => [
+                'type' => 'boolean',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 0,
@@ -62,6 +68,10 @@ class ListAppinstallationsRequest
     private ?string $searchTerm = null;
 
     private ?AppInstallationSortOrder $sortOrder = null;
+
+    private ?bool $autoUpdatesActivated = null;
+
+    private ?bool $autoUpdatesSupported = null;
 
     private ?int $limit = null;
 
@@ -99,6 +109,16 @@ class ListAppinstallationsRequest
     public function getSortOrder(): ?AppInstallationSortOrder
     {
         return $this->sortOrder ?? null;
+    }
+
+    public function getAutoUpdatesActivated(): ?bool
+    {
+        return $this->autoUpdatesActivated ?? null;
+    }
+
+    public function getAutoUpdatesSupported(): ?bool
+    {
+        return $this->autoUpdatesSupported ?? null;
     }
 
     public function getLimit(): ?int
@@ -193,6 +213,50 @@ class ListAppinstallationsRequest
         return $clone;
     }
 
+    public function withAutoUpdatesActivated(bool $autoUpdatesActivated): self
+    {
+        $validator = new Validator();
+        $validator->validate($autoUpdatesActivated, self::$internalValidationSchema['properties']['autoUpdatesActivated']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->autoUpdatesActivated = $autoUpdatesActivated;
+
+        return $clone;
+    }
+
+    public function withoutAutoUpdatesActivated(): self
+    {
+        $clone = clone $this;
+        unset($clone->autoUpdatesActivated);
+
+        return $clone;
+    }
+
+    public function withAutoUpdatesSupported(bool $autoUpdatesSupported): self
+    {
+        $validator = new Validator();
+        $validator->validate($autoUpdatesSupported, self::$internalValidationSchema['properties']['autoUpdatesSupported']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->autoUpdatesSupported = $autoUpdatesSupported;
+
+        return $clone;
+    }
+
+    public function withoutAutoUpdatesSupported(): self
+    {
+        $clone = clone $this;
+        unset($clone->autoUpdatesSupported);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -279,6 +343,14 @@ class ListAppinstallationsRequest
         if (isset($input->{'sortOrder'})) {
             $sortOrder = AppInstallationSortOrder::from($input->{'sortOrder'});
         }
+        $autoUpdatesActivated = null;
+        if (isset($input->{'autoUpdatesActivated'})) {
+            $autoUpdatesActivated = (bool)($input->{'autoUpdatesActivated'});
+        }
+        $autoUpdatesSupported = null;
+        if (isset($input->{'autoUpdatesSupported'})) {
+            $autoUpdatesSupported = (bool)($input->{'autoUpdatesSupported'});
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -296,6 +368,8 @@ class ListAppinstallationsRequest
         $obj->appIds = $appIds;
         $obj->searchTerm = $searchTerm;
         $obj->sortOrder = $sortOrder;
+        $obj->autoUpdatesActivated = $autoUpdatesActivated;
+        $obj->autoUpdatesSupported = $autoUpdatesSupported;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -319,6 +393,12 @@ class ListAppinstallationsRequest
         }
         if (isset($this->sortOrder)) {
             $output['sortOrder'] = $this->sortOrder->value;
+        }
+        if (isset($this->autoUpdatesActivated)) {
+            $output['autoUpdatesActivated'] = $this->autoUpdatesActivated;
+        }
+        if (isset($this->autoUpdatesSupported)) {
+            $output['autoUpdatesSupported'] = $this->autoUpdatesSupported;
         }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
@@ -396,6 +476,12 @@ class ListAppinstallationsRequest
         }
         if (isset($mapped['sortOrder'])) {
             $query['sortOrder'] = $mapped['sortOrder'];
+        }
+        if (isset($mapped['autoUpdatesActivated'])) {
+            $query['autoUpdatesActivated'] = $mapped['autoUpdatesActivated'];
+        }
+        if (isset($mapped['autoUpdatesSupported'])) {
+            $query['autoUpdatesSupported'] = $mapped['autoUpdatesSupported'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];

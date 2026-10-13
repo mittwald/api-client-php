@@ -73,6 +73,11 @@ class AppInstallation
             'installationPath' => [
                 'type' => 'string',
             ],
+            'lastAutoUpdateFailedAt' => [
+                'description' => 'When the last automatic update failed. Automatic updates are deactivated after a failure. The value is kept when automatic updates are activated again, so it does not indicate the current state on its own; combine it with `autoUpdatesActivated` (e.g. only warn while that is false).',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'lastError' => [
                 'description' => 'The last error that occurred during an update. Resets on success.',
                 'type' => 'string',
@@ -202,6 +207,11 @@ class AppInstallation
     private string $id;
 
     private string $installationPath;
+
+    /**
+     * When the last automatic update failed. Automatic updates are deactivated after a failure. The value is kept when automatic updates are activated again, so it does not indicate the current state on its own; combine it with `autoUpdatesActivated` (e.g. only warn while that is false).
+     */
+    private ?DateTime $lastAutoUpdateFailedAt = null;
 
     /**
      * The last error that occurred during an update. Resets on success.
@@ -344,6 +354,11 @@ class AppInstallation
     public function getInstallationPath(): string
     {
         return $this->installationPath;
+    }
+
+    public function getLastAutoUpdateFailedAt(): ?DateTime
+    {
+        return $this->lastAutoUpdateFailedAt ?? null;
     }
 
     public function getLastError(): ?string
@@ -631,6 +646,22 @@ class AppInstallation
 
         $clone = clone $this;
         $clone->installationPath = $installationPath;
+
+        return $clone;
+    }
+
+    public function withLastAutoUpdateFailedAt(DateTime $lastAutoUpdateFailedAt): self
+    {
+        $clone = clone $this;
+        $clone->lastAutoUpdateFailedAt = $lastAutoUpdateFailedAt;
+
+        return $clone;
+    }
+
+    public function withoutLastAutoUpdateFailedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastAutoUpdateFailedAt);
 
         return $clone;
     }
@@ -931,6 +962,10 @@ class AppInstallation
         }
         $id = $input->{'id'};
         $installationPath = $input->{'installationPath'};
+        $lastAutoUpdateFailedAt = null;
+        if (isset($input->{'lastAutoUpdateFailedAt'})) {
+            $lastAutoUpdateFailedAt = new DateTime($input->{'lastAutoUpdateFailedAt'});
+        }
         $lastError = null;
         if (isset($input->{'lastError'})) {
             $lastError = $input->{'lastError'};
@@ -978,6 +1013,7 @@ class AppInstallation
         $obj->deletionRequested = $deletionRequested;
         $obj->disabled = $disabled;
         $obj->hostname = $hostname;
+        $obj->lastAutoUpdateFailedAt = $lastAutoUpdateFailedAt;
         $obj->lastError = $lastError;
         $obj->lockedBy = $lockedBy;
         $obj->ports = $ports;
@@ -1016,6 +1052,9 @@ class AppInstallation
         }
         $output['id'] = $this->id;
         $output['installationPath'] = $this->installationPath;
+        if (isset($this->lastAutoUpdateFailedAt)) {
+            $output['lastAutoUpdateFailedAt'] = ($this->lastAutoUpdateFailedAt)->format(DateTime::ATOM);
+        }
         if (isset($this->lastError)) {
             $output['lastError'] = $this->lastError;
         }
@@ -1077,6 +1116,9 @@ class AppInstallation
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        if (isset($this->lastAutoUpdateFailedAt)) {
+            $this->lastAutoUpdateFailedAt = clone $this->lastAutoUpdateFailedAt;
+        }
         if (isset($this->ports)) {
             $this->ports = array_map(fn (AppInstallationPortsItem $i) => clone $i, $this->ports);
         }

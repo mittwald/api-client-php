@@ -77,6 +77,10 @@ class AppVersion
                 'type' => 'array',
                 'uniqueItems' => true,
             ],
+            'updateConstraint' => [
+                'description' => 'SemVer constraint that newer AppVersions must satisfy to be eligible as automatic update targets for this AppVersion.',
+                'type' => 'string',
+            ],
             'userInputs' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.UserInput',
@@ -130,6 +134,11 @@ class AppVersion
      * @var SystemSoftwareDependency[]|null
      */
     private ?array $systemSoftwareDependencies = null;
+
+    /**
+     * SemVer constraint that newer AppVersions must satisfy to be eligible as automatic update targets for this AppVersion.
+     */
+    private ?string $updateConstraint = null;
 
     /**
      * @var UserInput[]|null
@@ -218,6 +227,11 @@ class AppVersion
     public function getSystemSoftwareDependencies(): ?array
     {
         return $this->systemSoftwareDependencies ?? null;
+    }
+
+    public function getUpdateConstraint(): ?string
+    {
+        return $this->updateConstraint ?? null;
     }
 
     /**
@@ -445,6 +459,28 @@ class AppVersion
         return $clone;
     }
 
+    public function withUpdateConstraint(string $updateConstraint): self
+    {
+        $validator = new Validator();
+        $validator->validate($updateConstraint, self::$internalValidationSchema['properties']['updateConstraint']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->updateConstraint = $updateConstraint;
+
+        return $clone;
+    }
+
+    public function withoutUpdateConstraint(): self
+    {
+        $clone = clone $this;
+        unset($clone->updateConstraint);
+
+        return $clone;
+    }
+
     /**
      * @param UserInput[] $userInputs
      */
@@ -513,6 +549,10 @@ class AppVersion
         if (isset($input->{'systemSoftwareDependencies'})) {
             $systemSoftwareDependencies = array_map(fn (array|object $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
         }
+        $updateConstraint = null;
+        if (isset($input->{'updateConstraint'})) {
+            $updateConstraint = $input->{'updateConstraint'};
+        }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
             $userInputs = array_map(fn (array|object $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
@@ -526,6 +566,7 @@ class AppVersion
         $obj->recommended = $recommended;
         $obj->requestHandler = $requestHandler;
         $obj->systemSoftwareDependencies = $systemSoftwareDependencies;
+        $obj->updateConstraint = $updateConstraint;
         $obj->userInputs = $userInputs;
         return $obj;
     }
@@ -564,6 +605,9 @@ class AppVersion
         }
         if (isset($this->systemSoftwareDependencies)) {
             $output['systemSoftwareDependencies'] = array_map(fn (SystemSoftwareDependency $i): array => $i->toJson(), $this->systemSoftwareDependencies);
+        }
+        if (isset($this->updateConstraint)) {
+            $output['updateConstraint'] = $this->updateConstraint;
         }
         if (isset($this->userInputs)) {
             $output['userInputs'] = array_map(fn (UserInput $i): array => $i->toJson(), $this->userInputs);
