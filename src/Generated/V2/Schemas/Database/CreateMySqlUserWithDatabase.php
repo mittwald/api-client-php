@@ -38,6 +38,9 @@ For MySQLUsers that are created in the same step as the database itself, `full` 
                 ],
                 'type' => 'string',
             ],
+            'description' => [
+                'type' => 'string',
+            ],
             'externalAccess' => [
                 'description' => 'Describes if users should be able to connection to this database from external
 sources. Defaults to `false` when not set.
@@ -72,6 +75,8 @@ To find out how to connect to your database from external sources, refer to the 
      */
     private CreateMySqlUserWithDatabaseAccessLevel $accessLevel;
 
+    private ?string $description = null;
+
     /**
      * Describes if users should be able to connection to this database from external
      * sources. Defaults to `false` when not set.
@@ -101,6 +106,11 @@ To find out how to connect to your database from external sources, refer to the 
     public function getAccessLevel(): CreateMySqlUserWithDatabaseAccessLevel
     {
         return $this->accessLevel;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description ?? null;
     }
 
     public function getExternalAccess(): ?bool
@@ -139,6 +149,28 @@ To find out how to connect to your database from external sources, refer to the 
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
+
+        return $clone;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
 
         return $clone;
     }
@@ -199,6 +231,10 @@ To find out how to connect to your database from external sources, refer to the 
             $accessIpMask = $input->{'accessIpMask'};
         }
         $accessLevel = CreateMySqlUserWithDatabaseAccessLevel::from($input->{'accessLevel'});
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $externalAccess = null;
         if (isset($input->{'externalAccess'})) {
             $externalAccess = (bool)($input->{'externalAccess'});
@@ -207,6 +243,7 @@ To find out how to connect to your database from external sources, refer to the 
 
         $obj = new self($accessLevel, $password);
         $obj->accessIpMask = $accessIpMask;
+        $obj->description = $description;
         $obj->externalAccess = $externalAccess;
         return $obj;
     }
@@ -223,6 +260,9 @@ To find out how to connect to your database from external sources, refer to the 
             $output['accessIpMask'] = $this->accessIpMask;
         }
         $output['accessLevel'] = ($this->accessLevel)->value;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         if (isset($this->externalAccess)) {
             $output['externalAccess'] = $this->externalAccess;
         }

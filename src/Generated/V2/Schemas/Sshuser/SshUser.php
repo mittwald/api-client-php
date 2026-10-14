@@ -40,6 +40,12 @@ class SshUser
             'description' => [
                 'type' => 'string',
             ],
+            'detailedPublicKeys' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.sshuser.PublicKeyDetails',
+                ],
+                'type' => 'array',
+            ],
             'expiresAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -54,6 +60,8 @@ class SshUser
                 'type' => 'string',
             ],
             'publicKeys' => [
+                'deprecated' => true,
+                'description' => 'deprecated by detailedPublicKeys',
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.sshuser.PublicKey',
                 ],
@@ -87,6 +95,11 @@ class SshUser
 
     private string $description;
 
+    /**
+     * @var PublicKeyDetails[]|null
+     */
+    private ?array $detailedPublicKeys = null;
+
     private ?DateTime $expiresAt = null;
 
     private bool $hasPassword;
@@ -96,7 +109,10 @@ class SshUser
     private string $projectId;
 
     /**
+     * deprecated by detailedPublicKeys
+     *
      * @var PublicKey[]|null
+     * @deprecated
      */
     private ?array $publicKeys = null;
 
@@ -135,6 +151,14 @@ class SshUser
         return $this->description;
     }
 
+    /**
+     * @return PublicKeyDetails[]|null
+     */
+    public function getDetailedPublicKeys(): ?array
+    {
+        return $this->detailedPublicKeys ?? null;
+    }
+
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
@@ -157,6 +181,7 @@ class SshUser
 
     /**
      * @return PublicKey[]|null
+     * @deprecated
      */
     public function getPublicKeys(): ?array
     {
@@ -225,6 +250,25 @@ class SshUser
         return $clone;
     }
 
+    /**
+     * @param PublicKeyDetails[] $detailedPublicKeys
+     */
+    public function withDetailedPublicKeys(array $detailedPublicKeys): self
+    {
+        $clone = clone $this;
+        $clone->detailedPublicKeys = $detailedPublicKeys;
+
+        return $clone;
+    }
+
+    public function withoutDetailedPublicKeys(): self
+    {
+        $clone = clone $this;
+        unset($clone->detailedPublicKeys);
+
+        return $clone;
+    }
+
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -285,6 +329,7 @@ class SshUser
 
     /**
      * @param PublicKey[] $publicKeys
+     * @deprecated
      */
     public function withPublicKeys(array $publicKeys): self
     {
@@ -354,6 +399,10 @@ class SshUser
         $authUpdatedAt = new DateTime($input->{'authUpdatedAt'});
         $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
+        $detailedPublicKeys = null;
+        if (isset($input->{'detailedPublicKeys'})) {
+            $detailedPublicKeys = array_map(fn (array|object $i): PublicKeyDetails => PublicKeyDetails::buildFromInput($i, validate: $validate), $input->{'detailedPublicKeys'});
+        }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
@@ -373,6 +422,7 @@ class SshUser
 
         $obj = new self($authUpdatedAt, $createdAt, $description, $hasPassword, $id, $projectId, $userName);
         $obj->active = $active;
+        $obj->detailedPublicKeys = $detailedPublicKeys;
         $obj->expiresAt = $expiresAt;
         $obj->publicKeys = $publicKeys;
         $obj->updatedAt = $updatedAt;
@@ -393,6 +443,9 @@ class SshUser
         $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(DateTime::ATOM);
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
+        if (isset($this->detailedPublicKeys)) {
+            $output['detailedPublicKeys'] = array_map(fn (PublicKeyDetails $i): array => $i->toJson(), $this->detailedPublicKeys);
+        }
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }

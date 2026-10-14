@@ -25,7 +25,7 @@ class IngressDeprecated
     private static array $internalValidationSchema = [
         'properties' => [
             'dnsValidationErrors' => [
-                'description' => 'A list of errors that occurred while validating the ingress\'s dns before requesting a certificate.',
+                'description' => 'A list of errors that occurred while validating the ingress\'s dns before requesting a certificate. `ERROR_QUAD_A` and `ERROR_NO_A_RECORD` are deprecated and no longer reported.',
                 'items' => [
                     'enum' => [
                         'ERROR_UNSPECIFIED',
@@ -111,7 +111,7 @@ class IngressDeprecated
     ];
 
     /**
-     * A list of errors that occurred while validating the ingress's dns before requesting a certificate.
+     * A list of errors that occurred while validating the ingress's dns before requesting a certificate. `ERROR_QUAD_A` and `ERROR_NO_A_RECORD` are deprecated and no longer reported.
      *
      * @var string[]
      */

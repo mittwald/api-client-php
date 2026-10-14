@@ -43,6 +43,12 @@ class SftpUser
             'description' => [
                 'type' => 'string',
             ],
+            'detailedPublicKeys' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.sshuser.PublicKeyDetails',
+                ],
+                'type' => 'array',
+            ],
             'directories' => [
                 'items' => [
                     'type' => 'string',
@@ -63,6 +69,8 @@ class SftpUser
                 'type' => 'string',
             ],
             'publicKeys' => [
+                'deprecated' => true,
+                'description' => 'deprecated by detailedPublicKeys',
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.sshuser.PublicKey',
                 ],
@@ -100,6 +108,11 @@ class SftpUser
     private string $description;
 
     /**
+     * @var PublicKeyDetails[]|null
+     */
+    private ?array $detailedPublicKeys = null;
+
+    /**
      * @var string[]|null
      */
     private ?array $directories = null;
@@ -113,7 +126,10 @@ class SftpUser
     private string $projectId;
 
     /**
+     * deprecated by detailedPublicKeys
+     *
      * @var PublicKey[]|null
+     * @deprecated
      */
     private ?array $publicKeys = null;
 
@@ -159,6 +175,14 @@ class SftpUser
     }
 
     /**
+     * @return PublicKeyDetails[]|null
+     */
+    public function getDetailedPublicKeys(): ?array
+    {
+        return $this->detailedPublicKeys ?? null;
+    }
+
+    /**
      * @return string[]|null
      */
     public function getDirectories(): ?array
@@ -188,6 +212,7 @@ class SftpUser
 
     /**
      * @return PublicKey[]|null
+     * @deprecated
      */
     public function getPublicKeys(): ?array
     {
@@ -260,6 +285,25 @@ class SftpUser
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    /**
+     * @param PublicKeyDetails[] $detailedPublicKeys
+     */
+    public function withDetailedPublicKeys(array $detailedPublicKeys): self
+    {
+        $clone = clone $this;
+        $clone->detailedPublicKeys = $detailedPublicKeys;
+
+        return $clone;
+    }
+
+    public function withoutDetailedPublicKeys(): self
+    {
+        $clone = clone $this;
+        unset($clone->detailedPublicKeys);
 
         return $clone;
     }
@@ -349,6 +393,7 @@ class SftpUser
 
     /**
      * @param PublicKey[] $publicKeys
+     * @deprecated
      */
     public function withPublicKeys(array $publicKeys): self
     {
@@ -419,6 +464,10 @@ class SftpUser
         $authUpdatedAt = new DateTime($input->{'authUpdatedAt'});
         $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
+        $detailedPublicKeys = null;
+        if (isset($input->{'detailedPublicKeys'})) {
+            $detailedPublicKeys = array_map(fn (array|object $i): PublicKeyDetails => PublicKeyDetails::buildFromInput($i, validate: $validate), $input->{'detailedPublicKeys'});
+        }
         $directories = null;
         if (isset($input->{'directories'})) {
             $directories = $input->{'directories'};
@@ -442,6 +491,7 @@ class SftpUser
 
         $obj = new self($accessLevel, $authUpdatedAt, $createdAt, $description, $hasPassword, $id, $projectId, $userName);
         $obj->active = $active;
+        $obj->detailedPublicKeys = $detailedPublicKeys;
         $obj->directories = $directories;
         $obj->expiresAt = $expiresAt;
         $obj->publicKeys = $publicKeys;
@@ -464,6 +514,9 @@ class SftpUser
         $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(DateTime::ATOM);
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
+        if (isset($this->detailedPublicKeys)) {
+            $output['detailedPublicKeys'] = array_map(fn (PublicKeyDetails $i): array => $i->toJson(), $this->detailedPublicKeys);
+        }
         if (isset($this->directories)) {
             $output['directories'] = $this->directories;
         }
