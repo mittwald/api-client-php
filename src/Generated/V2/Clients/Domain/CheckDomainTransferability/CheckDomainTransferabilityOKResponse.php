@@ -37,6 +37,10 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
                             'inRedemptionPeriod' => [
                                 'type' => 'boolean',
                             ],
+                            'premiumDomain' => [
+                                'description' => 'The registry charges a premium price for transferring this domain. Premium domains are not supported.',
+                                'type' => 'boolean',
+                            ],
                             'transferLock' => [
                                 'type' => 'boolean',
                             ],
@@ -51,6 +55,7 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
                             'domainAgeTooSmall',
                             'inRedemptionPeriod',
                             'enabledIngressInOtherProject',
+                            'premiumDomain',
                         ],
                         'type' => 'object',
                     ],

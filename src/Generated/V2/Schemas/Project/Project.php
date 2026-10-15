@@ -103,6 +103,9 @@ class Project
                 'description' => 'deprecated by property status',
                 'type' => 'boolean',
             ],
+            'primaryIpAddresses' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.PrimaryIpAddresses',
+            ],
             'projectHostingId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -235,6 +238,8 @@ class Project
      * @deprecated
      */
     private bool $isReady;
+
+    private ?PrimaryIpAddresses $primaryIpAddresses = null;
 
     private ?string $projectHostingId = null;
 
@@ -378,6 +383,11 @@ class Project
     public function getIsReady(): bool
     {
         return $this->isReady;
+    }
+
+    public function getPrimaryIpAddresses(): ?PrimaryIpAddresses
+    {
+        return $this->primaryIpAddresses ?? null;
     }
 
     public function getProjectHostingId(): ?string
@@ -708,6 +718,22 @@ class Project
         return $clone;
     }
 
+    public function withPrimaryIpAddresses(PrimaryIpAddresses $primaryIpAddresses): self
+    {
+        $clone = clone $this;
+        $clone->primaryIpAddresses = $primaryIpAddresses;
+
+        return $clone;
+    }
+
+    public function withoutPrimaryIpAddresses(): self
+    {
+        $clone = clone $this;
+        unset($clone->primaryIpAddresses);
+
+        return $clone;
+    }
+
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
@@ -953,6 +979,10 @@ class Project
             $imageRefId = $input->{'imageRefId'};
         }
         $isReady = (bool)($input->{'isReady'});
+        $primaryIpAddresses = null;
+        if (isset($input->{'primaryIpAddresses'})) {
+            $primaryIpAddresses = PrimaryIpAddresses::buildFromInput($input->{'primaryIpAddresses'}, validate: $validate);
+        }
         $projectHostingId = null;
         if (isset($input->{'projectHostingId'})) {
             $projectHostingId = $input->{'projectHostingId'};
@@ -995,6 +1025,7 @@ class Project
         $obj->disabledAt = $disabledAt;
         $obj->features = $features;
         $obj->imageRefId = $imageRefId;
+        $obj->primaryIpAddresses = $primaryIpAddresses;
         $obj->projectHostingId = $projectHostingId;
         $obj->serverId = $serverId;
         $obj->serverShortId = $serverShortId;
@@ -1044,6 +1075,9 @@ class Project
             $output['imageRefId'] = $this->imageRefId;
         }
         $output['isReady'] = $this->isReady;
+        if (isset($this->primaryIpAddresses)) {
+            $output['primaryIpAddresses'] = $this->primaryIpAddresses->toJson();
+        }
         if (isset($this->projectHostingId)) {
             $output['projectHostingId'] = $this->projectHostingId;
         }

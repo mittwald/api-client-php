@@ -62,6 +62,9 @@ class Server
             'machineType' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.MachineType',
             ],
+            'primaryIpAddresses' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.PrimaryIpAddresses',
+            ],
             'readiness' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedServerReadinessStatus',
             ],
@@ -123,6 +126,8 @@ class Server
     private bool $isReady;
 
     private MachineType $machineType;
+
+    private ?PrimaryIpAddresses $primaryIpAddresses = null;
 
     private DeprecatedServerReadinessStatus $readiness;
 
@@ -201,6 +206,11 @@ class Server
     public function getMachineType(): MachineType
     {
         return $this->machineType;
+    }
+
+    public function getPrimaryIpAddresses(): ?PrimaryIpAddresses
+    {
+        return $this->primaryIpAddresses ?? null;
     }
 
     public function getReadiness(): DeprecatedServerReadinessStatus
@@ -369,6 +379,22 @@ class Server
         return $clone;
     }
 
+    public function withPrimaryIpAddresses(PrimaryIpAddresses $primaryIpAddresses): self
+    {
+        $clone = clone $this;
+        $clone->primaryIpAddresses = $primaryIpAddresses;
+
+        return $clone;
+    }
+
+    public function withoutPrimaryIpAddresses(): self
+    {
+        $clone = clone $this;
+        unset($clone->primaryIpAddresses);
+
+        return $clone;
+    }
+
     public function withReadiness(DeprecatedServerReadinessStatus $readiness): self
     {
         $clone = clone $this;
@@ -466,6 +492,10 @@ class Server
         }
         $isReady = (bool)($input->{'isReady'});
         $machineType = MachineType::buildFromInput($input->{'machineType'}, validate: $validate);
+        $primaryIpAddresses = null;
+        if (isset($input->{'primaryIpAddresses'})) {
+            $primaryIpAddresses = PrimaryIpAddresses::buildFromInput($input->{'primaryIpAddresses'}, validate: $validate);
+        }
         $readiness = (DeprecatedServerReadinessStatus::tryFrom($input->{'readiness'}) ?? DeprecatedServerReadinessStatus::unknown);
         $shortId = $input->{'shortId'};
         $statisticsBaseDomain = null;
@@ -478,6 +508,7 @@ class Server
         $obj = new self($clusterName, $createdAt, $customerId, $description, $groupId, $id, $isReady, $machineType, $readiness, $shortId, $status, $storage);
         $obj->disabledReason = $disabledReason;
         $obj->imageRefId = $imageRefId;
+        $obj->primaryIpAddresses = $primaryIpAddresses;
         $obj->statisticsBaseDomain = $statisticsBaseDomain;
         return $obj;
     }
@@ -504,6 +535,9 @@ class Server
         }
         $output['isReady'] = $this->isReady;
         $output['machineType'] = $this->machineType->toJson();
+        if (isset($this->primaryIpAddresses)) {
+            $output['primaryIpAddresses'] = $this->primaryIpAddresses->toJson();
+        }
         $output['readiness'] = $this->readiness->value;
         $output['shortId'] = $this->shortId;
         if (isset($this->statisticsBaseDomain)) {

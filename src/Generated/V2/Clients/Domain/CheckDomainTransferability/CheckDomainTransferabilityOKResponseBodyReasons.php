@@ -27,6 +27,10 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'inRedemptionPeriod' => [
                 'type' => 'boolean',
             ],
+            'premiumDomain' => [
+                'description' => 'The registry charges a premium price for transferring this domain. Premium domains are not supported.',
+                'type' => 'boolean',
+            ],
             'transferLock' => [
                 'type' => 'boolean',
             ],
@@ -41,6 +45,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
             'domainAgeTooSmall',
             'inRedemptionPeriod',
             'enabledIngressInOtherProject',
+            'premiumDomain',
         ],
         'type' => 'object',
     ];
@@ -56,16 +61,22 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 
     private bool $inRedemptionPeriod;
 
+    /**
+     * The registry charges a premium price for transferring this domain. Premium domains are not supported.
+     */
+    private bool $premiumDomain;
+
     private bool $transferLock;
 
     private bool $wrongAuthCode;
 
-    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $enabledIngressInOtherProject, bool $inRedemptionPeriod, bool $transferLock, bool $wrongAuthCode)
+    public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $enabledIngressInOtherProject, bool $inRedemptionPeriod, bool $premiumDomain, bool $transferLock, bool $wrongAuthCode)
     {
         $this->domainAgeTooSmall = $domainAgeTooSmall;
         $this->domainDoesNotExist = $domainDoesNotExist;
         $this->enabledIngressInOtherProject = $enabledIngressInOtherProject;
         $this->inRedemptionPeriod = $inRedemptionPeriod;
+        $this->premiumDomain = $premiumDomain;
         $this->transferLock = $transferLock;
         $this->wrongAuthCode = $wrongAuthCode;
     }
@@ -88,6 +99,11 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function getInRedemptionPeriod(): bool
     {
         return $this->inRedemptionPeriod;
+    }
+
+    public function getPremiumDomain(): bool
+    {
+        return $this->premiumDomain;
     }
 
     public function getTransferLock(): bool
@@ -156,6 +172,20 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         return $clone;
     }
 
+    public function withPremiumDomain(bool $premiumDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($premiumDomain, self::$internalValidationSchema['properties']['premiumDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->premiumDomain = $premiumDomain;
+
+        return $clone;
+    }
+
     public function withTransferLock(bool $transferLock): self
     {
         $validator = new Validator();
@@ -203,10 +233,11 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         $domainDoesNotExist = (bool)($input->{'domainDoesNotExist'});
         $enabledIngressInOtherProject = (bool)($input->{'enabledIngressInOtherProject'});
         $inRedemptionPeriod = (bool)($input->{'inRedemptionPeriod'});
+        $premiumDomain = (bool)($input->{'premiumDomain'});
         $transferLock = (bool)($input->{'transferLock'});
         $wrongAuthCode = (bool)($input->{'wrongAuthCode'});
 
-        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $enabledIngressInOtherProject, $inRedemptionPeriod, $transferLock, $wrongAuthCode);
+        $obj = new self($domainAgeTooSmall, $domainDoesNotExist, $enabledIngressInOtherProject, $inRedemptionPeriod, $premiumDomain, $transferLock, $wrongAuthCode);
 
         return $obj;
     }
@@ -223,6 +254,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         $output['domainDoesNotExist'] = $this->domainDoesNotExist;
         $output['enabledIngressInOtherProject'] = $this->enabledIngressInOtherProject;
         $output['inRedemptionPeriod'] = $this->inRedemptionPeriod;
+        $output['premiumDomain'] = $this->premiumDomain;
         $output['transferLock'] = $this->transferLock;
         $output['wrongAuthCode'] = $this->wrongAuthCode;
 

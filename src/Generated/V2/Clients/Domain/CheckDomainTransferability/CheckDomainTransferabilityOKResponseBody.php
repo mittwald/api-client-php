@@ -29,6 +29,10 @@ class CheckDomainTransferabilityOKResponseBody
                     'inRedemptionPeriod' => [
                         'type' => 'boolean',
                     ],
+                    'premiumDomain' => [
+                        'description' => 'The registry charges a premium price for transferring this domain. Premium domains are not supported.',
+                        'type' => 'boolean',
+                    ],
                     'transferLock' => [
                         'type' => 'boolean',
                     ],
@@ -43,6 +47,7 @@ class CheckDomainTransferabilityOKResponseBody
                     'domainAgeTooSmall',
                     'inRedemptionPeriod',
                     'enabledIngressInOtherProject',
+                    'premiumDomain',
                 ],
                 'type' => 'object',
             ],
