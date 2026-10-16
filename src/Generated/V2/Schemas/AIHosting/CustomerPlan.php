@@ -52,6 +52,10 @@ class CustomerPlan
             'rateLimit' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.RateLimit',
             ],
+            'suspended' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
             'tokens' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig',
             ],
@@ -110,6 +114,8 @@ class CustomerPlan
 
     private RateLimit $rateLimit;
 
+    private bool $suspended = false;
+
     private PlanUsageBig $tokens;
 
     /**
@@ -166,6 +172,11 @@ class CustomerPlan
     public function getRateLimit(): RateLimit
     {
         return $this->rateLimit;
+    }
+
+    public function getSuspended(): bool
+    {
+        return $this->suspended;
     }
 
     public function getTokens(): PlanUsageBig
@@ -277,6 +288,20 @@ class CustomerPlan
         return $clone;
     }
 
+    public function withSuspended(bool $suspended): self
+    {
+        $validator = new Validator();
+        $validator->validate($suspended, self::$internalValidationSchema['properties']['suspended']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->suspended = $suspended;
+
+        return $clone;
+    }
+
     public function withTokens(PlanUsageBig $tokens): self
     {
         $clone = clone $this;
@@ -333,6 +358,10 @@ class CustomerPlan
         $nextTokenReset = new DateTime($input->{'nextTokenReset'});
         $planId = $input->{'planId'};
         $rateLimit = RateLimit::buildFromInput($input->{'rateLimit'}, validate: $validate);
+        $suspended = false;
+        if (isset($input->{'suspended'})) {
+            $suspended = (bool)($input->{'suspended'});
+        }
         $tokens = PlanUsageBig::buildFromInput($input->{'tokens'}, validate: $validate);
         $topUsages = null;
         if (isset($input->{'topUsages'})) {
@@ -342,6 +371,7 @@ class CustomerPlan
         $obj = new self($customerId, $description, $keys, $nextTokenReset, $planId, $rateLimit, $tokens);
         $obj->deletedAt = $deletedAt;
         $obj->modelTermsApprovalRequired = $modelTermsApprovalRequired;
+        $obj->suspended = $suspended;
         $obj->topUsages = $topUsages;
         return $obj;
     }
@@ -364,6 +394,7 @@ class CustomerPlan
         $output['nextTokenReset'] = ($this->nextTokenReset)->format(DateTime::ATOM);
         $output['planId'] = $this->planId;
         $output['rateLimit'] = $this->rateLimit->toJson();
+        $output['suspended'] = $this->suspended;
         $output['tokens'] = $this->tokens->toJson();
         if (isset($this->topUsages)) {
             $output['topUsages'] = array_map(fn (CustomerPlanTopUsagesItem $i) => $i->toJson(), $this->topUsages);

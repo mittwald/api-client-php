@@ -16,6 +16,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileDefaultRes
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileNotAcceptableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileRequestEntityTooLargeResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileUnprocessableEntityResponse;
@@ -170,6 +171,7 @@ class FileClientImpl implements FileClient
             401 => CreateFileUnauthorizedResponse::fromResponse($httpResponse),
             406 => CreateFileNotAcceptableResponse::fromResponse($httpResponse),
             409 => CreateFileConflictResponse::fromResponse($httpResponse),
+            413 => CreateFileRequestEntityTooLargeResponse::fromResponse($httpResponse),
             422 => CreateFileUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => CreateFileTooManyRequestsResponse::fromResponse($httpResponse),
             500 => CreateFileInternalServerErrorResponse::fromResponse($httpResponse),

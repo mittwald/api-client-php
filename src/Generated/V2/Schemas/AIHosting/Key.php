@@ -38,7 +38,8 @@ class Key
                 'type' => 'boolean',
             ],
             'key' => [
-                'description' => 'The secret API key which is required for authentication with the AI hosting.',
+                'deprecated' => true,
+                'description' => 'The secret API key. For security reasons we no longer want to keep exposing this value on every response — this field is deprecated and will stop returning the real key in a future change. It still returns the real value for now.',
                 'type' => 'string',
             ],
             'keyId' => [
@@ -101,7 +102,9 @@ class Key
     private bool $isBlocked = false;
 
     /**
-     * The secret API key which is required for authentication with the AI hosting.
+     * The secret API key. For security reasons we no longer want to keep exposing this value on every response — this field is deprecated and will stop returning the real key in a future change. It still returns the real value for now.
+     *
+     * @deprecated
      */
     private string $key;
 
@@ -163,6 +166,9 @@ class Key
         return $this->isBlocked;
     }
 
+    /**
+     * @deprecated
+     */
     public function getKey(): string
     {
         return $this->key;
@@ -267,6 +273,9 @@ class Key
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withKey(string $key): self
     {
         $validator = new Validator();

@@ -44,6 +44,10 @@ class ProjectPlan
             'projectId' => [
                 'type' => 'string',
             ],
+            'suspended' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'keys',
@@ -65,6 +69,8 @@ class ProjectPlan
     private string $planId;
 
     private string $projectId;
+
+    private bool $suspended = false;
 
     public function __construct(PlanUsage $keys, bool $modelTermsApprovalRequired, string $planId, string $projectId)
     {
@@ -102,6 +108,11 @@ class ProjectPlan
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getSuspended(): bool
+    {
+        return $this->suspended;
     }
 
     public function withDescription(string $description): self
@@ -192,6 +203,20 @@ class ProjectPlan
         return $clone;
     }
 
+    public function withSuspended(bool $suspended): self
+    {
+        $validator = new Validator();
+        $validator->validate($suspended, self::$internalValidationSchema['properties']['suspended']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->suspended = $suspended;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -219,10 +244,15 @@ class ProjectPlan
         }
         $planId = $input->{'planId'};
         $projectId = $input->{'projectId'};
+        $suspended = false;
+        if (isset($input->{'suspended'})) {
+            $suspended = (bool)($input->{'suspended'});
+        }
 
         $obj = new self($keys, $modelTermsApprovalRequired, $planId, $projectId);
         $obj->description = $description;
         $obj->nextTokenReset = $nextTokenReset;
+        $obj->suspended = $suspended;
         return $obj;
     }
 
@@ -244,6 +274,7 @@ class ProjectPlan
         }
         $output['planId'] = $this->planId;
         $output['projectId'] = $this->projectId;
+        $output['suspended'] = $this->suspended;
 
         return $output;
     }
