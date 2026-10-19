@@ -70,6 +70,9 @@ class Domain
                 'type' => 'array',
                 'uniqueItems' => true,
             ],
+            'ownerVerification' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.domain.OwnerVerification',
+            ],
             'processes' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.domain.Process',
@@ -125,6 +128,8 @@ class Domain
      * @var string[]
      */
     private array $nameservers;
+
+    private ?OwnerVerification $ownerVerification = null;
 
     /**
      * @var Process[]|null
@@ -200,6 +205,11 @@ class Domain
     public function getNameservers(): array
     {
         return $this->nameservers;
+    }
+
+    public function getOwnerVerification(): ?OwnerVerification
+    {
+        return $this->ownerVerification ?? null;
     }
 
     /**
@@ -365,6 +375,22 @@ class Domain
         return $clone;
     }
 
+    public function withOwnerVerification(OwnerVerification $ownerVerification): self
+    {
+        $clone = clone $this;
+        $clone->ownerVerification = $ownerVerification;
+
+        return $clone;
+    }
+
+    public function withoutOwnerVerification(): self
+    {
+        $clone = clone $this;
+        unset($clone->ownerVerification);
+
+        return $clone;
+    }
+
     /**
      * @param Process[] $processes
      */
@@ -483,6 +509,10 @@ class Domain
         $domainId = $input->{'domainId'};
         $handles = DomainHandles::buildFromInput($input->{'handles'}, validate: $validate);
         $nameservers = $input->{'nameservers'};
+        $ownerVerification = null;
+        if (isset($input->{'ownerVerification'})) {
+            $ownerVerification = OwnerVerification::buildFromInput($input->{'ownerVerification'}, validate: $validate);
+        }
         $processes = null;
         if (isset($input->{'processes'})) {
             $processes = array_map(fn (array|object $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
@@ -502,6 +532,7 @@ class Domain
         $obj->authCode = $authCode;
         $obj->authCode2 = $authCode2;
         $obj->contactHash = $contactHash;
+        $obj->ownerVerification = $ownerVerification;
         $obj->processes = $processes;
         $obj->scheduledDeletionDate = $scheduledDeletionDate;
         $obj->transferInAuthCode = $transferInAuthCode;
@@ -531,6 +562,9 @@ class Domain
         $output['domainId'] = $this->domainId;
         $output['handles'] = ($this->handles)->toJson();
         $output['nameservers'] = $this->nameservers;
+        if (isset($this->ownerVerification)) {
+            $output['ownerVerification'] = $this->ownerVerification->toJson();
+        }
         if (isset($this->processes)) {
             $output['processes'] = array_map(fn (Process $i): array => $i->toJson(), $this->processes);
         }

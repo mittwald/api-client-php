@@ -1533,10 +1533,13 @@ class DomainClientImpl implements DomainClient
     /**
      * Resends a Contact-Verification email.
      *
+     * This operation is deprecated. Use the POST /v2/domains/{domainId}/actions/resend-email endpoint instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-contact-verification-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ResendContactVerificationEmailRequest $request An object representing the request for this operation
+     * @deprecated
      * @return EmptyResponse No Content
      */
     public function resendContactVerificationEmail(ResendContactVerificationEmailRequest $request): EmptyResponse
@@ -1557,7 +1560,7 @@ class DomainClientImpl implements DomainClient
     /**
      * Resend a Domain email.
      *
-     * Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
+     * Trigger a resend of the e-mail the owner must act on: the registrar's registrant verification or transfer confirmation e-mail or, for .de Domains, the verification e-mail of the owner's contact verification. Fails with 412 if the owner is already verified or the last e-mail was sent less than 15 minutes ago (.de).
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-domain-email
      * @throws GuzzleException
