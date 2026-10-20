@@ -29,6 +29,7 @@ class AIHostingOrder
                 'type' => 'string',
             ],
             'monthlyTokens' => [
+                'description' => 'Has to match the monthlyTokens of an available AI Hosting Article exactly. Reachable via the /articles endpoint.',
                 'example' => 2000000,
                 'type' => 'integer',
             ],
@@ -37,6 +38,7 @@ class AIHostingOrder
                 'type' => 'string',
             ],
             'requestsPerMinute' => [
+                'description' => 'Has to match the requestsPerMinute of an available AI Hosting Article exactly. Reachable via the /articles endpoint.',
                 'example' => 120,
                 'type' => 'integer',
             ],
@@ -54,10 +56,16 @@ class AIHostingOrder
 
     private string $customerId;
 
+    /**
+     * Has to match the monthlyTokens of an available AI Hosting Article exactly. Reachable via the /articles endpoint.
+     */
     private int $monthlyTokens;
 
     private ?string $name = null;
 
+    /**
+     * Has to match the requestsPerMinute of an available AI Hosting Article exactly. Reachable via the /articles endpoint.
+     */
     private int $requestsPerMinute;
 
     private ?bool $useFreeTrial = null;

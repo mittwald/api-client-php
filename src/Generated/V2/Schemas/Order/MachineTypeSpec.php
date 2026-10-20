@@ -25,6 +25,7 @@ class MachineTypeSpec
     private static array $internalValidationSchema = [
         'properties' => [
             'machineType' => [
+                'description' => 'Has to match the machineType of an available Article exactly. Reachable via the /articles endpoint.',
                 'example' => 'prospace.2cpu.4gb',
                 'type' => 'string',
             ],
@@ -32,6 +33,9 @@ class MachineTypeSpec
         'type' => 'object',
     ];
 
+    /**
+     * Has to match the machineType of an available Article exactly. Reachable via the /articles endpoint.
+     */
     private ?string $machineType = null;
 
     /**
