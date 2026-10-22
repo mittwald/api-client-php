@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPass
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Policy\Policy;
 use Psr\Http\Message\ResponseInterface;
 
 class PasswordValidationGetPasswordPolicyOKResponse implements ResponseContainer
@@ -26,21 +27,21 @@ class PasswordValidationGetPasswordPolicyOKResponse implements ResponseContainer
         ],
     ];
 
-    private string $body;
+    private Policy $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(string $body)
+    public function __construct(Policy $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): string
+    public function getBody(): Policy
     {
         return $this->body;
     }
 
-    public function withBody(string $body): self
+    public function withBody(Policy $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,7 +64,7 @@ class PasswordValidationGetPasswordPolicyOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = $input->{'body'};
+        $body = Policy::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -78,7 +79,7 @@ class PasswordValidationGetPasswordPolicyOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }

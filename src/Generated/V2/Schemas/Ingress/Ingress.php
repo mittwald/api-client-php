@@ -92,6 +92,10 @@ class Ingress
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'senderLoginProtection' => [
+                'description' => 'If enabled, only mailboxes of the Ingress\'s Project may send emails from addresses of the Ingress and its SubIngresses. Only set on the root Ingress, as it covers all of its SubIngresses.',
+                'type' => 'boolean',
+            ],
             'tls' => [
                 'oneOf' => [
                     [
@@ -150,6 +154,11 @@ class Ingress
     private array $paths;
 
     private string $projectId;
+
+    /**
+     * If enabled, only mailboxes of the Ingress's Project may send emails from addresses of the Ingress and its SubIngresses. Only set on the root Ingress, as it covers all of its SubIngresses.
+     */
+    private ?bool $senderLoginProtection = null;
 
     private TlsAcme|TlsCertificate $tls;
 
@@ -225,6 +234,11 @@ class Ingress
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getSenderLoginProtection(): ?bool
+    {
+        return $this->senderLoginProtection ?? null;
     }
 
     public function getTls(): TlsAcme|TlsCertificate
@@ -368,6 +382,28 @@ class Ingress
         return $clone;
     }
 
+    public function withSenderLoginProtection(bool $senderLoginProtection): self
+    {
+        $validator = new Validator();
+        $validator->validate($senderLoginProtection, self::$internalValidationSchema['properties']['senderLoginProtection']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->senderLoginProtection = $senderLoginProtection;
+
+        return $clone;
+    }
+
+    public function withoutSenderLoginProtection(): self
+    {
+        $clone = clone $this;
+        unset($clone->senderLoginProtection);
+
+        return $clone;
+    }
+
     public function withTls(TlsAcme|TlsCertificate $tls): self
     {
         $clone = clone $this;
@@ -404,6 +440,10 @@ class Ingress
         $ownership = Ownership::buildFromInput($input->{'ownership'}, validate: $validate);
         $paths = array_map(fn (array|object $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
+        $senderLoginProtection = null;
+        if (isset($input->{'senderLoginProtection'})) {
+            $senderLoginProtection = (bool)($input->{'senderLoginProtection'});
+        }
         $tls = match (true) {
             TlsAcme::validateInput($input->{'tls'}, true) => TlsAcme::buildFromInput($input->{'tls'}, validate: $validate),
             TlsCertificate::validateInput($input->{'tls'}, true) => TlsCertificate::buildFromInput($input->{'tls'}, validate: $validate),
@@ -412,6 +452,7 @@ class Ingress
 
         $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $ownership, $paths, $projectId, $tls);
         $obj->isDomain = $isDomain;
+        $obj->senderLoginProtection = $senderLoginProtection;
         return $obj;
     }
 
@@ -435,6 +476,9 @@ class Ingress
         $output['ownership'] = $this->ownership->toJson();
         $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
         $output['projectId'] = $this->projectId;
+        if (isset($this->senderLoginProtection)) {
+            $output['senderLoginProtection'] = $this->senderLoginProtection;
+        }
         $output['tls'] = match (true) {
             ($this->tls) instanceof TlsAcme, ($this->tls) instanceof TlsCertificate => $this->tls->toJson(),
         };
