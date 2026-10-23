@@ -120,6 +120,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetail
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest;
@@ -749,6 +750,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceGetDetailOfInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
+            403 => InvoiceGetDetailOfInvoiceSettingsForbiddenResponse::fromResponse($httpResponse),
             404 => InvoiceGetDetailOfInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
             429 => InvoiceGetDetailOfInvoiceSettingsTooManyRequestsResponse::fromResponse($httpResponse),
             default => InvoiceGetDetailOfInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
