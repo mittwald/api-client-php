@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer;
 
 use GuzzleHttp\Client;
@@ -152,7 +150,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustom
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipTooManyRequestsResponse;
 
@@ -781,6 +783,10 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateCustomerMembershipBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateCustomerMembershipForbiddenResponse::fromResponse($httpResponse),
+            404 => UpdateCustomerMembershipNotFoundResponse::fromResponse($httpResponse),
+            412 => UpdateCustomerMembershipPreconditionFailedResponse::fromResponse($httpResponse),
             429 => UpdateCustomerMembershipTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });

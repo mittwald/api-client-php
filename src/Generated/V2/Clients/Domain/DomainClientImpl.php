@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain;
 
 use GuzzleHttp\Client;

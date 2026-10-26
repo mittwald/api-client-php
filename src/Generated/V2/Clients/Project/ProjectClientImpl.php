@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project;
 
 use GuzzleHttp\Client;
@@ -202,7 +200,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectD
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProject\UpdateProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServer\UpdateServerBadRequestResponse;
@@ -1015,6 +1017,10 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateProjectMembershipBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateProjectMembershipForbiddenResponse::fromResponse($httpResponse),
+            404 => UpdateProjectMembershipNotFoundResponse::fromResponse($httpResponse),
+            412 => UpdateProjectMembershipPreconditionFailedResponse::fromResponse($httpResponse),
             429 => UpdateProjectMembershipTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateProjectMembershipDefaultResponse::fromResponse($httpResponse),
         });

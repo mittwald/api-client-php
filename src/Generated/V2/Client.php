@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2;
 
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient;

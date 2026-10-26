@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\Container;
 
 use GuzzleHttp\Client;
@@ -365,6 +363,9 @@ class ContainerClientImpl implements ContainerClient
      * Call a Service pull-image webhook.
      *
      * Calls the pull-image webhook endpoint for a Service using a webhook token.
+     *
+     * Like the pull action, this is rejected with `412 Precondition Failed` while the Stack is disabled or suspended.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-call-pull-image-webhook-for-service
      * @throws GuzzleException

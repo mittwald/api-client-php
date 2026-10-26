@@ -24,7 +24,7 @@ class BackupRestoreRequestedParameters
      */
     private static array $internalValidationSchema = [
         'additionalProperties' => [
-            '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty',
+            '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
         ],
         'properties' => [
             'description' => [
@@ -42,7 +42,7 @@ class BackupRestoreRequestedParameters
     /**
      * Properties from the input that are not explicitly declared in the schema
      *
-     * @var array<string, LinkedParameterProperty>
+     * @var array<string, ParameterProperty>
      */
     private array $additionalProperties = [];
 
@@ -65,7 +65,7 @@ class BackupRestoreRequestedParameters
     }
 
     /**
-     * @return array<string, LinkedParameterProperty>
+     * @return array<string, ParameterProperty>
      */
     public function getAdditionalProperties(): array
     {
@@ -73,7 +73,7 @@ class BackupRestoreRequestedParameters
     }
 
     /**
-     * @param array<string, LinkedParameterProperty> $additionalProperties
+     * @param array<string, ParameterProperty> $additionalProperties
      */
     public function withAdditionalProperties(array $additionalProperties): self
     {
@@ -106,7 +106,7 @@ class BackupRestoreRequestedParameters
             if (in_array($key, ['description'], true)) {
                 continue;
             }
-            $obj->additionalProperties[$key] = LinkedParameterProperty::buildFromInput($value, validate: $validate);
+            $obj->additionalProperties[$key] = ParameterProperty::buildFromInput($value, validate: $validate);
         }
         return $obj;
     }

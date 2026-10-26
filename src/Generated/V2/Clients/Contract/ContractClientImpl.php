@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract;
 
 use GuzzleHttp\Client;
@@ -48,66 +46,77 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfIn
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByAiHosting\GetDetailOfContractByAiHostingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLicense\GetDetailOfContractByLicenseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemRequest;
@@ -312,6 +321,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetBaseItemOfContractBadRequestResponse::fromResponse($httpResponse),
+            403 => GetBaseItemOfContractForbiddenResponse::fromResponse($httpResponse),
             404 => GetBaseItemOfContractNotFoundResponse::fromResponse($httpResponse),
             429 => GetBaseItemOfContractTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetBaseItemOfContractDefaultResponse::fromResponse($httpResponse),
@@ -335,6 +345,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
@@ -359,6 +370,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByAiHostingBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByAiHostingForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByAiHostingNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByAiHostingTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByAiHostingDefaultResponse::fromResponse($httpResponse),
@@ -383,6 +395,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByCertificateBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByCertificateForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByCertificateNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByCertificateTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByCertificateDefaultResponse::fromResponse($httpResponse),
@@ -407,6 +420,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByDomainBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByDomainForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByDomainNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByDomainTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByDomainDefaultResponse::fromResponse($httpResponse),
@@ -431,6 +445,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByLeadFyndrBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByLeadFyndrForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByLeadFyndrNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByLeadFyndrTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByLeadFyndrDefaultResponse::fromResponse($httpResponse),
@@ -455,6 +470,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByLicenseBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByLicenseForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByLicenseNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByLicenseTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByLicenseDefaultResponse::fromResponse($httpResponse),
@@ -479,6 +495,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByMailAddressBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByMailAddressForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByMailAddressNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByMailAddressDefaultResponse::fromResponse($httpResponse),
@@ -503,6 +520,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByProjectBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByProjectForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByProjectNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByProjectTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByProjectDefaultResponse::fromResponse($httpResponse),
@@ -527,6 +545,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByServerBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractByServerForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByServerNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractByServerTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByServerDefaultResponse::fromResponse($httpResponse),
@@ -550,6 +569,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractItemBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDetailOfContractItemForbiddenResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractItemNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractItemTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractItemDefaultResponse::fromResponse($httpResponse),

@@ -80,7 +80,7 @@ class BackupRestoreRequested
             ],
             'parameters' => [
                 'additionalProperties' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty',
                 ],
                 'properties' => [
                     'description' => [

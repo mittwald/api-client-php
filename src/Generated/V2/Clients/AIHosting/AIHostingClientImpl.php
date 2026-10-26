@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting;
 
 use GuzzleHttp\Client;
@@ -205,6 +203,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUp
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansTooManyRequestsResponse;
 
 /**
  * Client for AI hosting API
@@ -927,6 +937,66 @@ class AIHostingClientImpl implements AIHostingClient
             412 => ProjectUpdateKeyPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ProjectUpdateKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ProjectUpdateKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all ai hosting keys the authenticated user can access.
+     *
+     * Lists every AI hosting key the user reaches through its organizations,
+     * including the keys assigned to one of their projects, with the
+     * organization, project and plan names denormalized. A membership in a
+     * project alone grants no access to its keys. A user without any AI hosting
+     * gets an empty list, not an error.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-user-get-keys
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UserGetKeysRequest $request An object representing the request for this operation
+     * @return UserGetKeysOKResponse The list of keys the user can access.
+     */
+    public function userGetKeys(UserGetKeysRequest $request): UserGetKeysOKResponse
+    {
+        $httpRequest = new Request(UserGetKeysRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UserGetKeysOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UserGetKeysBadRequestResponse::fromResponse($httpResponse),
+            403 => UserGetKeysForbiddenResponse::fromResponse($httpResponse),
+            429 => UserGetKeysTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UserGetKeysDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all ai hosting plans the authenticated user can access.
+     *
+     * Lists every AI hosting plan the user reaches through its organizations.
+     * A membership in one of a plan's projects alone grants no access to the
+     * plan. A user without any AI hosting gets an empty list, not an error.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-user-get-plans
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UserGetPlansRequest $request An object representing the request for this operation
+     * @return UserGetPlansOKResponse The list of plans the user can access.
+     */
+    public function userGetPlans(UserGetPlansRequest $request): UserGetPlansOKResponse
+    {
+        $httpRequest = new Request(UserGetPlansRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UserGetPlansOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UserGetPlansBadRequestResponse::fromResponse($httpResponse),
+            403 => UserGetPlansForbiddenResponse::fromResponse($httpResponse),
+            429 => UserGetPlansTooManyRequestsResponse::fromResponse($httpResponse),
+            default => UserGetPlansDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mittwald\ApiClient\Generated\V2\Clients\AIHosting;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -55,6 +53,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRo
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectRotateKey\ProjectRotateKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\ProjectUpdateKey\ProjectUpdateKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetKeys\UserGetKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\UserGetPlans\UserGetPlansRequest;
 
 /**
  * Client for AI hosting API
@@ -355,4 +357,36 @@ interface AIHostingClient
      * @param ProjectUpdateKeyRequest $request An object representing the request for this operation
      */
     public function projectUpdateKey(ProjectUpdateKeyRequest $request): ProjectUpdateKeyOKResponse;
+    /**
+     * Get all ai hosting keys the authenticated user can access.
+     *
+     * Lists every AI hosting key the user reaches through its organizations,
+     * including the keys assigned to one of their projects, with the
+     * organization, project and plan names denormalized. A membership in a
+     * project alone grants no access to its keys. A user without any AI hosting
+     * gets an empty list, not an error.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-user-get-keys
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UserGetKeysRequest $request An object representing the request for this operation
+     * @return UserGetKeysOKResponse The list of keys the user can access.
+     */
+    public function userGetKeys(UserGetKeysRequest $request): UserGetKeysOKResponse;
+    /**
+     * Get all ai hosting plans the authenticated user can access.
+     *
+     * Lists every AI hosting plan the user reaches through its organizations.
+     * A membership in one of a plan's projects alone grants no access to the
+     * plan. A user without any AI hosting gets an empty list, not an error.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/AI-hosting/operation/ai-hosting-user-get-plans
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UserGetPlansRequest $request An object representing the request for this operation
+     * @return UserGetPlansOKResponse The list of plans the user can access.
+     */
+    public function userGetPlans(UserGetPlansRequest $request): UserGetPlansOKResponse;
 }
