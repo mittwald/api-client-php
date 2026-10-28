@@ -87,7 +87,6 @@ class Variant
      * DescriptionChangeType defines how the description change should be handled. Values:
      *   - FEATURE_SET_MODIFIED: The users have to confirm to the new contract details equal as price changes.
      *   - FEATURE_SET_UNCHANGED: The changes are only wording updates and do not impact the contract details, so no confirm is required.
-     *
      */
     private ?VariantDescriptionChangeType $descriptionChangeType = null;
 

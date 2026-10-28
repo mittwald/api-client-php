@@ -68,7 +68,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
 
     /**
      * The path to the part of the data that was validated. JavaScript property access notation (e.g., ".prop[1].subProp") is used.
-     *
      */
     private string $path;
 

@@ -71,13 +71,11 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequence
 
     /**
      * Description of the consequence for the Extension from the perspective of the contributor. Values: * "NONE": No consequence. * "EDIT_BLOCK": The Extension will be blocked for editing by the contributor for 30 days.
-     *
      */
     private ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceContributorConsequence $contributorConsequence;
 
     /**
      * Description of the consequence for all Customers of the Extension. Values: * "NONE": No consequence. * "INFO": Customers will be informed about the upcoming changes to their contracts. * "CONFIRM_REQUIRED": Customers will have to confirm or select the accepted changes to their contracts within 30 days or their contracts will be automatically cancelled.
-     *
      */
     private ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceGlobalCustomerConsequence $globalCustomerConsequence;
 

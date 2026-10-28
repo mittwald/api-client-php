@@ -56,6 +56,8 @@ class ServiceResponse
                 'type' => 'boolean',
             ],
             'restartPolicy' => [
+                'description' => 'Restart policy of the container. `unless-stopped` currently behaves like `on-failure`.
+',
                 'enum' => [
                     'no',
                     'always',
@@ -70,9 +72,9 @@ class ServiceResponse
                 'type' => 'string',
             ],
             'shortId' => [
-                'description' => 'A short ID of the container. This is a unique identifier for the container within the project, and can be used to reference it in other API calls, or for SSH connections.
+                'description' => 'A short ID of the container, unique within the project. It can be used for SSH connections. API routes address services by `id`, not by `shortId`.
 ',
-                'example' => 'c-12e4u6',
+                'example' => 'c-XXXXXX',
                 'type' => 'string',
             ],
             'stackId' => [
@@ -117,7 +119,6 @@ class ServiceResponse
 
     /**
      * Message explaining the current state of the container. This may contain information about the current state of the container, or errors that occurred during deployment.
-     *
      */
     private ?string $message = null;
 
@@ -127,13 +128,15 @@ class ServiceResponse
 
     private bool $requiresRecreate;
 
+    /**
+     * Restart policy of the container. `unless-stopped` currently behaves like `on-failure`.
+     */
     private ?ServiceResponseRestartPolicy $restartPolicy = null;
 
     private string $serviceName;
 
     /**
-     * A short ID of the container. This is a unique identifier for the container within the project, and can be used to reference it in other API calls, or for SSH connections.
-     *
+     * A short ID of the container, unique within the project. It can be used for SSH connections. API routes address services by `id`, not by `shortId`.
      */
     private string $shortId;
 

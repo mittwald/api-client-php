@@ -71,7 +71,6 @@ To find out how to connect to your database from external sources, refer to the 
      * The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
      *
      * For MySQLUsers that are created in the same step as the database itself, `full` is the only available option.
-     *
      */
     private CreateMySqlUserWithDatabaseAccessLevel $accessLevel;
 
@@ -82,13 +81,11 @@ To find out how to connect to your database from external sources, refer to the 
      * sources. Defaults to `false` when not set.
      *
      * To find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.
-     *
      */
     private ?bool $externalAccess = null;
 
     /**
      * The password must have a minimum of 8 characters and contain at least one uppercase letter, one lowercase letter, one digit and one special character of `#!~%^*_+-=?{}()<>|.,;$:/`. Other characters are not allowed. The password must not start with any of `-`, `_` or `;`.
-     *
      */
     private string $password;
 

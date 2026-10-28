@@ -35,7 +35,8 @@ class StackResponse
                 'type' => 'string',
             ],
             'prefix' => [
-                'description' => 'Prefix for all service-names in this stack.',
+                'description' => 'Generated, immutable identifier of the Stack (e.g. `st-XXXXXX`). Managed apps in the same project can resolve a container of this Stack as `<serviceName>.<prefix>`; containers of the same Stack can use the service name alone, and containers of other Stacks cannot communicate with it. The prefix is also the directory of the Stack\'s service log files (`/var/log/container/<prefix>/` in the project file system).
+',
                 'type' => 'string',
             ],
             'projectId' => [
@@ -91,7 +92,7 @@ class StackResponse
     private string $id;
 
     /**
-     * Prefix for all service-names in this stack.
+     * Generated, immutable identifier of the Stack (e.g. `st-XXXXXX`). Managed apps in the same project can resolve a container of this Stack as `<serviceName>.<prefix>`; containers of the same Stack can use the service name alone, and containers of other Stacks cannot communicate with it. The prefix is also the directory of the Stack's service log files (`/var/log/container/<prefix>/` in the project file system).
      */
     private string $prefix;
 

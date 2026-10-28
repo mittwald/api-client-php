@@ -134,7 +134,6 @@ Note that you still need a database user with `externalAccess` enabled to connec
 
     /**
      * A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
-     *
      */
     private string $description;
 
@@ -142,7 +141,6 @@ Note that you still need a database user with `externalAccess` enabled to connec
      * The hostname that you can use to connect to this MySQLDatabase from external sources, like your local machine or services running outside the mittwald cloud platform.
      *
      * Note that you still need a database user with `externalAccess` enabled to connect via this hostname.
-     *
      */
     private string $externalHostname;
 
@@ -153,7 +151,6 @@ Note that you still need a database user with `externalAccess` enabled to connec
 
     /**
      * The hostname that you can use to connect to this MySQLDatabase from _within_ the hosting environment.
-     *
      */
     private string $hostname;
 
@@ -167,7 +164,6 @@ Note that you still need a database user with `externalAccess` enabled to connec
 
     /**
      * The name of the MySQLDatabase. This is also the name of the database that you can use when connecting to it. It is automatically generated and cannot be changed.
-     *
      */
     private string $name;
 
@@ -185,7 +181,6 @@ Note that you still need a database user with `externalAccess` enabled to connec
 
     /**
      * The MySQL version that this database is running, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
-     *
      */
     private string $version;
 

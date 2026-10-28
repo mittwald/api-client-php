@@ -42,7 +42,6 @@ This is optional, depending on the MFA activation status of the profile.
     /**
      * Multi Factor Code to confirm MFA.
      * This is optional, depending on the MFA activation status of the profile.
-     *
      */
     private ?string $multiFactorCode = null;
 

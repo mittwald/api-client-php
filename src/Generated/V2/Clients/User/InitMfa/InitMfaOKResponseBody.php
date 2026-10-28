@@ -37,13 +37,11 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     /**
      * base64 encoded barcode content to scan from your mfa app. e.g. `iVBORw0KGgoAAAANSUhEUgAAAMgAAADIEAAAAADYoy...`. You
      * can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
-     *
      */
     private string $barcode;
 
     /**
      * Same as barcode,  but in URL form.
-     *
      */
     private string $url;
 

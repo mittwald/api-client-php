@@ -84,18 +84,13 @@ class ServiceDeclareRequest
                 'type' => 'object',
             ],
             'image' => [
-                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. When
-the image is pulled from a private registry, make sure to create the registry first
-using the `container-create-registry` endpoint (you can push the image later, although
-the container will remain in a pending state until the image is actually available).
-
-The appropriate registry is matched by hostname.
+                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. The image must exist and be accessible when the request is made, because its digest (and, for a new Service, the user it runs as) is resolved at that time; otherwise the request is rejected. Changing the image of an existing Service keeps the user that was resolved when the Service was created. For an image from a private registry, create a Registry with matching credentials first (`POST /v2/projects/{projectId}/registries`); the Registry is matched by the registry host of the image reference.
 ',
                 'example' => 'mysql:8.0',
                 'type' => 'string',
             ],
             'ports' => [
-                'description' => 'Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
+                'description' => 'Ports exposed by this container. Each item has the format `<port>[/<protocol>]` or `<port>:<port>[/<protocol>]`, where `<port>` is a single port or a range such as `8000-8010`. When both sides are given, they must be identical; mapping a port to a different number is not supported. `<protocol>` is `tcp` (default), `udp` or `sctp`. Exposed ports can be accessed from containers of the same Stack and from managed apps in the same project, but not from containers of other Stacks, and are not publicly reachable; to expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
 ',
                 'example' => [
                     '3306/tcp',
@@ -107,7 +102,7 @@ The appropriate registry is matched by hostname.
                 'type' => 'array',
             ],
             'restart' => [
-                'description' => 'Restart policy for the container, matching the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` (optionally `on-failure:<max-retries>`) or `unless-stopped`.
+                'description' => 'Restart policy for the container, using the values of the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` or `unless-stopped`. `unless-stopped` currently behaves like `on-failure`, a maximum retry count (`on-failure:<max-retries>`) is accepted but ignored, and unrecognized values are treated as `on-failure`. Defaults to `on-failure`, so omitting it resets the restart policy of an existing service to `on-failure`.
 ',
                 'example' => 'always',
                 'type' => 'string',
@@ -119,10 +114,10 @@ The appropriate registry is matched by hostname.
                 'type' => 'string',
             ],
             'volumes' => [
-                'description' => 'Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+                'description' => 'Volume mounts for this container. Each item has the format `<source>:<target>`; access-mode suffixes such as `:ro` are not supported. `<target>` is an absolute path inside the container. `<source>` is either the name of a Volume of this Stack (declared in the same request or already existing), or an absolute path in the (always present) project file system, which is shared among containers and managed apps within a project. Mounting the root of the project file system (`/`) is not supported.
 ',
                 'example' => [
-                    'data:/var/lib/mysql:ro',
+                    'data:/var/lib/mysql',
                     '/home/p-XXXXX/html:/var/www',
                 ],
                 'items' => [
@@ -184,18 +179,12 @@ The appropriate registry is matched by hostname.
     private ?array $envs = null;
 
     /**
-     * The image to run, in the usual format also used by `docker run` and `docker compose`. When
-     * the image is pulled from a private registry, make sure to create the registry first
-     * using the `container-create-registry` endpoint (you can push the image later, although
-     * the container will remain in a pending state until the image is actually available).
-     *
-     * The appropriate registry is matched by hostname.
-     *
+     * The image to run, in the usual format also used by `docker run` and `docker compose`. The image must exist and be accessible when the request is made, because its digest (and, for a new Service, the user it runs as) is resolved at that time; otherwise the request is rejected. Changing the image of an existing Service keeps the user that was resolved when the Service was created. For an image from a private registry, create a Registry with matching credentials first (`POST /v2/projects/{projectId}/registries`); the Registry is matched by the registry host of the image reference.
      */
     private string $image;
 
     /**
-     * Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
+     * Ports exposed by this container. Each item has the format `<port>[/<protocol>]` or `<port>:<port>[/<protocol>]`, where `<port>` is a single port or a range such as `8000-8010`. When both sides are given, they must be identical; mapping a port to a different number is not supported. `<protocol>` is `tcp` (default), `udp` or `sctp`. Exposed ports can be accessed from containers of the same Stack and from managed apps in the same project, but not from containers of other Stacks, and are not publicly reachable; to expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.
      *
      *
      * @var string[]|null
@@ -203,8 +192,7 @@ The appropriate registry is matched by hostname.
     private ?array $ports = null;
 
     /**
-     * Restart policy for the container, matching the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` (optionally `on-failure:<max-retries>`) or `unless-stopped`.
-     *
+     * Restart policy for the container, using the values of the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` or `unless-stopped`. `unless-stopped` currently behaves like `on-failure`, a maximum retry count (`on-failure:<max-retries>`) is accepted but ignored, and unrecognized values are treated as `on-failure`. Defaults to `on-failure`, so omitting it resets the restart policy of an existing service to `on-failure`.
      */
     private ?string $restart = null;
 
@@ -216,7 +204,7 @@ The appropriate registry is matched by hostname.
     private ?string $restartPolicy = null;
 
     /**
-     * Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+     * Volume mounts for this container. Each item has the format `<source>:<target>`; access-mode suffixes such as `:ro` are not supported. `<target>` is an absolute path inside the container. `<source>` is either the name of a Volume of this Stack (declared in the same request or already existing), or an absolute path in the (always present) project file system, which is shared among containers and managed apps within a project. Mounting the root of the project file system (`/`) is not supported.
      *
      *
      * @var string[]|null

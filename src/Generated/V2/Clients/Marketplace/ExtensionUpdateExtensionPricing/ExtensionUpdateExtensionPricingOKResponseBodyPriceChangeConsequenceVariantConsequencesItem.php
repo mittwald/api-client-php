@@ -40,7 +40,6 @@ class ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariant
 
     /**
      * The individual consequence for customers of a specific variant of the Extension. Values: * "NONE": No consequence. * "INFO": Customers will be informed about the upcoming changes to their contracts. * "CONFIRM_REQUIRED": Customers will have to confirm or select the accepted changes to their contracts within 30 days or their contracts will be automatically cancelled.
-     *
      */
     private ?ExtensionUpdateExtensionPricingOKResponseBodyPriceChangeConsequenceVariantConsequencesItemConsequence $consequence = null;
 

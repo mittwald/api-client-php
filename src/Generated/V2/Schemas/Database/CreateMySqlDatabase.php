@@ -50,13 +50,11 @@ class CreateMySqlDatabase
 
     /**
      * A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.
-     *
      */
     private string $description;
 
     /**
      * The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.
-     *
      */
     private string $version;
 

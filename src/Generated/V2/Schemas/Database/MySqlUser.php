@@ -121,7 +121,6 @@ but its password can be updated.
     /**
      * The access level that this MySQLUser should have for the database. The `full` access level grants
      * the user read/write privileges on the database.
-     *
      */
     private MySqlUserAccessLevel $accessLevel;
 
@@ -139,7 +138,6 @@ but its password can be updated.
      *
      * To find out how to connect to your database from external sources, refer to the `externalHostname`
      * field of the `GET /v2/mysql-databases/{id}` endpoint.
-     *
      */
     private bool $externalAccess;
 
@@ -149,13 +147,11 @@ but its password can be updated.
      * Indicates whether this MySQL user is the main user of the database. The main user is created by
      * default when a new MySQL database is provisioned. It can neither be deleted nor disabled,
      * but its password can be updated.
-     *
      */
     private bool $mainUser;
 
     /**
      * The name of the MySQL user. This can be used as the username when connecting to the database.
-     *
      */
     private string $name;
 

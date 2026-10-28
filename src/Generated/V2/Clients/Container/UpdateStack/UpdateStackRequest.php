@@ -36,10 +36,11 @@ class UpdateStackRequest
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceRequest',
                         ],
-                        'description' => 'A set of containers that should be started in this stack. The key is relevant for
-network connectivity between containers, because you can use it as DNS name to
-resolve this containers from other containers running in the same project (or from
-managed apps running in the same project).
+                        'description' => 'A set of containers that should be started in this stack. The key is the service name,
+which is relevant for network connectivity: containers of the same stack can resolve a
+container by its service name alone, and managed apps in the same project can resolve it as
+`<serviceName>.<prefix>`, where `<prefix>` is the stack\'s `prefix`. Containers of other
+stacks cannot communicate with it.
 
 To **delete** an existing container from a stack using a `PUT` request, simply omit
 it from the request body. Using a `PATCH` request, set it to an empty object `{}`.
@@ -74,9 +75,10 @@ removed in a future version.
                         'additionalProperties' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.container.VolumeRequest',
                         ],
-                        'description' => 'A set of named volumes that should be created for this stack. Removing a volume
-from this set will not delete the volume (for safety), but only detach it from the
-stack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.
+                        'description' => 'A set of named volumes that should exist in this stack, keyed by volume name. Missing
+volumes are created. Volumes are never removed by this request (for safety): a volume that is
+left out stays part of the stack and keeps its data. To delete a volume, use the
+`DELETE /v2/stacks/{stackId}/volumes/{volumeId}` endpoint.
 ',
                         'type' => 'object',
                     ],

@@ -40,7 +40,8 @@ class VolumeResponse
                 'type' => 'string',
             ],
             'orphaned' => [
-                'description' => 'Whether the Volume is attached to a Stack.',
+                'description' => 'Whether no service of the Stack mounts this Volume. An orphaned Volume still belongs to its Stack and keeps its data until it is deleted explicitly using `DELETE /v2/stacks/{stackId}/volumes/{volumeId}`.
+',
                 'type' => 'boolean',
             ],
             'stackId' => [
@@ -77,7 +78,7 @@ class VolumeResponse
     private string $name;
 
     /**
-     * Whether the Volume is attached to a Stack.
+     * Whether no service of the Stack mounts this Volume. An orphaned Volume still belongs to its Stack and keeps its data until it is deleted explicitly using `DELETE /v2/stacks/{stackId}/volumes/{volumeId}`.
      */
     private bool $orphaned;
 

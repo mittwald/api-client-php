@@ -61,12 +61,7 @@ class ServiceState
                 'type' => 'object',
             ],
             'image' => [
-                'description' => 'The image to run, in the usual format also used by `docker run` and `docker compose`. When
-the image is pulled from a private registry, make sure to create the registry first
-using the `container-create-registry` endpoint (you can push the image later, although
-the container will remain in a pending state until the image is actually available).
-
-The appropriate registry is matched by hostname.
+                'description' => 'The image, in the usual format also used by `docker run` and `docker compose`.
 ',
                 'example' => 'mysql:8.0',
                 'type' => 'string',
@@ -77,7 +72,7 @@ The appropriate registry is matched by hostname.
                 'type' => 'string',
             ],
             'ports' => [
-                'description' => 'Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+                'description' => 'Ports exposed by this container, in the format `<port>/<protocol>` (`<port>` may be a range such as `8000-8010`). Exposed ports can be accessed from containers of the same Stack and from managed apps in the same project, but not from containers of other Stacks, and are not publicly reachable; to expose a port publicly, connect it with an ingress resource.
 ',
                 'example' => [
                     '3306/tcp',
@@ -88,10 +83,10 @@ The appropriate registry is matched by hostname.
                 'type' => 'array',
             ],
             'volumes' => [
-                'description' => 'Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+                'description' => 'Volume mounts of this container in the format `<source>:<target>[:ro]`, where `<source>` is either the name of a Volume of this Stack or an absolute path in the project file system, and `<target>` is an absolute path inside the container. Read-only mounts are shown with an `:ro` suffix; requests currently cannot create them, but existing Services may contain them.
 ',
                 'example' => [
-                    'data:/var/lib/mysql:ro',
+                    'data:/var/lib/mysql',
                     '/home/p-XXXXX/html:/var/www',
                 ],
                 'items' => [
@@ -131,24 +126,17 @@ The appropriate registry is matched by hostname.
     private ?array $envs = null;
 
     /**
-     * The image to run, in the usual format also used by `docker run` and `docker compose`. When
-     * the image is pulled from a private registry, make sure to create the registry first
-     * using the `container-create-registry` endpoint (you can push the image later, although
-     * the container will remain in a pending state until the image is actually available).
-     *
-     * The appropriate registry is matched by hostname.
-     *
+     * The image, in the usual format also used by `docker run` and `docker compose`.
      */
     private string $image;
 
     /**
      * The digest of the image that is currently deployed.
-     *
      */
     private ?string $imageDigest = null;
 
     /**
-     * Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.
+     * Ports exposed by this container, in the format `<port>/<protocol>` (`<port>` may be a range such as `8000-8010`). Exposed ports can be accessed from containers of the same Stack and from managed apps in the same project, but not from containers of other Stacks, and are not publicly reachable; to expose a port publicly, connect it with an ingress resource.
      *
      *
      * @var string[]|null
@@ -156,7 +144,7 @@ The appropriate registry is matched by hostname.
     private ?array $ports = null;
 
     /**
-     * Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).
+     * Volume mounts of this container in the format `<source>:<target>[:ro]`, where `<source>` is either the name of a Volume of this Stack or an absolute path in the project file system, and `<target>` is an absolute path inside the container. Read-only mounts are shown with an `:ro` suffix; requests currently cannot create them, but existing Services may contain them.
      *
      *
      * @var string[]|null

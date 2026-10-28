@@ -30,7 +30,6 @@ Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
     /**
      * The latest secret an external application received via lifecycle webhooks.
      * Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
-     *
      */
     private string $extensionInstanceSecret;
 

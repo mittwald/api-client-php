@@ -118,9 +118,6 @@ class InvoiceItem
 
     private ?DateTime $serviceDate = null;
 
-    /**
-     * @var DatePeriod|null
-     */
     private ?DatePeriod $servicePeriod = null;
 
     private int|float $vatRate;
@@ -177,9 +174,6 @@ class InvoiceItem
         return $this->serviceDate ?? null;
     }
 
-    /**
-     * @return DatePeriod|null
-     */
     public function getServicePeriod(): ?DatePeriod
     {
         return $this->servicePeriod ?? null;
@@ -313,9 +307,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param DatePeriod $servicePeriod
-     */
     public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;

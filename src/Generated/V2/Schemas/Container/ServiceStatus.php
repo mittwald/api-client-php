@@ -12,5 +12,6 @@ enum ServiceStatus: string
     case creating = 'creating';
     case starting = 'starting';
     case stopping = 'stopping';
+    case unspecified = 'unspecified';
     case unknown = '__unknown__';
 }

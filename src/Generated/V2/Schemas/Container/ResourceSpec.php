@@ -32,13 +32,7 @@ one full CPU core. For example, `0.5` means that the container is limited to usi
                 'type' => 'string',
             ],
             'memory' => [
-                'description' => 'Memory limit for the container. The value can be specified in bytes or using a suffix to indicate
-the unit.
-
-The format matches the one [used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values):
-
-> Values express a byte value as a string in `{amount}{byte unit}` format: The supported units are
-`b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).
+                'description' => 'Memory limit for the container, as an integer followed by a unit, similar to the [byte values used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values): `b` (bytes), `k` or `kb` (kilobytes), `m` or `mb` (megabytes) and `g` or `gb` (gigabytes). Units must be lowercase and are decimal (`1g` = 1,000,000,000 bytes). A number without a unit is not accepted.
 ',
                 'example' => '1gb',
                 'type' => 'string',
@@ -49,19 +43,11 @@ The format matches the one [used by Docker Compose](https://docs.docker.com/refe
     /**
      * CPU limit for the container. The value can be specified as a decimal number, where `1` corresponds to
      * one full CPU core. For example, `0.5` means that the container is limited to using half of a CPU core.
-     *
      */
     private ?string $cpus = null;
 
     /**
-     * Memory limit for the container. The value can be specified in bytes or using a suffix to indicate
-     * the unit.
-     *
-     * The format matches the one [used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values):
-     *
-     * > Values express a byte value as a string in `{amount}{byte unit}` format: The supported units are
-     * `b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).
-     *
+     * Memory limit for the container, as an integer followed by a unit, similar to the [byte values used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values): `b` (bytes), `k` or `kb` (kilobytes), `m` or `mb` (megabytes) and `g` or `gb` (gigabytes). Units must be lowercase and are decimal (`1g` = 1,000,000,000 bytes). A number without a unit is not accepted.
      */
     private ?string $memory = null;
 

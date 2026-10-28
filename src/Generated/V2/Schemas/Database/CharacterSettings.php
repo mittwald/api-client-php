@@ -46,13 +46,11 @@ class CharacterSettings
 
     /**
      * A valid MySQL character set. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available character sets.
-     *
      */
     private string $characterSet;
 
     /**
      * A valid MySQL collation. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available collations.
-     *
      */
     private string $collation;
 

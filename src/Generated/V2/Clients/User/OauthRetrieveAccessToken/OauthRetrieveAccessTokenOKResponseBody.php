@@ -59,7 +59,6 @@ response was generated.
 
     /**
      * The access token issued by the authorization server.
-     *
      */
     private string $accessToken;
 
@@ -68,27 +67,23 @@ response was generated.
      * example, the value "3600" denotes that the access
      * token will expire in one hour from the time the
      * response was generated.
-     *
      */
     private int $expiresIn;
 
     /**
      * The refresh token issued by the authorization server.
-     *
      */
     private string $refreshToken;
 
     /**
      * The scope of the access token as described by
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3).
-     *
      */
     private ?string $scope = null;
 
     /**
      * The type of the token issued as described in
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
-     *
      */
     private OauthRetrieveAccessTokenOKResponseBodyTokenType $tokenType;
 

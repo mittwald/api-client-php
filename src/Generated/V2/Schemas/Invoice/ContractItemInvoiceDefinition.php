@@ -58,16 +58,10 @@ class ContractItemInvoiceDefinition
 
     private ?DateTime $serviceDate = null;
 
-    /**
-     * @var DatePeriod
-     */
     private DatePeriod $servicePeriod;
 
     private int $vatRate;
 
-    /**
-     * @param DatePeriod $servicePeriod
-     */
     public function __construct(string $contractItemId, DatePeriod $servicePeriod, int $vatRate)
     {
         $this->contractItemId = $contractItemId;
@@ -90,9 +84,6 @@ class ContractItemInvoiceDefinition
         return $this->serviceDate ?? null;
     }
 
-    /**
-     * @return DatePeriod
-     */
     public function getServicePeriod(): DatePeriod
     {
         return $this->servicePeriod;
@@ -155,9 +146,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @param DatePeriod $servicePeriod
-     */
     public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;

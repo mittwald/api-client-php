@@ -86,6 +86,8 @@ interface ContainerClient
     /**
      * Add a template component to a Stack.
      *
+     * Adds the Services and Volumes of a Container Template of type `component` to the Stack. Returns `400` if the Template is not of type `component` or the user inputs are invalid, `404` if the Template does not exist, and `412` while a template installation of the Stack is still in progress.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-add-template-component
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -153,6 +155,8 @@ interface ContainerClient
     /**
      * Delete a Stack.
      *
+     * Deletes the Stack including all of its Services and Volumes. **The data stored in the Stack's Volumes is deleted permanently.** Files in the project file system that are bind-mounted into Services are not affected. To keep a Volume's data, back it up before deleting the Stack.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-delete-stack
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -172,6 +176,8 @@ interface ContainerClient
     public function deleteVolume(DeleteVolumeRequest $request): EmptyResponse;
     /**
      * Get a ContainerImageConfig.
+     *
+     * Resolves the given image reference and returns the configuration of the image. An image that does not exist, cannot be accessed (e.g. a private image without matching Registry credentials), or cannot be resolved returns `400` with a validation error describing the cause; `404` is only returned for an unknown Registry passed as `useCredentialsForRegistryId`. If the image's registry rate-limits the request, `429` is returned and the request can be retried later.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-get-container-image-config
      * @throws GuzzleException
@@ -281,7 +287,9 @@ interface ContainerClient
      */
     public function listRegistries(ListRegistriesRequest $request): ListRegistriesOKResponse;
     /**
-     * List Stacks belonging to the executing user.
+     * List Stacks of the Projects in which the executing user is owner or external member.
+     *
+     * Lists the Stacks of all Projects in which the executing user has the project role `owner` or `external`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-list-self-stacks
      * @throws GuzzleException
