@@ -24,6 +24,9 @@ class Ingress
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'accessProtection' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.ingress.AccessProtection',
+            ],
             'dnsValidationErrors' => [
                 'description' => 'A list of errors that occurred while validating the ingress\'s dns before requesting a certificate. `ERROR_QUAD_A` and `ERROR_NO_A_RECORD` are deprecated and no longer reported.',
                 'items' => [
@@ -122,6 +125,8 @@ class Ingress
         'type' => 'object',
     ];
 
+    private ?AccessProtection $accessProtection = null;
+
     /**
      * A list of errors that occurred while validating the ingress's dns before requesting a certificate. `ERROR_QUAD_A` and `ERROR_NO_A_RECORD` are deprecated and no longer reported.
      *
@@ -178,6 +183,11 @@ class Ingress
         $this->paths = $paths;
         $this->projectId = $projectId;
         $this->tls = $tls;
+    }
+
+    public function getAccessProtection(): ?AccessProtection
+    {
+        return $this->accessProtection ?? null;
     }
 
     /**
@@ -244,6 +254,22 @@ class Ingress
     public function getTls(): TlsAcme|TlsCertificate
     {
         return $this->tls;
+    }
+
+    public function withAccessProtection(AccessProtection $accessProtection): self
+    {
+        $clone = clone $this;
+        $clone->accessProtection = $accessProtection;
+
+        return $clone;
+    }
+
+    public function withoutAccessProtection(): self
+    {
+        $clone = clone $this;
+        unset($clone->accessProtection);
+
+        return $clone;
     }
 
     /**
@@ -427,6 +453,10 @@ class Ingress
             static::validateInput($input);
         }
 
+        $accessProtection = null;
+        if (isset($input->{'accessProtection'})) {
+            $accessProtection = AccessProtection::buildFromInput($input->{'accessProtection'}, validate: $validate);
+        }
         $dnsValidationErrors = $input->{'dnsValidationErrors'};
         $hostname = $input->{'hostname'};
         $id = $input->{'id'};
@@ -451,6 +481,7 @@ class Ingress
         };
 
         $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $ownership, $paths, $projectId, $tls);
+        $obj->accessProtection = $accessProtection;
         $obj->isDomain = $isDomain;
         $obj->senderLoginProtection = $senderLoginProtection;
         return $obj;
@@ -464,6 +495,9 @@ class Ingress
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->accessProtection)) {
+            $output['accessProtection'] = $this->accessProtection->toJson();
+        }
         $output['dnsValidationErrors'] = $this->dnsValidationErrors;
         $output['hostname'] = $this->hostname;
         $output['id'] = $this->id;

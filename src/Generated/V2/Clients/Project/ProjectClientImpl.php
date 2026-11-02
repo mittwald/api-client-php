@@ -81,6 +81,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKRespo
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteRequest;
@@ -618,6 +619,7 @@ class ProjectClientImpl implements ProjectClient
             return GetProjectInviteOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetProjectInviteForbiddenResponse::fromResponse($httpResponse),
             404 => GetProjectInviteNotFoundResponse::fromResponse($httpResponse),
             429 => GetProjectInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetProjectInviteDefaultResponse::fromResponse($httpResponse),
