@@ -22,12 +22,29 @@ class AuthenticateAcceptedResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'properties' => [
+                    'availableSecondFactors' => [
+                        'description' => 'More values may be added in the future; clients must ignore values they do not know.',
+                        'items' => [
+                            'enum' => [
+                                'totp',
+                                'passkey',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
                     'name' => [
                         'enum' => [
                             'SecondFactorRequired',
                         ],
                         'type' => 'string',
                     ],
+                    'passkeyChallenge' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyChallenge',
+                    ],
+                ],
+                'required' => [
+                    'availableSecondFactors',
                 ],
                 'type' => 'object',
             ],

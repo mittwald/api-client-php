@@ -35,13 +35,15 @@ class AuthenticateMfaRequest
                         'minLength' => 6,
                         'type' => 'string',
                     ],
+                    'passkeyCredential' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+                    ],
                     'password' => [
                         'description' => 'The password of the user.',
                         'type' => 'string',
                     ],
                 ],
                 'required' => [
-                    'multiFactorCode',
                     'email',
                     'password',
                 ],

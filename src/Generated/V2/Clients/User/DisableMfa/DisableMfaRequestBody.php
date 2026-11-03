@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DisableMfa;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\PasskeyCredential;
 
 class DisableMfaRequestBody
 {
@@ -15,31 +16,41 @@ class DisableMfaRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'multiFactorCode' => [
-                'description' => 'Multi Factor Code to confirm MFA.',
+                'description' => 'A TOTP code or recovery code.',
+                'example' => '123456',
                 'maxLength' => 16,
                 'minLength' => 6,
                 'type' => 'string',
             ],
-        ],
-        'required' => [
-            'multiFactorCode',
+            'passkeyCredential' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+            ],
         ],
         'type' => 'object',
     ];
 
     /**
-     * Multi Factor Code to confirm MFA.
+     * A TOTP code or recovery code.
      */
-    private string $multiFactorCode;
+    private ?string $multiFactorCode = null;
 
-    public function __construct(string $multiFactorCode)
+    private ?PasskeyCredential $passkeyCredential = null;
+
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->multiFactorCode = $multiFactorCode;
     }
 
-    public function getMultiFactorCode(): string
+    public function getMultiFactorCode(): ?string
     {
-        return $this->multiFactorCode;
+        return $this->multiFactorCode ?? null;
+    }
+
+    public function getPasskeyCredential(): ?PasskeyCredential
+    {
+        return $this->passkeyCredential ?? null;
     }
 
     public function withMultiFactorCode(string $multiFactorCode): self
@@ -52,6 +63,30 @@ class DisableMfaRequestBody
 
         $clone = clone $this;
         $clone->multiFactorCode = $multiFactorCode;
+
+        return $clone;
+    }
+
+    public function withoutMultiFactorCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->multiFactorCode);
+
+        return $clone;
+    }
+
+    public function withPasskeyCredential(PasskeyCredential $passkeyCredential): self
+    {
+        $clone = clone $this;
+        $clone->passkeyCredential = $passkeyCredential;
+
+        return $clone;
+    }
+
+    public function withoutPasskeyCredential(): self
+    {
+        $clone = clone $this;
+        unset($clone->passkeyCredential);
 
         return $clone;
     }
@@ -71,10 +106,18 @@ class DisableMfaRequestBody
             static::validateInput($input);
         }
 
-        $multiFactorCode = $input->{'multiFactorCode'};
+        $multiFactorCode = null;
+        if (isset($input->{'multiFactorCode'})) {
+            $multiFactorCode = $input->{'multiFactorCode'};
+        }
+        $passkeyCredential = null;
+        if (isset($input->{'passkeyCredential'})) {
+            $passkeyCredential = PasskeyCredential::buildFromInput($input->{'passkeyCredential'}, validate: $validate);
+        }
 
-        $obj = new self($multiFactorCode);
-
+        $obj = new self();
+        $obj->multiFactorCode = $multiFactorCode;
+        $obj->passkeyCredential = $passkeyCredential;
         return $obj;
     }
 
@@ -86,7 +129,12 @@ class DisableMfaRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['multiFactorCode'] = $this->multiFactorCode;
+        if (isset($this->multiFactorCode)) {
+            $output['multiFactorCode'] = $this->multiFactorCode;
+        }
+        if (isset($this->passkeyCredential)) {
+            $output['passkeyCredential'] = $this->passkeyCredential->toJson();
+        }
 
         return $output;
     }

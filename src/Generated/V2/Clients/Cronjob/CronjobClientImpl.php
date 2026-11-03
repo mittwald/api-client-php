@@ -35,6 +35,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronj
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronjobAppId\DeprecatedCronjobUpdateCronjobAppIdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobUpdateCronjobAppId\DeprecatedCronjobUpdateCronjobAppIdTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobRequest;
@@ -178,6 +179,7 @@ class CronjobClientImpl implements CronjobClient
             return GetCronjobOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetCronjobForbiddenResponse::fromResponse($httpResponse),
             404 => GetCronjobNotFoundResponse::fromResponse($httpResponse),
             429 => GetCronjobTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetCronjobDefaultResponse::fromResponse($httpResponse),

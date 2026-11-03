@@ -33,6 +33,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
@@ -260,6 +261,7 @@ class AppClientImpl implements AppClient
             return GetAppinstallationOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetAppinstallationForbiddenResponse::fromResponse($httpResponse),
             404 => GetAppinstallationNotFoundResponse::fromResponse($httpResponse),
             429 => GetAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppinstallationDefaultResponse::fromResponse($httpResponse),

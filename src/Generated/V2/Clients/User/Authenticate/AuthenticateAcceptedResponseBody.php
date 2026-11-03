@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\PasskeyChallenge;
 
 class AuthenticateAcceptedResponseBody
 {
@@ -14,28 +15,85 @@ class AuthenticateAcceptedResponseBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'availableSecondFactors' => [
+                'description' => 'More values may be added in the future; clients must ignore values they do not know.',
+                'items' => [
+                    'enum' => [
+                        'totp',
+                        'passkey',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'name' => [
                 'enum' => [
                     'SecondFactorRequired',
                 ],
                 'type' => 'string',
             ],
+            'passkeyChallenge' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyChallenge',
+            ],
+        ],
+        'required' => [
+            'availableSecondFactors',
         ],
         'type' => 'object',
     ];
 
+    /**
+     * More values may be added in the future; clients must ignore values they do not know.
+     *
+     * @var string[]
+     */
+    private array $availableSecondFactors;
+
     private ?AuthenticateAcceptedResponseBodyName $name = null;
 
+    private ?PasskeyChallenge $passkeyChallenge = null;
+
     /**
-     *
+     * @param string[] $availableSecondFactors
      */
-    public function __construct()
+    public function __construct(array $availableSecondFactors)
     {
+        $this->availableSecondFactors = $availableSecondFactors;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAvailableSecondFactors(): array
+    {
+        return $this->availableSecondFactors;
     }
 
     public function getName(): ?AuthenticateAcceptedResponseBodyName
     {
         return $this->name ?? null;
+    }
+
+    public function getPasskeyChallenge(): ?PasskeyChallenge
+    {
+        return $this->passkeyChallenge ?? null;
+    }
+
+    /**
+     * @param string[] $availableSecondFactors
+     */
+    public function withAvailableSecondFactors(array $availableSecondFactors): self
+    {
+        $validator = new Validator();
+        $validator->validate($availableSecondFactors, self::$internalValidationSchema['properties']['availableSecondFactors']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->availableSecondFactors = $availableSecondFactors;
+
+        return $clone;
     }
 
     public function withName(AuthenticateAcceptedResponseBodyName $name): self
@@ -50,6 +108,22 @@ class AuthenticateAcceptedResponseBody
     {
         $clone = clone $this;
         unset($clone->name);
+
+        return $clone;
+    }
+
+    public function withPasskeyChallenge(PasskeyChallenge $passkeyChallenge): self
+    {
+        $clone = clone $this;
+        $clone->passkeyChallenge = $passkeyChallenge;
+
+        return $clone;
+    }
+
+    public function withoutPasskeyChallenge(): self
+    {
+        $clone = clone $this;
+        unset($clone->passkeyChallenge);
 
         return $clone;
     }
@@ -69,13 +143,19 @@ class AuthenticateAcceptedResponseBody
             static::validateInput($input);
         }
 
+        $availableSecondFactors = $input->{'availableSecondFactors'};
         $name = null;
         if (isset($input->{'name'})) {
             $name = AuthenticateAcceptedResponseBodyName::from($input->{'name'});
         }
+        $passkeyChallenge = null;
+        if (isset($input->{'passkeyChallenge'})) {
+            $passkeyChallenge = PasskeyChallenge::buildFromInput($input->{'passkeyChallenge'}, validate: $validate);
+        }
 
-        $obj = new self();
+        $obj = new self($availableSecondFactors);
         $obj->name = $name;
+        $obj->passkeyChallenge = $passkeyChallenge;
         return $obj;
     }
 
@@ -87,8 +167,12 @@ class AuthenticateAcceptedResponseBody
     public function toJson(): array
     {
         $output = [];
+        $output['availableSecondFactors'] = $this->availableSecondFactors;
         if (isset($this->name)) {
             $output['name'] = ($this->name)->value;
+        }
+        if (isset($this->passkeyChallenge)) {
+            $output['passkeyChallenge'] = $this->passkeyChallenge->toJson();
         }
 
         return $output;

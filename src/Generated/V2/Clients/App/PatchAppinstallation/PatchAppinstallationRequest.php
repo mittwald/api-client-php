@@ -26,6 +26,10 @@ class PatchAppinstallationRequest
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'autoUpdatesActivated' => [
+                        'description' => 'Enabling automatic updates may first update the AppInstallation to the newest permitted app version.',
+                        'type' => 'boolean',
+                    ],
                     'customDocumentRoot' => [
                         'type' => 'string',
                     ],

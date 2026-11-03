@@ -22,6 +22,10 @@ class PatchAppinstallationRequestBody
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'autoUpdatesActivated' => [
+                'description' => 'Enabling automatic updates may first update the AppInstallation to the newest permitted app version.',
+                'type' => 'boolean',
+            ],
             'customDocumentRoot' => [
                 'type' => 'string',
             ],
@@ -58,6 +62,11 @@ database ID. Databases omitted from this object remain unchanged.
 
     private ?string $appVersionId = null;
 
+    /**
+     * Enabling automatic updates may first update the AppInstallation to the newest permitted app version.
+     */
+    private ?bool $autoUpdatesActivated = null;
+
     private ?string $customDocumentRoot = null;
 
     /**
@@ -93,6 +102,11 @@ database ID. Databases omitted from this object remain unchanged.
     public function getAppVersionId(): ?string
     {
         return $this->appVersionId ?? null;
+    }
+
+    public function getAutoUpdatesActivated(): ?bool
+    {
+        return $this->autoUpdatesActivated ?? null;
     }
 
     public function getCustomDocumentRoot(): ?string
@@ -152,6 +166,28 @@ database ID. Databases omitted from this object remain unchanged.
     {
         $clone = clone $this;
         unset($clone->appVersionId);
+
+        return $clone;
+    }
+
+    public function withAutoUpdatesActivated(bool $autoUpdatesActivated): self
+    {
+        $validator = new Validator();
+        $validator->validate($autoUpdatesActivated, self::$internalValidationSchema['properties']['autoUpdatesActivated']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->autoUpdatesActivated = $autoUpdatesActivated;
+
+        return $clone;
+    }
+
+    public function withoutAutoUpdatesActivated(): self
+    {
+        $clone = clone $this;
+        unset($clone->autoUpdatesActivated);
 
         return $clone;
     }
@@ -292,6 +328,10 @@ database ID. Databases omitted from this object remain unchanged.
         if (isset($input->{'appVersionId'})) {
             $appVersionId = $input->{'appVersionId'};
         }
+        $autoUpdatesActivated = null;
+        if (isset($input->{'autoUpdatesActivated'})) {
+            $autoUpdatesActivated = (bool)($input->{'autoUpdatesActivated'});
+        }
         $customDocumentRoot = null;
         if (isset($input->{'customDocumentRoot'})) {
             $customDocumentRoot = $input->{'customDocumentRoot'};
@@ -319,6 +359,7 @@ database ID. Databases omitted from this object remain unchanged.
 
         $obj = new self();
         $obj->appVersionId = $appVersionId;
+        $obj->autoUpdatesActivated = $autoUpdatesActivated;
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->databases = $databases;
         $obj->description = $description;
@@ -338,6 +379,9 @@ database ID. Databases omitted from this object remain unchanged.
         $output = [];
         if (isset($this->appVersionId)) {
             $output['appVersionId'] = $this->appVersionId;
+        }
+        if (isset($this->autoUpdatesActivated)) {
+            $output['autoUpdatesActivated'] = $this->autoUpdatesActivated;
         }
         if (isset($this->customDocumentRoot)) {
             $output['customDocumentRoot'] = $this->customDocumentRoot;

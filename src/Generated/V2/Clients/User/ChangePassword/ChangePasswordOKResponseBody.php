@@ -31,8 +31,8 @@ class ChangePasswordOKResponseBody
         ],
         'required' => [
             'token',
-            'expires',
             'refreshToken',
+            'expires',
         ],
         'type' => 'object',
     ];

@@ -20,15 +20,15 @@ class ResetRecoverycodesRequest
             'body' => [
                 'properties' => [
                     'multiFactorCode' => [
-                        'description' => 'Multi Factor Code to authorize your request.',
+                        'description' => 'A TOTP code or recovery code.',
                         'example' => '123456',
                         'maxLength' => 16,
                         'minLength' => 6,
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'multiFactorCode',
+                    'passkeyCredential' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+                    ],
                 ],
                 'type' => 'object',
             ],

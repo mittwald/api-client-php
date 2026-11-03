@@ -23,9 +23,11 @@ class GetMfaStatusOKResponse implements ResponseContainer
             'body' => [
                 'properties' => [
                     'confirmed' => [
+                        'description' => 'TOTP has been confirmed and is active.',
                         'type' => 'boolean',
                     ],
                     'initialized' => [
+                        'description' => 'TOTP has been initialized.',
                         'type' => 'boolean',
                     ],
                 ],

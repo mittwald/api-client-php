@@ -15,9 +15,11 @@ class GetMfaStatusOKResponseBody
     private static array $internalValidationSchema = [
         'properties' => [
             'confirmed' => [
+                'description' => 'TOTP has been confirmed and is active.',
                 'type' => 'boolean',
             ],
             'initialized' => [
+                'description' => 'TOTP has been initialized.',
                 'type' => 'boolean',
             ],
         ],
@@ -28,8 +30,14 @@ class GetMfaStatusOKResponseBody
         'type' => 'object',
     ];
 
+    /**
+     * TOTP has been confirmed and is active.
+     */
     private bool $confirmed;
 
+    /**
+     * TOTP has been initialized.
+     */
     private bool $initialized;
 
     public function __construct(bool $confirmed, bool $initialized)

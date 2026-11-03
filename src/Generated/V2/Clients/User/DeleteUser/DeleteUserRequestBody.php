@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\PasskeyCredential;
 
 class DeleteUserRequestBody
 {
@@ -15,13 +16,17 @@ class DeleteUserRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'multiFactorCode' => [
-                'description' => 'Multi Factor Code to authorize your request.',
+                'description' => 'A TOTP code or recovery code.',
                 'example' => '123456',
                 'maxLength' => 16,
                 'minLength' => 6,
                 'type' => 'string',
             ],
+            'passkeyCredential' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+            ],
             'password' => [
+                'description' => 'The password of the user.',
                 'type' => 'string',
             ],
         ],
@@ -32,10 +37,15 @@ class DeleteUserRequestBody
     ];
 
     /**
-     * Multi Factor Code to authorize your request.
+     * A TOTP code or recovery code.
      */
     private ?string $multiFactorCode = null;
 
+    private ?PasskeyCredential $passkeyCredential = null;
+
+    /**
+     * The password of the user.
+     */
     private string $password;
 
     public function __construct(string $password)
@@ -46,6 +56,11 @@ class DeleteUserRequestBody
     public function getMultiFactorCode(): ?string
     {
         return $this->multiFactorCode ?? null;
+    }
+
+    public function getPasskeyCredential(): ?PasskeyCredential
+    {
+        return $this->passkeyCredential ?? null;
     }
 
     public function getPassword(): string
@@ -71,6 +86,22 @@ class DeleteUserRequestBody
     {
         $clone = clone $this;
         unset($clone->multiFactorCode);
+
+        return $clone;
+    }
+
+    public function withPasskeyCredential(PasskeyCredential $passkeyCredential): self
+    {
+        $clone = clone $this;
+        $clone->passkeyCredential = $passkeyCredential;
+
+        return $clone;
+    }
+
+    public function withoutPasskeyCredential(): self
+    {
+        $clone = clone $this;
+        unset($clone->passkeyCredential);
 
         return $clone;
     }
@@ -108,10 +139,15 @@ class DeleteUserRequestBody
         if (isset($input->{'multiFactorCode'})) {
             $multiFactorCode = $input->{'multiFactorCode'};
         }
+        $passkeyCredential = null;
+        if (isset($input->{'passkeyCredential'})) {
+            $passkeyCredential = PasskeyCredential::buildFromInput($input->{'passkeyCredential'}, validate: $validate);
+        }
         $password = $input->{'password'};
 
         $obj = new self($password);
         $obj->multiFactorCode = $multiFactorCode;
+        $obj->passkeyCredential = $passkeyCredential;
         return $obj;
     }
 
@@ -125,6 +161,9 @@ class DeleteUserRequestBody
         $output = [];
         if (isset($this->multiFactorCode)) {
             $output['multiFactorCode'] = $this->multiFactorCode;
+        }
+        if (isset($this->passkeyCredential)) {
+            $output['passkeyCredential'] = $this->passkeyCredential->toJson();
         }
         $output['password'] = $this->password;
 

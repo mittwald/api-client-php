@@ -92,6 +92,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysql
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseOKResponse;
@@ -111,6 +112,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\G
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseOKResponse;
@@ -438,6 +440,7 @@ class DatabaseClientImpl implements DatabaseClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
+            403 => GetMysqlDatabaseForbiddenResponse::fromResponse($httpResponse),
             404 => GetMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
             429 => GetMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
@@ -511,6 +514,7 @@ class DatabaseClientImpl implements DatabaseClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
+            403 => GetRedisDatabaseForbiddenResponse::fromResponse($httpResponse),
             404 => GetRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
             429 => GetRedisDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),

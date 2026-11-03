@@ -11,6 +11,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResp
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailRequest;
@@ -23,9 +25,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCr
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest;
@@ -101,6 +112,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensOKRe
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysOKResponse;
@@ -135,6 +148,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeR
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateAllSessions\TerminateAllSessionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateSession\TerminateSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailRequest;
@@ -567,6 +581,9 @@ interface UserClient
     /**
      * Validate your second factor.
      *
+     * Provide either `multiFactorCode` or `passkeyCredential` as second factor.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -574,6 +591,19 @@ interface UserClient
      * @return AuthenticateMfaOKResponse Your authentication request was successful and you've got an access token.
      */
     public function authenticateMfa(AuthenticateMfaRequest $request): AuthenticateMfaOKResponse;
+    /**
+     * Authenticate yourself with a passkey to get an access token.
+     *
+     * Create the challenge with `POST /passkey-challenges` first.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AuthenticatePasskeyRequest $request An object representing the request for this operation
+     * @return AuthenticatePasskeyOKResponse Your authentication request was successful and you've got an access token.
+     */
+    public function authenticatePasskey(AuthenticatePasskeyRequest $request): AuthenticatePasskeyOKResponse;
     /**
      * Authenticate an user with an access token retrieval key.
      *
@@ -597,6 +627,9 @@ interface UserClient
     public function changeEmail(ChangeEmailRequest $request): EmptyResponse;
     /**
      * Change your password.
+     *
+     * If a second factor is set up, provide either `multiFactorCode` or `passkeyCredential`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-password
      * @throws GuzzleException
@@ -646,6 +679,58 @@ interface UserClient
      */
     public function createFeedback(CreateFeedbackRequest $request): CreateFeedbackCreatedResponse;
     /**
+     * Register a new passkey.
+     *
+     * Create the challenge with `POST /users/self/passkey-registration-challenges` first.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyRequest $request An object representing the request for this operation
+     * @return CreatePasskeyCreatedResponse The passkey has been registered.
+     */
+    public function createPasskey(CreatePasskeyRequest $request): CreatePasskeyCreatedResponse;
+    /**
+     * Create a challenge for a passkey login.
+     *
+     * The challenge is bound to the `Origin` header of the request.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyChallenge(CreatePasskeyChallengeRequest $request): CreatePasskeyChallengeCreatedResponse;
+    /**
+     * Create a challenge to confirm an action with a passkey.
+     *
+     * The challenge is bound to the `Origin` header of the request and can be used once as `passkeyCredential`.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-confirmation-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyConfirmationChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyConfirmationChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyConfirmationChallenge(CreatePasskeyConfirmationChallengeRequest $request): CreatePasskeyConfirmationChallengeCreatedResponse;
+    /**
+     * Create a challenge to register a new passkey.
+     *
+     * Confirm your identity with the password and, if a second factor is set up, with `multiFactorCode` or `passkeyCredential`.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-registration-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyRegistrationChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyRegistrationChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyRegistrationChallenge(CreatePasskeyRegistrationChallengeRequest $request): CreatePasskeyRegistrationChallengeCreatedResponse;
+    /**
      * Store a new ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-ssh-key
@@ -666,6 +751,19 @@ interface UserClient
      */
     public function deleteApiToken(DeleteApiTokenRequest $request): EmptyResponse;
     /**
+     * Delete a passkey.
+     *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeletePasskeyRequest $request An object representing the request for this operation
+     * @return EmptyResponse The passkey has been deleted.
+     */
+    public function deletePasskey(DeletePasskeyRequest $request): EmptyResponse;
+    /**
      * Remove a ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-ssh-key
@@ -678,6 +776,9 @@ interface UserClient
     /**
      * Delete your account and all your personal data.
      *
+     * If a second factor is set up, provide either `multiFactorCode` or `passkeyCredential`.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -687,6 +788,9 @@ interface UserClient
     public function deleteUser(DeleteUserRequest $request): EmptyResponse;
     /**
      * Disable Multi Factor Authentication.
+     *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
      * @throws GuzzleException
@@ -737,6 +841,10 @@ interface UserClient
     public function getCurrentSessionStatus(GetCurrentSessionStatusRequest $request): GetCurrentSessionStatusOKResponse;
     /**
      * Get your current multi factor auth status.
+     *
+     * Describes TOTP only. Passkeys are a second factor as well; `GET /v2/users/self/passkeys` lists them, so
+     * `confirmed: false` does not mean that you have no second factor.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
      * @throws GuzzleException
@@ -866,6 +974,16 @@ interface UserClient
      * @return ListFeedbackOKResponse Feedback submitted by the user.
      */
     public function listFeedback(ListFeedbackRequest $request): ListFeedbackOKResponse;
+    /**
+     * Get your registered passkeys.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-passkeys
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListPasskeysRequest $request An object representing the request for this operation
+     * @return ListPasskeysOKResponse The registered passkeys, oldest first.
+     */
+    public function listPasskeys(ListPasskeysRequest $request): ListPasskeysOKResponse;
     /**
      * List all sessions.
      *
@@ -1001,6 +1119,9 @@ interface UserClient
     /**
      * Reset RecoveryCodes for MFA.
      *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -1078,6 +1199,16 @@ interface UserClient
      * @return EmptyResponse Account has been updated.
      */
     public function updateAccount(UpdateAccountRequest $request): EmptyResponse;
+    /**
+     * Rename a passkey.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePasskeyRequest $request An object representing the request for this operation
+     * @return EmptyResponse The passkey has been renamed.
+     */
+    public function updatePasskey(UpdatePasskeyRequest $request): EmptyResponse;
     /**
      * Change personal information.
      *

@@ -20,13 +20,17 @@ class DeleteUserRequest
             'body' => [
                 'properties' => [
                     'multiFactorCode' => [
-                        'description' => 'Multi Factor Code to authorize your request.',
+                        'description' => 'A TOTP code or recovery code.',
                         'example' => '123456',
                         'maxLength' => 16,
                         'minLength' => 6,
                         'type' => 'string',
                     ],
+                    'passkeyCredential' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+                    ],
                     'password' => [
+                        'description' => 'The password of the user.',
                         'type' => 'string',
                     ],
                 ],

@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\PasskeyCredential;
 
 class ChangePasswordRequestBody
 {
@@ -15,9 +16,7 @@ class ChangePasswordRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'multiFactorCode' => [
-                'description' => 'Multi Factor Code to confirm MFA.
-This is optional, depending on the MFA activation status of the profile.
-',
+                'description' => 'A TOTP code or recovery code.',
                 'example' => '123456',
                 'maxLength' => 16,
                 'minLength' => 6,
@@ -31,6 +30,9 @@ This is optional, depending on the MFA activation status of the profile.
                 'description' => 'The old password.',
                 'type' => 'string',
             ],
+            'passkeyCredential' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
+            ],
         ],
         'required' => [
             'oldPassword',
@@ -40,8 +42,7 @@ This is optional, depending on the MFA activation status of the profile.
     ];
 
     /**
-     * Multi Factor Code to confirm MFA.
-     * This is optional, depending on the MFA activation status of the profile.
+     * A TOTP code or recovery code.
      */
     private ?string $multiFactorCode = null;
 
@@ -54,6 +55,8 @@ This is optional, depending on the MFA activation status of the profile.
      * The old password.
      */
     private string $oldPassword;
+
+    private ?PasskeyCredential $passkeyCredential = null;
 
     public function __construct(string $newPassword, string $oldPassword)
     {
@@ -74,6 +77,11 @@ This is optional, depending on the MFA activation status of the profile.
     public function getOldPassword(): string
     {
         return $this->oldPassword;
+    }
+
+    public function getPasskeyCredential(): ?PasskeyCredential
+    {
+        return $this->passkeyCredential ?? null;
     }
 
     public function withMultiFactorCode(string $multiFactorCode): self
@@ -126,6 +134,22 @@ This is optional, depending on the MFA activation status of the profile.
         return $clone;
     }
 
+    public function withPasskeyCredential(PasskeyCredential $passkeyCredential): self
+    {
+        $clone = clone $this;
+        $clone->passkeyCredential = $passkeyCredential;
+
+        return $clone;
+    }
+
+    public function withoutPasskeyCredential(): self
+    {
+        $clone = clone $this;
+        unset($clone->passkeyCredential);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -147,9 +171,14 @@ This is optional, depending on the MFA activation status of the profile.
         }
         $newPassword = $input->{'newPassword'};
         $oldPassword = $input->{'oldPassword'};
+        $passkeyCredential = null;
+        if (isset($input->{'passkeyCredential'})) {
+            $passkeyCredential = PasskeyCredential::buildFromInput($input->{'passkeyCredential'}, validate: $validate);
+        }
 
         $obj = new self($newPassword, $oldPassword);
         $obj->multiFactorCode = $multiFactorCode;
+        $obj->passkeyCredential = $passkeyCredential;
         return $obj;
     }
 
@@ -166,6 +195,9 @@ This is optional, depending on the MFA activation status of the profile.
         }
         $output['newPassword'] = $this->newPassword;
         $output['oldPassword'] = $this->oldPassword;
+        if (isset($this->passkeyCredential)) {
+            $output['passkeyCredential'] = $this->passkeyCredential->toJson();
+        }
 
         return $output;
     }

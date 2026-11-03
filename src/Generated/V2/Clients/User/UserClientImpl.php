@@ -22,6 +22,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfa
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticatePasskey\AuthenticatePasskeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse;
@@ -56,6 +61,30 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackNo
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskey\CreatePasskeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyChallenge\CreatePasskeyChallengeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyConfirmationChallenge\CreatePasskeyConfirmationChallengeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreatePasskeyRegistrationChallenge\CreatePasskeyRegistrationChallengeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyDefaultResponse;
@@ -65,6 +94,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenBa
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeletePasskey\DeletePasskeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyTooManyRequestsResponse;
@@ -285,6 +320,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListPasskeys\ListPasskeysTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsRequest;
@@ -379,6 +419,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountBadR
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePasskey\UpdatePasskeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationRequest;
@@ -1280,6 +1326,9 @@ class UserClientImpl implements UserClient
     /**
      * Validate your second factor.
      *
+     * Provide either `multiFactorCode` or `passkeyCredential` as second factor.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -1298,6 +1347,34 @@ class UserClientImpl implements UserClient
             400, 408 => UntypedResponse::fromResponse($httpResponse),
             429 => AuthenticateMfaTooManyRequestsResponse::fromResponse($httpResponse),
             default => AuthenticateMfaDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Authenticate yourself with a passkey to get an access token.
+     *
+     * Create the challenge with `POST /passkey-challenges` first.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AuthenticatePasskeyRequest $request An object representing the request for this operation
+     * @return AuthenticatePasskeyOKResponse Your authentication request was successful and you've got an access token.
+     */
+    public function authenticatePasskey(AuthenticatePasskeyRequest $request): AuthenticatePasskeyOKResponse
+    {
+        $httpRequest = new Request(AuthenticatePasskeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return AuthenticatePasskeyOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => UntypedResponse::fromResponse($httpResponse),
+            429 => AuthenticatePasskeyTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => AuthenticatePasskeyInternalServerErrorResponse::fromResponse($httpResponse),
+            default => AuthenticatePasskeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1350,6 +1427,9 @@ class UserClientImpl implements UserClient
 
     /**
      * Change your password.
+     *
+     * If a second factor is set up, provide either `multiFactorCode` or `passkeyCredential`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-password
      * @throws GuzzleException
@@ -1466,6 +1546,116 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Register a new passkey.
+     *
+     * Create the challenge with `POST /users/self/passkey-registration-challenges` first.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyRequest $request An object representing the request for this operation
+     * @return CreatePasskeyCreatedResponse The passkey has been registered.
+     */
+    public function createPasskey(CreatePasskeyRequest $request): CreatePasskeyCreatedResponse
+    {
+        $httpRequest = new Request(CreatePasskeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreatePasskeyCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UntypedResponse::fromResponse($httpResponse),
+            412 => CreatePasskeyPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreatePasskeyTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CreatePasskeyInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CreatePasskeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a challenge for a passkey login.
+     *
+     * The challenge is bound to the `Origin` header of the request.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyChallenge(CreatePasskeyChallengeRequest $request): CreatePasskeyChallengeCreatedResponse
+    {
+        $httpRequest = new Request(CreatePasskeyChallengeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreatePasskeyChallengeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreatePasskeyChallengeBadRequestResponse::fromResponse($httpResponse),
+            429 => CreatePasskeyChallengeTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CreatePasskeyChallengeInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CreatePasskeyChallengeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a challenge to confirm an action with a passkey.
+     *
+     * The challenge is bound to the `Origin` header of the request and can be used once as `passkeyCredential`.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-confirmation-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyConfirmationChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyConfirmationChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyConfirmationChallenge(CreatePasskeyConfirmationChallengeRequest $request): CreatePasskeyConfirmationChallengeCreatedResponse
+    {
+        $httpRequest = new Request(CreatePasskeyConfirmationChallengeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreatePasskeyConfirmationChallengeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreatePasskeyConfirmationChallengeBadRequestResponse::fromResponse($httpResponse),
+            429 => CreatePasskeyConfirmationChallengeTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CreatePasskeyConfirmationChallengeInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CreatePasskeyConfirmationChallengeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a challenge to register a new passkey.
+     *
+     * Confirm your identity with the password and, if a second factor is set up, with `multiFactorCode` or `passkeyCredential`.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-passkey-registration-challenge
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreatePasskeyRegistrationChallengeRequest $request An object representing the request for this operation
+     * @return CreatePasskeyRegistrationChallengeCreatedResponse The challenge has been created.
+     */
+    public function createPasskeyRegistrationChallenge(CreatePasskeyRegistrationChallengeRequest $request): CreatePasskeyRegistrationChallengeCreatedResponse
+    {
+        $httpRequest = new Request(CreatePasskeyRegistrationChallengeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreatePasskeyRegistrationChallengeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            202, 400 => UntypedResponse::fromResponse($httpResponse),
+            412 => CreatePasskeyRegistrationChallengePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreatePasskeyRegistrationChallengeTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => CreatePasskeyRegistrationChallengeInternalServerErrorResponse::fromResponse($httpResponse),
+            default => CreatePasskeyRegistrationChallengeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Store a new ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-ssh-key
@@ -1512,6 +1702,34 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Delete a passkey.
+     *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeletePasskeyRequest $request An object representing the request for this operation
+     * @return EmptyResponse The passkey has been deleted.
+     */
+    public function deletePasskey(DeletePasskeyRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeletePasskeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeletePasskeyBadRequestResponse::fromResponse($httpResponse),
+            404 => DeletePasskeyNotFoundResponse::fromResponse($httpResponse),
+            429 => DeletePasskeyTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeletePasskeyInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeletePasskeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Remove a ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-ssh-key
@@ -1535,6 +1753,9 @@ class UserClientImpl implements UserClient
 
     /**
      * Delete your account and all your personal data.
+     *
+     * If a second factor is set up, provide either `multiFactorCode` or `passkeyCredential`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-user
      * @throws GuzzleException
@@ -1560,6 +1781,9 @@ class UserClientImpl implements UserClient
 
     /**
      * Disable Multi Factor Authentication.
+     *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
      * @throws GuzzleException
@@ -1674,6 +1898,10 @@ class UserClientImpl implements UserClient
 
     /**
      * Get your current multi factor auth status.
+     *
+     * Describes TOTP only. Passkeys are a second factor as well; `GET /v2/users/self/passkeys` lists them, so
+     * `confirmed: false` does not mean that you have no second factor.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
      * @throws GuzzleException
@@ -1969,6 +2197,29 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Get your registered passkeys.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-passkeys
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListPasskeysRequest $request An object representing the request for this operation
+     * @return ListPasskeysOKResponse The registered passkeys, oldest first.
+     */
+    public function listPasskeys(ListPasskeysRequest $request): ListPasskeysOKResponse
+    {
+        $httpRequest = new Request(ListPasskeysRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListPasskeysOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListPasskeysTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => ListPasskeysInternalServerErrorResponse::fromResponse($httpResponse),
+            default => ListPasskeysDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List all sessions.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-sessions
@@ -2260,6 +2511,9 @@ class UserClientImpl implements UserClient
     /**
      * Reset RecoveryCodes for MFA.
      *
+     * Provide either `multiFactorCode` or `passkeyCredential` as proof.
+     *
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -2434,6 +2688,31 @@ class UserClientImpl implements UserClient
             400 => UpdateAccountBadRequestResponse::fromResponse($httpResponse),
             429 => UpdateAccountTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateAccountDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Rename a passkey.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-passkey
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePasskeyRequest $request An object representing the request for this operation
+     * @return EmptyResponse The passkey has been renamed.
+     */
+    public function updatePasskey(UpdatePasskeyRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdatePasskeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdatePasskeyBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdatePasskeyNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdatePasskeyTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => UpdatePasskeyInternalServerErrorResponse::fromResponse($httpResponse),
+            default => UpdatePasskeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 

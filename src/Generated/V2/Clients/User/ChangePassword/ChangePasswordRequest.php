@@ -20,9 +20,7 @@ class ChangePasswordRequest
             'body' => [
                 'properties' => [
                     'multiFactorCode' => [
-                        'description' => 'Multi Factor Code to confirm MFA.
-This is optional, depending on the MFA activation status of the profile.
-',
+                        'description' => 'A TOTP code or recovery code.',
                         'example' => '123456',
                         'maxLength' => 16,
                         'minLength' => 6,
@@ -35,6 +33,9 @@ This is optional, depending on the MFA activation status of the profile.
                     'oldPassword' => [
                         'description' => 'The old password.',
                         'type' => 'string',
+                    ],
+                    'passkeyCredential' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.signup.PasskeyCredential',
                     ],
                 ],
                 'required' => [
