@@ -296,12 +296,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyNotFoundResp
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaOKResponse;
@@ -368,6 +370,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionTo
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarBadRequestResponse;
@@ -2097,6 +2100,8 @@ class UserClientImpl implements UserClient
             return GetUserOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetUserBadRequestResponse::fromResponse($httpResponse),
+            401 => GetUserUnauthorizedResponse::fromResponse($httpResponse),
             403 => GetUserForbiddenResponse::fromResponse($httpResponse),
             404 => GetUserNotFoundResponse::fromResponse($httpResponse),
             412 => GetUserPreconditionFailedResponse::fromResponse($httpResponse),
@@ -2409,6 +2414,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RegisterBadRequestResponse::fromResponse($httpResponse),
+            403 => RegisterForbiddenResponse::fromResponse($httpResponse),
             429 => RegisterTooManyRequestsResponse::fromResponse($httpResponse),
             default => RegisterDefaultResponse::fromResponse($httpResponse),
         });

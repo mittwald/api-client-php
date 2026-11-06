@@ -323,6 +323,40 @@ class LogEntry
             'aggregate' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.activitylog.AggregateReference',
             ],
+            'credential' => [
+                'description' => 'Credential used to execute the action. Null for historical events or actions without
+request credentials. Clients must treat unknown kind values like unknown.
+',
+                'nullable' => true,
+                'properties' => [
+                    'apiTokenName' => [
+                        'description' => 'Last known name of the API token, including removed or expired tokens.',
+                        'type' => 'string',
+                    ],
+                    'id' => [
+                        'type' => 'string',
+                    ],
+                    'kind' => [
+                        'enum' => [
+                            'unknown',
+                            'userSession',
+                            'apiToken',
+                            'scopedToken',
+                            'extensionInstance',
+                            'extensionSession',
+                            'serviceToken',
+                            'atrek',
+                            'classicIdentity',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'kind',
+                    'id',
+                ],
+                'type' => 'object',
+            ],
             'dateTime' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -363,6 +397,12 @@ class LogEntry
 
     private AggregateReference $aggregate;
 
+    /**
+     * Credential used to execute the action. Null for historical events or actions without
+     * request credentials. Clients must treat unknown kind values like unknown.
+     */
+    private ?LogEntryCredential $credential = null;
+
     private DateTime $dateTime;
 
     /**
@@ -387,6 +427,11 @@ class LogEntry
     public function getAggregate(): AggregateReference
     {
         return $this->aggregate;
+    }
+
+    public function getCredential(): ?LogEntryCredential
+    {
+        return $this->credential ?? null;
     }
 
     public function getDateTime(): DateTime
@@ -416,6 +461,22 @@ class LogEntry
     {
         $clone = clone $this;
         $clone->aggregate = $aggregate;
+
+        return $clone;
+    }
+
+    public function withCredential(LogEntryCredential $credential): self
+    {
+        $clone = clone $this;
+        $clone->credential = $credential;
+
+        return $clone;
+    }
+
+    public function withoutCredential(): self
+    {
+        $clone = clone $this;
+        unset($clone->credential);
 
         return $clone;
     }
@@ -576,6 +637,10 @@ class LogEntry
             default => throw new InvalidArgumentException("could not build property 'action' from JSON"),
         };
         $aggregate = AggregateReference::buildFromInput($input->{'aggregate'}, validate: $validate);
+        $credential = null;
+        if (isset($input->{'credential'})) {
+            $credential = LogEntryCredential::buildFromInput($input->{'credential'}, validate: $validate);
+        }
         $dateTime = new DateTime($input->{'dateTime'});
         $impersonator = null;
         if (isset($input->{'impersonator'})) {
@@ -587,6 +652,7 @@ class LogEntry
         }
 
         $obj = new self($action, $aggregate, $dateTime);
+        $obj->credential = $credential;
         $obj->impersonator = $impersonator;
         $obj->user = $user;
         return $obj;
@@ -604,6 +670,9 @@ class LogEntry
             ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof CronjobCreated, ($this->action) instanceof CronjobDescriptionUpdated, ($this->action) instanceof CronjobIntervalUpdated, ($this->action) instanceof CronjobTimeZoneUpdated, ($this->action) instanceof CronjobTargetUpdated, ($this->action) instanceof CronjobCommandUpdated, ($this->action) instanceof CronjobServiceReferenceUpdated, ($this->action) instanceof CronjobTimeoutUpdated, ($this->action) instanceof CronjobConcurrencyPolicyUpdated, ($this->action) instanceof CronjobAlertThresholdUpdated, ($this->action) instanceof CronjobNotificationEmailUpdated, ($this->action) instanceof CronjobActiveUpdated, ($this->action) instanceof CronjobDeleted, ($this->action) instanceof CronjobExecution, ($this->action) instanceof ContainerStackCreated, ($this->action) instanceof ContainerStackDescriptionUpdated, ($this->action) instanceof ContainerStackStorageUpdated, ($this->action) instanceof ContainerStackUpdateScheduleUpdated, ($this->action) instanceof ContainerStackDeleted, ($this->action) instanceof ContainerCreated, ($this->action) instanceof ContainerDescriptionUpdated, ($this->action) instanceof ContainerImageUpdated, ($this->action) instanceof ContainerEntrypointUpdated, ($this->action) instanceof ContainerCommandUpdated, ($this->action) instanceof ContainerPortsUpdated, ($this->action) instanceof ContainerVolumesUpdated, ($this->action) instanceof ContainerEnvsUpdated, ($this->action) instanceof ContainerResourcesUpdated, ($this->action) instanceof ContainerRestartPolicyUpdated, ($this->action) instanceof ContainerLifecycle, ($this->action) instanceof ContainerDeleted, ($this->action) instanceof ContainerVolumeCreated, ($this->action) instanceof ContainerVolumeDeleted, ($this->action) instanceof ContainerRegistryCreated, ($this->action) instanceof ContainerRegistryDescriptionUpdated, ($this->action) instanceof ContainerRegistryUriUpdated, ($this->action) instanceof ContainerRegistryCredentialsUpdated, ($this->action) instanceof ContainerRegistryDeleted, ($this->action) instanceof ProjectCreated, ($this->action) instanceof ProjectDescriptionUpdated, ($this->action) instanceof MembershipInviteCreated, ($this->action) instanceof MembershipInviteStatusChanged, ($this->action) instanceof MembershipMemberAdded, ($this->action) instanceof MembershipMemberRoleUpdated, ($this->action) instanceof MembershipMemberExpiryUpdated, ($this->action) instanceof MembershipMemberRemoved, ($this->action) instanceof SshUserCreated, ($this->action) instanceof SftpUserCreated, ($this->action) instanceof SshUserDescriptionUpdated, ($this->action) instanceof SshUserPasswordUpdated, ($this->action) instanceof SshUserPublicKeysUpdated, ($this->action) instanceof SshUserActiveUpdated, ($this->action) instanceof SshUserExpiryUpdated, ($this->action) instanceof SftpUserAccessLevelUpdated, ($this->action) instanceof SftpUserDirectoriesUpdated, ($this->action) instanceof SshUserDeleted, ($this->action) instanceof BackupCreated, ($this->action) instanceof BackupDescriptionUpdated, ($this->action) instanceof BackupExpirationUpdated, ($this->action) instanceof BackupExportRequested, ($this->action) instanceof BackupRestoreRequested, ($this->action) instanceof BackupScheduleCreated, ($this->action) instanceof BackupScheduleIntervalUpdated, ($this->action) instanceof BackupScheduleTtlUpdated, ($this->action) instanceof BackupDeleted, ($this->action) instanceof GenericAction => $this->action->toJson(),
         };
         $output['aggregate'] = $this->aggregate->toJson();
+        if (isset($this->credential)) {
+            $output['credential'] = ($this->credential)->toJson();
+        }
         $output['dateTime'] = ($this->dateTime)->format(DateTime::ATOM);
         if (isset($this->impersonator)) {
             $output['impersonator'] = ($this->impersonator)->toJson();
@@ -644,6 +713,9 @@ class LogEntry
         $this->action = match (true) {
             ($this->action) instanceof DnsDomainDeleted, ($this->action) instanceof DnsIngressDeleted, ($this->action) instanceof DnsZoneCreated, ($this->action) instanceof DnsZoneDeleted, ($this->action) instanceof DnsCnameRecordSet, ($this->action) instanceof DnsSrvRecordSet, ($this->action) instanceof DnsCaaRecordSet, ($this->action) instanceof DnsTxtRecordSet, ($this->action) instanceof DnsARecordSet, ($this->action) instanceof DnsARecordSetManaged, ($this->action) instanceof DnsMxRecordSet, ($this->action) instanceof DnsMxRecordSetManaged, ($this->action) instanceof DatabaseCreated, ($this->action) instanceof DatabaseDeleted, ($this->action) instanceof DatabaseDescriptionSet, ($this->action) instanceof DatabaseVersionSet, ($this->action) instanceof DatabaseMysqlUserCreated, ($this->action) instanceof DatabaseMysqlUserUpdated, ($this->action) instanceof DatabaseMysqlUserPasswordSet, ($this->action) instanceof DatabaseMysqlUserDeleted, ($this->action) instanceof AppInstallationRequested, ($this->action) instanceof AppInstallationCopyRequested, ($this->action) instanceof AppInstallationDescriptionSet, ($this->action) instanceof AppInstallationFailed, ($this->action) instanceof AppInstallationDeleted, ($this->action) instanceof AppInstallationDatabaseLinked, ($this->action) instanceof AppInstallationDatabaseUnlinked, ($this->action) instanceof AppInstallationMainDatabaseChanged, ($this->action) instanceof AppInstallationAppVersionSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareSet, ($this->action) instanceof AppInstallationDesiredSystemSoftwareDeleted, ($this->action) instanceof CronjobCreated, ($this->action) instanceof CronjobDescriptionUpdated, ($this->action) instanceof CronjobIntervalUpdated, ($this->action) instanceof CronjobTimeZoneUpdated, ($this->action) instanceof CronjobTargetUpdated, ($this->action) instanceof CronjobCommandUpdated, ($this->action) instanceof CronjobServiceReferenceUpdated, ($this->action) instanceof CronjobTimeoutUpdated, ($this->action) instanceof CronjobConcurrencyPolicyUpdated, ($this->action) instanceof CronjobAlertThresholdUpdated, ($this->action) instanceof CronjobNotificationEmailUpdated, ($this->action) instanceof CronjobActiveUpdated, ($this->action) instanceof CronjobDeleted, ($this->action) instanceof CronjobExecution, ($this->action) instanceof ContainerStackCreated, ($this->action) instanceof ContainerStackDescriptionUpdated, ($this->action) instanceof ContainerStackStorageUpdated, ($this->action) instanceof ContainerStackUpdateScheduleUpdated, ($this->action) instanceof ContainerStackDeleted, ($this->action) instanceof ContainerCreated, ($this->action) instanceof ContainerDescriptionUpdated, ($this->action) instanceof ContainerImageUpdated, ($this->action) instanceof ContainerEntrypointUpdated, ($this->action) instanceof ContainerCommandUpdated, ($this->action) instanceof ContainerPortsUpdated, ($this->action) instanceof ContainerVolumesUpdated, ($this->action) instanceof ContainerEnvsUpdated, ($this->action) instanceof ContainerResourcesUpdated, ($this->action) instanceof ContainerRestartPolicyUpdated, ($this->action) instanceof ContainerLifecycle, ($this->action) instanceof ContainerDeleted, ($this->action) instanceof ContainerVolumeCreated, ($this->action) instanceof ContainerVolumeDeleted, ($this->action) instanceof ContainerRegistryCreated, ($this->action) instanceof ContainerRegistryDescriptionUpdated, ($this->action) instanceof ContainerRegistryUriUpdated, ($this->action) instanceof ContainerRegistryCredentialsUpdated, ($this->action) instanceof ContainerRegistryDeleted, ($this->action) instanceof ProjectCreated, ($this->action) instanceof ProjectDescriptionUpdated, ($this->action) instanceof MembershipInviteCreated, ($this->action) instanceof MembershipInviteStatusChanged, ($this->action) instanceof MembershipMemberAdded, ($this->action) instanceof MembershipMemberRoleUpdated, ($this->action) instanceof MembershipMemberExpiryUpdated, ($this->action) instanceof MembershipMemberRemoved, ($this->action) instanceof SshUserCreated, ($this->action) instanceof SftpUserCreated, ($this->action) instanceof SshUserDescriptionUpdated, ($this->action) instanceof SshUserPasswordUpdated, ($this->action) instanceof SshUserPublicKeysUpdated, ($this->action) instanceof SshUserActiveUpdated, ($this->action) instanceof SshUserExpiryUpdated, ($this->action) instanceof SftpUserAccessLevelUpdated, ($this->action) instanceof SftpUserDirectoriesUpdated, ($this->action) instanceof SshUserDeleted, ($this->action) instanceof BackupCreated, ($this->action) instanceof BackupDescriptionUpdated, ($this->action) instanceof BackupExpirationUpdated, ($this->action) instanceof BackupExportRequested, ($this->action) instanceof BackupRestoreRequested, ($this->action) instanceof BackupScheduleCreated, ($this->action) instanceof BackupScheduleIntervalUpdated, ($this->action) instanceof BackupScheduleTtlUpdated, ($this->action) instanceof BackupDeleted, ($this->action) instanceof GenericAction => $this->action,
         };
+        if (isset($this->credential)) {
+            $this->credential = clone $this->credential;
+        }
         $this->dateTime = clone $this->dateTime;
         if (isset($this->impersonator)) {
             $this->impersonator = clone $this->impersonator;

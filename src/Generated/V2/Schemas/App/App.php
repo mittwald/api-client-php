@@ -38,6 +38,10 @@ class App
             'name' => [
                 'type' => 'string',
             ],
+            'stagingAllowed' => [
+                'description' => 'Whether a staging AppInstallation can be created from an AppInstallation of this App.',
+                'type' => 'boolean',
+            ],
             'tags' => [
                 'items' => [
                     'type' => 'string',
@@ -49,6 +53,7 @@ class App
             'id',
             'name',
             'tags',
+            'stagingAllowed',
         ],
         'type' => 'object',
     ];
@@ -65,6 +70,11 @@ class App
     private string $name;
 
     /**
+     * Whether a staging AppInstallation can be created from an AppInstallation of this App.
+     */
+    private bool $stagingAllowed;
+
+    /**
      * @var string[]
      */
     private array $tags;
@@ -72,10 +82,11 @@ class App
     /**
      * @param string[] $tags
      */
-    public function __construct(string $id, string $name, array $tags)
+    public function __construct(string $id, string $name, bool $stagingAllowed, array $tags)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->stagingAllowed = $stagingAllowed;
         $this->tags = $tags;
     }
 
@@ -100,6 +111,11 @@ class App
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getStagingAllowed(): bool
+    {
+        return $this->stagingAllowed;
     }
 
     /**
@@ -173,6 +189,20 @@ class App
         return $clone;
     }
 
+    public function withStagingAllowed(bool $stagingAllowed): self
+    {
+        $validator = new Validator();
+        $validator->validate($stagingAllowed, self::$internalValidationSchema['properties']['stagingAllowed']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->stagingAllowed = $stagingAllowed;
+
+        return $clone;
+    }
+
     /**
      * @param string[] $tags
      */
@@ -215,9 +245,10 @@ class App
         }
         $id = $input->{'id'};
         $name = $input->{'name'};
+        $stagingAllowed = (bool)($input->{'stagingAllowed'});
         $tags = $input->{'tags'};
 
-        $obj = new self($id, $name, $tags);
+        $obj = new self($id, $name, $stagingAllowed, $tags);
         $obj->actionCapabilities = $actionCapabilities;
         $obj->description = $description;
         return $obj;
@@ -239,6 +270,7 @@ class App
         }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
+        $output['stagingAllowed'] = $this->stagingAllowed;
         $output['tags'] = $this->tags;
 
         return $output;

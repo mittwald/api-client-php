@@ -6,8 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Directus\Domain;
-use Mittwald\ApiClient\Generated\V2\Schemas\Directus\EmailInbox;
+use Mittwald\ApiClient\Generated\V2\Schemas\Redirectus\Domain;
+use Mittwald\ApiClient\Generated\V2\Schemas\Redirectus\EmailInbox;
 
 class CreateRelocationRequestBody
 {
@@ -78,14 +78,14 @@ class CreateRelocationRequestBody
             'domains' => [
                 'description' => 'List of domains which should be transferred (when allDomains is not checked).',
                 'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.directus.Domain',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.redirectus.Domain',
                 ],
                 'type' => 'array',
             ],
             'emailInboxes' => [
                 'description' => 'List of email inboxes which should be transferred.',
                 'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.directus.EmailInbox',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.redirectus.EmailInbox',
                 ],
                 'type' => 'array',
             ],

@@ -19,6 +19,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifi
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsResetNotificationSettings\NotificationsResetNotificationSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusRequest;
 
@@ -81,6 +82,7 @@ interface NotificationClient
      *
      * The user is determined by the access token used.
      * Lighter weight route instead of getting all unread notifications and count yourself.
+     * The counts are computed from at most 500 unread notifications.
      *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-count-unread-notifications
@@ -127,6 +129,18 @@ interface NotificationClient
      * @return NotificationsReadAllNotificationsOKResponse OK
      */
     public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse;
+    /**
+     * Reset notification settings to their defaults.
+     *
+     * Removes all of the executing user's adjusted channel settings, so every message type uses its default channels again.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-reset-notification-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsResetNotificationSettingsRequest $request An object representing the request for this operation
+     * @return EmptyResponse No content
+     */
+    public function notificationsResetNotificationSettings(NotificationsResetNotificationSettingsRequest $request): EmptyResponse;
     /**
      * Update a notification's read status.
      *

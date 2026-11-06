@@ -42,6 +42,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNot
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsResetNotificationSettings\NotificationsResetNotificationSettingsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsResetNotificationSettings\NotificationsResetNotificationSettingsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsResetNotificationSettings\NotificationsResetNotificationSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsResetNotificationSettings\NotificationsResetNotificationSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsUpdateNotificationStatus\NotificationsUpdateNotificationStatusNotFoundResponse;
@@ -166,6 +170,7 @@ class NotificationClientImpl implements NotificationClient
      *
      * The user is determined by the access token used.
      * Lighter weight route instead of getting all unread notifications and count yourself.
+     * The counts are computed from at most 500 unread notifications.
      *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-count-unread-notifications
@@ -259,6 +264,31 @@ class NotificationClientImpl implements NotificationClient
             403 => NotificationsReadAllNotificationsForbiddenResponse::fromResponse($httpResponse),
             429 => NotificationsReadAllNotificationsTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsReadAllNotificationsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Reset notification settings to their defaults.
+     *
+     * Removes all of the executing user's adjusted channel settings, so every message type uses its default channels again.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-reset-notification-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsResetNotificationSettingsRequest $request An object representing the request for this operation
+     * @return EmptyResponse No content
+     */
+    public function notificationsResetNotificationSettings(NotificationsResetNotificationSettingsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(NotificationsResetNotificationSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => NotificationsResetNotificationSettingsForbiddenResponse::fromResponse($httpResponse),
+            429 => NotificationsResetNotificationSettingsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => NotificationsResetNotificationSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

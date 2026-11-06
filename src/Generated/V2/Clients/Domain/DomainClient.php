@@ -412,7 +412,7 @@ interface DomainClient
     /**
      * Create a DNSZone for a verified Ingress in a Project.
      *
-     * Creates a DNSZone for a verified Ingress in a Project. The service resolves whether the domain is a root zone or a subzone and creates it accordingly. This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost.
+     * Creates a DNSZone for a verified Ingress in a Project. The service resolves whether the domain is a root zone or a subzone and creates it accordingly. This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost. A subzone requires an existing root zone that belongs to the same customer as the Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-project-dns-zone
      * @throws GuzzleException

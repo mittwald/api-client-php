@@ -81,14 +81,14 @@ class CreateRelocationRequest
                     'domains' => [
                         'description' => 'List of domains which should be transferred (when allDomains is not checked).',
                         'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.directus.Domain',
+                            '$ref' => '#/components/schemas/de.mittwald.v1.redirectus.Domain',
                         ],
                         'type' => 'array',
                     ],
                     'emailInboxes' => [
                         'description' => 'List of email inboxes which should be transferred.',
                         'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.directus.EmailInbox',
+                            '$ref' => '#/components/schemas/de.mittwald.v1.redirectus.EmailInbox',
                         ],
                         'type' => 'array',
                     ],
