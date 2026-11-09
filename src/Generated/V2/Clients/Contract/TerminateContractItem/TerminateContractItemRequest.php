@@ -29,6 +29,7 @@ class TerminateContractItemRequest
                     'reason' => [
                         'description' => 'A reason for the Termination can be given as plain text.',
                         'example' => 'Server wird nicht mehr benötigt',
+                        'maxLength' => 1000,
                         'type' => 'string',
                     ],
                     'terminationTargetDate' => [

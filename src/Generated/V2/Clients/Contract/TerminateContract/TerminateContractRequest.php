@@ -24,11 +24,13 @@ class TerminateContractRequest
                 'properties' => [
                     'explanation' => [
                         'example' => 'The website for my temporary project is no longer needed',
+                        'maxLength' => 10000,
                         'type' => 'string',
                     ],
                     'reason' => [
                         'description' => 'A reason for the termination can be given as plain text.',
                         'example' => 'Projekt wird nicht mehr benötigt',
+                        'maxLength' => 1000,
                         'type' => 'string',
                     ],
                     'terminationTargetDate' => [
