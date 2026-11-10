@@ -15,7 +15,8 @@ class DnsCreateDnsZoneFileImportRequestBody
     private static array $internalValidationSchema = [
         'properties' => [
             'zoneFile' => [
-                'description' => 'Raw RFC-1035 zone file content to import.',
+                'description' => 'Raw RFC-1035 zone file content to import, at most 256 KiB and 1000 distinct owner names.',
+                'maxLength' => 262144,
                 'type' => 'string',
             ],
         ],
@@ -26,7 +27,7 @@ class DnsCreateDnsZoneFileImportRequestBody
     ];
 
     /**
-     * Raw RFC-1035 zone file content to import.
+     * Raw RFC-1035 zone file content to import, at most 256 KiB and 1000 distinct owner names.
      */
     private string $zoneFile;
 

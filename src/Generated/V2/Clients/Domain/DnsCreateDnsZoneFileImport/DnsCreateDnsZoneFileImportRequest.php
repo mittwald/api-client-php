@@ -27,7 +27,8 @@ class DnsCreateDnsZoneFileImportRequest
             'body' => [
                 'properties' => [
                     'zoneFile' => [
-                        'description' => 'Raw RFC-1035 zone file content to import.',
+                        'description' => 'Raw RFC-1035 zone file content to import, at most 256 KiB and 1000 distinct owner names.',
+                        'maxLength' => 262144,
                         'type' => 'string',
                     ],
                 ],

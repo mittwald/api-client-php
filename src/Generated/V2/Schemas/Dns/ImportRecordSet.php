@@ -32,11 +32,11 @@ class ImportRecordSet
                 'type' => 'array',
             ],
             'ttlNormalized' => [
-                'description' => 'True when the source TTLs had to be normalized to ttlSeconds — because they diverged within the set or fell below the 60s minimum. Informational; the import still uses ttlSeconds.',
+                'description' => 'True when the source TTLs had to be normalized to ttlSeconds — because they diverged within the set or fell outside 60..86400s. Informational; the import still uses ttlSeconds.',
                 'type' => 'boolean',
             ],
             'ttlSeconds' => [
-                'description' => 'TTL applied to the whole set, in seconds. Collapsed to a single value across the set: the minimum of the source TTLs, floored to the 60s minimum.',
+                'description' => 'TTL applied to the whole set, in seconds. Collapsed to a single value across the set: the minimum of the source TTLs, clamped to 60..86400s.',
                 'format' => 'int32',
                 'type' => 'integer',
             ],
@@ -70,12 +70,12 @@ class ImportRecordSet
     private array $records;
 
     /**
-     * True when the source TTLs had to be normalized to ttlSeconds — because they diverged within the set or fell below the 60s minimum. Informational; the import still uses ttlSeconds.
+     * True when the source TTLs had to be normalized to ttlSeconds — because they diverged within the set or fell outside 60..86400s. Informational; the import still uses ttlSeconds.
      */
     private bool $ttlNormalized;
 
     /**
-     * TTL applied to the whole set, in seconds. Collapsed to a single value across the set: the minimum of the source TTLs, floored to the 60s minimum.
+     * TTL applied to the whole set, in seconds. Collapsed to a single value across the set: the minimum of the source TTLs, clamped to 60..86400s.
      */
     private int $ttlSeconds;
 
