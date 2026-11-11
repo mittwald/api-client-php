@@ -40,6 +40,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
@@ -62,8 +64,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrieval
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretRequest;
@@ -317,6 +317,20 @@ interface MarketplaceClient
      */
     public function contributorUpdateBillingInformation(ContributorUpdateBillingInformationRequest $request): ContributorUpdateBillingInformationOKResponse;
     /**
+     * Dry run a webhook with random or given values.
+     *
+     * Do not call /v2/contributors/{contributorId}/extensions/{extensionId}/extension-instances/{extensionInstanceId}/actions/dry-run/{webhookKind}. This feature is deactivated.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/deprecated-extension-dry-run-webhook
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedExtensionDryRunWebhookRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedExtensionDryRunWebhookOKResponse The webhook has been run successfully.
+     */
+    public function deprecatedExtensionDryRunWebhook(DeprecatedExtensionDryRunWebhookRequest $request): DeprecatedExtensionDryRunWebhookOKResponse;
+    /**
      * Authenticate your external application using the extensionInstanceSecret.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-instance
@@ -450,16 +464,6 @@ interface MarketplaceClient
      * @return EmptyResponse NoContent
      */
     public function extensionDisableExtensionInstance(ExtensionDisableExtensionInstanceRequest $request): EmptyResponse;
-    /**
-     * Dry run a webhook with random or given values.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-dry-run-webhook
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionDryRunWebhookRequest $request An object representing the request for this operation
-     * @return ExtensionDryRunWebhookOKResponse The webhook has been run successfully.
-     */
-    public function extensionDryRunWebhook(ExtensionDryRunWebhookRequest $request): ExtensionDryRunWebhookOKResponse;
     /**
      * Enable an ExtensionInstance.
      *

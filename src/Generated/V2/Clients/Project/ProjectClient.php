@@ -17,6 +17,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeletePr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateServerDescription\DeprecatedProjectUpdateServerDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedStoragespaceReplaceProjectNotificationThreshold\DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest;
@@ -33,6 +35,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
@@ -91,6 +101,22 @@ interface ProjectClient
      * @deprecated
      */
     public function deprecatedProjectLeaveProject(DeprecatedProjectLeaveProjectRequest $request): EmptyResponse;
+    /**
+     * Removed metrics passthrough; use the usage-metrics routes instead.
+     *
+     * This route used to proxy the metrics Grafana and no longer serves data. Every authenticated request answers `410 Gone`.
+     * Use `GET /v2/projects/{projectId}/usage-metrics`, `GET /v2/projects/{projectId}/usage-metrics/breakdown`,
+     * `GET /v2/servers/{serverId}/usage-metrics` or `GET /v2/servers/{serverId}/usage-metrics/breakdown` instead.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-metrics-passthrough
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectMetricsPassthroughRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedProjectMetricsPassthroughOKResponse Former passthrough response; no longer returned.
+     */
+    public function deprecatedProjectMetricsPassthrough(DeprecatedProjectMetricsPassthroughRequest $request): DeprecatedProjectMetricsPassthroughOKResponse;
     /**
      * Update a Project's description.
      *
@@ -289,6 +315,46 @@ interface ProjectClient
      * @return GetServerOKResponse OK
      */
     public function getServer(GetServerRequest $request): GetServerOKResponse;
+    /**
+     * Get usage metrics for a server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server-usage-metrics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServerUsageMetricsRequest $request An object representing the request for this operation
+     * @return GetServerUsageMetricsOKResponse Usage metrics for the server
+     */
+    public function getServerUsageMetrics(GetServerUsageMetricsRequest $request): GetServerUsageMetricsOKResponse;
+    /**
+     * Get a usage-metrics breakdown for a server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server-usage-metrics-breakdown
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServerUsageMetricsBreakdownRequest $request An object representing the request for this operation
+     * @return GetServerUsageMetricsBreakdownOKResponse Usage-metrics breakdown for the server
+     */
+    public function getServerUsageMetricsBreakdown(GetServerUsageMetricsBreakdownRequest $request): GetServerUsageMetricsBreakdownOKResponse;
+    /**
+     * Get usage metrics for a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-usage-metrics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetUsageMetricsRequest $request An object representing the request for this operation
+     * @return GetUsageMetricsOKResponse Usage metrics for the project
+     */
+    public function getUsageMetrics(GetUsageMetricsRequest $request): GetUsageMetricsOKResponse;
+    /**
+     * Get a usage-metrics breakdown for a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-usage-metrics-breakdown
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetUsageMetricsBreakdownRequest $request An object representing the request for this operation
+     * @return GetUsageMetricsBreakdownOKResponse Usage-metrics breakdown for the project
+     */
+    public function getUsageMetricsBreakdown(GetUsageMetricsBreakdownRequest $request): GetUsageMetricsBreakdownOKResponse;
     /**
      * List Projects belonging to a Customer.
      *

@@ -110,6 +110,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMet
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\DeprecatedExtensionDryRunWebhook\DeprecatedExtensionDryRunWebhookTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceDefaultResponse;
@@ -177,11 +182,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
@@ -789,6 +789,33 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Dry run a webhook with random or given values.
+     *
+     * Do not call /v2/contributors/{contributorId}/extensions/{extensionId}/extension-instances/{extensionInstanceId}/actions/dry-run/{webhookKind}. This feature is deactivated.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/deprecated-extension-dry-run-webhook
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedExtensionDryRunWebhookRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedExtensionDryRunWebhookOKResponse The webhook has been run successfully.
+     */
+    public function deprecatedExtensionDryRunWebhook(DeprecatedExtensionDryRunWebhookRequest $request): DeprecatedExtensionDryRunWebhookOKResponse
+    {
+        $httpRequest = new Request(DeprecatedExtensionDryRunWebhookRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedExtensionDryRunWebhookOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedExtensionDryRunWebhookBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedExtensionDryRunWebhookTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedExtensionDryRunWebhookDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Authenticate your external application using the extensionInstanceSecret.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-instance
@@ -1094,29 +1121,6 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionDisableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionDisableExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDisableExtensionInstanceDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Dry run a webhook with random or given values.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-dry-run-webhook
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionDryRunWebhookRequest $request An object representing the request for this operation
-     * @return ExtensionDryRunWebhookOKResponse The webhook has been run successfully.
-     */
-    public function extensionDryRunWebhook(ExtensionDryRunWebhookRequest $request): ExtensionDryRunWebhookOKResponse
-    {
-        $httpRequest = new Request(ExtensionDryRunWebhookRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionDryRunWebhookOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionDryRunWebhookBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionDryRunWebhookTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionDryRunWebhookDefaultResponse::fromResponse($httpResponse),
         });
     }
 

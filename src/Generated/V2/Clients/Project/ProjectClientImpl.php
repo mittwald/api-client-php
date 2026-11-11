@@ -55,6 +55,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteSer
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughGoneResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectMetricsPassthrough\DeprecatedProjectMetricsPassthroughUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectUpdateProjectDescription\DeprecatedProjectUpdateProjectDescriptionForbiddenResponse;
@@ -108,6 +115,42 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerNotFoundR
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListCustomerProjects\ListCustomerProjectsForbiddenResponse;
@@ -257,6 +300,37 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => DeprecatedProjectLeaveProjectTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedProjectLeaveProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Removed metrics passthrough; use the usage-metrics routes instead.
+     *
+     * This route used to proxy the metrics Grafana and no longer serves data. Every authenticated request answers `410 Gone`.
+     * Use `GET /v2/projects/{projectId}/usage-metrics`, `GET /v2/projects/{projectId}/usage-metrics/breakdown`,
+     * `GET /v2/servers/{serverId}/usage-metrics` or `GET /v2/servers/{serverId}/usage-metrics/breakdown` instead.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-metrics-passthrough
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedProjectMetricsPassthroughRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedProjectMetricsPassthroughOKResponse Former passthrough response; no longer returned.
+     */
+    public function deprecatedProjectMetricsPassthrough(DeprecatedProjectMetricsPassthroughRequest $request): DeprecatedProjectMetricsPassthroughOKResponse
+    {
+        $httpRequest = new Request(DeprecatedProjectMetricsPassthroughRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedProjectMetricsPassthroughOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            401 => DeprecatedProjectMetricsPassthroughUnauthorizedResponse::fromResponse($httpResponse),
+            410 => DeprecatedProjectMetricsPassthroughGoneResponse::fromResponse($httpResponse),
+            429 => DeprecatedProjectMetricsPassthroughTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => DeprecatedProjectMetricsPassthroughInternalServerErrorResponse::fromResponse($httpResponse),
+            default => DeprecatedProjectMetricsPassthroughDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -716,6 +790,114 @@ class ProjectClientImpl implements ProjectClient
             404 => GetServerNotFoundResponse::fromResponse($httpResponse),
             429 => GetServerTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetServerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get usage metrics for a server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server-usage-metrics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServerUsageMetricsRequest $request An object representing the request for this operation
+     * @return GetServerUsageMetricsOKResponse Usage metrics for the server
+     */
+    public function getServerUsageMetrics(GetServerUsageMetricsRequest $request): GetServerUsageMetricsOKResponse
+    {
+        $httpRequest = new Request(GetServerUsageMetricsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetServerUsageMetricsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetServerUsageMetricsBadRequestResponse::fromResponse($httpResponse),
+            403 => GetServerUsageMetricsForbiddenResponse::fromResponse($httpResponse),
+            404 => GetServerUsageMetricsNotFoundResponse::fromResponse($httpResponse),
+            429 => GetServerUsageMetricsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetServerUsageMetricsInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetServerUsageMetricsServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetServerUsageMetricsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a usage-metrics breakdown for a server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server-usage-metrics-breakdown
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetServerUsageMetricsBreakdownRequest $request An object representing the request for this operation
+     * @return GetServerUsageMetricsBreakdownOKResponse Usage-metrics breakdown for the server
+     */
+    public function getServerUsageMetricsBreakdown(GetServerUsageMetricsBreakdownRequest $request): GetServerUsageMetricsBreakdownOKResponse
+    {
+        $httpRequest = new Request(GetServerUsageMetricsBreakdownRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetServerUsageMetricsBreakdownOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetServerUsageMetricsBreakdownBadRequestResponse::fromResponse($httpResponse),
+            403 => GetServerUsageMetricsBreakdownForbiddenResponse::fromResponse($httpResponse),
+            404 => GetServerUsageMetricsBreakdownNotFoundResponse::fromResponse($httpResponse),
+            429 => GetServerUsageMetricsBreakdownTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetServerUsageMetricsBreakdownInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetServerUsageMetricsBreakdownServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetServerUsageMetricsBreakdownDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get usage metrics for a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-usage-metrics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetUsageMetricsRequest $request An object representing the request for this operation
+     * @return GetUsageMetricsOKResponse Usage metrics for the project
+     */
+    public function getUsageMetrics(GetUsageMetricsRequest $request): GetUsageMetricsOKResponse
+    {
+        $httpRequest = new Request(GetUsageMetricsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetUsageMetricsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetUsageMetricsBadRequestResponse::fromResponse($httpResponse),
+            403 => GetUsageMetricsForbiddenResponse::fromResponse($httpResponse),
+            404 => GetUsageMetricsNotFoundResponse::fromResponse($httpResponse),
+            429 => GetUsageMetricsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetUsageMetricsInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetUsageMetricsServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetUsageMetricsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a usage-metrics breakdown for a project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-usage-metrics-breakdown
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetUsageMetricsBreakdownRequest $request An object representing the request for this operation
+     * @return GetUsageMetricsBreakdownOKResponse Usage-metrics breakdown for the project
+     */
+    public function getUsageMetricsBreakdown(GetUsageMetricsBreakdownRequest $request): GetUsageMetricsBreakdownOKResponse
+    {
+        $httpRequest = new Request(GetUsageMetricsBreakdownRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetUsageMetricsBreakdownOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetUsageMetricsBreakdownBadRequestResponse::fromResponse($httpResponse),
+            403 => GetUsageMetricsBreakdownForbiddenResponse::fromResponse($httpResponse),
+            404 => GetUsageMetricsBreakdownNotFoundResponse::fromResponse($httpResponse),
+            429 => GetUsageMetricsBreakdownTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => GetUsageMetricsBreakdownInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetUsageMetricsBreakdownServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetUsageMetricsBreakdownDefaultResponse::fromResponse($httpResponse),
         });
     }
 
