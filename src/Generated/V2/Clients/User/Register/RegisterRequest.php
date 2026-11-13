@@ -19,6 +19,14 @@ class RegisterRequest
         'properties' => [
             'body' => [
                 'properties' => [
+                    'captchaToken' => [
+                        'description' => 'The response token of a solved captcha challenge, as issued by the captcha widget of the
+registration form. An unsolved or already used token is rejected with `CaptchaVerificationFailed`.
+',
+                        'maxLength' => 2048,
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
                     'email' => [
                         'description' => 'The users email address',
                         'format' => 'email',

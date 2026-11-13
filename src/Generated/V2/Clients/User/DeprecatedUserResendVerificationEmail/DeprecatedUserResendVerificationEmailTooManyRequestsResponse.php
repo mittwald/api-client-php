@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerif
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class DeprecatedUserResendVerificationEmailTooManyRequestsResponse implements ResponseContainer
@@ -21,36 +22,26 @@ class DeprecatedUserResendVerificationEmailTooManyRequestsResponse implements Re
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
-                'properties' => [
-                    'message' => [
-                        'type' => 'string',
-                        'example' => 'too many requests',
-                    ],
-                    'type' => [
-                        'type' => 'string',
-                        'example' => 'RateLimitError',
-                    ],
-                ],
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -73,7 +64,7 @@ class DeprecatedUserResendVerificationEmailTooManyRequestsResponse implements Re
             static::validateInput($input);
         }
 
-        $body = DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -88,7 +79,7 @@ class DeprecatedUserResendVerificationEmailTooManyRequestsResponse implements Re
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -119,7 +110,6 @@ class DeprecatedUserResendVerificationEmailTooManyRequestsResponse implements Re
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

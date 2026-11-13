@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class ResendVerificationEmailTooManyRequestsResponse implements ResponseContainer
@@ -21,36 +22,26 @@ class ResendVerificationEmailTooManyRequestsResponse implements ResponseContaine
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
-                'properties' => [
-                    'message' => [
-                        'type' => 'string',
-                        'example' => 'too many requests',
-                    ],
-                    'type' => [
-                        'type' => 'string',
-                        'example' => 'RateLimitError',
-                    ],
-                ],
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private ResendVerificationEmailTooManyRequestsResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ResendVerificationEmailTooManyRequestsResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ResendVerificationEmailTooManyRequestsResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(ResendVerificationEmailTooManyRequestsResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -73,7 +64,7 @@ class ResendVerificationEmailTooManyRequestsResponse implements ResponseContaine
             static::validateInput($input);
         }
 
-        $body = ResendVerificationEmailTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -88,7 +79,7 @@ class ResendVerificationEmailTooManyRequestsResponse implements ResponseContaine
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -119,7 +110,6 @@ class ResendVerificationEmailTooManyRequestsResponse implements ResponseContaine
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

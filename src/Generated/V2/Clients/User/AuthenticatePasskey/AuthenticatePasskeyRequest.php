@@ -22,6 +22,14 @@ class AuthenticatePasskeyRequest
             ],
             'body' => [
                 'properties' => [
+                    'captchaToken' => [
+                        'description' => 'The response token of a solved captcha challenge, as issued by the captcha widget of the login
+form. A missing, unsolved or already used token is rejected with `CaptchaVerificationFailed` (400).
+',
+                        'maxLength' => 2048,
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
                     'challengeId' => [
                         'format' => 'uuid',
                         'type' => 'string',

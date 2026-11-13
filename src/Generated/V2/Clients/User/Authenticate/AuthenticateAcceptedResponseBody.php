@@ -21,6 +21,7 @@ class AuthenticateAcceptedResponseBody
                     'enum' => [
                         'totp',
                         'passkey',
+                        'email',
                     ],
                     'type' => 'string',
                 ],

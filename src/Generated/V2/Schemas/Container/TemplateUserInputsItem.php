@@ -27,7 +27,33 @@ class TemplateUserInputsItem
             'dataSource' => [
                 'type' => 'string',
             ],
+            'dataType' => [
+                'description' => 'How the installer renders the input. Missing means text.',
+                'enum' => [
+                    'text',
+                    'boolean',
+                    'consent',
+                    'select',
+                ],
+                'type' => 'string',
+            ],
             'defaultValue' => [
+                'type' => 'string',
+            ],
+            'description' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+            ],
+            'errorMessage' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+            ],
+            'format' => [
+                'description' => 'Input format of a text input.',
+                'enum' => [
+                    'email',
+                    'password',
+                    'url',
+                    'textarea',
+                ],
                 'type' => 'string',
             ],
             'label' => [
@@ -35,6 +61,25 @@ class TemplateUserInputsItem
             ],
             'name' => [
                 'type' => 'string',
+            ],
+            'options' => [
+                'description' => 'Options of a select input; their values match the enum of the validation schema.',
+                'items' => [
+                    'properties' => [
+                        'label' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+                        ],
+                        'value' => [
+                            'type' => 'string',
+                        ],
+                    ],
+                    'required' => [
+                        'value',
+                        'label',
+                    ],
+                    'type' => 'object',
+                ],
+                'type' => 'array',
             ],
             'positionMeta' => [
                 'properties' => [
@@ -54,6 +99,7 @@ class TemplateUserInputsItem
                 'type' => 'boolean',
             ],
             'validationSchema' => [
+                'description' => 'JSON schema the value is validated against; values are always strings.',
                 'type' => 'string',
             ],
         ],
@@ -66,16 +112,40 @@ class TemplateUserInputsItem
 
     private ?string $dataSource = null;
 
+    /**
+     * How the installer renders the input. Missing means text.
+     */
+    private ?TemplateUserInputsItemDataType $dataType = null;
+
     private ?string $defaultValue = null;
+
+    private ?TemplateTranslatedString $description = null;
+
+    private ?TemplateTranslatedString $errorMessage = null;
+
+    /**
+     * Input format of a text input.
+     */
+    private ?TemplateUserInputsItemFormat $format = null;
 
     private ?TemplateTranslatedString $label = null;
 
     private string $name;
 
+    /**
+     * Options of a select input; their values match the enum of the validation schema.
+     *
+     * @var TemplateUserInputsItemOptionsItem[]|null
+     */
+    private ?array $options = null;
+
     private ?TemplateUserInputsItemPositionMeta $positionMeta = null;
 
     private bool $required;
 
+    /**
+     * JSON schema the value is validated against; values are always strings.
+     */
     private ?string $validationSchema = null;
 
     public function __construct(string $name, bool $required)
@@ -89,9 +159,29 @@ class TemplateUserInputsItem
         return $this->dataSource ?? null;
     }
 
+    public function getDataType(): ?TemplateUserInputsItemDataType
+    {
+        return $this->dataType ?? null;
+    }
+
     public function getDefaultValue(): ?string
     {
         return $this->defaultValue ?? null;
+    }
+
+    public function getDescription(): ?TemplateTranslatedString
+    {
+        return $this->description ?? null;
+    }
+
+    public function getErrorMessage(): ?TemplateTranslatedString
+    {
+        return $this->errorMessage ?? null;
+    }
+
+    public function getFormat(): ?TemplateUserInputsItemFormat
+    {
+        return $this->format ?? null;
     }
 
     public function getLabel(): ?TemplateTranslatedString
@@ -102,6 +192,14 @@ class TemplateUserInputsItem
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return TemplateUserInputsItemOptionsItem[]|null
+     */
+    public function getOptions(): ?array
+    {
+        return $this->options ?? null;
     }
 
     public function getPositionMeta(): ?TemplateUserInputsItemPositionMeta
@@ -141,6 +239,22 @@ class TemplateUserInputsItem
         return $clone;
     }
 
+    public function withDataType(TemplateUserInputsItemDataType $dataType): self
+    {
+        $clone = clone $this;
+        $clone->dataType = $dataType;
+
+        return $clone;
+    }
+
+    public function withoutDataType(): self
+    {
+        $clone = clone $this;
+        unset($clone->dataType);
+
+        return $clone;
+    }
+
     public function withDefaultValue(string $defaultValue): self
     {
         $validator = new Validator();
@@ -159,6 +273,54 @@ class TemplateUserInputsItem
     {
         $clone = clone $this;
         unset($clone->defaultValue);
+
+        return $clone;
+    }
+
+    public function withDescription(TemplateTranslatedString $description): self
+    {
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
+    public function withErrorMessage(TemplateTranslatedString $errorMessage): self
+    {
+        $clone = clone $this;
+        $clone->errorMessage = $errorMessage;
+
+        return $clone;
+    }
+
+    public function withoutErrorMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->errorMessage);
+
+        return $clone;
+    }
+
+    public function withFormat(TemplateUserInputsItemFormat $format): self
+    {
+        $clone = clone $this;
+        $clone->format = $format;
+
+        return $clone;
+    }
+
+    public function withoutFormat(): self
+    {
+        $clone = clone $this;
+        unset($clone->format);
 
         return $clone;
     }
@@ -189,6 +351,25 @@ class TemplateUserInputsItem
 
         $clone = clone $this;
         $clone->name = $name;
+
+        return $clone;
+    }
+
+    /**
+     * @param TemplateUserInputsItemOptionsItem[] $options
+     */
+    public function withOptions(array $options): self
+    {
+        $clone = clone $this;
+        $clone->options = $options;
+
+        return $clone;
+    }
+
+    public function withoutOptions(): self
+    {
+        $clone = clone $this;
+        unset($clone->options);
 
         return $clone;
     }
@@ -264,15 +445,35 @@ class TemplateUserInputsItem
         if (isset($input->{'dataSource'})) {
             $dataSource = $input->{'dataSource'};
         }
+        $dataType = null;
+        if (isset($input->{'dataType'})) {
+            $dataType = TemplateUserInputsItemDataType::from($input->{'dataType'});
+        }
         $defaultValue = null;
         if (isset($input->{'defaultValue'})) {
             $defaultValue = $input->{'defaultValue'};
+        }
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = TemplateTranslatedString::buildFromInput($input->{'description'}, validate: $validate);
+        }
+        $errorMessage = null;
+        if (isset($input->{'errorMessage'})) {
+            $errorMessage = TemplateTranslatedString::buildFromInput($input->{'errorMessage'}, validate: $validate);
+        }
+        $format = null;
+        if (isset($input->{'format'})) {
+            $format = TemplateUserInputsItemFormat::from($input->{'format'});
         }
         $label = null;
         if (isset($input->{'label'})) {
             $label = TemplateTranslatedString::buildFromInput($input->{'label'}, validate: $validate);
         }
         $name = $input->{'name'};
+        $options = null;
+        if (isset($input->{'options'})) {
+            $options = array_map(fn (array|object $i): TemplateUserInputsItemOptionsItem => TemplateUserInputsItemOptionsItem::buildFromInput($i, validate: $validate), $input->{'options'});
+        }
         $positionMeta = null;
         if (isset($input->{'positionMeta'})) {
             $positionMeta = TemplateUserInputsItemPositionMeta::buildFromInput($input->{'positionMeta'}, validate: $validate);
@@ -285,8 +486,13 @@ class TemplateUserInputsItem
 
         $obj = new self($name, $required);
         $obj->dataSource = $dataSource;
+        $obj->dataType = $dataType;
         $obj->defaultValue = $defaultValue;
+        $obj->description = $description;
+        $obj->errorMessage = $errorMessage;
+        $obj->format = $format;
         $obj->label = $label;
+        $obj->options = $options;
         $obj->positionMeta = $positionMeta;
         $obj->validationSchema = $validationSchema;
         return $obj;
@@ -303,13 +509,28 @@ class TemplateUserInputsItem
         if (isset($this->dataSource)) {
             $output['dataSource'] = $this->dataSource;
         }
+        if (isset($this->dataType)) {
+            $output['dataType'] = ($this->dataType)->value;
+        }
         if (isset($this->defaultValue)) {
             $output['defaultValue'] = $this->defaultValue;
+        }
+        if (isset($this->description)) {
+            $output['description'] = $this->description->toJson();
+        }
+        if (isset($this->errorMessage)) {
+            $output['errorMessage'] = $this->errorMessage->toJson();
+        }
+        if (isset($this->format)) {
+            $output['format'] = ($this->format)->value;
         }
         if (isset($this->label)) {
             $output['label'] = $this->label->toJson();
         }
         $output['name'] = $this->name;
+        if (isset($this->options)) {
+            $output['options'] = array_map(fn (TemplateUserInputsItemOptionsItem $i) => $i->toJson(), $this->options);
+        }
         if (isset($this->positionMeta)) {
             $output['positionMeta'] = ($this->positionMeta)->toJson();
         }
@@ -347,6 +568,9 @@ class TemplateUserInputsItem
 
     public function __clone()
     {
+        if (isset($this->options)) {
+            $this->options = array_map(fn (TemplateUserInputsItemOptionsItem $i) => clone $i, $this->options);
+        }
         if (isset($this->positionMeta)) {
             $this->positionMeta = clone $this->positionMeta;
         }

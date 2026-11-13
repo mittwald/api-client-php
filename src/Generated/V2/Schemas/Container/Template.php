@@ -183,7 +183,33 @@ class Template
                         'dataSource' => [
                             'type' => 'string',
                         ],
+                        'dataType' => [
+                            'description' => 'How the installer renders the input. Missing means text.',
+                            'enum' => [
+                                'text',
+                                'boolean',
+                                'consent',
+                                'select',
+                            ],
+                            'type' => 'string',
+                        ],
                         'defaultValue' => [
+                            'type' => 'string',
+                        ],
+                        'description' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+                        ],
+                        'errorMessage' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+                        ],
+                        'format' => [
+                            'description' => 'Input format of a text input.',
+                            'enum' => [
+                                'email',
+                                'password',
+                                'url',
+                                'textarea',
+                            ],
                             'type' => 'string',
                         ],
                         'label' => [
@@ -191,6 +217,25 @@ class Template
                         ],
                         'name' => [
                             'type' => 'string',
+                        ],
+                        'options' => [
+                            'description' => 'Options of a select input; their values match the enum of the validation schema.',
+                            'items' => [
+                                'properties' => [
+                                    'label' => [
+                                        '$ref' => '#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString',
+                                    ],
+                                    'value' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                'required' => [
+                                    'value',
+                                    'label',
+                                ],
+                                'type' => 'object',
+                            ],
+                            'type' => 'array',
                         ],
                         'positionMeta' => [
                             'properties' => [
@@ -210,6 +255,7 @@ class Template
                             'type' => 'boolean',
                         ],
                         'validationSchema' => [
+                            'description' => 'JSON schema the value is validated against; values are always strings.',
                             'type' => 'string',
                         ],
                     ],

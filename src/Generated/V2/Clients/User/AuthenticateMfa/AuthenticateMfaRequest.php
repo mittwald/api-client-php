@@ -22,6 +22,15 @@ class AuthenticateMfaRequest
             ],
             'body' => [
                 'properties' => [
+                    'captchaToken' => [
+                        'description' => 'The response token of a solved captcha challenge. Not needed for a short while after a
+`POST /authenticate` that answered `202`; otherwise a missing, unsolved or already used token is
+rejected with `CaptchaVerificationFailed` (400).
+',
+                        'maxLength' => 2048,
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
                     'email' => [
                         'description' => 'The email of the user.',
                         'example' => 'a.lovelace@example.com',
@@ -29,7 +38,7 @@ class AuthenticateMfaRequest
                         'type' => 'string',
                     ],
                     'multiFactorCode' => [
-                        'description' => 'The second factor - otp code or recovery code.',
+                        'description' => 'The second factor - otp code, recovery code or the confirmation code mailed at login.',
                         'example' => '123456',
                         'maxLength' => 16,
                         'minLength' => 6,

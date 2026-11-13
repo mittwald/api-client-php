@@ -14,6 +14,14 @@ class AuthenticateRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'captchaToken' => [
+                'description' => 'The response token of a solved captcha challenge, as issued by the captcha widget of the login
+form. A missing, unsolved or already used token is rejected with `CaptchaVerificationFailed` (400).
+',
+                'maxLength' => 2048,
+                'minLength' => 1,
+                'type' => 'string',
+            ],
             'email' => [
                 'description' => 'The users Email-Address.',
                 'example' => 'a.lovelace@example.com',
@@ -32,6 +40,12 @@ class AuthenticateRequestBody
     ];
 
     /**
+     * The response token of a solved captcha challenge, as issued by the captcha widget of the login
+     * form. A missing, unsolved or already used token is rejected with `CaptchaVerificationFailed` (400).
+     */
+    private ?string $captchaToken = null;
+
+    /**
      * The users Email-Address.
      */
     private string $email;
@@ -47,6 +61,11 @@ class AuthenticateRequestBody
         $this->password = $password;
     }
 
+    public function getCaptchaToken(): ?string
+    {
+        return $this->captchaToken ?? null;
+    }
+
     public function getEmail(): string
     {
         return $this->email;
@@ -55,6 +74,28 @@ class AuthenticateRequestBody
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function withCaptchaToken(string $captchaToken): self
+    {
+        $validator = new Validator();
+        $validator->validate($captchaToken, self::$internalValidationSchema['properties']['captchaToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->captchaToken = $captchaToken;
+
+        return $clone;
+    }
+
+    public function withoutCaptchaToken(): self
+    {
+        $clone = clone $this;
+        unset($clone->captchaToken);
+
+        return $clone;
     }
 
     public function withEmail(string $email): self
@@ -100,11 +141,15 @@ class AuthenticateRequestBody
             static::validateInput($input);
         }
 
+        $captchaToken = null;
+        if (isset($input->{'captchaToken'})) {
+            $captchaToken = $input->{'captchaToken'};
+        }
         $email = $input->{'email'};
         $password = $input->{'password'};
 
         $obj = new self($email, $password);
-
+        $obj->captchaToken = $captchaToken;
         return $obj;
     }
 
@@ -116,6 +161,9 @@ class AuthenticateRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->captchaToken)) {
+            $output['captchaToken'] = $this->captchaToken;
+        }
         $output['email'] = $this->email;
         $output['password'] = $this->password;
 

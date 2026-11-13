@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody
+class GetPollStatusTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody Created instance
+     * @return GetPollStatusTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserResendVerificationEmailTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetPollStatusTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

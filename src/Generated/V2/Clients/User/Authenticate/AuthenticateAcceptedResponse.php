@@ -28,6 +28,7 @@ class AuthenticateAcceptedResponse implements ResponseContainer
                             'enum' => [
                                 'totp',
                                 'passkey',
+                                'email',
                             ],
                             'type' => 'string',
                         ],

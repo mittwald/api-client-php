@@ -15,6 +15,14 @@ class AuthenticatePasskeyRequestBody
      */
     private static array $internalValidationSchema = [
         'properties' => [
+            'captchaToken' => [
+                'description' => 'The response token of a solved captcha challenge, as issued by the captcha widget of the login
+form. A missing, unsolved or already used token is rejected with `CaptchaVerificationFailed` (400).
+',
+                'maxLength' => 2048,
+                'minLength' => 1,
+                'type' => 'string',
+            ],
             'challengeId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -30,6 +38,12 @@ class AuthenticatePasskeyRequestBody
         'type' => 'object',
     ];
 
+    /**
+     * The response token of a solved captcha challenge, as issued by the captcha widget of the login
+     * form. A missing, unsolved or already used token is rejected with `CaptchaVerificationFailed` (400).
+     */
+    private ?string $captchaToken = null;
+
     private string $challengeId;
 
     private PasskeyAuthenticationResponse $credential;
@@ -40,6 +54,11 @@ class AuthenticatePasskeyRequestBody
         $this->credential = $credential;
     }
 
+    public function getCaptchaToken(): ?string
+    {
+        return $this->captchaToken ?? null;
+    }
+
     public function getChallengeId(): string
     {
         return $this->challengeId;
@@ -48,6 +67,28 @@ class AuthenticatePasskeyRequestBody
     public function getCredential(): PasskeyAuthenticationResponse
     {
         return $this->credential;
+    }
+
+    public function withCaptchaToken(string $captchaToken): self
+    {
+        $validator = new Validator();
+        $validator->validate($captchaToken, self::$internalValidationSchema['properties']['captchaToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->captchaToken = $captchaToken;
+
+        return $clone;
+    }
+
+    public function withoutCaptchaToken(): self
+    {
+        $clone = clone $this;
+        unset($clone->captchaToken);
+
+        return $clone;
     }
 
     public function withChallengeId(string $challengeId): self
@@ -87,11 +128,15 @@ class AuthenticatePasskeyRequestBody
             static::validateInput($input);
         }
 
+        $captchaToken = null;
+        if (isset($input->{'captchaToken'})) {
+            $captchaToken = $input->{'captchaToken'};
+        }
         $challengeId = $input->{'challengeId'};
         $credential = PasskeyAuthenticationResponse::buildFromInput($input->{'credential'}, validate: $validate);
 
         $obj = new self($challengeId, $credential);
-
+        $obj->captchaToken = $captchaToken;
         return $obj;
     }
 
@@ -103,6 +148,9 @@ class AuthenticatePasskeyRequestBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->captchaToken)) {
+            $output['captchaToken'] = $this->captchaToken;
+        }
         $output['challengeId'] = $this->challengeId;
         $output['credential'] = $this->credential->toJson();
 
