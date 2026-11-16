@@ -8,6 +8,8 @@ use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CancelScheduledDeletion\CancelScheduledDeletionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckAuthinfo2\CheckAuthinfo2OKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckAuthinfo2\CheckAuthinfo2Request;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
@@ -527,6 +529,18 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function cancelScheduledDeletion(CancelScheduledDeletionRequest $request): EmptyResponse;
+    /**
+     * Check if a Domain is eligible for AuthInfo2.
+     *
+     * Answers 200 with eligible = false and the reason when no AuthInfo2 can be requested for the domain. At most one reason is true. Answers 400 for a domain that is not a .de domain and 503 if DENIC is not reachable.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-authinfo2
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CheckAuthinfo2Request $request An object representing the request for this operation
+     * @return CheckAuthinfo2OKResponse OK
+     */
+    public function checkAuthinfo2(CheckAuthinfo2Request $request): CheckAuthinfo2OKResponse;
     /**
      * Check if a Domain is available to register.
      *

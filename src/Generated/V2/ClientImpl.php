@@ -27,8 +27,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClientImpl;
-use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient;
-use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\License\LicenseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\License\LicenseClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
@@ -164,11 +162,6 @@ class ClientImpl extends BaseClient implements Client
     public function misc(): MiscClient
     {
         return new MiscClientImpl($this->client);
-    }
-
-    public function leadFyndr(): LeadFyndrClient
-    {
-        return new LeadFyndrClientImpl($this->client);
     }
 
     public function aiHosting(): AIHostingClient

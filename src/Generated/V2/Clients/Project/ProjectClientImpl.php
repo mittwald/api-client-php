@@ -121,6 +121,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetSer
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetrics\GetServerUsageMetricsTooManyRequestsResponse;
@@ -130,6 +131,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdo
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServerUsageMetricsBreakdown\GetServerUsageMetricsBreakdownTooManyRequestsResponse;
@@ -139,6 +141,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetrics\GetUsageMetricsTooManyRequestsResponse;
@@ -148,6 +151,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\Get
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownServiceUnavailableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetUsageMetricsBreakdown\GetUsageMetricsBreakdownTooManyRequestsResponse;
@@ -813,6 +817,7 @@ class ProjectClientImpl implements ProjectClient
             400 => GetServerUsageMetricsBadRequestResponse::fromResponse($httpResponse),
             403 => GetServerUsageMetricsForbiddenResponse::fromResponse($httpResponse),
             404 => GetServerUsageMetricsNotFoundResponse::fromResponse($httpResponse),
+            412 => GetServerUsageMetricsPreconditionFailedResponse::fromResponse($httpResponse),
             429 => GetServerUsageMetricsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetServerUsageMetricsInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetServerUsageMetricsServiceUnavailableResponse::fromResponse($httpResponse),
@@ -840,6 +845,7 @@ class ProjectClientImpl implements ProjectClient
             400 => GetServerUsageMetricsBreakdownBadRequestResponse::fromResponse($httpResponse),
             403 => GetServerUsageMetricsBreakdownForbiddenResponse::fromResponse($httpResponse),
             404 => GetServerUsageMetricsBreakdownNotFoundResponse::fromResponse($httpResponse),
+            412 => GetServerUsageMetricsBreakdownPreconditionFailedResponse::fromResponse($httpResponse),
             429 => GetServerUsageMetricsBreakdownTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetServerUsageMetricsBreakdownInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetServerUsageMetricsBreakdownServiceUnavailableResponse::fromResponse($httpResponse),
@@ -867,6 +873,7 @@ class ProjectClientImpl implements ProjectClient
             400 => GetUsageMetricsBadRequestResponse::fromResponse($httpResponse),
             403 => GetUsageMetricsForbiddenResponse::fromResponse($httpResponse),
             404 => GetUsageMetricsNotFoundResponse::fromResponse($httpResponse),
+            412 => GetUsageMetricsPreconditionFailedResponse::fromResponse($httpResponse),
             429 => GetUsageMetricsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetUsageMetricsInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetUsageMetricsServiceUnavailableResponse::fromResponse($httpResponse),
@@ -894,6 +901,7 @@ class ProjectClientImpl implements ProjectClient
             400 => GetUsageMetricsBreakdownBadRequestResponse::fromResponse($httpResponse),
             403 => GetUsageMetricsBreakdownForbiddenResponse::fromResponse($httpResponse),
             404 => GetUsageMetricsBreakdownNotFoundResponse::fromResponse($httpResponse),
+            412 => GetUsageMetricsBreakdownPreconditionFailedResponse::fromResponse($httpResponse),
             429 => GetUsageMetricsBreakdownTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetUsageMetricsBreakdownInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetUsageMetricsBreakdownServiceUnavailableResponse::fromResponse($httpResponse),
