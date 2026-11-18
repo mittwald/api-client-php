@@ -161,12 +161,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContracts
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderDefaultResponse;
@@ -187,12 +189,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\Orde
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeUnprocessableEntityResponse;
@@ -864,6 +868,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateOrderBadRequestResponse::fromResponse($httpResponse),
+            412 => OrderCreateOrderPreconditionFailedResponse::fromResponse($httpResponse),
             422 => OrderCreateOrderUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => OrderCreateOrderTooManyRequestsResponse::fromResponse($httpResponse),
             default => OrderCreateOrderDefaultResponse::fromResponse($httpResponse),
@@ -887,6 +892,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateTariffChangeBadRequestResponse::fromResponse($httpResponse),
+            412 => OrderCreateTariffChangePreconditionFailedResponse::fromResponse($httpResponse),
             429 => OrderCreateTariffChangeTooManyRequestsResponse::fromResponse($httpResponse),
             default => OrderCreateTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
@@ -1001,6 +1007,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewOrderBadRequestResponse::fromResponse($httpResponse),
+            412 => OrderPreviewOrderPreconditionFailedResponse::fromResponse($httpResponse),
             422 => OrderPreviewOrderUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => OrderPreviewOrderTooManyRequestsResponse::fromResponse($httpResponse),
             default => OrderPreviewOrderDefaultResponse::fromResponse($httpResponse),
@@ -1024,6 +1031,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewTariffChangeBadRequestResponse::fromResponse($httpResponse),
+            412 => OrderPreviewTariffChangePreconditionFailedResponse::fromResponse($httpResponse),
             422 => OrderPreviewTariffChangeUnprocessableEntityResponse::fromResponse($httpResponse),
             429 => OrderPreviewTariffChangeTooManyRequestsResponse::fromResponse($httpResponse),
             default => OrderPreviewTariffChangeDefaultResponse::fromResponse($httpResponse),
