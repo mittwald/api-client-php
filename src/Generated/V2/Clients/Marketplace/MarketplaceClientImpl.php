@@ -197,6 +197,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSession
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorDefaultResponse;
@@ -1196,6 +1197,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionGenerateSessionTokenBadRequestResponse::fromResponse($httpResponse),
             404 => ExtensionGenerateSessionTokenNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionGenerateSessionTokenPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionGenerateSessionTokenTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGenerateSessionTokenDefaultResponse::fromResponse($httpResponse),
         });
